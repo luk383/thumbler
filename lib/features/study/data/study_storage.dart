@@ -10,11 +10,11 @@ class StudyStorage {
   List<StudyItem> all() =>
       _box.values.map((v) => StudyItem.fromMap(v as Map)).toList();
 
-  bool contains(String lessonId) => _box.containsKey(lessonId);
+  bool contains(String id) => _box.containsKey(id);
 
-  void add(StudyItem item) => _box.put(item.lessonId, item.toMap());
+  void add(StudyItem item) => _box.put(item.id, item.toMap());
 
-  void update(StudyItem item) => _box.put(item.lessonId, item.toMap());
+  void update(StudyItem item) => _box.put(item.id, item.toMap());
 
-  void remove(String lessonId) => _box.delete(lessonId);
+  void remove(String id) => _box.delete(id);
 }
