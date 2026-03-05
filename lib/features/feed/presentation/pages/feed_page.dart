@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../data/providers.dart';
-import '../../growth/xp/xp_notifier.dart';
-import '../../growth/streak/streak_notifier.dart';
-import '../../growth/daily_quest/daily_quest_notifier.dart';
-import '../../growth/daily_quest/widgets/daily_quest_modal.dart';
-import '../../growth/daily_quest/widgets/reward_bottom_sheet.dart';
-import 'widgets/feed_overlay.dart';
-import 'widgets/lesson_card.dart';
+import '../../data/providers.dart';
+import '../../../growth/xp/xp_notifier.dart';
+import '../../../growth/streak/streak_notifier.dart';
+import '../../../growth/daily_quest/daily_quest_notifier.dart';
+import '../../../growth/daily_quest/widgets/daily_quest_modal.dart';
+import '../../../growth/daily_quest/widgets/reward_bottom_sheet.dart';
+import '../widgets/feed_overlay.dart';
+import '../widgets/lesson_card.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});

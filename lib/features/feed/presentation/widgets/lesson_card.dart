@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:share_plus/share_plus.dart';
 
 import '../../domain/lesson.dart';
-import '../feed_controller.dart';
+import '../controllers/feed_controller.dart';
 import '../../../bookmarks/presentation/bookmarks_notifier.dart';
 import '../../../growth/xp/xp_notifier.dart';
+import '../../../share/share_service.dart';
+import '../../../study/presentation/controllers/study_controller.dart';
 import 'quiz_section.dart';
 
 /// How long to wait after an answer before auto-advancing to the next card.
@@ -56,6 +57,9 @@ class _LessonCardState extends ConsumerState<LessonCard> {
     );
     final isBookmarked = ref.watch(
       bookmarksProvider.select((ids) => ids.contains(widget.lesson.id)),
+    );
+    final isInStudy = ref.watch(
+      studyProvider.select((s) => s.inDeck(widget.lesson.id)),
     );
 
     // When selectedAnswer transitions null → value, schedule auto-advance.
@@ -171,15 +175,15 @@ class _LessonCardState extends ConsumerState<LessonCard> {
             // ── Bottom action bar ──────────────────────────────────────
             _BottomBar(
               isBookmarked: isBookmarked,
+              isInStudy: isInStudy,
               onBookmark: () => ref
                   .read(bookmarksProvider.notifier)
                   .toggle(widget.lesson.id),
-              onShare: () => SharePlus.instance.share(
-                ShareParams(
-                  text:
-                      '${widget.lesson.hook}\n\n${widget.lesson.explanation}',
-                ),
-              ),
+              onAddToStudy: () => ref
+                  .read(studyProvider.notifier)
+                  .addLesson(widget.lesson),
+              onShare: () =>
+                  ShareService.shareLesson(context, widget.lesson),
               onNext: widget.onNext,
             ),
           ],
@@ -249,13 +253,17 @@ class _ExplanationBox extends StatelessWidget {
 class _BottomBar extends StatelessWidget {
   const _BottomBar({
     required this.isBookmarked,
+    required this.isInStudy,
     required this.onBookmark,
+    required this.onAddToStudy,
     required this.onShare,
     this.onNext,
   });
 
   final bool isBookmarked;
+  final bool isInStudy;
   final VoidCallback onBookmark;
+  final VoidCallback onAddToStudy;
   final VoidCallback onShare;
   final VoidCallback? onNext;
 
@@ -270,6 +278,12 @@ class _BottomBar extends StatelessWidget {
             icon: isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
             color: isBookmarked ? const Color(0xFF6C63FF) : Colors.white60,
             onTap: onBookmark,
+          ),
+          const SizedBox(width: 8),
+          _IconBtn(
+            icon: isInStudy ? Icons.school : Icons.school_outlined,
+            color: isInStudy ? Colors.tealAccent : Colors.white60,
+            onTap: onAddToStudy,
           ),
           const SizedBox(width: 8),
           _IconBtn(

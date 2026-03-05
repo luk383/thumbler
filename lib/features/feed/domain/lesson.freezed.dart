@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Lesson {
 
- String get id; String get hook; String get explanation; String get quizQuestion; List<String> get options; String get correctAnswer; String get category;
+ String get id; String get hook; String get explanation; String get quizQuestion; List<String> get options; int get correctAnswerIndex; String get category;
 /// Create a copy of Lesson
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $LessonCopyWith<Lesson> get copyWith => _$LessonCopyWithImpl<Lesson>(this as Les
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Lesson&&(identical(other.id, id) || other.id == id)&&(identical(other.hook, hook) || other.hook == hook)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.quizQuestion, quizQuestion) || other.quizQuestion == quizQuestion)&&const DeepCollectionEquality().equals(other.options, options)&&(identical(other.correctAnswer, correctAnswer) || other.correctAnswer == correctAnswer)&&(identical(other.category, category) || other.category == category));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Lesson&&(identical(other.id, id) || other.id == id)&&(identical(other.hook, hook) || other.hook == hook)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.quizQuestion, quizQuestion) || other.quizQuestion == quizQuestion)&&const DeepCollectionEquality().equals(other.options, options)&&(identical(other.correctAnswerIndex, correctAnswerIndex) || other.correctAnswerIndex == correctAnswerIndex)&&(identical(other.category, category) || other.category == category));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,hook,explanation,quizQuestion,const DeepCollectionEquality().hash(options),correctAnswer,category);
+int get hashCode => Object.hash(runtimeType,id,hook,explanation,quizQuestion,const DeepCollectionEquality().hash(options),correctAnswerIndex,category);
 
 @override
 String toString() {
-  return 'Lesson(id: $id, hook: $hook, explanation: $explanation, quizQuestion: $quizQuestion, options: $options, correctAnswer: $correctAnswer, category: $category)';
+  return 'Lesson(id: $id, hook: $hook, explanation: $explanation, quizQuestion: $quizQuestion, options: $options, correctAnswerIndex: $correctAnswerIndex, category: $category)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $LessonCopyWith<$Res>  {
   factory $LessonCopyWith(Lesson value, $Res Function(Lesson) _then) = _$LessonCopyWithImpl;
 @useResult
 $Res call({
- String id, String hook, String explanation, String quizQuestion, List<String> options, String correctAnswer, String category
+ String id, String hook, String explanation, String quizQuestion, List<String> options, int correctAnswerIndex, String category
 });
 
 
@@ -65,15 +65,15 @@ class _$LessonCopyWithImpl<$Res>
 
 /// Create a copy of Lesson
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? hook = null,Object? explanation = null,Object? quizQuestion = null,Object? options = null,Object? correctAnswer = null,Object? category = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? hook = null,Object? explanation = null,Object? quizQuestion = null,Object? options = null,Object? correctAnswerIndex = null,Object? category = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,hook: null == hook ? _self.hook : hook // ignore: cast_nullable_to_non_nullable
 as String,explanation: null == explanation ? _self.explanation : explanation // ignore: cast_nullable_to_non_nullable
 as String,quizQuestion: null == quizQuestion ? _self.quizQuestion : quizQuestion // ignore: cast_nullable_to_non_nullable
 as String,options: null == options ? _self.options : options // ignore: cast_nullable_to_non_nullable
-as List<String>,correctAnswer: null == correctAnswer ? _self.correctAnswer : correctAnswer // ignore: cast_nullable_to_non_nullable
-as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as List<String>,correctAnswerIndex: null == correctAnswerIndex ? _self.correctAnswerIndex : correctAnswerIndex // ignore: cast_nullable_to_non_nullable
+as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -159,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String hook,  String explanation,  String quizQuestion,  List<String> options,  String correctAnswer,  String category)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String hook,  String explanation,  String quizQuestion,  List<String> options,  int correctAnswerIndex,  String category)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Lesson() when $default != null:
-return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.options,_that.correctAnswer,_that.category);case _:
+return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.options,_that.correctAnswerIndex,_that.category);case _:
   return orElse();
 
 }
@@ -180,10 +180,10 @@ return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.o
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String hook,  String explanation,  String quizQuestion,  List<String> options,  String correctAnswer,  String category)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String hook,  String explanation,  String quizQuestion,  List<String> options,  int correctAnswerIndex,  String category)  $default,) {final _that = this;
 switch (_that) {
 case _Lesson():
-return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.options,_that.correctAnswer,_that.category);case _:
+return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.options,_that.correctAnswerIndex,_that.category);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +200,10 @@ return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.o
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String hook,  String explanation,  String quizQuestion,  List<String> options,  String correctAnswer,  String category)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String hook,  String explanation,  String quizQuestion,  List<String> options,  int correctAnswerIndex,  String category)?  $default,) {final _that = this;
 switch (_that) {
 case _Lesson() when $default != null:
-return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.options,_that.correctAnswer,_that.category);case _:
+return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.options,_that.correctAnswerIndex,_that.category);case _:
   return null;
 
 }
@@ -215,7 +215,7 @@ return $default(_that.id,_that.hook,_that.explanation,_that.quizQuestion,_that.o
 @JsonSerializable()
 
 class _Lesson implements Lesson {
-  const _Lesson({required this.id, required this.hook, required this.explanation, required this.quizQuestion, required final  List<String> options, required this.correctAnswer, required this.category}): _options = options;
+  const _Lesson({required this.id, required this.hook, required this.explanation, required this.quizQuestion, required final  List<String> options, required this.correctAnswerIndex, required this.category}): _options = options;
   factory _Lesson.fromJson(Map<String, dynamic> json) => _$LessonFromJson(json);
 
 @override final  String id;
@@ -229,7 +229,7 @@ class _Lesson implements Lesson {
   return EqualUnmodifiableListView(_options);
 }
 
-@override final  String correctAnswer;
+@override final  int correctAnswerIndex;
 @override final  String category;
 
 /// Create a copy of Lesson
@@ -245,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Lesson&&(identical(other.id, id) || other.id == id)&&(identical(other.hook, hook) || other.hook == hook)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.quizQuestion, quizQuestion) || other.quizQuestion == quizQuestion)&&const DeepCollectionEquality().equals(other._options, _options)&&(identical(other.correctAnswer, correctAnswer) || other.correctAnswer == correctAnswer)&&(identical(other.category, category) || other.category == category));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Lesson&&(identical(other.id, id) || other.id == id)&&(identical(other.hook, hook) || other.hook == hook)&&(identical(other.explanation, explanation) || other.explanation == explanation)&&(identical(other.quizQuestion, quizQuestion) || other.quizQuestion == quizQuestion)&&const DeepCollectionEquality().equals(other._options, _options)&&(identical(other.correctAnswerIndex, correctAnswerIndex) || other.correctAnswerIndex == correctAnswerIndex)&&(identical(other.category, category) || other.category == category));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,hook,explanation,quizQuestion,const DeepCollectionEquality().hash(_options),correctAnswer,category);
+int get hashCode => Object.hash(runtimeType,id,hook,explanation,quizQuestion,const DeepCollectionEquality().hash(_options),correctAnswerIndex,category);
 
 @override
 String toString() {
-  return 'Lesson(id: $id, hook: $hook, explanation: $explanation, quizQuestion: $quizQuestion, options: $options, correctAnswer: $correctAnswer, category: $category)';
+  return 'Lesson(id: $id, hook: $hook, explanation: $explanation, quizQuestion: $quizQuestion, options: $options, correctAnswerIndex: $correctAnswerIndex, category: $category)';
 }
 
 
@@ -265,7 +265,7 @@ abstract mixin class _$LessonCopyWith<$Res> implements $LessonCopyWith<$Res> {
   factory _$LessonCopyWith(_Lesson value, $Res Function(_Lesson) _then) = __$LessonCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String hook, String explanation, String quizQuestion, List<String> options, String correctAnswer, String category
+ String id, String hook, String explanation, String quizQuestion, List<String> options, int correctAnswerIndex, String category
 });
 
 
@@ -282,15 +282,15 @@ class __$LessonCopyWithImpl<$Res>
 
 /// Create a copy of Lesson
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? hook = null,Object? explanation = null,Object? quizQuestion = null,Object? options = null,Object? correctAnswer = null,Object? category = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? hook = null,Object? explanation = null,Object? quizQuestion = null,Object? options = null,Object? correctAnswerIndex = null,Object? category = null,}) {
   return _then(_Lesson(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,hook: null == hook ? _self.hook : hook // ignore: cast_nullable_to_non_nullable
 as String,explanation: null == explanation ? _self.explanation : explanation // ignore: cast_nullable_to_non_nullable
 as String,quizQuestion: null == quizQuestion ? _self.quizQuestion : quizQuestion // ignore: cast_nullable_to_non_nullable
 as String,options: null == options ? _self._options : options // ignore: cast_nullable_to_non_nullable
-as List<String>,correctAnswer: null == correctAnswer ? _self.correctAnswer : correctAnswer // ignore: cast_nullable_to_non_nullable
-as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as List<String>,correctAnswerIndex: null == correctAnswerIndex ? _self.correctAnswerIndex : correctAnswerIndex // ignore: cast_nullable_to_non_nullable
+as int,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

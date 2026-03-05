@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/lesson.dart';
-import '../feed_controller.dart';
+import '../controllers/feed_controller.dart';
 import '../../../growth/xp/xp_notifier.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
 
@@ -21,6 +21,8 @@ class QuizSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final correctAnswer = lesson.options[lesson.correctAnswerIndex];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -39,14 +41,14 @@ class QuizSection extends ConsumerWidget {
           (option) => _OptionTile(
             option: option,
             selectedAnswer: selectedAnswer,
-            correctAnswer: lesson.correctAnswer,
+            correctAnswer: correctAnswer,
             onTap: selectedAnswer != null
                 ? null
                 : () {
                     ref
                         .read(feedProvider.notifier)
                         .selectAnswer(cardIndex, option);
-                    if (option == lesson.correctAnswer) {
+                    if (option == correctAnswer) {
                       ref
                           .read(xpProvider.notifier)
                           .addXp(XpEvent.correctAnswer);
@@ -58,7 +60,7 @@ class QuizSection extends ConsumerWidget {
           ),
         ),
         if (selectedAnswer != null)
-          _FeedbackBanner(isCorrect: selectedAnswer == lesson.correctAnswer),
+          _FeedbackBanner(isCorrect: selectedAnswer == correctAnswer),
       ],
     );
   }
@@ -102,7 +104,6 @@ class _OptionTile extends StatelessWidget {
     }
 
     return GestureDetector(
-      // Wrap with haptic so every tap feels responsive.
       onTap: onTap == null
           ? null
           : () {

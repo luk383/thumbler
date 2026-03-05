@@ -1,8 +1,9 @@
 import 'package:go_router/go_router.dart';
 
 import '../features/bookmarks/presentation/bookmarks_page.dart';
-import '../features/feed/presentation/feed_page.dart';
+import '../features/feed/presentation/pages/feed_page.dart';
 import '../features/profile/presentation/profile_page.dart';
+import '../features/study/presentation/pages/study_page.dart';
 import 'shell_scaffold.dart';
 
 final appRouter = GoRouter(
@@ -13,6 +14,12 @@ final appRouter = GoRouter(
       branches: [
         StatefulShellBranch(routes: [
           GoRoute(path: '/', builder: (context, state) => const FeedPage()),
+        ]),
+        StatefulShellBranch(routes: [
+          GoRoute(
+            path: '/study',
+            builder: (context, state) => const StudyPage(),
+          ),
         ]),
         StatefulShellBranch(routes: [
           GoRoute(

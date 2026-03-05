@@ -11,7 +11,7 @@ abstract class Lesson with _$Lesson {
     required String explanation,
     required String quizQuestion,
     required List<String> options,
-    required String correctAnswer,
+    required int correctAnswerIndex,
     required String category,
   }) = _Lesson;
 

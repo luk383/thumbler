@@ -12,7 +12,7 @@ _Lesson _$LessonFromJson(Map<String, dynamic> json) => _Lesson(
   explanation: json['explanation'] as String,
   quizQuestion: json['quizQuestion'] as String,
   options: (json['options'] as List<dynamic>).map((e) => e as String).toList(),
-  correctAnswer: json['correctAnswer'] as String,
+  correctAnswerIndex: (json['correctAnswerIndex'] as num).toInt(),
   category: json['category'] as String,
 );
 
@@ -22,6 +22,6 @@ Map<String, dynamic> _$LessonToJson(_Lesson instance) => <String, dynamic>{
   'explanation': instance.explanation,
   'quizQuestion': instance.quizQuestion,
   'options': instance.options,
-  'correctAnswer': instance.correctAnswer,
+  'correctAnswerIndex': instance.correctAnswerIndex,
   'category': instance.category,
 };
