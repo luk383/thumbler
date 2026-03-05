@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../controllers/study_controller.dart';
+import '../pages/study_launcher_page.dart';
 import '../../domain/study_item.dart';
 
 // ============================================================================
@@ -19,106 +20,12 @@ class StudyPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(studyProvider);
     if (s.isStudying) return const _SessionPage();
-    return const _SetupPage();
+    return const StudyLauncherPage();
   }
 }
 
 // ============================================================================
 // A) Setup page
-// ============================================================================
-
-class _SetupPage extends ConsumerWidget {
-  const _SetupPage();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final s = ref.watch(studyProvider);
-    final n = ref.read(studyProvider.notifier);
-
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text('Study',
-            style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        elevation: 0,
-      ),
-      body: s.items.isEmpty
-          ? _EmptyDeck()
-          : SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(20, 4, 20, 40),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // ── Topic ──────────────────────────────────────────────
-                  _SectionLabel('Topic'),
-                  const SizedBox(height: 10),
-                  _ChipRow(
-                    chips: ['All', ...s.categories],
-                    selected: s.selectedCategory ?? 'All',
-                    onSelect: (v) => n.setCategory(v == 'All' ? null : v),
-                  ),
-                  const SizedBox(height: 22),
-
-                  // ── Mode ───────────────────────────────────────────────
-                  _SectionLabel('Mode'),
-                  const SizedBox(height: 10),
-                  _ModeSelector(
-                    selected: s.selectedMode,
-                    onSelect: n.setMode,
-                  ),
-                  const SizedBox(height: 22),
-
-                  // ── Session length ─────────────────────────────────────
-                  _SectionLabel('Questions'),
-                  const SizedBox(height: 10),
-                  _ChipRow(
-                    chips: ['5', '10', '20'],
-                    selected: '${s.sessionLength}',
-                    onSelect: (v) => n.setSessionLength(int.parse(v)),
-                  ),
-                  const SizedBox(height: 22),
-
-                  // ── Timer (Speed only) ────────────────────────────────
-                  if (s.selectedMode == StudyMode.speed) ...[
-                    _SectionLabel('Timer per question'),
-                    const SizedBox(height: 10),
-                    _ChipRow(
-                      chips: ['5s', '8s', '12s'],
-                      selected: '${s.timerSeconds}s',
-                      onSelect: (v) => n.setTimerSeconds(
-                          int.parse(v.replaceAll('s', ''))),
-                    ),
-                    const SizedBox(height: 22),
-                  ],
-
-                  // ── Preview + CTA ──────────────────────────────────────
-                  if (s.availableCount > 0) ...[
-                    _PreviewCard(state: s),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          textStyle: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: n.startSession,
-                        icon: const Icon(Icons.play_arrow_rounded),
-                        label: const Text('START SESSION'),
-                      ),
-                    ),
-                  ] else
-                    _EmptyFilterResult(),
-                ],
-              ),
-            ),
-    );
-  }
-}
-
 // ============================================================================
 // B) Session page (router between SRS and Speed)
 // ============================================================================
@@ -200,7 +107,7 @@ class _SrsSession extends ConsumerWidget {
                 child: _SrsCard(
                   key: ValueKey(studyState.generation),
                   item: item,
-                  onRate: (again) => n.rate(item.id, again: again),
+                  onRate: (rating) => n.rate(item.id, rating: rating),
                 ),
               );
             }(),
@@ -620,7 +527,7 @@ class _SrsCard extends StatefulWidget {
     required this.onRate,
   });
   final StudyItem item;
-  final void Function(bool again) onRate;
+  final void Function(SrsRating rating) onRate;
 
   @override
   State<_SrsCard> createState() => _SrsCardState();
@@ -773,31 +680,46 @@ class _SrsCardState extends State<_SrsCard> {
                     Row(
                       children: [
                         Expanded(
-                          child: OutlinedButton.icon(
+                          child: OutlinedButton(
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.redAccent,
                               side: const BorderSide(
                                   color: Colors.redAccent, width: 1.5),
                               padding:
-                                  const EdgeInsets.symmetric(vertical: 12),
+                                  const EdgeInsets.symmetric(vertical: 11),
                             ),
-                            onPressed: () => widget.onRate(true),
-                            icon: const Icon(Icons.replay, size: 16),
-                            label: const Text('Again'),
+                            onPressed: () =>
+                                widget.onRate(SrsRating.again),
+                            child: const Text('Again',
+                                style: TextStyle(fontSize: 13)),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 8),
                         Expanded(
-                          child: ElevatedButton.icon(
+                          child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               foregroundColor: Colors.white,
                               padding:
-                                  const EdgeInsets.symmetric(vertical: 12),
+                                  const EdgeInsets.symmetric(vertical: 11),
                             ),
-                            onPressed: () => widget.onRate(false),
-                            icon: const Icon(Icons.thumb_up, size: 16),
-                            label: const Text('Got it'),
+                            onPressed: () => widget.onRate(SrsRating.good),
+                            child: const Text('Good',
+                                style: TextStyle(fontSize: 13)),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF6C63FF),
+                              foregroundColor: Colors.white,
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 11),
+                            ),
+                            onPressed: () => widget.onRate(SrsRating.easy),
+                            child: const Text('Easy',
+                                style: TextStyle(fontSize: 13)),
                           ),
                         ),
                       ],
@@ -866,159 +788,8 @@ class _SrsComplete extends StatelessWidget {
 }
 
 // ============================================================================
-// Shared small widgets
+// Session helper widgets
 // ============================================================================
-
-class _SectionLabel extends StatelessWidget {
-  const _SectionLabel(this.text);
-  final String text;
-
-  @override
-  Widget build(BuildContext context) => Text(
-        text,
-        style: const TextStyle(
-            color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
-      );
-}
-
-class _ChipRow extends StatelessWidget {
-  const _ChipRow(
-      {required this.chips, required this.selected, required this.onSelect});
-  final List<String> chips;
-  final String selected;
-  final void Function(String) onSelect;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: chips
-            .map((c) => _Chip(
-                  label: c,
-                  selected: c == selected,
-                  onTap: () => onSelect(c),
-                ))
-            .toList(),
-      ),
-    );
-  }
-}
-
-class _Chip extends StatelessWidget {
-  const _Chip(
-      {required this.label, required this.selected, required this.onTap});
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        margin: const EdgeInsets.only(right: 8),
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-        decoration: BoxDecoration(
-          color: selected
-              ? const Color(0xFF6C63FF)
-              : Colors.white.withAlpha(18),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: selected
-                ? const Color(0xFF6C63FF)
-                : Colors.white.withAlpha(30),
-          ),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            color: selected ? Colors.white : Colors.white60,
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ModeSelector extends StatelessWidget {
-  const _ModeSelector({required this.selected, required this.onSelect});
-  final StudyMode selected;
-  final void Function(StudyMode) onSelect;
-
-  @override
-  Widget build(BuildContext context) {
-    return SegmentedButton<StudyMode>(
-      style: SegmentedButton.styleFrom(
-        backgroundColor: Colors.white.withAlpha(12),
-        foregroundColor: Colors.white60,
-        selectedBackgroundColor: const Color(0xFF6C63FF),
-        selectedForegroundColor: Colors.white,
-        side: BorderSide(color: Colors.white.withAlpha(30)),
-      ),
-      segments: StudyMode.values
-          .map((m) => ButtonSegment<StudyMode>(
-                value: m,
-                label: Text(m.label, style: const TextStyle(fontSize: 13)),
-                icon: Icon(m.icon, size: 16),
-              ))
-          .toList(),
-      selected: {selected},
-      onSelectionChanged: (modes) => onSelect(modes.first),
-    );
-  }
-}
-
-class _PreviewCard extends StatelessWidget {
-  const _PreviewCard({required this.state});
-  final StudyState state;
-
-  @override
-  Widget build(BuildContext context) {
-    final count =
-        state.sessionLength.clamp(1, state.availableCount);
-    final modeNote = state.selectedMode == StudyMode.speed
-        ? '${state.timerSeconds}s per domanda'
-        : 'priorità: più difficili prima';
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: BoxDecoration(
-        color: const Color(0xFF6C63FF).withAlpha(25),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF6C63FF).withAlpha(60)),
-      ),
-      child: Row(
-        children: [
-          Text(
-            state.selectedMode == StudyMode.speed ? '⚡' : '🧠',
-            style: const TextStyle(fontSize: 22),
-          ),
-          const SizedBox(width: 12),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                '$count available • ~${state.estimatedMinutes} min',
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600),
-              ),
-              const SizedBox(height: 2),
-              Text(modeNote,
-                  style:
-                      const TextStyle(color: Colors.white54, fontSize: 11)),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _TimerBar extends StatelessWidget {
   const _TimerBar(
@@ -1208,57 +979,6 @@ class _StatChip extends StatelessWidget {
               style:
                   const TextStyle(color: Colors.white54, fontSize: 11)),
         ],
-      ),
-    );
-  }
-}
-
-class _EmptyDeck extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(40),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text('📚', style: TextStyle(fontSize: 56)),
-            SizedBox(height: 16),
-            Text(
-              'Il tuo mazzo è vuoto',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Tocca l\'icona 🎓 su qualsiasi carta del feed per aggiungerla qui.',
-              style: TextStyle(color: Colors.white54, fontSize: 14),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _EmptyFilterResult extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(10),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withAlpha(20)),
-      ),
-      child: const Text(
-        'Nessuna carta per questa selezione.',
-        style: TextStyle(color: Colors.white54),
-        textAlign: TextAlign.center,
       ),
     );
   }

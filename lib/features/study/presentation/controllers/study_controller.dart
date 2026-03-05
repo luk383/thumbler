@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../features/feed/data/mock_lessons.dart';
 import '../../../../features/feed/domain/lesson.dart';
 import '../../data/study_storage.dart';
 import '../../domain/study_item.dart';
@@ -10,6 +11,24 @@ import '../../domain/study_item.dart';
 // ---------------------------------------------------------------------------
 // Enums
 // ---------------------------------------------------------------------------
+
+/// SRS self-rating after answering a card.
+enum SrsRating {
+  /// Card not known — review again in 10 minutes.
+  again,
+
+  /// Card known reasonably well — review in 2 days.
+  good,
+
+  /// Card very easy — review in 7 days.
+  easy;
+
+  String get label => switch (this) {
+        SrsRating.again => 'Again',
+        SrsRating.good => 'Good',
+        SrsRating.easy => 'Easy',
+      };
+}
 
 enum StudyMode {
   srs,
@@ -51,6 +70,7 @@ class StudyState {
   const StudyState({
     this.items = const [],
     this.selectedCategory,
+    this.selectedTopic,
     this.selectedMode = StudyMode.srs,
     this.sessionLength = 10,
     this.timerSeconds = 8,
@@ -67,6 +87,10 @@ class StudyState {
 
   /// null = All categories.
   final String? selectedCategory;
+
+  /// null = All topics within the selected category.
+  final String? selectedTopic;
+
   final StudyMode selectedMode;
 
   /// Number of questions per session (5 / 10 / 20).
@@ -91,12 +115,28 @@ class StudyState {
 
   // ── Derived ───────────────────────────────────────────────────────────────
 
-  List<StudyItem> get filtered => selectedCategory == null
-      ? items
-      : items.where((i) => i.category == selectedCategory).toList();
+  List<StudyItem> get filtered {
+    var list = selectedCategory == null
+        ? items
+        : items.where((i) => i.category == selectedCategory).toList();
+    if (selectedTopic != null) {
+      list = list.where((i) => i.topic == selectedTopic).toList();
+    }
+    return list;
+  }
 
   List<String> get categories =>
       ({for (final i in items) i.category}).toList()..sort();
+
+  /// Distinct topics within the currently selected category (empty if none).
+  List<String> get topics {
+    final byCategory = selectedCategory == null
+        ? items
+        : items.where((i) => i.category == selectedCategory).toList();
+    return ({for (final i in byCategory) if (i.topic != null) i.topic!})
+        .toList()
+      ..sort();
+  }
 
   bool inDeck(String id) => items.any((i) => i.id == id);
 
@@ -108,6 +148,15 @@ class StudyState {
       isStudying && answeredInSession >= sessionQueue.length;
 
   int get availableCount => filtered.length;
+
+  /// Cards due for SRS review right now (nextReviewAt == null OR <= now).
+  int get dueCount {
+    final now = DateTime.now();
+    return filtered
+        .where((i) =>
+            i.nextReviewAt == null || !i.nextReviewAt!.isAfter(now))
+        .length;
+  }
 
   /// Estimated minutes: SRS ~3 cards/min, Speed ~30s/card.
   int get estimatedMinutes {
@@ -156,6 +205,27 @@ class StudyNotifier extends Notifier<StudyState> {
     state = _copyWith(items: StudyStorage().all());
   }
 
+  /// Seeds the deck with up to 5 starter cards from mockLessons (no duplicates).
+  void seedStarterCards() {
+    final storage = StudyStorage();
+    var added = 0;
+    for (final lesson in mockLessons) {
+      if (added >= 5) break;
+      if (!state.inDeck(lesson.id)) {
+        storage.add(StudyItem.fromLesson(
+          id: lesson.id,
+          category: lesson.category,
+          hook: lesson.hook,
+          explanation: lesson.explanation,
+          options: lesson.options,
+          correctAnswerIndex: lesson.correctAnswerIndex,
+        ));
+        added++;
+      }
+    }
+    state = _copyWith(items: storage.all());
+  }
+
   void removeItem(String id) {
     StudyStorage().remove(id);
     state = _copyWith(
@@ -171,10 +241,26 @@ class StudyNotifier extends Notifier<StudyState> {
   void setCategory(String? category) {
     state = _copyWith(
       selectedCategory: _maybeNull(category),
+      // Reset topic whenever category changes
+      selectedTopic: _nil,
       isStudying: false,
       sessionQueue: const [],
       currentIndex: 0,
     );
+  }
+
+  void setTopic(String? topic) {
+    state = _copyWith(
+      selectedTopic: _maybeNull(topic),
+      isStudying: false,
+      sessionQueue: const [],
+      currentIndex: 0,
+    );
+  }
+
+  /// Reloads items from Hive without resetting session settings.
+  void reloadFromStorage() {
+    state = _copyWith(items: StudyStorage().all());
   }
 
   void setMode(StudyMode mode) {
@@ -196,16 +282,22 @@ class StudyNotifier extends Notifier<StudyState> {
 
   // ── Session ───────────────────────────────────────────────────────────────
 
-  void startSession({List<String>? retryIds}) {
+  void startSession({bool reviewAnyway = false, List<String>? retryIds}) {
     final candidates = retryIds != null
         ? state.items.where((i) => retryIds.contains(i.id)).toList()
         : state.filtered;
-    final queue =
-        _buildQueue(candidates, state.selectedMode, state.sessionLength);
+
+    // SRS: by default only show cards that are due; reviewAnyway bypasses filter.
+    final pool = (state.selectedMode == StudyMode.srs && !reviewAnyway)
+        ? _dueCards(candidates)
+        : candidates;
+
+    final queue = _buildQueue(pool, state.selectedMode, state.sessionLength);
     if (queue.isEmpty) return;
     state = StudyState(
       items: state.items,
       selectedCategory: state.selectedCategory,
+      selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
       sessionLength: state.sessionLength,
       timerSeconds: state.timerSeconds,
@@ -230,23 +322,43 @@ class StudyNotifier extends Notifier<StudyState> {
     );
   }
 
-  /// SRS: mark Again or Good, persist stats.
-  void rate(String id, {required bool again}) {
+  /// SRS: rate the current card and schedule next review.
+  /// TODO: replace interval logic with SM-2 algorithm (SRS v2)
+  void rate(String id, {required SrsRating rating}) {
     final storage = StudyStorage();
     final item = state.items.firstWhere(
       (i) => i.id == id,
       orElse: () => state.items.first,
     );
+    final wrong = rating == SrsRating.again;
     storage.update(item.copyWith(
-      againCount: again ? item.againCount + 1 : null,
-      goodCount: again ? null : item.goodCount + 1,
+      againCount: wrong ? item.againCount + 1 : null,
+      goodCount: wrong ? null : item.goodCount + 1,
       timesSeen: item.timesSeen + 1,
-      correctCount: again ? null : item.correctCount + 1,
-      wrongCount: again ? item.wrongCount + 1 : null,
+      correctCount: wrong ? null : item.correctCount + 1,
+      wrongCount: wrong ? item.wrongCount + 1 : null,
       lastReviewedAt: DateTime.now(),
-      // TODO: compute nextReviewAt with SM-2 algorithm (v2)
+      nextReviewAt: _nextReview(rating),
     ));
     _advanceSession(storage);
+  }
+
+  /// Computes the next review timestamp from the given SRS rating.
+  static DateTime _nextReview(SrsRating rating) {
+    final now = DateTime.now();
+    return switch (rating) {
+      SrsRating.again => now.add(const Duration(minutes: 10)),
+      SrsRating.good  => now.add(const Duration(days: 2)),
+      SrsRating.easy  => now.add(const Duration(days: 7)),
+    };
+  }
+
+  /// Returns only items whose nextReviewAt is null or in the past.
+  static List<StudyItem> _dueCards(List<StudyItem> items) {
+    final now = DateTime.now();
+    return items
+        .where((i) => i.nextReviewAt == null || !i.nextReviewAt!.isAfter(now))
+        .toList();
   }
 
   /// Speed: record result, persist stats, advance.
@@ -291,6 +403,7 @@ class StudyNotifier extends Notifier<StudyState> {
     state = StudyState(
       items: items,
       selectedCategory: state.selectedCategory,
+      selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
       sessionLength: state.sessionLength,
       timerSeconds: state.timerSeconds,
@@ -314,6 +427,7 @@ class StudyNotifier extends Notifier<StudyState> {
     state = StudyState(
       items: items,
       selectedCategory: state.selectedCategory,
+      selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
       sessionLength: state.sessionLength,
       timerSeconds: state.timerSeconds,
@@ -356,6 +470,7 @@ class StudyNotifier extends Notifier<StudyState> {
   StudyState _copyWith({
     List<StudyItem>? items,
     Object selectedCategory = _nil,
+    Object selectedTopic = _nil,
     StudyMode? selectedMode,
     int? sessionLength,
     int? timerSeconds,
@@ -372,6 +487,9 @@ class StudyNotifier extends Notifier<StudyState> {
       selectedCategory: identical(selectedCategory, _nil)
           ? state.selectedCategory
           : selectedCategory as String?,
+      selectedTopic: identical(selectedTopic, _nil)
+          ? state.selectedTopic
+          : selectedTopic as String?,
       selectedMode: selectedMode ?? state.selectedMode,
       sessionLength: sessionLength ?? state.sessionLength,
       timerSeconds: timerSeconds ?? state.timerSeconds,

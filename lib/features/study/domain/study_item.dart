@@ -5,6 +5,7 @@ class StudyItem {
     required this.id,
     required this.contentType,
     required this.category,
+    this.topic,
     required this.promptText,
     required this.options,
     required this.correctAnswerIndex,
@@ -23,6 +24,10 @@ class StudyItem {
   final String id; // lessonId for microCard, custom uuid for examQuestion
   final ContentType contentType;
   final String category;
+
+  /// Optional subtopic within a category (e.g. "Security" within "Technology").
+  final String? topic;
+
   final String promptText; // hook (microCard) or question (examQuestion)
   final String? explanationText;
   final List<String> options;
@@ -56,6 +61,7 @@ class StudyItem {
         id: id,
         contentType: contentType,
         category: category,
+        topic: topic,
         promptText: promptText,
         explanationText: explanationText,
         options: options,
@@ -74,6 +80,7 @@ class StudyItem {
         'id': id,
         'contentType': contentType.index,
         'category': category,
+        'topic': topic,
         'promptText': promptText,
         'explanationText': explanationText,
         'options': options,
@@ -93,6 +100,7 @@ class StudyItem {
         contentType: ContentType.values[
             (map['contentType'] as num?)?.toInt() ?? 0],
         category: map['category'] as String,
+        topic: map['topic'] as String?,
         promptText: map['promptText'] as String? ??
             map['hook'] as String? ??
             '',
