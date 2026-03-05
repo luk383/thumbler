@@ -1,0 +1,222 @@
+[
+{
+"id": "sec701_exam_001",
+"contentType": "exam_question",
+"category": "General Security Concepts",
+"topic": "CIA Triad",
+"subtopic": "Availability",
+"objectiveId": "1.1",
+"promptText": "Which security principle ensures systems remain accessible to authorized users?",
+"options": ["Confidentiality","Integrity","Availability","Authentication"],
+"correctAnswerIndex": 2
+},
+{
+"id": "sec701_exam_002",
+"contentType": "exam_question",
+"category": "General Security Concepts",
+"topic": "Security Controls",
+"subtopic": "Preventive",
+"objectiveId": "1.2",
+"promptText": "Which control type is designed to stop a security incident before it occurs?",
+"options": ["Detective","Preventive","Corrective","Directive"],
+"correctAnswerIndex": 1
+},
+{
+"id": "sec701_exam_003",
+"contentType": "exam_question",
+"category": "Threats and Vulnerabilities",
+"topic": "Malware",
+"subtopic": "Ransomware",
+"objectiveId": "2.1",
+"promptText": "Which malware encrypts files and demands payment for decryption?",
+"options": ["Trojan","Worm","Ransomware","Spyware"],
+"correctAnswerIndex": 2
+},
+{
+"id": "sec701_exam_004",
+"contentType": "exam_question",
+"category": "Threats and Vulnerabilities",
+"topic": "Social Engineering",
+"subtopic": "Phishing",
+"objectiveId": "2.2",
+"promptText": "An attacker sends emails pretending to be a bank to steal credentials. What attack is this?",
+"options": ["Phishing","Vishing","Tailgating","Shoulder surfing"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_005",
+"contentType": "exam_question",
+"category": "Threats and Vulnerabilities",
+"topic": "Application Attacks",
+"subtopic": "SQL Injection",
+"objectiveId": "2.3",
+"promptText": "Which attack exploits improperly sanitized database queries?",
+"options": ["XSS","SQL Injection","CSRF","Buffer Overflow"],
+"correctAnswerIndex": 1
+},
+{
+"id": "sec701_exam_006",
+"contentType": "exam_question",
+"category": "Threats and Vulnerabilities",
+"topic": "Network Attacks",
+"subtopic": "DDoS",
+"objectiveId": "2.4",
+"promptText": "A botnet floods a web server with traffic until it crashes. What attack is occurring?",
+"options": ["DDoS","MITM","ARP Poisoning","DNS Spoofing"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_007",
+"contentType": "exam_question",
+"category": "Security Architecture",
+"topic": "Network Security",
+"subtopic": "Firewall",
+"objectiveId": "3.1",
+"promptText": "Which device filters traffic between networks based on rules?",
+"options": ["Firewall","Proxy","IDS","Switch"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_008",
+"contentType": "exam_question",
+"category": "Security Architecture",
+"topic": "Network Security",
+"subtopic": "IDS",
+"objectiveId": "3.1",
+"promptText": "Which system monitors traffic and alerts administrators about suspicious activity?",
+"options": ["Firewall","IDS","VPN","Router"],
+"correctAnswerIndex": 1
+},
+{
+"id": "sec701_exam_009",
+"contentType": "exam_question",
+"category": "Security Architecture",
+"topic": "Identity",
+"subtopic": "MFA",
+"objectiveId": "3.3",
+"promptText": "Which authentication method requires two or more independent credentials?",
+"options": ["SSO","MFA","Kerberos","LDAP"],
+"correctAnswerIndex": 1
+},
+{
+"id": "sec701_exam_010",
+"contentType": "exam_question",
+"category": "Security Architecture",
+"topic": "Zero Trust",
+"subtopic": "Principle",
+"objectiveId": "3.2",
+"promptText": "What is the core principle of zero trust security?",
+"options": ["Trust internal networks","Always verify access","Disable authentication","Allow default access"],
+"correctAnswerIndex": 1
+},
+{
+"id": "sec701_exam_011",
+"contentType": "exam_question",
+"category": "Security Operations",
+"topic": "Incident Response",
+"subtopic": "Containment",
+"objectiveId": "4.2",
+"promptText": "Which phase of incident response isolates infected systems to prevent spread?",
+"options": ["Containment","Recovery","Eradication","Preparation"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_012",
+"contentType": "exam_question",
+"category": "Security Operations",
+"topic": "Logging",
+"subtopic": "SIEM",
+"objectiveId": "4.1",
+"promptText": "Which platform aggregates and analyzes logs from multiple systems?",
+"options": ["SIEM","SOAR","Firewall","IDS"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_013",
+"contentType": "exam_question",
+"category": "Security Operations",
+"topic": "Forensics",
+"subtopic": "Chain of Custody",
+"objectiveId": "4.3",
+"promptText": "What ensures evidence integrity during a digital investigation?",
+"options": ["Chain of custody","Hash collision","Encryption","Tokenization"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_014",
+"contentType": "exam_question",
+"category": "Security Operations",
+"topic": "Automation",
+"subtopic": "SOAR",
+"objectiveId": "4.4",
+"promptText": "Which technology automates incident response workflows?",
+"options": ["SIEM","SOAR","EDR","VPN"],
+"correctAnswerIndex": 1
+},
+{
+"id": "sec701_exam_015",
+"contentType": "exam_question",
+"category": "Security Governance",
+"topic": "Risk Management",
+"subtopic": "Risk Assessment",
+"objectiveId": "5.1",
+"promptText": "What process identifies potential threats and vulnerabilities to systems?",
+"options": ["Risk assessment","Penetration testing","Logging","Tokenization"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_016",
+"contentType": "exam_question",
+"category": "Security Governance",
+"topic": "Policies",
+"subtopic": "Acceptable Use",
+"objectiveId": "5.2",
+"promptText": "Which document defines how employees may use company systems?",
+"options": ["AUP","NDA","SLA","MOU"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_017",
+"contentType": "exam_question",
+"category": "Security Governance",
+"topic": "Compliance",
+"subtopic": "GDPR",
+"objectiveId": "5.3",
+"promptText": "Which regulation governs data protection in the European Union?",
+"options": ["HIPAA","PCI DSS","GDPR","SOX"],
+"correctAnswerIndex": 2
+},
+{
+"id": "sec701_exam_018",
+"contentType": "exam_question",
+"category": "Security Governance",
+"topic": "Training",
+"subtopic": "Security Awareness",
+"objectiveId": "5.4",
+"promptText": "Which program educates employees about cybersecurity threats?",
+"options": ["Security awareness","Risk register","Asset inventory","Pen test"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_019",
+"contentType": "exam_question",
+"category": "Threats and Vulnerabilities",
+"topic": "Network Attacks",
+"subtopic": "MITM",
+"objectiveId": "2.4",
+"promptText": "Which attack intercepts communication between two parties without their knowledge?",
+"options": ["MITM","DDoS","Replay attack","Pharming"],
+"correctAnswerIndex": 0
+},
+{
+"id": "sec701_exam_020",
+"contentType": "exam_question",
+"category": "Security Architecture",
+"topic": "Encryption",
+"subtopic": "Symmetric",
+"objectiveId": "1.4",
+"promptText": "Which encryption type uses the same key for encryption and decryption?",
+"options": ["Symmetric","Asymmetric","Hashing","Tokenization"],
+"correctAnswerIndex": 0
+}
+]

@@ -20,6 +20,7 @@ Future<void> main() async {
   await Hive.openBox('bookmarks_box');
   await Hive.openBox('quest_box');
   await Hive.openBox('study_box');
+  await Hive.openBox('exam_box');
 
   runApp(const ProviderScope(child: ThumblerApp()));
 }

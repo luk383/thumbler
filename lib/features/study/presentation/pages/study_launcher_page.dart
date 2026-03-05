@@ -95,8 +95,18 @@ class StudyLauncherPage extends ConsumerWidget {
               ),
             ],
 
+            // ── Session Type chips ───────────────────────────────────────
+            const SizedBox(height: 4),
+            _LauncherSection(
+              label: 'Session type',
+              child: _QueueTypeChipRow(
+                selected: s.selectedQueueType,
+                state: s,
+                onSelect: n.setQueueType,
+              ),
+            ),
+
             // ── Preview pill ─────────────────────────────────────────────
-            const SizedBox(height: 12),
             _PreviewPill(state: s),
             const SizedBox(height: 28),
 
@@ -145,40 +155,7 @@ class StudyLauncherPage extends ConsumerWidget {
             ] else if (s.availableCount == 0) ...[
               _EmptyFilterResult(),
             ] else ...[
-              // SRS — check due count
-              if (s.dueCount == 0 && s.selectedMode != StudyMode.speed) ...[
-                _NoDueCards(),
-                const SizedBox(height: 10),
-                _StartButton(
-                  icon: Icons.psychology_outlined,
-                  label: 'Review anyway',
-                  outlined: true,
-                  onPressed: () {
-                    n.setMode(StudyMode.srs);
-                    n.startSession(reviewAnyway: true);
-                  },
-                ),
-              ] else
-                _StartButton(
-                  icon: Icons.psychology_outlined,
-                  label:
-                      'Start Study  (${s.dueCount} due)',
-                  onPressed: () {
-                    n.setMode(StudyMode.srs);
-                    n.startSession();
-                  },
-                ),
-              const SizedBox(height: 10),
-              _StartButton(
-                icon: Icons.bolt,
-                label: 'Start Speed Drill',
-                outlined: true,
-                accentColor: const Color(0xFF6C63FF),
-                onPressed: () {
-                  n.setMode(StudyMode.speed);
-                  n.startSession();
-                },
-              ),
+              _QueueStartButtons(state: s, notifier: n),
             ],
 
             const SizedBox(height: 32),
@@ -317,7 +294,7 @@ class _PreviewPill extends StatelessWidget {
             Border.all(color: const Color(0xFF6C63FF).withAlpha(55)),
       ),
       child: Text(
-        '$label  ·  Total: ${state.availableCount}  ·  Due: ${state.dueCount}',
+        '$label  ·  Total: ${state.availableCount}  ·  Due: ${state.dueCount}  ·  Weak: ${state.weakCount}  ·  New: ${state.newCount}',
         style: const TextStyle(
           color: Color(0xFFADA8FF),
           fontSize: 12,
@@ -487,44 +464,6 @@ class _LibraryCard extends StatelessWidget {
 }
 
 // ============================================================================
-// No cards due
-// ============================================================================
-
-class _NoDueCards extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-      decoration: BoxDecoration(
-        color: Colors.green.withAlpha(18),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.green.withAlpha(60)),
-      ),
-      child: const Row(
-        children: [
-          Text('🎉', style: TextStyle(fontSize: 18)),
-          SizedBox(width: 10),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('No cards due for review.',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600)),
-                Text('Great job! Come back later or review anyway.',
-                    style: TextStyle(color: Colors.white54, fontSize: 11)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-// ============================================================================
 // Empty filter result
 // ============================================================================
 
@@ -614,6 +553,191 @@ class _Chip extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// Queue type chip row
+// ============================================================================
+
+class _QueueTypeChipRow extends StatelessWidget {
+  const _QueueTypeChipRow({
+    required this.selected,
+    required this.state,
+    required this.onSelect,
+  });
+  final SessionQueueType selected;
+  final StudyState state;
+  final void Function(SessionQueueType) onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: SessionQueueType.values.map((type) {
+          final count = switch (type) {
+            SessionQueueType.due      => state.dueCount,
+            SessionQueueType.weak     => state.weakCount,
+            SessionQueueType.newCards => state.newCount,
+            SessionQueueType.random   => state.availableCount,
+          };
+          final isSelected = type == selected;
+          return GestureDetector(
+            onTap: () => onSelect(type),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? const Color(0xFF6C63FF)
+                    : Colors.white.withAlpha(18),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: isSelected
+                      ? const Color(0xFF6C63FF)
+                      : Colors.white.withAlpha(30),
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    type.icon,
+                    size: 13,
+                    color: isSelected ? Colors.white : Colors.white54,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    '${type.label} $count',
+                    style: TextStyle(
+                      color: isSelected ? Colors.white : Colors.white60,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
+// ============================================================================
+// Start buttons — queue-type aware
+// ============================================================================
+
+class _QueueStartButtons extends StatelessWidget {
+  const _QueueStartButtons({required this.state, required this.notifier});
+  final StudyState state;
+  final StudyNotifier notifier;
+
+  @override
+  Widget build(BuildContext context) {
+    final queueCount = state.queueCount;
+    final queueLabel = state.selectedQueueType.label;
+    final hasCards = queueCount > 0;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Primary SRS start button
+        if (!hasCards) ...[
+          _EmptyQueueBanner(queueType: state.selectedQueueType),
+          const SizedBox(height: 10),
+          _StartButton(
+            icon: Icons.psychology_outlined,
+            label: 'Review Random instead',
+            outlined: true,
+            onPressed: () {
+              notifier.setQueueType(SessionQueueType.random);
+              notifier.setMode(StudyMode.srs);
+              notifier.startSession();
+            },
+          ),
+        ] else
+          _StartButton(
+            icon: Icons.psychology_outlined,
+            label: 'Study $queueLabel  ($queueCount cards)',
+            onPressed: () {
+              notifier.setMode(StudyMode.srs);
+              notifier.startSession();
+            },
+          ),
+        const SizedBox(height: 10),
+        // Speed Drill always available if cards exist
+        _StartButton(
+          icon: Icons.bolt,
+          label: hasCards
+              ? 'Speed Drill  ($queueLabel · $queueCount cards)'
+              : 'Speed Drill  (all ${state.availableCount} cards)',
+          outlined: true,
+          accentColor: const Color(0xFF6C63FF),
+          onPressed: () {
+            notifier.setMode(StudyMode.speed);
+            if (!hasCards) {
+              notifier.startSession(reviewAnyway: true);
+            } else {
+              notifier.startSession();
+            }
+          },
+        ),
+      ],
+    );
+  }
+}
+
+// ============================================================================
+// Empty queue banner (per queue type)
+// ============================================================================
+
+class _EmptyQueueBanner extends StatelessWidget {
+  const _EmptyQueueBanner({required this.queueType});
+  final SessionQueueType queueType;
+
+  @override
+  Widget build(BuildContext context) {
+    final (emoji, message) = switch (queueType) {
+      SessionQueueType.due => (
+          '🎉',
+          'No cards due for review. Great job!\nCome back later, or switch to Random.'
+        ),
+      SessionQueueType.weak => (
+          '💪',
+          'No weak cards found.\nKeep studying to track your mistakes.'
+        ),
+      SessionQueueType.newCards => (
+          '📭',
+          'No new cards left.\nImport a deck pack or add from Feed.'
+        ),
+      SessionQueueType.random => ('🃏', 'No cards available.'),
+    };
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        color: Colors.green.withAlpha(18),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.green.withAlpha(60)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(emoji, style: const TextStyle(fontSize: 18)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              message,
+              style: const TextStyle(color: Colors.white70, fontSize: 12),
+            ),
+          ),
+        ],
       ),
     );
   }

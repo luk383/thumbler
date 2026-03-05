@@ -24,10 +24,10 @@ enum SrsRating {
   easy;
 
   String get label => switch (this) {
-        SrsRating.again => 'Again',
-        SrsRating.good => 'Good',
-        SrsRating.easy => 'Easy',
-      };
+    SrsRating.again => 'Again',
+    SrsRating.good => 'Good',
+    SrsRating.easy => 'Easy',
+  };
 }
 
 enum StudyMode {
@@ -35,14 +35,58 @@ enum StudyMode {
   speed;
 
   String get label => switch (this) {
-        StudyMode.srs => 'SRS',
-        StudyMode.speed => 'Speed',
-      };
+    StudyMode.srs => 'SRS',
+    StudyMode.speed => 'Speed',
+  };
 
   IconData get icon => switch (this) {
-        StudyMode.srs => Icons.psychology_outlined,
-        StudyMode.speed => Icons.bolt,
-      };
+    StudyMode.srs => Icons.psychology_outlined,
+    StudyMode.speed => Icons.bolt,
+  };
+}
+
+/// Controls which cards go into the next session queue.
+enum SessionQueueType {
+  due,
+  weak,
+  newCards,
+  random;
+
+  String get label => switch (this) {
+    SessionQueueType.due => 'Due',
+    SessionQueueType.weak => 'Weak',
+    SessionQueueType.newCards => 'New',
+    SessionQueueType.random => 'Random',
+  };
+
+  IconData get icon => switch (this) {
+    SessionQueueType.due => Icons.schedule_outlined,
+    SessionQueueType.weak => Icons.trending_down_outlined,
+    SessionQueueType.newCards => Icons.fiber_new_outlined,
+    SessionQueueType.random => Icons.shuffle_outlined,
+  };
+}
+
+class StudyExternalSessionRequest {
+  const StudyExternalSessionRequest({
+    this.category,
+    this.topic,
+    this.mode = StudyMode.srs,
+    this.source,
+    this.autostart = false,
+    this.questionIds,
+    this.sessionLength = 10,
+    this.lastExamAttemptId,
+  });
+
+  final String? category;
+  final String? topic;
+  final StudyMode mode;
+  final String? source; // e.g. exam_bridge
+  final bool autostart;
+  final List<String>? questionIds;
+  final int sessionLength;
+  final String? lastExamAttemptId;
 }
 
 // ---------------------------------------------------------------------------
@@ -72,6 +116,7 @@ class StudyState {
     this.selectedCategory,
     this.selectedTopic,
     this.selectedMode = StudyMode.srs,
+    this.selectedQueueType = SessionQueueType.due,
     this.sessionLength = 10,
     this.timerSeconds = 8,
     this.isStudying = false,
@@ -81,6 +126,9 @@ class StudyState {
     this.generation = 0,
     this.speedResults = const [],
     this.wrongItemIds = const [],
+    this.startedFromExamBridge = false,
+    this.lastTrainedArea,
+    this.lastExamAttemptId,
   });
 
   final List<StudyItem> items;
@@ -92,6 +140,7 @@ class StudyState {
   final String? selectedTopic;
 
   final StudyMode selectedMode;
+  final SessionQueueType selectedQueueType;
 
   /// Number of questions per session (5 / 10 / 20).
   final int sessionLength;
@@ -113,6 +162,13 @@ class StudyState {
   /// IDs of items answered wrong — used for "Retry wrong" button.
   final List<String> wrongItemIds;
 
+  /// True when the current session was launched from Exam results.
+  final bool startedFromExamBridge;
+
+  /// Minimal analytics metadata (in-memory for now).
+  final String? lastTrainedArea;
+  final String? lastExamAttemptId;
+
   // ── Derived ───────────────────────────────────────────────────────────────
 
   List<StudyItem> get filtered {
@@ -133,9 +189,10 @@ class StudyState {
     final byCategory = selectedCategory == null
         ? items
         : items.where((i) => i.category == selectedCategory).toList();
-    return ({for (final i in byCategory) if (i.topic != null) i.topic!})
-        .toList()
-      ..sort();
+    return ({
+      for (final i in byCategory)
+        if (i.topic != null) i.topic!,
+    }).toList()..sort();
   }
 
   bool inDeck(String id) => items.any((i) => i.id == id);
@@ -153,10 +210,24 @@ class StudyState {
   int get dueCount {
     final now = DateTime.now();
     return filtered
-        .where((i) =>
-            i.nextReviewAt == null || !i.nextReviewAt!.isAfter(now))
+        .where((i) => i.nextReviewAt == null || !i.nextReviewAt!.isAfter(now))
         .length;
   }
+
+  /// Cards with wrong answers (wrongCount > 0), sorted by difficulty.
+  int get weakCount =>
+      filtered.where((i) => i.wrongCount > 0 || i.againCount > 0).length;
+
+  /// Cards never seen before (timesSeen == 0).
+  int get newCount => filtered.where((i) => i.timesSeen == 0).length;
+
+  /// Count for the currently selected queue type.
+  int get queueCount => switch (selectedQueueType) {
+    SessionQueueType.due => dueCount,
+    SessionQueueType.weak => weakCount,
+    SessionQueueType.newCards => newCount,
+    SessionQueueType.random => availableCount,
+  };
 
   /// Estimated minutes: SRS ~3 cards/min, Speed ~30s/card.
   int get estimatedMinutes {
@@ -169,14 +240,17 @@ class StudyState {
   }
 
   // Speed session stats
-  int get speedCorrect =>
-      speedResults.where((r) => r.correct).length;
-  int get speedWrong =>
-      speedResults.where((r) => !r.correct).length;
+  int get speedCorrect => speedResults.where((r) => r.correct).length;
+  int get speedWrong => speedResults.where((r) => !r.correct).length;
   int get speedAvgMs {
     if (speedResults.isEmpty) return 0;
     return speedResults.map((r) => r.timeMs).reduce((a, b) => a + b) ~/
         speedResults.length;
+  }
+
+  int get speedAccuracyPct {
+    if (speedResults.isEmpty) return 0;
+    return ((speedCorrect / speedResults.length) * 100).round();
   }
 }
 
@@ -194,14 +268,16 @@ class StudyNotifier extends Notifier<StudyState> {
 
   void addLesson(Lesson lesson) {
     if (state.inDeck(lesson.id)) return;
-    StudyStorage().add(StudyItem.fromLesson(
-      id: lesson.id,
-      category: lesson.category,
-      hook: lesson.hook,
-      explanation: lesson.explanation,
-      options: lesson.options,
-      correctAnswerIndex: lesson.correctAnswerIndex,
-    ));
+    StudyStorage().add(
+      StudyItem.fromLesson(
+        id: lesson.id,
+        category: lesson.category,
+        hook: lesson.hook,
+        explanation: lesson.explanation,
+        options: lesson.options,
+        correctAnswerIndex: lesson.correctAnswerIndex,
+      ),
+    );
     state = _copyWith(items: StudyStorage().all());
   }
 
@@ -212,14 +288,16 @@ class StudyNotifier extends Notifier<StudyState> {
     for (final lesson in mockLessons) {
       if (added >= 5) break;
       if (!state.inDeck(lesson.id)) {
-        storage.add(StudyItem.fromLesson(
-          id: lesson.id,
-          category: lesson.category,
-          hook: lesson.hook,
-          explanation: lesson.explanation,
-          options: lesson.options,
-          correctAnswerIndex: lesson.correctAnswerIndex,
-        ));
+        storage.add(
+          StudyItem.fromLesson(
+            id: lesson.id,
+            category: lesson.category,
+            hook: lesson.hook,
+            explanation: lesson.explanation,
+            options: lesson.options,
+            correctAnswerIndex: lesson.correctAnswerIndex,
+          ),
+        );
         added++;
       }
     }
@@ -272,12 +350,45 @@ class StudyNotifier extends Notifier<StudyState> {
     );
   }
 
+  void setQueueType(SessionQueueType type) {
+    state = _copyWith(
+      selectedQueueType: type,
+      isStudying: false,
+      sessionQueue: const [],
+      currentIndex: 0,
+    );
+  }
+
   void setSessionLength(int length) {
     state = _copyWith(sessionLength: length);
   }
 
   void setTimerSeconds(int seconds) {
     state = _copyWith(timerSeconds: seconds);
+  }
+
+  void applyExternalRequest(StudyExternalSessionRequest request) {
+    if (request.source == 'exam_bridge' &&
+        (request.category != null ||
+            request.topic != null ||
+            request.questionIds != null)) {
+      startSessionFromExamBridge(
+        category: request.category,
+        topic: request.topic,
+        questionIds: request.questionIds,
+        sessionLength: request.sessionLength,
+        lastExamAttemptId: request.lastExamAttemptId,
+      );
+      return;
+    }
+
+    setCategory(request.category);
+    setTopic(request.topic);
+    setMode(request.mode);
+    setSessionLength(request.sessionLength);
+    if (request.autostart) {
+      startSession();
+    }
   }
 
   // ── Session ───────────────────────────────────────────────────────────────
@@ -287,18 +398,23 @@ class StudyNotifier extends Notifier<StudyState> {
         ? state.items.where((i) => retryIds.contains(i.id)).toList()
         : state.filtered;
 
-    // SRS: by default only show cards that are due; reviewAnyway bypasses filter.
-    final pool = (state.selectedMode == StudyMode.srs && !reviewAnyway)
-        ? _dueCards(candidates)
-        : candidates;
+    final pool = reviewAnyway
+        ? candidates
+        : _poolForQueueType(candidates, state.selectedQueueType);
 
-    final queue = _buildQueue(pool, state.selectedMode, state.sessionLength);
+    final queue = _buildQueue(
+      pool,
+      state.selectedMode,
+      state.selectedQueueType,
+      state.sessionLength,
+    );
     if (queue.isEmpty) return;
     state = StudyState(
       items: state.items,
       selectedCategory: state.selectedCategory,
       selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
+      selectedQueueType: state.selectedQueueType,
       sessionLength: state.sessionLength,
       timerSeconds: state.timerSeconds,
       isStudying: true,
@@ -308,6 +424,9 @@ class StudyNotifier extends Notifier<StudyState> {
       generation: state.generation + 1,
       speedResults: const [],
       wrongItemIds: const [],
+      startedFromExamBridge: false,
+      lastTrainedArea: state.lastTrainedArea,
+      lastExamAttemptId: state.lastExamAttemptId,
     );
   }
 
@@ -319,6 +438,7 @@ class StudyNotifier extends Notifier<StudyState> {
       answeredInSession: 0,
       speedResults: const [],
       wrongItemIds: const [],
+      startedFromExamBridge: false,
     );
   }
 
@@ -331,15 +451,17 @@ class StudyNotifier extends Notifier<StudyState> {
       orElse: () => state.items.first,
     );
     final wrong = rating == SrsRating.again;
-    storage.update(item.copyWith(
-      againCount: wrong ? item.againCount + 1 : null,
-      goodCount: wrong ? null : item.goodCount + 1,
-      timesSeen: item.timesSeen + 1,
-      correctCount: wrong ? null : item.correctCount + 1,
-      wrongCount: wrong ? item.wrongCount + 1 : null,
-      lastReviewedAt: DateTime.now(),
-      nextReviewAt: _nextReview(rating),
-    ));
+    storage.update(
+      item.copyWith(
+        againCount: wrong ? item.againCount + 1 : null,
+        goodCount: wrong ? null : item.goodCount + 1,
+        timesSeen: item.timesSeen + 1,
+        correctCount: wrong ? null : item.correctCount + 1,
+        wrongCount: wrong ? item.wrongCount + 1 : null,
+        lastReviewedAt: DateTime.now(),
+        nextReviewAt: _nextReview(rating),
+      ),
+    );
     _advanceSession(storage);
   }
 
@@ -348,22 +470,18 @@ class StudyNotifier extends Notifier<StudyState> {
     final now = DateTime.now();
     return switch (rating) {
       SrsRating.again => now.add(const Duration(minutes: 10)),
-      SrsRating.good  => now.add(const Duration(days: 2)),
-      SrsRating.easy  => now.add(const Duration(days: 7)),
+      SrsRating.good => now.add(const Duration(days: 2)),
+      SrsRating.easy => now.add(const Duration(days: 7)),
     };
-  }
-
-  /// Returns only items whose nextReviewAt is null or in the past.
-  static List<StudyItem> _dueCards(List<StudyItem> items) {
-    final now = DateTime.now();
-    return items
-        .where((i) => i.nextReviewAt == null || !i.nextReviewAt!.isAfter(now))
-        .toList();
   }
 
   /// Speed: record result, persist stats, advance.
   void recordSpeedAnswer(
-      String id, {required bool correct, required int timeMs, required bool timedOut}) {
+    String id, {
+    required bool correct,
+    required int timeMs,
+    required bool timedOut,
+  }) {
     final storage = StudyStorage();
     final item = state.items.firstWhere(
       (i) => i.id == id,
@@ -373,16 +491,17 @@ class StudyNotifier extends Notifier<StudyState> {
     // Update running avgTimeMs
     final newAvg = item.avgTimeMs == null
         ? timeMs
-        : ((item.avgTimeMs! * item.timesSeen + timeMs) ~/
-            (item.timesSeen + 1));
+        : ((item.avgTimeMs! * item.timesSeen + timeMs) ~/ (item.timesSeen + 1));
 
-    storage.update(item.copyWith(
-      timesSeen: item.timesSeen + 1,
-      correctCount: correct ? item.correctCount + 1 : null,
-      wrongCount: correct ? null : item.wrongCount + 1,
-      avgTimeMs: newAvg,
-      lastReviewedAt: DateTime.now(),
-    ));
+    storage.update(
+      item.copyWith(
+        timesSeen: item.timesSeen + 1,
+        correctCount: correct ? item.correctCount + 1 : null,
+        wrongCount: correct ? null : item.wrongCount + 1,
+        avgTimeMs: newAvg,
+        lastReviewedAt: DateTime.now(),
+      ),
+    );
 
     final newResult = SpeedResult(
       itemId: id,
@@ -391,9 +510,7 @@ class StudyNotifier extends Notifier<StudyState> {
       timedOut: timedOut,
     );
     final newResults = [...state.speedResults, newResult];
-    final newWrong = correct
-        ? state.wrongItemIds
-        : [...state.wrongItemIds, id];
+    final newWrong = correct ? state.wrongItemIds : [...state.wrongItemIds, id];
 
     final items = storage.all();
     final nextIndex = state.sessionQueue.isEmpty
@@ -405,6 +522,7 @@ class StudyNotifier extends Notifier<StudyState> {
       selectedCategory: state.selectedCategory,
       selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
+      selectedQueueType: state.selectedQueueType,
       sessionLength: state.sessionLength,
       timerSeconds: state.timerSeconds,
       isStudying: true,
@@ -419,6 +537,72 @@ class StudyNotifier extends Notifier<StudyState> {
 
   void nextCard() => _advanceSession(StudyStorage());
 
+  /// Starts a targeted SRS session from Exam results (Train Weakest bridge).
+  ///
+  /// Pass either [category]/[topic] for area-based filtering,
+  /// or [questionIds] for a wrong-answers session.
+  /// Items are sorted: most errors first, then least seen.
+  void startSessionFromExamBridge({
+    String? category,
+    String? topic,
+    List<String>? questionIds,
+    int sessionLength = 10,
+    String? lastExamAttemptId,
+  }) {
+    List<StudyItem> candidates;
+    if (questionIds != null) {
+      candidates = state.items
+          .where(
+            (i) =>
+                i.contentType == ContentType.examQuestion &&
+                questionIds.contains(i.id),
+          )
+          .toList();
+    } else {
+      candidates = state.items.where((i) {
+        if (i.contentType != ContentType.examQuestion) return false;
+        if (category != null && i.category != category) return false;
+        if (topic != null && i.topic != topic) return false;
+        return true;
+      }).toList();
+    }
+    if (candidates.isEmpty) return;
+
+    // Sort: highest error count first, then least seen.
+    candidates.sort((a, b) {
+      final cmp = (b.wrongCount + b.againCount).compareTo(
+        a.wrongCount + a.againCount,
+      );
+      return cmp != 0 ? cmp : a.timesSeen.compareTo(b.timesSeen);
+    });
+
+    final queue = candidates.take(sessionLength).toList();
+
+    state = StudyState(
+      items: state.items,
+      selectedCategory: category,
+      selectedTopic: topic,
+      selectedMode: StudyMode.srs,
+      selectedQueueType: state.selectedQueueType,
+      sessionLength: sessionLength,
+      timerSeconds: state.timerSeconds,
+      isStudying: true,
+      sessionQueue: queue,
+      currentIndex: 0,
+      answeredInSession: 0,
+      generation: state.generation + 1,
+      speedResults: const [],
+      wrongItemIds: const [],
+      startedFromExamBridge: true,
+      lastTrainedArea: questionIds != null
+          ? 'wrong_answers'
+          : topic != null
+          ? '$category / $topic'
+          : category,
+      lastExamAttemptId: lastExamAttemptId,
+    );
+  }
+
   void _advanceSession(StudyStorage storage) {
     final items = storage.all();
     final nextIndex = state.sessionQueue.isEmpty
@@ -429,6 +613,7 @@ class StudyNotifier extends Notifier<StudyState> {
       selectedCategory: state.selectedCategory,
       selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
+      selectedQueueType: state.selectedQueueType,
       sessionLength: state.sessionLength,
       timerSeconds: state.timerSeconds,
       isStudying: true,
@@ -438,24 +623,70 @@ class StudyNotifier extends Notifier<StudyState> {
       generation: state.generation + 1,
       speedResults: state.speedResults,
       wrongItemIds: state.wrongItemIds,
+      startedFromExamBridge: state.startedFromExamBridge,
+      lastTrainedArea: state.lastTrainedArea,
+      lastExamAttemptId: state.lastExamAttemptId,
     );
   }
 
   // ── Queue builder ─────────────────────────────────────────────────────────
 
+  /// Filters candidates to the pool appropriate for the queue type.
+  static List<StudyItem> _poolForQueueType(
+    List<StudyItem> candidates,
+    SessionQueueType type,
+  ) {
+    final now = DateTime.now();
+    return switch (type) {
+      SessionQueueType.due =>
+        candidates
+            .where(
+              (i) => i.nextReviewAt == null || !i.nextReviewAt!.isAfter(now),
+            )
+            .toList(),
+      SessionQueueType.weak =>
+        candidates.where((i) => i.wrongCount > 0 || i.againCount > 0).toList(),
+      SessionQueueType.newCards =>
+        candidates.where((i) => i.timesSeen == 0).toList(),
+      SessionQueueType.random => candidates,
+    };
+  }
+
   static List<StudyItem> _buildQueue(
-      List<StudyItem> candidates, StudyMode mode, int maxLength) {
+    List<StudyItem> candidates,
+    StudyMode mode,
+    SessionQueueType queueType,
+    int maxLength,
+  ) {
     List<StudyItem> ordered;
-    switch (mode) {
-      case StudyMode.srs:
-        // Prioritise: never seen > high againCount > low goodCount
-        ordered = [...candidates]..sort((a, b) {
-            if (a.timesSeen == 0 && b.timesSeen > 0) return -1;
-            if (b.timesSeen == 0 && a.timesSeen > 0) return 1;
-            final cmp = b.againCount.compareTo(a.againCount);
-            return cmp != 0 ? cmp : a.goodCount.compareTo(b.goodCount);
+    switch (queueType) {
+      case SessionQueueType.due:
+        // For SRS: prioritise never seen > high againCount > low goodCount
+        // For Speed: shuffle
+        if (mode == StudyMode.speed) {
+          ordered = [...candidates]..shuffle(_rng);
+        } else {
+          ordered = [...candidates]
+            ..sort((a, b) {
+              if (a.timesSeen == 0 && b.timesSeen > 0) return -1;
+              if (b.timesSeen == 0 && a.timesSeen > 0) return 1;
+              final cmp = b.againCount.compareTo(a.againCount);
+              return cmp != 0 ? cmp : a.goodCount.compareTo(b.goodCount);
+            });
+        }
+      case SessionQueueType.weak:
+        // Sort by most wrong / most again / worst correct rate
+        ordered = [...candidates]
+          ..sort((a, b) {
+            final totalA = a.timesSeen > 0 ? a.timesSeen : 1;
+            final totalB = b.timesSeen > 0 ? b.timesSeen : 1;
+            final rateA = (a.wrongCount + a.againCount) / totalA;
+            final rateB = (b.wrongCount + b.againCount) / totalB;
+            return rateB.compareTo(rateA); // descending: worst first
           });
-      case StudyMode.speed:
+      case SessionQueueType.newCards:
+        ordered = [...candidates]..shuffle(_rng);
+      case SessionQueueType.random:
         ordered = [...candidates]..shuffle(_rng);
     }
     final count = min(maxLength, ordered.length);
@@ -472,6 +703,7 @@ class StudyNotifier extends Notifier<StudyState> {
     Object selectedCategory = _nil,
     Object selectedTopic = _nil,
     StudyMode? selectedMode,
+    SessionQueueType? selectedQueueType,
     int? sessionLength,
     int? timerSeconds,
     bool? isStudying,
@@ -481,6 +713,9 @@ class StudyNotifier extends Notifier<StudyState> {
     int? generation,
     List<SpeedResult>? speedResults,
     List<String>? wrongItemIds,
+    bool? startedFromExamBridge,
+    Object lastTrainedArea = _nil,
+    Object lastExamAttemptId = _nil,
   }) {
     return StudyState(
       items: items ?? state.items,
@@ -491,6 +726,7 @@ class StudyNotifier extends Notifier<StudyState> {
           ? state.selectedTopic
           : selectedTopic as String?,
       selectedMode: selectedMode ?? state.selectedMode,
+      selectedQueueType: selectedQueueType ?? state.selectedQueueType,
       sessionLength: sessionLength ?? state.sessionLength,
       timerSeconds: timerSeconds ?? state.timerSeconds,
       isStudying: isStudying ?? state.isStudying,
@@ -500,9 +736,18 @@ class StudyNotifier extends Notifier<StudyState> {
       generation: generation ?? state.generation,
       speedResults: speedResults ?? state.speedResults,
       wrongItemIds: wrongItemIds ?? state.wrongItemIds,
+      startedFromExamBridge:
+          startedFromExamBridge ?? state.startedFromExamBridge,
+      lastTrainedArea: identical(lastTrainedArea, _nil)
+          ? state.lastTrainedArea
+          : lastTrainedArea as String?,
+      lastExamAttemptId: identical(lastExamAttemptId, _nil)
+          ? state.lastExamAttemptId
+          : lastExamAttemptId as String?,
     );
   }
 }
 
-final studyProvider =
-    NotifierProvider<StudyNotifier, StudyState>(StudyNotifier.new);
+final studyProvider = NotifierProvider<StudyNotifier, StudyState>(
+  StudyNotifier.new,
+);

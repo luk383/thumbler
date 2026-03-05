@@ -31,6 +31,11 @@ class ShellScaffold extends StatelessWidget {
             label: 'Study',
           ),
           NavigationDestination(
+            icon: Icon(Icons.assignment_outlined),
+            selectedIcon: Icon(Icons.assignment),
+            label: 'Exam',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.bookmark_outline),
             selectedIcon: Icon(Icons.bookmark),
             label: 'Saved',

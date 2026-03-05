@@ -52,9 +52,10 @@ class _DeckLibrarySheet extends ConsumerWidget {
             const Text(
               'Deck Library',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 4),
             const Text(
@@ -62,22 +63,81 @@ class _DeckLibrarySheet extends ConsumerWidget {
               style: TextStyle(color: Colors.white54, fontSize: 13),
             ),
             const SizedBox(height: 20),
-
-            ...DeckPackMeta.localPacks.map(
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70,
+                      side: BorderSide(color: Colors.white.withAlpha(30)),
+                    ),
+                    onPressed: lib.isDiscovering ? null : n.discoverPacks,
+                    icon: const Icon(Icons.refresh, size: 16),
+                    label: const Text('Refresh packs'),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: Colors.white70,
+                      side: BorderSide(color: Colors.white.withAlpha(30)),
+                    ),
+                    onPressed: n.printDiscoveredPacks,
+                    icon: const Icon(Icons.terminal, size: 16),
+                    label: const Text('Print discovered packs'),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            if (lib.isDiscovering)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 12),
+                child: Center(
+                  child: SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: Color(0xFF6C63FF),
+                    ),
+                  ),
+                ),
+              ),
+            if (!lib.isDiscovering && lib.packs.isEmpty)
+              const Padding(
+                padding: EdgeInsets.only(bottom: 12),
+                child: Text(
+                  'No JSON packs found under assets/decks/.',
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                ),
+              ),
+            ...lib.packs.map(
               (meta) => _PackCard(
                 meta: meta,
                 result: lib.resultFor(meta.id),
                 loading: lib.isLoading(meta.id),
-                onImport: () => n.importPack(meta),
+                onImport: () async {
+                  try {
+                    await n.importPack(meta);
+                    if (!context.mounted) return;
+                    final result = ref
+                        .read(deckLibraryProvider)
+                        .resultFor(meta.id);
+                    if (result != null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text(result.toString())),
+                      );
+                    }
+                  } catch (e) {
+                    if (!context.mounted) return;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Import failed: $e')),
+                    );
+                  }
+                },
               ),
-            ),
-
-            const SizedBox(height: 4),
-            const Text(
-              // TODO: add remote packs from Supabase (decks v2)
-              'More packs coming soon.',
-              style: TextStyle(color: Colors.white24, fontSize: 11),
-              textAlign: TextAlign.center,
             ),
           ],
         ),
@@ -101,7 +161,7 @@ class _PackCard extends StatelessWidget {
   final DeckPackMeta meta;
   final ImportResult? result;
   final bool loading;
-  final VoidCallback onImport;
+  final Future<void> Function() onImport;
 
   @override
   Widget build(BuildContext context) {
@@ -124,22 +184,68 @@ class _PackCard extends StatelessWidget {
                 Text(
                   meta.name,
                   style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 3),
                 Text(
                   meta.description,
-                  style:
-                      const TextStyle(color: Colors.white54, fontSize: 11),
+                  style: const TextStyle(color: Colors.white54, fontSize: 11),
+                ),
+                const SizedBox(height: 6),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 6,
+                  children: [
+                    Text(
+                      meta.assetPath.split('/').last,
+                      style: const TextStyle(
+                        color: Colors.white38,
+                        fontSize: 10,
+                      ),
+                    ),
+                    if (meta.estimatedItemCount != null)
+                      Text(
+                        '${meta.estimatedItemCount} items',
+                        style: const TextStyle(
+                          color: Colors.white54,
+                          fontSize: 10,
+                        ),
+                      ),
+                    if (meta.hasInvalidJson)
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent.withAlpha(35),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: Colors.redAccent.withAlpha(90),
+                          ),
+                        ),
+                        child: const Text(
+                          'Invalid JSON',
+                          style: TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
                 if (result != null) ...[
                   const SizedBox(height: 6),
                   Text(
                     '✓ $result',
                     style: const TextStyle(
-                        color: Colors.greenAccent, fontSize: 11),
+                      color: Colors.greenAccent,
+                      fontSize: 11,
+                    ),
                   ),
                 ],
               ],
@@ -157,17 +263,17 @@ class _PackCard extends StatelessWidget {
                 )
               : TextButton(
                   style: TextButton.styleFrom(
-                    backgroundColor:
-                        const Color(0xFF6C63FF).withAlpha(40),
+                    backgroundColor: const Color(0xFF6C63FF).withAlpha(40),
                     foregroundColor: const Color(0xFFADA8FF),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 8),
+                      horizontal: 12,
+                      vertical: 8,
+                    ),
                     minimumSize: Size.zero,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
-                  onPressed: onImport,
-                  child:
-                      Text(result != null ? 'Re-import' : 'Import'),
+                  onPressed: meta.hasInvalidJson ? null : () => onImport(),
+                  child: Text(result != null ? 'Re-import' : 'Import'),
                 ),
         ],
       ),
