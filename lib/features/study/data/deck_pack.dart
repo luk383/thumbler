@@ -128,6 +128,39 @@ class DeckPackMeta {
       );
     }
 
+    final duplicatePathsById = <String, List<String>>{};
+    for (final meta in metas) {
+      duplicatePathsById.putIfAbsent(meta.id, () => []).add(meta.assetPath);
+    }
+    final duplicateIds = duplicatePathsById.entries
+        .where((entry) => entry.key.trim().isNotEmpty && entry.value.length > 1)
+        .toList();
+    if (duplicateIds.isNotEmpty) {
+      final duplicateIdSet = {for (final entry in duplicateIds) entry.key};
+      for (var index = 0; index < metas.length; index++) {
+        final meta = metas[index];
+        if (!duplicateIdSet.contains(meta.id)) continue;
+        final duplicatePaths = duplicatePathsById[meta.id]!..sort();
+        metas[index] = DeckPackMeta(
+          id: meta.id,
+          title: meta.title,
+          assetPath: meta.assetPath,
+          examCode: meta.examCode,
+          category: meta.category,
+          description: meta.description,
+          version: meta.version,
+          domains: meta.domains,
+          isStarter: meta.isStarter,
+          availabilityNote: meta.availabilityNote,
+          questionCount: meta.questionCount,
+          microCardCount: meta.microCardCount,
+          examQuestionCount: meta.examQuestionCount,
+          invalidJsonMessage:
+              'Duplicate deck id "${meta.id}" found in ${duplicatePaths.join(', ')}',
+        );
+      }
+    }
+
     metas.sort(
       (a, b) => a.title.toLowerCase().compareTo(b.title.toLowerCase()),
     );
@@ -307,7 +340,17 @@ int? _nullableIntValue(Object? v) {
 
 List<String> _stringList(Object? v) {
   if (v is List) {
-    return v.map((e) => e.toString()).toList();
+    final values = <String>[];
+    for (final entry in v) {
+      final normalized = _nonEmptyString(entry);
+      if (normalized == null) {
+        throw const FormatException(
+          'Invalid "options"/"answers": expected only non-empty strings',
+        );
+      }
+      values.add(normalized);
+    }
+    return values;
   }
   throw const FormatException('Invalid "options"');
 }

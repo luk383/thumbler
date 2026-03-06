@@ -113,11 +113,14 @@ Available templates:
 
 - `aws_cloud_practitioner.template.json`
 - `aws_solutions_architect_associate.template.json`
+- `general_knowledge_subject.template.json`
 - `linux_essentials.template.json`
 
 ## How To Add A New Deck
 
 1. Duplicate the closest template from `docs/deck_templates/`.
+   - Use an exam template for certification-style decks.
+   - Use `general_knowledge_subject.template.json` for topic/subject decks.
 2. Replace metadata:
    - `id`
    - `title`

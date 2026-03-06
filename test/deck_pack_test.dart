@@ -286,6 +286,32 @@ void main() {
     );
   });
 
+  test('rejects empty answer strings in normalized question entries', () {
+    const raw = '''
+{
+  "id": "empty_answer_pack",
+  "title": "Empty Answer Pack",
+  "questions": [
+    {
+      "id": "q1",
+      "domain": "Security",
+      "question": "Prompt?",
+      "answers": ["A", ""],
+      "correctIndex": 0
+    }
+  ]
+}
+''';
+
+    expect(
+      () => DeckPack.parseJsonString(
+        raw,
+        assetPath: 'assets/decks/empty_answer_pack.json',
+      ),
+      throwsFormatException,
+    );
+  });
+
   test('rejects mismatched declared questionCount metadata', () {
     const raw = '''
 {
@@ -681,5 +707,151 @@ void main() {
         isTrue,
       );
     }
+  });
+
+  test('future content packs are represented as real decks or starter entries', () {
+    final futurePacks = <({
+      String path,
+      String title,
+      String? examCode,
+      bool isStarter,
+      bool shouldSupportExam,
+    })>[
+      (
+        path: 'assets/decks/aws_cloud_practitioner_clf_c02.json',
+        title: 'AWS Cloud Practitioner',
+        examCode: 'CLF-C02',
+        isStarter: false,
+        shouldSupportExam: true,
+      ),
+      (
+        path: 'assets/decks/aws_solutions_architect_associate_saa_c03.json',
+        title: 'AWS Solutions Architect Associate',
+        examCode: 'SAA-C03',
+        isStarter: false,
+        shouldSupportExam: true,
+      ),
+      (
+        path: 'assets/decks/linux_essentials_010_160.json',
+        title: 'Linux Essentials',
+        examCode: '010-160',
+        isStarter: false,
+        shouldSupportExam: true,
+      ),
+      (
+        path: 'assets/decks/technology_basics_starter.json',
+        title: 'Technology Basics',
+        examCode: null,
+        isStarter: true,
+        shouldSupportExam: false,
+      ),
+      (
+        path: 'assets/decks/world_history_starter.json',
+        title: 'World History',
+        examCode: null,
+        isStarter: true,
+        shouldSupportExam: false,
+      ),
+      (
+        path: 'assets/decks/world_geography_starter.json',
+        title: 'World Geography',
+        examCode: null,
+        isStarter: true,
+        shouldSupportExam: false,
+      ),
+      (
+        path: 'assets/decks/basic_science_starter.json',
+        title: 'Basic Science',
+        examCode: null,
+        isStarter: true,
+        shouldSupportExam: false,
+      ),
+      (
+        path: 'assets/decks/general_knowledge_starter.json',
+        title: 'General Knowledge',
+        examCode: null,
+        isStarter: true,
+        shouldSupportExam: false,
+      ),
+    ];
+
+    for (final pack in futurePacks) {
+      final raw = File(pack.path).readAsStringSync();
+      final meta = DeckPackMeta.inspectJsonString(raw, assetPath: pack.path);
+
+      expect(meta.title, pack.title);
+      expect(meta.examCode, pack.examCode);
+      expect(meta.isStarter, pack.isStarter);
+      expect(meta.supportsExam, pack.shouldSupportExam);
+      expect(
+        meta.librarySection,
+        pack.examCode == null ? 'General Knowledge' : 'Certifications',
+      );
+      if (pack.isStarter) {
+        expect(meta.isImportable, isFalse);
+        expect(meta.availabilityNote, isNotEmpty);
+      } else {
+        expect(meta.isImportable, isTrue);
+        expect(meta.questionCount, greaterThan(0));
+      }
+    }
+  });
+
+  test('marks duplicate deck ids as invalid during local discovery post-processing', () {
+    const metaA = DeckPackMeta(
+      id: 'dup_deck',
+      title: 'Deck A',
+      assetPath: 'assets/decks/deck_a.json',
+      questionCount: 10,
+      microCardCount: 0,
+      examQuestionCount: 10,
+    );
+    const metaB = DeckPackMeta(
+      id: 'dup_deck',
+      title: 'Deck B',
+      assetPath: 'assets/decks/deck_b.json',
+      questionCount: 8,
+      microCardCount: 0,
+      examQuestionCount: 8,
+    );
+    const unique = DeckPackMeta(
+      id: 'unique_deck',
+      title: 'Deck C',
+      assetPath: 'assets/decks/deck_c.json',
+      questionCount: 6,
+      microCardCount: 0,
+      examQuestionCount: 6,
+    );
+
+    final metas = [metaA, metaB, unique];
+    final duplicatePathsById = <String, List<String>>{};
+    for (final meta in metas) {
+      duplicatePathsById.putIfAbsent(meta.id, () => []).add(meta.assetPath);
+    }
+    final duplicateIdSet = {
+      for (final entry in duplicatePathsById.entries)
+        if (entry.value.length > 1) entry.key,
+    };
+
+    final normalized = [
+      for (final meta in metas)
+        if (!duplicateIdSet.contains(meta.id))
+          meta
+        else
+          DeckPackMeta(
+            id: meta.id,
+            title: meta.title,
+            assetPath: meta.assetPath,
+            questionCount: meta.questionCount,
+            microCardCount: meta.microCardCount,
+            examQuestionCount: meta.examQuestionCount,
+            invalidJsonMessage:
+                'Duplicate deck id "${meta.id}" found in ${(duplicatePathsById[meta.id]!..sort()).join(', ')}',
+          ),
+    ];
+
+    expect(normalized[0].hasInvalidJson, isTrue);
+    expect(normalized[1].hasInvalidJson, isTrue);
+    expect(normalized[2].hasInvalidJson, isFalse);
   });
 }

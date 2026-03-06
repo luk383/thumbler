@@ -1,0 +1,49 @@
+{
+  "id": "technology_basics",
+  "title": "Technology Basics",
+  "category": "General Knowledge",
+  "description": "Starter template for subject-based learning decks such as technology, history, geography, science, or general knowledge.",
+  "version": "1",
+  "questionCount": 2,
+  "domains": [
+    "Computing Fundamentals",
+    "Internet and Networking Basics"
+  ],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "technology_basics_q_001",
+      "type": "micro_card",
+      "domain": "Computing Fundamentals",
+      "topic": "Hardware",
+      "subtopic": "CPU",
+      "difficulty": 1,
+      "question": "Placeholder card: which component is commonly described as the brain of the computer?",
+      "answers": [
+        "CPU",
+        "Monitor",
+        "Keyboard",
+        "Power cable"
+      ],
+      "correctIndex": 0,
+      "explanation": "Replace this placeholder with real subject content while keeping the same normalized field names."
+    },
+    {
+      "id": "technology_basics_q_002",
+      "type": "micro_card",
+      "domain": "Internet and Networking Basics",
+      "topic": "Connectivity",
+      "subtopic": "Wi-Fi",
+      "difficulty": 1,
+      "question": "Placeholder card: which technology lets devices connect wirelessly to a local network?",
+      "answers": [
+        "Wi-Fi",
+        "HDMI",
+        "USB-A",
+        "SATA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Replace this placeholder with real subject content."
+    }
+  ]
+}
