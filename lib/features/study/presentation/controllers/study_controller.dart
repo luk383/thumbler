@@ -267,6 +267,7 @@ class StudyNotifier extends Notifier<StudyState> {
   @override
   StudyState build() {
     final activeDeckId = ref.watch(activeDeckIdProvider);
+    ref.watch(deckLibraryDataVersionProvider);
     return StudyState(
       items: StudyStorage().allForDeck(activeDeckId),
       activeDeckId: activeDeckId,

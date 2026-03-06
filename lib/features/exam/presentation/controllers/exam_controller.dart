@@ -31,6 +31,7 @@ class ExamNotifier extends Notifier<ExamState> {
   ExamState build() {
     ref.onDispose(_stopTimer);
     final activeDeck = ref.watch(activeDeckMetaProvider);
+    ref.watch(deckLibraryDataVersionProvider);
 
     final questions = ExamQuestionRepository().loadAll(deckId: activeDeck?.id);
     final storage = ref.read(examAttemptStorageProvider);

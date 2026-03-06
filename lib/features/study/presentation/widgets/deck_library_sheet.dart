@@ -220,6 +220,16 @@ class _LibraryHub extends StatelessWidget {
       activeDeck: activeDeck,
       progressByDeck: progressByDeck,
     );
+    final pinnedIds = {
+      for (final pack in continueLearning) pack.id,
+      for (final pack in featured) pack.id,
+    };
+    final certificationBrowse = certificationPacks
+        .where((pack) => !pinnedIds.contains(pack.id))
+        .toList();
+    final topicBrowse = topicPacks
+        .where((pack) => !pinnedIds.contains(pack.id))
+        .toList();
 
     return ListView(
       children: [
@@ -267,11 +277,12 @@ class _LibraryHub extends StatelessWidget {
               .toList(),
         ),
         const SizedBox(height: 18),
-        _LibrarySection(
-          title: 'Certifications',
-          subtitle:
-              'Structured exam tracks such as Security+, AWS, and Linux Essentials.',
-          children: certificationPacks
+        if (certificationBrowse.isNotEmpty)
+          _LibrarySection(
+            title: 'Certifications',
+            subtitle:
+                'Structured exam tracks such as Security+, AWS, and Linux Essentials.',
+            children: certificationBrowse
               .map(
                 (meta) => _DeckHubCard(
                   meta: meta,
@@ -286,13 +297,14 @@ class _LibraryHub extends StatelessWidget {
                 ),
               )
               .toList(),
-        ),
-        const SizedBox(height: 18),
-        _LibrarySection(
-          title: 'Explore Topics',
-          subtitle:
-              'General knowledge decks for broader learning and lightweight daily practice.',
-          children: topicPacks
+          ),
+        if (certificationBrowse.isNotEmpty) const SizedBox(height: 18),
+        if (topicBrowse.isNotEmpty)
+          _LibrarySection(
+            title: 'Explore Topics',
+            subtitle:
+                'General knowledge decks for broader learning and lightweight daily practice.',
+            children: topicBrowse
               .map(
                 (meta) => _DeckHubCard(
                   meta: meta,
@@ -307,7 +319,7 @@ class _LibraryHub extends StatelessWidget {
                 ),
               )
               .toList(),
-        ),
+          ),
       ],
     );
   }
