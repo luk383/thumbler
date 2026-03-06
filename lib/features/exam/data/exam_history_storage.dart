@@ -27,5 +27,23 @@ class ExamHistoryStorage {
     _box.put(_resultsKey, results.take(50).map((e) => e.toMap()).toList());
   }
 
+  void removeResult(String resultId) {
+    final results = loadResults()..removeWhere((result) => result.id == resultId);
+    _box.put(_resultsKey, results.map((e) => e.toMap()).toList());
+  }
+
+  void clearResultsForDeck(String? deckId) {
+    final results = loadResults()
+      ..removeWhere(
+        (result) =>
+            deckId == null ? result.deckId == null : result.deckId == deckId,
+      );
+    _box.put(_resultsKey, results.map((e) => e.toMap()).toList());
+  }
+
+  void replaceResults(List<ExamResult> results) {
+    _box.put(_resultsKey, results.map((e) => e.toMap()).toList());
+  }
+
   Future<void> clearResults() => _box.delete(_resultsKey);
 }

@@ -54,6 +54,7 @@ void main() {
     expect(result.correctAnswers, 2);
     expect(result.wrongAnswers, 1);
     expect(result.percentageScore, 67);
+    expect(result.durationSeconds, 1800);
     expect(result.wrongQuestionIds, ['q2']);
     expect(result.domainScores, {'Security': 100.0, 'Networking': 0.0});
     expect(result.weakestDomain, 'Networking');
@@ -63,6 +64,7 @@ void main() {
     final result = ExamResult.fromMap({
       'id': 'attempt-2',
       'completedAt': '2026-03-06T12:00:00.000',
+      'durationSeconds': 900,
       'totalQuestions': 2,
       'correctAnswers': 1,
       'wrongAnswers': 1,
@@ -73,5 +75,6 @@ void main() {
 
     expect(result.domainScores, {'Security': 40.0, 'Networking': 70.0});
     expect(result.weakestDomain, 'Security');
+    expect(result.durationSeconds, 900);
   });
 }

@@ -43,6 +43,25 @@ class ExamAttemptStorage {
     _box.put(_historyKey, history.take(10).map((a) => a.toMap()).toList());
   }
 
+  void removeFromHistory(String attemptId) {
+    final history = loadHistory()
+      ..removeWhere((attempt) => attempt.id == attemptId);
+    _box.put(_historyKey, history.map((a) => a.toMap()).toList());
+  }
+
+  void clearHistoryForDeck(String? deckId) {
+    final history = loadHistory()
+      ..removeWhere(
+        (attempt) =>
+            deckId == null ? attempt.deckId == null : attempt.deckId == deckId,
+      );
+    _box.put(_historyKey, history.map((a) => a.toMap()).toList());
+  }
+
+  void replaceHistory(List<ExamAttempt> attempts) {
+    _box.put(_historyKey, attempts.map((a) => a.toMap()).toList());
+  }
+
   Future<void> clearHistory() => _box.delete(_historyKey);
 
   Future<void> clearAll() => _box.clear();

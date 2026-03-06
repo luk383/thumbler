@@ -25,10 +25,8 @@ class ProgressAnalyticsPage extends ConsumerWidget {
                 'A lightweight read of what is improving, what is weak, and how active you have been lately.',
           ),
           const SizedBox(height: 16),
-          if (activeDeck != null) ...[
-            _DeckScopeCard(deckTitle: activeDeck.title),
-            const SizedBox(height: 16),
-          ],
+          _DeckScopeCard(deckTitle: activeDeck?.title),
+          const SizedBox(height: 16),
           if (!analytics.hasAnyData) ...[
             const _EmptyAnalyticsCard(),
           ] else ...[
@@ -69,7 +67,7 @@ class ProgressAnalyticsPage extends ConsumerWidget {
 class _DeckScopeCard extends StatelessWidget {
   const _DeckScopeCard({required this.deckTitle});
 
-  final String deckTitle;
+  final String? deckTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -105,13 +103,20 @@ class _DeckScopeCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  deckTitle,
+                  deckTitle ?? 'Legacy / unscoped local data',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
+                if (deckTitle == null) ...[
+                  const SizedBox(height: 3),
+                  const Text(
+                    'These metrics only reflect local items and results without an active deck binding.',
+                    style: TextStyle(color: Colors.white54, fontSize: 11),
+                  ),
+                ],
               ],
             ),
           ),

@@ -183,8 +183,51 @@ void main() {
 
       expect(meta.isStarter, true);
       expect(meta.questionCount, 0);
+      expect(meta.librarySection, 'General Knowledge');
     },
   );
+
+  test('classifies certification and general knowledge deck sections', () {
+    const certificationRaw = '''
+{
+  "id": "security_plus",
+  "title": "Security+",
+  "examCode": "SY0-701",
+  "questions": [
+    {
+      "id": "q1",
+      "domain": "Security",
+      "question": "Prompt?",
+      "answers": ["A", "B"],
+      "correctIndex": 0
+    }
+  ]
+}
+''';
+
+    const generalKnowledgeRaw = '''
+{
+  "id": "history_starter",
+  "title": "World History",
+  "category": "General Knowledge",
+  "isStarter": true,
+  "availabilityNote": "Coming later",
+  "questions": []
+}
+''';
+
+    final certificationMeta = DeckPackMeta.inspectJsonString(
+      certificationRaw,
+      assetPath: 'assets/decks/security_plus.json',
+    );
+    final generalKnowledgeMeta = DeckPackMeta.inspectJsonString(
+      generalKnowledgeRaw,
+      assetPath: 'assets/decks/world_history_starter.json',
+    );
+
+    expect(certificationMeta.librarySection, 'Certifications');
+    expect(generalKnowledgeMeta.librarySection, 'General Knowledge');
+  });
 
   test('rejects invalid question answer shape and duplicate ids', () {
     const duplicateIds = '''
@@ -389,6 +432,28 @@ void main() {
     expect(deck.items.every((item) => item.options.length == 4), isTrue);
   });
 
+  test('parses general knowledge starter deck assets', () {
+    final files = <String>[
+      'assets/decks/technology_basics_starter.json',
+      'assets/decks/world_history_starter.json',
+      'assets/decks/world_geography_starter.json',
+      'assets/decks/basic_science_starter.json',
+      'assets/decks/general_knowledge_starter.json',
+    ];
+
+    for (final path in files) {
+      final raw = File(path).readAsStringSync();
+      final meta = DeckPackMeta.inspectJsonString(raw, assetPath: path);
+
+      expect(meta.isStarter, isTrue);
+      expect(meta.questionCount, 0);
+      expect(meta.hasQuestions, isFalse);
+      expect(meta.isImportable, isFalse);
+      expect(meta.librarySection, 'General Knowledge');
+      expect(meta.availabilityNote, isNotEmpty);
+    }
+  });
+
   test('parses all Security+ batch deck files', () {
     final dir = Directory('docs/question_batches/security_plus');
     final files =
@@ -501,6 +566,37 @@ void main() {
       expect(meta.title, 'Linux Essentials');
       expect(meta.questionCount, 30);
       expect(meta.examQuestionCount, 30);
+      expect(meta.domains, hasLength(1));
+      expect(deck.items, hasLength(30));
+      expect(deck.items.every((item) => item.options.length == 4), isTrue);
+      expect(
+        deck.items.every((item) => item.contentType == 'exam_question'),
+        isTrue,
+      );
+    }
+  });
+
+  test('parses all Technology Basics batch deck files', () {
+    final dir = Directory('docs/question_batches/technology_basics');
+    final files =
+        dir
+            .listSync()
+            .whereType<File>()
+            .where((file) => file.path.endsWith('.json'))
+            .toList()
+          ..sort((a, b) => a.path.compareTo(b.path));
+
+    expect(files, isNotEmpty);
+
+    for (final file in files) {
+      final raw = file.readAsStringSync();
+      final meta = DeckPackMeta.inspectJsonString(raw, assetPath: file.path);
+      final deck = DeckPack.parseJsonString(raw, assetPath: file.path);
+
+      expect(meta.title, 'Technology Basics');
+      expect(meta.questionCount, 30);
+      expect(meta.examQuestionCount, 30);
+      expect(meta.librarySection, 'General Knowledge');
       expect(meta.domains, hasLength(1));
       expect(deck.items, hasLength(30));
       expect(deck.items.every((item) => item.options.length == 4), isTrue);

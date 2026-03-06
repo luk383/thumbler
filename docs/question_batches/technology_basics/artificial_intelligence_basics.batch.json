@@ -1,0 +1,464 @@
+{
+  "id": "technology_basics_artificial_intelligence_basics_batch_01",
+  "title": "Technology Basics",
+  "category": "General Knowledge",
+  "description": "Question batch for the Artificial Intelligence Basics domain.",
+  "version": "1",
+  "questionCount": 30,
+  "domains": [
+    "Artificial Intelligence Basics"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "tech_ai_b01_q_001",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes Artificial intelligence?",
+      "answers": [
+        "Technology that performs tasks usually linked to human-like intelligence.",
+        "Examples used to help a model learn during development.",
+        "The stage where a trained model produces an output or prediction.",
+        "The learned system that turns inputs into predictions or responses."
+      ],
+      "correctIndex": 0,
+      "explanation": "Artificial intelligence is technology that performs tasks usually linked to human-like intelligence."
+    },
+    {
+      "id": "tech_ai_b01_q_002",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "What does Machine learning refer to?",
+      "answers": [
+        "An AI approach where systems learn patterns from data.",
+        "The stage where a trained model produces an output or prediction.",
+        "The learned system that turns inputs into predictions or responses.",
+        "The input text or instruction given to a generative AI system."
+      ],
+      "correctIndex": 0,
+      "explanation": "Machine learning is an AI approach where systems learn patterns from data."
+    },
+    {
+      "id": "tech_ai_b01_q_003",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "In basic technology, what is Training data?",
+      "answers": [
+        "Examples used to help a model learn during development.",
+        "The learned system that turns inputs into predictions or responses.",
+        "The input text or instruction given to a generative AI system.",
+        "An organized collection of data used for training or evaluation."
+      ],
+      "correctIndex": 0,
+      "explanation": "Training data is examples used to help a model learn during development."
+    },
+    {
+      "id": "tech_ai_b01_q_004",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes Inference?",
+      "answers": [
+        "The stage where a trained model produces an output or prediction.",
+        "The input text or instruction given to a generative AI system.",
+        "An organized collection of data used for training or evaluation.",
+        "The known answer or category attached to training data."
+      ],
+      "correctIndex": 0,
+      "explanation": "Inference is the stage where a trained model produces an output or prediction."
+    },
+    {
+      "id": "tech_ai_b01_q_005",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "What does Model refer to?",
+      "answers": [
+        "The learned system that turns inputs into predictions or responses.",
+        "An organized collection of data used for training or evaluation.",
+        "The known answer or category attached to training data.",
+        "Learning from examples that already include the correct answer."
+      ],
+      "correctIndex": 0,
+      "explanation": "Model is the learned system that turns inputs into predictions or responses."
+    },
+    {
+      "id": "tech_ai_b01_q_006",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "In basic technology, what is Prompt?",
+      "answers": [
+        "The input text or instruction given to a generative AI system.",
+        "The known answer or category attached to training data.",
+        "Learning from examples that already include the correct answer.",
+        "Learning patterns from data without labeled answers."
+      ],
+      "correctIndex": 0,
+      "explanation": "Prompt is the input text or instruction given to a generative AI system."
+    },
+    {
+      "id": "tech_ai_b01_q_007",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes Dataset?",
+      "answers": [
+        "An organized collection of data used for training or evaluation.",
+        "Learning from examples that already include the correct answer.",
+        "Learning patterns from data without labeled answers.",
+        "Learning by trial, feedback, and rewards for actions."
+      ],
+      "correctIndex": 0,
+      "explanation": "Dataset is an organized collection of data used for training or evaluation."
+    },
+    {
+      "id": "tech_ai_b01_q_008",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "What does Label refer to?",
+      "answers": [
+        "The known answer or category attached to training data.",
+        "Learning patterns from data without labeled answers.",
+        "Learning by trial, feedback, and rewards for actions.",
+        "A model architecture inspired by connected layers of simple processing units."
+      ],
+      "correctIndex": 0,
+      "explanation": "Label is the known answer or category attached to training data."
+    },
+    {
+      "id": "tech_ai_b01_q_009",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "In basic technology, what is Supervised learning?",
+      "answers": [
+        "Learning from examples that already include the correct answer.",
+        "Learning by trial, feedback, and rewards for actions.",
+        "A model architecture inspired by connected layers of simple processing units.",
+        "Machine learning that uses many layers in a neural network."
+      ],
+      "correctIndex": 0,
+      "explanation": "Supervised learning is learning from examples that already include the correct answer."
+    },
+    {
+      "id": "tech_ai_b01_q_010",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes Unsupervised learning?",
+      "answers": [
+        "Learning patterns from data without labeled answers.",
+        "A model architecture inspired by connected layers of simple processing units.",
+        "Machine learning that uses many layers in a neural network.",
+        "AI focused on understanding and generating human language."
+      ],
+      "correctIndex": 0,
+      "explanation": "Unsupervised learning is learning patterns from data without labeled answers."
+    },
+    {
+      "id": "tech_ai_b01_q_011",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "What does Reinforcement learning refer to?",
+      "answers": [
+        "Learning by trial, feedback, and rewards for actions.",
+        "Machine learning that uses many layers in a neural network.",
+        "AI focused on understanding and generating human language.",
+        "AI focused on interpreting images and video."
+      ],
+      "correctIndex": 0,
+      "explanation": "Reinforcement learning is learning by trial, feedback, and rewards for actions."
+    },
+    {
+      "id": "tech_ai_b01_q_012",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "In basic technology, what is Neural network?",
+      "answers": [
+        "A model architecture inspired by connected layers of simple processing units.",
+        "AI focused on understanding and generating human language.",
+        "AI focused on interpreting images and video.",
+        "A model that assigns inputs to categories."
+      ],
+      "correctIndex": 0,
+      "explanation": "Neural network is a model architecture inspired by connected layers of simple processing units."
+    },
+    {
+      "id": "tech_ai_b01_q_013",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "Which statement best describes Deep learning?",
+      "answers": [
+        "Machine learning that uses many layers in a neural network.",
+        "AI focused on interpreting images and video.",
+        "A model that assigns inputs to categories.",
+        "A model that predicts a numeric value instead of a category."
+      ],
+      "correctIndex": 0,
+      "explanation": "Deep learning is machine learning that uses many layers in a neural network."
+    },
+    {
+      "id": "tech_ai_b01_q_014",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "What does Natural language processing refer to?",
+      "answers": [
+        "AI focused on understanding and generating human language.",
+        "A model that assigns inputs to categories.",
+        "A model that predicts a numeric value instead of a category.",
+        "A measurable input value used by a model."
+      ],
+      "correctIndex": 0,
+      "explanation": "Natural language processing is aI focused on understanding and generating human language."
+    },
+    {
+      "id": "tech_ai_b01_q_015",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "In basic technology, what is Computer vision?",
+      "answers": [
+        "AI focused on interpreting images and video.",
+        "A model that predicts a numeric value instead of a category.",
+        "A measurable input value used by a model.",
+        "When a model learns training details too closely and performs poorly on new data."
+      ],
+      "correctIndex": 0,
+      "explanation": "Computer vision is aI focused on interpreting images and video."
+    },
+    {
+      "id": "tech_ai_b01_q_016",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "Which statement best describes Classifier?",
+      "answers": [
+        "A model that assigns inputs to categories.",
+        "A measurable input value used by a model.",
+        "When a model learns training details too closely and performs poorly on new data.",
+        "A systematic skew in data or model behavior that can lead to unfair outputs."
+      ],
+      "correctIndex": 0,
+      "explanation": "Classifier is a model that assigns inputs to categories."
+    },
+    {
+      "id": "tech_ai_b01_q_017",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "What does Regression model refer to?",
+      "answers": [
+        "A model that predicts a numeric value instead of a category.",
+        "When a model learns training details too closely and performs poorly on new data.",
+        "A systematic skew in data or model behavior that can lead to unfair outputs.",
+        "When a generative model produces false or made-up information."
+      ],
+      "correctIndex": 0,
+      "explanation": "Regression model is a model that predicts a numeric value instead of a category."
+    },
+    {
+      "id": "tech_ai_b01_q_018",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "In basic technology, what is Feature?",
+      "answers": [
+        "A measurable input value used by a model.",
+        "A systematic skew in data or model behavior that can lead to unfair outputs.",
+        "When a generative model produces false or made-up information.",
+        "Additional training that adapts a model to a narrower task or style."
+      ],
+      "correctIndex": 0,
+      "explanation": "Feature is a measurable input value used by a model."
+    },
+    {
+      "id": "tech_ai_b01_q_019",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "Which statement best describes Overfitting?",
+      "answers": [
+        "When a model learns training details too closely and performs poorly on new data.",
+        "When a generative model produces false or made-up information.",
+        "Additional training that adapts a model to a narrower task or style.",
+        "A neural architecture widely used in modern language models."
+      ],
+      "correctIndex": 0,
+      "explanation": "Overfitting is when a model learns training details too closely and performs poorly on new data."
+    },
+    {
+      "id": "tech_ai_b01_q_020",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 2,
+      "question": "What does Bias refer to?",
+      "answers": [
+        "A systematic skew in data or model behavior that can lead to unfair outputs.",
+        "Additional training that adapts a model to a narrower task or style.",
+        "A neural architecture widely used in modern language models.",
+        "A small unit of text processed by a language model."
+      ],
+      "correctIndex": 0,
+      "explanation": "Bias is a systematic skew in data or model behavior that can lead to unfair outputs."
+    },
+    {
+      "id": "tech_ai_b01_q_021",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Hallucination?",
+      "answers": [
+        "When a generative model produces false or made-up information.",
+        "A neural architecture widely used in modern language models.",
+        "A small unit of text processed by a language model.",
+        "The amount of input and recent text a model can consider at once."
+      ],
+      "correctIndex": 0,
+      "explanation": "Hallucination is when a generative model produces false or made-up information."
+    },
+    {
+      "id": "tech_ai_b01_q_022",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "Which statement best describes Fine-tuning?",
+      "answers": [
+        "Additional training that adapts a model to a narrower task or style.",
+        "A small unit of text processed by a language model.",
+        "The amount of input and recent text a model can consider at once.",
+        "A numeric representation that captures relationships between pieces of data."
+      ],
+      "correctIndex": 0,
+      "explanation": "Fine-tuning is additional training that adapts a model to a narrower task or style."
+    },
+    {
+      "id": "tech_ai_b01_q_023",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "What does Transformer refer to?",
+      "answers": [
+        "A neural architecture widely used in modern language models.",
+        "The amount of input and recent text a model can consider at once.",
+        "A numeric representation that captures relationships between pieces of data.",
+        "AI that suggests items based on patterns in user behavior or content."
+      ],
+      "correctIndex": 0,
+      "explanation": "Transformer is a neural architecture widely used in modern language models."
+    },
+    {
+      "id": "tech_ai_b01_q_024",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Token?",
+      "answers": [
+        "A small unit of text processed by a language model.",
+        "A numeric representation that captures relationships between pieces of data.",
+        "AI that suggests items based on patterns in user behavior or content.",
+        "Software that simulates a conversation with a user."
+      ],
+      "correctIndex": 0,
+      "explanation": "Token is a small unit of text processed by a language model."
+    },
+    {
+      "id": "tech_ai_b01_q_025",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "Which statement best describes Context window?",
+      "answers": [
+        "The amount of input and recent text a model can consider at once.",
+        "AI that suggests items based on patterns in user behavior or content.",
+        "Software that simulates a conversation with a user.",
+        "Data used to check model performance during development."
+      ],
+      "correctIndex": 0,
+      "explanation": "Context window is the amount of input and recent text a model can consider at once."
+    },
+    {
+      "id": "tech_ai_b01_q_026",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "What does Embedding refer to?",
+      "answers": [
+        "A numeric representation that captures relationships between pieces of data.",
+        "Software that simulates a conversation with a user.",
+        "Data used to check model performance during development.",
+        "One complete pass through training data during model training."
+      ],
+      "correctIndex": 0,
+      "explanation": "Embedding is a numeric representation that captures relationships between pieces of data."
+    },
+    {
+      "id": "tech_ai_b01_q_027",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Recommendation system?",
+      "answers": [
+        "AI that suggests items based on patterns in user behavior or content.",
+        "Data used to check model performance during development.",
+        "One complete pass through training data during model training.",
+        "Technology that performs tasks usually linked to human-like intelligence."
+      ],
+      "correctIndex": 0,
+      "explanation": "Recommendation system is aI that suggests items based on patterns in user behavior or content."
+    },
+    {
+      "id": "tech_ai_b01_q_028",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "Which statement best describes Chatbot?",
+      "answers": [
+        "Software that simulates a conversation with a user.",
+        "One complete pass through training data during model training.",
+        "Technology that performs tasks usually linked to human-like intelligence.",
+        "An AI approach where systems learn patterns from data."
+      ],
+      "correctIndex": 0,
+      "explanation": "Chatbot is software that simulates a conversation with a user."
+    },
+    {
+      "id": "tech_ai_b01_q_029",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "What does Validation set refer to?",
+      "answers": [
+        "Data used to check model performance during development.",
+        "Technology that performs tasks usually linked to human-like intelligence.",
+        "An AI approach where systems learn patterns from data.",
+        "Examples used to help a model learn during development."
+      ],
+      "correctIndex": 0,
+      "explanation": "Validation set is data used to check model performance during development."
+    },
+    {
+      "id": "tech_ai_b01_q_030",
+      "type": "exam_question",
+      "domain": "Artificial Intelligence Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Epoch?",
+      "answers": [
+        "One complete pass through training data during model training.",
+        "An AI approach where systems learn patterns from data.",
+        "Examples used to help a model learn during development.",
+        "The stage where a trained model produces an output or prediction."
+      ],
+      "correctIndex": 0,
+      "explanation": "Epoch is one complete pass through training data during model training."
+    }
+  ]
+}

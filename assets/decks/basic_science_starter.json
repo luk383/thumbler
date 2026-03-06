@@ -1,0 +1,18 @@
+{
+  "id": "basic_science_starter",
+  "title": "Basic Science",
+  "category": "General Knowledge",
+  "description": "Starter local deck for core science concepts across biology, chemistry, physics, and Earth science.",
+  "version": "1",
+  "questionCount": 0,
+  "domains": [
+    "Biology Basics",
+    "Chemistry Basics",
+    "Physics Basics",
+    "Earth and Space Science"
+  ],
+  "isStarter": true,
+  "availabilityNote": "Starter entry only. Real questions are not included yet.",
+  "defaultContentType": "exam_question",
+  "questions": []
+}

@@ -13,6 +13,14 @@ import '../../../study/domain/study_item.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import 'exam_state.dart';
 
+final examAttemptStorageProvider = Provider<ExamAttemptStorage>(
+  (_) => ExamAttemptStorage(),
+);
+
+final examHistoryStorageProvider = Provider<ExamHistoryStorage>(
+  (_) => ExamHistoryStorage(),
+);
+
 class ExamNotifier extends Notifier<ExamState> {
   static final _rng = Random();
 
@@ -25,10 +33,10 @@ class ExamNotifier extends Notifier<ExamState> {
     final activeDeck = ref.watch(activeDeckMetaProvider);
 
     final questions = ExamQuestionRepository().loadAll(deckId: activeDeck?.id);
-    final storage = ExamAttemptStorage();
+    final storage = ref.read(examAttemptStorageProvider);
     final history = storage.loadHistory();
     final active = storage.loadActive();
-    final results = ExamHistoryStorage().loadResults();
+    final results = ref.read(examHistoryStorageProvider).loadResults();
     final activeAttempt = active?.deckId == activeDeck?.id ? active : null;
 
     return ExamState(
@@ -62,10 +70,10 @@ class ExamNotifier extends Notifier<ExamState> {
 
     final activeDeckId = ref.read(activeDeckIdProvider);
     final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
-    final storage = ExamAttemptStorage();
+    final storage = ref.read(examAttemptStorageProvider);
     final history = storage.loadHistory();
     final active = storage.loadActive();
-    final results = ExamHistoryStorage().loadResults();
+    final results = ref.read(examHistoryStorageProvider).loadResults();
     final activeAttempt = active?.deckId == activeDeckId ? active : null;
 
     state = ExamState(
@@ -106,7 +114,7 @@ class ExamNotifier extends Notifier<ExamState> {
       questionIds: sessionQuestions.map((q) => q.id).toList(),
     );
 
-    ExamAttemptStorage().saveActive(attempt);
+    ref.read(examAttemptStorageProvider).saveActive(attempt);
 
     state = state.copyWith(
       phase: ExamPhase.active,
@@ -147,7 +155,7 @@ class ExamNotifier extends Notifier<ExamState> {
     );
 
     // Persist every answer immediately (lightweight).
-    ExamAttemptStorage().saveActive(updated);
+    ref.read(examAttemptStorageProvider).saveActive(updated);
     state = state.copyWith(activeAttempt: updated);
   }
 
@@ -163,7 +171,7 @@ class ExamNotifier extends Notifier<ExamState> {
     }
 
     final updated = attempt.copyWith(flaggedIds: flags);
-    ExamAttemptStorage().saveActive(updated);
+    ref.read(examAttemptStorageProvider).saveActive(updated);
     state = state.copyWith(activeAttempt: updated);
   }
 
@@ -195,7 +203,7 @@ class ExamNotifier extends Notifier<ExamState> {
     _stopTimer();
     final attempt = state.activeAttempt;
     if (attempt != null) {
-      ExamAttemptStorage().saveActive(attempt);
+      ref.read(examAttemptStorageProvider).saveActive(attempt);
     }
     state = state.copyWith(phase: ExamPhase.paused);
   }
@@ -230,15 +238,66 @@ class ExamNotifier extends Notifier<ExamState> {
       questions: state.sessionQuestions,
     );
 
-    ExamAttemptStorage().addToHistory(completed);
-    ExamHistoryStorage().addResult(result);
-    ExamAttemptStorage().clearActive();
+    ref.read(examAttemptStorageProvider).addToHistory(completed);
+    ref.read(examHistoryStorageProvider).addResult(result);
+    ref.read(examAttemptStorageProvider).clearActive();
 
     state = state.copyWith(
       phase: ExamPhase.results,
       activeAttempt: completed,
-      history: ExamAttemptStorage().loadHistory(),
-      results: ExamHistoryStorage().loadResults(),
+      history: ref.read(examAttemptStorageProvider).loadHistory(),
+      results: ref.read(examHistoryStorageProvider).loadResults(),
+      currentIndex: 0,
+    );
+  }
+
+  void deleteHistoryEntry(String resultId) {
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    ref.read(examAttemptStorageProvider).removeFromHistory(resultId);
+    ref.read(examHistoryStorageProvider).removeResult(resultId);
+
+    final nextResults = ref.read(examHistoryStorageProvider).loadResults();
+    final nextHistory = ref.read(examAttemptStorageProvider).loadHistory();
+    final deletingCurrent = state.activeAttempt?.id == resultId;
+    final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
+
+    state = state.copyWith(
+      phase: deletingCurrent ? ExamPhase.home : state.phase,
+      activeAttempt: deletingCurrent ? null : state.activeAttempt,
+      availableQuestions: questions,
+      history: nextHistory,
+      results: nextResults,
+      sessionQuestions: deletingCurrent ? const [] : state.sessionQuestions,
+      reviewQuestions: deletingCurrent ? const [] : state.reviewQuestions,
+      currentIndex: 0,
+    );
+  }
+
+  void clearHistoryForActiveDeck() {
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    final activeDeck = ref.read(activeDeckMetaProvider);
+    if (activeDeck == null) {
+      ref.read(examAttemptStorageProvider).replaceHistory(const []);
+      ref.read(examHistoryStorageProvider).replaceResults(const []);
+    } else {
+      ref.read(examAttemptStorageProvider).clearHistoryForDeck(activeDeckId);
+      ref.read(examHistoryStorageProvider).clearResultsForDeck(activeDeckId);
+    }
+
+    final nextResults = ref.read(examHistoryStorageProvider).loadResults();
+    final nextHistory = ref.read(examAttemptStorageProvider).loadHistory();
+    final deletingCurrent = state.activeAttempt?.deckId == activeDeckId &&
+        (state.phase == ExamPhase.results || state.phase == ExamPhase.reviewing);
+    final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
+
+    state = state.copyWith(
+      phase: deletingCurrent ? ExamPhase.home : state.phase,
+      activeAttempt: deletingCurrent ? null : state.activeAttempt,
+      availableQuestions: questions,
+      history: nextHistory,
+      results: nextResults,
+      sessionQuestions: deletingCurrent ? const [] : state.sessionQuestions,
+      reviewQuestions: deletingCurrent ? const [] : state.reviewQuestions,
       currentIndex: 0,
     );
   }
@@ -268,8 +327,8 @@ class ExamNotifier extends Notifier<ExamState> {
   void backToHome() {
     final activeDeckId = ref.read(activeDeckIdProvider);
     final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
-    final history = ExamAttemptStorage().loadHistory();
-    final results = ExamHistoryStorage().loadResults();
+    final history = ref.read(examAttemptStorageProvider).loadHistory();
+    final results = ref.read(examHistoryStorageProvider).loadResults();
     state = ExamState(
       phase: ExamPhase.home,
       availableQuestions: questions,
@@ -312,7 +371,7 @@ class ExamNotifier extends Notifier<ExamState> {
 
     // Persist every 10 seconds.
     if (_tickCount % 10 == 0) {
-      ExamAttemptStorage().saveActive(updated);
+      ref.read(examAttemptStorageProvider).saveActive(updated);
     }
 
     state = state.copyWith(activeAttempt: updated);

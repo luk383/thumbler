@@ -12,6 +12,7 @@ class ExamHistoryPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final allResults = ref.watch(examProvider.select((s) => s.results));
+    final notifier = ref.read(examProvider.notifier);
     final activeDeck = ref.watch(activeDeckMetaProvider);
     final results = activeDeck == null
         ? allResults
@@ -26,6 +27,28 @@ class ExamHistoryPage extends ConsumerWidget {
           'Exam History',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          if (results.isNotEmpty)
+            IconButton(
+              tooltip: 'Clear visible history',
+              onPressed: () async {
+                final confirmed = await _confirmHistoryAction(
+                  context,
+                  title: 'Clear exam history?',
+                  message: activeDeck == null
+                      ? 'This removes all locally saved exam history entries.'
+                      : 'This removes all locally saved exam history entries for ${activeDeck.title}.',
+                  confirmLabel: 'Clear history',
+                );
+                if (confirmed != true || !context.mounted) return;
+                notifier.clearHistoryForActiveDeck();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Exam history cleared')),
+                );
+              },
+              icon: const Icon(Icons.delete_sweep_outlined),
+            ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
@@ -48,6 +71,20 @@ class ExamHistoryPage extends ConsumerWidget {
               return _ExamHistoryItem(
                 index: index,
                 result: result,
+                onDelete: () async {
+                  final confirmed = await _confirmHistoryAction(
+                    context,
+                    title: 'Delete exam attempt?',
+                    message:
+                        'This removes the selected exam result from local history only.',
+                    confirmLabel: 'Delete',
+                  );
+                  if (confirmed != true || !context.mounted) return;
+                  notifier.deleteHistoryEntry(result.id);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Exam attempt deleted')),
+                  );
+                },
                 onTap: () =>
                     context.push('/exam/history/detail', extra: result),
               );
@@ -315,11 +352,13 @@ class _ExamHistoryItem extends StatelessWidget {
   const _ExamHistoryItem({
     required this.index,
     required this.result,
+    required this.onDelete,
     required this.onTap,
   });
 
   final int index;
   final ExamResult result;
+  final Future<void> Function() onDelete;
   final VoidCallback onTap;
 
   @override
@@ -350,7 +389,12 @@ class _ExamHistoryItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${result.totalQuestions} questions  •  ${_formatShortDateTime(result.completedAt)}',
+                    [
+                      '${result.totalQuestions} questions',
+                      if (result.durationSeconds != null)
+                        _formatDuration(result.durationSeconds!),
+                      _formatShortDateTime(result.completedAt),
+                    ].join('  •  '),
                     style: const TextStyle(color: Colors.white54, fontSize: 12),
                   ),
                   if (result.deckTitle != null) ...[
@@ -367,6 +411,12 @@ class _ExamHistoryItem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 10),
+            IconButton(
+              onPressed: () {
+                onDelete();
+              },
+              icon: const Icon(Icons.delete_outline, color: Colors.white38),
+            ),
             const Icon(Icons.chevron_right, color: Colors.white38),
           ],
         ),
@@ -413,4 +463,42 @@ String _formatShortDateTime(DateTime d) {
   final hour = d.hour.toString().padLeft(2, '0');
   final minute = d.minute.toString().padLeft(2, '0');
   return '${_formatShortDate(d)}  $hour:$minute';
+}
+
+String _formatDuration(int seconds) {
+  final minutes = seconds ~/ 60;
+  final remainingSeconds = seconds % 60;
+  if (minutes <= 0) return '${remainingSeconds}s';
+  if (remainingSeconds == 0) return '${minutes}m';
+  return '${minutes}m ${remainingSeconds}s';
+}
+
+Future<bool?> _confirmHistoryAction(
+  BuildContext context, {
+  required String title,
+  required String message,
+  required String confirmLabel,
+}) {
+  return showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: const Color(0xFF161616),
+      title: Text(title, style: const TextStyle(color: Colors.white)),
+      content: Text(message, style: const TextStyle(color: Colors.white70)),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(false),
+          child: const Text('Cancel'),
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(
+            backgroundColor: Colors.redAccent,
+            foregroundColor: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(true),
+          child: Text(confirmLabel),
+        ),
+      ],
+    ),
+  );
 }

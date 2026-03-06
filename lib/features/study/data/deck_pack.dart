@@ -42,6 +42,9 @@ class DeckPackMeta {
   bool get supportsFeed => microCardCount > 0;
   bool get supportsExam => examQuestionCount > 0;
   bool get isImportable => !hasInvalidJson && !isStarter && hasQuestions;
+  bool get isCertificationDeck => (examCode?.trim().isNotEmpty ?? false);
+  String get librarySection =>
+      isCertificationDeck ? 'Certifications' : 'General Knowledge';
 
   String get subtitle {
     final parts = <String>[

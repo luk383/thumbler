@@ -5,6 +5,7 @@ import '../../data/deck_library_storage.dart';
 import '../../data/deck_pack.dart';
 import '../../data/deck_pack_service.dart';
 import '../../data/study_storage.dart';
+import '../../domain/study_item.dart';
 import '../../../exam/presentation/controllers/exam_controller.dart';
 import 'study_controller.dart';
 
@@ -201,3 +202,45 @@ final activeDeckIdProvider = Provider<String?>(
 final activeDeckMetaProvider = Provider<DeckPackMeta?>(
   (ref) => ref.watch(deckLibraryProvider.select((state) => state.activeDeck)),
 );
+
+class DeckProgressSummary {
+  const DeckProgressSummary({
+    required this.deckId,
+    this.totalItems = 0,
+    this.reviewedItems = 0,
+  });
+
+  final String deckId;
+  final int totalItems;
+  final int reviewedItems;
+
+  bool get hasImportedItems => totalItems > 0;
+  bool get hasProgress => reviewedItems > 0;
+}
+
+final deckProgressSummariesProvider = Provider<Map<String, DeckProgressSummary>>((
+  ref,
+) {
+  ref.watch(deckLibraryProvider);
+  ref.watch(studyProvider);
+
+  final items = StudyStorage().all();
+  final grouped = <String, List<StudyItem>>{};
+  for (final item in items) {
+    final deckId = item.deckId;
+    if (deckId == null || deckId.trim().isEmpty) continue;
+    grouped.putIfAbsent(deckId, () => []).add(item);
+  }
+
+  return grouped.map((deckId, deckItems) {
+    final reviewedItems = deckItems.where((item) => item.timesSeen > 0).length;
+    return MapEntry(
+      deckId,
+      DeckProgressSummary(
+        deckId: deckId,
+        totalItems: deckItems.length,
+        reviewedItems: reviewedItems,
+      ),
+    );
+  });
+});

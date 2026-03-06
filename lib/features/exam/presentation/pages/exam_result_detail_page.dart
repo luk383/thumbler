@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../domain/exam_result.dart';
 import '../../../study/presentation/controllers/study_controller.dart';
+import '../controllers/exam_controller.dart';
 
-class ExamResultDetailPage extends StatelessWidget {
+class ExamResultDetailPage extends ConsumerWidget {
   const ExamResultDetailPage({super.key, required this.result});
 
   final ExamResult result;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final sortedDomains = result.domainScores.entries.toList()
       ..sort((a, b) => a.value.compareTo(b.value));
     final weakestDomain = result.weakestDomain;
@@ -23,6 +25,45 @@ class ExamResultDetailPage extends StatelessWidget {
           'Exam Detail',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            tooltip: 'Delete result',
+            onPressed: () async {
+              final confirmed = await showDialog<bool>(
+                context: context,
+                builder: (context) => AlertDialog(
+                  backgroundColor: const Color(0xFF161616),
+                  title: const Text(
+                    'Delete exam result?',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  content: const Text(
+                    'This removes the result from local exam history.',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: const Text('Cancel'),
+                    ),
+                    FilledButton(
+                      style: FilledButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text('Delete'),
+                    ),
+                  ],
+                ),
+              );
+              if (confirmed != true || !context.mounted) return;
+              ref.read(examProvider.notifier).deleteHistoryEntry(result.id);
+              context.pop();
+            },
+            icon: const Icon(Icons.delete_outline),
+          ),
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
@@ -47,7 +88,13 @@ class ExamResultDetailPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Correct ${result.correctAnswers} · Wrong ${result.wrongAnswers} · ${result.totalQuestions} questions',
+                  [
+                    'Correct ${result.correctAnswers}',
+                    'Wrong ${result.wrongAnswers}',
+                    '${result.totalQuestions} questions',
+                    if (result.durationSeconds != null)
+                      _formatDuration(result.durationSeconds!),
+                  ].join(' · '),
                   style: const TextStyle(color: Colors.white70, fontSize: 12),
                 ),
                 if (result.deckTitle != null) ...[
@@ -179,6 +226,14 @@ class ExamResultDetailPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String _formatDuration(int seconds) {
+  final minutes = seconds ~/ 60;
+  final remainingSeconds = seconds % 60;
+  if (minutes <= 0) return '${remainingSeconds}s';
+  if (remainingSeconds == 0) return '${minutes}m';
+  return '${minutes}m ${remainingSeconds}s';
 }
 
 String _formatPercent(double value) {

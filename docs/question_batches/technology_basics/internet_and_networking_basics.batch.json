@@ -1,0 +1,464 @@
+{
+  "id": "technology_basics_internet_and_networking_basics_batch_01",
+  "title": "Technology Basics",
+  "category": "General Knowledge",
+  "description": "Question batch for the Internet and Networking Basics domain.",
+  "version": "1",
+  "questionCount": 30,
+  "domains": [
+    "Internet and Networking Basics"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "tech_net_b01_q_001",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes IP address?",
+      "answers": [
+        "A numeric label used to identify a device on a network.",
+        "A device that connects a home or office network to an internet provider.",
+        "A service that translates domain names into IP addresses.",
+        "The web address used to locate a page or resource online."
+      ],
+      "correctIndex": 0,
+      "explanation": "IP address is a numeric label used to identify a device on a network."
+    },
+    {
+      "id": "tech_net_b01_q_002",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "What does Router refer to?",
+      "answers": [
+        "A device that directs network traffic between devices and networks.",
+        "A service that translates domain names into IP addresses.",
+        "The web address used to locate a page or resource online.",
+        "A separate page open within the same browser window."
+      ],
+      "correctIndex": 0,
+      "explanation": "Router is a device that directs network traffic between devices and networks."
+    },
+    {
+      "id": "tech_net_b01_q_003",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "In basic technology, what is Modem?",
+      "answers": [
+        "A device that connects a home or office network to an internet provider.",
+        "The web address used to locate a page or resource online.",
+        "A separate page open within the same browser window.",
+        "The transfer of data from the internet to a local device."
+      ],
+      "correctIndex": 0,
+      "explanation": "Modem is a device that connects a home or office network to an internet provider."
+    },
+    {
+      "id": "tech_net_b01_q_004",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes DNS?",
+      "answers": [
+        "A service that translates domain names into IP addresses.",
+        "A separate page open within the same browser window.",
+        "The transfer of data from the internet to a local device.",
+        "The transfer of data from a local device to the internet."
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS is a service that translates domain names into IP addresses."
+    },
+    {
+      "id": "tech_net_b01_q_005",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "What does URL refer to?",
+      "answers": [
+        "The web address used to locate a page or resource online.",
+        "The transfer of data from the internet to a local device.",
+        "The transfer of data from a local device to the internet.",
+        "The amount of data that can move through a connection in a given time."
+      ],
+      "correctIndex": 0,
+      "explanation": "URL is the web address used to locate a page or resource online."
+    },
+    {
+      "id": "tech_net_b01_q_006",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "In basic technology, what is Browser tab?",
+      "answers": [
+        "A separate page open within the same browser window.",
+        "The transfer of data from a local device to the internet.",
+        "The amount of data that can move through a connection in a given time.",
+        "The delay before data begins moving across a network."
+      ],
+      "correctIndex": 0,
+      "explanation": "Browser tab is a separate page open within the same browser window."
+    },
+    {
+      "id": "tech_net_b01_q_007",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes Download?",
+      "answers": [
+        "The transfer of data from the internet to a local device.",
+        "The amount of data that can move through a connection in a given time.",
+        "The delay before data begins moving across a network.",
+        "Wireless networking that connects devices without cables."
+      ],
+      "correctIndex": 0,
+      "explanation": "Download is the transfer of data from the internet to a local device."
+    },
+    {
+      "id": "tech_net_b01_q_008",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "What does Upload refer to?",
+      "answers": [
+        "The transfer of data from a local device to the internet.",
+        "The delay before data begins moving across a network.",
+        "Wireless networking that connects devices without cables.",
+        "A wired network connection commonly used for stable local access."
+      ],
+      "correctIndex": 0,
+      "explanation": "Upload is the transfer of data from a local device to the internet."
+    },
+    {
+      "id": "tech_net_b01_q_009",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "In basic technology, what is Bandwidth?",
+      "answers": [
+        "The amount of data that can move through a connection in a given time.",
+        "Wireless networking that connects devices without cables.",
+        "A wired network connection commonly used for stable local access.",
+        "A local area network that covers a small physical area."
+      ],
+      "correctIndex": 0,
+      "explanation": "Bandwidth is the amount of data that can move through a connection in a given time."
+    },
+    {
+      "id": "tech_net_b01_q_010",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 1,
+      "question": "Which statement best describes Latency?",
+      "answers": [
+        "The delay before data begins moving across a network.",
+        "A wired network connection commonly used for stable local access.",
+        "A local area network that covers a small physical area.",
+        "A wide area network that connects locations over large distances."
+      ],
+      "correctIndex": 0,
+      "explanation": "Latency is the delay before data begins moving across a network."
+    },
+    {
+      "id": "tech_net_b01_q_011",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "What does Wi-Fi refer to?",
+      "answers": [
+        "Wireless networking that connects devices without cables.",
+        "A local area network that covers a small physical area.",
+        "A wide area network that connects locations over large distances.",
+        "A device or feature that shares internet access wirelessly."
+      ],
+      "correctIndex": 0,
+      "explanation": "Wi-Fi is wireless networking that connects devices without cables."
+    },
+    {
+      "id": "tech_net_b01_q_012",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "In basic technology, what is Ethernet?",
+      "answers": [
+        "A wired network connection commonly used for stable local access.",
+        "A wide area network that connects locations over large distances.",
+        "A device or feature that shares internet access wirelessly.",
+        "A company that provides internet access to customers."
+      ],
+      "correctIndex": 0,
+      "explanation": "Ethernet is a wired network connection commonly used for stable local access."
+    },
+    {
+      "id": "tech_net_b01_q_013",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "Which statement best describes LAN?",
+      "answers": [
+        "A local area network that covers a small physical area.",
+        "A device or feature that shares internet access wirelessly.",
+        "A company that provides internet access to customers.",
+        "A small unit of data sent across a network."
+      ],
+      "correctIndex": 0,
+      "explanation": "LAN is a local area network that covers a small physical area."
+    },
+    {
+      "id": "tech_net_b01_q_014",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "What does WAN refer to?",
+      "answers": [
+        "A wide area network that connects locations over large distances.",
+        "A company that provides internet access to customers.",
+        "A small unit of data sent across a network.",
+        "A web protocol used to transfer pages without encryption by default."
+      ],
+      "correctIndex": 0,
+      "explanation": "WAN is a wide area network that connects locations over large distances."
+    },
+    {
+      "id": "tech_net_b01_q_015",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "In basic technology, what is Hotspot?",
+      "answers": [
+        "A device or feature that shares internet access wirelessly.",
+        "A small unit of data sent across a network.",
+        "A web protocol used to transfer pages without encryption by default.",
+        "A secure web protocol that adds encryption to HTTP traffic."
+      ],
+      "correctIndex": 0,
+      "explanation": "Hotspot is a device or feature that shares internet access wirelessly."
+    },
+    {
+      "id": "tech_net_b01_q_016",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "Which statement best describes ISP?",
+      "answers": [
+        "A company that provides internet access to customers.",
+        "A web protocol used to transfer pages without encryption by default.",
+        "A secure web protocol that adds encryption to HTTP traffic.",
+        "A human-readable website name such as example.com."
+      ],
+      "correctIndex": 0,
+      "explanation": "ISP is a company that provides internet access to customers."
+    },
+    {
+      "id": "tech_net_b01_q_017",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "What does Packet refer to?",
+      "answers": [
+        "A small unit of data sent across a network.",
+        "A secure web protocol that adds encryption to HTTP traffic.",
+        "A human-readable website name such as example.com.",
+        "The main starting page of a website or browser."
+      ],
+      "correctIndex": 0,
+      "explanation": "Packet is a small unit of data sent across a network."
+    },
+    {
+      "id": "tech_net_b01_q_018",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "In basic technology, what is HTTP?",
+      "answers": [
+        "A web protocol used to transfer pages without encryption by default.",
+        "A human-readable website name such as example.com.",
+        "The main starting page of a website or browser.",
+        "A service used to find information on the web."
+      ],
+      "correctIndex": 0,
+      "explanation": "HTTP is a web protocol used to transfer pages without encryption by default."
+    },
+    {
+      "id": "tech_net_b01_q_019",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "Which statement best describes HTTPS?",
+      "answers": [
+        "A secure web protocol that adds encryption to HTTP traffic.",
+        "The main starting page of a website or browser.",
+        "A service used to find information on the web.",
+        "Small website data stored in a browser to remember settings or sessions."
+      ],
+      "correctIndex": 0,
+      "explanation": "HTTPS is a secure web protocol that adds encryption to HTTP traffic."
+    },
+    {
+      "id": "tech_net_b01_q_020",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 2,
+      "question": "What does Domain name refer to?",
+      "answers": [
+        "A human-readable website name such as example.com.",
+        "A service used to find information on the web.",
+        "Small website data stored in a browser to remember settings or sessions.",
+        "Temporary stored data that helps content load faster later."
+      ],
+      "correctIndex": 0,
+      "explanation": "Domain name is a human-readable website name such as example.com."
+    },
+    {
+      "id": "tech_net_b01_q_021",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Homepage?",
+      "answers": [
+        "The main starting page of a website or browser.",
+        "Small website data stored in a browser to remember settings or sessions.",
+        "Temporary stored data that helps content load faster later.",
+        "A service that encrypts traffic and routes it through another network path."
+      ],
+      "correctIndex": 0,
+      "explanation": "Homepage is the main starting page of a website or browser."
+    },
+    {
+      "id": "tech_net_b01_q_022",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "Which statement best describes Search engine?",
+      "answers": [
+        "A service used to find information on the web.",
+        "Temporary stored data that helps content load faster later.",
+        "A service that encrypts traffic and routes it through another network path.",
+        "A short-range wireless technology for connecting nearby devices."
+      ],
+      "correctIndex": 0,
+      "explanation": "Search engine is a service used to find information on the web."
+    },
+    {
+      "id": "tech_net_b01_q_023",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "What does Cookie refer to?",
+      "answers": [
+        "Small website data stored in a browser to remember settings or sessions.",
+        "A service that encrypts traffic and routes it through another network path.",
+        "A short-range wireless technology for connecting nearby devices.",
+        "A scannable square code that quickly opens information or links."
+      ],
+      "correctIndex": 0,
+      "explanation": "Cookie is small website data stored in a browser to remember settings or sessions."
+    },
+    {
+      "id": "tech_net_b01_q_024",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Cache?",
+      "answers": [
+        "Temporary stored data that helps content load faster later.",
+        "A short-range wireless technology for connecting nearby devices.",
+        "A scannable square code that quickly opens information or links.",
+        "Playing audio or video over the internet without downloading the full file first."
+      ],
+      "correctIndex": 0,
+      "explanation": "Cache is temporary stored data that helps content load faster later."
+    },
+    {
+      "id": "tech_net_b01_q_025",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "Which statement best describes VPN?",
+      "answers": [
+        "A service that encrypts traffic and routes it through another network path.",
+        "A scannable square code that quickly opens information or links.",
+        "Playing audio or video over the internet without downloading the full file first.",
+        "An online service delivered over the internet instead of from only local software."
+      ],
+      "correctIndex": 0,
+      "explanation": "VPN is a service that encrypts traffic and routes it through another network path."
+    },
+    {
+      "id": "tech_net_b01_q_026",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "What does Bluetooth refer to?",
+      "answers": [
+        "A short-range wireless technology for connecting nearby devices.",
+        "Playing audio or video over the internet without downloading the full file first.",
+        "An online service delivered over the internet instead of from only local software.",
+        "A live internet conversation that includes audio and video."
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluetooth is a short-range wireless technology for connecting nearby devices."
+    },
+    {
+      "id": "tech_net_b01_q_027",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is QR code?",
+      "answers": [
+        "A scannable square code that quickly opens information or links.",
+        "An online service delivered over the internet instead of from only local software.",
+        "A live internet conversation that includes audio and video.",
+        "A numeric label used to identify a device on a network."
+      ],
+      "correctIndex": 0,
+      "explanation": "QR code is a scannable square code that quickly opens information or links."
+    },
+    {
+      "id": "tech_net_b01_q_028",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "Which statement best describes Streaming?",
+      "answers": [
+        "Playing audio or video over the internet without downloading the full file first.",
+        "A live internet conversation that includes audio and video.",
+        "A numeric label used to identify a device on a network.",
+        "A device that directs network traffic between devices and networks."
+      ],
+      "correctIndex": 0,
+      "explanation": "Streaming is playing audio or video over the internet without downloading the full file first."
+    },
+    {
+      "id": "tech_net_b01_q_029",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "What does Cloud service refer to?",
+      "answers": [
+        "An online service delivered over the internet instead of from only local software.",
+        "A numeric label used to identify a device on a network.",
+        "A device that directs network traffic between devices and networks.",
+        "A device that connects a home or office network to an internet provider."
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloud service is an online service delivered over the internet instead of from only local software."
+    },
+    {
+      "id": "tech_net_b01_q_030",
+      "type": "exam_question",
+      "domain": "Internet and Networking Basics",
+      "difficulty": 3,
+      "question": "In basic technology, what is Video call?",
+      "answers": [
+        "A live internet conversation that includes audio and video.",
+        "A device that directs network traffic between devices and networks.",
+        "A device that connects a home or office network to an internet provider.",
+        "A service that translates domain names into IP addresses."
+      ],
+      "correctIndex": 0,
+      "explanation": "Video call is a live internet conversation that includes audio and video."
+    }
+  ]
+}

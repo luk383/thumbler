@@ -1,0 +1,464 @@
+{
+  "id": "technology_basics_computer_fundamentals_batch_01",
+  "title": "Technology Basics",
+  "category": "General Knowledge",
+  "description": "Question batch for the Computer Fundamentals domain.",
+  "version": "1",
+  "questionCount": 30,
+  "domains": [
+    "Computer Fundamentals"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "tech_cf_b01_q_001",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "Which statement best describes CPU?",
+      "answers": [
+        "The main processor that executes instructions.",
+        "Fast storage that uses flash memory and has no moving parts.",
+        "Storage that saves data on spinning magnetic disks.",
+        "Core software that manages hardware and applications."
+      ],
+      "correctIndex": 0,
+      "explanation": "CPU is the main processor that executes instructions."
+    },
+    {
+      "id": "tech_cf_b01_q_002",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "What does RAM refer to?",
+      "answers": [
+        "Short-term memory used by active programs.",
+        "Storage that saves data on spinning magnetic disks.",
+        "Core software that manages hardware and applications.",
+        "The main circuit board that connects computer components."
+      ],
+      "correctIndex": 0,
+      "explanation": "RAM is short-term memory used by active programs."
+    },
+    {
+      "id": "tech_cf_b01_q_003",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "In basic technology, what is SSD?",
+      "answers": [
+        "Fast storage that uses flash memory and has no moving parts.",
+        "Core software that manages hardware and applications.",
+        "The main circuit board that connects computer components.",
+        "A processor specialized for graphics and parallel visual tasks."
+      ],
+      "correctIndex": 0,
+      "explanation": "SSD is fast storage that uses flash memory and has no moving parts."
+    },
+    {
+      "id": "tech_cf_b01_q_004",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "Which statement best describes HDD?",
+      "answers": [
+        "Storage that saves data on spinning magnetic disks.",
+        "The main circuit board that connects computer components.",
+        "A processor specialized for graphics and parallel visual tasks.",
+        "The component that converts electricity for internal hardware."
+      ],
+      "correctIndex": 0,
+      "explanation": "HDD is storage that saves data on spinning magnetic disks."
+    },
+    {
+      "id": "tech_cf_b01_q_005",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "What does Operating system refer to?",
+      "answers": [
+        "Core software that manages hardware and applications.",
+        "A processor specialized for graphics and parallel visual tasks.",
+        "The component that converts electricity for internal hardware.",
+        "The screen that displays visual output from a computer."
+      ],
+      "correctIndex": 0,
+      "explanation": "Operating system is core software that manages hardware and applications."
+    },
+    {
+      "id": "tech_cf_b01_q_006",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "In basic technology, what is Motherboard?",
+      "answers": [
+        "The main circuit board that connects computer components.",
+        "The component that converts electricity for internal hardware.",
+        "The screen that displays visual output from a computer.",
+        "An input device used to type text and commands."
+      ],
+      "correctIndex": 0,
+      "explanation": "Motherboard is the main circuit board that connects computer components."
+    },
+    {
+      "id": "tech_cf_b01_q_007",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "Which statement best describes GPU?",
+      "answers": [
+        "A processor specialized for graphics and parallel visual tasks.",
+        "The screen that displays visual output from a computer.",
+        "An input device used to type text and commands.",
+        "A pointing device used to move the cursor and click items."
+      ],
+      "correctIndex": 0,
+      "explanation": "GPU is a processor specialized for graphics and parallel visual tasks."
+    },
+    {
+      "id": "tech_cf_b01_q_008",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "What does Power supply refer to?",
+      "answers": [
+        "The component that converts electricity for internal hardware.",
+        "An input device used to type text and commands.",
+        "A pointing device used to move the cursor and click items.",
+        "A common connector used for peripherals, charging, and data transfer."
+      ],
+      "correctIndex": 0,
+      "explanation": "Power supply is the component that converts electricity for internal hardware."
+    },
+    {
+      "id": "tech_cf_b01_q_009",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "In basic technology, what is Monitor?",
+      "answers": [
+        "The screen that displays visual output from a computer.",
+        "A pointing device used to move the cursor and click items.",
+        "A common connector used for peripherals, charging, and data transfer.",
+        "A named collection of stored data on a device."
+      ],
+      "correctIndex": 0,
+      "explanation": "Monitor is the screen that displays visual output from a computer."
+    },
+    {
+      "id": "tech_cf_b01_q_010",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 1,
+      "question": "Which statement best describes Keyboard?",
+      "answers": [
+        "An input device used to type text and commands.",
+        "A common connector used for peripherals, charging, and data transfer.",
+        "A named collection of stored data on a device.",
+        "A container used to organize files and other folders."
+      ],
+      "correctIndex": 0,
+      "explanation": "Keyboard is an input device used to type text and commands."
+    },
+    {
+      "id": "tech_cf_b01_q_011",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "What does Mouse refer to?",
+      "answers": [
+        "A pointing device used to move the cursor and click items.",
+        "A named collection of stored data on a device.",
+        "A container used to organize files and other folders.",
+        "Software designed to help a user perform a specific task."
+      ],
+      "correctIndex": 0,
+      "explanation": "Mouse is a pointing device used to move the cursor and click items."
+    },
+    {
+      "id": "tech_cf_b01_q_012",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "In basic technology, what is USB port?",
+      "answers": [
+        "A common connector used for peripherals, charging, and data transfer.",
+        "A container used to organize files and other folders.",
+        "Software designed to help a user perform a specific task.",
+        "Software used to open and navigate websites."
+      ],
+      "correctIndex": 0,
+      "explanation": "USB port is a common connector used for peripherals, charging, and data transfer."
+    },
+    {
+      "id": "tech_cf_b01_q_013",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "Which statement best describes File?",
+      "answers": [
+        "A named collection of stored data on a device.",
+        "Software designed to help a user perform a specific task.",
+        "Software used to open and navigate websites.",
+        "The act of restarting a device or operating system."
+      ],
+      "correctIndex": 0,
+      "explanation": "File is a named collection of stored data on a device."
+    },
+    {
+      "id": "tech_cf_b01_q_014",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "What does Folder refer to?",
+      "answers": [
+        "A container used to organize files and other folders.",
+        "Software used to open and navigate websites.",
+        "The act of restarting a device or operating system.",
+        "A software release that improves features, fixes bugs, or patches issues."
+      ],
+      "correctIndex": 0,
+      "explanation": "Folder is a container used to organize files and other folders."
+    },
+    {
+      "id": "tech_cf_b01_q_015",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "In basic technology, what is Application?",
+      "answers": [
+        "Software designed to help a user perform a specific task.",
+        "The act of restarting a device or operating system.",
+        "A software release that improves features, fixes bugs, or patches issues.",
+        "A copy of data kept so it can be restored later."
+      ],
+      "correctIndex": 0,
+      "explanation": "Application is software designed to help a user perform a specific task."
+    },
+    {
+      "id": "tech_cf_b01_q_016",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "Which statement best describes Browser?",
+      "answers": [
+        "Software used to open and navigate websites.",
+        "A software release that improves features, fixes bugs, or patches issues.",
+        "A copy of data kept so it can be restored later.",
+        "Online storage accessed through the internet instead of only one local device."
+      ],
+      "correctIndex": 0,
+      "explanation": "Browser is software used to open and navigate websites."
+    },
+    {
+      "id": "tech_cf_b01_q_017",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "What does Reboot refer to?",
+      "answers": [
+        "The act of restarting a device or operating system.",
+        "A copy of data kept so it can be restored later.",
+        "Online storage accessed through the internet instead of only one local device.",
+        "A basic data unit made of eight bits."
+      ],
+      "correctIndex": 0,
+      "explanation": "Reboot is the act of restarting a device or operating system."
+    },
+    {
+      "id": "tech_cf_b01_q_018",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "In basic technology, what is Update?",
+      "answers": [
+        "A software release that improves features, fixes bugs, or patches issues.",
+        "Online storage accessed through the internet instead of only one local device.",
+        "A basic data unit made of eight bits.",
+        "The smallest unit of digital information, represented as 0 or 1."
+      ],
+      "correctIndex": 0,
+      "explanation": "Update is a software release that improves features, fixes bugs, or patches issues."
+    },
+    {
+      "id": "tech_cf_b01_q_019",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "Which statement best describes Backup?",
+      "answers": [
+        "A copy of data kept so it can be restored later.",
+        "A basic data unit made of eight bits.",
+        "The smallest unit of digital information, represented as 0 or 1.",
+        "The number of pixels shown on a display image."
+      ],
+      "correctIndex": 0,
+      "explanation": "Backup is a copy of data kept so it can be restored later."
+    },
+    {
+      "id": "tech_cf_b01_q_020",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 2,
+      "question": "What does Cloud storage refer to?",
+      "answers": [
+        "Online storage accessed through the internet instead of only one local device.",
+        "The smallest unit of digital information, represented as 0 or 1.",
+        "The number of pixels shown on a display image.",
+        "A display that also accepts finger or stylus input."
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloud storage is online storage accessed through the internet instead of only one local device."
+    },
+    {
+      "id": "tech_cf_b01_q_021",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "In basic technology, what is Byte?",
+      "answers": [
+        "A basic data unit made of eight bits.",
+        "The number of pixels shown on a display image.",
+        "A display that also accepts finger or stylus input.",
+        "An input device that captures sound."
+      ],
+      "correctIndex": 0,
+      "explanation": "Byte is a basic data unit made of eight bits."
+    },
+    {
+      "id": "tech_cf_b01_q_022",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "Which statement best describes Bit?",
+      "answers": [
+        "The smallest unit of digital information, represented as 0 or 1.",
+        "A display that also accepts finger or stylus input.",
+        "An input device that captures sound.",
+        "An output device that plays sound."
+      ],
+      "correctIndex": 0,
+      "explanation": "Bit is the smallest unit of digital information, represented as 0 or 1."
+    },
+    {
+      "id": "tech_cf_b01_q_023",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "What does Resolution refer to?",
+      "answers": [
+        "The number of pixels shown on a display image.",
+        "An input device that captures sound.",
+        "An output device that plays sound.",
+        "A device that produces physical copies of digital content."
+      ],
+      "correctIndex": 0,
+      "explanation": "Resolution is the number of pixels shown on a display image."
+    },
+    {
+      "id": "tech_cf_b01_q_024",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "In basic technology, what is Touchscreen?",
+      "answers": [
+        "A display that also accepts finger or stylus input.",
+        "An output device that plays sound.",
+        "A device that produces physical copies of digital content.",
+        "A camera used to capture video through a computer or mobile device."
+      ],
+      "correctIndex": 0,
+      "explanation": "Touchscreen is a display that also accepts finger or stylus input."
+    },
+    {
+      "id": "tech_cf_b01_q_025",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "Which statement best describes Microphone?",
+      "answers": [
+        "An input device that captures sound.",
+        "A device that produces physical copies of digital content.",
+        "A camera used to capture video through a computer or mobile device.",
+        "A component that stores power for portable electronic devices."
+      ],
+      "correctIndex": 0,
+      "explanation": "Microphone is an input device that captures sound."
+    },
+    {
+      "id": "tech_cf_b01_q_026",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "What does Speaker refer to?",
+      "answers": [
+        "An output device that plays sound.",
+        "A camera used to capture video through a computer or mobile device.",
+        "A component that stores power for portable electronic devices.",
+        "The total amount of data a device can hold."
+      ],
+      "correctIndex": 0,
+      "explanation": "Speaker is an output device that plays sound."
+    },
+    {
+      "id": "tech_cf_b01_q_027",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "In basic technology, what is Printer?",
+      "answers": [
+        "A device that produces physical copies of digital content.",
+        "A component that stores power for portable electronic devices.",
+        "The total amount of data a device can hold.",
+        "The main processor that executes instructions."
+      ],
+      "correctIndex": 0,
+      "explanation": "Printer is a device that produces physical copies of digital content."
+    },
+    {
+      "id": "tech_cf_b01_q_028",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "Which statement best describes Webcam?",
+      "answers": [
+        "A camera used to capture video through a computer or mobile device.",
+        "The total amount of data a device can hold.",
+        "The main processor that executes instructions.",
+        "Short-term memory used by active programs."
+      ],
+      "correctIndex": 0,
+      "explanation": "Webcam is a camera used to capture video through a computer or mobile device."
+    },
+    {
+      "id": "tech_cf_b01_q_029",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "What does Battery refer to?",
+      "answers": [
+        "A component that stores power for portable electronic devices.",
+        "The main processor that executes instructions.",
+        "Short-term memory used by active programs.",
+        "Fast storage that uses flash memory and has no moving parts."
+      ],
+      "correctIndex": 0,
+      "explanation": "Battery is a component that stores power for portable electronic devices."
+    },
+    {
+      "id": "tech_cf_b01_q_030",
+      "type": "exam_question",
+      "domain": "Computer Fundamentals",
+      "difficulty": 3,
+      "question": "In basic technology, what is Storage capacity?",
+      "answers": [
+        "The total amount of data a device can hold.",
+        "Short-term memory used by active programs.",
+        "Fast storage that uses flash memory and has no moving parts.",
+        "Storage that saves data on spinning magnetic disks."
+      ],
+      "correctIndex": 0,
+      "explanation": "Storage capacity is the total amount of data a device can hold."
+    }
+  ]
+}

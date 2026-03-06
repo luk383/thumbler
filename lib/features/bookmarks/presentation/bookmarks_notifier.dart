@@ -3,6 +3,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../feed/data/providers.dart';
 import '../../feed/domain/lesson.dart';
+import '../../study/data/deck_pack.dart';
+import '../../study/presentation/controllers/deck_library_controller.dart';
 import '../data/bookmarks_repository.dart';
 
 final bookmarksRepositoryProvider = Provider<BookmarksRepository>(
@@ -12,16 +14,39 @@ final bookmarksRepositoryProvider = Provider<BookmarksRepository>(
 class BookmarksNotifier extends Notifier<List<String>> {
   @override
   List<String> build() {
-    return ref.read(bookmarksRepositoryProvider).getBookmarkedIds();
+    final activeDeck = ref.watch(activeDeckMetaProvider);
+    final activeDeckId = ref.watch(activeDeckIdProvider);
+    return ref
+        .read(bookmarksRepositoryProvider)
+        .getBookmarkedIds(
+          deckId: activeDeckId,
+          includeLegacy: _shouldIncludeLegacyBookmarks(activeDeck),
+        );
   }
 
   Future<void> toggle(String lessonId) async {
-    await ref.read(bookmarksRepositoryProvider).toggleBookmark(lessonId);
-    state = ref.read(bookmarksRepositoryProvider).getBookmarkedIds();
+    final activeDeck = ref.read(activeDeckMetaProvider);
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    await ref
+        .read(bookmarksRepositoryProvider)
+        .toggleBookmark(lessonId, deckId: activeDeckId);
+    state = ref
+        .read(bookmarksRepositoryProvider)
+        .getBookmarkedIds(
+          deckId: activeDeckId,
+          includeLegacy: _shouldIncludeLegacyBookmarks(activeDeck),
+        );
   }
 
   void reloadFromStorage() {
-    state = ref.read(bookmarksRepositoryProvider).getBookmarkedIds();
+    final activeDeck = ref.read(activeDeckMetaProvider);
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    state = ref
+        .read(bookmarksRepositoryProvider)
+        .getBookmarkedIds(
+          deckId: activeDeckId,
+          includeLegacy: _shouldIncludeLegacyBookmarks(activeDeck),
+        );
   }
 
   bool isBookmarked(String lessonId) => state.contains(lessonId);
@@ -37,3 +62,10 @@ final bookmarkedLessonsProvider = Provider<AsyncValue<List<Lesson>>>((ref) {
     (lessons) => lessons.where((l) => bookmarkedIds.contains(l.id)).toList(),
   );
 });
+
+bool _shouldIncludeLegacyBookmarks(DeckPackMeta? activeDeck) {
+  if (activeDeck == null) return true;
+  return activeDeck.examCode == 'SY0-701' ||
+      activeDeck.id.toLowerCase().contains('sec701') ||
+      activeDeck.title.toLowerCase().contains('security+');
+}

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/data/reset_service.dart';
 import '../../../core/ui/app_surfaces.dart';
 import '../../bookmarks/presentation/bookmarks_notifier.dart';
+import '../../study/presentation/controllers/deck_library_controller.dart';
 import '../../growth/streak/streak_notifier.dart';
 import '../../growth/daily_quest/daily_quest_notifier.dart';
 import '../../growth/xp/xp_notifier.dart';
@@ -18,6 +19,7 @@ class ProfilePage extends ConsumerWidget {
     final streak = ref.watch(streakProvider);
     final bookmarkCount = ref.watch(bookmarksProvider).length;
     final quest = ref.watch(dailyQuestProvider);
+    final activeDeck = ref.watch(activeDeckMetaProvider);
 
     final dailyProgress = (xp.dailyXp / dailyGoal).clamp(0.0, 1.0);
     final goalReached = dailyProgress >= 1.0;
@@ -93,6 +95,7 @@ class ProfilePage extends ConsumerWidget {
             const _SectionTitle('Analytics'),
             const SizedBox(height: 12),
             _AnalyticsEntryCard(
+              deckTitle: activeDeck?.title,
               onOpen: () => context.push('/profile/analytics'),
             ),
             const SizedBox(height: 24),
@@ -649,9 +652,10 @@ class _XpLegendCard extends StatelessWidget {
 }
 
 class _AnalyticsEntryCard extends StatelessWidget {
-  const _AnalyticsEntryCard({required this.onOpen});
+  const _AnalyticsEntryCard({required this.onOpen, this.deckTitle});
 
   final VoidCallback onOpen;
+  final String? deckTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -672,11 +676,11 @@ class _AnalyticsEntryCard extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 14),
-          const Expanded(
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Progress Analytics',
                   style: TextStyle(
                     color: Colors.white,
@@ -684,11 +688,18 @@ class _AnalyticsEntryCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                SizedBox(height: 4),
-                Text(
+                const SizedBox(height: 4),
+                const Text(
                   'See answered questions, deck-scoped accuracy, domain performance, and recent activity.',
                   style: TextStyle(color: Colors.white54, fontSize: 12),
                 ),
+                if (deckTitle != null) ...[
+                  SizedBox(height: 4),
+                  Text(
+                    'Current scope: $deckTitle',
+                    style: TextStyle(color: Color(0xFFADA8FF), fontSize: 11),
+                  ),
+                ],
               ],
             ),
           ),
