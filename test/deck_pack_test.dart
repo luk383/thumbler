@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -285,6 +286,33 @@ void main() {
     );
   });
 
+  test('rejects mismatched declared questionCount metadata', () {
+    const raw = '''
+{
+  "id": "count_mismatch",
+  "title": "Count Mismatch",
+  "questionCount": 4,
+  "questions": [
+    {
+      "id": "q1",
+      "domain": "Security",
+      "question": "Prompt?",
+      "answers": ["A", "B"],
+      "correctIndex": 0
+    }
+  ]
+}
+''';
+
+    expect(
+      () => DeckPack.parseJsonString(
+        raw,
+        assetPath: 'assets/decks/count_mismatch.json',
+      ),
+      throwsFormatException,
+    );
+  });
+
   test('parses the real AWS Cloud Practitioner deck asset', () {
     final raw = File(
       'assets/decks/aws_cloud_practitioner_clf_c02.json',
@@ -392,6 +420,54 @@ void main() {
     expect(deck.items.every((item) => item.options.length == 4), isTrue);
     expect(deck.items.every((item) => item.explanationText != null), isTrue);
     expect(deck.items.every((item) => item.difficulty != null), isTrue);
+  });
+
+  test('Security+ app assets follow the standardized root metadata shape', () {
+    final files = <String>[
+      'assets/decks/sec701_exam_pack_20.json',
+      'assets/decks/sec701_exam_pack_30_a.json',
+      'assets/decks/sec701_exam_simulation_90.json',
+    ];
+
+    for (final path in files) {
+      final decoded = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
+      final questions = decoded['questions'] as List<dynamic>;
+
+      expect(decoded['id'], isA<String>());
+      expect(decoded['title'], isA<String>());
+      expect(decoded['examCode'], 'SY0-701');
+      expect(decoded['category'], 'Cybersecurity');
+      expect(decoded['description'], isA<String>());
+      expect(decoded['version'], isNotNull);
+      expect(decoded['questionCount'], questions.length);
+      expect(decoded['domains'], isA<List<dynamic>>());
+      expect(decoded['defaultContentType'], 'exam_question');
+      expect(decoded['questions'], isA<List<dynamic>>());
+    }
+  });
+
+  test('Security+ app assets use normalized question keys', () {
+    final files = <String>[
+      'assets/decks/sec701_exam_pack_20.json',
+      'assets/decks/sec701_exam_pack_30_a.json',
+      'assets/decks/sec701_exam_simulation_90.json',
+    ];
+
+    for (final path in files) {
+      final decoded = jsonDecode(File(path).readAsStringSync()) as Map<String, dynamic>;
+      final questions = decoded['questions'] as List<dynamic>;
+
+      expect(questions, isNotEmpty);
+      for (final raw in questions.cast<Map<String, dynamic>>()) {
+        expect(raw['id'], isA<String>());
+        expect(raw['domain'], isA<String>());
+        expect(raw['difficulty'], isA<int>());
+        expect(raw['question'], isA<String>());
+        expect(raw['answers'], isA<List<dynamic>>());
+        expect(raw['correctIndex'], isA<int>());
+        expect(raw['explanation'], isA<String>());
+      }
+    }
   });
 
   test('parses the real Linux Essentials deck asset', () {

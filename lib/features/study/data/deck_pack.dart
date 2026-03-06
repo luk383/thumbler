@@ -503,6 +503,7 @@ void _validateDeckMetadata(
   required List<dynamic> items,
 }) {
   final issues = <String>[];
+  int? declaredQuestionCount;
 
   if (decoded is Map<String, dynamic>) {
     if (_nonEmptyString(decoded['id']) == null) {
@@ -511,6 +512,16 @@ void _validateDeckMetadata(
     if (_nonEmptyString(decoded['title']) == null &&
         _nonEmptyString(decoded['name']) == null) {
       issues.add('Missing required deck field "title"');
+    }
+    if (decoded.containsKey('questionCount')) {
+      try {
+        declaredQuestionCount = _intValue(decoded['questionCount']);
+        if (declaredQuestionCount < 0) {
+          issues.add('"questionCount" must be zero or greater');
+        }
+      } catch (_) {
+        issues.add('Invalid deck field "questionCount"');
+      }
     }
   }
 
@@ -528,6 +539,11 @@ void _validateDeckMetadata(
   if (isStarter &&
       (availabilityNote == null || availabilityNote.trim().isEmpty)) {
     issues.add('Starter decks must provide "availabilityNote"');
+  }
+  if (declaredQuestionCount != null && declaredQuestionCount != items.length) {
+    issues.add(
+      '"questionCount" ($declaredQuestionCount) does not match actual item count (${items.length})',
+    );
   }
 
   if (issues.isNotEmpty) {

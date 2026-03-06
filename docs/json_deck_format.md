@@ -13,6 +13,7 @@ for older list-based packs and legacy `items` wrappers.
   "category": "Cybersecurity",
   "description": "Security+ practice questions and review cards.",
   "version": "1",
+  "questionCount": 1,
   "domains": [
     "General Security Concepts",
     "Threats and Vulnerabilities"
@@ -40,6 +41,17 @@ for older list-based packs and legacy `items` wrappers.
 }
 ```
 
+## Reference Implementation
+
+The Security+ SY0-701 deck set is the canonical reference for the standardized
+Thumbler format. Use these files as the source of truth when authoring new exam
+or subject decks:
+
+- `assets/decks/sec701_exam_pack_20.json`
+- `assets/decks/sec701_exam_pack_30_a.json`
+- `assets/decks/sec701_exam_simulation_90.json`
+- `docs/question_batches/security_plus/*.batch.json`
+
 ## Supported Field Mapping
 
 Root metadata:
@@ -50,6 +62,7 @@ Root metadata:
 - `category`
 - `description`
 - `version`
+- `questionCount`
 - `domains`
 - `questions` or legacy `items`
 - optional `defaultContentType`
@@ -67,6 +80,10 @@ Question fields:
 - `correctIndex` or legacy `correctAnswerIndex`
 - `explanation` or legacy `explanationText`
 - `type` or legacy `contentType`
+- optional `tags` (ignored safely if present)
+
+`questionCount` is optional metadata, but if provided it should match the real
+number of entries in `questions`/`items`.
 
 ## Backward Compatibility
 
@@ -120,4 +137,5 @@ Available templates:
 - Use `domain` instead of `category` for new questions.
 - Use `question`, `answers`, `correctIndex`, and `explanation` for new decks.
 - Keep `defaultContentType` explicit when the whole deck is exam-only.
+- Keep `questionCount` aligned with the real question list length.
 - Do not store template files in `assets/decks/`, or they will show up as real packs.
