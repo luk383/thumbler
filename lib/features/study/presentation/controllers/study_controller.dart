@@ -7,6 +7,7 @@ import '../../../../features/feed/data/mock_lessons.dart';
 import '../../../../features/feed/domain/lesson.dart';
 import '../../data/study_storage.dart';
 import '../../domain/study_item.dart';
+import 'deck_library_controller.dart';
 
 // ---------------------------------------------------------------------------
 // Enums
@@ -113,6 +114,7 @@ class SpeedResult {
 class StudyState {
   const StudyState({
     this.items = const [],
+    this.activeDeckId,
     this.selectedCategory,
     this.selectedTopic,
     this.selectedMode = StudyMode.srs,
@@ -132,6 +134,7 @@ class StudyState {
   });
 
   final List<StudyItem> items;
+  final String? activeDeckId;
 
   /// null = All categories.
   final String? selectedCategory;
@@ -262,7 +265,13 @@ class StudyNotifier extends Notifier<StudyState> {
   static final _rng = Random();
 
   @override
-  StudyState build() => StudyState(items: StudyStorage().all());
+  StudyState build() {
+    final activeDeckId = ref.watch(activeDeckIdProvider);
+    return StudyState(
+      items: StudyStorage().allForDeck(activeDeckId),
+      activeDeckId: activeDeckId,
+    );
+  }
 
   // ── Deck management ───────────────────────────────────────────────────────
 
@@ -271,6 +280,7 @@ class StudyNotifier extends Notifier<StudyState> {
     StudyStorage().add(
       StudyItem.fromLesson(
         id: lesson.id,
+        deckId: state.activeDeckId,
         category: lesson.category,
         hook: lesson.hook,
         explanation: lesson.explanation,
@@ -278,7 +288,7 @@ class StudyNotifier extends Notifier<StudyState> {
         correctAnswerIndex: lesson.correctAnswerIndex,
       ),
     );
-    state = _copyWith(items: StudyStorage().all());
+    state = _copyWith(items: StudyStorage().allForDeck(state.activeDeckId));
   }
 
   /// Seeds the deck with up to 5 starter cards from mockLessons (no duplicates).
@@ -291,6 +301,7 @@ class StudyNotifier extends Notifier<StudyState> {
         storage.add(
           StudyItem.fromLesson(
             id: lesson.id,
+            deckId: state.activeDeckId,
             category: lesson.category,
             hook: lesson.hook,
             explanation: lesson.explanation,
@@ -301,13 +312,13 @@ class StudyNotifier extends Notifier<StudyState> {
         added++;
       }
     }
-    state = _copyWith(items: storage.all());
+    state = _copyWith(items: storage.allForDeck(state.activeDeckId));
   }
 
   void removeItem(String id) {
-    StudyStorage().remove(id);
+    StudyStorage().remove(id, deckId: state.activeDeckId);
     state = _copyWith(
-      items: StudyStorage().all(),
+      items: StudyStorage().allForDeck(state.activeDeckId),
       isStudying: false,
       sessionQueue: const [],
       currentIndex: 0,
@@ -338,7 +349,47 @@ class StudyNotifier extends Notifier<StudyState> {
 
   /// Reloads items from Hive without resetting session settings.
   void reloadFromStorage() {
-    state = _copyWith(items: StudyStorage().all());
+    state = _copyWith(items: StudyStorage().allForDeck(state.activeDeckId));
+  }
+
+  void resetAfterDataChange({bool clearSelections = false}) {
+    final items = StudyStorage().allForDeck(state.activeDeckId);
+    final nextCategory = clearSelections || state.selectedCategory == null
+        ? null
+        : items.any((item) => item.category == state.selectedCategory)
+        ? state.selectedCategory
+        : null;
+    final nextTopic =
+        clearSelections || nextCategory == null || state.selectedTopic == null
+        ? null
+        : items.any(
+            (item) =>
+                item.category == nextCategory &&
+                item.topic == state.selectedTopic,
+          )
+        ? state.selectedTopic
+        : null;
+
+    state = StudyState(
+      items: items,
+      activeDeckId: state.activeDeckId,
+      selectedCategory: nextCategory,
+      selectedTopic: nextTopic,
+      selectedMode: state.selectedMode,
+      selectedQueueType: state.selectedQueueType,
+      sessionLength: state.sessionLength,
+      timerSeconds: state.timerSeconds,
+      isStudying: false,
+      sessionQueue: const [],
+      currentIndex: 0,
+      answeredInSession: 0,
+      generation: state.generation + 1,
+      speedResults: const [],
+      wrongItemIds: const [],
+      startedFromExamBridge: false,
+      lastTrainedArea: clearSelections ? null : state.lastTrainedArea,
+      lastExamAttemptId: clearSelections ? null : state.lastExamAttemptId,
+    );
   }
 
   void setMode(StudyMode mode) {
@@ -411,6 +462,7 @@ class StudyNotifier extends Notifier<StudyState> {
     if (queue.isEmpty) return;
     state = StudyState(
       items: state.items,
+      activeDeckId: state.activeDeckId,
       selectedCategory: state.selectedCategory,
       selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
@@ -513,12 +565,16 @@ class StudyNotifier extends Notifier<StudyState> {
     final newWrong = correct ? state.wrongItemIds : [...state.wrongItemIds, id];
 
     final items = storage.all();
+    final activeItems = items
+        .where((item) => item.deckId == state.activeDeckId)
+        .toList();
     final nextIndex = state.sessionQueue.isEmpty
         ? 0
         : (state.currentIndex + 1) % state.sessionQueue.length;
 
     state = StudyState(
-      items: items,
+      items: activeItems,
+      activeDeckId: state.activeDeckId,
       selectedCategory: state.selectedCategory,
       selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
@@ -580,6 +636,7 @@ class StudyNotifier extends Notifier<StudyState> {
 
     state = StudyState(
       items: state.items,
+      activeDeckId: state.activeDeckId,
       selectedCategory: category,
       selectedTopic: topic,
       selectedMode: StudyMode.srs,
@@ -604,12 +661,13 @@ class StudyNotifier extends Notifier<StudyState> {
   }
 
   void _advanceSession(StudyStorage storage) {
-    final items = storage.all();
+    final items = storage.allForDeck(state.activeDeckId);
     final nextIndex = state.sessionQueue.isEmpty
         ? 0
         : (state.currentIndex + 1) % state.sessionQueue.length;
     state = StudyState(
       items: items,
+      activeDeckId: state.activeDeckId,
       selectedCategory: state.selectedCategory,
       selectedTopic: state.selectedTopic,
       selectedMode: state.selectedMode,
@@ -700,6 +758,7 @@ class StudyNotifier extends Notifier<StudyState> {
 
   StudyState _copyWith({
     List<StudyItem>? items,
+    Object activeDeckId = _nil,
     Object selectedCategory = _nil,
     Object selectedTopic = _nil,
     StudyMode? selectedMode,
@@ -719,6 +778,9 @@ class StudyNotifier extends Notifier<StudyState> {
   }) {
     return StudyState(
       items: items ?? state.items,
+      activeDeckId: identical(activeDeckId, _nil)
+          ? state.activeDeckId
+          : activeDeckId as String?,
       selectedCategory: identical(selectedCategory, _nil)
           ? state.selectedCategory
           : selectedCategory as String?,

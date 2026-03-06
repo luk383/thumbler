@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/ui/app_surfaces.dart';
 import '../../data/deck_pack.dart';
 import '../controllers/deck_library_controller.dart';
 
-/// Opens the Deck Library as a modal bottom sheet.
 void showDeckLibrary(BuildContext context) {
   showModalBottomSheet<void>(
     context: context,
@@ -17,18 +18,14 @@ void showDeckLibrary(BuildContext context) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Sheet
-// ---------------------------------------------------------------------------
-
 class _DeckLibrarySheet extends ConsumerWidget {
   const _DeckLibrarySheet();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final lib = ref.watch(deckLibraryProvider);
-    final n = ref.read(deckLibraryProvider.notifier);
-    final maxHeight = MediaQuery.of(context).size.height * 0.8;
+    final notifier = ref.read(deckLibraryProvider.notifier);
+    final maxHeight = MediaQuery.of(context).size.height * 0.85;
 
     return SafeArea(
       child: ConstrainedBox(
@@ -38,7 +35,6 @@ class _DeckLibrarySheet extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Handle bar
               Center(
                 child: Container(
                   width: 40,
@@ -50,123 +46,89 @@ class _DeckLibrarySheet extends ConsumerWidget {
                   ),
                 ),
               ),
-
-              const Text(
-                'Deck Library',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+              AppPageIntro(
+                title: 'Library',
+                subtitle: lib.activeDeck == null
+                    ? 'Choose a local pack to power Feed, Study and Exam.'
+                    : 'Current active deck: ${lib.activeDeck!.title}',
+                trailing: lib.activeDeck == null
+                    ? null
+                    : const AppStatusBadge(
+                        label: 'Active deck',
+                        icon: Icons.layers_outlined,
+                      ),
+              ),
+              const SizedBox(height: 18),
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                  side: BorderSide(color: Colors.white.withAlpha(30)),
                 ),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                'Import pre-built decks into your Study collection.',
-                style: TextStyle(color: Colors.white54, fontSize: 13),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.white70,
-                        side: BorderSide(color: Colors.white.withAlpha(30)),
-                      ),
-                      onPressed: lib.isDiscovering ? null : n.discoverPacks,
-                      icon: const Icon(Icons.refresh, size: 16),
-                      label: const Text('Refresh packs'),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.white70,
-                        side: BorderSide(color: Colors.white.withAlpha(30)),
-                      ),
-                      onPressed: n.printDiscoveredPacks,
-                      icon: const Icon(Icons.terminal, size: 16),
-                      label: const Text('Print discovered packs'),
-                    ),
-                  ),
-                ],
+                onPressed: lib.isDiscovering ? null : notifier.discoverPacks,
+                icon: const Icon(Icons.refresh, size: 16),
+                label: const Text('Refresh library'),
               ),
               const SizedBox(height: 12),
+              if (lib.lastError != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    lib.lastError!,
+                    style: const TextStyle(
+                      color: Colors.redAccent,
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
               Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (lib.isDiscovering)
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 12),
-                          child: Center(
-                            child: SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                color: Color(0xFF6C63FF),
-                              ),
-                            ),
-                          ),
+                child: lib.isDiscovering && lib.packs.isEmpty
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xFF6C63FF),
                         ),
-                      if (!lib.isDiscovering && lib.packs.isEmpty)
-                        const Padding(
-                          padding: EdgeInsets.only(bottom: 12),
-                          child: Text(
-                            'No JSON packs found under assets/decks/.',
-                            style: TextStyle(
-                              color: Colors.white54,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      if (lib.lastError != null)
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: Text(
-                            lib.lastError!,
-                            style: const TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ),
-                      ...lib.packs.map(
-                        (meta) => _PackCard(
-                          meta: meta,
-                          result: lib.resultFor(meta.id),
-                          loading: lib.isLoading(meta.id),
-                          onImport: () async {
-                            try {
-                              await n.importPack(meta);
-                              if (!context.mounted) return;
-                              final result = ref
-                                  .read(deckLibraryProvider)
-                                  .resultFor(meta.id);
-                              if (result != null) {
+                      )
+                    : lib.packs.isEmpty
+                    ? const _EmptyLibraryState()
+                    : ListView.builder(
+                        itemCount: lib.packs.length,
+                        itemBuilder: (context, index) {
+                          final meta = lib.packs[index];
+                          return _PackCard(
+                            meta: meta,
+                            isActive: lib.isActive(meta.id),
+                            isLoading: lib.isLoading(meta.id),
+                            result: lib.resultFor(meta.id),
+                            onUseDeck: () async {
+                              try {
+                                await notifier.setActiveDeck(meta);
+                                if (!context.mounted) return;
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'Imported ${result.added}, skipped ${result.skipped}',
+                                      '${meta.title} is now the active deck.',
                                     ),
                                   ),
                                 );
+                              } catch (e) {
+                                if (!context.mounted) return;
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())),
+                                );
                               }
-                            } catch (e) {
-                              if (!context.mounted) return;
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text(e.toString())),
-                              );
-                            }
-                          },
-                        ),
+                            },
+                            onStudy: () {
+                              Navigator.of(context).pop();
+                              context.go('/study');
+                            },
+                            onExam: meta.supportsExam
+                                ? () {
+                                    Navigator.of(context).pop();
+                                    context.go('/exam');
+                                  }
+                                : null,
+                          );
+                        },
                       ),
-                    ],
-                  ),
-                ),
               ),
             ],
           ),
@@ -176,141 +138,231 @@ class _DeckLibrarySheet extends ConsumerWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Pack card row
-// ---------------------------------------------------------------------------
+class _EmptyLibraryState extends StatelessWidget {
+  const _EmptyLibraryState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.library_books_outlined, color: Colors.white30, size: 40),
+            SizedBox(height: 12),
+            Text(
+              'No local packs found in assets/decks.',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Add a JSON pack to assets/decks and refresh the library.',
+              style: TextStyle(color: Colors.white54, fontSize: 13),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class _PackCard extends StatelessWidget {
   const _PackCard({
     required this.meta,
+    required this.isActive,
+    required this.isLoading,
     required this.result,
-    required this.loading,
-    required this.onImport,
+    required this.onUseDeck,
+    required this.onStudy,
+    required this.onExam,
   });
 
   final DeckPackMeta meta;
+  final bool isActive;
+  final bool isLoading;
   final ImportResult? result;
-  final bool loading;
-  final Future<void> Function() onImport;
+  final Future<void> Function() onUseDeck;
+  final VoidCallback onStudy;
+  final VoidCallback? onExam;
+
+  @override
+  Widget build(BuildContext context) {
+    final isUnavailable =
+        meta.hasInvalidJson || meta.isStarter || !meta.hasQuestions;
+
+    return AppGlassCard(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      radius: 18,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      meta.title,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      meta.subtitle,
+                      style: const TextStyle(
+                        color: Colors.white60,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (isActive)
+                const AppStatusBadge(
+                  label: 'Active',
+                  icon: Icons.check_circle_outline,
+                ),
+            ],
+          ),
+          if (meta.description != null && meta.description!.isNotEmpty) ...[
+            const SizedBox(height: 8),
+            Text(
+              meta.description!,
+              style: const TextStyle(color: Colors.white70, fontSize: 12),
+            ),
+          ],
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _InfoChip(label: '${meta.questionCount} items'),
+              if (meta.microCardCount > 0)
+                _InfoChip(label: '${meta.microCardCount} feed/study'),
+              if (meta.examQuestionCount > 0)
+                _InfoChip(label: '${meta.examQuestionCount} exam'),
+              _InfoChip(
+                label: meta.hasInvalidJson ? 'Invalid JSON' : 'Ready',
+                tint: meta.hasInvalidJson ? Colors.redAccent : Colors.white24,
+              ),
+              if (meta.isStarter)
+                const _InfoChip(
+                  label: 'Starter deck',
+                  tint: Colors.orangeAccent,
+                ),
+              if (meta.hasInvalidJson)
+                const _InfoChip(label: 'Cannot import', tint: Colors.redAccent),
+              if (!meta.hasInvalidJson && isActive)
+                const _InfoChip(
+                  label: 'Used across Feed, Study, Exam',
+                  tint: Color(0xFF6C63FF),
+                ),
+            ],
+          ),
+          if (result != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              'Last import: ${result!.added} added, ${result!.updated} updated, ${result!.skipped} skipped',
+              style: const TextStyle(color: Colors.white54, fontSize: 11),
+            ),
+          ],
+          if (meta.availabilityNote != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              meta.availabilityNote!,
+              style: const TextStyle(color: Colors.orangeAccent, fontSize: 11),
+            ),
+          ],
+          if (meta.invalidJsonMessage != null) ...[
+            const SizedBox(height: 10),
+            Text(
+              meta.invalidJsonMessage!,
+              style: const TextStyle(color: Colors.redAccent, fontSize: 11),
+            ),
+          ],
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: FilledButton(
+                  onPressed: isUnavailable || isLoading ? null : onUseDeck,
+                  style: FilledButton.styleFrom(
+                    backgroundColor: isActive
+                        ? Colors.white12
+                        : const Color(0xFF6C63FF),
+                    foregroundColor: Colors.white,
+                  ),
+                  child: isLoading
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text(
+                          isActive
+                              ? 'In Use'
+                              : meta.isStarter || !meta.hasQuestions
+                              ? 'Not Ready'
+                              : 'Use Deck',
+                        ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              OutlinedButton(
+                onPressed: isActive && meta.hasQuestions ? onStudy : null,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                  side: BorderSide(color: Colors.white.withAlpha(30)),
+                ),
+                child: const Text('Study'),
+              ),
+              const SizedBox(width: 8),
+              OutlinedButton(
+                onPressed: isActive && meta.supportsExam ? onExam : null,
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.white70,
+                  side: BorderSide(color: Colors.white.withAlpha(30)),
+                ),
+                child: const Text('Exam'),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InfoChip extends StatelessWidget {
+  const _InfoChip({required this.label, this.tint});
+
+  final String label;
+  final Color? tint;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(10),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withAlpha(20)),
+        color: (tint ?? Colors.white24).withAlpha(30),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: (tint ?? Colors.white24).withAlpha(60)),
       ),
-      child: Row(
-        children: [
-          Text(meta.emoji, style: const TextStyle(fontSize: 28)),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  meta.name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  meta.description,
-                  style: const TextStyle(color: Colors.white54, fontSize: 11),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 6),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 6,
-                  children: [
-                    Text(
-                      meta.assetPath.split('/').last,
-                      style: const TextStyle(
-                        color: Colors.white38,
-                        fontSize: 10,
-                      ),
-                    ),
-                    if (meta.estimatedItemCount != null)
-                      Text(
-                        '${meta.estimatedItemCount} items',
-                        style: const TextStyle(
-                          color: Colors.white54,
-                          fontSize: 10,
-                        ),
-                      ),
-                    if (meta.hasInvalidJson)
-                      Tooltip(
-                        message: meta.invalidJsonMessage ?? 'Invalid JSON',
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 6,
-                            vertical: 2,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.redAccent.withAlpha(35),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: Colors.redAccent.withAlpha(90),
-                            ),
-                          ),
-                          child: const Text(
-                            'Invalid JSON',
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                if (result != null) ...[
-                  const SizedBox(height: 6),
-                  Text(
-                    '✓ $result',
-                    style: const TextStyle(
-                      color: Colors.greenAccent,
-                      fontSize: 11,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-          const SizedBox(width: 12),
-          loading
-              ? const SizedBox(
-                  width: 22,
-                  height: 22,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: Color(0xFF6C63FF),
-                  ),
-                )
-              : TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: const Color(0xFF6C63FF).withAlpha(40),
-                    foregroundColor: const Color(0xFFADA8FF),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    minimumSize: Size.zero,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  onPressed: meta.hasInvalidJson ? null : () => onImport(),
-                  child: Text(result != null ? 'Re-import' : 'Import'),
-                ),
-        ],
+      child: Text(
+        label,
+        style: const TextStyle(color: Colors.white70, fontSize: 11),
       ),
     );
   }

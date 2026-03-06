@@ -135,6 +135,12 @@ class DailyQuestNotifier extends Notifier<DailyQuestState> {
     state = state.copyWith(pendingReward: () => null);
   }
 
+  void reloadFromStorage() {
+    final today = _today();
+    _ensureQuestIsForToday(today);
+    state = _loadState(today);
+  }
+
   /// Dev-only: wipe today's quest so you can trigger the full flow again.
   void devResetQuest() {
     _box.put(_dateKey, '');

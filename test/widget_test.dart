@@ -1,6 +1,32 @@
-// TODO: Add widget/integration tests for Thumbler features
-// See: https://flutter.dev/docs/testing
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import 'package:thumbler/features/feed/domain/lesson.dart';
+import 'package:thumbler/features/share/share_card_widget.dart';
 
 void main() {
-  // Placeholder — add feature tests here
+  testWidgets('Share card renders lesson content and branding', (tester) async {
+    const lesson = Lesson(
+      id: 'security-basics',
+      hook: 'Use unique passwords for every critical account.',
+      explanation: 'Password reuse increases blast radius after a breach.',
+      quizQuestion: 'What reduces account takeover risk?',
+      options: ['Reuse passwords', 'Use unique passwords'],
+      correctAnswerIndex: 1,
+      category: 'Security',
+    );
+
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: Scaffold(body: ShareCardWidget(lesson: lesson)),
+      ),
+    );
+
+    expect(find.text('Security'), findsOneWidget);
+    expect(
+      find.text('Use unique passwords for every critical account.'),
+      findsOneWidget,
+    );
+    expect(find.text('Thumbler'), findsOneWidget);
+  });
 }

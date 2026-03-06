@@ -1,0 +1,385 @@
+{
+  "id": "comptia_security_plus_sy0_701_security_operations_batch_01",
+  "title": "CompTIA Security+",
+  "examCode": "SY0-701",
+  "category": "Cybersecurity",
+  "description": "Question batch for the Security Operations domain.",
+  "version": "1",
+  "questionCount": 30,
+  "domains": [
+    "Security Operations"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "sec701_ops_b01_q_001",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 1,
+      "question": "Which incident response phase focuses on restoring systems to normal operation?",
+      "answers": ["Recovery", "Preparation", "Identification", "Containment"],
+      "correctIndex": 0,
+      "explanation": "Recovery returns affected systems to production after the threat is contained and removed."
+    },
+    {
+      "id": "sec701_ops_b01_q_002",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 1,
+      "question": "Which platform collects and correlates logs from many sources?",
+      "answers": ["SIEM", "RAID", "HSM", "UPS"],
+      "correctIndex": 0,
+      "explanation": "A SIEM centralizes logs and supports monitoring, correlation, and alerting."
+    },
+    {
+      "id": "sec701_ops_b01_q_003",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 1,
+      "question": "Which technology automates repetitive response actions after an alert?",
+      "answers": ["SOAR", "NAT", "FTP", "RADIUS"],
+      "correctIndex": 0,
+      "explanation": "SOAR platforms automate workflows and orchestration in security operations."
+    },
+    {
+      "id": "sec701_ops_b01_q_004",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 1,
+      "question": "Which phase of incident response confirms suspicious activity is actually an incident?",
+      "answers": ["Identification", "Recovery", "Lessons learned", "Eradication"],
+      "correctIndex": 0,
+      "explanation": "Identification determines whether observed behavior is a real security incident."
+    },
+    {
+      "id": "sec701_ops_b01_q_005",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 1,
+      "question": "What is the primary goal of chain of custody documentation?",
+      "answers": [
+        "To track how evidence is handled",
+        "To increase network bandwidth",
+        "To automate password resets",
+        "To rotate certificates"
+      ],
+      "correctIndex": 0,
+      "explanation": "Chain of custody preserves evidence integrity by recording who handled it and when."
+    },
+    {
+      "id": "sec701_ops_b01_q_006",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 1,
+      "question": "Which backup strategy stores one full backup plus changes since the last backup of any type?",
+      "answers": ["Incremental", "Differential", "Snapshotless", "Mirrored only"],
+      "correctIndex": 0,
+      "explanation": "Incremental backups capture changes since the most recent backup."
+    },
+    {
+      "id": "sec701_ops_b01_q_007",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which backup strategy stores one full backup plus changes since the last full backup?",
+      "answers": ["Differential", "Incremental", "Cold site", "RAID 0"],
+      "correctIndex": 0,
+      "explanation": "Differential backups accumulate changes since the last full backup."
+    },
+    {
+      "id": "sec701_ops_b01_q_008",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "What does RTO measure?",
+      "answers": [
+        "How quickly a service must be restored",
+        "How much data loss is acceptable",
+        "How many users can authenticate",
+        "How often logs rotate"
+      ],
+      "correctIndex": 0,
+      "explanation": "Recovery time objective defines the maximum acceptable outage duration."
+    },
+    {
+      "id": "sec701_ops_b01_q_009",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "What does RPO measure?",
+      "answers": [
+        "Maximum acceptable data loss window",
+        "Time needed to rebuild hardware",
+        "Patch installation speed",
+        "Average password length"
+      ],
+      "correctIndex": 0,
+      "explanation": "Recovery point objective defines how much recent data loss is acceptable."
+    },
+    {
+      "id": "sec701_ops_b01_q_010",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which site type has hardware ready but needs data restoration before use?",
+      "answers": ["Warm site", "Cold site", "Hot site", "Air-gapped vault"],
+      "correctIndex": 0,
+      "explanation": "A warm site is partially prepared and requires some restoration before operations resume."
+    },
+    {
+      "id": "sec701_ops_b01_q_011",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which site type supports the fastest disaster recovery with systems already running?",
+      "answers": ["Hot site", "Warm site", "Cold site", "Offline archive"],
+      "correctIndex": 0,
+      "explanation": "A hot site is fully equipped and ready to take over quickly."
+    },
+    {
+      "id": "sec701_ops_b01_q_012",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "What is the primary purpose of an incident response playbook?",
+      "answers": [
+        "To document repeatable response steps for specific scenarios",
+        "To replace vulnerability scanning",
+        "To assign IP addresses",
+        "To manage storage quotas"
+      ],
+      "correctIndex": 0,
+      "explanation": "Playbooks provide structured steps for common incident types."
+    },
+    {
+      "id": "sec701_ops_b01_q_013",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which action is most appropriate during evidence collection on a compromised system?",
+      "answers": [
+        "Preserve and document evidence carefully",
+        "Install many new applications immediately",
+        "Delete suspicious files first",
+        "Disable all logging"
+      ],
+      "correctIndex": 0,
+      "explanation": "Evidence should be preserved and documented to support investigation and integrity."
+    },
+    {
+      "id": "sec701_ops_b01_q_014",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "What is a key advantage of central time synchronization in security operations?",
+      "answers": [
+        "It makes event timelines more accurate across systems",
+        "It removes the need for backups",
+        "It replaces multifactor authentication",
+        "It increases CPU speed"
+      ],
+      "correctIndex": 0,
+      "explanation": "Consistent timestamps make investigations and log correlation much more reliable."
+    },
+    {
+      "id": "sec701_ops_b01_q_015",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which metric focuses on how long it takes to discover an incident?",
+      "answers": ["MTTD", "RPO", "RTO", "AUP"],
+      "correctIndex": 0,
+      "explanation": "Mean time to detect measures the average time needed to identify an incident."
+    },
+    {
+      "id": "sec701_ops_b01_q_016",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which metric focuses on how long it takes to remediate an incident?",
+      "answers": ["MTTR", "NDA", "MOU", "TTL"],
+      "correctIndex": 0,
+      "explanation": "Mean time to respond or remediate measures recovery or response duration."
+    },
+    {
+      "id": "sec701_ops_b01_q_017",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "What is the purpose of a tabletop exercise?",
+      "answers": [
+        "To walk through response scenarios without a live outage",
+        "To patch servers automatically",
+        "To replace security awareness training",
+        "To measure wireless coverage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tabletop exercises test decision-making and procedures in a discussion-based format."
+    },
+    {
+      "id": "sec701_ops_b01_q_018",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which log source is most useful for tracking user sign-in events?",
+      "answers": ["Authentication logs", "Temperature logs", "Printer counts", "Battery status"],
+      "correctIndex": 0,
+      "explanation": "Authentication logs record sign-ins, failures, and related identity activity."
+    },
+    {
+      "id": "sec701_ops_b01_q_019",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 3,
+      "question": "Which response action is usually best immediately after detecting ransomware spread?",
+      "answers": [
+        "Isolate affected systems",
+        "Delete all backups",
+        "Disable all alerts",
+        "Publish the encryption keys"
+      ],
+      "correctIndex": 0,
+      "explanation": "Isolation helps stop further spread while the incident is investigated."
+    },
+    {
+      "id": "sec701_ops_b01_q_020",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 3,
+      "question": "Why are immutable backups valuable against ransomware?",
+      "answers": [
+        "They are harder for attackers to alter or delete",
+        "They remove the need for restoration testing",
+        "They always eliminate downtime",
+        "They replace endpoint security"
+      ],
+      "correctIndex": 0,
+      "explanation": "Immutable backups reduce the risk that attackers can modify recovery data."
+    },
+    {
+      "id": "sec701_ops_b01_q_021",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which practice confirms that backups can actually be restored successfully?",
+      "answers": ["Recovery testing", "Password spraying", "Hash collision testing", "VLAN pruning"],
+      "correctIndex": 0,
+      "explanation": "Backups have limited value unless restoration is tested regularly."
+    },
+    {
+      "id": "sec701_ops_b01_q_022",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which data source is most helpful for understanding suspicious network connections from a host?",
+      "answers": ["NetFlow or connection logs", "Badge printer logs", "Inventory labels", "HVAC telemetry"],
+      "correctIndex": 0,
+      "explanation": "Flow and connection records help analysts review who connected to what and when."
+    },
+    {
+      "id": "sec701_ops_b01_q_023",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "What is the main purpose of endpoint detection and response?",
+      "answers": [
+        "To monitor endpoints for suspicious behavior and support response",
+        "To replace disk encryption",
+        "To route packets between VLANs",
+        "To manage printer queues"
+      ],
+      "correctIndex": 0,
+      "explanation": "EDR helps detect, investigate, and respond to endpoint threats."
+    },
+    {
+      "id": "sec701_ops_b01_q_024",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 3,
+      "question": "Which evidence type should usually be captured first on a live compromised host?",
+      "answers": ["Volatile memory data", "Archived training records", "Spare hardware inventory", "Visitor badges"],
+      "correctIndex": 0,
+      "explanation": "Volatile data such as memory can be lost when the system is powered off or rebooted."
+    },
+    {
+      "id": "sec701_ops_b01_q_025",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 3,
+      "question": "Why are lessons-learned meetings held after incidents?",
+      "answers": [
+        "To improve future detection, response, and controls",
+        "To delete all incident records",
+        "To remove business continuity plans",
+        "To bypass compliance reviews"
+      ],
+      "correctIndex": 0,
+      "explanation": "Post-incident reviews identify improvements in processes, tooling, and controls."
+    },
+    {
+      "id": "sec701_ops_b01_q_026",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which operation best supports threat hunting?",
+      "answers": [
+        "Proactively searching for suspicious patterns not yet flagged",
+        "Waiting only for user complaints",
+        "Disabling endpoint logs",
+        "Removing all detections"
+      ],
+      "correctIndex": 0,
+      "explanation": "Threat hunting is a proactive search for hidden or missed malicious activity."
+    },
+    {
+      "id": "sec701_ops_b01_q_027",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which document defines communication and escalation during an incident?",
+      "answers": ["Incident response plan", "Asset disposal form", "Privacy notice", "Logo guide"],
+      "correctIndex": 0,
+      "explanation": "The incident response plan defines roles, communication paths, and escalation."
+    },
+    {
+      "id": "sec701_ops_b01_q_028",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 2,
+      "question": "Which kind of alert most likely indicates impossible travel between two logins?",
+      "answers": ["UEBA alert", "Patch note", "DHCP reservation", "Cable test"],
+      "correctIndex": 0,
+      "explanation": "User and entity behavior analytics can flag unusual authentication behavior such as impossible travel."
+    },
+    {
+      "id": "sec701_ops_b01_q_029",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 3,
+      "question": "Which step should happen before returning rebuilt systems to production after an incident?",
+      "answers": [
+        "Validation that systems are clean and hardened",
+        "Removing all monitoring tools",
+        "Restoring old weak passwords",
+        "Disabling updates"
+      ],
+      "correctIndex": 0,
+      "explanation": "Systems should be verified, patched, and hardened before production use resumes."
+    },
+    {
+      "id": "sec701_ops_b01_q_030",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "difficulty": 3,
+      "question": "Which practice most improves the quality of forensic evidence collection?",
+      "answers": [
+        "Using documented, repeatable procedures",
+        "Making unlogged manual changes",
+        "Sharing evidence through personal accounts",
+        "Turning off timestamps"
+      ],
+      "correctIndex": 0,
+      "explanation": "Documented procedures reduce mistakes and strengthen evidence reliability."
+    }
+  ]
+}

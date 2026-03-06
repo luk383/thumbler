@@ -50,6 +50,13 @@ class ExamResultDetailPage extends StatelessWidget {
                   'Correct ${result.correctAnswers} · Wrong ${result.wrongAnswers} · ${result.totalQuestions} questions',
                   style: const TextStyle(color: Colors.white70, fontSize: 12),
                 ),
+                if (result.deckTitle != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    result.deckTitle!,
+                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                  ),
+                ],
                 if (weakestDomain != null) ...[
                   const SizedBox(height: 10),
                   Text(
@@ -75,38 +82,52 @@ class ExamResultDetailPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ...sortedDomains.map(
-            (entry) => Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
+          if (sortedDomains.isEmpty)
+            Container(
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 color: Colors.white.withAlpha(8),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white.withAlpha(15)),
               ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      entry.key,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 12,
+              child: const Text(
+                'No domain breakdown is available for this exam.',
+                style: TextStyle(color: Colors.white60, fontSize: 12),
+              ),
+            )
+          else
+            ...sortedDomains.map(
+              (entry) => Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: Colors.white.withAlpha(8),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.white.withAlpha(15)),
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        entry.key,
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                        ),
                       ),
                     ),
-                  ),
-                  Text(
-                    '${entry.value}%',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w700,
+                    Text(
+                      _formatPercent(entry.value),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
@@ -120,7 +141,7 @@ class ExamResultDetailPage extends StatelessWidget {
                   : () {
                       context.go(
                         '/study?category=${Uri.encodeComponent(weakestDomain)}'
-                        '&mode=study&source=exam_bridge&autostart=true'
+                        '&source=exam_bridge&autostart=true'
                         '&lastExamAttemptId=${Uri.encodeComponent(result.id)}',
                       );
                     },
@@ -158,4 +179,12 @@ class ExamResultDetailPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String _formatPercent(double value) {
+  final rounded = value.roundToDouble();
+  final text = rounded == value
+      ? value.toStringAsFixed(0)
+      : value.toStringAsFixed(1);
+  return '$text%';
 }

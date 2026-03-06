@@ -47,6 +47,10 @@ class StreakNotifier extends Notifier<StreakState> {
     state = StreakState(currentStreak: newStreak, completedToday: true);
   }
 
+  void reloadFromStorage() {
+    state = _computeState();
+  }
+
   String _todayString() => DateTime.now().toIso8601String().substring(0, 10);
   String _yesterdayString() =>
       DateTime.now()

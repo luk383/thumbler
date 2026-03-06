@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/ui/app_surfaces.dart';
 import '../../domain/exam_attempt.dart';
 import '../../domain/exam_result.dart';
+import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../controllers/exam_controller.dart';
 
 class ExamHomePage extends ConsumerWidget {
@@ -12,6 +14,10 @@ class ExamHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(examProvider);
     final n = ref.read(examProvider.notifier);
+    final activeDeck = ref.watch(activeDeckMetaProvider);
+    final deckResults = activeDeck == null
+        ? s.results
+        : s.results.where((result) => result.deckId == activeDeck.id).toList();
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -21,18 +27,17 @@ class ExamHomePage extends ConsumerWidget {
           children: [
             // ── Header ──────────────────────────────────────────────────
             const SizedBox(height: 20),
-            const Text(
-              'Exam',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              '${s.availableQuestions.length} exam questions available',
-              style: const TextStyle(color: Colors.white38, fontSize: 12),
+            AppPageIntro(
+              title: 'Exam',
+              subtitle: activeDeck == null
+                  ? '${s.availableQuestions.length} exam questions available'
+                  : '${activeDeck.title} · ${s.availableQuestions.length} questions ready for timed practice',
+              trailing: activeDeck == null
+                  ? null
+                  : const AppStatusBadge(
+                      label: 'Deck active',
+                      icon: Icons.layers_outlined,
+                    ),
             ),
             const SizedBox(height: 24),
 
@@ -49,53 +54,64 @@ class ExamHomePage extends ConsumerWidget {
             ],
 
             // ── Question count selector ──────────────────────────────────
-            _SectionLabel('Questions'),
-            _CountChips(
-              options: const [30, 60, 90],
-              selected: s.selectedCount,
-              available: s.availableQuestions.length,
-              onSelect: n.setQuestionCount,
-            ),
-            const SizedBox(height: 8),
-
-            // ── Effective count info ─────────────────────────────────────
-            if (s.availableQuestions.isNotEmpty)
-              _InfoPill(
-                'Duration: ${s.effectiveQuestionCount} questions · '
-                '${s.effectiveQuestionCount} minutes',
-              ),
-            const SizedBox(height: 24),
-
-            // ── Start button ─────────────────────────────────────────────
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF6C63FF),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  textStyle: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
+            AppGlassCard(
+              padding: const EdgeInsets.all(18),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const _SectionLabel('Questions'),
+                  _CountChips(
+                    options: const [30, 60, 90],
+                    selected: s.selectedCount,
+                    available: s.availableQuestions.length,
+                    onSelect: n.setQuestionCount,
                   ),
-                  disabledBackgroundColor: const Color(
-                    0xFF6C63FF,
-                  ).withAlpha(50),
-                ),
-                onPressed: s.availableQuestions.isEmpty
-                    ? null
-                    : () => n.startExam(s.selectedCount),
-                icon: const Icon(Icons.assignment_outlined, size: 20),
-                label: Text(
-                  s.availableQuestions.isEmpty
-                      ? 'No exam questions — import a pack first'
-                      : 'Start Exam  (${s.effectiveQuestionCount} questions)',
-                ),
+                  const SizedBox(height: 12),
+                  if (s.availableQuestions.isNotEmpty)
+                    _InfoPill(
+                      'Timed run: ${s.effectiveQuestionCount} questions · '
+                      '${s.effectiveQuestionCount} minutes',
+                    ),
+                  const SizedBox(height: 16),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF6C63FF),
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        textStyle: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        disabledBackgroundColor: const Color(
+                          0xFF6C63FF,
+                        ).withAlpha(50),
+                      ),
+                      onPressed: s.availableQuestions.isEmpty
+                          ? null
+                          : () => n.startExam(s.selectedCount),
+                      icon: const Icon(Icons.assignment_outlined, size: 20),
+                      label: Text(
+                        s.availableQuestions.isEmpty
+                            ? 'No exam questions available'
+                            : 'Start Exam (${s.effectiveQuestionCount} questions)',
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+            if (deckResults.isEmpty && s.availableQuestions.isNotEmpty) ...[
+              const SizedBox(height: 16),
+              const _InfoPill(
+                'No completed exam history for this deck yet. Your next result will appear here.',
+              ),
+            ],
+            const SizedBox(height: 12),
 
             // ── History ──────────────────────────────────────────────────
-            if (s.results.isNotEmpty) ...[
+            if (deckResults.isNotEmpty) ...[
               const SizedBox(height: 36),
               Row(
                 children: [
@@ -107,7 +123,7 @@ class ExamHomePage extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              ...s.results
+              ...deckResults
                   .take(5)
                   .map(
                     (result) => _HistoryCard(

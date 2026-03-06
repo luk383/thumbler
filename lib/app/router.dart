@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../features/analytics/presentation/pages/progress_analytics_page.dart';
 import '../features/bookmarks/presentation/bookmarks_page.dart';
 import '../features/exam/presentation/pages/exam_page.dart';
 import '../features/exam/presentation/pages/exam_history_page.dart';
@@ -111,6 +112,12 @@ final appRouter = GoRouter(
             GoRoute(
               path: '/profile',
               builder: (context, state) => const ProfilePage(),
+              routes: [
+                GoRoute(
+                  path: 'analytics',
+                  builder: (context, state) => const ProgressAnalyticsPage(),
+                ),
+              ],
             ),
           ],
         ),

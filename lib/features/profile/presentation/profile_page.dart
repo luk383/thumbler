@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/data/reset_service.dart';
+import '../../../core/ui/app_surfaces.dart';
 import '../../bookmarks/presentation/bookmarks_notifier.dart';
-import '../../exam/presentation/controllers/exam_controller.dart';
 import '../../growth/streak/streak_notifier.dart';
 import '../../growth/daily_quest/daily_quest_notifier.dart';
 import '../../growth/xp/xp_notifier.dart';
-import '../../study/presentation/controllers/study_controller.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -24,19 +24,17 @@ class ProfilePage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text(
-          'Profile',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        elevation: 0,
-      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const AppPageIntro(
+              title: 'Profile',
+              subtitle:
+                  'Track momentum, manage local data, and keep your study setup clean.',
+            ),
+            const SizedBox(height: 20),
             // ── Daily goal card ──────────────────────────────────────────
             _DailyGoalCard(
               dailyXp: xp.dailyXp,
@@ -79,7 +77,7 @@ class ProfilePage extends ConsumerWidget {
             const SizedBox(height: 24),
 
             // ── Daily quest section ──────────────────────────────────────
-            const _SectionTitle("Daily Quest"),
+            const _SectionTitle('Daily Quest'),
             const SizedBox(height: 12),
             _DailyQuestCard(quest: quest),
             const SizedBox(height: 8),
@@ -92,60 +90,57 @@ class ProfilePage extends ConsumerWidget {
             const _XpLegendCard(),
             const SizedBox(height: 24),
 
+            const _SectionTitle('Analytics'),
+            const SizedBox(height: 12),
+            _AnalyticsEntryCard(
+              onOpen: () => context.push('/profile/analytics'),
+            ),
+            const SizedBox(height: 24),
+
             const _SectionTitle('Data Management'),
             const SizedBox(height: 12),
             _DataManagementCard(
               onResetStudyDeck: () => _runResetAction(
                 context,
-                ref,
-                dialogMessage: 'This will delete all study cards.',
-                successMessage: 'Study deck reset',
-                action: () => const ResetService().resetStudyDeck(),
-                invalidateProviders: () {
-                  ref.invalidate(studyProvider);
-                  ref.invalidate(examProvider);
-                },
+                dialogMessage:
+                    'This will delete all study cards saved on this device. '
+                    'Imported exam questions in the local deck will also be removed.',
+                successAction: () => const ResetService().resetStudyDeck(
+                  context: context,
+                  ref: ref,
+                ),
               ),
               onResetProgress: () => _runResetAction(
                 context,
-                ref,
                 dialogMessage:
-                    'This will delete XP, streak, study statistics, and local progress.',
-                successMessage: 'Progress reset',
-                action: () => const ResetService().resetProgress(),
-                invalidateProviders: () {
-                  ref.invalidate(xpProvider);
-                  ref.invalidate(streakProvider);
-                  ref.invalidate(dailyQuestProvider);
-                  ref.invalidate(studyProvider);
-                  ref.invalidate(examProvider);
-                },
+                    'This will reset XP, streak, daily quest state, and study statistics, '
+                    'but keep your local deck content.',
+                successAction: () => const ResetService().resetProgress(
+                  context: context,
+                  ref: ref,
+                ),
               ),
               onResetExamHistory: () => _runResetAction(
                 context,
-                ref,
                 dialogMessage:
                     'This will delete saved exam attempts and any paused exam.',
-                successMessage: 'Exam history reset',
-                action: () => const ResetService().resetExamHistory(),
-                invalidateProviders: () => ref.invalidate(examProvider),
+                successAction: () => const ResetService().resetExamHistory(
+                  context: context,
+                  ref: ref,
+                ),
               ),
               onResetAllAppData: () => _runResetAction(
                 context,
-                ref,
                 dialogTitle: 'Reset all local data',
-                dialogMessage: 'This will delete all local app data.',
-                confirmLabel: 'Reset all local data',
-                successMessage: 'All app data reset',
-                action: () => const ResetService().resetAllAppData(),
-                invalidateProviders: () {
-                  ref.invalidate(xpProvider);
-                  ref.invalidate(streakProvider);
-                  ref.invalidate(bookmarksProvider);
-                  ref.invalidate(dailyQuestProvider);
-                  ref.invalidate(studyProvider);
-                  ref.invalidate(examProvider);
-                },
+                dialogMessage:
+                    'This permanently deletes every local deck, exam result, bookmark, '
+                    'XP record, streak, and quest state on this device. '
+                    'This action cannot be undone.',
+                confirmLabel: 'Delete all local data',
+                successAction: () => const ResetService().resetAllData(
+                  context: context,
+                  ref: ref,
+                ),
               ),
             ),
             const SizedBox(height: 24),
@@ -171,14 +166,11 @@ class ProfilePage extends ConsumerWidget {
 }
 
 Future<void> _runResetAction(
-  BuildContext context,
-  WidgetRef ref, {
+  BuildContext context, {
   String dialogTitle = 'Are you sure?',
   required String dialogMessage,
   String confirmLabel = 'Confirm',
-  required String successMessage,
-  required Future<void> Function() action,
-  required VoidCallback invalidateProviders,
+  required Future<void> Function() successAction,
 }) async {
   final confirmed = await _showResetConfirmationDialog(
     context,
@@ -188,13 +180,7 @@ Future<void> _runResetAction(
   );
   if (confirmed != true || !context.mounted) return;
 
-  await action();
-  invalidateProviders();
-
-  if (!context.mounted) return;
-  ScaffoldMessenger.of(
-    context,
-  ).showSnackBar(SnackBar(content: Text(successMessage)));
+  await successAction();
 }
 
 Future<bool?> _showResetConfirmationDialog(
@@ -594,13 +580,8 @@ class _StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
-      decoration: BoxDecoration(
-        color: color.withAlpha(26),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: color.withAlpha(77)),
-      ),
       child: Column(
         children: [
           Text(emoji, style: const TextStyle(fontSize: 24)),
@@ -631,14 +612,7 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 17,
-        fontWeight: FontWeight.bold,
-      ),
-    );
+    return AppSectionHeader(title);
   }
 }
 
@@ -647,14 +621,9 @@ class _XpLegendCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(13),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withAlpha(20)),
-      ),
-      child: const Column(
+    return const AppGlassCard(
+      padding: EdgeInsets.all(16),
+      child: Column(
         children: [
           _XpRow(
             icon: Icons.visibility_outlined,
@@ -672,6 +641,61 @@ class _XpLegendCard extends StatelessWidget {
             icon: Icons.check_circle_outline,
             label: 'Correct answer',
             xp: '+3 XP',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AnalyticsEntryCard extends StatelessWidget {
+  const _AnalyticsEntryCard({required this.onOpen});
+
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppGlassCard(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            decoration: BoxDecoration(
+              color: const Color(0xFF6C63FF).withAlpha(24),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Icon(
+              Icons.insights_outlined,
+              color: Color(0xFFADA8FF),
+            ),
+          ),
+          const SizedBox(width: 14),
+          const Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Progress Analytics',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'See answered questions, deck-scoped accuracy, domain performance, and recent activity.',
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          IconButton(
+            onPressed: onOpen,
+            icon: const Icon(Icons.chevron_right, color: Colors.white54),
           ),
         ],
       ),

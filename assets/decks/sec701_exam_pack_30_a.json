@@ -1,182 +1,559 @@
-[
 {
-"id":"sec701_exam_a_001",
-"contentType":"exam_question",
-"category":"General Security Concepts",
-"topic":"CIA Triad",
-"subtopic":"Availability",
-"objectiveId":"1.2",
-"promptText":"A ransomware attack encrypts company files and prevents employees from accessing them. Which element of the CIA triad is primarily affected?",
-"options":[
-"Confidentiality",
-"Integrity",
-"Availability",
-"Authentication"
-],
-"correctAnswerIndex":2,
-"explanationText":"Ransomware prevents legitimate users from accessing systems and data, which directly impacts availability.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_002",
-"contentType":"exam_question",
-"category":"General Security Concepts",
-"topic":"Authentication",
-"subtopic":"MFA",
-"objectiveId":"1.2",
-"promptText":"Which authentication method combines something you know with something you have?",
-"options":[
-"Password and PIN",
-"Fingerprint and retina scan",
-"Smart card and PIN",
-"Username and password"
-],
-"correctAnswerIndex":2,
-"explanationText":"A smart card represents something you have and a PIN represents something you know.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_003",
-"contentType":"exam_question",
-"category":"Threats, Vulnerabilities, and Mitigations",
-"topic":"Malware",
-"subtopic":"Trojan",
-"objectiveId":"2.4",
-"promptText":"Malware disguised as legitimate software that creates a backdoor is known as what?",
-"options":[
-"Worm",
-"Trojan",
-"Spyware",
-"Rootkit"
-],
-"correctAnswerIndex":1,
-"explanationText":"A Trojan disguises itself as legitimate software while performing malicious actions.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_004",
-"contentType":"exam_question",
-"category":"Threats, Vulnerabilities, and Mitigations",
-"topic":"Network Attacks",
-"subtopic":"MitM",
-"objectiveId":"2.4",
-"promptText":"An attacker secretly intercepts communication between two parties. What attack is this?",
-"options":[
-"Replay attack",
-"Man in the middle",
-"DNS poisoning",
-"DDoS"
-],
-"correctAnswerIndex":1,
-"explanationText":"A man-in-the-middle attack intercepts communications between two parties.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_005",
-"contentType":"exam_question",
-"category":"Security Architecture",
-"topic":"Network Security",
-"subtopic":"DMZ",
-"objectiveId":"3.2",
-"promptText":"A company places its public web server in a network isolated from the internal LAN. What is this architecture called?",
-"options":[
-"Intranet",
-"DMZ",
-"Air gap",
-"VLAN trunk"
-],
-"correctAnswerIndex":1,
-"explanationText":"A DMZ is used to host public services while protecting the internal network.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_006",
-"contentType":"exam_question",
-"category":"Security Architecture",
-"topic":"Secure Protocols",
-"subtopic":"Remote Access",
-"objectiveId":"3.1",
-"promptText":"Which protocol replaces Telnet to provide encrypted remote administration?",
-"options":[
-"FTP",
-"SSH",
-"SNMP",
-"TFTP"
-],
-"correctAnswerIndex":1,
-"explanationText":"SSH encrypts remote administrative connections, unlike Telnet.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_007",
-"contentType":"exam_question",
-"category":"Security Operations",
-"topic":"Monitoring",
-"subtopic":"SIEM",
-"objectiveId":"4.3",
-"promptText":"Which system aggregates and correlates security logs from multiple devices?",
-"options":[
-"IDS",
-"SIEM",
-"DLP",
-"Firewall"
-],
-"correctAnswerIndex":1,
-"explanationText":"A SIEM centralizes log collection and correlation for security monitoring.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_008",
-"contentType":"exam_question",
-"category":"Security Operations",
-"topic":"Incident Response",
-"subtopic":"Containment",
-"objectiveId":"4.2",
-"promptText":"What is the first step when ransomware is spreading through the network?",
-"options":[
-"Notify management",
-"Isolate infected systems",
-"Reinstall operating systems",
-"Pay the ransom"
-],
-"correctAnswerIndex":1,
-"explanationText":"The first action is containment by isolating infected systems.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_009",
-"contentType":"exam_question",
-"category":"Security Program Management and Oversight",
-"topic":"Compliance",
-"subtopic":"GDPR",
-"objectiveId":"5.4",
-"promptText":"Which regulation governs personal data protection in the European Union?",
-"options":[
-"HIPAA",
-"SOX",
-"PCI DSS",
-"GDPR"
-],
-"correctAnswerIndex":3,
-"explanationText":"GDPR regulates personal data protection within the EU.",
-"difficulty":1
-},
-{
-"id":"sec701_exam_a_010",
-"contentType":"exam_question",
-"category":"Security Program Management and Oversight",
-"topic":"Risk Management",
-"subtopic":"Risk Response",
-"objectiveId":"5.2",
-"promptText":"Purchasing cyber insurance is an example of which risk strategy?",
-"options":[
-"Risk avoidance",
-"Risk transfer",
-"Risk mitigation",
-"Risk acceptance"
-],
-"correctAnswerIndex":1,
-"explanationText":"Insurance transfers financial risk to a third party.",
-"difficulty":1
+  "id": "comptia_security_plus_sy0_701_pack_30_a",
+  "title": "CompTIA Security+ Pack 30 A",
+  "examCode": "SY0-701",
+  "category": "Cybersecurity",
+  "description": "Security+ practice deck with exam-style questions and explanations.",
+  "version": "1",
+  "questionCount": 30,
+  "domains": [
+    "General Security Concepts",
+    "Threats, Vulnerabilities, and Mitigations",
+    "Security Architecture",
+    "Security Operations",
+    "Security Program Management and Oversight"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "sec701_exam_a_001",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "CIA Triad",
+      "subtopic": "Availability",
+      "objectiveId": "1.2",
+      "difficulty": 1,
+      "question": "A ransomware attack encrypts company files and prevents employees from accessing them. Which element of the CIA triad is primarily affected?",
+      "answers": [
+        "Confidentiality",
+        "Integrity",
+        "Availability",
+        "Authentication"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ransomware prevents legitimate users from accessing systems and data, which directly impacts availability."
+    },
+    {
+      "id": "sec701_exam_a_002",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Authentication",
+      "subtopic": "MFA",
+      "objectiveId": "1.2",
+      "difficulty": 1,
+      "question": "Which authentication method combines something you know with something you have?",
+      "answers": [
+        "Password and PIN",
+        "Fingerprint and retina scan",
+        "Smart card and PIN",
+        "Username and password"
+      ],
+      "correctIndex": 2,
+      "explanation": "A smart card represents something you have and a PIN represents something you know."
+    },
+    {
+      "id": "sec701_exam_a_003",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware",
+      "subtopic": "Trojan",
+      "objectiveId": "2.4",
+      "difficulty": 1,
+      "question": "Malware disguised as legitimate software that creates a backdoor is known as what?",
+      "answers": [
+        "Worm",
+        "Trojan",
+        "Spyware",
+        "Rootkit"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Trojan disguises itself as legitimate software while performing malicious actions."
+    },
+    {
+      "id": "sec701_exam_a_004",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Network Attacks",
+      "subtopic": "MitM",
+      "objectiveId": "2.4",
+      "difficulty": 1,
+      "question": "An attacker secretly intercepts communication between two parties. What attack is this?",
+      "answers": [
+        "Replay attack",
+        "Man in the middle",
+        "DNS poisoning",
+        "DDoS"
+      ],
+      "correctIndex": 1,
+      "explanation": "A man-in-the-middle attack intercepts communications between two parties."
+    },
+    {
+      "id": "sec701_exam_a_005",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Network Security",
+      "subtopic": "DMZ",
+      "objectiveId": "3.2",
+      "difficulty": 1,
+      "question": "A company places its public web server in a network isolated from the internal LAN. What is this architecture called?",
+      "answers": [
+        "Intranet",
+        "DMZ",
+        "Air gap",
+        "VLAN trunk"
+      ],
+      "correctIndex": 1,
+      "explanation": "A DMZ is used to host public services while protecting the internal network."
+    },
+    {
+      "id": "sec701_exam_a_006",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Protocols",
+      "subtopic": "Remote Access",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which protocol replaces Telnet to provide encrypted remote administration?",
+      "answers": [
+        "FTP",
+        "SSH",
+        "SNMP",
+        "TFTP"
+      ],
+      "correctIndex": 1,
+      "explanation": "SSH encrypts remote administrative connections, unlike Telnet."
+    },
+    {
+      "id": "sec701_exam_a_007",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "subtopic": "SIEM",
+      "objectiveId": "4.3",
+      "difficulty": 1,
+      "question": "Which system aggregates and correlates security logs from multiple devices?",
+      "answers": [
+        "IDS",
+        "SIEM",
+        "DLP",
+        "Firewall"
+      ],
+      "correctIndex": 1,
+      "explanation": "A SIEM centralizes log collection and correlation for security monitoring."
+    },
+    {
+      "id": "sec701_exam_a_008",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "subtopic": "Containment",
+      "objectiveId": "4.2",
+      "difficulty": 1,
+      "question": "What is the first step when ransomware is spreading through the network?",
+      "answers": [
+        "Notify management",
+        "Isolate infected systems",
+        "Reinstall operating systems",
+        "Pay the ransom"
+      ],
+      "correctIndex": 1,
+      "explanation": "The first action is containment by isolating infected systems."
+    },
+    {
+      "id": "sec701_exam_a_009",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Compliance",
+      "subtopic": "GDPR",
+      "objectiveId": "5.4",
+      "difficulty": 1,
+      "question": "Which regulation governs personal data protection in the European Union?",
+      "answers": [
+        "HIPAA",
+        "SOX",
+        "PCI DSS",
+        "GDPR"
+      ],
+      "correctIndex": 3,
+      "explanation": "GDPR regulates personal data protection within the EU."
+    },
+    {
+      "id": "sec701_exam_a_010",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Risk Management",
+      "subtopic": "Risk Response",
+      "objectiveId": "5.2",
+      "difficulty": 1,
+      "question": "Purchasing cyber insurance is an example of which risk strategy?",
+      "answers": [
+        "Risk avoidance",
+        "Risk transfer",
+        "Risk mitigation",
+        "Risk acceptance"
+      ],
+      "correctIndex": 1,
+      "explanation": "Insurance transfers financial risk to a third party."
+    },
+    {
+      "id": "sec701_exam_a_011",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Identity and Access Management",
+      "subtopic": "Password Attacks",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "An attacker tries one common password against many accounts to avoid lockouts. Which attack is this?",
+      "answers": [
+        "Brute-force attack",
+        "Password spraying",
+        "Rainbow table attack",
+        "Credential stuffing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Password spraying uses a small set of common passwords across many accounts to reduce the chance of triggering account lockout controls."
+    },
+    {
+      "id": "sec701_exam_a_012",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Cryptography",
+      "subtopic": "Hashing",
+      "objectiveId": "1.4",
+      "difficulty": 2,
+      "question": "What is the primary purpose of adding a unique salt before hashing passwords?",
+      "answers": [
+        "To speed up hash generation",
+        "To prevent replay attacks",
+        "To make identical passwords produce different hashes",
+        "To enable symmetric encryption"
+      ],
+      "correctIndex": 2,
+      "explanation": "A unique salt ensures identical passwords do not produce the same stored hash, which helps defeat rainbow table and precomputed attacks."
+    },
+    {
+      "id": "sec701_exam_a_013",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Authorization",
+      "subtopic": "Access Control Models",
+      "objectiveId": "1.2",
+      "difficulty": 1,
+      "question": "A company grants permissions based on job function, such as help desk or finance. Which model is being used?",
+      "answers": [
+        "Role-based access control",
+        "Mandatory access control",
+        "Rule-based access control",
+        "Discretionary access control"
+      ],
+      "correctIndex": 0,
+      "explanation": "RBAC assigns permissions to roles, and users inherit those permissions based on their job responsibilities."
+    },
+    {
+      "id": "sec701_exam_a_014",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "PKI",
+      "subtopic": "Digital Signatures",
+      "objectiveId": "1.4",
+      "difficulty": 2,
+      "question": "Which security goals are primarily provided by a digital signature?",
+      "answers": [
+        "Confidentiality and availability",
+        "Integrity and non-repudiation",
+        "Authentication and availability",
+        "Segmentation and isolation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Digital signatures verify that data has not changed and help prove who signed it, supporting integrity and non-repudiation."
+    },
+    {
+      "id": "sec701_exam_a_015",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Social Engineering",
+      "subtopic": "Baiting",
+      "objectiveId": "2.3",
+      "difficulty": 1,
+      "question": "An attacker leaves infected USB drives in a parking lot hoping employees will plug them in. Which attack is this?",
+      "answers": [
+        "Tailgating",
+        "Baiting",
+        "Pretexting",
+        "Shoulder surfing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Baiting tempts victims with something attractive, such as a free device or download, to trigger unsafe behavior."
+    },
+    {
+      "id": "sec701_exam_a_016",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Web Attacks",
+      "subtopic": "Cross-Site Scripting",
+      "objectiveId": "2.3",
+      "difficulty": 2,
+      "question": "Which control most directly reduces the risk of cross-site scripting in a web application?",
+      "answers": [
+        "Input validation and output encoding",
+        "Network segmentation",
+        "Disk encryption",
+        "Password complexity rules"
+      ],
+      "correctIndex": 0,
+      "explanation": "XSS is mitigated by validating input and safely encoding output before rendering untrusted data in the browser."
+    },
+    {
+      "id": "sec701_exam_a_017",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Assessment Tools",
+      "subtopic": "Vulnerability Scanning",
+      "objectiveId": "2.5",
+      "difficulty": 2,
+      "question": "What is the main difference between a vulnerability scan and a penetration test?",
+      "answers": [
+        "A vulnerability scan actively exploits systems, but a penetration test does not",
+        "A penetration test attempts to exploit weaknesses, but a vulnerability scan mainly identifies them",
+        "A vulnerability scan is always manual, but a penetration test is always automated",
+        "A penetration test only checks compliance settings"
+      ],
+      "correctIndex": 1,
+      "explanation": "A vulnerability scan identifies known issues, while a penetration test validates risk by attempting controlled exploitation."
+    },
+    {
+      "id": "sec701_exam_a_018",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Vulnerability Management",
+      "subtopic": "Severity Ratings",
+      "objectiveId": "2.5",
+      "difficulty": 2,
+      "question": "Which system is commonly used to score the severity of published vulnerabilities?",
+      "answers": [
+        "CVE",
+        "CVSS",
+        "MITRE ATT&CK",
+        "STIX"
+      ],
+      "correctIndex": 1,
+      "explanation": "CVSS provides a standardized severity score. CVE identifiers name vulnerabilities but do not score them."
+    },
+    {
+      "id": "sec701_exam_a_019",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Network Security",
+      "subtopic": "WAF",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "question": "Which control is best suited to protect a public web application from SQL injection and cross-site scripting?",
+      "answers": [
+        "Web application firewall",
+        "Load balancer",
+        "Layer 2 switch",
+        "VPN concentrator"
+      ],
+      "correctIndex": 0,
+      "explanation": "A WAF inspects HTTP traffic and can block common web application attacks such as SQL injection and XSS."
+    },
+    {
+      "id": "sec701_exam_a_020",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Access Control",
+      "subtopic": "NAC",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "question": "A company wants to verify endpoint health before allowing devices onto the network. Which technology best meets this need?",
+      "answers": [
+        "NAC",
+        "DLP",
+        "RAID",
+        "Sandboxing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Network Access Control can assess device posture, such as patch level or antivirus status, before granting network access."
+    },
+    {
+      "id": "sec701_exam_a_021",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Segmentation",
+      "subtopic": "VLANs",
+      "objectiveId": "3.2",
+      "difficulty": 1,
+      "question": "What is the main security benefit of placing finance and engineering systems on separate VLANs?",
+      "answers": [
+        "It automatically encrypts all traffic",
+        "It reduces opportunities for lateral movement",
+        "It removes the need for firewalls",
+        "It guarantees compliance"
+      ],
+      "correctIndex": 1,
+      "explanation": "Segmentation restricts broadcast domains and limits an attacker's ability to move freely between systems."
+    },
+    {
+      "id": "sec701_exam_a_022",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Name Resolution",
+      "subtopic": "DNS Security",
+      "objectiveId": "3.1",
+      "difficulty": 3,
+      "question": "Which technology helps validate that DNS responses have not been tampered with in transit?",
+      "answers": [
+        "DNSSEC",
+        "NAT",
+        "SNMPv3",
+        "ARP inspection"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNSSEC uses digital signatures to verify the authenticity and integrity of DNS records."
+    },
+    {
+      "id": "sec701_exam_a_023",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Documentation",
+      "subtopic": "Runbooks and Playbooks",
+      "objectiveId": "4.1",
+      "difficulty": 2,
+      "question": "Which document provides the step-by-step actions analysts should follow for a specific operational task?",
+      "answers": [
+        "Runbook",
+        "AUP",
+        "MOU",
+        "SLA"
+      ],
+      "correctIndex": 0,
+      "explanation": "A runbook contains detailed operational steps. A playbook is broader and often focuses on response strategy and decision paths."
+    },
+    {
+      "id": "sec701_exam_a_024",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Logging",
+      "subtopic": "Log Integrity",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "What is the main security benefit of storing logs on write-once, read-many media?",
+      "answers": [
+        "Logs are easier to compress",
+        "Logs cannot be modified after writing",
+        "Logs are automatically encrypted",
+        "Logs no longer require backups"
+      ],
+      "correctIndex": 1,
+      "explanation": "WORM storage helps preserve evidence by preventing tampering after logs have been written."
+    },
+    {
+      "id": "sec701_exam_a_025",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Business Continuity",
+      "subtopic": "Recovery Objectives",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "question": "Which metric defines the maximum tolerable amount of data loss after an outage?",
+      "answers": [
+        "RTO",
+        "MTTR",
+        "RPO",
+        "SLA"
+      ],
+      "correctIndex": 2,
+      "explanation": "Recovery Point Objective defines how much data loss is acceptable, while Recovery Time Objective defines how quickly service must be restored."
+    },
+    {
+      "id": "sec701_exam_a_026",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Backups",
+      "subtopic": "Backup Strategy",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "question": "Which backup type records changes since the last full backup and typically makes restores slower than incremental-only backup jobs?",
+      "answers": [
+        "Differential backup",
+        "Incremental backup",
+        "Snapshot backup",
+        "Synthetic backup"
+      ],
+      "correctIndex": 0,
+      "explanation": "Differential backups store everything changed since the last full backup, which simplifies restore steps but grows in size over time."
+    },
+    {
+      "id": "sec701_exam_a_027",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Governance",
+      "subtopic": "Due Care",
+      "objectiveId": "5.1",
+      "difficulty": 2,
+      "question": "Which term describes acting responsibly to maintain security controls after risks have been identified?",
+      "answers": [
+        "Due care",
+        "Due diligence",
+        "Risk transfer",
+        "Gap analysis"
+      ],
+      "correctIndex": 0,
+      "explanation": "Due diligence is identifying and assessing risk, while due care is taking reasonable action to address it."
+    },
+    {
+      "id": "sec701_exam_a_028",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Change Management",
+      "subtopic": "Change Control",
+      "objectiveId": "5.3",
+      "difficulty": 1,
+      "question": "Why should a security team use a formal change management process for production firewall rule changes?",
+      "answers": [
+        "To eliminate the need for testing",
+        "To document, review, and reduce unintended impact",
+        "To allow any administrator to make emergency changes without approval",
+        "To guarantee zero downtime"
+      ],
+      "correctIndex": 1,
+      "explanation": "Change management reduces operational risk by enforcing review, approval, testing, and documentation of production changes."
+    },
+    {
+      "id": "sec701_exam_a_029",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Data Governance",
+      "subtopic": "Retention",
+      "objectiveId": "5.4",
+      "difficulty": 2,
+      "question": "What is the primary purpose of a data retention policy?",
+      "answers": [
+        "To classify malware samples",
+        "To define how long data should be stored and when it should be disposed of",
+        "To replace backup procedures",
+        "To disable legal holds"
+      ],
+      "correctIndex": 1,
+      "explanation": "A retention policy defines how long data is kept to meet legal, operational, and business requirements before secure disposal."
+    },
+    {
+      "id": "sec701_exam_a_030",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Third-Party Risk",
+      "subtopic": "Service Agreements",
+      "objectiveId": "5.3",
+      "difficulty": 2,
+      "question": "Which document most directly defines the uptime and response commitments a cloud provider owes a customer?",
+      "answers": [
+        "NDA",
+        "MOU",
+        "SLA",
+        "AUP"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Service Level Agreement defines measurable service commitments such as uptime, support response, and remedies for failure."
+    }
+  ]
 }
-]

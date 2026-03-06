@@ -71,6 +71,14 @@ class XpNotifier extends Notifier<XpState> {
     return base;
   }
 
+  void reloadFromStorage() {
+    _resetDailyIfNeeded();
+    state = XpState(
+      totalXp: (_box.get(_keyTotal, defaultValue: 0) as num).toInt(),
+      dailyXp: (_box.get(_keyDaily, defaultValue: 0) as num).toInt(),
+    );
+  }
+
   String _todayString() =>
       DateTime.now().toIso8601String().substring(0, 10);
 }

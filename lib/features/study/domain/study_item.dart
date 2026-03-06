@@ -3,6 +3,7 @@ enum ContentType { microCard, examQuestion }
 class StudyItem {
   const StudyItem({
     required this.id,
+    this.deckId,
     required this.contentType,
     required this.category,
     this.topic,
@@ -25,6 +26,7 @@ class StudyItem {
   });
 
   final String id; // lessonId for microCard, custom uuid for examQuestion
+  final String? deckId;
   final ContentType contentType;
   final String category;
 
@@ -54,6 +56,7 @@ class StudyItem {
   String get correctAnswer => options[correctAnswerIndex];
 
   StudyItem copyWith({
+    String? deckId,
     int? againCount,
     int? goodCount,
     int? timesSeen,
@@ -64,6 +67,7 @@ class StudyItem {
     DateTime? lastReviewedAt,
   }) => StudyItem(
     id: id,
+    deckId: deckId ?? this.deckId,
     contentType: contentType,
     category: category,
     topic: topic,
@@ -86,6 +90,7 @@ class StudyItem {
 
   Map<String, dynamic> toMap() => {
     'id': id,
+    'deckId': deckId,
     'contentType': contentType.index,
     'category': category,
     'topic': topic,
@@ -108,6 +113,7 @@ class StudyItem {
 
   factory StudyItem.fromMap(Map map) => StudyItem(
     id: map['id'] as String? ?? map['lessonId'] as String,
+    deckId: map['deckId'] as String?,
     contentType: ContentType.values[(map['contentType'] as num?)?.toInt() ?? 0],
     category: map['category'] as String,
     topic: map['topic'] as String?,
@@ -136,6 +142,7 @@ class StudyItem {
   /// Build a StudyItem from a feed Lesson (micro_card type).
   static StudyItem fromLesson({
     required String id,
+    String? deckId,
     required String category,
     required String hook,
     required String explanation,
@@ -143,6 +150,7 @@ class StudyItem {
     required int correctAnswerIndex,
   }) => StudyItem(
     id: id,
+    deckId: deckId,
     contentType: ContentType.microCard,
     category: category,
     promptText: hook,

@@ -20,6 +20,10 @@ class BookmarksNotifier extends Notifier<List<String>> {
     state = ref.read(bookmarksRepositoryProvider).getBookmarkedIds();
   }
 
+  void reloadFromStorage() {
+    state = ref.read(bookmarksRepositoryProvider).getBookmarkedIds();
+  }
+
   bool isBookmarked(String lessonId) => state.contains(lessonId);
 }
 

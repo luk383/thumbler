@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../domain/exam_result.dart';
+import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../controllers/exam_controller.dart';
 
 class ExamHistoryPage extends ConsumerWidget {
@@ -10,17 +11,12 @@ class ExamHistoryPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final results = ref.watch(examProvider.select((s) => s.results));
-    final latest = results.isNotEmpty ? results.first : null;
-    final bestScore = results.isEmpty
-        ? 0
-        : results.map((r) => r.percentageScore).reduce((a, b) => a > b ? a : b);
-    final averageScore = results.isEmpty
-        ? 0
-        : (results.map((r) => r.percentageScore).reduce((a, b) => a + b) /
-                  results.length)
-              .round();
-    final improvement = _mostImprovedDomain(results);
+    final allResults = ref.watch(examProvider.select((s) => s.results));
+    final activeDeck = ref.watch(activeDeckMetaProvider);
+    final results = activeDeck == null
+        ? allResults
+        : allResults.where((result) => result.deckId == activeDeck.id).toList();
+    final summary = ExamHistorySummary.fromResults(results);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -34,28 +30,18 @@ class ExamHistoryPage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
         children: [
-          _SummaryCard(
-            lastScore: latest?.percentageScore ?? 0,
-            bestScore: bestScore,
-            averageScore: averageScore,
-            totalExams: results.length,
-          ),
-          if (results.length >= 2) ...[
+          _SummaryCard(summary: summary),
+          const SizedBox(height: 16),
+          _ScoreTrendCard(results: results),
+          if (summary.mostImprovedDomainMessage case final message?) ...[
             const SizedBox(height: 16),
-            _ScoreHistoryChart(results: results),
-          ],
-          if (improvement != null) ...[
-            const SizedBox(height: 16),
-            _ImprovementCard(message: improvement),
+            _InsightCard(message: message),
           ],
           const SizedBox(height: 24),
           const _SectionLabel('Exam History'),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           if (results.isEmpty)
-            const Text(
-              'No completed exams yet.',
-              style: TextStyle(color: Colors.white54, fontSize: 12),
-            )
+            const _EmptyHistoryCard()
           else
             ...List.generate(results.length, (index) {
               final result = results[index];
@@ -72,17 +58,54 @@ class ExamHistoryPage extends ConsumerWidget {
   }
 }
 
+class ExamHistorySummary {
+  const ExamHistorySummary({
+    required this.lastScore,
+    required this.bestScore,
+    required this.averageScore,
+    required this.totalExams,
+    required this.mostImprovedDomainMessage,
+  });
+
+  final int lastScore;
+  final int bestScore;
+  final int averageScore;
+  final int totalExams;
+  final String? mostImprovedDomainMessage;
+
+  factory ExamHistorySummary.fromResults(List<ExamResult> results) {
+    final latest = results.isNotEmpty ? results.first : null;
+    final bestScore = results.isEmpty
+        ? 0
+        : results.map((r) => r.percentageScore).reduce((a, b) => a > b ? a : b);
+    final averageScore = results.isEmpty
+        ? 0
+        : (results.map((r) => r.percentageScore).reduce((a, b) => a + b) /
+                  results.length)
+              .round();
+
+    return ExamHistorySummary(
+      lastScore: latest?.percentageScore ?? 0,
+      bestScore: bestScore,
+      averageScore: averageScore,
+      totalExams: results.length,
+      mostImprovedDomainMessage: _mostImprovedDomain(results),
+    );
+  }
+}
+
 String? _mostImprovedDomain(List<ExamResult> results) {
   if (results.length < 2) return null;
   final latest = results[0];
   final previous = results[1];
 
   String? bestDomain;
-  int? bestDelta;
+  double? bestDelta;
 
   for (final entry in latest.domainScores.entries) {
     final previousScore = previous.domainScores[entry.key];
     if (previousScore == null) continue;
+
     final delta = entry.value - previousScore;
     if (bestDelta == null || delta > bestDelta) {
       bestDelta = delta;
@@ -91,21 +114,13 @@ String? _mostImprovedDomain(List<ExamResult> results) {
   }
 
   if (bestDomain == null || bestDelta == null || bestDelta <= 0) return null;
-  return 'Most improved domain: $bestDomain (+$bestDelta%)';
+  return 'Most improved domain: $bestDomain (+${bestDelta.round()}%)';
 }
 
 class _SummaryCard extends StatelessWidget {
-  const _SummaryCard({
-    required this.lastScore,
-    required this.bestScore,
-    required this.averageScore,
-    required this.totalExams,
-  });
+  const _SummaryCard({required this.summary});
 
-  final int lastScore;
-  final int bestScore;
-  final int averageScore;
-  final int totalExams;
+  final ExamHistorySummary summary;
 
   @override
   Widget build(BuildContext context) {
@@ -119,16 +134,16 @@ class _SummaryCard extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: _Metric(label: 'Last', value: '$lastScore%'),
+            child: _Metric(label: 'Last', value: '${summary.lastScore}%'),
           ),
           Expanded(
-            child: _Metric(label: 'Best', value: '$bestScore%'),
+            child: _Metric(label: 'Best', value: '${summary.bestScore}%'),
           ),
           Expanded(
-            child: _Metric(label: 'Average', value: '$averageScore%'),
+            child: _Metric(label: 'Average', value: '${summary.averageScore}%'),
           ),
           Expanded(
-            child: _Metric(label: 'Exams', value: '$totalExams'),
+            child: _Metric(label: 'Exams', value: '${summary.totalExams}'),
           ),
         ],
       ),
@@ -164,14 +179,13 @@ class _Metric extends StatelessWidget {
   }
 }
 
-class _ScoreHistoryChart extends StatelessWidget {
-  const _ScoreHistoryChart({required this.results});
+class _ScoreTrendCard extends StatelessWidget {
+  const _ScoreTrendCard({required this.results});
 
   final List<ExamResult> results;
 
   @override
   Widget build(BuildContext context) {
-    final chronological = results.reversed.toList();
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -183,54 +197,80 @@ class _ScoreHistoryChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Score history',
+            'Score Trend',
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 12),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: chronological.map((result) {
-              final height = (result.percentageScore.clamp(5, 100) / 100) * 90;
-              return Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        '${result.percentageScore}',
-                        style: const TextStyle(
-                          color: Colors.white54,
-                          fontSize: 10,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Container(
-                        height: height.toDouble(),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFF6C63FF),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }).toList(),
+          const SizedBox(height: 6),
+          const Text(
+            'Recent exams over time',
+            style: TextStyle(color: Colors.white54, fontSize: 12),
           ),
-          const SizedBox(height: 12),
-          Text(
-            chronological.map((r) => '${r.percentageScore}').join(' → '),
-            style: const TextStyle(color: Colors.white70, fontSize: 12),
-          ),
+          const SizedBox(height: 14),
+          if (results.isEmpty)
+            const Text(
+              'Complete an exam to start tracking your progress.',
+              style: TextStyle(color: Colors.white54, fontSize: 12),
+            )
+          else ...[
+            SizedBox(
+              height: 120,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: results.reversed.map((result) {
+                  final height =
+                      (result.percentageScore.clamp(8, 100) / 100) * 92;
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '${result.percentageScore}%',
+                            style: const TextStyle(
+                              color: Colors.white54,
+                              fontSize: 10,
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Container(
+                            height: height.toDouble(),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF6C63FF),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            _formatShortDate(result.completedAt),
+                            style: const TextStyle(
+                              color: Colors.white30,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              results.reversed
+                  .map((r) => '${r.percentageScore}%')
+                  .join('  •  '),
+              style: const TextStyle(color: Colors.white70, fontSize: 12),
+            ),
+          ],
         ],
       ),
     );
   }
 }
 
-class _ImprovementCard extends StatelessWidget {
-  const _ImprovementCard({required this.message});
+class _InsightCard extends StatelessWidget {
+  const _InsightCard({required this.message});
 
   final String message;
 
@@ -246,6 +286,26 @@ class _ImprovementCard extends StatelessWidget {
       child: Text(
         message,
         style: const TextStyle(color: Colors.greenAccent, fontSize: 13),
+      ),
+    );
+  }
+}
+
+class _EmptyHistoryCard extends StatelessWidget {
+  const _EmptyHistoryCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white.withAlpha(8),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.white.withAlpha(15)),
+      ),
+      child: const Text(
+        'No completed exams yet. Finish your first exam to unlock score trend and domain analytics.',
+        style: TextStyle(color: Colors.white70, fontSize: 13),
       ),
     );
   }
@@ -277,10 +337,33 @@ class _ExamHistoryItem extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: Text(
-                'Exam ${index + 1} — ${result.percentageScore}% — '
-                '${result.totalQuestions} questions — ${_formatShortDate(result.completedAt)}',
-                style: const TextStyle(color: Colors.white70, fontSize: 13),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Exam ${index + 1}  •  ${result.percentageScore}%',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '${result.totalQuestions} questions  •  ${_formatShortDateTime(result.completedAt)}',
+                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                  ),
+                  if (result.deckTitle != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      result.deckTitle!,
+                      style: const TextStyle(
+                        color: Colors.white38,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
             const SizedBox(width: 10),
@@ -324,4 +407,10 @@ String _formatShortDate(DateTime d) {
     'Dec',
   ];
   return '${months[d.month - 1]} ${d.day}';
+}
+
+String _formatShortDateTime(DateTime d) {
+  final hour = d.hour.toString().padLeft(2, '0');
+  final minute = d.minute.toString().padLeft(2, '0');
+  return '${_formatShortDate(d)}  $hour:$minute';
 }

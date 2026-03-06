@@ -14,15 +14,17 @@ class DomainStats {
   Map<String, dynamic> toMap() => {'total': total, 'correct': correct};
 
   factory DomainStats.fromMap(Map m) => DomainStats(
-        total: (m['total'] as num).toInt(),
-        correct: (m['correct'] as num).toInt(),
-      );
+    total: (m['total'] as num).toInt(),
+    correct: (m['correct'] as num).toInt(),
+  );
 }
 
 class ExamAttempt {
   ExamAttempt({
     required this.id,
     required this.startedAt,
+    this.deckId,
+    this.deckTitle,
     this.finishedAt,
     required this.totalQuestions,
     required this.durationSeconds,
@@ -33,12 +35,14 @@ class ExamAttempt {
     this.isCompleted = false,
     this.scoreCorrect = 0,
     Map<String, DomainStats>? domainBreakdown,
-  })  : answers = answers ?? {},
-        flaggedIds = flaggedIds ?? [],
-        domainBreakdown = domainBreakdown ?? {};
+  }) : answers = answers ?? {},
+       flaggedIds = flaggedIds ?? [],
+       domainBreakdown = domainBreakdown ?? {};
 
   final String id;
   final DateTime startedAt;
+  final String? deckId;
+  final String? deckTitle;
   final DateTime? finishedAt;
   final int totalQuestions;
 
@@ -71,6 +75,8 @@ class ExamAttempt {
   // ── CopyWith ──────────────────────────────────────────────────────────────
 
   ExamAttempt copyWith({
+    String? deckId,
+    String? deckTitle,
     DateTime? finishedAt,
     int? remainingSeconds,
     Map<String, int>? answers,
@@ -78,64 +84,67 @@ class ExamAttempt {
     bool? isCompleted,
     int? scoreCorrect,
     Map<String, DomainStats>? domainBreakdown,
-  }) =>
-      ExamAttempt(
-        id: id,
-        startedAt: startedAt,
-        finishedAt: finishedAt ?? this.finishedAt,
-        totalQuestions: totalQuestions,
-        durationSeconds: durationSeconds,
-        remainingSeconds: remainingSeconds ?? this.remainingSeconds,
-        questionIds: questionIds,
-        answers: answers ?? Map.of(this.answers),
-        flaggedIds: flaggedIds ?? List.of(this.flaggedIds),
-        isCompleted: isCompleted ?? this.isCompleted,
-        scoreCorrect: scoreCorrect ?? this.scoreCorrect,
-        domainBreakdown: domainBreakdown ?? Map.of(this.domainBreakdown),
-      );
+  }) => ExamAttempt(
+    id: id,
+    startedAt: startedAt,
+    deckId: deckId ?? this.deckId,
+    deckTitle: deckTitle ?? this.deckTitle,
+    finishedAt: finishedAt ?? this.finishedAt,
+    totalQuestions: totalQuestions,
+    durationSeconds: durationSeconds,
+    remainingSeconds: remainingSeconds ?? this.remainingSeconds,
+    questionIds: questionIds,
+    answers: answers ?? Map.of(this.answers),
+    flaggedIds: flaggedIds ?? List.of(this.flaggedIds),
+    isCompleted: isCompleted ?? this.isCompleted,
+    scoreCorrect: scoreCorrect ?? this.scoreCorrect,
+    domainBreakdown: domainBreakdown ?? Map.of(this.domainBreakdown),
+  );
 
   // ── Serialisation ─────────────────────────────────────────────────────────
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'startedAt': startedAt.toIso8601String(),
-        'finishedAt': finishedAt?.toIso8601String(),
-        'totalQuestions': totalQuestions,
-        'durationSeconds': durationSeconds,
-        'remainingSeconds': remainingSeconds,
-        'questionIds': List.of(questionIds),
-        'answers': Map.of(answers),
-        'flaggedIds': List.of(flaggedIds),
-        'isCompleted': isCompleted,
-        'scoreCorrect': scoreCorrect,
-        'domainBreakdown':
-            domainBreakdown.map((k, v) => MapEntry(k, v.toMap())),
-      };
+    'id': id,
+    'startedAt': startedAt.toIso8601String(),
+    'deckId': deckId,
+    'deckTitle': deckTitle,
+    'finishedAt': finishedAt?.toIso8601String(),
+    'totalQuestions': totalQuestions,
+    'durationSeconds': durationSeconds,
+    'remainingSeconds': remainingSeconds,
+    'questionIds': List.of(questionIds),
+    'answers': Map.of(answers),
+    'flaggedIds': List.of(flaggedIds),
+    'isCompleted': isCompleted,
+    'scoreCorrect': scoreCorrect,
+    'domainBreakdown': domainBreakdown.map((k, v) => MapEntry(k, v.toMap())),
+  };
 
   factory ExamAttempt.fromMap(Map m) => ExamAttempt(
-        id: m['id'] as String,
-        startedAt: DateTime.parse(m['startedAt'] as String),
-        finishedAt: m['finishedAt'] != null
-            ? DateTime.parse(m['finishedAt'] as String)
-            : null,
-        totalQuestions: (m['totalQuestions'] as num).toInt(),
-        durationSeconds: (m['durationSeconds'] as num).toInt(),
-        remainingSeconds: (m['remainingSeconds'] as num).toInt(),
-        questionIds:
-            (m['questionIds'] as List).map((e) => e as String).toList(),
-        answers: (m['answers'] as Map?)?.map(
-              (k, v) => MapEntry(k as String, (v as num).toInt()),
-            ) ??
-            {},
-        flaggedIds: (m['flaggedIds'] as List?)
-                ?.map((e) => e as String)
-                .toList() ??
-            [],
-        isCompleted: (m['isCompleted'] as bool?) ?? false,
-        scoreCorrect: (m['scoreCorrect'] as num?)?.toInt() ?? 0,
-        domainBreakdown: (m['domainBreakdown'] as Map?)?.map(
-              (k, v) => MapEntry(k as String, DomainStats.fromMap(v as Map)),
-            ) ??
-            {},
-      );
+    id: m['id'] as String,
+    startedAt: DateTime.parse(m['startedAt'] as String),
+    deckId: m['deckId'] as String?,
+    deckTitle: m['deckTitle'] as String?,
+    finishedAt: m['finishedAt'] != null
+        ? DateTime.parse(m['finishedAt'] as String)
+        : null,
+    totalQuestions: (m['totalQuestions'] as num).toInt(),
+    durationSeconds: (m['durationSeconds'] as num).toInt(),
+    remainingSeconds: (m['remainingSeconds'] as num).toInt(),
+    questionIds: (m['questionIds'] as List).map((e) => e as String).toList(),
+    answers:
+        (m['answers'] as Map?)?.map(
+          (k, v) => MapEntry(k as String, (v as num).toInt()),
+        ) ??
+        {},
+    flaggedIds:
+        (m['flaggedIds'] as List?)?.map((e) => e as String).toList() ?? [],
+    isCompleted: (m['isCompleted'] as bool?) ?? false,
+    scoreCorrect: (m['scoreCorrect'] as num?)?.toInt() ?? 0,
+    domainBreakdown:
+        (m['domainBreakdown'] as Map?)?.map(
+          (k, v) => MapEntry(k as String, DomainStats.fromMap(v as Map)),
+        ) ??
+        {},
+  );
 }

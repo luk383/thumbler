@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/ui/app_surfaces.dart';
 import '../../feed/domain/lesson.dart';
 import 'bookmarks_notifier.dart';
 
@@ -24,12 +25,19 @@ class BookmarksPage extends ConsumerWidget {
       body: bookmarkedAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(
-          child: Text('Error: $e', style: const TextStyle(color: Colors.white60)),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: AppEmptyStateCard(
+              icon: Icons.error_outline,
+              title: 'Saved lessons unavailable',
+              message: 'The local saved list could not be loaded.\n$e',
+            ),
+          ),
         ),
         data: (lessons) => lessons.isEmpty
             ? const _EmptyState()
             : ListView.builder(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 24),
                 itemCount: lessons.length,
                 itemBuilder: (context, index) =>
                     _BookmarkCard(lesson: lessons[index]),
@@ -46,23 +54,13 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.bookmark_outline, color: Colors.white24, size: 64),
-          SizedBox(height: 16),
-          Text(
-            'No saved lessons yet',
-            style: TextStyle(color: Colors.white38, fontSize: 16),
-          ),
-          SizedBox(height: 6),
-          Text(
-            'Bookmark cards from the feed to find them here',
-            style: TextStyle(color: Colors.white24, fontSize: 13),
-            textAlign: TextAlign.center,
-          ),
-        ],
+    return const Padding(
+      padding: EdgeInsets.all(20),
+      child: AppEmptyStateCard(
+        icon: Icons.bookmark_outline,
+        title: 'No saved lessons yet',
+        message:
+            'Bookmark useful cards from the feed to build a quick review list here.',
       ),
     );
   }
@@ -77,11 +75,11 @@ class _BookmarkCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(13),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withAlpha(20)),
+        color: Colors.white.withAlpha(11),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.white.withAlpha(16)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +102,7 @@ class _BookmarkCard extends ConsumerWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w700,
                     height: 1.4,
                   ),
                 ),

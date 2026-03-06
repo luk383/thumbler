@@ -1,0 +1,450 @@
+{
+  "id": "aws_cloud_practitioner_clf_c02",
+  "title": "AWS Cloud Practitioner",
+  "examCode": "CLF-C02",
+  "category": "Cloud Computing",
+  "description": "AWS Cloud Practitioner practice deck with concise exam-style questions for quick study and exam sessions.",
+  "version": "1",
+  "questionCount": 24,
+  "domains": [
+    "Cloud Concepts",
+    "Security and Compliance",
+    "Technology",
+    "Billing and Pricing"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "clf_c02_q_001",
+      "type": "exam_question",
+      "domain": "Cloud Concepts",
+      "topic": "Cloud Value",
+      "subtopic": "Elasticity",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "question": "Which AWS Cloud benefit lets resources scale up or down automatically as demand changes?",
+      "answers": [
+        "Elasticity",
+        "Capital expenditure",
+        "Dedicated hosting",
+        "Manual provisioning"
+      ],
+      "correctIndex": 0,
+      "explanation": "Elasticity allows workloads to adapt capacity to current demand without permanent overprovisioning."
+    },
+    {
+      "id": "clf_c02_q_002",
+      "type": "exam_question",
+      "domain": "Cloud Concepts",
+      "topic": "Cloud Deployment Models",
+      "subtopic": "Public Cloud",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "question": "Which deployment model describes services offered over the internet to many customers by a cloud provider?",
+      "answers": [
+        "Private cloud",
+        "Public cloud",
+        "On-premises datacenter",
+        "Colocation"
+      ],
+      "correctIndex": 1,
+      "explanation": "A public cloud is owned and operated by a provider such as AWS and shared across customers."
+    },
+    {
+      "id": "clf_c02_q_003",
+      "type": "exam_question",
+      "domain": "Cloud Concepts",
+      "topic": "High Availability",
+      "subtopic": "Regions and AZs",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "What is the best way to improve application availability within a single AWS Region?",
+      "answers": [
+        "Deploy across multiple Availability Zones",
+        "Use one large EC2 instance",
+        "Place all data on one EBS volume",
+        "Disable Auto Scaling"
+      ],
+      "correctIndex": 0,
+      "explanation": "Using multiple Availability Zones reduces the impact of a failure in one facility."
+    },
+    {
+      "id": "clf_c02_q_004",
+      "type": "exam_question",
+      "domain": "Cloud Concepts",
+      "topic": "Responsibilities",
+      "subtopic": "Shared Responsibility Model",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "question": "Under the AWS shared responsibility model, which task is the customer's responsibility?",
+      "answers": [
+        "Protecting the physical data center",
+        "Maintaining hypervisor firmware",
+        "Configuring IAM permissions",
+        "Replacing failed disks in AWS facilities"
+      ],
+      "correctIndex": 2,
+      "explanation": "Customers are responsible for security in the cloud, including identity configuration and access controls."
+    },
+    {
+      "id": "clf_c02_q_005",
+      "type": "exam_question",
+      "domain": "Cloud Concepts",
+      "topic": "Migration",
+      "subtopic": "Operational Model",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "question": "Why do organizations often move variable workloads to AWS?",
+      "answers": [
+        "To replace all security controls",
+        "To match capacity with changing demand",
+        "To eliminate the need for monitoring",
+        "To avoid using networks"
+      ],
+      "correctIndex": 1,
+      "explanation": "AWS is well suited to variable workloads because capacity can expand and contract as demand changes."
+    },
+    {
+      "id": "clf_c02_q_006",
+      "type": "exam_question",
+      "domain": "Cloud Concepts",
+      "topic": "Disaster Recovery",
+      "subtopic": "Global Infrastructure",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "A company wants a disaster recovery site far from its primary site. What should it choose?",
+      "answers": [
+        "A second subnet in the same VPC",
+        "A second Availability Zone in the same Region",
+        "A different AWS Region",
+        "A larger EC2 instance"
+      ],
+      "correctIndex": 2,
+      "explanation": "A separate Region provides geographic separation for broader disaster recovery planning."
+    },
+    {
+      "id": "clf_c02_q_007",
+      "type": "exam_question",
+      "domain": "Security and Compliance",
+      "topic": "Identity and Access",
+      "subtopic": "Least Privilege",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "question": "Which IAM best practice reduces risk by granting only the permissions a user needs?",
+      "answers": [
+        "Least privilege",
+        "Wide-open administrator access",
+        "Shared root account usage",
+        "Long-lived access keys for everyone"
+      ],
+      "correctIndex": 0,
+      "explanation": "Least privilege limits users and roles to only the actions required for their tasks."
+    },
+    {
+      "id": "clf_c02_q_008",
+      "type": "exam_question",
+      "domain": "Security and Compliance",
+      "topic": "Authentication",
+      "subtopic": "MFA",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "question": "What is the main benefit of enabling MFA on an AWS account?",
+      "answers": [
+        "It replaces IAM policies",
+        "It adds an extra authentication factor",
+        "It encrypts all S3 objects automatically",
+        "It removes the need for passwords"
+      ],
+      "correctIndex": 1,
+      "explanation": "MFA adds another verification step, making account compromise harder if a password is exposed."
+    },
+    {
+      "id": "clf_c02_q_009",
+      "type": "exam_question",
+      "domain": "Security and Compliance",
+      "topic": "Encryption",
+      "subtopic": "Data at Rest",
+      "objectiveId": "2.2",
+      "difficulty": 1,
+      "question": "Which AWS service is commonly used to manage encryption keys?",
+      "answers": [
+        "Amazon Inspector",
+        "AWS KMS",
+        "Amazon GuardDuty",
+        "AWS Artifact"
+      ],
+      "correctIndex": 1,
+      "explanation": "AWS Key Management Service is used to create and manage encryption keys across AWS services."
+    },
+    {
+      "id": "clf_c02_q_010",
+      "type": "exam_question",
+      "domain": "Security and Compliance",
+      "topic": "Compliance",
+      "subtopic": "Reports",
+      "objectiveId": "2.3",
+      "difficulty": 2,
+      "question": "Which AWS service provides on-demand access to AWS compliance reports and agreements?",
+      "answers": [
+        "AWS Artifact",
+        "AWS Config",
+        "Amazon CloudWatch",
+        "AWS IAM Identity Center"
+      ],
+      "correctIndex": 0,
+      "explanation": "AWS Artifact gives customers access to compliance documentation such as audit reports and agreements."
+    },
+    {
+      "id": "clf_c02_q_011",
+      "type": "exam_question",
+      "domain": "Security and Compliance",
+      "topic": "Threat Detection",
+      "subtopic": "Managed Detection",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "question": "Which AWS service helps detect suspicious activity and potential threats in AWS accounts and workloads?",
+      "answers": [
+        "Amazon GuardDuty",
+        "AWS Snowball",
+        "Amazon Route 53",
+        "AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "explanation": "GuardDuty is a managed threat detection service that analyzes activity for potentially malicious behavior."
+    },
+    {
+      "id": "clf_c02_q_012",
+      "type": "exam_question",
+      "domain": "Security and Compliance",
+      "topic": "Auditability",
+      "subtopic": "API Logging",
+      "objectiveId": "2.1",
+      "difficulty": 2,
+      "question": "Which AWS service records API activity for governance, compliance, and auditing?",
+      "answers": [
+        "AWS CloudTrail",
+        "Amazon SNS",
+        "AWS Shield",
+        "Amazon Inspector"
+      ],
+      "correctIndex": 0,
+      "explanation": "CloudTrail captures AWS API calls and account activity for auditing and investigation."
+    },
+    {
+      "id": "clf_c02_q_013",
+      "type": "exam_question",
+      "domain": "Technology",
+      "topic": "Compute",
+      "subtopic": "Virtual Servers",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which AWS service provides resizable virtual servers in the cloud?",
+      "answers": [
+        "Amazon EC2",
+        "Amazon S3",
+        "Amazon RDS",
+        "Amazon Athena"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon EC2 provides virtual machine instances with different sizes and configurations."
+    },
+    {
+      "id": "clf_c02_q_014",
+      "type": "exam_question",
+      "domain": "Technology",
+      "topic": "Storage",
+      "subtopic": "Object Storage",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which AWS service is primarily used for scalable object storage?",
+      "answers": [
+        "Amazon EBS",
+        "Amazon S3",
+        "Amazon EFS",
+        "AWS Storage Gateway"
+      ],
+      "correctIndex": 1,
+      "explanation": "Amazon S3 is AWS object storage for files, backups, static assets, and data lakes."
+    },
+    {
+      "id": "clf_c02_q_015",
+      "type": "exam_question",
+      "domain": "Technology",
+      "topic": "Databases",
+      "subtopic": "Managed Relational",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which AWS service makes it easier to run a managed relational database?",
+      "answers": [
+        "Amazon RDS",
+        "Amazon DynamoDB",
+        "Amazon S3",
+        "Amazon Redshift"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon RDS automates common relational database tasks such as patching, backups, and maintenance."
+    },
+    {
+      "id": "clf_c02_q_016",
+      "type": "exam_question",
+      "domain": "Technology",
+      "topic": "Networking",
+      "subtopic": "Private Networking",
+      "objectiveId": "3.2",
+      "difficulty": 2,
+      "question": "Which AWS service lets you define an isolated virtual network for your resources?",
+      "answers": [
+        "Amazon VPC",
+        "Amazon CloudFront",
+        "AWS Direct Connect",
+        "Amazon Route 53"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon VPC provides an isolated virtual networking environment inside AWS."
+    },
+    {
+      "id": "clf_c02_q_017",
+      "type": "exam_question",
+      "domain": "Technology",
+      "topic": "Content Delivery",
+      "subtopic": "Edge Caching",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "question": "Which AWS service improves global content delivery by caching content closer to users?",
+      "answers": [
+        "Amazon CloudFront",
+        "Amazon SQS",
+        "AWS Batch",
+        "Amazon EMR"
+      ],
+      "correctIndex": 0,
+      "explanation": "CloudFront uses edge locations to cache and deliver content with lower latency."
+    },
+    {
+      "id": "clf_c02_q_018",
+      "type": "exam_question",
+      "domain": "Technology",
+      "topic": "Serverless",
+      "subtopic": "Event-Driven Compute",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "question": "Which AWS service runs code without provisioning or managing servers?",
+      "answers": [
+        "AWS Lambda",
+        "Amazon EC2",
+        "Amazon Lightsail",
+        "AWS Outposts"
+      ],
+      "correctIndex": 0,
+      "explanation": "AWS Lambda is a serverless compute service that runs code in response to events."
+    },
+    {
+      "id": "clf_c02_q_019",
+      "type": "exam_question",
+      "domain": "Billing and Pricing",
+      "topic": "Pricing Models",
+      "subtopic": "Pay-as-you-go",
+      "objectiveId": "4.1",
+      "difficulty": 1,
+      "question": "Which AWS pricing principle means you pay only for the resources you actually use?",
+      "answers": [
+        "Pay-as-you-go pricing",
+        "Perpetual licensing",
+        "Fixed annual pricing",
+        "Bundled hardware pricing"
+      ],
+      "correctIndex": 0,
+      "explanation": "AWS pricing is based on measured consumption, which helps align cost with usage."
+    },
+    {
+      "id": "clf_c02_q_020",
+      "type": "exam_question",
+      "domain": "Billing and Pricing",
+      "topic": "Monitoring Costs",
+      "subtopic": "Budgets",
+      "objectiveId": "4.2",
+      "difficulty": 1,
+      "question": "Which AWS service helps customers set custom cost and usage thresholds with alerts?",
+      "answers": [
+        "AWS Budgets",
+        "Amazon Inspector",
+        "AWS WAF",
+        "Amazon Macie"
+      ],
+      "correctIndex": 0,
+      "explanation": "AWS Budgets lets customers create thresholds for spending, usage, and reservations and trigger alerts."
+    },
+    {
+      "id": "clf_c02_q_021",
+      "type": "exam_question",
+      "domain": "Billing and Pricing",
+      "topic": "Support Plans",
+      "subtopic": "Billing Access",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "Which AWS support plan gives customers access to guidance from cloud support engineers 24/7?",
+      "answers": [
+        "Basic Support",
+        "Developer Support",
+        "Business Support",
+        "Free Tier Support"
+      ],
+      "correctIndex": 2,
+      "explanation": "Business Support includes 24/7 access to cloud support engineers and faster response targets than lower plans."
+    },
+    {
+      "id": "clf_c02_q_022",
+      "type": "exam_question",
+      "domain": "Billing and Pricing",
+      "topic": "Cost Visibility",
+      "subtopic": "Cost Analysis",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "question": "Which AWS tool helps visualize historical spending trends and identify major cost drivers?",
+      "answers": [
+        "AWS Cost Explorer",
+        "Amazon Route 53",
+        "AWS Artifact",
+        "Amazon Detective"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cost Explorer helps customers analyze historical costs and usage patterns."
+    },
+    {
+      "id": "clf_c02_q_023",
+      "type": "exam_question",
+      "domain": "Billing and Pricing",
+      "topic": "Optimization",
+      "subtopic": "Pricing Discounts",
+      "objectiveId": "4.1",
+      "difficulty": 2,
+      "question": "Which option can reduce EC2 pricing in exchange for a long-term usage commitment?",
+      "answers": [
+        "Reserved Instances or Savings Plans",
+        "AWS Budgets",
+        "Support cases",
+        "Multi-factor authentication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reserved pricing models such as Reserved Instances and Savings Plans trade commitment for lower compute cost."
+    },
+    {
+      "id": "clf_c02_q_024",
+      "type": "exam_question",
+      "domain": "Billing and Pricing",
+      "topic": "Migration Economics",
+      "subtopic": "Cost Model",
+      "objectiveId": "4.1",
+      "difficulty": 2,
+      "question": "Which cost model shifts spending from large upfront infrastructure purchases to ongoing operational spending?",
+      "answers": [
+        "CapEx to OpEx",
+        "OpEx to CapEx",
+        "Fixed licensing to perpetual licensing",
+        "Data transfer to storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloud adoption often changes spending from capital expenditure to operational expenditure."
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/ui/app_surfaces.dart';
 import '../../../../features/paywall/pro_guard.dart';
+import '../controllers/deck_library_controller.dart';
 import '../controllers/study_controller.dart';
 import '../widgets/deck_library_sheet.dart';
 
@@ -18,6 +20,7 @@ class StudyLauncherPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(studyProvider);
     final n = ref.read(studyProvider.notifier);
+    final activeDeck = ref.watch(activeDeckMetaProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -37,9 +40,13 @@ class StudyLauncherPage extends ConsumerWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              '${s.items.length} cards in deck',
+              activeDeck == null
+                  ? '${s.items.length} cards in deck'
+                  : '${activeDeck.title} · ${s.items.length} cards',
               style: const TextStyle(color: Colors.white38, fontSize: 12),
             ),
+            const SizedBox(height: 24),
+            _StudySnapshot(state: s),
             const SizedBox(height: 24),
 
             // ── Empty banner (deck empty) ────────────────────────────────
@@ -160,7 +167,10 @@ class StudyLauncherPage extends ConsumerWidget {
             const SizedBox(height: 32),
 
             // ── Library card ─────────────────────────────────────────────
-            _LibraryCard(onOpen: () => showDeckLibrary(context)),
+            _LibraryCard(
+              onOpen: () => showDeckLibrary(context),
+              deckTitle: activeDeck?.title,
+            ),
 
             // ── Debug footer ─────────────────────────────────────────────
             const SizedBox(height: 20),
@@ -232,7 +242,7 @@ class _EmptyBanner extends StatelessWidget {
             'No cards in Study yet',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 15,
+              fontSize: 17,
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.center,
@@ -240,7 +250,7 @@ class _EmptyBanner extends StatelessWidget {
           const SizedBox(height: 6),
           const Text(
             "Go to Feed and tap 'Add to Study', or import a pack with the Library button below.",
-            style: TextStyle(color: Colors.white54, fontSize: 12),
+            style: TextStyle(color: Colors.white54, fontSize: 13, height: 1.4),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
@@ -259,6 +269,66 @@ class _EmptyBanner extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _StudySnapshot extends StatelessWidget {
+  const _StudySnapshot({required this.state});
+
+  final StudyState state;
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.items.isEmpty) return const SizedBox.shrink();
+
+    return AppGlassCard(
+      padding: const EdgeInsets.all(16),
+      child: Row(
+        children: [
+          Expanded(
+            child: _SnapshotStat(
+              label: 'Reviewed',
+              value:
+                  '${state.items.where((item) => item.timesSeen > 0).length}',
+            ),
+          ),
+          Expanded(
+            child: _SnapshotStat(label: 'Due Now', value: '${state.dueCount}'),
+          ),
+          Expanded(
+            child: _SnapshotStat(label: 'Weak', value: '${state.weakCount}'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SnapshotStat extends StatelessWidget {
+  const _SnapshotStat({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white54, fontSize: 11),
+        ),
+      ],
     );
   }
 }
@@ -409,8 +479,9 @@ class _DisabledStartButton extends StatelessWidget {
 // ============================================================================
 
 class _LibraryCard extends StatelessWidget {
-  const _LibraryCard({required this.onOpen});
+  const _LibraryCard({required this.onOpen, this.deckTitle});
   final VoidCallback onOpen;
+  final String? deckTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -439,21 +510,23 @@ class _LibraryCard extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 14),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Library / Import Packs',
+                    deckTitle ?? 'Library / Import Packs',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
                   Text(
-                    'Browse and import any JSON pack found in assets/decks/.',
+                    deckTitle == null
+                        ? 'Browse and import any JSON pack found in assets/decks/.'
+                        : 'This is the active deck for Feed, Study and Exam.',
                     style: TextStyle(color: Colors.white54, fontSize: 11),
                   ),
                 ],

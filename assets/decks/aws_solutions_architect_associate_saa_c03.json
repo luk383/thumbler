@@ -1,0 +1,450 @@
+{
+  "id": "aws_solutions_architect_associate_saa_c03",
+  "title": "AWS Solutions Architect Associate",
+  "examCode": "SAA-C03",
+  "category": "Cloud Architecture",
+  "description": "AWS Solutions Architect Associate practice deck with concise scenario-based questions for study and exam sessions.",
+  "version": "1",
+  "questionCount": 24,
+  "domains": [
+    "Design Secure Architectures",
+    "Design Resilient Architectures",
+    "Design High-Performing Architectures",
+    "Design Cost-Optimized Architectures"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "saa_c03_q_001",
+      "type": "exam_question",
+      "domain": "Design Secure Architectures",
+      "topic": "Identity and Access",
+      "subtopic": "Least Privilege",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "question": "A team needs temporary access to AWS resources without sharing long-term credentials. Which approach is best?",
+      "answers": [
+        "Create one shared IAM user",
+        "Use IAM roles with temporary credentials",
+        "Embed access keys in application code",
+        "Store the root account password in a vault"
+      ],
+      "correctIndex": 1,
+      "explanation": "IAM roles provide temporary credentials and avoid the risks of distributing long-term access keys."
+    },
+    {
+      "id": "saa_c03_q_002",
+      "type": "exam_question",
+      "domain": "Design Secure Architectures",
+      "topic": "Data Protection",
+      "subtopic": "S3 Encryption",
+      "objectiveId": "1.2",
+      "difficulty": 1,
+      "question": "A company stores sensitive files in Amazon S3 and wants encryption keys managed by AWS KMS. Which option should it use?",
+      "answers": [
+        "SSE-S3",
+        "SSE-KMS",
+        "Client-side caching",
+        "S3 Transfer Acceleration"
+      ],
+      "correctIndex": 1,
+      "explanation": "SSE-KMS encrypts S3 objects while allowing key control and auditing through AWS KMS."
+    },
+    {
+      "id": "saa_c03_q_003",
+      "type": "exam_question",
+      "domain": "Design Secure Architectures",
+      "topic": "Networking",
+      "subtopic": "Private Connectivity",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "Instances in private subnets need access to Amazon S3 without traversing the public internet. What should be added?",
+      "answers": [
+        "An internet gateway",
+        "A NAT instance with a public IP",
+        "A gateway VPC endpoint for S3",
+        "A peering connection to another VPC"
+      ],
+      "correctIndex": 2,
+      "explanation": "A gateway VPC endpoint lets private resources reach S3 over the AWS network without internet exposure."
+    },
+    {
+      "id": "saa_c03_q_004",
+      "type": "exam_question",
+      "domain": "Design Secure Architectures",
+      "topic": "Secrets Management",
+      "subtopic": "Database Credentials",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "question": "An application running on EC2 must retrieve database credentials securely and support automatic rotation. Which service is the best fit?",
+      "answers": [
+        "AWS Systems Manager Parameter Store standard strings",
+        "AWS Secrets Manager",
+        "Amazon SQS",
+        "Amazon Inspector"
+      ],
+      "correctIndex": 1,
+      "explanation": "AWS Secrets Manager is designed for secrets storage and automated credential rotation."
+    },
+    {
+      "id": "saa_c03_q_005",
+      "type": "exam_question",
+      "domain": "Design Secure Architectures",
+      "topic": "Network Security",
+      "subtopic": "Traffic Filtering",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "question": "Which control acts as a stateful firewall for an Amazon EC2 instance?",
+      "answers": [
+        "Network ACL",
+        "Route table",
+        "Security group",
+        "Transit gateway"
+      ],
+      "correctIndex": 2,
+      "explanation": "Security groups are stateful and evaluate traffic at the instance level."
+    },
+    {
+      "id": "saa_c03_q_006",
+      "type": "exam_question",
+      "domain": "Design Secure Architectures",
+      "topic": "Access Control",
+      "subtopic": "Cross-Account Access",
+      "objectiveId": "1.1",
+      "difficulty": 3,
+      "question": "A central security account must audit resources in multiple AWS accounts. Which design scales best?",
+      "answers": [
+        "Create duplicate IAM users in every account",
+        "Use cross-account IAM roles",
+        "Share the root credentials across accounts",
+        "Open all resources to the public internet"
+      ],
+      "correctIndex": 1,
+      "explanation": "Cross-account IAM roles provide controlled access across accounts without duplicating users or sharing credentials."
+    },
+    {
+      "id": "saa_c03_q_007",
+      "type": "exam_question",
+      "domain": "Design Resilient Architectures",
+      "topic": "High Availability",
+      "subtopic": "Multi-AZ",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "question": "A web application must remain available if one Availability Zone fails. Which design should be used?",
+      "answers": [
+        "One EC2 instance in one subnet",
+        "Instances across multiple Availability Zones behind a load balancer",
+        "A larger EC2 instance in a single AZ",
+        "One EBS volume shared by all users"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spreading instances across multiple AZs behind a load balancer improves availability during an AZ outage."
+    },
+    {
+      "id": "saa_c03_q_008",
+      "type": "exam_question",
+      "domain": "Design Resilient Architectures",
+      "topic": "Storage Durability",
+      "subtopic": "Object Storage",
+      "objectiveId": "2.2",
+      "difficulty": 1,
+      "question": "Which service is best for storing backups with high durability and regional resilience?",
+      "answers": [
+        "Amazon S3",
+        "Amazon EC2 instance store",
+        "Amazon ElastiCache",
+        "AWS Lambda"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon S3 is designed for highly durable object storage and is a common choice for backups."
+    },
+    {
+      "id": "saa_c03_q_009",
+      "type": "exam_question",
+      "domain": "Design Resilient Architectures",
+      "topic": "Auto Scaling",
+      "subtopic": "Fault Tolerance",
+      "objectiveId": "2.1",
+      "difficulty": 2,
+      "question": "Which service automatically launches or removes EC2 instances based on demand or health checks?",
+      "answers": [
+        "AWS Auto Scaling",
+        "Amazon GuardDuty",
+        "AWS Artifact",
+        "Amazon Athena"
+      ],
+      "correctIndex": 0,
+      "explanation": "AWS Auto Scaling adjusts capacity automatically to maintain availability and match demand."
+    },
+    {
+      "id": "saa_c03_q_010",
+      "type": "exam_question",
+      "domain": "Design Resilient Architectures",
+      "topic": "Decoupling",
+      "subtopic": "Message Queues",
+      "objectiveId": "2.3",
+      "difficulty": 2,
+      "question": "A system needs to decouple application components so temporary spikes do not overwhelm downstream services. Which service should be used?",
+      "answers": [
+        "Amazon SQS",
+        "Amazon Route 53",
+        "AWS Direct Connect",
+        "AWS Config"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon SQS buffers messages between components, which helps absorb bursts and decouple workloads."
+    },
+    {
+      "id": "saa_c03_q_011",
+      "type": "exam_question",
+      "domain": "Design Resilient Architectures",
+      "topic": "Databases",
+      "subtopic": "Failover",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "question": "A mission-critical relational database needs automated standby failover in another Availability Zone. Which option should be chosen?",
+      "answers": [
+        "Amazon RDS Multi-AZ",
+        "Amazon RDS Read Replica only",
+        "Amazon DynamoDB Streams",
+        "Amazon S3 Glacier"
+      ],
+      "correctIndex": 0,
+      "explanation": "RDS Multi-AZ provides a standby instance in another AZ and supports automatic failover."
+    },
+    {
+      "id": "saa_c03_q_012",
+      "type": "exam_question",
+      "domain": "Design Resilient Architectures",
+      "topic": "Recovery",
+      "subtopic": "Versioning",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "question": "What S3 feature helps recover objects that were accidentally overwritten or deleted?",
+      "answers": [
+        "Bucket versioning",
+        "Transfer Acceleration",
+        "Requester Pays",
+        "Multipart upload"
+      ],
+      "correctIndex": 0,
+      "explanation": "S3 versioning preserves previous object versions, making accidental deletion or overwrite easier to recover from."
+    },
+    {
+      "id": "saa_c03_q_013",
+      "type": "exam_question",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Caching",
+      "subtopic": "Application Performance",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which AWS service can improve read performance for frequently accessed application data with in-memory caching?",
+      "answers": [
+        "Amazon ElastiCache",
+        "Amazon S3 Glacier",
+        "AWS Shield",
+        "AWS Organizations"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon ElastiCache stores data in memory, reducing latency for repeated reads."
+    },
+    {
+      "id": "saa_c03_q_014",
+      "type": "exam_question",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Content Delivery",
+      "subtopic": "Global Distribution",
+      "objectiveId": "3.2",
+      "difficulty": 1,
+      "question": "Which service should be used to reduce latency for users downloading static content globally?",
+      "answers": [
+        "Amazon CloudFront",
+        "Amazon EBS",
+        "AWS Snow Family",
+        "Amazon WorkSpaces"
+      ],
+      "correctIndex": 0,
+      "explanation": "CloudFront caches content at edge locations closer to users around the world."
+    },
+    {
+      "id": "saa_c03_q_015",
+      "type": "exam_question",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Databases",
+      "subtopic": "Read Scaling",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "question": "A database-backed application has heavy read traffic. Which RDS feature can help offload read queries from the primary instance?",
+      "answers": [
+        "Read Replicas",
+        "Multi-AZ standby only",
+        "IAM groups",
+        "VPC peering"
+      ],
+      "correctIndex": 0,
+      "explanation": "RDS Read Replicas scale read-heavy workloads by directing read traffic away from the primary database."
+    },
+    {
+      "id": "saa_c03_q_016",
+      "type": "exam_question",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Compute Selection",
+      "subtopic": "Serverless",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "question": "An event-driven workload has unpredictable traffic and short processing time. Which compute option is usually the best fit?",
+      "answers": [
+        "AWS Lambda",
+        "Dedicated EC2 hosts",
+        "Amazon EC2 instance store",
+        "AWS Snowmobile"
+      ],
+      "correctIndex": 0,
+      "explanation": "Lambda is well suited to short-lived, event-driven workloads with variable demand."
+    },
+    {
+      "id": "saa_c03_q_017",
+      "type": "exam_question",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Analytics",
+      "subtopic": "Query in Place",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "question": "A team wants to run SQL queries directly against data stored in Amazon S3 without provisioning servers. Which service should it use?",
+      "answers": [
+        "Amazon Athena",
+        "Amazon Redshift Serverless only",
+        "Amazon EMR on EC2 only",
+        "AWS Batch"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon Athena lets teams query S3 data with SQL without managing infrastructure."
+    },
+    {
+      "id": "saa_c03_q_018",
+      "type": "exam_question",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Storage Performance",
+      "subtopic": "Shared File Storage",
+      "objectiveId": "3.2",
+      "difficulty": 3,
+      "question": "Multiple Linux-based EC2 instances need shared file storage that can scale automatically. Which service is the best fit?",
+      "answers": [
+        "Amazon EFS",
+        "Amazon S3",
+        "Amazon EBS",
+        "AWS Backup"
+      ],
+      "correctIndex": 0,
+      "explanation": "Amazon EFS provides scalable shared file storage for multiple Linux EC2 instances."
+    },
+    {
+      "id": "saa_c03_q_019",
+      "type": "exam_question",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Storage Lifecycle",
+      "subtopic": "Infrequent Access",
+      "objectiveId": "4.1",
+      "difficulty": 1,
+      "question": "A company keeps large log files that are rarely accessed but must be retained for months. Which S3 approach is most cost-effective?",
+      "answers": [
+        "Use an S3 lifecycle policy to transition objects to a lower-cost storage class",
+        "Keep all logs in S3 Standard forever",
+        "Store logs on EC2 instance store",
+        "Move logs into ElastiCache"
+      ],
+      "correctIndex": 0,
+      "explanation": "S3 lifecycle policies reduce storage cost by transitioning infrequently accessed data to cheaper storage classes."
+    },
+    {
+      "id": "saa_c03_q_020",
+      "type": "exam_question",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Compute Pricing",
+      "subtopic": "Steady State",
+      "objectiveId": "4.2",
+      "difficulty": 1,
+      "question": "Which pricing model is usually best for predictable EC2 workloads that run continuously over time?",
+      "answers": [
+        "Savings Plans or Reserved Instances",
+        "On-Demand Instances only",
+        "Spot Instances only",
+        "Dedicated Hosts only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Long-term commitment models such as Savings Plans and Reserved Instances usually lower cost for steady workloads."
+    },
+    {
+      "id": "saa_c03_q_021",
+      "type": "exam_question",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Fault-Tolerant Cost Control",
+      "subtopic": "Interruptible Compute",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "question": "Which EC2 purchasing option can provide the lowest cost for flexible, fault-tolerant batch processing?",
+      "answers": [
+        "Spot Instances",
+        "Dedicated Hosts",
+        "On-Demand Instances",
+        "Reserved Instances for every workload"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spot Instances offer deep discounts for interruptible workloads that can tolerate interruptions."
+    },
+    {
+      "id": "saa_c03_q_022",
+      "type": "exam_question",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Managed Services",
+      "subtopic": "Operational Overhead",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "Which design choice often reduces operational cost by offloading undifferentiated database administration work to AWS?",
+      "answers": [
+        "Using Amazon RDS instead of self-managed databases on EC2",
+        "Installing a database manually on larger EC2 instances",
+        "Running all workloads in one Availability Zone",
+        "Using only local instance storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Managed services like RDS reduce operational effort for backups, patching, and maintenance."
+    },
+    {
+      "id": "saa_c03_q_023",
+      "type": "exam_question",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Monitoring",
+      "subtopic": "Budgets and Visibility",
+      "objectiveId": "4.1",
+      "difficulty": 2,
+      "question": "Which AWS tool helps teams track spending against a defined threshold and send alerts when costs exceed that amount?",
+      "answers": [
+        "AWS Budgets",
+        "Amazon Rekognition",
+        "Amazon Connect",
+        "AWS WAF"
+      ],
+      "correctIndex": 0,
+      "explanation": "AWS Budgets lets teams set cost or usage thresholds and receive notifications."
+    },
+    {
+      "id": "saa_c03_q_024",
+      "type": "exam_question",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Architecture Review",
+      "subtopic": "Cost Optimization",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "question": "Which AWS framework helps teams review architectures against cost optimization and other best-practice pillars?",
+      "answers": [
+        "AWS Well-Architected Framework",
+        "AWS Shared Responsibility Model",
+        "AWS Acceptable Use Policy",
+        "AWS Marketplace"
+      ],
+      "correctIndex": 0,
+      "explanation": "The AWS Well-Architected Framework includes the Cost Optimization pillar and other architecture best practices."
+    }
+  ]
+}

@@ -9,10 +9,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+    ),
+  );
 
   await Hive.initFlutter();
   await Hive.openBox('xp_box');
@@ -21,6 +23,7 @@ Future<void> main() async {
   await Hive.openBox('quest_box');
   await Hive.openBox('study_box');
   await Hive.openBox('exam_box');
+  await Hive.openBox('library_box');
 
   runApp(const ProviderScope(child: ThumblerApp()));
 }

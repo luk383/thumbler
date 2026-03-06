@@ -35,7 +35,7 @@ Map<String, int> calculateDomainScores({
   };
 }
 
-String? getWeakestDomain(Map<String, int> scores) {
+String? getWeakestDomain(Map<String, num> scores) {
   if (scores.isEmpty) return null;
 
   final ordered = scores.entries.toList()

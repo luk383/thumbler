@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/ui/app_surfaces.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
 
 /// Floating overlay shown over the feed at top-right.
@@ -19,30 +20,56 @@ class FeedOverlay extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final quest = ref.watch(dailyQuestProvider);
     final goalReached = quest.questCompleted;
+    final progress = total == 0 ? 0.0 : (currentIndex + 1) / total;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
       children: [
-        // Card counter: "3 / 10"
         _Pill(
-          color: Colors.black.withAlpha(140),
-          child: Text(
-            '${currentIndex + 1} / $total',
-            style: const TextStyle(
-              color: Colors.white70,
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
+          color: const Color(0xCC11131A),
+          child: SizedBox(
+            width: 92,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  '${currentIndex + 1} / $total',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(99),
+                  child: LinearProgressIndicator(
+                    value: progress,
+                    minHeight: 5,
+                    backgroundColor: Colors.white10,
+                  ),
+                ),
+              ],
             ),
           ),
+        ),
+        const SizedBox(height: 6),
+        AppStatusBadge(
+          label: total == 0
+              ? 'Empty deck'
+              : '${(progress * 100).round()}% through',
+          icon: Icons.flash_on_rounded,
+          tint: const Color(0xFFADA8FF),
         ),
         const SizedBox(height: 6),
 
         // Quest progress pill: "🎯 0/3" or "🎉 Done!"
         _Pill(
           color: goalReached
-              ? Colors.green.withAlpha(200)
-              : const Color(0xFF6C63FF).withAlpha(210),
+              ? const Color(0xCC198754)
+              : const Color(0xCC6C63FF),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -54,7 +81,7 @@ class FeedOverlay extends ConsumerWidget {
               Text(
                 goalReached
                     ? 'Done!'
-                    : '${quest.questProgress} / ${quest.questTarget}',
+                    : 'Quest ${quest.questProgress}/${quest.questTarget}',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 11,
@@ -78,10 +105,11 @@ class _Pill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: Colors.white.withAlpha(18)),
       ),
       child: child,
     );

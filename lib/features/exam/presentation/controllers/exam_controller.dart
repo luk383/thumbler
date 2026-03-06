@@ -10,6 +10,7 @@ import '../../data/exam_question_repository.dart';
 import '../../domain/exam_attempt.dart';
 import '../../domain/exam_result.dart';
 import '../../../study/domain/study_item.dart';
+import '../../../study/presentation/controllers/deck_library_controller.dart';
 import 'exam_state.dart';
 
 class ExamNotifier extends Notifier<ExamState> {
@@ -21,22 +22,24 @@ class ExamNotifier extends Notifier<ExamState> {
   @override
   ExamState build() {
     ref.onDispose(_stopTimer);
+    final activeDeck = ref.watch(activeDeckMetaProvider);
 
-    final questions = ExamQuestionRepository().loadAll();
+    final questions = ExamQuestionRepository().loadAll(deckId: activeDeck?.id);
     final storage = ExamAttemptStorage();
     final history = storage.loadHistory();
     final active = storage.loadActive();
     final results = ExamHistoryStorage().loadResults();
+    final activeAttempt = active?.deckId == activeDeck?.id ? active : null;
 
     return ExamState(
       availableQuestions: questions,
       history: history,
       results: results,
-      activeAttempt: active,
-      phase: active != null ? ExamPhase.paused : ExamPhase.home,
+      activeAttempt: activeAttempt,
+      phase: activeAttempt != null ? ExamPhase.paused : ExamPhase.home,
       // Restore session questions if there's an incomplete attempt.
-      sessionQuestions: active != null
-          ? _resolveQuestions(active.questionIds, questions)
+      sessionQuestions: activeAttempt != null
+          ? _resolveQuestions(activeAttempt.questionIds, questions)
           : const [],
     );
   }
@@ -49,8 +52,33 @@ class ExamNotifier extends Notifier<ExamState> {
 
   /// Call after importing new packs to refresh available questions.
   void reload() {
-    final questions = ExamQuestionRepository().loadAll();
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
     state = state.copyWith(availableQuestions: questions);
+  }
+
+  void resetAfterDataChange() {
+    _stopTimer();
+
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
+    final storage = ExamAttemptStorage();
+    final history = storage.loadHistory();
+    final active = storage.loadActive();
+    final results = ExamHistoryStorage().loadResults();
+    final activeAttempt = active?.deckId == activeDeckId ? active : null;
+
+    state = ExamState(
+      phase: activeAttempt != null ? ExamPhase.paused : ExamPhase.home,
+      availableQuestions: questions,
+      activeAttempt: activeAttempt,
+      sessionQuestions: activeAttempt != null
+          ? _resolveQuestions(activeAttempt.questionIds, questions)
+          : const [],
+      history: history,
+      results: results,
+      selectedCount: state.selectedCount,
+    );
   }
 
   // ── Session lifecycle ─────────────────────────────────────────────────────
@@ -65,10 +93,13 @@ class ExamNotifier extends Notifier<ExamState> {
     final sessionQuestions = shuffled.take(count).toList();
 
     final durationSeconds = count * 60; // 1 min per question
+    final activeDeck = ref.read(activeDeckMetaProvider);
 
     final attempt = ExamAttempt(
       id: '${DateTime.now().millisecondsSinceEpoch}',
       startedAt: DateTime.now(),
+      deckId: activeDeck?.id,
+      deckTitle: activeDeck?.title,
       totalQuestions: count,
       durationSeconds: durationSeconds,
       remainingSeconds: durationSeconds,
@@ -235,7 +266,8 @@ class ExamNotifier extends Notifier<ExamState> {
   }
 
   void backToHome() {
-    final questions = ExamQuestionRepository().loadAll();
+    final activeDeckId = ref.read(activeDeckIdProvider);
+    final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
     final history = ExamAttemptStorage().loadHistory();
     final results = ExamHistoryStorage().loadResults();
     state = ExamState(

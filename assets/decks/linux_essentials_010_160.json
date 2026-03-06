@@ -1,0 +1,469 @@
+{
+  "id": "linux_essentials_010_160",
+  "title": "Linux Essentials",
+  "examCode": "010-160",
+  "category": "Linux Administration",
+  "description": "Linux Essentials practice deck with concise foundational Linux questions for study and exam sessions.",
+  "version": "1",
+  "questionCount": 25,
+  "domains": [
+    "The Linux Community and a Career in Open Source",
+    "Finding Your Way on a Linux System",
+    "The Power of the Command Line",
+    "The Linux Operating System",
+    "Security and File Permissions"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "linux_010_160_q_001",
+      "type": "exam_question",
+      "domain": "The Linux Community and a Career in Open Source",
+      "topic": "Open Source",
+      "subtopic": "Licensing",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "question": "What best describes open-source software?",
+      "answers": [
+        "Software that cannot be modified",
+        "Software whose source code is available to inspect and improve",
+        "Software sold only by hardware vendors",
+        "Software that runs only on Linux"
+      ],
+      "correctIndex": 1,
+      "explanation": "Open-source software makes its source code available so users and developers can study, modify, and share it."
+    },
+    {
+      "id": "linux_010_160_q_002",
+      "type": "exam_question",
+      "domain": "The Linux Community and a Career in Open Source",
+      "topic": "Distributions",
+      "subtopic": "Ecosystem",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "question": "What is a Linux distribution?",
+      "answers": [
+        "A hardware certification program",
+        "A package of the Linux kernel with tools and software",
+        "A Linux-only file format",
+        "A command used to install programs"
+      ],
+      "correctIndex": 1,
+      "explanation": "A distribution combines the Linux kernel with utilities, package management, and applications."
+    },
+    {
+      "id": "linux_010_160_q_003",
+      "type": "exam_question",
+      "domain": "The Linux Community and a Career in Open Source",
+      "topic": "Organizations",
+      "subtopic": "Open Source Projects",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "Which organization is known for stewarding the Linux kernel project?",
+      "answers": [
+        "The Linux Foundation",
+        "W3C",
+        "ECMA",
+        "Oracle University"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Linux Foundation supports the Linux ecosystem and hosts many important open-source projects."
+    },
+    {
+      "id": "linux_010_160_q_004",
+      "type": "exam_question",
+      "domain": "The Linux Community and a Career in Open Source",
+      "topic": "Open Standards",
+      "subtopic": "Interoperability",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "Why are open standards important in the Linux ecosystem?",
+      "answers": [
+        "They prevent command-line usage",
+        "They help different systems and tools work together",
+        "They require all software to be free of charge",
+        "They eliminate the need for documentation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Open standards improve compatibility and interoperability across vendors, systems, and applications."
+    },
+    {
+      "id": "linux_010_160_q_005",
+      "type": "exam_question",
+      "domain": "The Linux Community and a Career in Open Source",
+      "topic": "Careers",
+      "subtopic": "Linux Roles",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "question": "Which task is commonly associated with an entry-level Linux administrator?",
+      "answers": [
+        "Designing CPU hardware",
+        "Managing users, packages, and basic system services",
+        "Writing only mobile apps",
+        "Replacing the Linux kernel source code daily"
+      ],
+      "correctIndex": 1,
+      "explanation": "Entry-level Linux administration often includes user management, software updates, and basic service monitoring."
+    },
+    {
+      "id": "linux_010_160_q_006",
+      "type": "exam_question",
+      "domain": "Finding Your Way on a Linux System",
+      "topic": "Filesystem Layout",
+      "subtopic": "Home Directories",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "question": "Which directory usually contains a user's personal files?",
+      "answers": [
+        "/home",
+        "/boot",
+        "/dev",
+        "/proc"
+      ],
+      "correctIndex": 0,
+      "explanation": "User home directories are typically stored under /home."
+    },
+    {
+      "id": "linux_010_160_q_007",
+      "type": "exam_question",
+      "domain": "Finding Your Way on a Linux System",
+      "topic": "Navigation",
+      "subtopic": "Working Directory",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "question": "Which command prints the current working directory?",
+      "answers": [
+        "pwd",
+        "cd",
+        "ls",
+        "mv"
+      ],
+      "correctIndex": 0,
+      "explanation": "The pwd command displays the full path of the current directory."
+    },
+    {
+      "id": "linux_010_160_q_008",
+      "type": "exam_question",
+      "domain": "Finding Your Way on a Linux System",
+      "topic": "File Listing",
+      "subtopic": "Hidden Files",
+      "objectiveId": "2.2",
+      "difficulty": 1,
+      "question": "Which command shows hidden files in the current directory?",
+      "answers": [
+        "ls -a",
+        "cat -h",
+        "pwd -a",
+        "find -z"
+      ],
+      "correctIndex": 0,
+      "explanation": "The -a option makes ls display hidden files, including names beginning with a dot."
+    },
+    {
+      "id": "linux_010_160_q_009",
+      "type": "exam_question",
+      "domain": "Finding Your Way on a Linux System",
+      "topic": "Filesystem Layout",
+      "subtopic": "Configuration Files",
+      "objectiveId": "2.1",
+      "difficulty": 2,
+      "question": "Which directory commonly stores system-wide configuration files?",
+      "answers": [
+        "/etc",
+        "/tmp",
+        "/srv",
+        "/media"
+      ],
+      "correctIndex": 0,
+      "explanation": "The /etc directory contains many system configuration files and service settings."
+    },
+    {
+      "id": "linux_010_160_q_010",
+      "type": "exam_question",
+      "domain": "Finding Your Way on a Linux System",
+      "topic": "Documentation",
+      "subtopic": "Manual Pages",
+      "objectiveId": "2.3",
+      "difficulty": 2,
+      "question": "Which command is commonly used to read built-in documentation for a Linux command?",
+      "answers": [
+        "man",
+        "infox",
+        "doc",
+        "helpme"
+      ],
+      "correctIndex": 0,
+      "explanation": "The man command opens manual pages that describe command usage, options, and behavior."
+    },
+    {
+      "id": "linux_010_160_q_011",
+      "type": "exam_question",
+      "domain": "The Power of the Command Line",
+      "topic": "File Management",
+      "subtopic": "Copying Files",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which command copies a file from one location to another?",
+      "answers": [
+        "cp",
+        "rm",
+        "grep",
+        "echo"
+      ],
+      "correctIndex": 0,
+      "explanation": "The cp command copies files or directories to a new location."
+    },
+    {
+      "id": "linux_010_160_q_012",
+      "type": "exam_question",
+      "domain": "The Power of the Command Line",
+      "topic": "File Management",
+      "subtopic": "Moving Files",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "question": "Which command is used to rename or move a file?",
+      "answers": [
+        "mv",
+        "cp",
+        "touch",
+        "sort"
+      ],
+      "correctIndex": 0,
+      "explanation": "The mv command can both move a file and rename it."
+    },
+    {
+      "id": "linux_010_160_q_013",
+      "type": "exam_question",
+      "domain": "The Power of the Command Line",
+      "topic": "Text Processing",
+      "subtopic": "Searching",
+      "objectiveId": "3.2",
+      "difficulty": 1,
+      "question": "Which command searches for matching text inside files?",
+      "answers": [
+        "grep",
+        "chmod",
+        "mount",
+        "uname"
+      ],
+      "correctIndex": 0,
+      "explanation": "grep searches input and files for lines that match a pattern."
+    },
+    {
+      "id": "linux_010_160_q_014",
+      "type": "exam_question",
+      "domain": "The Power of the Command Line",
+      "topic": "Redirection",
+      "subtopic": "Pipes",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "question": "What does the pipe symbol `|` do in a shell command?",
+      "answers": [
+        "Deletes the output of the first command",
+        "Sends the output of one command to another command",
+        "Runs commands only as root",
+        "Creates a new user account"
+      ],
+      "correctIndex": 1,
+      "explanation": "A pipe connects the standard output of one command to the standard input of another."
+    },
+    {
+      "id": "linux_010_160_q_015",
+      "type": "exam_question",
+      "domain": "The Power of the Command Line",
+      "topic": "Archives",
+      "subtopic": "Compression",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "question": "Which command is commonly used to create or extract `.tar` archives?",
+      "answers": [
+        "tar",
+        "ps",
+        "kill",
+        "ip"
+      ],
+      "correctIndex": 0,
+      "explanation": "The tar command packages files into archives and can also extract them."
+    },
+    {
+      "id": "linux_010_160_q_016",
+      "type": "exam_question",
+      "domain": "The Linux Operating System",
+      "topic": "Processes",
+      "subtopic": "Process Listing",
+      "objectiveId": "4.1",
+      "difficulty": 1,
+      "question": "Which command commonly shows running processes?",
+      "answers": [
+        "ps",
+        "ls",
+        "pwd",
+        "cat"
+      ],
+      "correctIndex": 0,
+      "explanation": "The ps command displays information about running processes."
+    },
+    {
+      "id": "linux_010_160_q_017",
+      "type": "exam_question",
+      "domain": "The Linux Operating System",
+      "topic": "System Information",
+      "subtopic": "Kernel Name",
+      "objectiveId": "4.1",
+      "difficulty": 1,
+      "question": "Which command displays basic system information such as the kernel name?",
+      "answers": [
+        "uname",
+        "whoami",
+        "echo",
+        "mkdir"
+      ],
+      "correctIndex": 0,
+      "explanation": "uname reports system information, including the kernel name."
+    },
+    {
+      "id": "linux_010_160_q_018",
+      "type": "exam_question",
+      "domain": "The Linux Operating System",
+      "topic": "Software Management",
+      "subtopic": "Packages",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "question": "What is the main purpose of a package manager on Linux?",
+      "answers": [
+        "To control internet routing",
+        "To install, update, and remove software",
+        "To replace the shell",
+        "To encrypt every file automatically"
+      ],
+      "correctIndex": 1,
+      "explanation": "Package managers handle software installation, updates, dependencies, and removal."
+    },
+    {
+      "id": "linux_010_160_q_019",
+      "type": "exam_question",
+      "domain": "The Linux Operating System",
+      "topic": "Boot Process",
+      "subtopic": "Startup Services",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "What is the role of a Linux init system such as systemd?",
+      "answers": [
+        "To format hard drives",
+        "To manage system startup and services",
+        "To compile the kernel from source",
+        "To create desktop wallpapers"
+      ],
+      "correctIndex": 1,
+      "explanation": "An init system starts the system and manages services and background processes."
+    },
+    {
+      "id": "linux_010_160_q_020",
+      "type": "exam_question",
+      "domain": "The Linux Operating System",
+      "topic": "Processes",
+      "subtopic": "Termination",
+      "objectiveId": "4.1",
+      "difficulty": 2,
+      "question": "Which command sends a signal to a process, often to stop it?",
+      "answers": [
+        "kill",
+        "find",
+        "less",
+        "touch"
+      ],
+      "correctIndex": 0,
+      "explanation": "The kill command sends a signal to a process, such as SIGTERM or SIGKILL."
+    },
+    {
+      "id": "linux_010_160_q_021",
+      "type": "exam_question",
+      "domain": "Security and File Permissions",
+      "topic": "Permissions",
+      "subtopic": "chmod",
+      "objectiveId": "5.1",
+      "difficulty": 1,
+      "question": "Which command changes file permissions?",
+      "answers": [
+        "chmod",
+        "chdir",
+        "passwd",
+        "du"
+      ],
+      "correctIndex": 0,
+      "explanation": "chmod modifies file and directory permission bits."
+    },
+    {
+      "id": "linux_010_160_q_022",
+      "type": "exam_question",
+      "domain": "Security and File Permissions",
+      "topic": "Ownership",
+      "subtopic": "chown",
+      "objectiveId": "5.1",
+      "difficulty": 1,
+      "question": "Which command changes the owner of a file?",
+      "answers": [
+        "chown",
+        "chmod",
+        "passwd",
+        "who"
+      ],
+      "correctIndex": 0,
+      "explanation": "chown changes file ownership and can also update the group owner."
+    },
+    {
+      "id": "linux_010_160_q_023",
+      "type": "exam_question",
+      "domain": "Security and File Permissions",
+      "topic": "Authentication",
+      "subtopic": "Passwords",
+      "objectiveId": "5.2",
+      "difficulty": 1,
+      "question": "Which command is used to change a user's password?",
+      "answers": [
+        "passwd",
+        "sudo",
+        "umask",
+        "id"
+      ],
+      "correctIndex": 0,
+      "explanation": "The passwd command updates a user's password."
+    },
+    {
+      "id": "linux_010_160_q_024",
+      "type": "exam_question",
+      "domain": "Security and File Permissions",
+      "topic": "Privilege Escalation",
+      "subtopic": "Administrative Access",
+      "objectiveId": "5.2",
+      "difficulty": 2,
+      "question": "What is the main purpose of the `sudo` command?",
+      "answers": [
+        "To display disk usage",
+        "To run a command with elevated privileges",
+        "To change a filename extension",
+        "To search log files"
+      ],
+      "correctIndex": 1,
+      "explanation": "sudo allows authorized users to run specific commands with elevated privileges."
+    },
+    {
+      "id": "linux_010_160_q_025",
+      "type": "exam_question",
+      "domain": "Security and File Permissions",
+      "topic": "Permissions",
+      "subtopic": "Numeric Modes",
+      "objectiveId": "5.1",
+      "difficulty": 2,
+      "question": "What permission set does the numeric mode `755` represent for a file?",
+      "answers": [
+        "Owner read/write/execute, group and others read/execute",
+        "Owner read only, group write only, others execute only",
+        "Everyone full control",
+        "Owner read/write, group read/write, others no access"
+      ],
+      "correctIndex": 0,
+      "explanation": "755 means the owner has rwx and group and others have r-x permissions."
+    }
+  ]
+}
