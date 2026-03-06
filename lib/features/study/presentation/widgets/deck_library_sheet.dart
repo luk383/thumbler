@@ -14,12 +14,12 @@ void showDeckLibrary(BuildContext context) {
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
     ),
-    builder: (_) => const _DeckLibrarySheet(),
+    builder: (_) => const DeckLibrarySheet(),
   );
 }
 
-class _DeckLibrarySheet extends ConsumerWidget {
-  const _DeckLibrarySheet();
+class DeckLibrarySheet extends ConsumerWidget {
+  const DeckLibrarySheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -217,8 +217,8 @@ class _LibraryHub extends StatelessWidget {
     );
     final featured = _featuredPacks(
       packs: packs,
-      activeDeck: activeDeck,
       progressByDeck: progressByDeck,
+      excludedIds: {for (final pack in continueLearning) pack.id},
     );
     final pinnedIds = {
       for (final pack in continueLearning) pack.id,
@@ -662,8 +662,8 @@ List<DeckPackMeta> _continueLearningPacks({
 
 List<DeckPackMeta> _featuredPacks({
   required List<DeckPackMeta> packs,
-  required DeckPackMeta? activeDeck,
   required Map<String, DeckProgressSummary> progressByDeck,
+  Set<String> excludedIds = const {},
 }) {
   const preferredOrder = [
     'comptia_security_plus_sy0_701_pack_20',
@@ -680,13 +680,12 @@ List<DeckPackMeta> _featuredPacks({
   ];
 
   final byId = {for (final pack in packs) pack.id: pack};
-  final featured = <DeckPackMeta>[
-    ...?activeDeck == null ? null : [activeDeck],
-  ];
+  final featured = <DeckPackMeta>[];
 
   for (final id in preferredOrder) {
     final pack = byId[id];
     if (pack == null) continue;
+    if (excludedIds.contains(pack.id)) continue;
     if (featured.any((existing) => existing.id == pack.id)) continue;
     if (!(pack.isImportable ||
         pack.isStarter ||
@@ -698,6 +697,7 @@ List<DeckPackMeta> _featuredPacks({
 
   if (featured.length < 4) {
     for (final pack in packs) {
+      if (excludedIds.contains(pack.id)) continue;
       if (featured.any((existing) => existing.id == pack.id)) continue;
       featured.add(pack);
       if (featured.length >= 4) break;
