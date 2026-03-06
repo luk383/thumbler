@@ -1,4 +1,5 @@
 import '../../domain/exam_attempt.dart';
+import '../../domain/exam_result.dart';
 import '../../../study/domain/study_item.dart';
 
 enum ExamPhase {
@@ -26,6 +27,7 @@ class ExamState {
     this.sessionQuestions = const [],
     this.currentIndex = 0,
     this.history = const [],
+    this.results = const [],
     this.selectedCount = 90,
     this.reviewQuestions = const [],
   });
@@ -46,6 +48,7 @@ class ExamState {
 
   /// Last 10 completed attempts (newest first).
   final List<ExamAttempt> history;
+  final List<ExamResult> results;
 
   /// Question count the user has selected (30 / 60 / 90).
   final int selectedCount;
@@ -81,10 +84,9 @@ class ExamState {
     return activeAttempt!.flaggedIds.contains(q.id);
   }
 
-  int get effectiveQuestionCount =>
-      availableQuestions.length < selectedCount
-          ? availableQuestions.length
-          : selectedCount;
+  int get effectiveQuestionCount => availableQuestions.length < selectedCount
+      ? availableQuestions.length
+      : selectedCount;
 
   // ── CopyWith ──────────────────────────────────────────────────────────────
 
@@ -97,19 +99,20 @@ class ExamState {
     List<StudyItem>? sessionQuestions,
     int? currentIndex,
     List<ExamAttempt>? history,
+    List<ExamResult>? results,
     int? selectedCount,
     List<StudyItem>? reviewQuestions,
-  }) =>
-      ExamState(
-        phase: phase ?? this.phase,
-        availableQuestions: availableQuestions ?? this.availableQuestions,
-        activeAttempt: identical(activeAttempt, _nil)
-            ? this.activeAttempt
-            : activeAttempt as ExamAttempt?,
-        sessionQuestions: sessionQuestions ?? this.sessionQuestions,
-        currentIndex: currentIndex ?? this.currentIndex,
-        history: history ?? this.history,
-        selectedCount: selectedCount ?? this.selectedCount,
-        reviewQuestions: reviewQuestions ?? this.reviewQuestions,
-      );
+  }) => ExamState(
+    phase: phase ?? this.phase,
+    availableQuestions: availableQuestions ?? this.availableQuestions,
+    activeAttempt: identical(activeAttempt, _nil)
+        ? this.activeAttempt
+        : activeAttempt as ExamAttempt?,
+    sessionQuestions: sessionQuestions ?? this.sessionQuestions,
+    currentIndex: currentIndex ?? this.currentIndex,
+    history: history ?? this.history,
+    results: results ?? this.results,
+    selectedCount: selectedCount ?? this.selectedCount,
+    reviewQuestions: reviewQuestions ?? this.reviewQuestions,
+  );
 }

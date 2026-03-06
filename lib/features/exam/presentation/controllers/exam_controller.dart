@@ -3,9 +3,12 @@ import 'dart:math';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/analytics/domain_analyzer.dart';
+import '../../data/exam_history_storage.dart';
 import '../../data/exam_attempt_storage.dart';
 import '../../data/exam_question_repository.dart';
 import '../../domain/exam_attempt.dart';
+import '../../domain/exam_result.dart';
 import '../../../study/domain/study_item.dart';
 import 'exam_state.dart';
 
@@ -23,10 +26,12 @@ class ExamNotifier extends Notifier<ExamState> {
     final storage = ExamAttemptStorage();
     final history = storage.loadHistory();
     final active = storage.loadActive();
+    final results = ExamHistoryStorage().loadResults();
 
     return ExamState(
       availableQuestions: questions,
       history: history,
+      results: results,
       activeAttempt: active,
       phase: active != null ? ExamPhase.paused : ExamPhase.home,
       // Restore session questions if there's an incomplete attempt.
@@ -170,30 +175,18 @@ class ExamNotifier extends Notifier<ExamState> {
     final attempt = state.activeAttempt;
     if (attempt == null) return;
 
-    // Compute score + domain breakdown.
     int scoreCorrect = 0;
-    final domainTotal = <String, int>{};
-    final domainCorrect = <String, int>{};
 
     for (final q in state.sessionQuestions) {
       final selected = attempt.answers[q.id];
-      final correct =
-          selected != null && selected == q.correctAnswerIndex;
+      final correct = selected != null && selected == q.correctAnswerIndex;
       if (correct) scoreCorrect++;
-
-      final domain = q.category;
-      domainTotal[domain] = (domainTotal[domain] ?? 0) + 1;
-      domainCorrect[domain] =
-          (domainCorrect[domain] ?? 0) + (correct ? 1 : 0);
     }
 
-    final domainBreakdown = {
-      for (final k in domainTotal.keys)
-        k: DomainStats(
-          total: domainTotal[k]!,
-          correct: domainCorrect[k]!,
-        ),
-    };
+    final domainBreakdown = calculateDomainStats(
+      questions: state.sessionQuestions,
+      answers: attempt.answers,
+    );
 
     final completed = attempt.copyWith(
       finishedAt: DateTime.now(),
@@ -201,14 +194,20 @@ class ExamNotifier extends Notifier<ExamState> {
       scoreCorrect: scoreCorrect,
       domainBreakdown: domainBreakdown,
     );
+    final result = ExamResult.fromAttempt(
+      attempt: completed,
+      questions: state.sessionQuestions,
+    );
 
     ExamAttemptStorage().addToHistory(completed);
+    ExamHistoryStorage().addResult(result);
     ExamAttemptStorage().clearActive();
 
     state = state.copyWith(
       phase: ExamPhase.results,
       activeAttempt: completed,
       history: ExamAttemptStorage().loadHistory(),
+      results: ExamHistoryStorage().loadResults(),
       currentIndex: 0,
     );
   }
@@ -238,10 +237,12 @@ class ExamNotifier extends Notifier<ExamState> {
   void backToHome() {
     final questions = ExamQuestionRepository().loadAll();
     final history = ExamAttemptStorage().loadHistory();
+    final results = ExamHistoryStorage().loadResults();
     state = ExamState(
       phase: ExamPhase.home,
       availableQuestions: questions,
       history: history,
+      results: results,
       selectedCount: state.selectedCount,
     );
   }
@@ -296,5 +297,6 @@ class ExamNotifier extends Notifier<ExamState> {
   }
 }
 
-final examProvider =
-    NotifierProvider<ExamNotifier, ExamState>(ExamNotifier.new);
+final examProvider = NotifierProvider<ExamNotifier, ExamState>(
+  ExamNotifier.new,
+);

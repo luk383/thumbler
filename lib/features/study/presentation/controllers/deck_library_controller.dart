@@ -16,6 +16,7 @@ class DeckLibraryState {
     this.loadingPackId,
     this.results = const {},
     this.isDiscovering = false,
+    this.lastError,
   });
 
   final List<DeckPackMeta> packs;
@@ -26,6 +27,7 @@ class DeckLibraryState {
   /// packId → ImportResult, populated after each import this session.
   final Map<String, ImportResult> results;
   final bool isDiscovering;
+  final String? lastError;
 
   bool isLoading(String packId) => loadingPackId == packId;
   ImportResult? resultFor(String packId) => results[packId];
@@ -48,15 +50,28 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       loadingPackId: state.loadingPackId,
       results: state.results,
       isDiscovering: true,
+      lastError: null,
     );
 
-    final packs = await DeckPackMeta.discoverLocalPacks();
-    state = DeckLibraryState(
-      packs: packs,
-      loadingPackId: state.loadingPackId,
-      results: state.results,
-      isDiscovering: false,
-    );
+    try {
+      final packs = await DeckPackMeta.discoverLocalPacks();
+      state = DeckLibraryState(
+        packs: packs,
+        loadingPackId: state.loadingPackId,
+        results: state.results,
+        isDiscovering: false,
+      );
+    } catch (e, st) {
+      debugPrint('Deck discovery failed: $e');
+      debugPrintStack(stackTrace: st);
+      state = DeckLibraryState(
+        packs: state.packs,
+        loadingPackId: state.loadingPackId,
+        results: state.results,
+        isDiscovering: false,
+        lastError: e.toString(),
+      );
+    }
   }
 
   void printDiscoveredPacks() {
@@ -72,6 +87,7 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       loadingPackId: meta.id,
       results: state.results,
       isDiscovering: state.isDiscovering,
+      lastError: null,
     );
 
     try {
@@ -95,8 +111,9 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
         packs: state.packs,
         results: state.results,
         isDiscovering: state.isDiscovering,
+        lastError: e.toString(),
       );
-      throw Exception(e.toString());
+      rethrow;
     }
   }
 }

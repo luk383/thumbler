@@ -27,46 +27,55 @@ class DeckPackMeta {
 
   static Future<List<DeckPackMeta>> discoverLocalPacks() async {
     final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
-    final paths =
-        manifest
-            .listAssets()
-            .where((k) => k.startsWith('assets/decks/') && k.endsWith('.json'))
-            .toList()
-          ..sort((a, b) => a.toLowerCase().compareTo(b.toLowerCase()));
+    final paths = manifest
+        .listAssets()
+        .where((k) => k.startsWith('assets/decks/') && k.endsWith('.json'))
+        .toList();
 
     final metas = <DeckPackMeta>[];
     for (final path in paths) {
+      final filename = path.split('/').last;
+      final fallbackId = filename.replaceAll('.json', '');
+      final fallbackName = _titleFromFilename(filename);
       int? count;
       String? invalidJsonMessage;
+      String id = fallbackId;
+      String name = fallbackName;
+      String description = filename;
       try {
         final raw = await rootBundle.loadString(path);
         final decoded = jsonDecode(raw);
         final list = _extractItemsList(decoded);
         count = list.length;
+        if (decoded is Map<String, dynamic>) {
+          id = _asString(decoded['id'])?.trim().isNotEmpty == true
+              ? _asString(decoded['id'])!.trim()
+              : fallbackId;
+          name = _asString(decoded['name'])?.trim().isNotEmpty == true
+              ? _asString(decoded['name'])!.trim()
+              : fallbackName;
+          description =
+              _asString(decoded['description'])?.trim().isNotEmpty == true
+              ? _asString(decoded['description'])!.trim()
+              : filename;
+        }
       } catch (e) {
         invalidJsonMessage = e.toString();
       }
 
-      final filename = path.split('/').last;
-      final id = filename.replaceAll('.json', '');
-      final isSimulation90 = filename == 'sec701_exam_simulation_90.json';
-
       metas.add(
         DeckPackMeta(
           id: id,
-          name: isSimulation90
-              ? 'Security+ SY0-701 Exam Simulation (90)'
-              : _titleFromFilename(filename),
-          description: isSimulation90
-              ? '90 exam-style questions covering SY0-701 domains.'
-              : filename,
+          name: name,
+          description: description,
           assetPath: path,
-          emoji: isSimulation90 ? '🧪' : '📦',
+          emoji: '📦',
           estimatedItemCount: count,
           invalidJsonMessage: invalidJsonMessage,
         ),
       );
     }
+    metas.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     return metas;
   }
 }
@@ -77,37 +86,52 @@ class DeckPackItem {
     required this.contentType,
     required this.category,
     this.topic,
+    this.subtopic,
     this.objectiveId,
     required this.promptText,
     this.explanationText,
     required this.options,
     required this.correctAnswerIndex,
+    this.difficulty,
   });
 
   final String id;
   final String contentType; // "micro_card" | "exam_question"
   final String category;
   final String? topic;
+  final String? subtopic;
   final String? objectiveId;
   final String promptText;
   final String? explanationText;
   final List<String> options;
   final int correctAnswerIndex;
+  final int? difficulty;
 
   factory DeckPackItem.fromJson(Map<String, dynamic> j) {
-    final topic = _asString(j['topic']);
-    final subtopic = _asString(j['subtopic']);
+    final options = _stringList(j['options']);
+    final correctAnswerIndex = _intValue(j['correctAnswerIndex']);
+    if (options.isEmpty) {
+      throw const FormatException(
+        'Invalid "options": expected a non-empty list',
+      );
+    }
+    if (correctAnswerIndex < 0 || correctAnswerIndex >= options.length) {
+      throw const FormatException(
+        'Invalid "correctAnswerIndex": out of range for "options"',
+      );
+    }
     return DeckPackItem(
       id: _requiredString(j, 'id'),
       contentType: _asString(j['contentType']) ?? 'micro_card',
       category: _requiredString(j, 'category'),
-      // If both are present, prefer subtopic for finer filtering.
-      topic: (subtopic != null && subtopic.isNotEmpty) ? subtopic : topic,
+      topic: _asString(j['topic']),
+      subtopic: _asString(j['subtopic']),
       objectiveId: _asString(j['objectiveId']),
       promptText: _requiredString(j, 'promptText'),
       explanationText: _asString(j['explanationText']),
-      options: _stringList(j['options']),
-      correctAnswerIndex: _intValue(j['correctAnswerIndex']),
+      options: options,
+      correctAnswerIndex: correctAnswerIndex,
+      difficulty: _nullableIntValue(j['difficulty']),
     );
   }
 
@@ -118,11 +142,13 @@ class DeckPackItem {
         : ContentType.microCard,
     category: category,
     topic: topic,
+    subtopic: subtopic,
     objectiveId: objectiveId,
     promptText: promptText,
     explanationText: explanationText,
     options: options,
     correctAnswerIndex: correctAnswerIndex,
+    difficulty: difficulty,
   );
 }
 
@@ -169,6 +195,13 @@ int _intValue(Object? v) {
   if (v is int) return v;
   if (v is num) return v.toInt();
   throw const FormatException('Invalid "correctAnswerIndex"');
+}
+
+int? _nullableIntValue(Object? v) {
+  if (v == null) return null;
+  if (v is int) return v;
+  if (v is num) return v.toInt();
+  throw const FormatException('Invalid integer value');
 }
 
 List<String> _stringList(Object? v) {

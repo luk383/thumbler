@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/data/reset_service.dart';
 import '../../bookmarks/presentation/bookmarks_notifier.dart';
+import '../../exam/presentation/controllers/exam_controller.dart';
 import '../../growth/streak/streak_notifier.dart';
-import '../../growth/xp/xp_notifier.dart';
 import '../../growth/daily_quest/daily_quest_notifier.dart';
+import '../../growth/xp/xp_notifier.dart';
+import '../../study/presentation/controllers/study_controller.dart';
 
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
@@ -89,22 +92,141 @@ class ProfilePage extends ConsumerWidget {
             const _XpLegendCard(),
             const SizedBox(height: 24),
 
+            const _SectionTitle('Data Management'),
+            const SizedBox(height: 12),
+            _DataManagementCard(
+              onResetStudyDeck: () => _runResetAction(
+                context,
+                ref,
+                dialogMessage: 'This will delete all study cards.',
+                successMessage: 'Study deck reset',
+                action: () => const ResetService().resetStudyDeck(),
+                invalidateProviders: () {
+                  ref.invalidate(studyProvider);
+                  ref.invalidate(examProvider);
+                },
+              ),
+              onResetProgress: () => _runResetAction(
+                context,
+                ref,
+                dialogMessage:
+                    'This will delete XP, streak, study statistics, and local progress.',
+                successMessage: 'Progress reset',
+                action: () => const ResetService().resetProgress(),
+                invalidateProviders: () {
+                  ref.invalidate(xpProvider);
+                  ref.invalidate(streakProvider);
+                  ref.invalidate(dailyQuestProvider);
+                  ref.invalidate(studyProvider);
+                  ref.invalidate(examProvider);
+                },
+              ),
+              onResetExamHistory: () => _runResetAction(
+                context,
+                ref,
+                dialogMessage:
+                    'This will delete saved exam attempts and any paused exam.',
+                successMessage: 'Exam history reset',
+                action: () => const ResetService().resetExamHistory(),
+                invalidateProviders: () => ref.invalidate(examProvider),
+              ),
+              onResetAllAppData: () => _runResetAction(
+                context,
+                ref,
+                dialogTitle: 'Reset all local data',
+                dialogMessage: 'This will delete all local app data.',
+                confirmLabel: 'Reset all local data',
+                successMessage: 'All app data reset',
+                action: () => const ResetService().resetAllAppData(),
+                invalidateProviders: () {
+                  ref.invalidate(xpProvider);
+                  ref.invalidate(streakProvider);
+                  ref.invalidate(bookmarksProvider);
+                  ref.invalidate(dailyQuestProvider);
+                  ref.invalidate(studyProvider);
+                  ref.invalidate(examProvider);
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+
             // ── Dev tools ────────────────────────────────────────────────
-            _DevResetButton(onReset: () {
-              ref.read(dailyQuestProvider.notifier).devResetQuest();
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Quest reset for testing'),
-                  backgroundColor: Colors.deepOrange,
-                  duration: Duration(seconds: 2),
-                ),
-              );
-            }),
+            _DevResetButton(
+              onReset: () {
+                ref.read(dailyQuestProvider.notifier).devResetQuest();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Quest reset for testing'),
+                    backgroundColor: Colors.deepOrange,
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
     );
   }
+}
+
+Future<void> _runResetAction(
+  BuildContext context,
+  WidgetRef ref, {
+  String dialogTitle = 'Are you sure?',
+  required String dialogMessage,
+  String confirmLabel = 'Confirm',
+  required String successMessage,
+  required Future<void> Function() action,
+  required VoidCallback invalidateProviders,
+}) async {
+  final confirmed = await _showResetConfirmationDialog(
+    context,
+    title: dialogTitle,
+    message: dialogMessage,
+    confirmLabel: confirmLabel,
+  );
+  if (confirmed != true || !context.mounted) return;
+
+  await action();
+  invalidateProviders();
+
+  if (!context.mounted) return;
+  ScaffoldMessenger.of(
+    context,
+  ).showSnackBar(SnackBar(content: Text(successMessage)));
+}
+
+Future<bool?> _showResetConfirmationDialog(
+  BuildContext context, {
+  required String title,
+  required String message,
+  required String confirmLabel,
+}) {
+  return showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        backgroundColor: const Color(0xFF161616),
+        title: Text(title, style: const TextStyle(color: Colors.white)),
+        content: Text(message, style: const TextStyle(color: Colors.white70)),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            style: FilledButton.styleFrom(
+              backgroundColor: Colors.redAccent,
+              foregroundColor: Colors.white,
+            ),
+            onPressed: () => Navigator.of(context).pop(true),
+            child: Text(confirmLabel),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 // ── Sub-widgets ─────────────────────────────────────────────────────────────
@@ -211,7 +333,10 @@ class _DailyQuestCard extends StatelessWidget {
               ),
               if (quest.xpBoostActive)
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 3,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.amber.withAlpha(40),
                     borderRadius: BorderRadius.circular(8),
@@ -354,6 +479,106 @@ class _DevResetButton extends StatelessWidget {
   }
 }
 
+class _DataManagementCard extends StatelessWidget {
+  const _DataManagementCard({
+    required this.onResetStudyDeck,
+    required this.onResetProgress,
+    required this.onResetExamHistory,
+    required this.onResetAllAppData,
+  });
+
+  final Future<void> Function() onResetStudyDeck;
+  final Future<void> Function() onResetProgress;
+  final Future<void> Function() onResetExamHistory;
+  final Future<void> Function() onResetAllAppData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.redAccent.withAlpha(18),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: Colors.redAccent.withAlpha(64)),
+      ),
+      child: Column(
+        children: [
+          _DangerActionButton(
+            icon: Icons.school_outlined,
+            label: 'Reset Study Deck',
+            onPressed: onResetStudyDeck,
+          ),
+          const SizedBox(height: 10),
+          _DangerActionButton(
+            icon: Icons.insights_outlined,
+            label: 'Reset Progress',
+            onPressed: onResetProgress,
+          ),
+          const SizedBox(height: 10),
+          _DangerActionButton(
+            icon: Icons.history_toggle_off,
+            label: 'Reset Exam History',
+            onPressed: onResetExamHistory,
+          ),
+          const SizedBox(height: 10),
+          _DangerActionButton(
+            icon: Icons.delete_forever_outlined,
+            label: 'Reset All App Data',
+            onPressed: onResetAllAppData,
+            isPrimaryDestructive: true,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DangerActionButton extends StatelessWidget {
+  const _DangerActionButton({
+    required this.icon,
+    required this.label,
+    required this.onPressed,
+    this.isPrimaryDestructive = false,
+  });
+
+  final IconData icon;
+  final String label;
+  final Future<void> Function() onPressed;
+  final bool isPrimaryDestructive;
+
+  @override
+  Widget build(BuildContext context) {
+    final foreground = isPrimaryDestructive
+        ? Colors.white
+        : Colors.redAccent.shade100;
+    final background = isPrimaryDestructive
+        ? Colors.redAccent
+        : Colors.redAccent.withAlpha(26);
+
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton.icon(
+        style: FilledButton.styleFrom(
+          alignment: Alignment.centerLeft,
+          backgroundColor: background,
+          foregroundColor: foreground,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(color: Colors.redAccent.withAlpha(90)),
+          ),
+        ),
+        onPressed: onPressed,
+        icon: Icon(icon, size: 18),
+        label: Text(
+          label,
+          style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
+}
+
 class _StatCard extends StatelessWidget {
   const _StatCard({
     required this.emoji,
@@ -455,11 +680,7 @@ class _XpLegendCard extends StatelessWidget {
 }
 
 class _XpRow extends StatelessWidget {
-  const _XpRow({
-    required this.icon,
-    required this.label,
-    required this.xp,
-  });
+  const _XpRow({required this.icon, required this.label, required this.xp});
 
   final IconData icon;
   final String label;

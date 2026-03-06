@@ -1,0 +1,182 @@
+[
+{
+"id":"sec701_exam_a_001",
+"contentType":"exam_question",
+"category":"General Security Concepts",
+"topic":"CIA Triad",
+"subtopic":"Availability",
+"objectiveId":"1.2",
+"promptText":"A ransomware attack encrypts company files and prevents employees from accessing them. Which element of the CIA triad is primarily affected?",
+"options":[
+"Confidentiality",
+"Integrity",
+"Availability",
+"Authentication"
+],
+"correctAnswerIndex":2,
+"explanationText":"Ransomware prevents legitimate users from accessing systems and data, which directly impacts availability.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_002",
+"contentType":"exam_question",
+"category":"General Security Concepts",
+"topic":"Authentication",
+"subtopic":"MFA",
+"objectiveId":"1.2",
+"promptText":"Which authentication method combines something you know with something you have?",
+"options":[
+"Password and PIN",
+"Fingerprint and retina scan",
+"Smart card and PIN",
+"Username and password"
+],
+"correctAnswerIndex":2,
+"explanationText":"A smart card represents something you have and a PIN represents something you know.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_003",
+"contentType":"exam_question",
+"category":"Threats, Vulnerabilities, and Mitigations",
+"topic":"Malware",
+"subtopic":"Trojan",
+"objectiveId":"2.4",
+"promptText":"Malware disguised as legitimate software that creates a backdoor is known as what?",
+"options":[
+"Worm",
+"Trojan",
+"Spyware",
+"Rootkit"
+],
+"correctAnswerIndex":1,
+"explanationText":"A Trojan disguises itself as legitimate software while performing malicious actions.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_004",
+"contentType":"exam_question",
+"category":"Threats, Vulnerabilities, and Mitigations",
+"topic":"Network Attacks",
+"subtopic":"MitM",
+"objectiveId":"2.4",
+"promptText":"An attacker secretly intercepts communication between two parties. What attack is this?",
+"options":[
+"Replay attack",
+"Man in the middle",
+"DNS poisoning",
+"DDoS"
+],
+"correctAnswerIndex":1,
+"explanationText":"A man-in-the-middle attack intercepts communications between two parties.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_005",
+"contentType":"exam_question",
+"category":"Security Architecture",
+"topic":"Network Security",
+"subtopic":"DMZ",
+"objectiveId":"3.2",
+"promptText":"A company places its public web server in a network isolated from the internal LAN. What is this architecture called?",
+"options":[
+"Intranet",
+"DMZ",
+"Air gap",
+"VLAN trunk"
+],
+"correctAnswerIndex":1,
+"explanationText":"A DMZ is used to host public services while protecting the internal network.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_006",
+"contentType":"exam_question",
+"category":"Security Architecture",
+"topic":"Secure Protocols",
+"subtopic":"Remote Access",
+"objectiveId":"3.1",
+"promptText":"Which protocol replaces Telnet to provide encrypted remote administration?",
+"options":[
+"FTP",
+"SSH",
+"SNMP",
+"TFTP"
+],
+"correctAnswerIndex":1,
+"explanationText":"SSH encrypts remote administrative connections, unlike Telnet.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_007",
+"contentType":"exam_question",
+"category":"Security Operations",
+"topic":"Monitoring",
+"subtopic":"SIEM",
+"objectiveId":"4.3",
+"promptText":"Which system aggregates and correlates security logs from multiple devices?",
+"options":[
+"IDS",
+"SIEM",
+"DLP",
+"Firewall"
+],
+"correctAnswerIndex":1,
+"explanationText":"A SIEM centralizes log collection and correlation for security monitoring.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_008",
+"contentType":"exam_question",
+"category":"Security Operations",
+"topic":"Incident Response",
+"subtopic":"Containment",
+"objectiveId":"4.2",
+"promptText":"What is the first step when ransomware is spreading through the network?",
+"options":[
+"Notify management",
+"Isolate infected systems",
+"Reinstall operating systems",
+"Pay the ransom"
+],
+"correctAnswerIndex":1,
+"explanationText":"The first action is containment by isolating infected systems.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_009",
+"contentType":"exam_question",
+"category":"Security Program Management and Oversight",
+"topic":"Compliance",
+"subtopic":"GDPR",
+"objectiveId":"5.4",
+"promptText":"Which regulation governs personal data protection in the European Union?",
+"options":[
+"HIPAA",
+"SOX",
+"PCI DSS",
+"GDPR"
+],
+"correctAnswerIndex":3,
+"explanationText":"GDPR regulates personal data protection within the EU.",
+"difficulty":1
+},
+{
+"id":"sec701_exam_a_010",
+"contentType":"exam_question",
+"category":"Security Program Management and Oversight",
+"topic":"Risk Management",
+"subtopic":"Risk Response",
+"objectiveId":"5.2",
+"promptText":"Purchasing cyber insurance is an example of which risk strategy?",
+"options":[
+"Risk avoidance",
+"Risk transfer",
+"Risk mitigation",
+"Risk acceptance"
+],
+"correctAnswerIndex":1,
+"explanationText":"Insurance transfers financial risk to a third party.",
+"difficulty":1
+}
+]

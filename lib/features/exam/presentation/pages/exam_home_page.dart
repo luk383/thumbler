@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../domain/exam_attempt.dart';
+import '../../domain/exam_result.dart';
 import '../controllers/exam_controller.dart';
 
 class ExamHomePage extends ConsumerWidget {
@@ -22,9 +24,10 @@ class ExamHomePage extends ConsumerWidget {
             const Text(
               'Exam',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 4),
             Text(
@@ -72,9 +75,12 @@ class ExamHomePage extends ConsumerWidget {
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   textStyle: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w700),
-                  disabledBackgroundColor:
-                      const Color(0xFF6C63FF).withAlpha(50),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  disabledBackgroundColor: const Color(
+                    0xFF6C63FF,
+                  ).withAlpha(50),
                 ),
                 onPressed: s.availableQuestions.isEmpty
                     ? null
@@ -89,11 +95,27 @@ class ExamHomePage extends ConsumerWidget {
             ),
 
             // ── History ──────────────────────────────────────────────────
-            if (s.history.isNotEmpty) ...[
+            if (s.results.isNotEmpty) ...[
               const SizedBox(height: 36),
-              const _SectionLabel('Recent Attempts'),
+              Row(
+                children: [
+                  const Expanded(child: _SectionLabel('Exam History')),
+                  TextButton(
+                    onPressed: () => context.push('/exam/history'),
+                    child: const Text('View all'),
+                  ),
+                ],
+              ),
               const SizedBox(height: 12),
-              ...s.history.take(5).map((a) => _HistoryCard(attempt: a)),
+              ...s.results
+                  .take(5)
+                  .map(
+                    (result) => _HistoryCard(
+                      result: result,
+                      onTap: () =>
+                          context.push('/exam/history/detail', extra: result),
+                    ),
+                  ),
             ],
 
             const SizedBox(height: 20),
@@ -118,17 +140,17 @@ class _SectionLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Text(
-          label.toUpperCase(),
-          style: const TextStyle(
-            color: Colors.white38,
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
-            letterSpacing: 1.1,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.only(bottom: 10),
+    child: Text(
+      label.toUpperCase(),
+      style: const TextStyle(
+        color: Colors.white38,
+        fontSize: 10,
+        fontWeight: FontWeight.w700,
+        letterSpacing: 1.1,
+      ),
+    ),
+  );
 }
 
 // ── Resume banner ─────────────────────────────────────────────────────────────
@@ -163,9 +185,10 @@ class _ResumeBanner extends StatelessWidget {
               Text(
                 'Exam in Progress',
                 style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700),
+                  color: Colors.orange,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),
@@ -179,7 +202,9 @@ class _ResumeBanner extends StatelessWidget {
                     Text(
                       '${attempt.answeredCount}/${attempt.totalQuestions} answered  ·  $timeStr remaining',
                       style: const TextStyle(
-                          color: Colors.white70, fontSize: 12),
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
                     ),
                     const SizedBox(height: 6),
                     ClipRRect(
@@ -188,8 +213,7 @@ class _ResumeBanner extends StatelessWidget {
                         value: progress,
                         minHeight: 4,
                         backgroundColor: Colors.white12,
-                        valueColor: const AlwaysStoppedAnimation(
-                            Colors.orange),
+                        valueColor: const AlwaysStoppedAnimation(Colors.orange),
                       ),
                     ),
                   ],
@@ -201,9 +225,13 @@ class _ResumeBanner extends StatelessWidget {
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 16, vertical: 10),
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                   textStyle: const TextStyle(
-                      fontWeight: FontWeight.w700, fontSize: 13),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 13,
+                  ),
                 ),
                 onPressed: onResume,
                 child: const Text('Resume'),
@@ -235,9 +263,10 @@ class _NoQuestionsCard extends StatelessWidget {
           const Text(
             'No exam questions imported yet',
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 6),
@@ -278,8 +307,7 @@ class _CountChips extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 160),
             margin: const EdgeInsets.only(right: 10),
-            padding:
-                const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
             decoration: BoxDecoration(
               color: isSelected
                   ? const Color(0xFF6C63FF)
@@ -304,8 +332,7 @@ class _CountChips extends StatelessWidget {
                 if (insufficient)
                   Text(
                     'only $available',
-                    style: const TextStyle(
-                        color: Colors.orange, fontSize: 9),
+                    style: const TextStyle(color: Colors.orange, fontSize: 9),
                   ),
               ],
             ),
@@ -347,8 +374,18 @@ class _InfoPill extends StatelessWidget {
 
 String _formatDate(DateTime d) {
   const months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
   final h = d.hour.toString().padLeft(2, '0');
   final m = d.minute.toString().padLeft(2, '0');
@@ -358,91 +395,81 @@ String _formatDate(DateTime d) {
 // ── History card ──────────────────────────────────────────────────────────────
 
 class _HistoryCard extends StatelessWidget {
-  const _HistoryCard({required this.attempt});
-  final ExamAttempt attempt;
+  const _HistoryCard({required this.result, required this.onTap});
+  final ExamResult result;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final pct = attempt.totalQuestions == 0
-        ? 0
-        : (attempt.scoreCorrect / attempt.totalQuestions * 100).round();
+    final pct = result.percentageScore;
     final passed = pct >= 75;
     final color = passed ? Colors.green : Colors.redAccent;
 
-    final dateStr = attempt.finishedAt != null
-        ? _formatDate(attempt.finishedAt!)
-        : 'In progress';
-
-    final elapsedMin = attempt.elapsedSeconds ~/ 60;
-    final elapsedSec = attempt.elapsedSeconds % 60;
-
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(8),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: Colors.white.withAlpha(15)),
-      ),
-      child: Row(
-        children: [
-          // Score badge
-          Container(
-            width: 54,
-            height: 54,
-            decoration: BoxDecoration(
-              color: color.withAlpha(30),
-              shape: BoxShape.circle,
-              border: Border.all(color: color.withAlpha(100), width: 2),
-            ),
-            child: Center(
-              child: Text(
-                '$pct%',
-                style: TextStyle(
-                  color: color,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 10),
+        padding: const EdgeInsets.all(14),
+        decoration: BoxDecoration(
+          color: Colors.white.withAlpha(8),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.white.withAlpha(15)),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 54,
+              height: 54,
+              decoration: BoxDecoration(
+                color: color.withAlpha(30),
+                shape: BoxShape.circle,
+                border: Border.all(color: color.withAlpha(100), width: 2),
+              ),
+              child: Center(
+                child: Text(
+                  '$pct%',
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
-          ),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${attempt.scoreCorrect}/${attempt.totalQuestions} correct  ·  $dateStr',
-                  style: const TextStyle(
-                      color: Colors.white70, fontSize: 12),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  '${elapsedMin}m ${elapsedSec}s used  ·  '
-                  '${attempt.flaggedCount} flagged',
-                  style: const TextStyle(
-                      color: Colors.white38, fontSize: 11),
-                ),
-              ],
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${result.correctAnswers}/${result.totalQuestions} correct  ·  ${_formatDate(result.completedAt)}',
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    '${result.wrongAnswers} wrong  ·  ${result.weakestDomain ?? 'No weakest domain'}',
+                    style: const TextStyle(color: Colors.white38, fontSize: 11),
+                  ),
+                ],
+              ),
             ),
-          ),
-          // Pass/Fail badge
-          Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 8, vertical: 4),
-            decoration: BoxDecoration(
-              color: color.withAlpha(30),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              passed ? 'PASS' : 'FAIL',
-              style: TextStyle(
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              decoration: BoxDecoration(
+                color: color.withAlpha(30),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                passed ? 'PASS' : 'FAIL',
+                style: TextStyle(
                   color: color,
                   fontSize: 10,
-                  fontWeight: FontWeight.w800),
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

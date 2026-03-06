@@ -30,9 +30,10 @@ class StudyLauncherPage extends ConsumerWidget {
             const Text(
               'Study',
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold),
+                color: Colors.white,
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 4),
             Text(
@@ -82,9 +83,7 @@ class StudyLauncherPage extends ConsumerWidget {
                   selected: s.selectedTopic ?? 'All topics',
                   onSelect: (v) {
                     if (v != 'All topics') {
-                      if (!ref
-                          .read(proGuardProvider)
-                          .canUseTopicSelection()) {
+                      if (!ref.read(proGuardProvider).canUseTopicSelection()) {
                         _showProDialog(context, 'Topic filtering');
                         return;
                       }
@@ -232,9 +231,10 @@ class _EmptyBanner extends StatelessWidget {
           const Text(
             'No cards in Study yet',
             style: TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 6),
@@ -290,8 +290,7 @@ class _PreviewPill extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF6C63FF).withAlpha(22),
         borderRadius: BorderRadius.circular(10),
-        border:
-            Border.all(color: const Color(0xFF6C63FF).withAlpha(55)),
+        border: Border.all(color: const Color(0xFF6C63FF).withAlpha(55)),
       ),
       child: Text(
         '$label  ·  Total: ${state.availableCount}  ·  Due: ${state.dueCount}  ·  Weak: ${state.weakCount}  ·  New: ${state.newCount}',
@@ -333,11 +332,14 @@ class _StartButton extends StatelessWidget {
           style: OutlinedButton.styleFrom(
             foregroundColor: accentColor ?? Colors.white70,
             side: BorderSide(
-                color: accentColor ?? Colors.white.withAlpha(50),
-                width: 1.5),
+              color: accentColor ?? Colors.white.withAlpha(50),
+              width: 1.5,
+            ),
             padding: const EdgeInsets.symmetric(vertical: 14),
             textStyle: const TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w600),
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
           ),
           onPressed: onPressed,
           icon: Icon(icon, size: 18),
@@ -350,8 +352,7 @@ class _StartButton extends StatelessWidget {
       child: ElevatedButton.icon(
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 14),
-          textStyle:
-              const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
         ),
         onPressed: onPressed,
         icon: Icon(icon, size: 18),
@@ -391,9 +392,10 @@ class _DisabledStartButton extends StatelessWidget {
             Text(
               '$label  ($reason)',
               style: const TextStyle(
-                  color: Colors.white60,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600),
+                color: Colors.white60,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -419,8 +421,7 @@ class _LibraryCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xFF6C63FF).withAlpha(18),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-              color: const Color(0xFF6C63FF).withAlpha(60)),
+          border: Border.all(color: const Color(0xFF6C63FF).withAlpha(60)),
         ),
         child: Row(
           children: [
@@ -431,8 +432,11 @@ class _LibraryCard extends StatelessWidget {
                 color: const Color(0xFF6C63FF).withAlpha(50),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(Icons.library_books_outlined,
-                  color: Color(0xFFADA8FF), size: 22),
+              child: const Icon(
+                Icons.library_books_outlined,
+                color: Color(0xFFADA8FF),
+                size: 22,
+              ),
             ),
             const SizedBox(width: 14),
             const Expanded(
@@ -442,15 +446,15 @@ class _LibraryCard extends StatelessWidget {
                   Text(
                     'Library / Import Packs',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   SizedBox(height: 3),
                   Text(
-                    'Starter Pack · Exam Pack · more coming soon',
-                    style:
-                        TextStyle(color: Colors.white54, fontSize: 11),
+                    'Browse and import any JSON pack found in assets/decks/.',
+                    style: TextStyle(color: Colors.white54, fontSize: 11),
                   ),
                 ],
               ),
@@ -491,10 +495,11 @@ class _EmptyFilterResult extends StatelessWidget {
 // ============================================================================
 
 class _ChipRow extends StatelessWidget {
-  const _ChipRow(
-      {required this.chips,
-      required this.selected,
-      required this.onSelect});
+  const _ChipRow({
+    required this.chips,
+    required this.selected,
+    required this.onSelect,
+  });
   final List<String> chips;
   final String selected;
   final void Function(String) onSelect;
@@ -505,11 +510,13 @@ class _ChipRow extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       child: Row(
         children: chips
-            .map((c) => _Chip(
-                  label: c,
-                  selected: c == selected,
-                  onTap: () => onSelect(c),
-                ))
+            .map(
+              (c) => _Chip(
+                label: c,
+                selected: c == selected,
+                onTap: () => onSelect(c),
+              ),
+            )
             .toList(),
       ),
     );
@@ -517,10 +524,11 @@ class _ChipRow extends StatelessWidget {
 }
 
 class _Chip extends StatelessWidget {
-  const _Chip(
-      {required this.label,
-      required this.selected,
-      required this.onTap});
+  const _Chip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
   final String label;
   final bool selected;
   final VoidCallback onTap;
@@ -532,8 +540,7 @@ class _Chip extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 180),
         margin: const EdgeInsets.only(right: 8),
-        padding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: selected
               ? const Color(0xFF6C63FF)
@@ -579,10 +586,10 @@ class _QueueTypeChipRow extends StatelessWidget {
       child: Row(
         children: SessionQueueType.values.map((type) {
           final count = switch (type) {
-            SessionQueueType.due      => state.dueCount,
-            SessionQueueType.weak     => state.weakCount,
+            SessionQueueType.due => state.dueCount,
+            SessionQueueType.weak => state.weakCount,
             SessionQueueType.newCards => state.newCount,
-            SessionQueueType.random   => state.availableCount,
+            SessionQueueType.random => state.availableCount,
           };
           final isSelected = type == selected;
           return GestureDetector(
@@ -705,17 +712,17 @@ class _EmptyQueueBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     final (emoji, message) = switch (queueType) {
       SessionQueueType.due => (
-          '🎉',
-          'No cards due for review. Great job!\nCome back later, or switch to Random.'
-        ),
+        '🎉',
+        'No cards due for review. Great job!\nCome back later, or switch to Random.',
+      ),
       SessionQueueType.weak => (
-          '💪',
-          'No weak cards found.\nKeep studying to track your mistakes.'
-        ),
+        '💪',
+        'No weak cards found.\nKeep studying to track your mistakes.',
+      ),
       SessionQueueType.newCards => (
-          '📭',
-          'No new cards left.\nImport a deck pack or add from Feed.'
-        ),
+        '📭',
+        'No new cards left.\nImport a deck pack or add from Feed.',
+      ),
       SessionQueueType.random => ('🃏', 'No cards available.'),
     };
 
@@ -752,14 +759,15 @@ void _showProDialog(BuildContext context, String featureName) {
     context: context,
     builder: (ctx) => AlertDialog(
       backgroundColor: const Color(0xFF1A1730),
-      shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
       title: const Row(
         children: [
           Text('⭐', style: TextStyle(fontSize: 22)),
           SizedBox(width: 8),
-          Text('Pro Feature',
-              style: TextStyle(color: Colors.white, fontSize: 17)),
+          Text(
+            'Pro Feature',
+            style: TextStyle(color: Colors.white, fontSize: 17),
+          ),
         ],
       ),
       content: Text(
@@ -769,8 +777,10 @@ void _showProDialog(BuildContext context, String featureName) {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Maybe later',
-              style: TextStyle(color: Colors.white54)),
+          child: const Text(
+            'Maybe later',
+            style: TextStyle(color: Colors.white54),
+          ),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(

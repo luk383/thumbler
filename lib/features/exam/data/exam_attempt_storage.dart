@@ -21,8 +21,7 @@ class ExamAttemptStorage {
     }
   }
 
-  void saveActive(ExamAttempt attempt) =>
-      _box.put(_activeKey, attempt.toMap());
+  void saveActive(ExamAttempt attempt) => _box.put(_activeKey, attempt.toMap());
 
   void clearActive() => _box.delete(_activeKey);
 
@@ -32,9 +31,7 @@ class ExamAttemptStorage {
     final list = _box.get(_historyKey);
     if (list == null) return [];
     try {
-      return (list as List)
-          .map((m) => ExamAttempt.fromMap(m as Map))
-          .toList();
+      return (list as List).map((m) => ExamAttempt.fromMap(m as Map)).toList();
     } catch (_) {
       return [];
     }
@@ -43,9 +40,10 @@ class ExamAttemptStorage {
   /// Prepends attempt to history; keeps last 10.
   void addToHistory(ExamAttempt attempt) {
     final history = loadHistory()..insert(0, attempt);
-    _box.put(
-      _historyKey,
-      history.take(10).map((a) => a.toMap()).toList(),
-    );
+    _box.put(_historyKey, history.take(10).map((a) => a.toMap()).toList());
   }
+
+  Future<void> clearHistory() => _box.delete(_historyKey);
+
+  Future<void> clearAll() => _box.clear();
 }

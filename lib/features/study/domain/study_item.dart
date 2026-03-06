@@ -6,11 +6,13 @@ class StudyItem {
     required this.contentType,
     required this.category,
     this.topic,
+    this.subtopic,
     this.objectiveId,
     required this.promptText,
     required this.options,
     required this.correctAnswerIndex,
     this.explanationText,
+    this.difficulty,
     this.againCount = 0,
     this.goodCount = 0,
     this.timesSeen = 0,
@@ -28,12 +30,14 @@ class StudyItem {
 
   /// Optional subtopic within a category (e.g. "Security" within "Technology").
   final String? topic;
+  final String? subtopic;
   final String? objectiveId;
 
   final String promptText; // hook (microCard) or question (examQuestion)
   final String? explanationText;
   final List<String> options;
   final int correctAnswerIndex;
+  final int? difficulty;
 
   // Stats
   final int againCount;
@@ -63,11 +67,13 @@ class StudyItem {
     contentType: contentType,
     category: category,
     topic: topic,
+    subtopic: subtopic,
     objectiveId: objectiveId,
     promptText: promptText,
     explanationText: explanationText,
     options: options,
     correctAnswerIndex: correctAnswerIndex,
+    difficulty: difficulty,
     againCount: againCount ?? this.againCount,
     goodCount: goodCount ?? this.goodCount,
     timesSeen: timesSeen ?? this.timesSeen,
@@ -83,11 +89,13 @@ class StudyItem {
     'contentType': contentType.index,
     'category': category,
     'topic': topic,
+    'subtopic': subtopic,
     'objectiveId': objectiveId,
     'promptText': promptText,
     'explanationText': explanationText,
     'options': options,
     'correctAnswerIndex': correctAnswerIndex,
+    'difficulty': difficulty,
     'againCount': againCount,
     'goodCount': goodCount,
     'timesSeen': timesSeen,
@@ -103,12 +111,14 @@ class StudyItem {
     contentType: ContentType.values[(map['contentType'] as num?)?.toInt() ?? 0],
     category: map['category'] as String,
     topic: map['topic'] as String?,
+    subtopic: map['subtopic'] as String?,
     objectiveId: map['objectiveId'] as String?,
     promptText: map['promptText'] as String? ?? map['hook'] as String? ?? '',
     explanationText: map['explanationText'] as String?,
     options:
         (map['options'] as List?)?.map((e) => e as String).toList() ?? const [],
     correctAnswerIndex: (map['correctAnswerIndex'] as num?)?.toInt() ?? 0,
+    difficulty: (map['difficulty'] as num?)?.toInt(),
     againCount: (map['againCount'] as num?)?.toInt() ?? 0,
     goodCount: (map['goodCount'] as num?)?.toInt() ?? 0,
     timesSeen: (map['timesSeen'] as num?)?.toInt() ?? 0,

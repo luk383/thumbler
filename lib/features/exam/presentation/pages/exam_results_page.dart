@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/analytics/domain_analyzer.dart';
 import '../../domain/exam_attempt.dart';
 import '../../../study/domain/study_item.dart';
 import '../../../study/presentation/controllers/study_controller.dart';
@@ -67,40 +68,16 @@ class _ResultsContent extends StatelessWidget {
     final elapsedMin = attempt.elapsedSeconds ~/ 60;
     final elapsedSec = attempt.elapsedSeconds % 60;
 
-    final domainStats = _groupStats(
+    final domainStats = calculateDomainStats(
       questions: sessionQuestions,
-      attempt: attempt,
-      keyFor: (q) => q.category,
+      answers: attempt.answers,
     );
-    final sortedDomains = _sortWeakest(domainStats).take(3).toList();
-    final weakestDomain = _pickWeakest(domainStats, minQuestions: 3);
-
-    final topicStatsInWeakestDomain = weakestDomain == null
-        ? const <_AreaStat>[]
-        : _sortWeakest(
-            _groupStats(
-              questions: sessionQuestions
-                  .where(
-                    (q) => q.category == weakestDomain.key && q.topic != null,
-                  )
-                  .toList(),
-              attempt: attempt,
-              keyFor: (q) => q.topic!,
-            ),
-          ).take(3).toList();
-    final weakestTopic = _pickWeakest(
-      topicStatsInWeakestDomain,
-      minQuestions: 3,
+    final domainScores = calculateDomainScores(
+      questions: sessionQuestions,
+      answers: attempt.answers,
     );
-
-    final objectiveStats = _groupStats(
-      questions: sessionQuestions
-          .where((q) => q.objectiveId != null && q.objectiveId!.isNotEmpty)
-          .toList(),
-      attempt: attempt,
-      keyFor: (q) => q.objectiveId!,
-    );
-    final weakestObjective = _pickWeakest(objectiveStats, minQuestions: 3);
+    final domainPerformance = _sortDomainPerformance(domainStats);
+    final weakestDomain = getWeakestDomain(domainScores);
 
     final wrongIds = sessionQuestions
         .where((q) {
@@ -179,42 +156,16 @@ class _ResultsContent extends StatelessWidget {
             ),
             const SizedBox(height: 32),
 
-            // ── Domain breakdown ─────────────────────────────────────────
-            if (sortedDomains.isNotEmpty) ...[
-              const _SectionLabel('Domain Breakdown'),
+            // ── Domain performance ──────────────────────────────────────
+            if (domainPerformance.isNotEmpty) ...[
+              const _SectionLabel('Domain Performance'),
               const SizedBox(height: 8),
-              ...sortedDomains.map((e) => _WeakAreaRow(stat: e)),
-              const SizedBox(height: 28),
-            ],
-
-            // ── Weak areas bridge ───────────────────────────────────────
-            const _SectionLabel('Weak Areas'),
-            const SizedBox(height: 8),
-            if (sortedDomains.isEmpty)
-              const Text(
-                'Not enough grouped data to detect weak areas yet.',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
-              )
-            else ...[
-              ...sortedDomains.map((e) => _WeakAreaRow(stat: e)),
-              if (topicStatsInWeakestDomain.isNotEmpty) ...[
-                const SizedBox(height: 12),
-                Text(
-                  'Weakest topics in ${weakestDomain?.key}:',
-                  style: const TextStyle(color: Colors.white54, fontSize: 11),
+              ...domainPerformance.map(
+                (entry) => _DomainPerformanceRow(
+                  domain: entry.key,
+                  stats: entry.value,
                 ),
-                const SizedBox(height: 6),
-                ...topicStatsInWeakestDomain.map(
-                  (e) => _WeakAreaRow(stat: e, compact: true),
-                ),
-              ],
-              if (weakestObjective != null) ...[
-                const SizedBox(height: 12),
-                Text(
-                  'Weakest objective: ${weakestObjective.key} (${weakestObjective.percentageInt}%)',
-                  style: const TextStyle(color: Colors.white54, fontSize: 11),
-                ),
-              ],
+              ),
               const SizedBox(height: 16),
               SizedBox(
                 width: double.infinity,
@@ -227,88 +178,57 @@ class _ResultsContent extends StatelessWidget {
                       ? null
                       : () {
                           context.go(
-                            '/study?category=${Uri.encodeComponent(weakestDomain.key)}'
+                            '/study?category=${Uri.encodeComponent(weakestDomain)}'
                             '&mode=study&source=exam_bridge&autostart=true'
                             '&lastExamAttemptId=${Uri.encodeComponent(attempt.id)}',
                           );
                         },
                   icon: const Icon(Icons.school_outlined, size: 18),
                   label: Text(
-                    'Train Weakest Domain'
-                    '${weakestDomain != null ? ' (${weakestDomain.key})' : ''}',
+                    weakestDomain == null
+                        ? 'Train Weakest Domain'
+                        : 'Train Weakest Domain ($weakestDomain)',
                   ),
                 ),
               ),
-              if (weakestTopic != null) ...[
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF236BFF),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    onPressed: () {
-                      context.go(
-                        '/study?category=${Uri.encodeComponent(weakestDomain!.key)}'
-                        '&topic=${Uri.encodeComponent(weakestTopic.key)}'
-                        '&mode=study&source=exam_bridge&autostart=true'
-                        '&lastExamAttemptId=${Uri.encodeComponent(attempt.id)}',
-                      );
-                    },
-                    icon: const Icon(Icons.filter_alt_outlined, size: 18),
-                    label: const Text('Train Weakest Topic'),
-                  ),
-                ),
-              ],
-              if (wrongIds.isNotEmpty) ...[
-                const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange.withAlpha(200),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                    ),
-                    onPressed: () {
-                      context.go(
-                        '/study',
-                        extra: StudyExternalSessionRequest(
-                          source: 'exam_bridge',
-                          questionIds: wrongIds,
-                          autostart: true,
-                          sessionLength: 10,
-                          lastExamAttemptId: attempt.id,
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.replay_outlined, size: 18),
-                    label: const Text('Train Wrong Answers'),
-                  ),
-                ),
-              ],
-              const SizedBox(height: 28),
-            ],
-
-            // ── Actions ──────────────────────────────────────────────────
-            if (attempt.scoreCorrect < attempt.totalQuestions) ...[
+              const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent.withAlpha(200),
+                    backgroundColor: Colors.orange.withAlpha(200),
                     padding: const EdgeInsets.symmetric(vertical: 14),
                   ),
-                  onPressed: notifier.startReview,
-                  icon: const Icon(Icons.rate_review_outlined, size: 18),
-                  label: Text(
-                    'Review Wrong  (${attempt.totalQuestions - attempt.scoreCorrect})',
-                  ),
+                  onPressed: wrongIds.isEmpty
+                      ? null
+                      : () {
+                          context.go(
+                            '/study',
+                            extra: StudyExternalSessionRequest(
+                              source: 'exam_bridge',
+                              questionIds: wrongIds,
+                              autostart: true,
+                              sessionLength: wrongIds.length,
+                              lastExamAttemptId: attempt.id,
+                            ),
+                          );
+                        },
+                  icon: const Icon(Icons.replay_outlined, size: 18),
+                  label: const Text('Review Wrong Answers'),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 28),
+            ] else ...[
+              const _SectionLabel('Domain Performance'),
+              const SizedBox(height: 8),
+              const Text(
+                'Not enough grouped data to detect domain performance yet.',
+                style: TextStyle(color: Colors.white54, fontSize: 12),
+              ),
+              const SizedBox(height: 28),
             ],
 
+            // ── Actions ──────────────────────────────────────────────────
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
@@ -328,59 +248,18 @@ class _ResultsContent extends StatelessWidget {
   }
 }
 
-class _AreaStat {
-  const _AreaStat({
-    required this.key,
-    required this.total,
-    required this.correct,
-    this.category,
-  });
-
-  final String key;
-  final int total;
-  final int correct;
-  final String? category;
-
-  double get percentage => total == 0 ? 0 : correct / total;
-  int get percentageInt => (percentage * 100).round();
-}
-
-List<_AreaStat> _groupStats({
-  required List<StudyItem> questions,
-  required ExamAttempt attempt,
-  required String Function(StudyItem) keyFor,
-}) {
-  final stats = <String, _AreaStat>{};
-  for (final q in questions) {
-    final key = keyFor(q).trim();
-    if (key.isEmpty) continue;
-    final selected = attempt.answers[q.id];
-    final correct = selected != null && selected == q.correctAnswerIndex;
-    final prev = stats[key];
-    stats[key] = _AreaStat(
-      key: key,
-      total: (prev?.total ?? 0) + 1,
-      correct: (prev?.correct ?? 0) + (correct ? 1 : 0),
-      category: q.category,
-    );
-  }
-  return stats.values.toList();
-}
-
-List<_AreaStat> _sortWeakest(List<_AreaStat> items) {
-  final sorted = [...items];
-  sorted.sort((a, b) {
-    final byAccuracy = a.percentage.compareTo(b.percentage);
-    if (byAccuracy != 0) return byAccuracy;
-    return b.total.compareTo(a.total);
-  });
+List<MapEntry<String, DomainStats>> _sortDomainPerformance(
+  Map<String, DomainStats> stats,
+) {
+  final sorted = stats.entries.toList()
+    ..sort((a, b) {
+      final byAccuracy = a.value.percentage.compareTo(b.value.percentage);
+      if (byAccuracy != 0) return byAccuracy;
+      final byTotal = b.value.total.compareTo(a.value.total);
+      if (byTotal != 0) return byTotal;
+      return a.key.toLowerCase().compareTo(b.key.toLowerCase());
+    });
   return sorted;
-}
-
-_AreaStat? _pickWeakest(List<_AreaStat> items, {int minQuestions = 3}) {
-  final eligible = items.where((e) => e.total >= minQuestions).toList();
-  if (eligible.isEmpty) return null;
-  return _sortWeakest(eligible).first;
 }
 
 // ── Section label ─────────────────────────────────────────────────────────────
@@ -401,14 +280,14 @@ class _SectionLabel extends StatelessWidget {
   );
 }
 
-class _WeakAreaRow extends StatelessWidget {
-  const _WeakAreaRow({required this.stat, this.compact = false});
-  final _AreaStat stat;
-  final bool compact;
+class _DomainPerformanceRow extends StatelessWidget {
+  const _DomainPerformanceRow({required this.domain, required this.stats});
+  final String domain;
+  final DomainStats stats;
 
   @override
   Widget build(BuildContext context) {
-    final pct = stat.percentageInt;
+    final pct = stats.percentageInt;
     final color = pct >= 75
         ? Colors.green
         : pct >= 50
@@ -417,7 +296,7 @@ class _WeakAreaRow extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: compact ? 8 : 11),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(8),
         borderRadius: BorderRadius.circular(12),
@@ -427,17 +306,17 @@ class _WeakAreaRow extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              stat.key,
-              style: TextStyle(
+              domain,
+              style: const TextStyle(
                 color: Colors.white70,
-                fontSize: compact ? 11 : 12,
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
           const SizedBox(width: 10),
           Text(
-            '${stat.correct}/${stat.total}',
+            '${stats.correct}/${stats.total}',
             style: const TextStyle(color: Colors.white54, fontSize: 11),
           ),
           const SizedBox(width: 8),

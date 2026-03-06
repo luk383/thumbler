@@ -8,8 +8,10 @@ class DeckPackService {
   /// Imports all items from [pack] into [storage], skipping duplicates by id.
   ImportResult importPack(DeckPack pack, StudyStorage storage) {
     int added = 0, skipped = 0;
+    final seenInPack = <String>{};
+
     for (final item in pack.items) {
-      if (storage.contains(item.id)) {
+      if (!seenInPack.add(item.id) || storage.contains(item.id)) {
         skipped++;
         continue;
       }

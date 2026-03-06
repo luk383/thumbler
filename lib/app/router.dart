@@ -2,6 +2,9 @@ import 'package:go_router/go_router.dart';
 
 import '../features/bookmarks/presentation/bookmarks_page.dart';
 import '../features/exam/presentation/pages/exam_page.dart';
+import '../features/exam/presentation/pages/exam_history_page.dart';
+import '../features/exam/presentation/pages/exam_result_detail_page.dart';
+import '../features/exam/domain/exam_result.dart';
 import '../features/feed/presentation/pages/feed_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
@@ -74,6 +77,24 @@ final appRouter = GoRouter(
             GoRoute(
               path: '/exam',
               builder: (context, state) => const ExamPage(),
+              routes: [
+                GoRoute(
+                  path: 'history',
+                  builder: (context, state) => const ExamHistoryPage(),
+                  routes: [
+                    GoRoute(
+                      path: 'detail',
+                      builder: (context, state) {
+                        final extra = state.extra;
+                        if (extra is! ExamResult) {
+                          return const ExamHistoryPage();
+                        }
+                        return ExamResultDetailPage(result: extra);
+                      },
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
