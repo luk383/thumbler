@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../app/l10n/app_localizations.dart';
 import '../../../core/ui/app_surfaces.dart';
 import '../../feed/domain/lesson.dart';
 import 'bookmarks_notifier.dart';
@@ -10,14 +11,15 @@ class BookmarksPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final bookmarkedAsync = ref.watch(bookmarkedLessonsProvider);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: const Text(
-          'Saved',
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Text(
+          l10n.navSaved,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0,
@@ -29,7 +31,7 @@ class BookmarksPage extends ConsumerWidget {
             padding: const EdgeInsets.all(20),
             child: AppEmptyStateCard(
               icon: Icons.error_outline,
-              title: 'Saved lessons unavailable',
+              title: l10n.bookmarksErrorTitle,
               message: 'The local saved list could not be loaded.\n$e',
             ),
           ),
@@ -54,13 +56,13 @@ class _EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20),
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.all(20),
       child: AppEmptyStateCard(
         icon: Icons.bookmark_outline,
-        title: 'No saved lessons yet',
-        message:
-            'Bookmark useful cards from the feed to build a quick review list here.',
+        title: l10n.bookmarksEmptyTitle,
+        message: l10n.bookmarksEmptyMessage,
       ),
     );
   }

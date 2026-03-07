@@ -4,6 +4,8 @@ abstract final class AppTheme {
   static const _accent = Color(0xFF6C63FF);
   static const _surface = Color(0xFF12131A);
   static const _surfaceElevated = Color(0xFF181B24);
+  static const _lightSurface = Color(0xFFF7F5EF);
+  static const _lightSurfaceElevated = Color(0xFFFFFFFF);
 
   static final dark = ThemeData(
     useMaterial3: true,
@@ -136,6 +138,148 @@ abstract final class AppTheme {
       bodySmall: TextStyle(color: Colors.white38, fontSize: 12, height: 1.4),
       labelLarge: TextStyle(
         color: Colors.white,
+        fontSize: 15,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  );
+
+  static final light = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.light,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: _accent,
+      brightness: Brightness.light,
+      surface: _lightSurface,
+    ),
+    scaffoldBackgroundColor: const Color(0xFFFCFBF7),
+    cardColor: _lightSurfaceElevated,
+    appBarTheme: const AppBarTheme(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      centerTitle: false,
+      surfaceTintColor: Colors.transparent,
+      titleTextStyle: TextStyle(
+        color: Color(0xFF11131A),
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+      ),
+      iconTheme: IconThemeData(color: Color(0xFF11131A)),
+    ),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: const Color(0xFFF3F1EA),
+      indicatorColor: _accent.withAlpha(28),
+      labelTextStyle: WidgetStateProperty.all(
+        const TextStyle(color: Color(0xFF3B4050), fontSize: 12),
+      ),
+    ),
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: _lightSurfaceElevated,
+      contentTextStyle: const TextStyle(color: Color(0xFF11131A)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      behavior: SnackBarBehavior.floating,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: _accent,
+        foregroundColor: Colors.white,
+        disabledBackgroundColor: Colors.black12,
+        disabledForegroundColor: Colors.black38,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 18),
+        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: const Color(0xFF11131A),
+        side: BorderSide(color: Colors.black.withAlpha(16)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 18),
+        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+      ),
+    ),
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        backgroundColor: _accent,
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: const Color(0xFF3B4050),
+        backgroundColor: Colors.black.withAlpha(6),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      ),
+    ),
+    chipTheme: ChipThemeData(
+      backgroundColor: Colors.black.withAlpha(5),
+      selectedColor: _accent.withAlpha(28),
+      disabledColor: Colors.black12,
+      side: BorderSide(color: Colors.black.withAlpha(10)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      labelStyle: const TextStyle(color: Color(0xFF3B4050), fontSize: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: _accent,
+      linearTrackColor: Color(0x22000000),
+    ),
+    dividerColor: Colors.black.withAlpha(10),
+    bottomSheetTheme: const BottomSheetThemeData(
+      backgroundColor: Colors.transparent,
+      surfaceTintColor: Colors.transparent,
+    ),
+    dialogTheme: DialogThemeData(
+      backgroundColor: _lightSurfaceElevated,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      titleTextStyle: const TextStyle(
+        color: Color(0xFF11131A),
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+      ),
+      contentTextStyle: const TextStyle(color: Color(0xFF4E5465), fontSize: 14),
+    ),
+    textSelectionTheme: const TextSelectionThemeData(
+      cursorColor: _accent,
+      selectionColor: Color(0x336C63FF),
+      selectionHandleColor: _accent,
+    ),
+    textTheme: const TextTheme(
+      headlineLarge: TextStyle(
+        color: Color(0xFF11131A),
+        fontWeight: FontWeight.w800,
+        fontSize: 30,
+        height: 1.15,
+      ),
+      headlineMedium: TextStyle(
+        color: Color(0xFF11131A),
+        fontWeight: FontWeight.w700,
+        fontSize: 24,
+        height: 1.2,
+      ),
+      titleLarge: TextStyle(
+        color: Color(0xFF11131A),
+        fontWeight: FontWeight.w700,
+        fontSize: 18,
+      ),
+      titleMedium: TextStyle(
+        color: Color(0xFF11131A),
+        fontWeight: FontWeight.w600,
+        fontSize: 15,
+      ),
+      bodyLarge: TextStyle(color: Color(0xFF2F3442), fontSize: 16, height: 1.6),
+      bodyMedium: TextStyle(
+        color: Color(0xFF4E5465),
+        fontSize: 14,
+        height: 1.5,
+      ),
+      bodySmall: TextStyle(color: Color(0xFF6F7584), fontSize: 12, height: 1.4),
+      labelLarge: TextStyle(
+        color: Color(0xFF11131A),
         fontSize: 15,
         fontWeight: FontWeight.w600,
       ),

@@ -19,6 +19,7 @@ class AppGlassCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resolvedTint = tint ?? const Color(0xFF6C63FF);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: margin,
       padding: padding,
@@ -27,9 +28,9 @@ class AppGlassCard extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Colors.white.withAlpha(12),
+            (isDark ? Colors.white : Colors.black).withAlpha(isDark ? 12 : 5),
             resolvedTint.withAlpha(10),
-            Colors.white.withAlpha(6),
+            (isDark ? Colors.white : Colors.black).withAlpha(isDark ? 6 : 2),
           ],
         ),
         borderRadius: BorderRadius.circular(radius),
@@ -79,7 +80,9 @@ class AppPageIntro extends StatelessWidget {
               Text(
                 subtitle,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Colors.white54,
+                  color: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.color?.withAlpha(180),
                   height: 1.45,
                 ),
               ),
@@ -105,8 +108,10 @@ class AppSectionHeader extends StatelessWidget {
         Expanded(
           child: Text(
             label.toUpperCase(),
-            style: const TextStyle(
-              color: Colors.white38,
+            style: TextStyle(
+              color: Theme.of(
+                context,
+              ).textTheme.bodySmall?.color?.withAlpha(180),
               fontSize: 10,
               fontWeight: FontWeight.w700,
               letterSpacing: 1.1,
@@ -177,17 +182,18 @@ class AppEmptyStateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final onSurface = Theme.of(context).textTheme.bodyLarge?.color;
     return AppGlassCard(
       padding: const EdgeInsets.all(20),
       tint: Colors.white,
       child: Column(
         children: [
-          Icon(icon, color: Colors.white24, size: 48),
+          Icon(icon, color: onSurface?.withAlpha(70), size: 48),
           const SizedBox(height: 14),
           Text(
             title,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: onSurface,
               fontSize: 16,
               fontWeight: FontWeight.w700,
             ),
@@ -196,8 +202,10 @@ class AppEmptyStateCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             message,
-            style: const TextStyle(
-              color: Colors.white54,
+            style: TextStyle(
+              color: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.color?.withAlpha(190),
               fontSize: 13,
               height: 1.45,
             ),

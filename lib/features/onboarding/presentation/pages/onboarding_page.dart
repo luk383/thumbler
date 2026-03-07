@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
 import '../../../study/data/deck_library_storage.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
@@ -60,8 +61,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -71,14 +73,13 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 onPageChanged: (value) => setState(() => _pageIndex = value),
                 children: [
                   _OnboardingStep(
-                    title: 'Learn something new in seconds',
-                    subtitle: 'Swipe through questions and train your mind.',
+                    title: l10n.onboardingHeroTitle,
+                    subtitle: l10n.onboardingHeroSubtitle,
                     child: const _HeroCard(),
                   ),
                   _OnboardingStep(
-                    title: 'What do you want to learn?',
-                    subtitle:
-                        'Pick one or more interests and start the Feed instantly.',
+                    title: l10n.onboardingInterestsTitle,
+                    subtitle: l10n.onboardingInterestsSubtitle,
                     child: Wrap(
                       spacing: 10,
                       runSpacing: 10,
@@ -110,7 +111,10 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   if (_pageIndex == 0)
-                    TextButton(onPressed: _finish, child: const Text('Skip')),
+                    TextButton(
+                      onPressed: _finish,
+                      child: Text(l10n.onboardingSkip),
+                    ),
                   FilledButton(
                     onPressed: _isFinishing
                         ? null
@@ -122,7 +126,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
                         : Text(
-                            _pageIndex == 0 ? 'Start learning' : 'Start Feed',
+                            _pageIndex == 0
+                                ? l10n.onboardingStartLearning
+                                : l10n.onboardingStartFeed,
                           ),
                   ),
                 ],
@@ -172,28 +178,33 @@ class _HeroCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         AppStatusBadge(
-          label: 'Feed first',
+          label: l10n.onboardingBadge,
           icon: Icons.bolt_rounded,
-          tint: Color(0xFFADA8FF),
+          tint: const Color(0xFFADA8FF),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
-          'Open the app, see a question, answer, keep going.',
-          style: TextStyle(
+          l10n.onboardingHeroBody,
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 24,
             fontWeight: FontWeight.w700,
             height: 1.2,
           ),
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
         Text(
-          'No setup friction. Just one useful question at a time.',
-          style: TextStyle(color: Colors.white60, fontSize: 14, height: 1.4),
+          l10n.onboardingHeroFoot,
+          style: const TextStyle(
+            color: Colors.white60,
+            fontSize: 14,
+            height: 1.4,
+          ),
         ),
       ],
     );

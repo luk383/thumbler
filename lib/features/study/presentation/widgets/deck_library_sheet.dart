@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
+import '../../../paywall/presentation/paywall_page.dart';
+import '../../../paywall/pro_guard.dart';
 import '../../data/deck_export_service.dart';
 import '../../data/deck_pack.dart';
 import '../controllers/deck_library_controller.dart';
@@ -25,7 +28,9 @@ class DeckLibrarySheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final lib = ref.watch(deckLibraryProvider);
+    final isPro = ref.watch(isProProvider);
     final progressByDeck = ref.watch(deckProgressSummariesProvider);
     final notifier = ref.read(deckLibraryProvider.notifier);
     final maxHeight = MediaQuery.of(context).size.height * 0.88;
@@ -65,6 +70,12 @@ class DeckLibrarySheet extends ConsumerWidget {
 
     Future<void> goToExam(DeckPackMeta meta) async {
       if (!meta.supportsExam) return;
+      if (!ref.read(proGuardProvider).canAccessExamMode()) {
+        if (context.mounted) {
+          openPaywall(context, featureName: 'Exam mode');
+        }
+        return;
+      }
       if (!lib.isActive(meta.id)) {
         await activateDeck(meta);
       }
@@ -119,9 +130,9 @@ class DeckLibrarySheet extends ConsumerWidget {
                 ),
               ),
               AppPageIntro(
-                title: 'Library',
+                title: l10n.libraryTitle,
                 subtitle: lib.activeDeck == null
-                    ? 'Discover local decks and choose what to learn next.'
+                    ? 'Choose a broad topic deck for the Feed, or unlock Pro for personal and exam content.'
                     : 'Current focus: ${lib.activeDeck!.title}',
                 trailing: lib.activeDeck == null
                     ? null
@@ -139,20 +150,51 @@ class DeckLibrarySheet extends ConsumerWidget {
                 ),
                 onPressed: lib.isDiscovering ? null : notifier.discoverPacks,
                 icon: const Icon(Icons.refresh, size: 16),
-                label: const Text('Refresh library'),
+                label: Text(l10n.libraryRefresh),
               ),
               const SizedBox(height: 12),
               FilledButton.icon(
-                onPressed: () => showAddStudyMaterialSheet(context, ref),
-                icon: const Icon(Icons.add_circle_outline),
-                label: const Text('Add Study Material'),
+                onPressed: () {
+                  if (isPro) {
+                    showAddStudyMaterialSheet(context, ref);
+                    return;
+                  }
+                  openPaywall(context, featureName: 'Personal decks');
+                },
+                icon: Icon(
+                  isPro ? Icons.add_circle_outline : Icons.lock_outline,
+                ),
+                label: Text(
+                  isPro
+                      ? l10n.libraryAddStudyMaterial
+                      : l10n.libraryUnlockPersonalDecks,
+                ),
               ),
               const SizedBox(height: 8),
-              TextButton.icon(
-                onPressed: () => importJsonDeck(context, ref),
-                icon: const Icon(Icons.file_upload_outlined),
-                label: const Text('Import JSON Deck'),
-              ),
+              if (isPro)
+                TextButton.icon(
+                  onPressed: () => importJsonDeck(context, ref),
+                  icon: const Icon(Icons.file_upload_outlined),
+                  label: Text(l10n.libraryImportJson),
+                )
+              else
+                TextButton.icon(
+                  onPressed: () =>
+                      openPaywall(context, featureName: 'JSON deck import'),
+                  icon: const Icon(Icons.workspace_premium_outlined),
+                  label: Text(l10n.libraryProImport),
+                ),
+              if (!isPro) ...[
+                const SizedBox(height: 12),
+                AppGlassCard(
+                  padding: const EdgeInsets.all(14),
+                  tint: const Color(0xFF6C63FF),
+                  child: Text(
+                    l10n.libraryPublicBuildNote,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                ),
+              ],
               const SizedBox(height: 12),
               if (lib.lastError != null)
                 Padding(
@@ -309,7 +351,7 @@ class _LibraryHub extends StatelessWidget {
         _LibrarySection(
           title: 'Featured',
           subtitle:
-              'A short list of strong starting points across certifications and broad topics.',
+              'A short list of broad topic decks that work well with the Feed.',
           children: featured
               .map(
                 (meta) => _DeckHubCard(
@@ -333,7 +375,7 @@ class _LibraryHub extends StatelessWidget {
           _LibrarySection(
             title: 'Certifications',
             subtitle:
-                'Structured exam tracks such as Security+, AWS, and Linux Essentials.',
+                'Structured exam tracks live behind Pro and are best for timed practice.',
             children: certificationBrowse
                 .map(
                   (meta) => _DeckHubCard(
@@ -751,17 +793,11 @@ List<DeckPackMeta> _featuredPacks({
   Set<String> excludedIds = const {},
 }) {
   const preferredOrder = [
-    'comptia_security_plus_sy0_701_pack_20',
-    'sec701_exam_simulation_90',
-    'aws_cloud_practitioner_clf_c02',
-    'aws_solutions_architect_associate_saa_c03',
-    'linux_essentials_010_160',
-    'technology_basics',
-    'technology_basics_starter',
-    'world_history_starter',
-    'world_geography_starter',
-    'basic_science_starter',
-    'general_knowledge_starter',
+    'general_knowledge_daily',
+    'technology_basics_daily',
+    'basic_science_daily',
+    'world_history_daily',
+    'world_geography_daily',
   ];
 
   final byId = {for (final pack in packs) pack.id: pack};

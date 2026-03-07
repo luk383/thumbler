@@ -13,8 +13,7 @@ class IsProNotifier extends Notifier<bool> {
 }
 
 /// Whether the current user has an active Pro subscription.
-final isProProvider =
-    NotifierProvider<IsProNotifier, bool>(IsProNotifier.new);
+final isProProvider = NotifierProvider<IsProNotifier, bool>(IsProNotifier.new);
 
 // ---------------------------------------------------------------------------
 // ProGuard — centralises feature gating logic
@@ -24,6 +23,21 @@ class ProGuard {
   const ProGuard({required this.isPro});
 
   final bool isPro;
+
+  /// Personal deck creation and imports are Pro-only.
+  bool canManagePersonalDecks() => isPro;
+
+  /// JSON deck imports are Pro-only.
+  bool canImportDecks() => isPro;
+
+  /// Notes-to-deck generation is Pro-only.
+  bool canGenerateFromNotes() => isPro;
+
+  /// Manual deck creation is Pro-only.
+  bool canCreateDecks() => isPro;
+
+  /// Exam mode is Pro-only in the public launch build.
+  bool canAccessExamMode() => isPro;
 
   /// Topic filtering in Study mode is Pro-only.
   bool canUseTopicSelection() => isPro;

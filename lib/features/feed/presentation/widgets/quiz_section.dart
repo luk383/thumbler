@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../domain/lesson.dart';
 import '../controllers/feed_controller.dart';
 import '../../../growth/xp/xp_notifier.dart';
@@ -23,6 +24,7 @@ class QuizSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final correctAnswer = lesson.options[lesson.correctAnswerIndex];
     final repeatsCardPrompt = lesson.quizQuestion.trim() == lesson.hook.trim();
 
@@ -47,7 +49,7 @@ class QuizSection extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Quick Check',
+                l10n.quickCheck,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: const Color(0xFFADA8FF),
                   fontWeight: FontWeight.w700,
@@ -56,9 +58,7 @@ class QuizSection extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                repeatsCardPrompt
-                    ? 'Choose the best answer below.'
-                    : lesson.quizQuestion,
+                repeatsCardPrompt ? l10n.chooseBestAnswer : lesson.quizQuestion,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: repeatsCardPrompt ? 14 : 17,
@@ -242,12 +242,13 @@ class _FeedbackBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final color = isCorrect ? const Color(0xFF2ECC71) : const Color(0xFFFF6B6B);
     final icon = isCorrect ? Icons.check_circle : Icons.info_outline;
-    final title = isCorrect ? 'Correct answer' : 'Review before you scroll';
+    final title = isCorrect ? l10n.correctAnswerTitle : l10n.reviewBeforeScroll;
     final label = isCorrect
-        ? 'Nice hit. You earned XP and can keep the streak moving.'
-        : 'The explanation above contains the key idea. Read it once, then continue.';
+        ? l10n.correctAnswerCopy
+        : l10n.reviewBeforeScrollCopy;
 
     return AnimatedContainer(
       duration: const Duration(milliseconds: 220),

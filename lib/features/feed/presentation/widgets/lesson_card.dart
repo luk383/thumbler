@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../bookmarks/presentation/bookmarks_notifier.dart';
 import '../../../../core/ui/app_surfaces.dart';
 import '../../../growth/xp/xp_notifier.dart';
@@ -52,6 +53,7 @@ class _LessonCardState extends ConsumerState<LessonCard> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final cardState = ref.watch(
       feedProvider.select((s) => s.cardStateFor(widget.lesson.id)),
     );
@@ -65,8 +67,8 @@ class _LessonCardState extends ConsumerState<LessonCard> {
         widget.lesson.hook.trim() == widget.lesson.quizQuestion.trim();
 
     ref.listen(
-        feedProvider.select(
-          (s) => s.cardStateFor(widget.lesson.id).selectedAnswer,
+      feedProvider.select(
+        (s) => s.cardStateFor(widget.lesson.id).selectedAnswer,
       ),
       (prev, next) {
         if (next != null && prev == null) _scheduleAutoAdvance();
@@ -116,14 +118,14 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                         children: [
                           Row(
                             children: [
-                              const AppStatusBadge(
-                                label: 'Feed card',
+                              AppStatusBadge(
+                                label: l10n.feedCardLabel,
                                 icon: Icons.bolt_rounded,
-                                tint: Color(0xFFADA8FF),
+                                tint: const Color(0xFFADA8FF),
                               ),
                               const Spacer(),
                               Text(
-                                'Swipe or tap next',
+                                l10n.swipeOrNext,
                                 style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
                                       color: Colors.white38,
@@ -137,8 +139,8 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                             children: [
                               Text(
                                 repeatsQuizQuestion
-                                    ? 'Question card'
-                                    : 'Micro lesson',
+                                    ? l10n.questionCard
+                                    : l10n.microLesson,
                                 style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
                                       color: const Color(0xFFADA8FF),
@@ -169,12 +171,14 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                             ),
                             child: Text(
                               repeatsQuizQuestion
-                                  ? cardState.revealed
-                                        ? 'Read the explanation, answer once, then keep scrolling.'
-                                        : 'Read the question, reveal the explanation, then answer once.'
-                                  : cardState.revealed
-                                  ? 'Review the explanation, answer one quick check, then keep scrolling.'
-                                  : 'Reveal the explanation, answer one quick check, then move to the next card.',
+                                  ? l10n.cardInstruction(
+                                      repeatsQuestion: true,
+                                      revealed: cardState.revealed,
+                                    )
+                                  : l10n.cardInstruction(
+                                      repeatsQuestion: false,
+                                      revealed: cardState.revealed,
+                                    ),
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ),
@@ -235,7 +239,7 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                                 .reveal(widget.lesson.id);
                             ref.read(xpProvider.notifier).addXp(XpEvent.reveal);
                           },
-                          child: const Text('Reveal Answer + Quiz'),
+                          child: Text(l10n.revealAnswerQuiz),
                         ),
                       ),
                     )
@@ -294,6 +298,7 @@ class _ExplanationBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
@@ -312,7 +317,7 @@ class _ExplanationBox extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Why this matters',
+            l10n.whyThisMatters,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Colors.white54,
               fontWeight: FontWeight.w700,
@@ -346,6 +351,7 @@ class _BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 14),
       child: Container(
@@ -369,19 +375,19 @@ class _BottomBar extends StatelessWidget {
                     color: isBookmarked
                         ? const Color(0xFF6C63FF)
                         : Colors.white60,
-                    label: isBookmarked ? 'Saved' : 'Save',
+                    label: isBookmarked ? l10n.savedLabel : l10n.saveLabel,
                     onTap: onBookmark,
                   ),
                   _IconBtn(
                     icon: isInStudy ? Icons.school : Icons.school_outlined,
                     color: isInStudy ? Colors.tealAccent : Colors.white60,
-                    label: isInStudy ? 'In Study' : 'Study',
+                    label: isInStudy ? l10n.inStudyLabel : l10n.studyLabel,
                     onTap: onAddToStudy,
                   ),
                   _IconBtn(
                     icon: Icons.share_outlined,
                     color: Colors.white60,
-                    label: 'Share',
+                    label: l10n.shareLabel,
                     onTap: onShare,
                   ),
                 ],
@@ -391,7 +397,7 @@ class _BottomBar extends StatelessWidget {
               _IconBtn(
                 icon: Icons.keyboard_arrow_down_rounded,
                 color: Colors.white60,
-                label: 'Next',
+                label: l10n.nextLabel,
                 onTap: onNext!,
               ),
           ],

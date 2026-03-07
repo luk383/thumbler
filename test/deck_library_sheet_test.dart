@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:thumbler/app/l10n/app_localizations.dart';
 import 'package:thumbler/features/study/data/deck_pack.dart';
 import 'package:thumbler/features/study/presentation/controllers/deck_library_controller.dart';
 import 'package:thumbler/features/study/presentation/widgets/deck_library_sheet.dart';
@@ -61,7 +62,11 @@ void main() {
             },
           ),
         ],
-        child: const MaterialApp(home: Scaffold(body: DeckLibrarySheet())),
+        child: const MaterialApp(
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          home: Scaffold(body: DeckLibrarySheet()),
+        ),
       ),
     );
 

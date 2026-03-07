@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
 import '../../../analytics/presentation/providers/progress_analytics_provider.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
@@ -21,6 +22,7 @@ class FeedMotivationCue {
 }
 
 FeedMotivationCue? buildFeedMotivationCue({
+  required AppLocalizations l10n,
   required StreakState streak,
   required DailyQuestState quest,
   required int weakCount,
@@ -31,8 +33,8 @@ FeedMotivationCue? buildFeedMotivationCue({
 }) {
   final streakRemaining = streak.remainingToday;
   if (!streak.completedToday && streakRemaining == 1) {
-    return const FeedMotivationCue(
-      message: '1 more to keep your streak',
+    return FeedMotivationCue(
+      message: l10n.streakOneMore,
       icon: Icons.local_fire_department_rounded,
       tint: Color(0xFFFF8A4C),
     );
@@ -44,7 +46,7 @@ FeedMotivationCue? buildFeedMotivationCue({
       questRemaining >= 1 &&
       questRemaining <= 2) {
     return FeedMotivationCue(
-      message: '$questRemaining more to finish today\'s goal',
+      message: l10n.questRemaining(questRemaining),
       icon: Icons.flag_rounded,
       tint: const Color(0xFF6C63FF),
     );
@@ -54,7 +56,7 @@ FeedMotivationCue? buildFeedMotivationCue({
       currentLesson != null && weakestDomains.contains(currentLesson.category);
   if (isWeakCard && weakCount >= 1 && weakCount <= 2) {
     return FeedMotivationCue(
-      message: '$weakCount more to clear weak questions',
+      message: l10n.weakRemaining(weakCount),
       icon: Icons.trending_up_rounded,
       tint: const Color(0xFF12B981),
     );
@@ -63,7 +65,7 @@ FeedMotivationCue? buildFeedMotivationCue({
   final remainingInRun = total - currentIndex - 1;
   if (remainingInRun >= 1 && remainingInRun <= 2) {
     return FeedMotivationCue(
-      message: '$remainingInRun more to finish this quick run',
+      message: l10n.quickRunRemaining(remainingInRun),
       icon: Icons.playlist_play_rounded,
       tint: const Color(0xFF22C55E),
     );
@@ -86,6 +88,7 @@ class FeedMotivationBanner extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final streak = ref.watch(streakProvider);
     final quest = ref.watch(dailyQuestProvider);
     final weakCount = ref.watch(
@@ -99,6 +102,7 @@ class FeedMotivationBanner extends ConsumerWidget {
     );
 
     final cue = buildFeedMotivationCue(
+      l10n: l10n,
       streak: streak,
       quest: quest,
       weakCount: weakCount,
@@ -159,6 +163,7 @@ class FeedOverlay extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final quest = ref.watch(dailyQuestProvider);
     final streak = ref.watch(streakProvider);
     final goalReached = quest.questCompleted;
@@ -200,8 +205,8 @@ class FeedOverlay extends ConsumerWidget {
         const SizedBox(height: 6),
         AppStatusBadge(
           label: total == 0
-              ? 'Empty deck'
-              : '${(progress * 100).round()}% through',
+              ? l10n.emptyDeck
+              : l10n.feedProgressPercent((progress * 100).round()),
           icon: Icons.flash_on_rounded,
           tint: const Color(0xFFADA8FF),
         ),
@@ -215,8 +220,11 @@ class FeedOverlay extends ConsumerWidget {
               const SizedBox(width: 4),
               Text(
                 streak.completedToday
-                    ? '${streak.currentStreak} day streak'
-                    : '${streak.currentStreak} streak • ${streak.answeredToday}/3 today',
+                    ? l10n.dayStreak(streak.currentStreak)
+                    : l10n.streakToday(
+                        streak.currentStreak,
+                        streak.answeredToday,
+                      ),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 11,
@@ -243,8 +251,11 @@ class FeedOverlay extends ConsumerWidget {
               const SizedBox(width: 4),
               Text(
                 goalReached
-                    ? 'Done!'
-                    : 'Quest ${quest.questProgress}/${quest.questTarget}',
+                    ? l10n.done
+                    : l10n.questProgressLabel(
+                        quest.questProgress,
+                        quest.questTarget,
+                      ),
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 11,

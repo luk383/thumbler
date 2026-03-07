@@ -3,6 +3,12 @@ import 'dart:math';
 enum RewardType { rareCard, xpBoost, newCategory }
 
 extension RewardTypeDetails on RewardType {
+  String get key => switch (this) {
+    RewardType.rareCard => 'rareCard',
+    RewardType.xpBoost => 'xpBoost',
+    RewardType.newCategory => 'newCategory',
+  };
+
   String get emoji => switch (this) {
     RewardType.rareCard => '🃏',
     RewardType.xpBoost => '⚡',

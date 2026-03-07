@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../../../growth/xp/xp_notifier.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
@@ -69,6 +70,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     // Listen for a completed quest to show the reward bottom sheet.
     ref.listen(dailyQuestProvider.select((s) => s.pendingReward), (prev, next) {
       if (next != null && prev == null) {
@@ -94,15 +96,15 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     final activeDeck = ref.watch(activeDeckMetaProvider);
 
     return lessonsAsync.when(
-      loading: () => const Scaffold(
-        backgroundColor: Colors.black,
+      loading: () => Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Center(child: CircularProgressIndicator()),
       ),
       error: (error, _) => Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Center(
           child: Text(
-            'Something went wrong\n$error',
+            l10n.feedLoadError(error.toString()),
             style: const TextStyle(color: Colors.white60),
             textAlign: TextAlign.center,
           ),
@@ -114,7 +116,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
             : lessons[_currentIndex.clamp(0, lessons.length - 1)];
 
         return Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: lessons.isEmpty
               ? Center(
                   child: Padding(
@@ -130,8 +132,8 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                         const SizedBox(height: 14),
                         Text(
                           activeDeck == null
-                              ? 'No active deck'
-                              : 'No study cards available in ${activeDeck.title}',
+                              ? l10n.noActiveDeckTitle
+                              : l10n.noStudyCardsTitle(activeDeck.title),
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -140,8 +142,8 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'Select another deck from Library or import a valid pack.',
+                        Text(
+                          l10n.noStudyCardsMessage,
                           style: TextStyle(color: Colors.white54, fontSize: 13),
                           textAlign: TextAlign.center,
                         ),

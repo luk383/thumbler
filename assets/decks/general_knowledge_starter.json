@@ -1,18 +1,27 @@
 {
-  "id": "general_knowledge_starter",
+  "id": "general_knowledge_daily",
   "title": "General Knowledge",
   "category": "General Knowledge",
-  "description": "Starter local deck for mixed knowledge topics aligned to the current Thumbler topic batches.",
+  "description": "Mixed bite-sized questions designed for the public Thumbler launch and daily feed usage.",
   "version": "1",
-  "questionCount": 0,
+  "questionCount": 10,
   "domains": [
-    "Economics Basics",
-    "Philosophy and Ideas",
-    "Literature and Arts",
-    "World Culture"
+    "Everyday Science",
+    "Culture and Society",
+    "Ideas and Economics",
+    "Space and Nature"
   ],
-  "isStarter": true,
-  "availabilityNote": "Starter entry only. Real questions are not included yet.",
-  "defaultContentType": "exam_question",
-  "questions": []
+  "defaultContentType": "micro_card",
+  "questions": [
+    {"id":"gk_daily_001","contentType":"micro_card","category":"Psychology","topic":"Perception","promptText":"How fast can the brain process a visual image?","explanationText":"The human visual system can register and begin processing a visual image in roughly 13 milliseconds.","options":["13 milliseconds","100 milliseconds","500 milliseconds"],"correctAnswerIndex":0,"difficulty":1},
+    {"id":"gk_daily_002","contentType":"micro_card","category":"Science","topic":"Collective Behavior","promptText":"What concept best describes the way ant colonies solve problems together?","explanationText":"Ant colonies show emergent intelligence: complex group behavior arises without a central leader.","options":["Hive monarchy","Emergent intelligence","Solo optimization"],"correctAnswerIndex":1,"difficulty":1},
+    {"id":"gk_daily_003","contentType":"micro_card","category":"History","topic":"Food Origins","promptText":"Why is the sandwich traditionally named after the Earl of Sandwich?","explanationText":"The story says he wanted meat between bread so he could keep gambling without leaving the table.","options":["To feed sailors quickly","To keep gambling","To preserve meat longer"],"correctAnswerIndex":1,"difficulty":1},
+    {"id":"gk_daily_004","contentType":"micro_card","category":"Economics","topic":"Decision Making","promptText":"What is opportunity cost?","explanationText":"Opportunity cost is the value of the best alternative you give up when choosing something else.","options":["A hidden transaction fee","The next-best alternative forgone","The retail price of a choice"],"correctAnswerIndex":1,"difficulty":2},
+    {"id":"gk_daily_005","contentType":"micro_card","category":"Nature","topic":"Patterns","promptText":"Which number pattern is often linked to sunflower seed spirals?","explanationText":"Sunflower seed layouts are commonly associated with Fibonacci spirals and the golden ratio.","options":["Prime numbers","Golden ratio","Binary sequence"],"correctAnswerIndex":1,"difficulty":2},
+    {"id":"gk_daily_006","contentType":"micro_card","category":"Space","topic":"Black Holes","promptText":"What is true about the singularity in a black hole?","explanationText":"In current physics models, equations break down at the singularity, which signals our theory is incomplete there.","options":["Time reverses","Physics equations break down","Light becomes matter"],"correctAnswerIndex":1,"difficulty":2},
+    {"id":"gk_daily_007","contentType":"micro_card","category":"Chemistry","topic":"Everyday Science","promptText":"Why does adding salt make ice melt more easily?","explanationText":"Salt lowers water's freezing point by interfering with ice crystal formation.","options":["It adds heat to the ice","It disrupts ice crystal formation","It removes oxygen from water"],"correctAnswerIndex":1,"difficulty":2},
+    {"id":"gk_daily_008","contentType":"micro_card","category":"Physics","topic":"Magnetism","promptText":"Magnetism is fundamentally related to what?","explanationText":"Magnetism is a consequence of moving electric charges and the electromagnetic force.","options":["Moving electric charges","Gravity wells","Sound waves"],"correctAnswerIndex":0,"difficulty":3},
+    {"id":"gk_daily_009","contentType":"micro_card","category":"Language","topic":"Linguistics","promptText":"About how many human languages exist today?","explanationText":"Linguists usually estimate around 7,000 living languages worldwide.","options":["About 700","About 7,000","About 70,000"],"correctAnswerIndex":1,"difficulty":1},
+    {"id":"gk_daily_010","contentType":"micro_card","category":"Science","topic":"Atmosphere","promptText":"What phenomenon makes the daytime sky appear blue?","explanationText":"Rayleigh scattering causes shorter blue wavelengths to scatter more strongly through the atmosphere.","options":["Reflection","Rayleigh scattering","Magnetic refraction"],"correctAnswerIndex":1,"difficulty":1}
+  ]
 }

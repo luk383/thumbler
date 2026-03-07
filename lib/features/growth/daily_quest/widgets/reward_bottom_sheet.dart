@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../rewards/reward_service.dart';
 import '../daily_quest_notifier.dart';
 import 'confetti_painter.dart';
@@ -58,6 +59,7 @@ class _RewardBottomSheetState extends ConsumerState<RewardBottomSheet>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFF12101F),
@@ -100,8 +102,8 @@ class _RewardBottomSheetState extends ConsumerState<RewardBottomSheet>
                   // Trophy emoji
                   const Text('🏆', style: TextStyle(fontSize: 56)),
                   const SizedBox(height: 8),
-                  const Text(
-                    'Quest Complete!',
+                  Text(
+                    l10n.questComplete,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -116,7 +118,9 @@ class _RewardBottomSheetState extends ConsumerState<RewardBottomSheet>
                     duration: const Duration(milliseconds: 500),
                     curve: Curves.easeOut,
                     child: AnimatedSlide(
-                      offset: _rewardVisible ? Offset.zero : const Offset(0, 0.15),
+                      offset: _rewardVisible
+                          ? Offset.zero
+                          : const Offset(0, 0.15),
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeOut,
                       child: _RewardCard(reward: widget.reward),
@@ -134,7 +138,7 @@ class _RewardBottomSheetState extends ConsumerState<RewardBottomSheet>
                             .clearPendingReward();
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Claim Reward'),
+                      child: Text(l10n.claimReward),
                     ),
                   ),
                 ],
@@ -154,6 +158,7 @@ class _RewardCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -174,7 +179,7 @@ class _RewardCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  reward.title,
+                  l10n.rewardTitle(reward.key),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -183,11 +188,8 @@ class _RewardCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  reward.description,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 13,
-                  ),
+                  l10n.rewardDescription(reward.key),
+                  style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],
             ),

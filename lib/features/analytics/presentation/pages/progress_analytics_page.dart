@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../../domain/progress_analytics.dart';
@@ -11,18 +12,18 @@ class ProgressAnalyticsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final analytics = ref.watch(progressAnalyticsProvider);
     final activeDeck = ref.watch(activeDeckMetaProvider);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: ListView(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
         children: [
-          const AppPageIntro(
-            title: 'Progress',
-            subtitle:
-                'A lightweight read of what is improving, what is weak, and how active you have been lately.',
+          AppPageIntro(
+            title: l10n.progressTitle,
+            subtitle: l10n.progressSubtitle,
           ),
           const SizedBox(height: 16),
           _DeckScopeCard(deckTitle: activeDeck?.title),
@@ -34,25 +35,19 @@ class ProgressAnalyticsPage extends ConsumerWidget {
             const SizedBox(height: 16),
             _RecentActivityCard(points: analytics.recentActivity),
             const SizedBox(height: 24),
-            const AppSectionHeader('By Domain'),
+            AppSectionHeader(l10n.byDomain),
             const SizedBox(height: 10),
             if (analytics.domainSummaries.isEmpty)
-              const _InfoCard(
-                message:
-                    'Answer study cards or exam questions to unlock domain analytics.',
-              )
+              _InfoCard(message: l10n.domainAnalyticsHint)
             else
               ...analytics.domainSummaries.map(
                 (summary) => _DomainRow(summary: summary),
               ),
             const SizedBox(height: 24),
-            const AppSectionHeader('Weakest Domains'),
+            AppSectionHeader(l10n.weakestDomains),
             const SizedBox(height: 10),
             if (analytics.weakestDomains.isEmpty)
-              const _InfoCard(
-                message:
-                    'Weakest domains will appear after you answer enough questions.',
-              )
+              _InfoCard(message: l10n.weakestDomainsHint)
             else
               ...analytics.weakestDomains.map(
                 (summary) => _WeakDomainCard(summary: summary),
@@ -71,6 +66,7 @@ class _DeckScopeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       padding: const EdgeInsets.all(14),
       tint: const Color(0xFF6C63FF),
@@ -87,8 +83,8 @@ class _DeckScopeCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Active Deck Scope',
+                Text(
+                  l10n.activeDeckScope,
                   style: TextStyle(
                     color: Colors.white70,
                     fontSize: 11,
@@ -97,7 +93,7 @@ class _DeckScopeCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  deckTitle ?? 'Legacy / unscoped local data',
+                  deckTitle ?? l10n.legacyUnscopedData,
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
@@ -106,8 +102,8 @@ class _DeckScopeCard extends StatelessWidget {
                 ),
                 if (deckTitle == null) ...[
                   const SizedBox(height: 3),
-                  const Text(
-                    'These metrics only reflect local items and results without an active deck binding.',
+                  Text(
+                    l10n.legacyUnscopedDataHelp,
                     style: TextStyle(color: Colors.white54, fontSize: 11),
                   ),
                 ],
@@ -127,14 +123,15 @@ class _OverviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       padding: const EdgeInsets.all(18),
       tint: const Color(0xFF6C63FF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Overview',
+          Text(
+            l10n.overview,
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -146,14 +143,14 @@ class _OverviewCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _MetricTile(
-                  label: 'Answered',
+                  label: l10n.answeredLabel,
                   value: '${analytics.totalAnswered}',
                 ),
               ),
               const SizedBox(width: 10),
               Expanded(
                 child: _MetricTile(
-                  label: 'Accuracy',
+                  label: l10n.accuracyLabel,
                   value: '${analytics.correctRate}%',
                 ),
               ),
@@ -164,7 +161,7 @@ class _OverviewCard extends StatelessWidget {
             children: [
               Expanded(
                 child: _MetricTile(
-                  label: 'Cards Reviewed',
+                  label: l10n.cardsReviewedLabel,
                   value:
                       '${analytics.reviewedCards}/${analytics.totalTrackedCards}',
                 ),
@@ -172,7 +169,7 @@ class _OverviewCard extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: _MetricTile(
-                  label: 'Completed Exams',
+                  label: l10n.completedExamsLabel,
                   value: '${analytics.totalCompletedExams}',
                 ),
               ),
@@ -191,7 +188,10 @@ class _OverviewCard extends StatelessWidget {
                 ),
               ),
               child: Text(
-                'Last exam: ${analytics.lastExamScore ?? 0}%  •  Average exam: ${analytics.averageExamScore}%',
+                l10n.examOverviewScores(
+                  analytics.lastExamScore ?? 0,
+                  analytics.averageExamScore,
+                ),
                 style: const TextStyle(
                   color: Color(0xFFADA8FF),
                   fontSize: 12,
@@ -257,6 +257,7 @@ class _RecentActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final maxActivity = points.fold<int>(
       0,
       (max, point) => point.totalActivity > max ? point.totalActivity : max,
@@ -268,19 +269,19 @@ class _RecentActivityCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Recent Activity',
+          Text(
+            l10n.recentActivityTitle,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 6),
-          const Text(
-            'Cards reviewed and exams completed in the last 7 days',
+          Text(
+            l10n.recentActivitySubtitle,
             style: TextStyle(color: Colors.white54, fontSize: 12),
           ),
           const SizedBox(height: 16),
           if (maxActivity == 0)
-            const Text(
-              'No recent local study or exam activity found.',
+            Text(
+              l10n.noRecentActivity,
               style: TextStyle(color: Colors.white54, fontSize: 12),
             )
           else
@@ -343,6 +344,7 @@ class _DomainRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
@@ -394,7 +396,7 @@ class _DomainRow extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            '${summary.answered} answered  •  ${summary.correct} correct  •  ${summary.wrong} wrong',
+            l10n.domainStats(summary.answered, summary.correct, summary.wrong),
             style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
         ],
@@ -410,6 +412,7 @@ class _WeakDomainCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
@@ -425,7 +428,11 @@ class _WeakDomainCard extends StatelessWidget {
           const SizedBox(width: 10),
           Expanded(
             child: Text(
-              '${summary.domain}  •  ${summary.accuracy}% accuracy across ${summary.answered} answers',
+              l10n.weakDomainSummary(
+                summary.domain,
+                summary.accuracy,
+                summary.answered,
+              ),
               style: const TextStyle(color: Colors.white70, fontSize: 13),
             ),
           ),
@@ -440,11 +447,11 @@ class _EmptyAnalyticsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppEmptyStateCard(
+    final l10n = context.l10n;
+    return AppEmptyStateCard(
       icon: Icons.insights_outlined,
-      title: 'No analytics yet',
-      message:
-          'Study cards or complete an exam to unlock local progress analytics.',
+      title: l10n.noAnalyticsYet,
+      message: l10n.noAnalyticsYetMessage,
     );
   }
 }

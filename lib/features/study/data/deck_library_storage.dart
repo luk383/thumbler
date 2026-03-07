@@ -8,6 +8,7 @@ class DeckLibraryStorage {
   static const _userDeckPrefix = 'user_deck::';
   static const _onboardingCompleteKey = 'onboarding_complete';
   static const _onboardingInterestsKey = 'onboarding_interests';
+  static const _preferredLanguageCodeKey = 'preferred_language_code';
 
   Box get _box => Hive.box(boxName);
 
@@ -53,4 +54,10 @@ class DeckLibraryStorage {
 
   Future<void> saveOnboardingInterests(List<String> interests) =>
       _box.put(_onboardingInterestsKey, interests);
+
+  String? loadPreferredLanguageCode() =>
+      _box.get(_preferredLanguageCodeKey) as String?;
+
+  Future<void> savePreferredLanguageCode(String code) =>
+      _box.put(_preferredLanguageCodeKey, code);
 }

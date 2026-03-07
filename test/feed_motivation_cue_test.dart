@@ -1,10 +1,13 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:thumbler/app/l10n/app_localizations.dart';
 import 'package:thumbler/features/feed/domain/lesson.dart';
 import 'package:thumbler/features/feed/presentation/widgets/feed_overlay.dart';
 import 'package:thumbler/features/growth/daily_quest/daily_quest_state.dart';
 import 'package:thumbler/features/growth/streak/streak_state.dart';
 
 void main() {
+  const l10n = AppLocalizations(Locale('en'));
   const sampleLesson = Lesson(
     id: 'q1',
     hook: 'Question',
@@ -17,6 +20,7 @@ void main() {
 
   test('prioritizes streak cue when one answer remains today', () {
     final cue = buildFeedMotivationCue(
+      l10n: l10n,
       streak: const StreakState(currentStreak: 4, answeredToday: 2),
       quest: const DailyQuestState(
         questType: QuestType.answerQuizzes,
@@ -40,6 +44,7 @@ void main() {
 
   test('shows daily goal cue when quiz quest is nearly done', () {
     final cue = buildFeedMotivationCue(
+      l10n: l10n,
       streak: const StreakState(currentStreak: 1, answeredToday: 0),
       quest: const DailyQuestState(
         questType: QuestType.answerQuizzes,
@@ -63,6 +68,7 @@ void main() {
 
   test('shows weak review cue when only a few weak cards remain', () {
     final cue = buildFeedMotivationCue(
+      l10n: l10n,
       streak: const StreakState(currentStreak: 1, answeredToday: 0),
       quest: const DailyQuestState(
         questType: QuestType.earnXp,
@@ -86,6 +92,7 @@ void main() {
 
   test('falls back to quick run cue near the end of the loaded feed', () {
     final cue = buildFeedMotivationCue(
+      l10n: l10n,
       streak: const StreakState(currentStreak: 1, answeredToday: 0),
       quest: const DailyQuestState(
         questType: QuestType.earnXp,
@@ -109,6 +116,7 @@ void main() {
 
   test('returns null when no retention cue is available', () {
     final cue = buildFeedMotivationCue(
+      l10n: l10n,
       streak: const StreakState(currentStreak: 1, answeredToday: 0),
       quest: const DailyQuestState(
         questType: QuestType.earnXp,

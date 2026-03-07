@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
 import '../../domain/exam_attempt.dart';
 import '../../domain/exam_result.dart';
@@ -12,6 +13,7 @@ class ExamHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final s = ref.watch(examProvider);
     final n = ref.read(examProvider.notifier);
     final activeDeck = ref.watch(activeDeckMetaProvider);
@@ -21,7 +23,7 @@ class ExamHomePage extends ConsumerWidget {
         : s.results.where((result) => result.deckId == activeDeck.id).toList();
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 48),
@@ -29,14 +31,17 @@ class ExamHomePage extends ConsumerWidget {
             // ── Header ──────────────────────────────────────────────────
             const SizedBox(height: 20),
             AppPageIntro(
-              title: 'Exam',
+              title: l10n.examTitle,
               subtitle: activeDeck == null
-                  ? '${s.availableQuestions.length} exam questions available'
-                  : '${activeDeck.title} · ${s.availableQuestions.length} questions ready for timed practice',
+                  ? l10n.examQuestionsAvailable(s.availableQuestions.length)
+                  : l10n.examQuestionsReady(
+                      activeDeck.title,
+                      s.availableQuestions.length,
+                    ),
               trailing: activeDeck == null
                   ? null
-                  : const AppStatusBadge(
-                      label: 'Deck active',
+                  : AppStatusBadge(
+                      label: l10n.deckActive,
                       icon: Icons.layers_outlined,
                     ),
             ),
@@ -61,7 +66,7 @@ class ExamHomePage extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const _SectionLabel('Questions'),
+                  _SectionLabel(l10n.questionsLabel),
                   _CountChips(
                     options: countOptions,
                     selected: s.selectedCount,
@@ -70,10 +75,7 @@ class ExamHomePage extends ConsumerWidget {
                   ),
                   const SizedBox(height: 12),
                   if (s.availableQuestions.isNotEmpty)
-                    _InfoPill(
-                      'Timed run: ${s.effectiveQuestionCount} questions · '
-                      '${s.effectiveQuestionCount} minutes',
-                    ),
+                    _InfoPill(l10n.timedRunLabel(s.effectiveQuestionCount)),
                   const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
@@ -96,8 +98,8 @@ class ExamHomePage extends ConsumerWidget {
                       icon: const Icon(Icons.assignment_outlined, size: 20),
                       label: Text(
                         s.availableQuestions.isEmpty
-                            ? 'No exam questions available'
-                            : 'Start Exam (${s.effectiveQuestionCount} questions)',
+                            ? l10n.noExamQuestionsAvailable
+                            : l10n.startExamLabel(s.effectiveQuestionCount),
                       ),
                     ),
                   ),
@@ -106,9 +108,7 @@ class ExamHomePage extends ConsumerWidget {
             ),
             if (deckResults.isEmpty && s.availableQuestions.isNotEmpty) ...[
               const SizedBox(height: 16),
-              const _InfoPill(
-                'No completed exam history for this deck yet. Your next result will appear here.',
-              ),
+              _InfoPill(l10n.noExamHistoryYet),
             ],
             const SizedBox(height: 12),
 
@@ -117,10 +117,10 @@ class ExamHomePage extends ConsumerWidget {
               const SizedBox(height: 36),
               Row(
                 children: [
-                  const Expanded(child: _SectionLabel('Exam History')),
+                  Expanded(child: _SectionLabel(l10n.examHistoryTitle)),
                   TextButton(
                     onPressed: () => context.push('/exam/history'),
-                    child: const Text('View all'),
+                    child: Text(l10n.viewAll),
                   ),
                 ],
               ),
@@ -139,9 +139,9 @@ class ExamHomePage extends ConsumerWidget {
             const SizedBox(height: 20),
             if (s.availableQuestions.isNotEmpty &&
                 s.availableQuestions.length < 30)
-              const Center(
+              Center(
                 child: Text(
-                  'This deck has a shorter exam pool, so runs use the available question count.',
+                  l10n.shortExamPoolNote,
                   style: TextStyle(color: Colors.white24, fontSize: 10),
                   textAlign: TextAlign.center,
                 ),
@@ -193,6 +193,7 @@ class _ResumeBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final mins = attempt.remainingSeconds ~/ 60;
     final secs = attempt.remainingSeconds % 60;
     final timeStr =
@@ -214,8 +215,8 @@ class _ResumeBanner extends StatelessWidget {
                 iconSize: 16,
               ),
               const SizedBox(width: 10),
-              const Text(
-                'Exam in Progress',
+              Text(
+                l10n.examInProgress,
                 style: TextStyle(
                   color: Colors.orange,
                   fontSize: 13,
@@ -232,7 +233,11 @@ class _ResumeBanner extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${attempt.answeredCount}/${attempt.totalQuestions} answered  ·  $timeStr remaining',
+                      l10n.examResumeStatus(
+                        attempt.answeredCount,
+                        attempt.totalQuestions,
+                        timeStr,
+                      ),
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 12,
@@ -266,7 +271,7 @@ class _ResumeBanner extends StatelessWidget {
                   ),
                 ),
                 onPressed: onResume,
-                child: const Text('Resume'),
+                child: Text(l10n.resume),
               ),
             ],
           ),
@@ -281,6 +286,7 @@ class _ResumeBanner extends StatelessWidget {
 class _NoQuestionsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       padding: const EdgeInsets.all(20),
       tint: Colors.white,
@@ -293,8 +299,8 @@ class _NoQuestionsCard extends StatelessWidget {
             iconSize: 24,
           ),
           const SizedBox(height: 12),
-          const Text(
-            'No exam questions imported yet',
+          Text(
+            l10n.noExamQuestionsImported,
             style: TextStyle(
               color: Colors.white,
               fontSize: 15,
@@ -303,8 +309,8 @@ class _NoQuestionsCard extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 6),
-          const Text(
-            'Go to the Study tab → Library and import\na pack like "CompTIA Security+ SY0-701".',
+          Text(
+            l10n.noExamQuestionsImportedHelp,
             style: TextStyle(color: Colors.white54, fontSize: 12),
             textAlign: TextAlign.center,
           ),
@@ -331,6 +337,7 @@ class _CountChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Row(
       children: options.map((n) {
         final isSelected = n == selected;
@@ -364,7 +371,7 @@ class _CountChips extends StatelessWidget {
                 ),
                 if (insufficient)
                   Text(
-                    'only $available',
+                    l10n.onlyAvailableCount(available),
                     style: const TextStyle(color: Colors.orange, fontSize: 9),
                   ),
               ],
@@ -434,6 +441,7 @@ class _HistoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final pct = result.percentageScore;
     final passed = pct >= 75;
     final color = passed ? Colors.green : Colors.redAccent;
@@ -471,12 +479,19 @@ class _HistoryCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${result.correctAnswers}/${result.totalQuestions} correct  ·  ${_formatDate(result.completedAt)}',
+                    l10n.historyCardTop(
+                      result.correctAnswers,
+                      result.totalQuestions,
+                      _formatDate(result.completedAt),
+                    ),
                     style: const TextStyle(color: Colors.white70, fontSize: 12),
                   ),
                   const SizedBox(height: 3),
                   Text(
-                    '${result.wrongAnswers} wrong  ·  ${result.weakestDomain ?? 'No weakest domain'}',
+                    l10n.historyCardBottom(
+                      result.wrongAnswers,
+                      result.weakestDomain ?? l10n.noWeakestDomain,
+                    ),
                     style: const TextStyle(color: Colors.white38, fontSize: 11),
                   ),
                 ],
@@ -489,7 +504,7 @@ class _HistoryCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                passed ? 'PASS' : 'FAIL',
+                passed ? l10n.passLabel : l10n.failLabel,
                 style: TextStyle(
                   color: color,
                   fontSize: 10,

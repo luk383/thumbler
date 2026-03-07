@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/l10n/app_localizations.dart';
+import '../../../app/settings/app_settings.dart';
 import '../../../core/data/reset_service.dart';
 import '../../../core/ui/app_surfaces.dart';
 import '../../bookmarks/presentation/bookmarks_notifier.dart';
@@ -15,6 +17,8 @@ class ProfilePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
+    final settings = ref.watch(appSettingsProvider);
     final xp = ref.watch(xpProvider);
     final streak = ref.watch(streakProvider);
     final bookmarkCount = ref.watch(bookmarksProvider).length;
@@ -25,16 +29,21 @@ class ProfilePage extends ConsumerWidget {
     final goalReached = dailyProgress >= 1.0;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const AppPageIntro(
-              title: 'Profile',
-              subtitle:
-                  'Track momentum, manage local data, and keep your study setup clean.',
+            AppPageIntro(
+              title: l10n.profileTitle,
+              subtitle: l10n.profileSubtitle,
+            ),
+            const SizedBox(height: 20),
+            _SettingsCard(
+              settings: settings,
+              onLanguageChanged: (language) =>
+                  ref.read(appSettingsProvider.notifier).setLanguage(language),
             ),
             const SizedBox(height: 20),
             // ── Daily goal card ──────────────────────────────────────────
@@ -223,6 +232,82 @@ Future<bool?> _showResetConfirmationDialog(
 
 // ── Sub-widgets ─────────────────────────────────────────────────────────────
 
+class _SettingsCard extends StatelessWidget {
+  const _SettingsCard({
+    required this.settings,
+    required this.onLanguageChanged,
+  });
+
+  final AppSettingsState settings;
+  final ValueChanged<AppLanguage> onLanguageChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return AppGlassCard(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            l10n.settingsSection,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Text(
+            l10n.languageLabel,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          SegmentedButton<AppLanguage>(
+            segments: [
+              ButtonSegment<AppLanguage>(
+                value: AppLanguage.italian,
+                label: Text(l10n.italianLabel),
+              ),
+              ButtonSegment<AppLanguage>(
+                value: AppLanguage.english,
+                label: Text(l10n.englishLabel),
+              ),
+            ],
+            selected: {settings.language},
+            onSelectionChanged: (selection) {
+              onLanguageChanged(selection.first);
+            },
+          ),
+          const SizedBox(height: 8),
+          Text(
+            l10n.languageHelp,
+            style: const TextStyle(color: Colors.white54, fontSize: 12),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            l10n.appearanceLabel,
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            l10n.appearanceSystem,
+            style: const TextStyle(color: Colors.white54, fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _DailyGoalCard extends StatelessWidget {
   const _DailyGoalCard({
     required this.dailyXp,
@@ -301,7 +386,10 @@ class _DailyQuestCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  quest.description,
+                  context.l10n.questDescription(
+                    quest.questType == QuestType.earnXp,
+                    quest.questTarget,
+                  ),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../daily_quest_notifier.dart';
 
 class DailyQuestModal extends ConsumerWidget {
@@ -21,6 +22,7 @@ class DailyQuestModal extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final quest = ref.watch(dailyQuestProvider);
 
     return Dialog(
@@ -37,8 +39,8 @@ class DailyQuestModal extends ConsumerWidget {
           children: [
             const Text('🎯', style: TextStyle(fontSize: 48)),
             const SizedBox(height: 12),
-            const Text(
-              "Today's Quest",
+            Text(
+              l10n.todaysQuest,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 20,
@@ -47,7 +49,10 @@ class DailyQuestModal extends ConsumerWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              quest.description,
+              l10n.questDescription(
+                quest.questType == QuestType.earnXp,
+                quest.questTarget,
+              ),
               style: const TextStyle(color: Colors.white70, fontSize: 15),
               textAlign: TextAlign.center,
             ),
@@ -66,10 +71,7 @@ class DailyQuestModal extends ConsumerWidget {
             const SizedBox(height: 8),
             Text(
               '${quest.questProgress} / ${quest.questTarget}',
-              style: const TextStyle(
-                color: Colors.white54,
-                fontSize: 12,
-              ),
+              style: const TextStyle(color: Colors.white54, fontSize: 12),
             ),
             const SizedBox(height: 24),
 
@@ -78,16 +80,13 @@ class DailyQuestModal extends ConsumerWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text("Let's Go!"),
+                child: Text(l10n.letsGo),
               ),
             ),
             const SizedBox(height: 8),
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text(
-                'Not now',
-                style: TextStyle(color: Colors.white38),
-              ),
+              child: Text(l10n.notNow, style: TextStyle(color: Colors.white38)),
             ),
           ],
         ),

@@ -217,17 +217,34 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
     final importable = packs.where((pack) => pack.isImportable).toList();
     if (importable.isEmpty) return null;
 
-    final securityPacks =
+    final preferredGeneralDecks =
         importable
             .where(
               (pack) =>
-                  pack.id.toLowerCase().contains('sec701') ||
-                  pack.assetPath.toLowerCase().contains('sec701') ||
-                  pack.examCode == 'SY0-701',
+                  pack.librarySection == 'General Knowledge' &&
+                  pack.supportsFeed,
             )
             .toList()
-          ..sort((a, b) => b.questionCount.compareTo(a.questionCount));
-    if (securityPacks.isNotEmpty) return securityPacks.first.id;
+          ..sort((a, b) {
+            final preferredIds = [
+              'general_knowledge_daily',
+              'technology_basics_daily',
+              'basic_science_daily',
+              'world_history_daily',
+            ];
+            final aIndex = preferredIds.indexOf(a.id);
+            final bIndex = preferredIds.indexOf(b.id);
+            if (aIndex != -1 || bIndex != -1) {
+              if (aIndex == -1) return 1;
+              if (bIndex == -1) return -1;
+              return aIndex.compareTo(bIndex);
+            }
+            final byQuestions = b.questionCount.compareTo(a.questionCount);
+            if (byQuestions != 0) return byQuestions;
+            return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+          });
+    if (preferredGeneralDecks.isNotEmpty) return preferredGeneralDecks.first.id;
+
     if (importable.length == 1) return importable.first.id;
     return importable.first.id;
   }

@@ -5,7 +5,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
+import '../../../paywall/presentation/paywall_page.dart';
+import '../../../paywall/pro_guard.dart';
 import '../../data/user_deck_service.dart';
 import '../../domain/user_deck_draft.dart';
 import '../controllers/deck_library_controller.dart';
@@ -31,6 +34,12 @@ Future<void> importJsonDeck(
   WidgetRef ref, {
   bool closeCurrentRoute = false,
 }) async {
+  if (!ref.read(proGuardProvider).canImportDecks()) {
+    if (context.mounted) {
+      openPaywall(context, featureName: 'JSON deck import');
+    }
+    return;
+  }
   if (closeCurrentRoute) {
     Navigator.of(context).pop();
   }
@@ -82,6 +91,11 @@ class _AddStudyMaterialSheet extends StatelessWidget {
   final WidgetRef ref;
 
   Future<void> _openGenerate(BuildContext context) async {
+    if (!ref.read(proGuardProvider).canGenerateFromNotes()) {
+      Navigator.of(context).pop();
+      openPaywall(context, featureName: 'Generate from notes');
+      return;
+    }
     Navigator.of(context).pop();
     await Navigator.of(context).push(
       MaterialPageRoute<void>(
@@ -91,6 +105,11 @@ class _AddStudyMaterialSheet extends StatelessWidget {
   }
 
   Future<void> _openManual(BuildContext context) async {
+    if (!ref.read(proGuardProvider).canCreateDecks()) {
+      Navigator.of(context).pop();
+      openPaywall(context, featureName: 'Manual deck creation');
+      return;
+    }
     Navigator.of(context).pop();
     final draft = UserDeckDraft(
       id: 'deck_${DateTime.now().millisecondsSinceEpoch}',
@@ -120,6 +139,7 @@ class _AddStudyMaterialSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
@@ -127,10 +147,9 @@ class _AddStudyMaterialSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const AppPageIntro(
-              title: 'Add Study Material',
-              subtitle:
-                  'Create your own local decks and keep them compatible with Feed, Study, and Exam.',
+            AppPageIntro(
+              title: l10n.addStudyMaterialTitle,
+              subtitle: l10n.addStudyMaterialSubtitle,
             ),
             const SizedBox(height: 16),
             _OptionCard(

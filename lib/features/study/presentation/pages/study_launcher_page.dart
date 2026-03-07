@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
 import '../../../analytics/presentation/providers/progress_analytics_provider.dart';
 import '../../../analytics/domain/progress_analytics.dart';
 import '../../../../features/paywall/pro_guard.dart';
+import '../../../../features/paywall/presentation/paywall_page.dart';
 import '../controllers/deck_library_controller.dart';
 import '../controllers/study_controller.dart';
 import '../widgets/deck_library_sheet.dart';
@@ -20,6 +22,7 @@ class StudyLauncherPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = context.l10n;
     final s = ref.watch(studyProvider);
     final n = ref.read(studyProvider.notifier);
     final activeDeck = ref.watch(activeDeckMetaProvider);
@@ -32,17 +35,16 @@ class StudyLauncherPage extends ConsumerWidget {
         s.filtered.length >= 12;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 48),
           children: [
             // ── Header ──────────────────────────────────────────────────
             const SizedBox(height: 20),
-            const Text(
-              'Study',
-              style: TextStyle(
-                color: Colors.white,
+            Text(
+              l10n.studyTitle,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                 fontSize: 26,
                 fontWeight: FontWeight.bold,
               ),
@@ -50,8 +52,8 @@ class StudyLauncherPage extends ConsumerWidget {
             const SizedBox(height: 4),
             Text(
               activeDeck == null
-                  ? '${s.items.length} cards in deck'
-                  : '${activeDeck.title} · ${s.items.length} cards',
+                  ? l10n.cardsInDeck(s.items.length)
+                  : l10n.activeDeckCards(activeDeck.title, s.items.length),
               style: const TextStyle(color: Colors.white38, fontSize: 12),
             ),
             const SizedBox(height: 16),
@@ -76,7 +78,7 @@ class StudyLauncherPage extends ConsumerWidget {
                 canRunLongSession: ref
                     .read(proGuardProvider)
                     .canRunLongSpeedDrill(),
-                onProGate: (label) => _showProDialog(context, label),
+                onProGate: (label) => openPaywall(context, featureName: label),
               ),
               const SizedBox(height: 20),
               _WeakAreasSummaryCard(
@@ -95,14 +97,14 @@ class StudyLauncherPage extends ConsumerWidget {
             if (s.items.isEmpty) ...[
               _DisabledStartButton(
                 icon: Icons.psychology_outlined,
-                label: 'Start Study Session',
-                reason: 'Import cards first',
+                label: l10n.studyStartSession,
+                reason: l10n.studyImportCardsFirst,
               ),
               const SizedBox(height: 10),
               _DisabledStartButton(
                 icon: Icons.bolt,
-                label: 'Start Speed Drill',
-                reason: 'Import cards first',
+                label: l10n.studyStartSpeed,
+                reason: l10n.studyImportCardsFirst,
               ),
             ] else if (s.availableCount == 0) ...[
               _EmptyFilterResult(),
@@ -163,6 +165,7 @@ class _EmptyBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -174,8 +177,8 @@ class _EmptyBanner extends StatelessWidget {
         children: [
           const Text('📚', style: TextStyle(fontSize: 38)),
           const SizedBox(height: 10),
-          const Text(
-            'No cards in Study yet',
+          Text(
+            l10n.studyEmptyTitle,
             style: TextStyle(
               color: Colors.white,
               fontSize: 17,
@@ -184,8 +187,8 @@ class _EmptyBanner extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 6),
-          const Text(
-            "Go to Feed and tap 'Add to Study', or import a pack with the Library button below.",
+          Text(
+            l10n.studyEmptyMessage,
             style: TextStyle(color: Colors.white54, fontSize: 13, height: 1.4),
             textAlign: TextAlign.center,
           ),
@@ -200,7 +203,7 @@ class _EmptyBanner extends StatelessWidget {
               ),
               onPressed: onSeed,
               icon: const Icon(Icons.auto_awesome, size: 15),
-              label: const Text('Add 5 starter cards'),
+              label: Text(l10n.studySeedStarter),
             ),
           ),
         ],
@@ -220,6 +223,7 @@ class _WeakAreasSummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       padding: const EdgeInsets.all(18),
       child: Column(
@@ -241,12 +245,12 @@ class _WeakAreasSummaryCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Weak Areas',
+                      l10n.weakAreasTitle,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -255,7 +259,7 @@ class _WeakAreasSummaryCard extends StatelessWidget {
                     ),
                     SizedBox(height: 2),
                     Text(
-                      'Based on local answers in the active deck.',
+                      l10n.weakAreasSubtitle,
                       style: TextStyle(color: Colors.white54, fontSize: 12),
                     ),
                   ],
@@ -265,8 +269,8 @@ class _WeakAreasSummaryCard extends StatelessWidget {
           ),
           const SizedBox(height: 14),
           if (analytics.weakestDomains.isEmpty)
-            const Text(
-              'Answer more study cards or exam questions to unlock weak-area guidance.',
+            Text(
+              l10n.weakAreasHint,
               style: TextStyle(
                 color: Colors.white54,
                 fontSize: 12,
@@ -287,7 +291,7 @@ class _WeakAreasSummaryCard extends StatelessWidget {
                 ),
                 onPressed: onTrainWeakAreas,
                 icon: const Icon(Icons.school_outlined, size: 18),
-                label: const Text('Train Weak Areas'),
+                label: Text(l10n.weakAreasTrain),
               ),
             ),
           ],
@@ -304,6 +308,7 @@ class _WeakAreaRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final progress = (summary.accuracy / 100).clamp(0.0, 1.0);
     final tint = summary.accuracy >= 70
         ? Colors.tealAccent
@@ -356,7 +361,7 @@ class _WeakAreaRow extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            '${summary.answered} answers • ${summary.wrong} wrong',
+            l10n.answersWrong(summary.answered, summary.wrong),
             style: const TextStyle(color: Colors.white54, fontSize: 11),
           ),
         ],
@@ -372,6 +377,7 @@ class _StudySnapshot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     if (state.items.isEmpty) return const SizedBox.shrink();
 
     return AppGlassCard(
@@ -380,16 +386,22 @@ class _StudySnapshot extends StatelessWidget {
         children: [
           Expanded(
             child: _SnapshotStat(
-              label: 'Reviewed',
+              label: l10n.snapshotReviewed,
               value:
                   '${state.items.where((item) => item.timesSeen > 0).length}',
             ),
           ),
           Expanded(
-            child: _SnapshotStat(label: 'Due Now', value: '${state.dueCount}'),
+            child: _SnapshotStat(
+              label: l10n.snapshotDueNow,
+              value: '${state.dueCount}',
+            ),
           ),
           Expanded(
-            child: _SnapshotStat(label: 'Weak', value: '${state.weakCount}'),
+            child: _SnapshotStat(
+              label: l10n.snapshotWeak,
+              value: '${state.weakCount}',
+            ),
           ),
         ],
       ),
@@ -405,14 +417,15 @@ class _PrimaryStudyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     final queueCount = state.queueCount;
     final hasPreferredQueue = queueCount > 0;
     final startLabel = hasPreferredQueue
-        ? 'Start Study • ${state.selectedQueueType.label} $queueCount'
-        : 'Start Study';
+        ? l10n.studyStartWithQueue(state.selectedQueueType.label, queueCount)
+        : l10n.studyStart;
     final supporting = hasPreferredQueue
-        ? '${state.estimatedMinutes} min focused run'
-        : 'Falls back to a useful random run when needed';
+        ? l10n.focusedRunMinutes(state.estimatedMinutes)
+        : l10n.studyRandomFallback;
 
     return AppGlassCard(
       padding: const EdgeInsets.all(18),
@@ -421,8 +434,8 @@ class _PrimaryStudyCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Focused Practice',
+          Text(
+            l10n.focusedPractice,
             style: TextStyle(
               color: Colors.white,
               fontSize: 17,
@@ -465,7 +478,7 @@ class _PrimaryStudyCard extends StatelessWidget {
                 }
               },
               icon: const Icon(Icons.bolt),
-              label: const Text('Speed Drill'),
+              label: Text(l10n.speedDrill),
             ),
           ),
         ],
@@ -495,6 +508,7 @@ class _SessionSettingsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
     return AppGlassCard(
       padding: EdgeInsets.zero,
       radius: 22,
@@ -504,8 +518,8 @@ class _SessionSettingsCard extends StatelessWidget {
         child: ExpansionTile(
           tilePadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
           childrenPadding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
-          title: const Text(
-            'Session Settings',
+          title: Text(
+            l10n.sessionSettings,
             style: TextStyle(
               color: Colors.white,
               fontSize: 15,
@@ -513,7 +527,11 @@ class _SessionSettingsCard extends StatelessWidget {
             ),
           ),
           subtitle: Text(
-            '${state.selectedQueueType.label} • ${state.sessionLength} questions • ${state.timerSeconds}s timer',
+            l10n.sessionSettingsSummary(
+              state.selectedQueueType.label,
+              state.sessionLength,
+              state.timerSeconds,
+            ),
             style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
           children: [
@@ -1110,44 +1128,3 @@ class _EmptyQueueBanner extends StatelessWidget {
 // ============================================================================
 // Pro dialog
 // ============================================================================
-
-void _showProDialog(BuildContext context, String featureName) {
-  showDialog<void>(
-    context: context,
-    builder: (ctx) => AlertDialog(
-      backgroundColor: const Color(0xFF1A1730),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      title: const Row(
-        children: [
-          Text('⭐', style: TextStyle(fontSize: 22)),
-          SizedBox(width: 8),
-          Text(
-            'Pro Feature',
-            style: TextStyle(color: Colors.white, fontSize: 17),
-          ),
-        ],
-      ),
-      content: Text(
-        '$featureName is available for Pro users.',
-        style: const TextStyle(color: Colors.white70, fontSize: 14),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(ctx),
-          child: const Text(
-            'Maybe later',
-            style: TextStyle(color: Colors.white54),
-          ),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF6C63FF),
-          ),
-          // TODO: navigate to paywall / RevenueCat purchase flow
-          onPressed: () => Navigator.pop(ctx),
-          child: const Text('Upgrade to Pro'),
-        ),
-      ],
-    ),
-  );
-}
