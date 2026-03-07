@@ -175,13 +175,18 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
     final importable = packs.where((pack) => pack.isImportable).toList();
     if (importable.isEmpty) return;
 
+    final rankedCandidates = [
+      ...importable.where((pack) => pack.supportsFeed),
+      ...importable.where((pack) => !pack.supportsFeed),
+    ];
+
     final interestKeywords = {
       for (final interest in interests) interest: _interestKeywords(interest),
     };
 
     DeckPackMeta? bestMatch;
     var bestScore = -1;
-    for (final pack in importable) {
+    for (final pack in rankedCandidates) {
       final haystack = [
         pack.title,
         pack.category ?? '',
@@ -190,9 +195,11 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       ].join(' ').toLowerCase();
 
       var score = 0;
+      if (pack.supportsFeed) score += 2;
+      if (pack.librarySection == 'General Knowledge') score += 1;
       for (final keywords in interestKeywords.values) {
         if (keywords.any(haystack.contains)) {
-          score += 1;
+          score += 2;
         }
       }
       if (score > bestScore) {

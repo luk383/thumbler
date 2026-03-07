@@ -12,7 +12,7 @@ import '../../domain/lesson.dart';
 import '../controllers/feed_controller.dart';
 import 'quiz_section.dart';
 
-const _kAutoAdvanceDelay = Duration(milliseconds: 250);
+const _kAutoAdvanceDelay = Duration(milliseconds: 1600);
 
 class LessonCard extends ConsumerStatefulWidget {
   const LessonCard({
@@ -53,7 +53,7 @@ class _LessonCardState extends ConsumerState<LessonCard> {
   @override
   Widget build(BuildContext context) {
     final cardState = ref.watch(
-      feedProvider.select((s) => s.cardStateAt(widget.cardIndex)),
+      feedProvider.select((s) => s.cardStateFor(widget.lesson.id)),
     );
     final isBookmarked = ref.watch(
       bookmarksProvider.select((ids) => ids.contains(widget.lesson.id)),
@@ -65,8 +65,8 @@ class _LessonCardState extends ConsumerState<LessonCard> {
         widget.lesson.hook.trim() == widget.lesson.quizQuestion.trim();
 
     ref.listen(
-      feedProvider.select(
-        (s) => s.cardStateAt(widget.cardIndex).selectedAnswer,
+        feedProvider.select(
+          (s) => s.cardStateFor(widget.lesson.id).selectedAnswer,
       ),
       (prev, next) {
         if (next != null && prev == null) _scheduleAutoAdvance();
@@ -232,7 +232,7 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                           onPressed: () {
                             ref
                                 .read(feedProvider.notifier)
-                                .reveal(widget.cardIndex);
+                                .reveal(widget.lesson.id);
                             ref.read(xpProvider.notifier).addXp(XpEvent.reveal);
                           },
                           child: const Text('Reveal Answer + Quiz'),

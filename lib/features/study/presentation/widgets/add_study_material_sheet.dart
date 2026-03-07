@@ -26,6 +26,56 @@ Future<void> showAddStudyMaterialSheet(
   );
 }
 
+Future<void> importJsonDeck(
+  BuildContext context,
+  WidgetRef ref, {
+  bool closeCurrentRoute = false,
+}) async {
+  if (closeCurrentRoute) {
+    Navigator.of(context).pop();
+  }
+  try {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: const ['json'],
+      withData: true,
+    );
+    final file = result?.files.single;
+    if (file == null) return;
+
+    final bytes =
+        file.bytes ??
+        (file.path == null ? null : await File(file.path!).readAsBytes());
+    if (bytes == null || bytes.isEmpty) {
+      throw const FormatException('Unable to read the selected JSON file');
+    }
+
+    final raw = utf8.decode(bytes);
+    final draft = const UserDeckService().normalizeImportedJson(
+      raw,
+      fallbackCategory: 'Imported Deck',
+    );
+    await const UserDeckService().saveDeck(draft);
+    await ref.read(deckLibraryProvider.notifier).discoverPacks();
+
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${draft.title} added to your library'),
+        backgroundColor: const Color(0xFF0D8B5F),
+      ),
+    );
+  } catch (error) {
+    if (!context.mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(error.toString()),
+        backgroundColor: Colors.redAccent,
+      ),
+    );
+  }
+}
+
 class _AddStudyMaterialSheet extends StatelessWidget {
   const _AddStudyMaterialSheet({required this.ref});
 
@@ -65,47 +115,7 @@ class _AddStudyMaterialSheet extends StatelessWidget {
   }
 
   Future<void> _importJson(BuildContext context) async {
-    Navigator.of(context).pop();
-    try {
-      final result = await FilePicker.platform.pickFiles(
-        type: FileType.custom,
-        allowedExtensions: const ['json'],
-        withData: true,
-      );
-      final file = result?.files.single;
-      if (file == null) return;
-
-      final bytes =
-          file.bytes ??
-          (file.path == null ? null : await File(file.path!).readAsBytes());
-      if (bytes == null || bytes.isEmpty) {
-        throw const FormatException('Unable to read the selected JSON file');
-      }
-
-      final raw = utf8.decode(bytes);
-      final draft = const UserDeckService().normalizeImportedJson(
-        raw,
-        fallbackCategory: 'Imported Deck',
-      );
-      await const UserDeckService().saveDeck(draft);
-      await ref.read(deckLibraryProvider.notifier).discoverPacks();
-
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('${draft.title} added to your library'),
-          backgroundColor: const Color(0xFF0D8B5F),
-        ),
-      );
-    } catch (error) {
-      if (!context.mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(error.toString()),
-          backgroundColor: Colors.redAccent,
-        ),
-      );
-    }
+    await importJsonDeck(context, ref, closeCurrentRoute: true);
   }
 
   @override
@@ -143,7 +153,7 @@ class _AddStudyMaterialSheet extends StatelessWidget {
               icon: Icons.file_upload_outlined,
               title: 'Import JSON Deck',
               subtitle:
-                  'Pick a JSON file, validate it, and add it to your local library.',
+                  'Choose a local JSON deck file, validate it, and add it straight to your library.',
               onTap: () => _importJson(context),
             ),
           ],

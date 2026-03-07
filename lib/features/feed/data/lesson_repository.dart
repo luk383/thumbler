@@ -102,26 +102,40 @@ DeckPackMeta? resolveFeedDeckMeta({
   }
 
   final activeDeck = findById(activeDeckId);
-  if (_isFeedCapable(activeDeck)) return activeDeck;
+  if (_isPreferredFeedDeck(activeDeck)) return activeDeck;
 
-  final candidates = packs
-      .where((pack) => _isFeedCapable(pack))
+  final preferredCandidates = packs
+      .where((pack) => _isPreferredFeedDeck(pack))
       .toList(growable: false);
-  if (candidates.isEmpty) return null;
+  if (preferredCandidates.isNotEmpty) {
+    preferredCandidates.sort(_compareFeedPriority);
+    return preferredCandidates.first;
+  }
 
-  final securityDecks =
-      candidates
-          .where(
-            (pack) =>
-                pack.id.toLowerCase().contains('sec701') ||
-                pack.assetPath.toLowerCase().contains('sec701') ||
-                pack.examCode == 'SY0-701',
-          )
-          .toList()
-        ..sort((a, b) => b.questionCount.compareTo(a.questionCount));
-  if (securityDecks.isNotEmpty) return securityDecks.first;
-  return candidates.first;
+  if (_isFallbackFeedDeck(activeDeck)) return activeDeck;
+
+  final fallbackCandidates = packs
+      .where((pack) => _isFallbackFeedDeck(pack))
+      .toList(growable: false);
+  if (fallbackCandidates.isEmpty) return null;
+  fallbackCandidates.sort(_compareFeedPriority);
+  return fallbackCandidates.first;
 }
 
-bool _isFeedCapable(DeckPackMeta? pack) =>
+bool _isPreferredFeedDeck(DeckPackMeta? pack) =>
+    pack != null && pack.isImportable && pack.supportsFeed;
+
+bool _isFallbackFeedDeck(DeckPackMeta? pack) =>
     pack != null && pack.isImportable && pack.hasQuestions;
+
+int _compareFeedPriority(DeckPackMeta a, DeckPackMeta b) {
+  final sectionScoreA = a.librarySection == 'General Knowledge' ? 1 : 0;
+  final sectionScoreB = b.librarySection == 'General Knowledge' ? 1 : 0;
+  final bySection = sectionScoreB.compareTo(sectionScoreA);
+  if (bySection != 0) return bySection;
+
+  final byQuestions = b.questionCount.compareTo(a.questionCount);
+  if (byQuestions != 0) return byQuestions;
+
+  return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+}

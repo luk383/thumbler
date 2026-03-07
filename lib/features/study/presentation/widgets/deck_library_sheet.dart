@@ -147,6 +147,12 @@ class DeckLibrarySheet extends ConsumerWidget {
                 icon: const Icon(Icons.add_circle_outline),
                 label: const Text('Add Study Material'),
               ),
+              const SizedBox(height: 8),
+              TextButton.icon(
+                onPressed: () => importJsonDeck(context, ref),
+                icon: const Icon(Icons.file_upload_outlined),
+                label: const Text('Import JSON Deck'),
+              ),
               const SizedBox(height: 12),
               if (lib.lastError != null)
                 Padding(
@@ -201,7 +207,8 @@ class _EmptyLibraryState extends StatelessWidget {
         child: AppEmptyStateCard(
           icon: Icons.library_books_outlined,
           title: 'No local packs found',
-          message: 'Add a JSON pack to assets/decks and refresh the library.',
+          message:
+              'Use Add Study Material to import a JSON deck or create your own local deck.',
         ),
       ),
     );

@@ -15,12 +15,12 @@ class CardState {
 class FeedState {
   const FeedState({this.cards = const {}});
 
-  final Map<int, CardState> cards;
+  final Map<String, CardState> cards;
 
-  CardState cardStateAt(int index) => cards[index] ?? const CardState();
+  CardState cardStateFor(String lessonId) => cards[lessonId] ?? const CardState();
 
-  FeedState updateCard(int index, CardState updated) =>
-      FeedState(cards: {...cards, index: updated});
+  FeedState updateCard(String lessonId, CardState updated) =>
+      FeedState(cards: {...cards, lessonId: updated});
 }
 
 class FeedNotifier extends Notifier<FeedState> {
@@ -31,16 +31,16 @@ class FeedNotifier extends Notifier<FeedState> {
     state = const FeedState();
   }
 
-  void reveal(int index) {
-    final current = state.cardStateAt(index);
+  void reveal(String lessonId) {
+    final current = state.cardStateFor(lessonId);
     if (current.revealed) return;
-    state = state.updateCard(index, current.copyWith(revealed: true));
+    state = state.updateCard(lessonId, current.copyWith(revealed: true));
   }
 
-  void selectAnswer(int index, String answer) {
-    final current = state.cardStateAt(index);
+  void selectAnswer(String lessonId, String answer) {
+    final current = state.cardStateFor(lessonId);
     if (current.selectedAnswer != null) return;
-    state = state.updateCard(index, current.copyWith(selectedAnswer: answer));
+    state = state.updateCard(lessonId, current.copyWith(selectedAnswer: answer));
   }
 }
 

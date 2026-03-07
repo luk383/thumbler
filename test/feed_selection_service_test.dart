@@ -246,4 +246,35 @@ void main() {
 
     expect(resolved?.id, 'deck-a');
   });
+
+  test(
+    'feed deck resolution prefers feed-friendly decks over exam-only decks',
+    () {
+      final resolved = resolveFeedDeckMeta(
+        packs: const [
+          DeckPackMeta(
+            id: 'exam-only',
+            title: 'Certification Exam',
+            assetPath: 'assets/decks/exam_only.json',
+            questionCount: 90,
+            microCardCount: 0,
+            examQuestionCount: 90,
+            examCode: 'SY0-701',
+          ),
+          DeckPackMeta(
+            id: 'topic-feed',
+            title: 'Technology Basics',
+            assetPath: 'assets/decks/technology_basics.json',
+            questionCount: 30,
+            microCardCount: 30,
+            examQuestionCount: 0,
+            category: 'Technology',
+          ),
+        ],
+        activeDeckId: 'exam-only',
+      );
+
+      expect(resolved?.id, 'topic-feed');
+    },
+  );
 }

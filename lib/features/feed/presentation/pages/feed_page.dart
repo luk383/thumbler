@@ -167,6 +167,7 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                       },
                       itemBuilder: (context, index) {
                         return LessonCard(
+                          key: ValueKey(lessons[index].id),
                           lesson: lessons[index],
                           cardIndex: index,
                           onNext: () => unawaited(_goToNextCard()),
