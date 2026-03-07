@@ -364,8 +364,8 @@ void main() {
       containsAll(<String>[
         'Cloud Concepts',
         'Security and Compliance',
-        'Technology',
-        'Billing and Pricing',
+        'Cloud Technology and Services',
+        'Billing, Pricing, and Support',
       ]),
     );
     expect(deck.items, hasLength(24));
