@@ -120,15 +120,15 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
 
   Future<void> setActiveDeck(DeckPackMeta meta) async {
     if (state.loadingPackId != null) return;
-      state = DeckLibraryState(
-        packs: state.packs,
-        activeDeckId: state.activeDeckId,
-        loadingPackId: meta.id,
-        results: state.results,
-        isDiscovering: state.isDiscovering,
-        lastError: null,
-        dataVersion: state.dataVersion,
-      );
+    state = DeckLibraryState(
+      packs: state.packs,
+      activeDeckId: state.activeDeckId,
+      loadingPackId: meta.id,
+      results: state.results,
+      isDiscovering: state.isDiscovering,
+      lastError: null,
+      dataVersion: state.dataVersion,
+    );
 
     try {
       final result = await importPack(meta);
@@ -156,6 +156,54 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       );
       rethrow;
     }
+  }
+
+  Future<void> chooseDeckForInterests(List<String> interests) async {
+    if (interests.isEmpty) {
+      if (state.activeDeckId == null) {
+        await discoverPacks();
+      }
+      return;
+    }
+
+    var packs = state.packs;
+    if (packs.isEmpty) {
+      await discoverPacks();
+      packs = state.packs;
+    }
+
+    final importable = packs.where((pack) => pack.isImportable).toList();
+    if (importable.isEmpty) return;
+
+    final interestKeywords = {
+      for (final interest in interests) interest: _interestKeywords(interest),
+    };
+
+    DeckPackMeta? bestMatch;
+    var bestScore = -1;
+    for (final pack in importable) {
+      final haystack = [
+        pack.title,
+        pack.category ?? '',
+        pack.examCode ?? '',
+        ...pack.domains,
+      ].join(' ').toLowerCase();
+
+      var score = 0;
+      for (final keywords in interestKeywords.values) {
+        if (keywords.any(haystack.contains)) {
+          score += 1;
+        }
+      }
+      if (score > bestScore) {
+        bestScore = score;
+        bestMatch = pack;
+      }
+    }
+
+    if (bestMatch == null) return;
+    if (state.activeDeckId == bestMatch.id) return;
+    await setActiveDeck(bestMatch);
   }
 
   String? _defaultDeckId(List<DeckPackMeta> packs) {
@@ -190,6 +238,22 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
   }
 }
 
+List<String> _interestKeywords(String interest) {
+  switch (interest.toLowerCase()) {
+    case 'cybersecurity':
+      return const ['security', 'cyber', 'linux', 'threat'];
+    case 'cloud':
+      return const ['cloud', 'aws', 'architecture'];
+    case 'technology':
+      return const ['technology', 'computer', 'internet', 'ai', 'network'];
+    case 'science':
+      return const ['science', 'physics', 'chemistry', 'biology', 'astronomy'];
+    case 'history':
+      return const ['history', 'civilization', 'medieval', 'modern'];
+  }
+  return [interest.toLowerCase()];
+}
+
 final deckLibraryProvider =
     NotifierProvider<DeckLibraryNotifier, DeckLibraryState>(
       DeckLibraryNotifier.new,
@@ -222,28 +286,29 @@ class DeckProgressSummary {
   bool get hasProgress => reviewedItems > 0;
 }
 
-final deckProgressSummariesProvider = Provider<Map<String, DeckProgressSummary>>((
-  ref,
-) {
-  ref.watch(deckLibraryProvider);
+final deckProgressSummariesProvider =
+    Provider<Map<String, DeckProgressSummary>>((ref) {
+      ref.watch(deckLibraryProvider);
 
-  final items = StudyStorage().all();
-  final grouped = <String, List<StudyItem>>{};
-  for (final item in items) {
-    final deckId = item.deckId;
-    if (deckId == null || deckId.trim().isEmpty) continue;
-    grouped.putIfAbsent(deckId, () => []).add(item);
-  }
+      final items = StudyStorage().all();
+      final grouped = <String, List<StudyItem>>{};
+      for (final item in items) {
+        final deckId = item.deckId;
+        if (deckId == null || deckId.trim().isEmpty) continue;
+        grouped.putIfAbsent(deckId, () => []).add(item);
+      }
 
-  return grouped.map((deckId, deckItems) {
-    final reviewedItems = deckItems.where((item) => item.timesSeen > 0).length;
-    return MapEntry(
-      deckId,
-      DeckProgressSummary(
-        deckId: deckId,
-        totalItems: deckItems.length,
-        reviewedItems: reviewedItems,
-      ),
-    );
-  });
-});
+      return grouped.map((deckId, deckItems) {
+        final reviewedItems = deckItems
+            .where((item) => item.timesSeen > 0)
+            .length;
+        return MapEntry(
+          deckId,
+          DeckProgressSummary(
+            deckId: deckId,
+            totalItems: deckItems.length,
+            reviewedItems: reviewedItems,
+          ),
+        );
+      });
+    });

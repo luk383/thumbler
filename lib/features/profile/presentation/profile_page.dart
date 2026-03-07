@@ -138,8 +138,9 @@ class ProfilePage extends ConsumerWidget {
                 context,
                 dialogTitle: 'Reset all local data',
                 dialogMessage:
-                    'This permanently deletes every local deck, exam result, bookmark, '
-                    'XP record, streak, and quest state on this device. '
+                    'This permanently deletes local progress, exam results, bookmarks, '
+                    'XP, streak, active deck selection, and quest state on this device, '
+                    'but keeps bundled deck content available offline. '
                     'This action cannot be undone.',
                 confirmLabel: 'Delete all local data',
                 successAction: () => const ResetService().resetAllData(

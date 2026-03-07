@@ -15,6 +15,7 @@ class ExamHomePage extends ConsumerWidget {
     final s = ref.watch(examProvider);
     final n = ref.read(examProvider.notifier);
     final activeDeck = ref.watch(activeDeckMetaProvider);
+    final countOptions = _questionCountOptions(s.availableQuestions.length);
     final deckResults = activeDeck == null
         ? s.results
         : s.results.where((result) => result.deckId == activeDeck.id).toList();
@@ -62,7 +63,7 @@ class ExamHomePage extends ConsumerWidget {
                 children: [
                   const _SectionLabel('Questions'),
                   _CountChips(
-                    options: const [30, 60, 90],
+                    options: countOptions,
                     selected: s.selectedCount,
                     available: s.availableQuestions.length,
                     onSelect: n.setQuestionCount,
@@ -136,17 +137,30 @@ class ExamHomePage extends ConsumerWidget {
             ],
 
             const SizedBox(height: 20),
-            const Center(
-              child: Text(
-                '// TODO: PBQ (Performance-Based Questions) support coming later',
-                style: TextStyle(color: Colors.white12, fontSize: 10),
+            if (s.availableQuestions.isNotEmpty &&
+                s.availableQuestions.length < 30)
+              const Center(
+                child: Text(
+                  'This deck has a shorter exam pool, so runs use the available question count.',
+                  style: TextStyle(color: Colors.white24, fontSize: 10),
+                  textAlign: TextAlign.center,
+                ),
               ),
-            ),
           ],
         ),
       ),
     );
   }
+}
+
+List<int> _questionCountOptions(int availableQuestions) {
+  const defaults = [30, 60, 90];
+  final supported = defaults
+      .where((count) => count <= availableQuestions)
+      .toList(growable: false);
+  if (supported.isNotEmpty) return supported;
+  if (availableQuestions <= 0) return defaults;
+  return [availableQuestions];
 }
 
 // ── Section label ─────────────────────────────────────────────────────────────

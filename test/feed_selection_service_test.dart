@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:thumbler/features/feed/data/feed_selection_service.dart';
 import 'package:thumbler/features/feed/data/feed_session_memory.dart';
 import 'package:thumbler/features/feed/data/lesson_repository.dart';
+import 'package:thumbler/features/study/data/deck_pack.dart';
 import 'package:thumbler/features/study/domain/study_item.dart';
 
 void main() {
@@ -146,10 +147,10 @@ void main() {
     'repository filters to active deck and ignores invalid feed items',
     () async {
       final repository = LocalDeckLessonRepository(
-        activeDeckId: 'deck-a',
+        deckId: 'deck-a',
         weakestDomains: const [],
         sessionMemory: FeedSessionMemory(),
-        items: [
+        sourceItems: [
           makeItem(id: 'valid', category: 'Domain A', deckId: 'deck-a'),
           makeItem(id: 'other-deck', category: 'Domain B', deckId: 'deck-b'),
           StudyItem(
@@ -163,6 +164,7 @@ void main() {
             correctAnswerIndex: 0,
           ),
         ],
+        progressItems: const [],
       );
 
       final lessons = await repository.fetchLessons();
@@ -170,4 +172,78 @@ void main() {
       expect(lessons.map((lesson) => lesson.id).toList(), ['valid']);
     },
   );
+
+  test(
+    'repository uses deck source items even when progress has been reset',
+    () async {
+      final repository = LocalDeckLessonRepository(
+        deckId: 'deck-a',
+        weakestDomains: const [],
+        sessionMemory: FeedSessionMemory(),
+        sourceItems: [
+          makeItem(id: 'deck-question', category: 'Domain A', deckId: 'deck-a'),
+        ],
+        progressItems: const [],
+      );
+
+      final lessons = await repository.fetchLessons();
+
+      expect(lessons.map((lesson) => lesson.id).toList(), ['deck-question']);
+    },
+  );
+
+  test(
+    'repository overlays progress stats onto the local deck source',
+    () async {
+      final repository = LocalDeckLessonRepository(
+        deckId: 'deck-a',
+        weakestDomains: const [],
+        sessionMemory: FeedSessionMemory(),
+        sourceItems: [
+          makeItem(id: 'question', category: 'Domain A', deckId: 'deck-a'),
+        ],
+        progressItems: [
+          makeItem(
+            id: 'question',
+            category: 'Domain A',
+            deckId: 'deck-a',
+            timesSeen: 4,
+            wrongCount: 2,
+          ),
+        ],
+      );
+
+      final lessons = await repository.fetchLessons();
+
+      expect(lessons.single.id, 'question');
+    },
+  );
+
+  test('feed deck resolution falls back to the first valid local deck', () {
+    final resolved = resolveFeedDeckMeta(
+      packs: const [
+        DeckPackMeta(
+          id: 'starter',
+          title: 'Starter',
+          assetPath: 'assets/decks/starter.json',
+          questionCount: 0,
+          microCardCount: 0,
+          examQuestionCount: 0,
+          isStarter: true,
+          availabilityNote: 'Soon',
+        ),
+        DeckPackMeta(
+          id: 'deck-a',
+          title: 'Deck A',
+          assetPath: 'assets/decks/deck_a.json',
+          questionCount: 20,
+          microCardCount: 20,
+          examQuestionCount: 0,
+        ),
+      ],
+      activeDeckId: 'missing-deck',
+    );
+
+    expect(resolved?.id, 'deck-a');
+  });
 }

@@ -16,7 +16,7 @@ class FeedQueueNotifier extends AsyncNotifier<List<Lesson>> {
   Future<List<Lesson>> build() async {
     ref.watch(activeDeckIdProvider);
     ref.watch(deckLibraryDataVersionProvider);
-    final lessons = await ref.read(lessonRepositoryProvider).fetchLessons();
+    final lessons = await ref.watch(lessonsProvider.future);
     return _takeBatch(
       current: const [],
       candidates: lessons,

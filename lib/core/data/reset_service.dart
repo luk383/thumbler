@@ -24,9 +24,7 @@ class ResetService {
   static const streakBoxName = 'streak_box';
   static const bookmarksBoxName = 'bookmarks_box';
   static const questBoxName = 'quest_box';
-  static const studyBoxName = StudyStorage.boxName;
   static const examBoxName = ExamAttemptStorage.boxName;
-  static const libraryBoxName = DeckLibraryStorage.boxName;
 
   Future<void> resetStudyDeck({
     required BuildContext context,
@@ -101,9 +99,9 @@ class ResetService {
         await Hive.box(streakBoxName).clear();
         await Hive.box(bookmarksBoxName).clear();
         await Hive.box(questBoxName).clear();
-        await Hive.box(studyBoxName).clear();
+        await StudyStorage().resetProgress();
         await Hive.box(examBoxName).clear();
-        await Hive.box(libraryBoxName).clear();
+        await const DeckLibraryStorage().clearActiveDeckId();
       },
       onAfterClear: () async {
         ref.read(xpProvider.notifier).reloadFromStorage();

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
+import 'deck_library_storage.dart';
 import '../domain/study_item.dart';
 
 class DeckPackMeta {
@@ -113,6 +114,62 @@ class DeckPackMeta {
           id: id,
           title: title,
           assetPath: path,
+          examCode: examCode,
+          category: category,
+          description: description,
+          version: version,
+          domains: domains,
+          isStarter: isStarter,
+          availabilityNote: availabilityNote,
+          questionCount: questionCount,
+          microCardCount: microCardCount,
+          examQuestionCount: examQuestionCount,
+          invalidJsonMessage: invalidJsonMessage,
+        ),
+      );
+    }
+
+    const libraryStorage = DeckLibraryStorage();
+    final userDecks = libraryStorage.loadAllUserDeckJson();
+    for (final entry in userDecks.entries) {
+      final deckId = entry.key;
+      final raw = entry.value;
+      final pseudoPath = 'user://$deckId';
+      String title = deckId;
+      String? description;
+      String? examCode;
+      String? category;
+      String? version;
+      List<String> domains = const [];
+      bool isStarter = false;
+      String? availabilityNote;
+      int questionCount = 0;
+      int microCardCount = 0;
+      int examQuestionCount = 0;
+      String? invalidJsonMessage;
+
+      try {
+        final inspected = inspectJsonString(raw, assetPath: pseudoPath);
+        title = inspected.title;
+        description = inspected.description;
+        examCode = inspected.examCode;
+        category = inspected.category;
+        version = inspected.version;
+        domains = inspected.domains;
+        isStarter = inspected.isStarter;
+        availabilityNote = inspected.availabilityNote;
+        questionCount = inspected.questionCount;
+        microCardCount = inspected.microCardCount;
+        examQuestionCount = inspected.examQuestionCount;
+      } catch (e) {
+        invalidJsonMessage = e.toString();
+      }
+
+      metas.add(
+        DeckPackMeta(
+          id: deckId,
+          title: title,
+          assetPath: pseudoPath,
           examCode: examCode,
           category: category,
           description: description,
@@ -288,8 +345,18 @@ class DeckPack {
   }
 
   static Future<DeckPack> load(DeckPackMeta meta) async {
-    final raw = await rootBundle.loadString(meta.assetPath);
+    final raw = await loadRawJson(meta);
+    if (raw == null) {
+      throw FormatException('Missing local deck data for "${meta.id}"');
+    }
     return parseJsonString(raw, assetPath: meta.assetPath);
+  }
+
+  static Future<String?> loadRawJson(DeckPackMeta meta) async {
+    if (meta.assetPath.startsWith('user://')) {
+      return const DeckLibraryStorage().loadUserDeckJson(meta.id);
+    }
+    return rootBundle.loadString(meta.assetPath);
   }
 }
 

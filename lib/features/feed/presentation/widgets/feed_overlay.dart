@@ -2,8 +2,148 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/ui/app_surfaces.dart';
+import '../../../analytics/presentation/providers/progress_analytics_provider.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
 import '../../../growth/streak/streak_notifier.dart';
+import '../../../study/presentation/controllers/study_controller.dart';
+import '../../domain/lesson.dart';
+
+class FeedMotivationCue {
+  const FeedMotivationCue({
+    required this.message,
+    required this.icon,
+    required this.tint,
+  });
+
+  final String message;
+  final IconData icon;
+  final Color tint;
+}
+
+FeedMotivationCue? buildFeedMotivationCue({
+  required StreakState streak,
+  required DailyQuestState quest,
+  required int weakCount,
+  required List<String> weakestDomains,
+  required int currentIndex,
+  required int total,
+  Lesson? currentLesson,
+}) {
+  final streakRemaining = streak.remainingToday;
+  if (!streak.completedToday && streakRemaining == 1) {
+    return const FeedMotivationCue(
+      message: '1 more to keep your streak',
+      icon: Icons.local_fire_department_rounded,
+      tint: Color(0xFFFF8A4C),
+    );
+  }
+
+  final questRemaining = quest.questTarget - quest.questProgress;
+  if (!quest.questCompleted &&
+      quest.questType == QuestType.answerQuizzes &&
+      questRemaining >= 1 &&
+      questRemaining <= 2) {
+    return FeedMotivationCue(
+      message: '$questRemaining more to finish today\'s goal',
+      icon: Icons.flag_rounded,
+      tint: const Color(0xFF6C63FF),
+    );
+  }
+
+  final isWeakCard =
+      currentLesson != null && weakestDomains.contains(currentLesson.category);
+  if (isWeakCard && weakCount >= 1 && weakCount <= 2) {
+    return FeedMotivationCue(
+      message: '$weakCount more to clear weak questions',
+      icon: Icons.trending_up_rounded,
+      tint: const Color(0xFF12B981),
+    );
+  }
+
+  final remainingInRun = total - currentIndex - 1;
+  if (remainingInRun >= 1 && remainingInRun <= 2) {
+    return FeedMotivationCue(
+      message: '$remainingInRun more to finish this quick run',
+      icon: Icons.playlist_play_rounded,
+      tint: const Color(0xFF22C55E),
+    );
+  }
+
+  return null;
+}
+
+class FeedMotivationBanner extends ConsumerWidget {
+  const FeedMotivationBanner({
+    super.key,
+    required this.currentIndex,
+    required this.total,
+    this.currentLesson,
+  });
+
+  final int currentIndex;
+  final int total;
+  final Lesson? currentLesson;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final streak = ref.watch(streakProvider);
+    final quest = ref.watch(dailyQuestProvider);
+    final weakCount = ref.watch(
+      studyProvider.select((state) => state.weakCount),
+    );
+    final weakestDomains = ref.watch(
+      progressAnalyticsProvider.select(
+        (analytics) =>
+            analytics.weakestDomains.map((summary) => summary.domain).toList(),
+      ),
+    );
+
+    final cue = buildFeedMotivationCue(
+      streak: streak,
+      quest: quest,
+      weakCount: weakCount,
+      weakestDomains: weakestDomains,
+      currentIndex: currentIndex,
+      total: total,
+      currentLesson: currentLesson,
+    );
+    if (cue == null) return const SizedBox.shrink();
+
+    return IgnorePointer(
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [cue.tint.withAlpha(56), const Color(0xE611131A)],
+          ),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: Colors.white.withAlpha(16)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(cue.icon, color: cue.tint, size: 16),
+            const SizedBox(width: 8),
+            Flexible(
+              child: Text(
+                cue.message,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 /// Floating overlay shown over the feed at top-right.
 /// Displays card progress and daily quest pill.

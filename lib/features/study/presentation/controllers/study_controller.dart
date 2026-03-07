@@ -597,12 +597,19 @@ class StudyNotifier extends Notifier<StudyState> {
 
   void nextCard() => _advanceSession(StudyStorage());
 
-  void recordFeedAnswer(String id, {required bool correct}) {
+  void recordFeedAnswer(Lesson lesson, {required bool correct}) {
     final storage = StudyStorage();
-    final item = state.items.firstWhere(
-      (i) => i.id == id,
-      orElse: () => state.items.first,
-    );
+    final item =
+        storage.getById(lesson.id, deckId: state.activeDeckId) ??
+        StudyItem.fromLesson(
+          id: lesson.id,
+          deckId: state.activeDeckId,
+          category: lesson.category,
+          hook: lesson.hook,
+          explanation: lesson.explanation,
+          options: lesson.options,
+          correctAnswerIndex: lesson.correctAnswerIndex,
+        );
 
     storage.update(
       item.copyWith(

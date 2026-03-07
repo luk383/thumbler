@@ -85,7 +85,7 @@ class QuizSection extends ConsumerWidget {
                     ref
                         .read(studyProvider.notifier)
                         .recordFeedAnswer(
-                          lesson.id,
+                          lesson,
                           correct: option == correctAnswer,
                         );
                     ref.read(streakProvider.notifier).recordStudyQuestion();

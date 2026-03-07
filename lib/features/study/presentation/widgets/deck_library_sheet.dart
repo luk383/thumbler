@@ -3,8 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/ui/app_surfaces.dart';
+import '../../data/deck_export_service.dart';
 import '../../data/deck_pack.dart';
 import '../controllers/deck_library_controller.dart';
+import 'add_study_material_sheet.dart';
 
 void showDeckLibrary(BuildContext context) {
   showModalBottomSheet<void>(
@@ -71,6 +73,32 @@ class DeckLibrarySheet extends ConsumerWidget {
       context.go('/exam');
     }
 
+    Future<void> exportDeck(DeckPackMeta meta) async {
+      try {
+        await const DeckExportService().exportDeck(meta);
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('${meta.title} ready to save or share')),
+        );
+      } catch (e) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
+      }
+    }
+
+    Future<void> shareDeck(DeckPackMeta meta) async {
+      try {
+        await const DeckExportService().shareDeck(meta);
+      } catch (e) {
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
+      }
+    }
+
     return SafeArea(
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxHeight),
@@ -114,6 +142,12 @@ class DeckLibrarySheet extends ConsumerWidget {
                 label: const Text('Refresh library'),
               ),
               const SizedBox(height: 12),
+              FilledButton.icon(
+                onPressed: () => showAddStudyMaterialSheet(context, ref),
+                icon: const Icon(Icons.add_circle_outline),
+                label: const Text('Add Study Material'),
+              ),
+              const SizedBox(height: 12),
               if (lib.lastError != null)
                 Padding(
                   padding: const EdgeInsets.only(bottom: 12),
@@ -144,6 +178,8 @@ class DeckLibrarySheet extends ConsumerWidget {
                         onStudy: goToStudy,
                         onPractice: goToPractice,
                         onExam: goToExam,
+                        onExport: exportDeck,
+                        onShare: shareDeck,
                       ),
               ),
             ],
@@ -183,6 +219,8 @@ class _LibraryHub extends StatelessWidget {
     required this.onStudy,
     required this.onPractice,
     required this.onExam,
+    required this.onExport,
+    required this.onShare,
   });
 
   final List<DeckPackMeta> packs;
@@ -194,6 +232,8 @@ class _LibraryHub extends StatelessWidget {
   final Future<void> Function(DeckPackMeta meta) onStudy;
   final Future<void> Function(DeckPackMeta meta) onPractice;
   final Future<void> Function(DeckPackMeta meta) onExam;
+  final Future<void> Function(DeckPackMeta meta) onExport;
+  final Future<void> Function(DeckPackMeta meta) onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -251,6 +291,8 @@ class _LibraryHub extends StatelessWidget {
                     onStudy: () => onStudy(meta),
                     onPractice: () => onPractice(meta),
                     onExam: meta.supportsExam ? () => onExam(meta) : null,
+                    onExport: () => onExport(meta),
+                    onShare: () => onShare(meta),
                   ),
                 )
                 .toList(),
@@ -273,6 +315,8 @@ class _LibraryHub extends StatelessWidget {
                   onStudy: () => onStudy(meta),
                   onPractice: () => onPractice(meta),
                   onExam: meta.supportsExam ? () => onExam(meta) : null,
+                  onExport: () => onExport(meta),
+                  onShare: () => onShare(meta),
                 ),
               )
               .toList(),
@@ -295,6 +339,8 @@ class _LibraryHub extends StatelessWidget {
                     onStudy: () => onStudy(meta),
                     onPractice: () => onPractice(meta),
                     onExam: meta.supportsExam ? () => onExam(meta) : null,
+                    onExport: () => onExport(meta),
+                    onShare: () => onShare(meta),
                   ),
                 )
                 .toList(),
@@ -317,6 +363,8 @@ class _LibraryHub extends StatelessWidget {
                     onStudy: () => onStudy(meta),
                     onPractice: () => onPractice(meta),
                     onExam: meta.supportsExam ? () => onExam(meta) : null,
+                    onExport: () => onExport(meta),
+                    onShare: () => onShare(meta),
                   ),
                 )
                 .toList(),
@@ -366,6 +414,8 @@ class _DeckHubCard extends StatelessWidget {
     required this.onStudy,
     required this.onPractice,
     required this.onExam,
+    required this.onExport,
+    required this.onShare,
   });
 
   final DeckPackMeta meta;
@@ -377,6 +427,8 @@ class _DeckHubCard extends StatelessWidget {
   final Future<void> Function() onStudy;
   final Future<void> Function() onPractice;
   final Future<void> Function()? onExam;
+  final Future<void> Function() onExport;
+  final Future<void> Function() onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -525,6 +577,16 @@ class _DeckHubCard extends StatelessWidget {
                   icon: Icons.assignment_outlined,
                   onPressed: isUnavailable || isLoading ? null : onExam,
                 ),
+              _ActionButton(
+                label: 'Share Deck',
+                icon: Icons.share_outlined,
+                onPressed: isUnavailable || isLoading ? null : onShare,
+              ),
+              _ActionButton(
+                label: 'Export Deck',
+                icon: Icons.download_outlined,
+                onPressed: isUnavailable || isLoading ? null : onExport,
+              ),
             ],
           ),
         ],

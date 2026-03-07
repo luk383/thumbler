@@ -69,6 +69,8 @@ void main() {
 
     final libraryText = find.text('Linux Essentials');
     expect(libraryText, findsOneWidget);
+    await tester.drag(find.byType(ListView), const Offset(0, -500));
+    await tester.pumpAndSettle();
     expect(find.text('CompTIA Security+ Pack 20'), findsOneWidget);
   });
 }

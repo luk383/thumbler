@@ -7,14 +7,31 @@ import '../features/exam/presentation/pages/exam_history_page.dart';
 import '../features/exam/presentation/pages/exam_result_detail_page.dart';
 import '../features/exam/domain/exam_result.dart';
 import '../features/feed/presentation/pages/feed_page.dart';
+import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/profile/presentation/profile_page.dart';
+import '../features/study/data/deck_library_storage.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import 'shell_scaffold.dart';
 
+final _deckLibraryStorage = const DeckLibraryStorage();
+
 final appRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: _deckLibraryStorage.isOnboardingComplete()
+      ? '/'
+      : '/onboarding',
+  redirect: (context, state) {
+    final completed = _deckLibraryStorage.isOnboardingComplete();
+    final onOnboarding = state.matchedLocation == '/onboarding';
+    if (!completed && !onOnboarding) return '/onboarding';
+    if (completed && onOnboarding) return '/';
+    return null;
+  },
   routes: [
+    GoRoute(
+      path: '/onboarding',
+      builder: (context, state) => const OnboardingPage(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => ShellScaffold(navigationShell: shell),
       branches: [

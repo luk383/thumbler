@@ -24,6 +24,12 @@ class StudyLauncherPage extends ConsumerWidget {
     final n = ref.read(studyProvider.notifier);
     final activeDeck = ref.watch(activeDeckMetaProvider);
     final analytics = ref.watch(progressAnalyticsProvider);
+    final showCategoryFilters = s.items.length >= 20 && s.categories.length > 1;
+    final showTopicFilters =
+        showCategoryFilters &&
+        s.selectedCategory != null &&
+        s.topics.length > 1 &&
+        s.filtered.length >= 12;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -48,118 +54,44 @@ class StudyLauncherPage extends ConsumerWidget {
                   : '${activeDeck.title} · ${s.items.length} cards',
               style: const TextStyle(color: Colors.white38, fontSize: 12),
             ),
-            const SizedBox(height: 24),
-            _StudySnapshot(state: s),
             const SizedBox(height: 16),
-            _WeakAreasSummaryCard(
-              analytics: analytics,
-              onTrainWeakAreas: analytics.weakestDomains.isEmpty
-                  ? null
-                  : () => n.startWeakAreasSession(
-                      categories: analytics.weakestDomains
-                          .map((summary) => summary.domain)
-                          .toList(growable: false),
-                    ),
-            ),
-            const SizedBox(height: 24),
+            _StudySnapshot(state: s),
+            const SizedBox(height: 18),
 
             // ── Empty banner (deck empty) ────────────────────────────────
             if (s.items.isEmpty) ...[
               _EmptyBanner(onSeed: n.seedStarterCards),
               const SizedBox(height: 28),
-            ],
-
-            // ── Category chips ───────────────────────────────────────────
-            _LauncherSection(
-              label: 'Category',
-              child: s.categories.isEmpty
-                  ? const Text(
-                      'Import a pack or add cards from Feed to see categories.',
-                      style: TextStyle(color: Colors.white38, fontSize: 12),
-                    )
-                  : _ChipRow(
-                      chips: ['All', ...s.categories],
-                      selected: s.selectedCategory ?? 'All',
-                      onSelect: (v) {
-                        if (v != 'All') {
-                          if (!ref
-                              .read(proGuardProvider)
-                              .canUseTopicSelection()) {
-                            _showProDialog(context, 'Category filtering');
-                            return;
-                          }
-                        }
-                        n.setCategory(v == 'All' ? null : v);
-                      },
-                    ),
-            ),
-
-            // ── Topic chips (only when category selected + topics exist) ─
-            if (s.selectedCategory != null && s.topics.isNotEmpty) ...[
-              const SizedBox(height: 4),
-              _LauncherSection(
-                label: 'Topic',
-                child: _ChipRow(
-                  chips: ['All topics', ...s.topics],
-                  selected: s.selectedTopic ?? 'All topics',
-                  onSelect: (v) {
-                    if (v != 'All topics') {
-                      if (!ref.read(proGuardProvider).canUseTopicSelection()) {
-                        _showProDialog(context, 'Topic filtering');
-                        return;
-                      }
-                    }
-                    n.setTopic(v == 'All topics' ? null : v);
-                  },
-                ),
-              ),
-            ],
-
-            // ── Session Type chips ───────────────────────────────────────
-            const SizedBox(height: 4),
-            _LauncherSection(
-              label: 'Session type',
-              child: _QueueTypeChipRow(
-                selected: s.selectedQueueType,
+            ] else ...[
+              _PrimaryStudyCard(state: s, notifier: n),
+              const SizedBox(height: 16),
+              _SessionSettingsCard(
                 state: s,
-                onSelect: n.setQueueType,
+                notifier: n,
+                showCategoryFilters: showCategoryFilters,
+                showTopicFilters: showTopicFilters,
+                canUseTopicSelection: ref
+                    .read(proGuardProvider)
+                    .canUseTopicSelection(),
+                canRunLongSession: ref
+                    .read(proGuardProvider)
+                    .canRunLongSpeedDrill(),
+                onProGate: (label) => _showProDialog(context, label),
               ),
-            ),
-
-            // ── Preview pill ─────────────────────────────────────────────
-            _PreviewPill(state: s),
-            const SizedBox(height: 28),
-
-            // ── Session settings ─────────────────────────────────────────
-            _LauncherSection(
-              label: 'Questions per session',
-              child: _ChipRow(
-                chips: const ['5', '10', '20'],
-                selected: '${s.sessionLength}',
-                onSelect: (v) {
-                  final length = int.parse(v);
-                  if (length > 10 &&
-                      !ref.read(proGuardProvider).canRunLongSpeedDrill()) {
-                    _showProDialog(context, 'Sessions with 20 questions');
-                    return;
-                  }
-                  n.setSessionLength(length);
-                },
+              const SizedBox(height: 20),
+              _WeakAreasSummaryCard(
+                analytics: analytics,
+                onTrainWeakAreas: analytics.weakestDomains.isEmpty
+                    ? null
+                    : () => n.startWeakAreasSession(
+                        categories: analytics.weakestDomains
+                            .map((summary) => summary.domain)
+                            .toList(growable: false),
+                      ),
               ),
-            ),
-            const SizedBox(height: 4),
-            _LauncherSection(
-              label: 'Speed timer',
-              child: _ChipRow(
-                chips: const ['5s', '8s', '12s'],
-                selected: '${s.timerSeconds}s',
-                onSelect: (v) =>
-                    n.setTimerSeconds(int.parse(v.replaceAll('s', ''))),
-              ),
-            ),
-            const SizedBox(height: 28),
+              const SizedBox(height: 24),
+            ],
 
-            // ── Start buttons ────────────────────────────────────────────
             if (s.items.isEmpty) ...[
               _DisabledStartButton(
                 icon: Icons.psychology_outlined,
@@ -174,8 +106,6 @@ class StudyLauncherPage extends ConsumerWidget {
               ),
             ] else if (s.availableCount == 0) ...[
               _EmptyFilterResult(),
-            ] else ...[
-              _QueueStartButtons(state: s, notifier: n),
             ],
 
             const SizedBox(height: 32),
@@ -184,14 +114,6 @@ class StudyLauncherPage extends ConsumerWidget {
             _LibraryCard(
               onOpen: () => showDeckLibrary(context),
               deckTitle: activeDeck?.title,
-            ),
-
-            // ── Debug footer ─────────────────────────────────────────────
-            const SizedBox(height: 20),
-            Text(
-              'Study cards: ${s.items.length}',
-              style: const TextStyle(color: Colors.white24, fontSize: 10),
-              textAlign: TextAlign.center,
             ),
           ],
         ),
@@ -475,6 +397,196 @@ class _StudySnapshot extends StatelessWidget {
   }
 }
 
+class _PrimaryStudyCard extends StatelessWidget {
+  const _PrimaryStudyCard({required this.state, required this.notifier});
+
+  final StudyState state;
+  final StudyNotifier notifier;
+
+  @override
+  Widget build(BuildContext context) {
+    final queueCount = state.queueCount;
+    final hasPreferredQueue = queueCount > 0;
+    final startLabel = hasPreferredQueue
+        ? 'Start Study • ${state.selectedQueueType.label} $queueCount'
+        : 'Start Study';
+    final supporting = hasPreferredQueue
+        ? '${state.estimatedMinutes} min focused run'
+        : 'Falls back to a useful random run when needed';
+
+    return AppGlassCard(
+      padding: const EdgeInsets.all(18),
+      radius: 22,
+      tint: const Color(0xFF6C63FF),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Focused Practice',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            supporting,
+            style: const TextStyle(color: Colors.white60, fontSize: 12),
+          ),
+          const SizedBox(height: 16),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                notifier.setMode(StudyMode.srs);
+                if (hasPreferredQueue) {
+                  notifier.startSession();
+                } else {
+                  notifier.setQueueType(SessionQueueType.random);
+                  notifier.startSession(reviewAnyway: true);
+                }
+              },
+              icon: const Icon(Icons.psychology_outlined),
+              label: Text(startLabel),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            child: OutlinedButton.icon(
+              onPressed: () {
+                notifier.setMode(StudyMode.speed);
+                if (hasPreferredQueue) {
+                  notifier.startSession();
+                } else {
+                  notifier.setQueueType(SessionQueueType.random);
+                  notifier.startSession(reviewAnyway: true);
+                }
+              },
+              icon: const Icon(Icons.bolt),
+              label: const Text('Speed Drill'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SessionSettingsCard extends StatelessWidget {
+  const _SessionSettingsCard({
+    required this.state,
+    required this.notifier,
+    required this.showCategoryFilters,
+    required this.showTopicFilters,
+    required this.canUseTopicSelection,
+    required this.canRunLongSession,
+    required this.onProGate,
+  });
+
+  final StudyState state;
+  final StudyNotifier notifier;
+  final bool showCategoryFilters;
+  final bool showTopicFilters;
+  final bool canUseTopicSelection;
+  final bool canRunLongSession;
+  final void Function(String label) onProGate;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppGlassCard(
+      padding: EdgeInsets.zero,
+      radius: 22,
+      tint: const Color(0xFF12B981),
+      child: Theme(
+        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+        child: ExpansionTile(
+          tilePadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 4),
+          childrenPadding: const EdgeInsets.fromLTRB(18, 0, 18, 18),
+          title: const Text(
+            'Session Settings',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          subtitle: Text(
+            '${state.selectedQueueType.label} • ${state.sessionLength} questions • ${state.timerSeconds}s timer',
+            style: const TextStyle(color: Colors.white54, fontSize: 12),
+          ),
+          children: [
+            if (showCategoryFilters)
+              _LauncherSection(
+                label: 'Category',
+                child: _ChipRow(
+                  chips: ['All', ...state.categories],
+                  selected: state.selectedCategory ?? 'All',
+                  onSelect: (value) {
+                    if (value != 'All' && !canUseTopicSelection) {
+                      onProGate('Category filtering');
+                      return;
+                    }
+                    notifier.setCategory(value == 'All' ? null : value);
+                  },
+                ),
+              ),
+            if (showTopicFilters)
+              _LauncherSection(
+                label: 'Topic',
+                child: _ChipRow(
+                  chips: ['All topics', ...state.topics],
+                  selected: state.selectedTopic ?? 'All topics',
+                  onSelect: (value) {
+                    if (value != 'All topics' && !canUseTopicSelection) {
+                      onProGate('Topic filtering');
+                      return;
+                    }
+                    notifier.setTopic(value == 'All topics' ? null : value);
+                  },
+                ),
+              ),
+            _LauncherSection(
+              label: 'Session Type',
+              child: _QueueTypeChipRow(
+                selected: state.selectedQueueType,
+                state: state,
+                onSelect: notifier.setQueueType,
+              ),
+            ),
+            _LauncherSection(
+              label: 'Questions',
+              child: _ChipRow(
+                chips: const ['5', '10', '20'],
+                selected: '${state.sessionLength}',
+                onSelect: (value) {
+                  final length = int.parse(value);
+                  if (length > 10 && !canRunLongSession) {
+                    onProGate('Sessions with 20 questions');
+                    return;
+                  }
+                  notifier.setSessionLength(length);
+                },
+              ),
+            ),
+            _LauncherSection(
+              label: 'Timer',
+              child: _ChipRow(
+                chips: const ['5s', '8s', '12s'],
+                selected: '${state.timerSeconds}s',
+                onSelect: (value) => notifier.setTimerSeconds(
+                  int.parse(value.replaceAll('s', '')),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _SnapshotStat extends StatelessWidget {
   const _SnapshotStat({required this.label, required this.value});
 
@@ -507,6 +619,7 @@ class _SnapshotStat extends StatelessWidget {
 // Preview pill
 // ============================================================================
 
+// ignore: unused_element
 class _PreviewPill extends StatelessWidget {
   const _PreviewPill({required this.state});
   final StudyState state;
@@ -883,6 +996,7 @@ class _QueueTypeChipRow extends StatelessWidget {
 // Start buttons — queue-type aware
 // ============================================================================
 
+// ignore: unused_element
 class _QueueStartButtons extends StatelessWidget {
   const _QueueStartButtons({required this.state, required this.notifier});
   final StudyState state;
