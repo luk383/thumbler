@@ -12,7 +12,7 @@ import '../../domain/lesson.dart';
 import '../controllers/feed_controller.dart';
 import 'quiz_section.dart';
 
-const _kAutoAdvanceDelay = Duration(milliseconds: 700);
+const _kAutoAdvanceDelay = Duration(milliseconds: 250);
 
 class LessonCard extends ConsumerStatefulWidget {
   const LessonCard({
@@ -110,9 +110,29 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                     AppGlassCard(
                       padding: const EdgeInsets.all(22),
                       radius: 28,
+                      tint: const Color(0xFF6C63FF),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Row(
+                            children: [
+                              const AppStatusBadge(
+                                label: 'Feed card',
+                                icon: Icons.bolt_rounded,
+                                tint: Color(0xFFADA8FF),
+                              ),
+                              const Spacer(),
+                              Text(
+                                'Swipe or tap next',
+                                style: Theme.of(context).textTheme.bodySmall
+                                    ?.copyWith(
+                                      color: Colors.white38,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 14),
                           Row(
                             children: [
                               Text(
@@ -141,7 +161,7 @@ class _LessonCardState extends ConsumerState<LessonCard> {
                               vertical: 10,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.white.withAlpha(6),
+                              color: const Color(0xFF0F1320).withAlpha(220),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
                                 color: Colors.white.withAlpha(10),
@@ -277,7 +297,14 @@ class _ExplanationBox extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(11),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white.withAlpha(11),
+            const Color(0xFF6C63FF).withAlpha(12),
+          ],
+        ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(color: Colors.white.withAlpha(18)),
       ),
@@ -324,7 +351,7 @@ class _BottomBar extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white.withAlpha(9),
+          color: const Color(0xFF0F1320).withAlpha(224),
           borderRadius: BorderRadius.circular(22),
           border: Border.all(color: Colors.white.withAlpha(16)),
         ),

@@ -7,22 +7,33 @@ class AppGlassCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(16),
     this.margin,
     this.radius = 18,
+    this.tint,
   });
 
   final Widget child;
   final EdgeInsetsGeometry padding;
   final EdgeInsetsGeometry? margin;
   final double radius;
+  final Color? tint;
 
   @override
   Widget build(BuildContext context) {
+    final resolvedTint = tint ?? const Color(0xFF6C63FF);
     return Container(
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(9),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white.withAlpha(12),
+            resolvedTint.withAlpha(10),
+            Colors.white.withAlpha(6),
+          ],
+        ),
         borderRadius: BorderRadius.circular(radius),
-        border: Border.all(color: Colors.white.withAlpha(14)),
+        border: Border.all(color: resolvedTint.withAlpha(32)),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withAlpha(30),
@@ -67,9 +78,10 @@ class AppPageIntro extends StatelessWidget {
               const SizedBox(height: 6),
               Text(
                 subtitle,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyMedium?.copyWith(color: Colors.white54),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white54,
+                  height: 1.45,
+                ),
               ),
             ],
           ),
@@ -167,6 +179,7 @@ class AppEmptyStateCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppGlassCard(
       padding: const EdgeInsets.all(20),
+      tint: Colors.white,
       child: Column(
         children: [
           Icon(icon, color: Colors.white24, size: 48),
@@ -193,6 +206,35 @@ class AppEmptyStateCard extends StatelessWidget {
           if (action != null) ...[const SizedBox(height: 16), action!],
         ],
       ),
+    );
+  }
+}
+
+class AppSurfaceIcon extends StatelessWidget {
+  const AppSurfaceIcon({
+    super.key,
+    required this.icon,
+    this.tint = const Color(0xFF6C63FF),
+    this.size = 40,
+    this.iconSize = 20,
+  });
+
+  final IconData icon;
+  final Color tint;
+  final double size;
+  final double iconSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: tint.withAlpha(28),
+        borderRadius: BorderRadius.circular(size * 0.3),
+        border: Border.all(color: tint.withAlpha(72)),
+      ),
+      child: Icon(icon, color: tint, size: iconSize),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../features/feed/data/mock_lessons.dart';
 import '../../../../features/feed/domain/lesson.dart';
+import '../../../../features/growth/streak/streak_notifier.dart';
 import '../../data/study_storage.dart';
 import '../../domain/study_item.dart';
 import 'deck_library_controller.dart';
@@ -515,6 +516,7 @@ class StudyNotifier extends Notifier<StudyState> {
         nextReviewAt: _nextReview(rating),
       ),
     );
+    ref.read(streakProvider.notifier).recordStudyQuestion();
     _advanceSession(storage);
   }
 
@@ -555,6 +557,7 @@ class StudyNotifier extends Notifier<StudyState> {
         lastReviewedAt: DateTime.now(),
       ),
     );
+    ref.read(streakProvider.notifier).recordStudyQuestion();
 
     final newResult = SpeedResult(
       itemId: id,
@@ -593,6 +596,25 @@ class StudyNotifier extends Notifier<StudyState> {
   }
 
   void nextCard() => _advanceSession(StudyStorage());
+
+  void recordFeedAnswer(String id, {required bool correct}) {
+    final storage = StudyStorage();
+    final item = state.items.firstWhere(
+      (i) => i.id == id,
+      orElse: () => state.items.first,
+    );
+
+    storage.update(
+      item.copyWith(
+        timesSeen: item.timesSeen + 1,
+        correctCount: correct ? item.correctCount + 1 : null,
+        wrongCount: correct ? null : item.wrongCount + 1,
+        lastReviewedAt: DateTime.now(),
+      ),
+    );
+
+    state = _copyWith(items: storage.allForDeck(state.activeDeckId));
+  }
 
   /// Starts a targeted SRS session from Exam results (Train Weakest bridge).
   ///
@@ -658,6 +680,68 @@ class StudyNotifier extends Notifier<StudyState> {
           ? '$category / $topic'
           : category,
       lastExamAttemptId: lastExamAttemptId,
+    );
+  }
+
+  void startWeakAreasSession({
+    required List<String> categories,
+    int? sessionLength,
+  }) {
+    final normalized = {
+      for (final category in categories)
+        if (category.trim().isNotEmpty) category.trim(),
+    }.toList(growable: false);
+    if (normalized.isEmpty) return;
+
+    final candidates = state.items.where((item) {
+      if (item.contentType != ContentType.examQuestion) return false;
+      return normalized.contains(item.category);
+    }).toList();
+    if (candidates.isEmpty) return;
+
+    candidates.sort((a, b) {
+      final totalA = a.timesSeen > 0 ? a.timesSeen : 1;
+      final totalB = b.timesSeen > 0 ? b.timesSeen : 1;
+      final wrongRateA = (a.wrongCount + a.againCount) / totalA;
+      final wrongRateB = (b.wrongCount + b.againCount) / totalB;
+
+      final byWrongRate = wrongRateB.compareTo(wrongRateA);
+      if (byWrongRate != 0) return byWrongRate;
+
+      final byWrongCount = (b.wrongCount + b.againCount).compareTo(
+        a.wrongCount + a.againCount,
+      );
+      if (byWrongCount != 0) return byWrongCount;
+
+      return a.timesSeen.compareTo(b.timesSeen);
+    });
+
+    final queueLength = min(
+      sessionLength ?? state.sessionLength,
+      candidates.length,
+    );
+    final queue = candidates.take(queueLength).toList(growable: false);
+    if (queue.isEmpty) return;
+
+    state = StudyState(
+      items: state.items,
+      activeDeckId: state.activeDeckId,
+      selectedCategory: null,
+      selectedTopic: null,
+      selectedMode: StudyMode.srs,
+      selectedQueueType: SessionQueueType.weak,
+      sessionLength: queueLength,
+      timerSeconds: state.timerSeconds,
+      isStudying: true,
+      sessionQueue: queue,
+      currentIndex: 0,
+      answeredInSession: 0,
+      generation: state.generation + 1,
+      speedResults: const [],
+      wrongItemIds: const [],
+      startedFromExamBridge: false,
+      lastTrainedArea: normalized.join(', '),
+      lastExamAttemptId: state.lastExamAttemptId,
     );
   }
 

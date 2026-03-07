@@ -9,8 +9,8 @@
   "domains": [
     "Cloud Concepts",
     "Security and Compliance",
-    "Technology",
-    "Billing and Pricing"
+    "Cloud Technology and Services",
+    "Billing, Pricing, and Support"
   ],
   "defaultContentType": "exam_question",
   "questions": [
@@ -233,7 +233,7 @@
     {
       "id": "clf_c02_q_013",
       "type": "exam_question",
-      "domain": "Technology",
+      "domain": "Cloud Technology and Services",
       "topic": "Compute",
       "subtopic": "Virtual Servers",
       "objectiveId": "3.1",
@@ -251,7 +251,7 @@
     {
       "id": "clf_c02_q_014",
       "type": "exam_question",
-      "domain": "Technology",
+      "domain": "Cloud Technology and Services",
       "topic": "Storage",
       "subtopic": "Object Storage",
       "objectiveId": "3.1",
@@ -269,7 +269,7 @@
     {
       "id": "clf_c02_q_015",
       "type": "exam_question",
-      "domain": "Technology",
+      "domain": "Cloud Technology and Services",
       "topic": "Databases",
       "subtopic": "Managed Relational",
       "objectiveId": "3.1",
@@ -287,7 +287,7 @@
     {
       "id": "clf_c02_q_016",
       "type": "exam_question",
-      "domain": "Technology",
+      "domain": "Cloud Technology and Services",
       "topic": "Networking",
       "subtopic": "Private Networking",
       "objectiveId": "3.2",
@@ -305,7 +305,7 @@
     {
       "id": "clf_c02_q_017",
       "type": "exam_question",
-      "domain": "Technology",
+      "domain": "Cloud Technology and Services",
       "topic": "Content Delivery",
       "subtopic": "Edge Caching",
       "objectiveId": "3.1",
@@ -323,7 +323,7 @@
     {
       "id": "clf_c02_q_018",
       "type": "exam_question",
-      "domain": "Technology",
+      "domain": "Cloud Technology and Services",
       "topic": "Serverless",
       "subtopic": "Event-Driven Compute",
       "objectiveId": "3.1",
@@ -341,7 +341,7 @@
     {
       "id": "clf_c02_q_019",
       "type": "exam_question",
-      "domain": "Billing and Pricing",
+      "domain": "Billing, Pricing, and Support",
       "topic": "Pricing Models",
       "subtopic": "Pay-as-you-go",
       "objectiveId": "4.1",
@@ -359,7 +359,7 @@
     {
       "id": "clf_c02_q_020",
       "type": "exam_question",
-      "domain": "Billing and Pricing",
+      "domain": "Billing, Pricing, and Support",
       "topic": "Monitoring Costs",
       "subtopic": "Budgets",
       "objectiveId": "4.2",
@@ -377,7 +377,7 @@
     {
       "id": "clf_c02_q_021",
       "type": "exam_question",
-      "domain": "Billing and Pricing",
+      "domain": "Billing, Pricing, and Support",
       "topic": "Support Plans",
       "subtopic": "Billing Access",
       "objectiveId": "4.3",
@@ -395,7 +395,7 @@
     {
       "id": "clf_c02_q_022",
       "type": "exam_question",
-      "domain": "Billing and Pricing",
+      "domain": "Billing, Pricing, and Support",
       "topic": "Cost Visibility",
       "subtopic": "Cost Analysis",
       "objectiveId": "4.2",
@@ -413,7 +413,7 @@
     {
       "id": "clf_c02_q_023",
       "type": "exam_question",
-      "domain": "Billing and Pricing",
+      "domain": "Billing, Pricing, and Support",
       "topic": "Optimization",
       "subtopic": "Pricing Discounts",
       "objectiveId": "4.1",
@@ -431,7 +431,7 @@
     {
       "id": "clf_c02_q_024",
       "type": "exam_question",
-      "domain": "Billing and Pricing",
+      "domain": "Billing, Pricing, and Support",
       "topic": "Migration Economics",
       "subtopic": "Cost Model",
       "objectiveId": "4.1",

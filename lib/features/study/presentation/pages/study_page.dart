@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../growth/streak/streak_notifier.dart';
 import '../controllers/study_controller.dart';
 import '../pages/study_launcher_page.dart';
 import '../../domain/study_item.dart';
@@ -79,10 +80,11 @@ class _SessionPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(studyProvider);
+    final streak = ref.watch(streakProvider);
     if (s.selectedMode == StudyMode.speed) {
       return _SpeedSession(studyState: s);
     }
-    return _SrsSession(studyState: s);
+    return _SrsSession(studyState: s, streak: streak);
   }
 }
 
@@ -91,8 +93,9 @@ class _SessionPage extends ConsumerWidget {
 // ============================================================================
 
 class _SrsSession extends ConsumerWidget {
-  const _SrsSession({required this.studyState});
+  const _SrsSession({required this.studyState, required this.streak});
   final StudyState studyState;
+  final StreakState streak;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -137,6 +140,28 @@ class _SrsSession extends ConsumerWidget {
                     '${studyState.currentIndex + 1}/${studyState.sessionQueue.length}',
                     style: const TextStyle(color: Colors.white60, fontSize: 13),
                   ),
+                const SizedBox(width: 10),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(10),
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(color: Colors.white.withAlpha(12)),
+                  ),
+                  child: Text(
+                    streak.completedToday
+                        ? '🔥 ${streak.currentStreak}'
+                        : '🔥 ${streak.currentStreak} • ${streak.answeredToday}/3',
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
                 const SizedBox(width: 12),
                 _CloseBtn(onTap: closeSession),
               ],

@@ -7,6 +7,7 @@ class SmartFeedSelectionService {
   List<Lesson> selectLessons({
     required List<StudyItem> items,
     required List<String> weakestDomains,
+    List<String> recentLessonIds = const [],
     DateTime? now,
   }) {
     final uniqueItems = _dedupeItems(items);
@@ -21,29 +22,38 @@ class SmartFeedSelectionService {
       for (var i = 0; i < normalizedWeakestDomains.length; i++)
         normalizedWeakestDomains[i]: i,
     };
+    final recentLessonRank = <String, int>{
+      for (var i = 0; i < recentLessonIds.length; i++) recentLessonIds[i]: i,
+    };
 
-    final scored = uniqueItems
-        .map(
-          (item) => _ScoredFeedItem(
-            item: item,
-            bucket: _bucketFor(item, weakestRank),
-            priorityScore: _priorityScore(item, weakestRank, current),
-            stableJitter: _stableJitter(item.id, current, item.deckId),
-          ),
-        )
-        .toList()
-      ..sort((a, b) {
-        final byBucket = a.bucket.compareTo(b.bucket);
-        if (byBucket != 0) return byBucket;
+    final scored =
+        uniqueItems
+            .map(
+              (item) => _ScoredFeedItem(
+                item: item,
+                bucket: _bucketFor(item, weakestRank),
+                priorityScore: _priorityScore(
+                  item,
+                  weakestRank,
+                  recentLessonRank,
+                  current,
+                ),
+                stableJitter: _stableJitter(item.id, current, item.deckId),
+              ),
+            )
+            .toList()
+          ..sort((a, b) {
+            final byBucket = a.bucket.compareTo(b.bucket);
+            if (byBucket != 0) return byBucket;
 
-        final byPriority = b.priorityScore.compareTo(a.priorityScore);
-        if (byPriority != 0) return byPriority;
+            final byPriority = b.priorityScore.compareTo(a.priorityScore);
+            if (byPriority != 0) return byPriority;
 
-        final byJitter = a.stableJitter.compareTo(b.stableJitter);
-        if (byJitter != 0) return byJitter;
+            final byJitter = a.stableJitter.compareTo(b.stableJitter);
+            if (byJitter != 0) return byJitter;
 
-        return a.item.id.compareTo(b.item.id);
-      });
+            return a.item.id.compareTo(b.item.id);
+          });
 
     final diversified = _diversifyAcrossBuckets(scored);
     return diversified.map(_toLesson).toList();
@@ -59,6 +69,7 @@ class SmartFeedSelectionService {
   double _priorityScore(
     StudyItem item,
     Map<String, int> weakestRank,
+    Map<String, int> recentLessonRank,
     DateTime now,
   ) {
     final totalSeen = item.timesSeen <= 0 ? 1 : item.timesSeen;
@@ -68,10 +79,14 @@ class SmartFeedSelectionService {
         : (weakestRank.length - weakestRank[item.category]!) * 4.0;
     final difficultyBoost = (item.difficulty ?? 1).toDouble();
     final recencyPenalty = _recentPenalty(item.lastReviewedAt, now);
+    final shortSessionPenalty = _shortSessionPenalty(
+      recentLessonRank[item.id],
+      recentLessonRank.length,
+    );
     final seenPenalty = item.timesSeen * 1.5;
 
     if (item.timesSeen == 0) {
-      return 1000 + difficultyBoost + weakestBoost;
+      return 1000 + difficultyBoost + weakestBoost - shortSessionPenalty;
     }
 
     if (item.wrongCount > 0 || item.againCount > 0) {
@@ -81,14 +96,24 @@ class SmartFeedSelectionService {
           (wrongPressure * 100) +
           weakestBoost -
           recencyPenalty -
+          shortSessionPenalty -
           seenPenalty;
     }
 
     if (weakestRank.containsKey(item.category)) {
-      return 400 + weakestBoost + difficultyBoost - recencyPenalty - seenPenalty;
+      return 400 +
+          weakestBoost +
+          difficultyBoost -
+          recencyPenalty -
+          shortSessionPenalty -
+          seenPenalty;
     }
 
-    return 100 + difficultyBoost - recencyPenalty - seenPenalty;
+    return 100 +
+        difficultyBoost -
+        recencyPenalty -
+        shortSessionPenalty -
+        seenPenalty;
   }
 
   double _recentPenalty(DateTime? lastReviewedAt, DateTime now) {
@@ -101,9 +126,22 @@ class SmartFeedSelectionService {
     return 0;
   }
 
+  double _shortSessionPenalty(int? recentIndex, int recentPoolSize) {
+    if (recentIndex == null) return 0;
+    final distanceFromNewest = recentPoolSize - recentIndex;
+    if (distanceFromNewest <= 3) return 320;
+    if (distanceFromNewest <= 6) return 160;
+    if (distanceFromNewest <= 10) return 64;
+    return 24;
+  }
+
   int _stableJitter(String id, DateTime now, String? deckId) {
-    final daySeed = '${now.year}-${now.month}-${now.day}:${deckId ?? 'none'}:$id';
-    return daySeed.codeUnits.fold<int>(0, (sum, unit) => (sum * 31 + unit) & 0x7fffffff);
+    final daySeed =
+        '${now.year}-${now.month}-${now.day}:${deckId ?? 'none'}:$id';
+    return daySeed.codeUnits.fold<int>(
+      0,
+      (sum, unit) => (sum * 31 + unit) & 0x7fffffff,
+    );
   }
 
   List<StudyItem> _diversifyAcrossBuckets(List<_ScoredFeedItem> scored) {

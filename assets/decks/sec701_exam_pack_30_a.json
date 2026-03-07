@@ -74,18 +74,18 @@
       "type": "exam_question",
       "domain": "Threats, Vulnerabilities, and Mitigations",
       "topic": "Network Attacks",
-      "subtopic": "MitM",
+      "subtopic": "ARP Spoofing",
       "objectiveId": "2.4",
       "difficulty": 1,
-      "question": "An attacker secretly intercepts communication between two parties. What attack is this?",
+      "question": "Which attack poisons ARP tables on a local network to redirect traffic?",
       "answers": [
-        "Replay attack",
-        "Man in the middle",
-        "DNS poisoning",
-        "DDoS"
+        "DNS tunneling",
+        "ARP spoofing",
+        "Pass-the-hash",
+        "Evil twin"
       ],
       "correctIndex": 1,
-      "explanation": "A man-in-the-middle attack intercepts communications between two parties."
+      "explanation": "ARP spoofing sends forged ARP messages so traffic on a local network is redirected through the attacker."
     },
     {
       "id": "sec701_exam_a_005",
@@ -128,18 +128,18 @@
       "type": "exam_question",
       "domain": "Security Operations",
       "topic": "Monitoring",
-      "subtopic": "SIEM",
+      "subtopic": "EDR",
       "objectiveId": "4.3",
       "difficulty": 1,
-      "question": "Which system aggregates and correlates security logs from multiple devices?",
+      "question": "Which security tool records endpoint activity and helps investigators trace host-based attacks?",
       "answers": [
-        "IDS",
-        "SIEM",
-        "DLP",
-        "Firewall"
+        "HSM",
+        "EDR",
+        "WAF",
+        "NAC"
       ],
       "correctIndex": 1,
-      "explanation": "A SIEM centralizes log collection and correlation for security monitoring."
+      "explanation": "Endpoint detection and response tools capture endpoint telemetry and support investigation and response on hosts."
     },
     {
       "id": "sec701_exam_a_008",
@@ -164,18 +164,18 @@
       "type": "exam_question",
       "domain": "Security Program Management and Oversight",
       "topic": "Compliance",
-      "subtopic": "GDPR",
+      "subtopic": "SOX",
       "objectiveId": "5.4",
       "difficulty": 1,
-      "question": "Which regulation governs personal data protection in the European Union?",
+      "question": "Which regulation focuses on internal controls and financial reporting for U.S. public companies?",
       "answers": [
         "HIPAA",
-        "SOX",
+        "GDPR",
         "PCI DSS",
-        "GDPR"
+        "SOX"
       ],
       "correctIndex": 3,
-      "explanation": "GDPR regulates personal data protection within the EU."
+      "explanation": "SOX requires public companies to maintain and report on internal controls over financial reporting."
     },
     {
       "id": "sec701_exam_a_010",
@@ -200,18 +200,18 @@
       "type": "exam_question",
       "domain": "General Security Concepts",
       "topic": "Identity and Access Management",
-      "subtopic": "Password Attacks",
+      "subtopic": "ABAC",
       "objectiveId": "1.2",
       "difficulty": 2,
-      "question": "An attacker tries one common password against many accounts to avoid lockouts. Which attack is this?",
+      "question": "Which access control model uses user, resource, and environmental attributes to make decisions?",
       "answers": [
-        "Brute-force attack",
-        "Password spraying",
-        "Rainbow table attack",
-        "Credential stuffing"
+        "RBAC",
+        "DAC",
+        "ABAC",
+        "MAC"
       ],
-      "correctIndex": 1,
-      "explanation": "Password spraying uses a small set of common passwords across many accounts to reduce the chance of triggering account lockout controls."
+      "correctIndex": 2,
+      "explanation": "ABAC evaluates multiple attributes, such as department, data type, device state, or time, before granting access."
     },
     {
       "id": "sec701_exam_a_012",

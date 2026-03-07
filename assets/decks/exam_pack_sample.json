@@ -2,7 +2,7 @@
   "id": "exam_pack_sample_v1",
   "name": "Exam Pack Sample",
   "description": "20 challenging exam-style questions to test your knowledge.",
-  "version": 1,
+  "version": "1",
   "items": [
     {
       "id": "ep_001",
@@ -11,7 +11,11 @@
       "topic": "Programming",
       "promptText": "What does 'HTTP' stand for?",
       "explanationText": "HyperText Transfer Protocol is the foundation of data communication on the web. HTTPS adds TLS encryption on top. HTTP/2 and HTTP/3 are faster modern versions.",
-      "options": ["HyperText Transfer Protocol", "High Transfer Text Protocol", "Hybrid Text Template Protocol"],
+      "options": [
+        "HyperText Transfer Protocol",
+        "High Transfer Text Protocol",
+        "Hybrid Text Template Protocol"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -20,7 +24,11 @@
       "category": "🧪 Chemistry",
       "promptText": "What is the pH of pure water at 25°C?",
       "explanationText": "Pure water has a pH of exactly 7 — perfectly neutral. The scale runs from 0 (most acidic) to 14 (most alkaline). A pH below 7 is acidic; above 7 is basic.",
-      "options": ["7", "6", "8"],
+      "options": [
+        "7",
+        "6",
+        "8"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -30,7 +38,11 @@
       "topic": "Cell",
       "promptText": "Which organelle is known as the 'powerhouse of the cell'?",
       "explanationText": "The mitochondrion produces ATP via cellular respiration, supplying energy for most cellular processes. Cells with high energy demands — muscle cells, neurons — contain thousands of mitochondria.",
-      "options": ["Mitochondrion", "Ribosome", "Golgi apparatus"],
+      "options": [
+        "Mitochondrion",
+        "Ribosome",
+        "Golgi apparatus"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -39,7 +51,11 @@
       "category": "🧲 Physics",
       "promptText": "What is the SI unit of electric resistance?",
       "explanationText": "The ohm (Ω) is the SI unit of electrical resistance, named after Georg Simon Ohm. Ohm's Law: V = IR. One ohm equals one volt per ampere (1 Ω = 1 V/A).",
-      "options": ["Ohm (Ω)", "Watt (W)", "Ampere (A)"],
+      "options": [
+        "Ohm (Ω)",
+        "Watt (W)",
+        "Ampere (A)"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -49,7 +65,11 @@
       "topic": "Modern",
       "promptText": "In what year did World War I begin?",
       "explanationText": "WWI began in 1914, triggered by the assassination of Archduke Franz Ferdinand of Austria-Hungary. The war ended in 1918, killing approximately 17 million people across Europe and beyond.",
-      "options": ["1914", "1918", "1939"],
+      "options": [
+        "1914",
+        "1918",
+        "1939"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -58,7 +78,11 @@
       "category": "💰 Economics",
       "promptText": "What does 'GDP' stand for?",
       "explanationText": "Gross Domestic Product measures the total monetary value of all goods and services produced within a country in a given period. It is the most widely used indicator of economic output.",
-      "options": ["Gross Domestic Product", "General Domestic Production", "Global Development Policy"],
+      "options": [
+        "Gross Domestic Product",
+        "General Domestic Production",
+        "Global Development Policy"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -67,7 +91,11 @@
       "category": "🚀 Space",
       "promptText": "How many planets are in our Solar System (IAU definition, 2006)?",
       "explanationText": "In 2006, the IAU redefined 'planet', demoting Pluto to 'dwarf planet'. The 8 planets are: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune.",
-      "options": ["8", "9", "7"],
+      "options": [
+        "8",
+        "9",
+        "7"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -75,9 +103,13 @@
       "contentType": "exam_question",
       "category": "🔬 Science",
       "topic": "Physics",
-      "promptText": "Approximately how fast does light travel in a vacuum?",
-      "explanationText": "Light travels at 299,792,458 m/s in a vacuum — commonly rounded to 300,000 km/s or 3×10⁸ m/s. This constant, c, is fundamental to Einstein's theory of special relativity.",
-      "options": ["300,000 km/s", "30,000 km/s", "3,000,000 km/s"],
+      "promptText": "What does acceleration measure?",
+      "explanationText": "Acceleration measures how quickly velocity changes. It can describe speeding up, slowing down, or changing direction.",
+      "options": [
+        "Change in velocity over time",
+        "Distance traveled in one second",
+        "Force divided by area"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -87,7 +119,11 @@
       "topic": "Behavior",
       "promptText": "Who developed the theory of classical conditioning?",
       "explanationText": "Ivan Pavlov discovered classical conditioning while studying digestion in dogs. Dogs salivated at a bell paired with food — an involuntary conditioned reflex. This work laid the groundwork for behaviorism.",
-      "options": ["Ivan Pavlov", "B.F. Skinner", "Sigmund Freud"],
+      "options": [
+        "Ivan Pavlov",
+        "B.F. Skinner",
+        "Sigmund Freud"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -96,7 +132,11 @@
       "category": "🗣️ Language",
       "promptText": "Approximately how many languages are currently spoken in the world?",
       "explanationText": "About 7,000 languages are spoken globally, though the number is declining rapidly. Around 40% are considered endangered. The top 23 languages account for more than half the world's speakers.",
-      "options": ["~7,000", "~1,000", "~20,000"],
+      "options": [
+        "~7,000",
+        "~1,000",
+        "~20,000"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -106,7 +146,11 @@
       "topic": "Programming",
       "promptText": "What does 'SQL' stand for?",
       "explanationText": "Structured Query Language is the standard language for relational databases, supporting CRUD operations. First developed at IBM in the 1970s, SQL remains one of the most widely used languages today.",
-      "options": ["Structured Query Language", "Sequential Query Logic", "Standard Query Link"],
+      "options": [
+        "Structured Query Language",
+        "Sequential Query Logic",
+        "Standard Query Link"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -116,7 +160,11 @@
       "topic": "Genetics",
       "promptText": "How many pairs of chromosomes do humans typically have?",
       "explanationText": "Humans have 23 pairs of chromosomes (46 total) in each somatic cell. 22 pairs are autosomes; the 23rd pair determines biological sex (XX = female, XY = male). Trisomy of chromosome 21 causes Down syndrome.",
-      "options": ["23 pairs", "46 pairs", "24 pairs"],
+      "options": [
+        "23 pairs",
+        "46 pairs",
+        "24 pairs"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -125,7 +173,11 @@
       "category": "🧲 Physics",
       "promptText": "What is the standard gravitational acceleration on Earth's surface?",
       "explanationText": "The standard gravitational acceleration is 9.81 m/s² (often rounded to 9.8 or 10 m/s²). It varies slightly by location — stronger at the poles than the equator due to Earth's rotation and non-uniform mass distribution.",
-      "options": ["9.8 m/s²", "1.6 m/s²", "3.7 m/s²"],
+      "options": [
+        "9.8 m/s²",
+        "1.6 m/s²",
+        "3.7 m/s²"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -135,7 +187,11 @@
       "topic": "Stars",
       "promptText": "What is the closest star to Earth other than the Sun?",
       "explanationText": "Proxima Centauri is a red dwarf 4.24 light-years from Earth, part of the Alpha Centauri triple system. It hosts a potentially habitable planet, Proxima b.",
-      "options": ["Proxima Centauri", "Alpha Centauri A", "Barnard's Star"],
+      "options": [
+        "Proxima Centauri",
+        "Alpha Centauri A",
+        "Barnard's Star"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -145,7 +201,11 @@
       "topic": "Modern",
       "promptText": "Who was the first human to walk on the Moon?",
       "explanationText": "Neil Armstrong became the first person to walk on the Moon on July 20, 1969, during NASA's Apollo 11 mission. His words: 'That's one small step for man, one giant leap for mankind.' Buzz Aldrin joined him shortly after.",
-      "options": ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin"],
+      "options": [
+        "Neil Armstrong",
+        "Buzz Aldrin",
+        "Yuri Gagarin"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -153,9 +213,13 @@
       "contentType": "exam_question",
       "category": "🧠 Psychology",
       "topic": "Biases",
-      "promptText": "What cognitive bias describes people overestimating their own competence?",
-      "explanationText": "The Dunning-Kruger effect: people with limited knowledge in a domain overestimate their competence because they lack the metacognitive ability to see their own gaps. Described by Dunning & Kruger in 1999.",
-      "options": ["Dunning-Kruger effect", "Impostor syndrome", "Overconfidence bias"],
+      "promptText": "What bias makes people favor evidence that supports what they already believe?",
+      "explanationText": "Confirmation bias makes people notice and remember supporting evidence more than conflicting evidence. It can distort judgment and research.",
+      "options": [
+        "Confirmation bias",
+        "Anchoring bias",
+        "Placebo effect"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -163,9 +227,13 @@
       "contentType": "exam_question",
       "category": "💰 Economics",
       "topic": "Macro",
-      "promptText": "What does 'inflation' primarily measure?",
-      "explanationText": "Inflation measures the rate at which the general price level of goods and services rises over time, eroding purchasing power. Commonly measured by the Consumer Price Index (CPI). Central banks typically target ~2% annual inflation.",
-      "options": ["Rise in general price level", "Government debt growth", "Exchange rate changes"],
+      "promptText": "What does opportunity cost mean in economics?",
+      "explanationText": "Opportunity cost is the value of the next best option you give up when making a choice. Every decision has a tradeoff.",
+      "options": [
+        "The value of the next best alternative given up",
+        "The price rise across an economy",
+        "The money a company earns after tax"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -175,7 +243,11 @@
       "topic": "Physics",
       "promptText": "Which subatomic particle carries no electric charge?",
       "explanationText": "The neutron is found in the atomic nucleus with no electric charge. Protons carry +1 charge, electrons carry -1. The number of neutrons determines the isotope of an element.",
-      "options": ["Neutron", "Proton", "Electron"],
+      "options": [
+        "Neutron",
+        "Proton",
+        "Electron"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -184,7 +256,11 @@
       "category": "🧪 Chemistry",
       "promptText": "What is the chemical symbol for gold?",
       "explanationText": "Gold's symbol Au comes from the Latin 'aurum'. Atomic number 79. Gold is valued for its rarity, malleability, and corrosion resistance — it does not tarnish or react with most acids.",
-      "options": ["Au", "Ag", "Fe"],
+      "options": [
+        "Au",
+        "Ag",
+        "Fe"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -194,8 +270,27 @@
       "topic": "AI",
       "promptText": "What does 'LLM' stand for in the context of artificial intelligence?",
       "explanationText": "Large Language Model refers to AI models trained on vast text datasets using transformer architectures. Examples: GPT-4, Claude, Gemini. They excel at text generation, summarisation, and reasoning tasks.",
-      "options": ["Large Language Model", "Linear Learning Machine", "Layered Logic Module"],
+      "options": [
+        "Large Language Model",
+        "Linear Learning Machine",
+        "Layered Logic Module"
+      ],
       "correctAnswerIndex": 0
     }
+  ],
+  "title": "Exam Pack Sample",
+  "questionCount": 20,
+  "defaultContentType": "exam_question",
+  "domains": [
+    "💡 Technology",
+    "🧪 Chemistry",
+    "🧬 Biology",
+    "🧲 Physics",
+    "📚 History",
+    "💰 Economics",
+    "🚀 Space",
+    "🔬 Science",
+    "🧠 Psychology",
+    "🗣️ Language"
   ]
 }

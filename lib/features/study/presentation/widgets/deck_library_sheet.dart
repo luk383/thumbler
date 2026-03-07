@@ -107,6 +107,7 @@ class DeckLibrarySheet extends ConsumerWidget {
                 style: OutlinedButton.styleFrom(
                   foregroundColor: Colors.white70,
                   side: BorderSide(color: Colors.white.withAlpha(30)),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                 ),
                 onPressed: lib.isDiscovering ? null : notifier.discoverPacks,
                 icon: const Icon(Icons.refresh, size: 16),
@@ -283,20 +284,20 @@ class _LibraryHub extends StatelessWidget {
             subtitle:
                 'Structured exam tracks such as Security+, AWS, and Linux Essentials.',
             children: certificationBrowse
-              .map(
-                (meta) => _DeckHubCard(
-                  meta: meta,
-                  progress: progressByDeck[meta.id],
-                  isActive: meta.id == activeDeckId,
-                  isLoading: isLoading(meta.id),
-                  result: resultFor(meta.id),
-                  onActivate: () => onActivate(meta),
-                  onStudy: () => onStudy(meta),
-                  onPractice: () => onPractice(meta),
-                  onExam: meta.supportsExam ? () => onExam(meta) : null,
-                ),
-              )
-              .toList(),
+                .map(
+                  (meta) => _DeckHubCard(
+                    meta: meta,
+                    progress: progressByDeck[meta.id],
+                    isActive: meta.id == activeDeckId,
+                    isLoading: isLoading(meta.id),
+                    result: resultFor(meta.id),
+                    onActivate: () => onActivate(meta),
+                    onStudy: () => onStudy(meta),
+                    onPractice: () => onPractice(meta),
+                    onExam: meta.supportsExam ? () => onExam(meta) : null,
+                  ),
+                )
+                .toList(),
           ),
         if (certificationBrowse.isNotEmpty) const SizedBox(height: 18),
         if (topicBrowse.isNotEmpty)
@@ -305,20 +306,20 @@ class _LibraryHub extends StatelessWidget {
             subtitle:
                 'General knowledge decks for broader learning and lightweight daily practice.',
             children: topicBrowse
-              .map(
-                (meta) => _DeckHubCard(
-                  meta: meta,
-                  progress: progressByDeck[meta.id],
-                  isActive: meta.id == activeDeckId,
-                  isLoading: isLoading(meta.id),
-                  result: resultFor(meta.id),
-                  onActivate: () => onActivate(meta),
-                  onStudy: () => onStudy(meta),
-                  onPractice: () => onPractice(meta),
-                  onExam: meta.supportsExam ? () => onExam(meta) : null,
-                ),
-              )
-              .toList(),
+                .map(
+                  (meta) => _DeckHubCard(
+                    meta: meta,
+                    progress: progressByDeck[meta.id],
+                    isActive: meta.id == activeDeckId,
+                    isLoading: isLoading(meta.id),
+                    result: resultFor(meta.id),
+                    onActivate: () => onActivate(meta),
+                    onStudy: () => onStudy(meta),
+                    onPractice: () => onPractice(meta),
+                    onExam: meta.supportsExam ? () => onExam(meta) : null,
+                  ),
+                )
+                .toList(),
           ),
       ],
     );
@@ -384,7 +385,9 @@ class _DeckHubCard extends StatelessWidget {
         meta.hasInvalidJson || meta.isStarter || !meta.hasQuestions;
     final supportingLine = meta.description?.trim().isNotEmpty == true
         ? meta.description!.trim()
-        : (meta.category?.trim().isNotEmpty == true ? meta.category! : meta.subtitle);
+        : (meta.category?.trim().isNotEmpty == true
+              ? meta.category!
+              : meta.subtitle);
     final countLabel = meta.questionCount > 0
         ? '${meta.questionCount} questions'
         : 'Question count coming soon';
@@ -398,12 +401,21 @@ class _DeckHubCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(16),
       radius: 20,
+      tint: status.tint,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              AppSurfaceIcon(
+                icon: meta.librarySection == 'Certifications'
+                    ? Icons.workspace_premium_outlined
+                    : Icons.explore_outlined,
+                tint: status.tint,
+                size: 40,
+              ),
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -539,7 +551,9 @@ class _ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = FilledButton.styleFrom(
-      backgroundColor: isPrimary ? const Color(0xFF6C63FF) : Colors.white12,
+      backgroundColor: isPrimary
+          ? const Color(0xFF6C63FF)
+          : const Color(0xFF171B25),
       foregroundColor: Colors.white,
       disabledBackgroundColor: Colors.white10,
       disabledForegroundColor: Colors.white30,
@@ -640,17 +654,19 @@ List<DeckPackMeta> _continueLearningPacks({
     selected.add(activeDeck);
   }
 
-  final progressPacks = packs.where((pack) {
-    final progress = progressByDeck[pack.id];
-    return progress?.hasProgress ?? false;
-  }).toList()
-    ..sort((a, b) {
-      final aProgress = progressByDeck[a.id]!;
-      final bProgress = progressByDeck[b.id]!;
-      final byReviewed = bProgress.reviewedItems.compareTo(aProgress.reviewedItems);
-      if (byReviewed != 0) return byReviewed;
-      return a.title.toLowerCase().compareTo(b.title.toLowerCase());
-    });
+  final progressPacks =
+      packs.where((pack) {
+        final progress = progressByDeck[pack.id];
+        return progress?.hasProgress ?? false;
+      }).toList()..sort((a, b) {
+        final aProgress = progressByDeck[a.id]!;
+        final bProgress = progressByDeck[b.id]!;
+        final byReviewed = bProgress.reviewedItems.compareTo(
+          aProgress.reviewedItems,
+        );
+        if (byReviewed != 0) return byReviewed;
+        return a.title.toLowerCase().compareTo(b.title.toLowerCase());
+      });
 
   for (final pack in progressPacks) {
     if (selected.any((item) => item.id == pack.id)) continue;

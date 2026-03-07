@@ -1,15 +1,17 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/providers.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../../../growth/xp/xp_notifier.dart';
-import '../../../growth/streak/streak_notifier.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
 import '../../../growth/daily_quest/widgets/daily_quest_modal.dart';
 import '../../../growth/daily_quest/widgets/reward_bottom_sheet.dart';
 import '../widgets/feed_overlay.dart';
 import '../widgets/lesson_card.dart';
+import '../controllers/feed_queue_controller.dart';
+import '../controllers/feed_controller.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -30,7 +32,6 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Award XP for the first card shown (page 0 never triggers onPageChanged).
       ref.read(xpProvider.notifier).addXp(XpEvent.viewCard);
-      ref.read(streakProvider.notifier).recordActivity();
 
       // Show today's quest modal 500ms after first load (once per day).
       Future.delayed(const Duration(milliseconds: 500), () {
@@ -50,6 +51,22 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     super.dispose();
   }
 
+  Future<void> _goToNextCard() async {
+    final currentIndex = _currentIndex;
+    await ref
+        .read(feedQueueProvider.notifier)
+        .ensureNextPageAvailable(currentIndex);
+    if (!mounted) return;
+
+    final total = ref.read(feedQueueProvider).asData?.value.length ?? 0;
+    if (currentIndex >= total - 1) return;
+
+    await _pageController.nextPage(
+      duration: const Duration(milliseconds: 220),
+      curve: Curves.easeOutCubic,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Listen for a completed quest to show the reward bottom sheet.
@@ -62,7 +79,18 @@ class _FeedPageState extends ConsumerState<FeedPage> {
       }
     });
 
-    final lessonsAsync = ref.watch(lessonsProvider);
+    ref.listen(activeDeckIdProvider, (previous, next) {
+      if (previous == next) return;
+      ref.read(feedProvider.notifier).reset();
+      if (_pageController.hasClients) {
+        _pageController.jumpToPage(0);
+      }
+      if (mounted) {
+        setState(() => _currentIndex = 0);
+      }
+    });
+
+    final lessonsAsync = ref.watch(feedQueueProvider);
     final activeDeck = ref.watch(activeDeckMetaProvider);
 
     return lessonsAsync.when(
@@ -125,20 +153,18 @@ class _FeedPageState extends ConsumerState<FeedPage> {
                     itemCount: lessons.length,
                     onPageChanged: (index) {
                       setState(() => _currentIndex = index);
+                      unawaited(
+                        ref
+                            .read(feedQueueProvider.notifier)
+                            .ensureNextPageAvailable(index),
+                      );
                       ref.read(xpProvider.notifier).addXp(XpEvent.viewCard);
-                      ref.read(streakProvider.notifier).recordActivity();
                     },
                     itemBuilder: (context, index) {
-                      final isLast = index == lessons.length - 1;
                       return LessonCard(
                         lesson: lessons[index],
                         cardIndex: index,
-                        onNext: isLast
-                            ? null
-                            : () => _pageController.nextPage(
-                                duration: const Duration(milliseconds: 350),
-                                curve: Curves.easeInOut,
-                              ),
+                        onNext: () => unawaited(_goToNextCard()),
                       );
                     },
                   ),

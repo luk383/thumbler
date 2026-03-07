@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/ui/app_surfaces.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
+import '../../../growth/streak/streak_notifier.dart';
 
 /// Floating overlay shown over the feed at top-right.
 /// Displays card progress and daily quest pill.
@@ -19,6 +20,7 @@ class FeedOverlay extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final quest = ref.watch(dailyQuestProvider);
+    final streak = ref.watch(streakProvider);
     final goalReached = quest.questCompleted;
     final progress = total == 0 ? 0.0 : (currentIndex + 1) / total;
 
@@ -62,6 +64,27 @@ class FeedOverlay extends ConsumerWidget {
               : '${(progress * 100).round()}% through',
           icon: Icons.flash_on_rounded,
           tint: const Color(0xFFADA8FF),
+        ),
+        const SizedBox(height: 6),
+        _Pill(
+          color: const Color(0xCC2A180F),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text('🔥', style: TextStyle(fontSize: 10)),
+              const SizedBox(width: 4),
+              Text(
+                streak.completedToday
+                    ? '${streak.currentStreak} day streak'
+                    : '${streak.currentStreak} streak • ${streak.answeredToday}/3 today',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ),
         const SizedBox(height: 6),
 

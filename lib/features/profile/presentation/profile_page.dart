@@ -61,7 +61,9 @@ class ProfilePage extends ConsumerWidget {
                   child: _StatCard(
                     emoji: '🔥',
                     value: '${streak.currentStreak}',
-                    label: 'Day Streak',
+                    label: streak.completedToday
+                        ? 'Day Streak'
+                        : '${streak.answeredToday}/3 today',
                     color: Colors.deepOrangeAccent,
                   ),
                 ),
@@ -233,16 +235,10 @@ class _DailyGoalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF6C63FF), Color(0xFF3B37C8)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
+      radius: 24,
+      tint: const Color(0xFF6C63FF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -265,8 +261,8 @@ class _DailyGoalCard extends StatelessWidget {
             child: LinearProgressIndicator(
               value: progress,
               minHeight: 8,
-              backgroundColor: Colors.white24,
-              valueColor: const AlwaysStoppedAnimation(Colors.white),
+              backgroundColor: Colors.white10,
+              valueColor: const AlwaysStoppedAnimation(Color(0xFFADA8FF)),
             ),
           ),
           const SizedBox(height: 8),
@@ -289,17 +285,9 @@ class _DailyQuestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(13),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: quest.questCompleted
-              ? Colors.green.withAlpha(100)
-              : const Color(0xFF6C63FF).withAlpha(60),
-        ),
-      ),
+      tint: quest.questCompleted ? Colors.green : const Color(0xFF6C63FF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -414,13 +402,9 @@ class _MiniStat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(10),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withAlpha(20)),
-      ),
+      tint: Colors.white,
       child: Row(
         children: [
           Text(emoji, style: const TextStyle(fontSize: 20)),
@@ -483,13 +467,9 @@ class _DataManagementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.redAccent.withAlpha(18),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.redAccent.withAlpha(64)),
-      ),
+      tint: Colors.redAccent,
       child: Column(
         children: [
           _DangerActionButton(
@@ -585,6 +565,7 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppGlassCard(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+      tint: color,
       child: Column(
         children: [
           Text(emoji, style: const TextStyle(fontSize: 24)),
@@ -661,19 +642,14 @@ class _AnalyticsEntryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppGlassCard(
       padding: const EdgeInsets.all(16),
+      tint: const Color(0xFF6C63FF),
       child: Row(
         children: [
-          Container(
-            width: 42,
-            height: 42,
-            decoration: BoxDecoration(
-              color: const Color(0xFF6C63FF).withAlpha(24),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const Icon(
-              Icons.insights_outlined,
-              color: Color(0xFFADA8FF),
-            ),
+          const AppSurfaceIcon(
+            icon: Icons.insights_outlined,
+            tint: Color(0xFFADA8FF),
+            size: 42,
+            iconSize: 20,
           ),
           const SizedBox(width: 14),
           Expanded(

@@ -2,6 +2,7 @@ import '../domain/lesson.dart';
 import 'mock_lessons.dart';
 import '../../study/domain/study_item.dart';
 import 'feed_selection_service.dart';
+import 'feed_session_memory.dart';
 
 abstract interface class LessonRepository {
   Future<List<Lesson>> fetchLessons();
@@ -20,11 +21,13 @@ class LocalDeckLessonRepository implements LessonRepository {
     required this.activeDeckId,
     required this.items,
     required this.weakestDomains,
+    required this.sessionMemory,
   });
 
   final String? activeDeckId;
   final List<StudyItem> items;
   final List<String> weakestDomains;
+  final FeedSessionMemory sessionMemory;
 
   @override
   Future<List<Lesson>> fetchLessons() async {
@@ -34,10 +37,16 @@ class LocalDeckLessonRepository implements LessonRepository {
         .toList(growable: false);
     if (eligibleItems.isEmpty) return const [];
 
-    return const SmartFeedSelectionService().selectLessons(
+    final lessons = const SmartFeedSelectionService().selectLessons(
       items: eligibleItems,
       weakestDomains: weakestDomains,
+      recentLessonIds: sessionMemory.recentIdsForDeck(activeDeckId),
     );
+    sessionMemory.rememberSelection(
+      activeDeckId,
+      lessons.map((lesson) => lesson.id).toList(growable: false),
+    );
+    return lessons;
   }
 
   bool _belongsToActiveDeck(StudyItem item) {

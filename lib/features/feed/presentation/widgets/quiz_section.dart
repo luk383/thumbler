@@ -6,6 +6,8 @@ import '../../domain/lesson.dart';
 import '../controllers/feed_controller.dart';
 import '../../../growth/xp/xp_notifier.dart';
 import '../../../growth/daily_quest/daily_quest_notifier.dart';
+import '../../../growth/streak/streak_notifier.dart';
+import '../../../study/presentation/controllers/study_controller.dart';
 
 class QuizSection extends ConsumerWidget {
   const QuizSection({
@@ -30,7 +32,14 @@ class QuizSection extends ConsumerWidget {
         Container(
           padding: const EdgeInsets.fromLTRB(16, 14, 16, 16),
           decoration: BoxDecoration(
-            color: Colors.white.withAlpha(7),
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.white.withAlpha(8),
+                const Color(0xFF6C63FF).withAlpha(14),
+              ],
+            ),
             borderRadius: BorderRadius.circular(18),
             border: Border.all(color: Colors.white.withAlpha(12)),
           ),
@@ -73,6 +82,13 @@ class QuizSection extends ConsumerWidget {
                     ref
                         .read(feedProvider.notifier)
                         .selectAnswer(cardIndex, option);
+                    ref
+                        .read(studyProvider.notifier)
+                        .recordFeedAnswer(
+                          lesson.id,
+                          correct: option == correctAnswer,
+                        );
+                    ref.read(streakProvider.notifier).recordStudyQuestion();
                     if (option == correctAnswer) {
                       ref
                           .read(xpProvider.notifier)
@@ -118,7 +134,7 @@ class _OptionTile extends StatelessWidget {
     final isSelected = selectedAnswer == option;
 
     Color borderColor = Colors.white.withAlpha(18);
-    Color bgColor = const Color(0xFF151821);
+    Color bgColor = const Color(0xFF121620);
     Color textColor = Colors.white70;
     IconData? stateIcon;
 
@@ -149,7 +165,11 @@ class _OptionTile extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
-          color: bgColor,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [bgColor, bgColor.withAlpha(220)],
+          ),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(color: borderColor),
         ),

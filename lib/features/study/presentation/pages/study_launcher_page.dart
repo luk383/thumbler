@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/ui/app_surfaces.dart';
+import '../../../analytics/presentation/providers/progress_analytics_provider.dart';
+import '../../../analytics/domain/progress_analytics.dart';
 import '../../../../features/paywall/pro_guard.dart';
 import '../controllers/deck_library_controller.dart';
 import '../controllers/study_controller.dart';
@@ -21,6 +23,7 @@ class StudyLauncherPage extends ConsumerWidget {
     final s = ref.watch(studyProvider);
     final n = ref.read(studyProvider.notifier);
     final activeDeck = ref.watch(activeDeckMetaProvider);
+    final analytics = ref.watch(progressAnalyticsProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -47,6 +50,17 @@ class StudyLauncherPage extends ConsumerWidget {
             ),
             const SizedBox(height: 24),
             _StudySnapshot(state: s),
+            const SizedBox(height: 16),
+            _WeakAreasSummaryCard(
+              analytics: analytics,
+              onTrainWeakAreas: analytics.weakestDomains.isEmpty
+                  ? null
+                  : () => n.startWeakAreasSession(
+                      categories: analytics.weakestDomains
+                          .map((summary) => summary.domain)
+                          .toList(growable: false),
+                    ),
+            ),
             const SizedBox(height: 24),
 
             // ── Empty banner (deck empty) ────────────────────────────────
@@ -266,6 +280,162 @@ class _EmptyBanner extends StatelessWidget {
               icon: const Icon(Icons.auto_awesome, size: 15),
               label: const Text('Add 5 starter cards'),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _WeakAreasSummaryCard extends StatelessWidget {
+  const _WeakAreasSummaryCard({
+    required this.analytics,
+    required this.onTrainWeakAreas,
+  });
+
+  final ProgressAnalytics analytics;
+  final VoidCallback? onTrainWeakAreas;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppGlassCard(
+      padding: const EdgeInsets.all(18),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: Colors.orange.withAlpha(26),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Icon(
+                  Icons.trending_down_rounded,
+                  color: Colors.orangeAccent,
+                  size: 18,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Weak Areas',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      'Based on local answers in the active deck.',
+                      style: TextStyle(color: Colors.white54, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 14),
+          if (analytics.weakestDomains.isEmpty)
+            const Text(
+              'Answer more study cards or exam questions to unlock weak-area guidance.',
+              style: TextStyle(
+                color: Colors.white54,
+                fontSize: 12,
+                height: 1.4,
+              ),
+            )
+          else ...[
+            ...analytics.weakestDomains.map(
+              (summary) => _WeakAreaRow(summary: summary),
+            ),
+            const SizedBox(height: 14),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0D8B5F),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                onPressed: onTrainWeakAreas,
+                icon: const Icon(Icons.school_outlined, size: 18),
+                label: const Text('Train Weak Areas'),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _WeakAreaRow extends StatelessWidget {
+  const _WeakAreaRow({required this.summary});
+
+  final DomainAnalyticsSummary summary;
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = (summary.accuracy / 100).clamp(0.0, 1.0);
+    final tint = summary.accuracy >= 70
+        ? Colors.tealAccent
+        : summary.accuracy >= 50
+        ? Colors.orangeAccent
+        : Colors.redAccent;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white.withAlpha(6),
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: Colors.white.withAlpha(12)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  summary.domain,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              Text(
+                '${summary.accuracy}%',
+                style: TextStyle(
+                  color: tint,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(99),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 6,
+              backgroundColor: Colors.white10,
+              valueColor: AlwaysStoppedAnimation<Color>(tint),
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '${summary.answered} answers • ${summary.wrong} wrong',
+            style: const TextStyle(color: Colors.white54, fontSize: 11),
           ),
         ],
       ),

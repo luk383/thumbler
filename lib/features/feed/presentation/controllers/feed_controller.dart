@@ -27,6 +27,10 @@ class FeedNotifier extends Notifier<FeedState> {
   @override
   FeedState build() => const FeedState();
 
+  void reset() {
+    state = const FeedState();
+  }
+
   void reveal(int index) {
     final current = state.cardStateAt(index);
     if (current.revealed) return;
@@ -40,5 +44,6 @@ class FeedNotifier extends Notifier<FeedState> {
   }
 }
 
-final feedProvider =
-    NotifierProvider<FeedNotifier, FeedState>(FeedNotifier.new);
+final feedProvider = NotifierProvider<FeedNotifier, FeedState>(
+  FeedNotifier.new,
+);

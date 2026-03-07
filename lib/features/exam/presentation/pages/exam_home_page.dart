@@ -56,6 +56,7 @@ class ExamHomePage extends ConsumerWidget {
             // ── Question count selector ──────────────────────────────────
             AppGlassCard(
               padding: const EdgeInsets.all(18),
+              tint: const Color(0xFF6C63FF),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -184,21 +185,22 @@ class _ResumeBanner extends StatelessWidget {
         '${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
     final progress = attempt.answeredCount / attempt.totalQuestions;
 
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.orange.withAlpha(18),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.orange.withAlpha(80)),
-      ),
+      tint: Colors.orange,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Row(
+          Row(
             children: [
-              Icon(Icons.timer_outlined, color: Colors.orange, size: 16),
-              SizedBox(width: 6),
-              Text(
+              const AppSurfaceIcon(
+                icon: Icons.timer_outlined,
+                tint: Colors.orange,
+                size: 34,
+                iconSize: 16,
+              ),
+              const SizedBox(width: 10),
+              const Text(
                 'Exam in Progress',
                 style: TextStyle(
                   color: Colors.orange,
@@ -265,17 +267,18 @@ class _ResumeBanner extends StatelessWidget {
 class _NoQuestionsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white.withAlpha(8),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white.withAlpha(15)),
-      ),
+      tint: Colors.white,
       child: Column(
         children: [
-          const Text('📋', style: TextStyle(fontSize: 36)),
-          const SizedBox(height: 10),
+          const AppSurfaceIcon(
+            icon: Icons.assignment_outlined,
+            tint: Color(0xFFADA8FF),
+            size: 52,
+            iconSize: 24,
+          ),
+          const SizedBox(height: 12),
           const Text(
             'No exam questions imported yet',
             style: TextStyle(
@@ -423,14 +426,10 @@ class _HistoryCard extends StatelessWidget {
 
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AppGlassCard(
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
-        decoration: BoxDecoration(
-          color: Colors.white.withAlpha(8),
-          borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: Colors.white.withAlpha(15)),
-        ),
+        tint: color,
         child: Row(
           children: [
             Container(

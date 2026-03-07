@@ -2,7 +2,7 @@
   "id": "starter_pack_v1",
   "name": "Starter Pack",
   "description": "20 fascinating facts across science, history, psychology, and technology.",
-  "version": 1,
+  "version": "1",
   "items": [
     {
       "id": "sp_001",
@@ -11,7 +11,11 @@
       "topic": "Biases",
       "promptText": "The least competent people are often the most confident — this is the Dunning-Kruger effect.",
       "explanationText": "Dunning and Kruger (1999) found that people with low competence lack the metacognitive ability to recognise their own incompetence. Highly skilled people often underestimate their ability by comparison.",
-      "options": ["Dunning-Kruger effect", "Impostor syndrome", "Cognitive dissonance"],
+      "options": [
+        "Dunning-Kruger effect",
+        "Impostor syndrome",
+        "Cognitive dissonance"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -21,7 +25,11 @@
       "topic": "Memory",
       "promptText": "Every time you recall a memory, you subtly rewrite it.",
       "explanationText": "Memory reconsolidation: retrieving a memory makes it temporarily unstable. The brain re-saves it, and during this window it can be altered. This is why eyewitness testimony is unreliable and why therapy can reframe traumatic memories.",
-      "options": ["Memory reconsolidation", "Encoding specificity", "Mnemonic interference"],
+      "options": [
+        "Memory reconsolidation",
+        "Encoding specificity",
+        "Mnemonic interference"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -31,7 +39,11 @@
       "topic": "Social",
       "promptText": "In Asch's experiments, 75% of people gave an obviously wrong answer just to conform with the group.",
       "explanationText": "Solomon Asch (1951) showed that social pressure can override clear perceptual evidence. When confederates gave wrong answers, most participants conformed rather than contradict the group — a powerful demonstration of conformity.",
-      "options": ["Conformity (Asch experiment)", "Groupthink", "Social facilitation"],
+      "options": [
+        "Conformity (Asch experiment)",
+        "Groupthink",
+        "Social facilitation"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -41,7 +53,11 @@
       "topic": "Security",
       "promptText": "Over 90% of cyberattacks start with a phishing email.",
       "explanationText": "Phishing exploits human psychology rather than technical vulnerabilities. Attackers impersonate trusted entities to steal credentials or deploy malware. Email filtering and security awareness training are the primary defences.",
-      "options": ["Phishing email", "Zero-day exploit", "SQL injection"],
+      "options": [
+        "Phishing email",
+        "Zero-day exploit",
+        "SQL injection"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -51,7 +67,11 @@
       "topic": "AI",
       "promptText": "Large Language Models don't 'think' — they predict the most statistically likely next token.",
       "explanationText": "LLMs like GPT are statistical models trained on token probabilities. They have no understanding, goals, or internal world model. This makes them impressive at language tasks but brittle outside their training distribution.",
-      "options": ["Predict next token", "Reason from first principles", "Simulate human cognition"],
+      "options": [
+        "Predict next token",
+        "Reason from first principles",
+        "Simulate human cognition"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -61,7 +81,11 @@
       "topic": "Programming",
       "promptText": "Moore's Law: the number of transistors in a chip roughly doubles every two years.",
       "explanationText": "Gordon Moore (Intel) observed in 1965 that transistor density doubled annually; he later revised this to ~2 years. This drove exponential growth in computing power for 50+ years, though the trend is now slowing as we approach physical limits.",
-      "options": ["Doubles every two years", "Doubles every six months", "Doubles every decade"],
+      "options": [
+        "Doubles every two years",
+        "Doubles every six months",
+        "Doubles every decade"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -71,7 +95,11 @@
       "topic": "Physics",
       "promptText": "Nothing can travel faster than light — 299,792 km/s in a vacuum.",
       "explanationText": "Einstein's special relativity shows that as an object approaches the speed of light, its effective mass increases toward infinity, requiring infinite energy. The speed of light is therefore an absolute cosmic speed limit.",
-      "options": ["Light speed is absolute limit", "Gravity travels faster", "Neutrinos exceed light speed"],
+      "options": [
+        "Light speed is absolute limit",
+        "Gravity travels faster",
+        "Neutrinos exceed light speed"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -81,7 +109,11 @@
       "topic": "Biology",
       "promptText": "CRISPR-Cas9 lets scientists edit DNA like a word processor — cut, paste, replace.",
       "explanationText": "CRISPR was discovered in bacteria as an immune mechanism. Scientists adapted it into a precise gene-editing tool. Jennifer Doudna and Emmanuelle Charpentier won the 2020 Nobel Prize in Chemistry for this breakthrough.",
-      "options": ["Precise gene-editing tool", "DNA sequencing method", "Protein synthesis technique"],
+      "options": [
+        "Precise gene-editing tool",
+        "DNA sequencing method",
+        "Protein synthesis technique"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -91,7 +123,11 @@
       "topic": "Ancient",
       "promptText": "The 'fall' of Rome in 476 AD was only the western half — the Eastern Empire survived until 1453.",
       "explanationText": "The Eastern Roman Empire (Byzantine Empire) continued for nearly 1,000 years after the west fell. It preserved Greek and Roman knowledge and fell only when Constantinople was conquered by the Ottoman Turks in 1453.",
-      "options": ["Byzantine Empire survived until 1453", "Rome fell completely in 476 AD", "Eastern Rome fell in 800 AD"],
+      "options": [
+        "Byzantine Empire survived until 1453",
+        "Rome fell completely in 476 AD",
+        "Eastern Rome fell in 800 AD"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -101,7 +137,11 @@
       "topic": "Modern",
       "promptText": "The internet began as ARPANET in 1969 — a military network designed to survive a nuclear attack.",
       "explanationText": "ARPANET connected four US university computers in 1969. Its decentralised packet-switching design meant no single node failure could bring it down — a key military requirement. It later evolved into the civilian Internet.",
-      "options": ["Military network (ARPANET, 1969)", "Commercial network (1985)", "Academic network (1975)"],
+      "options": [
+        "Military network (ARPANET, 1969)",
+        "Commercial network (1985)",
+        "Academic network (1975)"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -111,7 +151,11 @@
       "topic": "Cell",
       "promptText": "Mitochondria have their own DNA — evidence they were once free-living bacteria.",
       "explanationText": "The endosymbiotic theory (Lynn Margulis, 1967) proposes that mitochondria were originally α-proteobacteria engulfed by early cells ~2 billion years ago. Their own circular DNA, ribosomes, and double membrane are evidence of this ancient partnership.",
-      "options": ["Were once free-living bacteria", "Evolved from the cell nucleus", "Produce DNA for the whole cell"],
+      "options": [
+        "Were once free-living bacteria",
+        "Evolved from the cell nucleus",
+        "Produce DNA for the whole cell"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -121,7 +165,11 @@
       "topic": "Evolution",
       "promptText": "An estimated 99% of all species that have ever lived on Earth are now extinct.",
       "explanationText": "Life on Earth has endured at least 5 mass extinctions. The fossil record shows species typically survive 1–10 million years before extinction or evolution into new forms. Current extinction rates are estimated at 100–1,000x the natural background rate.",
-      "options": ["99% are extinct", "50% are extinct", "75% are extinct"],
+      "options": [
+        "99% are extinct",
+        "50% are extinct",
+        "75% are extinct"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -131,7 +179,11 @@
       "topic": "Macro",
       "promptText": "\"Inflation is always and everywhere a monetary phenomenon.\" — Milton Friedman",
       "explanationText": "Friedman's monetarist view holds that sustained inflation results from excessive growth of the money supply. While widely influential, modern economists also recognise supply shocks and expectations as important drivers.",
-      "options": ["Excess money supply growth", "Government spending alone", "Supply chain disruptions"],
+      "options": [
+        "Excess money supply growth",
+        "Government spending alone",
+        "Supply chain disruptions"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -141,7 +193,11 @@
       "topic": "Behavioral",
       "promptText": "Losing €100 feels about twice as painful as gaining €100 feels good — this is loss aversion.",
       "explanationText": "Kahneman and Tversky's Prospect Theory (1979) showed that the pain of losses is roughly 2x the pleasure of equivalent gains. This explains irrational risk-averse choices and why 'no-risk' or 'free' offers are so psychologically powerful.",
-      "options": ["Loss aversion (Prospect Theory)", "Diminishing marginal utility", "Sunk cost fallacy"],
+      "options": [
+        "Loss aversion (Prospect Theory)",
+        "Diminishing marginal utility",
+        "Sunk cost fallacy"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -151,7 +207,11 @@
       "topic": "Stars",
       "promptText": "When you look at a distant star, you're seeing the past — its light left thousands of years ago.",
       "explanationText": "The nearest star (Proxima Centauri) is 4.24 light-years away, so we see it as it was 4 years ago. Some visible stars are thousands of light-years distant. Observing the farthest galaxies means seeing them as they were 13+ billion years ago.",
-      "options": ["Light travel time delay", "Stellar parallax shift", "Gravitational lensing effect"],
+      "options": [
+        "Light travel time delay",
+        "Stellar parallax shift",
+        "Gravitational lensing effect"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -161,7 +221,11 @@
       "topic": "Universe",
       "promptText": "The observable universe contains an estimated 2 trillion galaxies.",
       "explanationText": "A 2016 study (Conselice et al.) used Hubble Deep Field data to extrapolate the total galaxy count to ~2 trillion — 10x the previous estimate of 200 billion. Each galaxy contains billions to trillions of stars.",
-      "options": ["~2 trillion galaxies", "~200 billion galaxies", "~1 million galaxies"],
+      "options": [
+        "~2 trillion galaxies",
+        "~200 billion galaxies",
+        "~1 million galaxies"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -170,7 +234,11 @@
       "category": "🧪 Chemistry",
       "promptText": "Water's unusually high boiling point exists because of hydrogen bonds between molecules.",
       "explanationText": "H₂O molecules form hydrogen bonds due to oxygen's high electronegativity. These bonds require more energy to break — hence water boils at 100°C, far higher than similar-sized molecules like H₂S (-60°C). This wide liquid range enables life on Earth.",
-      "options": ["Hydrogen bonding", "Covalent bonding strength", "Van der Waals forces"],
+      "options": [
+        "Hydrogen bonding",
+        "Covalent bonding strength",
+        "Van der Waals forces"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -179,7 +247,11 @@
       "category": "🧲 Physics",
       "promptText": "Schrödinger's cat illustrates that quantum particles exist in superposition until observed.",
       "explanationText": "Erwin Schrödinger's 1935 thought experiment exposes the paradox of quantum superposition at macro scale. A cat in a sealed box is 'both alive and dead' until observed — highlighting the measurement problem in quantum mechanics.",
-      "options": ["Quantum superposition paradox", "Wave-particle duality", "Heisenberg uncertainty principle"],
+      "options": [
+        "Quantum superposition paradox",
+        "Wave-particle duality",
+        "Heisenberg uncertainty principle"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -188,7 +260,11 @@
       "category": "🗣️ Language",
       "promptText": "After puberty, it becomes very hard to learn a new language without a foreign accent.",
       "explanationText": "The 'critical period hypothesis' (Lenneberg, 1967) proposes a developmental window for native-like language acquisition. After puberty, neuroplasticity decreases and phonemic categories from the native language are fixed — making accent-free learning rare but not impossible.",
-      "options": ["Critical period hypothesis", "Sapir-Whorf hypothesis", "Universal grammar theory"],
+      "options": [
+        "Critical period hypothesis",
+        "Sapir-Whorf hypothesis",
+        "Universal grammar theory"
+      ],
       "correctAnswerIndex": 0
     },
     {
@@ -198,8 +274,27 @@
       "topic": "History",
       "promptText": "The Impressionists were rejected from the official Paris Salon and founded their own independent exhibition.",
       "explanationText": "In 1874, Monet, Renoir, Degas, and others held their first independent exhibition after rejection by the Académie des Beaux-Arts. A critic mockingly used 'Impressionism' (from Monet's 'Impression, Sunrise') as an insult — the artists proudly adopted the name.",
-      "options": ["Independent exhibition (1874)", "Supported by the official Salon", "Founded by the Paris Academy"],
+      "options": [
+        "Independent exhibition (1874)",
+        "Supported by the official Salon",
+        "Founded by the Paris Academy"
+      ],
       "correctAnswerIndex": 0
     }
+  ],
+  "title": "Starter Pack",
+  "questionCount": 20,
+  "defaultContentType": "micro_card",
+  "domains": [
+    "🧠 Psychology",
+    "💡 Technology",
+    "🔬 Science",
+    "📚 History",
+    "🧬 Biology",
+    "💰 Economics",
+    "🚀 Space",
+    "🧪 Chemistry",
+    "🗣️ Language",
+    "🎨 Art & Nature"
   ]
 }

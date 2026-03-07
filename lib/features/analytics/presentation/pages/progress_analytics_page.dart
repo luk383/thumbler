@@ -73,20 +73,14 @@ class _DeckScopeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppGlassCard(
       padding: const EdgeInsets.all(14),
+      tint: const Color(0xFF6C63FF),
       child: Row(
         children: [
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: const Color(0xFF6C63FF).withAlpha(30),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: const Icon(
-              Icons.layers_outlined,
-              color: Color(0xFFADA8FF),
-              size: 18,
-            ),
+          const AppSurfaceIcon(
+            icon: Icons.layers_outlined,
+            tint: Color(0xFFADA8FF),
+            size: 36,
+            iconSize: 18,
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -135,6 +129,7 @@ class _OverviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppGlassCard(
       padding: const EdgeInsets.all(18),
+      tint: const Color(0xFF6C63FF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -222,7 +217,14 @@ class _MetricTile extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(6),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Colors.white.withAlpha(6),
+            const Color(0xFF6C63FF).withAlpha(10),
+          ],
+        ),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.white.withAlpha(12)),
       ),
@@ -262,6 +264,7 @@ class _RecentActivityCard extends StatelessWidget {
 
     return AppGlassCard(
       padding: const EdgeInsets.all(16),
+      tint: const Color(0xFF6C63FF),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -343,6 +346,11 @@ class _DomainRow extends StatelessWidget {
     return AppGlassCard(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
+      tint: summary.accuracy >= 70
+          ? Colors.greenAccent
+          : summary.accuracy >= 50
+          ? Colors.orangeAccent
+          : Colors.redAccent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -402,17 +410,18 @@ class _WeakDomainCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppGlassCard(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: Colors.orange.withAlpha(12),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.orange.withAlpha(50)),
-      ),
+      tint: Colors.orange,
       child: Row(
         children: [
-          const Icon(Icons.trending_down_outlined, color: Colors.orange),
+          const AppSurfaceIcon(
+            icon: Icons.trending_down_outlined,
+            tint: Colors.orange,
+            size: 34,
+            iconSize: 16,
+          ),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
