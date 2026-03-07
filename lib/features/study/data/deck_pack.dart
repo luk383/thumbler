@@ -234,8 +234,11 @@ class DeckPackItem {
     this.subtopic,
     this.objectiveId,
     required this.promptText,
+    this.promptTextIt,
     this.explanationText,
+    this.explanationTextIt,
     required this.options,
+    this.optionsIt,
     required this.correctAnswerIndex,
     this.difficulty,
   });
@@ -247,8 +250,11 @@ class DeckPackItem {
   final String? subtopic;
   final String? objectiveId;
   final String promptText;
+  final String? promptTextIt;
   final String? explanationText;
+  final String? explanationTextIt;
   final List<String> options;
+  final List<String>? optionsIt;
   final int correctAnswerIndex;
   final int? difficulty;
 
@@ -291,6 +297,10 @@ class DeckPackItem {
       );
     }
 
+    final optionsIt = j.containsKey('options_it')
+        ? _stringList(j['options_it'])
+        : null;
+
     return DeckPackItem(
       id: _requiredString(j, 'id'),
       contentType: contentType,
@@ -305,15 +315,18 @@ class DeckPackItem {
           _nonEmptyString(j['promptText']) ??
           _nonEmptyString(j['question']) ??
           _requiredString(j, 'promptText'),
+      promptTextIt: _nonEmptyString(j['promptText_it']),
       explanationText:
           _asString(j['explanationText']) ?? _asString(j['explanation']),
+      explanationTextIt: _asString(j['explanationText_it']),
       options: options,
+      optionsIt: optionsIt,
       correctAnswerIndex: correctAnswerIndex,
       difficulty: _nullableIntValue(j['difficulty']),
     );
   }
 
-  StudyItem toStudyItem(String deckId) => StudyItem(
+  StudyItem toStudyItem(String deckId, {bool isItalian = false}) => StudyItem(
     id: id,
     deckId: deckId,
     contentType: contentType == 'exam_question'
@@ -323,9 +336,11 @@ class DeckPackItem {
     topic: topic,
     subtopic: subtopic,
     objectiveId: objectiveId,
-    promptText: promptText,
-    explanationText: explanationText,
-    options: options,
+    promptText: (isItalian && promptTextIt != null) ? promptTextIt! : promptText,
+    explanationText: (isItalian && explanationTextIt != null)
+        ? explanationTextIt
+        : explanationText,
+    options: (isItalian && optionsIt != null) ? optionsIt! : options,
     correctAnswerIndex: correctAnswerIndex,
     difficulty: difficulty,
   );

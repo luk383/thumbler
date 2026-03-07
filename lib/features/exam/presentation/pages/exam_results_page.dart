@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/analytics/domain_analyzer.dart';
 import '../../domain/exam_attempt.dart';
 import '../../../study/domain/study_item.dart';
@@ -16,9 +17,10 @@ class ExamResultsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(examProvider);
     final n = ref.read(examProvider.notifier);
+    final l10n = AppLocalizations.of(context);
 
     if (s.phase == ExamPhase.reviewing) {
-      return _ReviewPage(state: s, notifier: n);
+      return _ReviewPage(state: s, notifier: n, l10n: l10n);
     }
 
     final attempt = s.activeAttempt;
@@ -29,7 +31,7 @@ class ExamResultsPage extends ConsumerWidget {
           child: Center(
             child: ElevatedButton(
               onPressed: n.backToHome,
-              child: const Text('Back'),
+              child: Text(l10n.cancelLabel),
             ),
           ),
         ),
@@ -40,6 +42,7 @@ class ExamResultsPage extends ConsumerWidget {
       attempt: attempt,
       sessionQuestions: s.sessionQuestions,
       notifier: n,
+      l10n: l10n,
     );
   }
 }
@@ -51,11 +54,13 @@ class _ResultsContent extends StatelessWidget {
     required this.attempt,
     required this.sessionQuestions,
     required this.notifier,
+    required this.l10n,
   });
 
   final ExamAttempt attempt;
   final List<StudyItem> sessionQuestions;
   final ExamNotifier notifier;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -132,23 +137,23 @@ class _ResultsContent extends StatelessWidget {
               runSpacing: 10,
               children: [
                 _StatChip(
-                  label: 'Correct',
+                  label: l10n.correctLabel,
                   value: '${attempt.scoreCorrect}',
                   color: Colors.green,
                 ),
                 _StatChip(
-                  label: 'Wrong',
+                  label: l10n.wrongLabel,
                   value:
                       '${attempt.totalQuestions - attempt.scoreCorrect - attempt.unansweredCount}',
                   color: Colors.redAccent,
                 ),
                 _StatChip(
-                  label: 'Unanswered',
+                  label: l10n.unanswered,
                   value: '${attempt.unansweredCount}',
                   color: Colors.white54,
                 ),
                 _StatChip(
-                  label: 'Time used',
+                  label: l10n.timeUsedLabel,
                   value: '${elapsedMin}m ${elapsedSec}s',
                   color: Colors.white60,
                 ),
@@ -158,7 +163,7 @@ class _ResultsContent extends StatelessWidget {
 
             // ── Domain performance ──────────────────────────────────────
             if (domainPerformance.isNotEmpty) ...[
-              const _SectionLabel('Domain Performance'),
+              _SectionLabel(l10n.domainPerformance),
               const SizedBox(height: 8),
               ...domainPerformance.map(
                 (entry) => _DomainPerformanceRow(
@@ -186,8 +191,8 @@ class _ResultsContent extends StatelessWidget {
                   icon: const Icon(Icons.school_outlined, size: 18),
                   label: Text(
                     weakestDomain == null
-                        ? 'Train Weakest Domain'
-                        : 'Train Weakest Domain ($weakestDomain)',
+                        ? l10n.trainWeakestDomain
+                        : l10n.trainWeakestDomainLabel(weakestDomain),
                   ),
                 ),
               ),
@@ -214,16 +219,16 @@ class _ResultsContent extends StatelessWidget {
                           );
                         },
                   icon: const Icon(Icons.replay_outlined, size: 18),
-                  label: const Text('Review Wrong Answers'),
+                  label: Text(l10n.reviewWrongAnswers),
                 ),
               ),
               const SizedBox(height: 28),
             ] else ...[
-              const _SectionLabel('Domain Performance'),
+              _SectionLabel(l10n.domainPerformance),
               const SizedBox(height: 8),
-              const Text(
-                'Not enough grouped data to detect domain performance yet.',
-                style: TextStyle(color: Colors.white54, fontSize: 12),
+              Text(
+                l10n.notEnoughDomainData,
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
               ),
               const SizedBox(height: 28),
             ],
@@ -238,7 +243,7 @@ class _ResultsContent extends StatelessWidget {
                 ),
                 onPressed: notifier.backToHome,
                 icon: const Icon(Icons.refresh, size: 18),
-                label: const Text('New Exam'),
+                label: Text(l10n.newExam),
               ),
             ),
           ],
@@ -384,9 +389,10 @@ class _StatChip extends StatelessWidget {
 // ── Review page ───────────────────────────────────────────────────────────────
 
 class _ReviewPage extends StatelessWidget {
-  const _ReviewPage({required this.state, required this.notifier});
+  const _ReviewPage({required this.state, required this.notifier, required this.l10n});
   final ExamState state;
   final ExamNotifier notifier;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -431,9 +437,9 @@ class _ReviewPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            const Text(
-              'Review Wrong Answers',
-              style: TextStyle(
+            Text(
+              l10n.reviewWrongAnswers,
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
@@ -666,7 +672,7 @@ class _ReviewPage extends StatelessWidget {
                         ? null
                         : notifier.previous,
                     icon: const Icon(Icons.arrow_back_ios, size: 14),
-                    label: const Text('Prev'),
+                    label: Text(l10n.prev),
                   ),
                   const Spacer(),
                   state.currentIndex == total - 1
@@ -679,7 +685,7 @@ class _ReviewPage extends StatelessWidget {
                             ),
                           ),
                           onPressed: notifier.backToResults,
-                          child: const Text('Back to Results'),
+                          child: Text(l10n.backToResults),
                         )
                       : ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
@@ -691,7 +697,7 @@ class _ReviewPage extends StatelessWidget {
                           ),
                           onPressed: notifier.next,
                           icon: const Icon(Icons.arrow_forward_ios, size: 14),
-                          label: const Text('Next'),
+                          label: Text(l10n.next),
                         ),
                 ],
               ),

@@ -567,6 +567,7 @@ class StudyNotifier extends Notifier<StudyState> {
     );
     final newResults = [...state.speedResults, newResult];
     final newWrong = correct ? state.wrongItemIds : [...state.wrongItemIds, id];
+    debugPrint('Study: recording speed answer for $id, moving to index ${state.currentIndex + 1}');
 
     final items = storage.all();
     final activeItems = items

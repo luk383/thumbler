@@ -46,6 +46,7 @@ dependencies:
   path_provider: ^2.1.5
   file_picker: ^10.3.2
   syncfusion_flutter_pdf: ^30.2.7
+  purchases_flutter: ^9.13.1
 
 dev_dependencies:
   flutter_test:
@@ -81,10 +82,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/decks/general_knowledge_starter.json
-    - assets/decks/technology_basics_starter.json
-    - assets/decks/basic_science_starter.json
-    - assets/decks/world_history_starter.json
+    - assets/branding/
+    - assets/decks/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

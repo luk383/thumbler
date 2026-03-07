@@ -1,19 +1,84 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
+
+import 'revenue_cat_config.dart';
 
 // ---------------------------------------------------------------------------
-// Pro state — simple toggle, no real payment yet.
-// TODO: replace with RevenueCat entitlement check (monetisation v2)
+// IsProNotifier — AsyncNotifier backed by RevenueCat customer info stream
 // ---------------------------------------------------------------------------
 
-class IsProNotifier extends Notifier<bool> {
+class IsProNotifier extends AsyncNotifier<bool> {
   @override
-  bool build() => false;
+  Future<bool> build() async {
+    try {
+      // Listen to real-time updates from RevenueCat (v9 API).
+      void listener(CustomerInfo info) {
+        state = AsyncData(
+          info.entitlements.active.containsKey(RevenueCatConfig.entitlementId),
+        );
+      }
+      Purchases.addCustomerInfoUpdateListener(listener);
+      ref.onDispose(() => Purchases.removeCustomerInfoUpdateListener(listener));
 
-  void setPro({required bool value}) => state = value;
+      final info = await Purchases.getCustomerInfo();
+      return info.entitlements.active.containsKey(RevenueCatConfig.entitlementId);
+    } catch (_) {
+      // RevenueCat unavailable (e.g. placeholder key) — default to free.
+      return false;
+    }
+  }
+
+  /// Initiates a purchase for [package]. Throws on non-cancellation errors.
+  Future<void> purchase(Package package) async {
+    final prev = state.value ?? false;
+    state = const AsyncLoading();
+    try {
+      final result = await Purchases.purchase(PurchaseParams.package(package));
+      state = AsyncData(
+        result.customerInfo.entitlements.active
+            .containsKey(RevenueCatConfig.entitlementId),
+      );
+    } on PlatformException catch (e) {
+      final code = PurchasesErrorHelper.getErrorCode(e);
+      state = AsyncData(prev);
+      if (code != PurchasesErrorCode.purchaseCancelledError) {
+        throw Exception(e.message ?? 'Purchase failed');
+      }
+    } catch (e) {
+      state = AsyncData(prev);
+      rethrow;
+    }
+  }
+
+  /// Restores previous purchases. Throws on error.
+  Future<void> restore() async {
+    final prev = state.value ?? false;
+    state = const AsyncLoading();
+    try {
+      final info = await Purchases.restorePurchases();
+      state = AsyncData(
+        info.entitlements.active.containsKey(RevenueCatConfig.entitlementId),
+      );
+    } catch (e) {
+      state = AsyncData(prev);
+      rethrow;
+    }
+  }
+
+  /// Dev-only: toggle local Pro state without RevenueCat.
+  void devSetPro({required bool value}) {
+    assert(!kReleaseMode, 'devSetPro must not be called in release mode');
+    state = AsyncData(value);
+  }
 }
 
-/// Whether the current user has an active Pro subscription.
-final isProProvider = NotifierProvider<IsProNotifier, bool>(IsProNotifier.new);
+final isProProvider = AsyncNotifierProvider<IsProNotifier, bool>(
+  IsProNotifier.new,
+);
 
 // ---------------------------------------------------------------------------
 // ProGuard — centralises feature gating logic
@@ -24,28 +89,33 @@ class ProGuard {
 
   final bool isPro;
 
-  /// Personal deck creation and imports are Pro-only.
   bool canManagePersonalDecks() => isPro;
-
-  /// JSON deck imports are Pro-only.
   bool canImportDecks() => isPro;
-
-  /// Notes-to-deck generation is Pro-only.
   bool canGenerateFromNotes() => isPro;
-
-  /// Manual deck creation is Pro-only.
   bool canCreateDecks() => isPro;
-
-  /// Exam mode is Pro-only in the public launch build.
   bool canAccessExamMode() => isPro;
-
-  /// Topic filtering in Study mode is Pro-only.
   bool canUseTopicSelection() => isPro;
-
-  /// Speed Drill sessions longer than 10 questions are Pro-only.
   bool canRunLongSpeedDrill() => isPro;
 }
 
 final proGuardProvider = Provider<ProGuard>((ref) {
-  return ProGuard(isPro: ref.watch(isProProvider));
+  final isPro = ref.watch(isProProvider).value ?? false;
+  return ProGuard(isPro: isPro);
 });
+
+// ---------------------------------------------------------------------------
+// RevenueCat initialisation helper (called from main.dart)
+// ---------------------------------------------------------------------------
+
+Future<void> configureRevenueCat() async {
+  final apiKey = Platform.isIOS
+      ? RevenueCatConfig.iosApiKey
+      : RevenueCatConfig.androidApiKey;
+
+  final config = PurchasesConfiguration(apiKey);
+  try {
+    await Purchases.configure(config);
+  } catch (_) {
+    // Graceful degradation if key is placeholder or store unavailable.
+  }
+}

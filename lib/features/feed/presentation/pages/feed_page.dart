@@ -54,13 +54,17 @@ class _FeedPageState extends ConsumerState<FeedPage> {
 
   Future<void> _goToNextCard() async {
     final currentIndex = _currentIndex;
+    debugPrint('Feed: going to next card from $currentIndex');
     await ref
         .read(feedQueueProvider.notifier)
         .ensureNextPageAvailable(currentIndex);
     if (!mounted) return;
 
     final total = ref.read(feedQueueProvider).asData?.value.length ?? 0;
-    if (currentIndex >= total - 1) return;
+    if (currentIndex >= total - 1) {
+      debugPrint('Feed: at the end of queue ($total)');
+      return;
+    }
 
     await _pageController.nextPage(
       duration: const Duration(milliseconds: 220),

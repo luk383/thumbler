@@ -17,6 +17,8 @@ import '../../features/study/presentation/controllers/study_controller.dart';
 
 enum ResetAction { studyDeck, progress, examHistory, allData }
 
+final resetServiceProvider = Provider((ref) => const ResetService());
+
 class ResetService {
   const ResetService();
 

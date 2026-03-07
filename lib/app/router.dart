@@ -9,6 +9,7 @@ import '../features/exam/domain/exam_result.dart';
 import '../features/feed/presentation/pages/feed_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/paywall/presentation/paywall_page.dart';
+import '../features/profile/presentation/privacy_policy_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/study/data/deck_library_storage.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
@@ -37,6 +38,10 @@ final appRouter = GoRouter(
       path: '/pro',
       builder: (context, state) =>
           PaywallPage(featureName: state.uri.queryParameters['feature']),
+    ),
+    GoRoute(
+      path: '/privacy',
+      builder: (context, state) => const PrivacyPolicyPage(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => ShellScaffold(navigationShell: shell),

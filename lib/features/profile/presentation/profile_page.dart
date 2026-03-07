@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -29,173 +30,207 @@ class ProfilePage extends ConsumerWidget {
     final goalReached = dailyProgress >= 1.0;
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AppPageIntro(
-              title: l10n.profileTitle,
-              subtitle: l10n.profileSubtitle,
-            ),
-            const SizedBox(height: 20),
-            _SettingsCard(
-              settings: settings,
-              onLanguageChanged: (language) =>
-                  ref.read(appSettingsProvider.notifier).setLanguage(language),
-            ),
-            const SizedBox(height: 20),
-            // ── Daily goal card ──────────────────────────────────────────
-            _DailyGoalCard(
-              dailyXp: xp.dailyXp,
-              progress: dailyProgress,
-              goalReached: goalReached,
-            ),
-            const SizedBox(height: 16),
-
-            // ── Stats row ────────────────────────────────────────────────
-            Row(
-              children: [
-                Expanded(
-                  child: _StatCard(
-                    emoji: '⚡',
-                    value: '${xp.totalXp}',
-                    label: 'Total XP',
-                    color: const Color(0xFF6C63FF),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _StatCard(
-                    emoji: '🔥',
-                    value: '${streak.currentStreak}',
-                    label: streak.completedToday
-                        ? 'Day Streak'
-                        : '${streak.answeredToday}/3 today',
-                    color: Colors.deepOrangeAccent,
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _StatCard(
-                    emoji: '🔖',
-                    value: '$bookmarkCount',
-                    label: 'Saved',
-                    color: Colors.tealAccent,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-
-            // ── Daily quest section ──────────────────────────────────────
-            const _SectionTitle('Daily Quest'),
-            const SizedBox(height: 12),
-            _DailyQuestCard(quest: quest),
-            const SizedBox(height: 8),
-            _QuestStatsRow(quest: quest),
-            const SizedBox(height: 24),
-
-            // ── XP legend ────────────────────────────────────────────────
-            const _SectionTitle('How XP works'),
-            const SizedBox(height: 12),
-            const _XpLegendCard(),
-            const SizedBox(height: 24),
-
-            const _SectionTitle('Analytics'),
-            const SizedBox(height: 12),
-            _AnalyticsEntryCard(
-              deckTitle: activeDeck?.title,
-              onOpen: () => context.push('/profile/analytics'),
-            ),
-            const SizedBox(height: 24),
-
-            const _SectionTitle('Data Management'),
-            const SizedBox(height: 12),
-            _DataManagementCard(
-              onResetStudyDeck: () => _runResetAction(
-                context,
-                dialogMessage:
-                    'This will delete all study cards saved on this device. '
-                    'Imported exam questions in the local deck will also be removed.',
-                successAction: () => const ResetService().resetStudyDeck(
-                  context: context,
-                  ref: ref,
+      backgroundColor: const Color(0xFF0A0C11),
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 140,
+            collapsedHeight: 80,
+            pinned: true,
+            stretch: true,
+            backgroundColor: const Color(0xFF0A0C11).withAlpha(200),
+            surfaceTintColor: Colors.transparent,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: false,
+              titlePadding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 16,
+              ),
+              title: Text(
+                l10n.profileTitle,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -0.5,
                 ),
               ),
-              onResetProgress: () => _runResetAction(
-                context,
-                dialogMessage:
-                    'This will reset XP, streak, daily quest state, and study statistics, '
-                    'but keep your local deck content.',
-                successAction: () => const ResetService().resetProgress(
-                  context: context,
-                  ref: ref,
-                ),
-              ),
-              onResetExamHistory: () => _runResetAction(
-                context,
-                dialogMessage:
-                    'This will delete saved exam attempts and any paused exam.',
-                successAction: () => const ResetService().resetExamHistory(
-                  context: context,
-                  ref: ref,
-                ),
-              ),
-              onResetAllAppData: () => _runResetAction(
-                context,
-                dialogTitle: 'Reset all local data',
-                dialogMessage:
-                    'This permanently deletes local progress, exam results, bookmarks, '
-                    'XP, streak, active deck selection, and quest state on this device, '
-                    'but keeps bundled deck content available offline. '
-                    'This action cannot be undone.',
-                confirmLabel: 'Delete all local data',
-                successAction: () => const ResetService().resetAllData(
-                  context: context,
-                  ref: ref,
+              background: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      const Color(0xFF6C63FF).withAlpha(30),
+                      Colors.transparent,
+                    ],
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 24),
-
-            // ── Dev tools ────────────────────────────────────────────────
-            _DevResetButton(
-              onReset: () {
-                ref.read(dailyQuestProvider.notifier).devResetQuest();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Quest reset for testing'),
-                    backgroundColor: Colors.deepOrange,
-                    duration: Duration(seconds: 2),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.profileSubtitle,
+                    style: const TextStyle(color: Colors.white54, fontSize: 14),
                   ),
-                );
-              },
+                  const SizedBox(height: 28),
+                  _DailyGoalCard(
+                    dailyXp: xp.dailyXp,
+                    progress: dailyProgress,
+                    goalReached: goalReached,
+                    l10n: l10n,
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _StatCard(
+                          emoji: '🔥',
+                          value: '${streak.currentStreak}',
+                          label: 'Day Streak',
+                          color: Colors.orangeAccent,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _StatCard(
+                          emoji: '🔖',
+                          value: '$bookmarkCount',
+                          label: 'Bookmarks',
+                          color: const Color(0xFFADA8FF),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 28),
+                  _SectionTitle(l10n.todaysQuest),
+                  const SizedBox(height: 12),
+                  _DailyQuestCard(quest: quest, l10n: l10n),
+                  const SizedBox(height: 12),
+                  _QuestStatsRow(quest: quest, l10n: l10n),
+                  if (kDebugMode) ...[
+                    const SizedBox(height: 12),
+                    _DevResetButton(
+                      onReset: () {
+                        ref.read(dailyQuestProvider.notifier).devResetQuest();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(l10n.questResetSuccess)),
+                        );
+                      },
+                      l10n: l10n,
+                    ),
+                  ],
+                  const SizedBox(height: 32),
+                  _SectionTitle(l10n.overview),
+                  const SizedBox(height: 12),
+                  _AnalyticsEntryCard(
+                    onOpen: () => context.push('/profile/analytics'),
+                    deckTitle: activeDeck?.title,
+                    l10n: l10n,
+                  ),
+                  const SizedBox(height: 20),
+                  _SectionTitle(l10n.xpLegendTitle),
+                  const SizedBox(height: 12),
+                  _XpLegendCard(l10n: l10n),
+                  const SizedBox(height: 32),
+                  _SettingsCard(
+                    settings: settings,
+                    onLanguageChanged: (lang) => ref
+                        .read(appSettingsProvider.notifier)
+                        .setLanguage(lang),
+                  ),
+                  const SizedBox(height: 32),
+                  _SectionTitle('Data Management'),
+                  const SizedBox(height: 12),
+                  _DataManagementCard(
+                    onResetStudyDeck: () => _handleReset(
+                      context,
+                      ref,
+                      title: 'Reset Study Deck',
+                      message:
+                          'This will remove all cards from your study pool. Your bookmarks and exam history remain safe.',
+                      confirmLabel: 'Reset Deck',
+                      resetAction: () => ref
+                          .read(resetServiceProvider)
+                          .resetStudyDeck(context: context, ref: ref),
+                      l10n: l10n,
+                    ),
+                    onResetProgress: () => _handleReset(
+                      context,
+                      ref,
+                      title: 'Reset Progress',
+                      message:
+                          'This will reset your XP, streaks, and current daily quest. This cannot be undone.',
+                      confirmLabel: 'Reset Progress',
+                      resetAction: () => ref
+                          .read(resetServiceProvider)
+                          .resetProgress(context: context, ref: ref),
+                      l10n: l10n,
+                    ),
+                    onResetExamHistory: () => _handleReset(
+                      context,
+                      ref,
+                      title: 'Reset Exam History',
+                      message:
+                          'This will permanently delete all your previous exam results.',
+                      confirmLabel: 'Reset History',
+                      resetAction: () => ref
+                          .read(resetServiceProvider)
+                          .resetExamHistory(context: context, ref: ref),
+                      l10n: l10n,
+                    ),
+                    onResetAllAppData: () => _handleReset(
+                      context,
+                      ref,
+                      title: 'Reset All App Data',
+                      message:
+                          'WARNING: This will wipe everything—bookmarks, study cards, progress, and history. The app will return to its initial state.',
+                      confirmLabel: 'Wipe Everything',
+                      resetAction: () => ref
+                          .read(resetServiceProvider)
+                          .resetAllData(context: context, ref: ref),
+                      l10n: l10n,
+                    ),
+                    l10n: l10n,
+                  ),
+                  const SizedBox(height: 60),
+                ],
+              ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
-}
 
-Future<void> _runResetAction(
-  BuildContext context, {
-  String dialogTitle = 'Are you sure?',
-  required String dialogMessage,
-  String confirmLabel = 'Confirm',
-  required Future<void> Function() successAction,
-}) async {
-  final confirmed = await _showResetConfirmationDialog(
-    context,
-    title: dialogTitle,
-    message: dialogMessage,
-    confirmLabel: confirmLabel,
-  );
-  if (confirmed != true || !context.mounted) return;
+  Future<void> _handleReset(
+    BuildContext context,
+    WidgetRef ref, {
+    required String title,
+    required String message,
+    required String confirmLabel,
+    required AsyncCallback resetAction,
+    required AppLocalizations l10n,
+  }) async {
+    final confirmed = await _showResetConfirmationDialog(
+      context,
+      title: title,
+      message: message,
+      confirmLabel: confirmLabel,
+      cancelLabel: l10n.cancelLabel,
+    );
 
-  await successAction();
+    if (confirmed != true || !context.mounted) return;
+
+    await resetAction();
+  }
 }
 
 Future<bool?> _showResetConfirmationDialog(
@@ -203,6 +238,7 @@ Future<bool?> _showResetConfirmationDialog(
   required String title,
   required String message,
   required String confirmLabel,
+  required String cancelLabel,
 }) {
   return showDialog<bool>(
     context: context,
@@ -214,7 +250,7 @@ Future<bool?> _showResetConfirmationDialog(
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(cancelLabel),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
@@ -302,6 +338,31 @@ class _SettingsCard extends StatelessWidget {
             l10n.appearanceSystem,
             style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
+          const SizedBox(height: 16),
+          const Divider(color: Colors.white12, height: 1),
+          const SizedBox(height: 12),
+          GestureDetector(
+            onTap: () => context.push('/privacy'),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.privacy_tip_outlined,
+                  color: Colors.white38,
+                  size: 16,
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  l10n.privacyPolicyLink,
+                  style: const TextStyle(
+                    color: Colors.white54,
+                    fontSize: 13,
+                    decoration: TextDecoration.underline,
+                    decorationColor: Colors.white38,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -313,11 +374,13 @@ class _DailyGoalCard extends StatelessWidget {
     required this.dailyXp,
     required this.progress,
     required this.goalReached,
+    required this.l10n,
   });
 
   final int dailyXp;
   final double progress;
   final bool goalReached;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -328,9 +391,9 @@ class _DailyGoalCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Daily Goal',
-            style: TextStyle(color: Colors.white70, fontSize: 13),
+          Text(
+            l10n.dailyGoal,
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
           ),
           const SizedBox(height: 4),
           Text(
@@ -354,8 +417,8 @@ class _DailyGoalCard extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             goalReached
-                ? '🎉 Goal reached! Keep going!'
-                : '${((1 - progress) * dailyGoal).ceil()} XP left to daily goal',
+                ? l10n.goalReachedKeepGoing
+                : l10n.xpLeftToDailyGoal(((1 - progress) * dailyGoal).ceil()),
             style: const TextStyle(color: Colors.white70, fontSize: 12),
           ),
         ],
@@ -365,9 +428,10 @@ class _DailyGoalCard extends StatelessWidget {
 }
 
 class _DailyQuestCard extends StatelessWidget {
-  const _DailyQuestCard({required this.quest});
+  const _DailyQuestCard({required this.quest, required this.l10n});
 
   final DailyQuestState quest;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -386,7 +450,7 @@ class _DailyQuestCard extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  context.l10n.questDescription(
+                  l10n.questDescription(
                     quest.questType == QuestType.earnXp,
                     quest.questTarget,
                   ),
@@ -408,7 +472,7 @@ class _DailyQuestCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Colors.amber.withAlpha(100)),
                   ),
-                  child: const Text(
+                  child: Text(
                     '⚡ +20% XP',
                     style: TextStyle(
                       color: Colors.amber,
@@ -434,7 +498,7 @@ class _DailyQuestCard extends StatelessWidget {
           const SizedBox(height: 6),
           Text(
             quest.questCompleted
-                ? 'Completed! 🎉'
+                ? l10n.done
                 : '${quest.questProgress} / ${quest.questTarget}',
             style: TextStyle(
               color: quest.questCompleted ? Colors.green : Colors.white54,
@@ -448,9 +512,10 @@ class _DailyQuestCard extends StatelessWidget {
 }
 
 class _QuestStatsRow extends StatelessWidget {
-  const _QuestStatsRow({required this.quest});
+  const _QuestStatsRow({required this.quest, required this.l10n});
 
   final DailyQuestState quest;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -462,7 +527,7 @@ class _QuestStatsRow extends StatelessWidget {
           child: _MiniStat(
             emoji: '🏆',
             value: '${quest.totalCompleted}',
-            label: 'Quests Done',
+            label: l10n.questsDone,
           ),
         ),
         const SizedBox(width: 12),
@@ -470,7 +535,7 @@ class _QuestStatsRow extends StatelessWidget {
           child: _MiniStat(
             emoji: '📅',
             value: lastDate != null ? lastDate.substring(5) : '—',
-            label: 'Last Completed',
+            label: l10n.lastCompleted,
           ),
         ),
       ],
@@ -522,9 +587,10 @@ class _MiniStat extends StatelessWidget {
 }
 
 class _DevResetButton extends StatelessWidget {
-  const _DevResetButton({required this.onReset});
+  const _DevResetButton({required this.onReset, required this.l10n});
 
   final VoidCallback onReset;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -536,7 +602,7 @@ class _DevResetButton extends StatelessWidget {
       ),
       onPressed: onReset,
       icon: const Icon(Icons.refresh, size: 16),
-      label: const Text('Reset Quest (dev)', style: TextStyle(fontSize: 13)),
+      label: Text(l10n.resetQuestDev, style: const TextStyle(fontSize: 13)),
     );
   }
 }
@@ -547,12 +613,14 @@ class _DataManagementCard extends StatelessWidget {
     required this.onResetProgress,
     required this.onResetExamHistory,
     required this.onResetAllAppData,
+    required this.l10n,
   });
 
   final Future<void> Function() onResetStudyDeck;
   final Future<void> Function() onResetProgress;
   final Future<void> Function() onResetExamHistory;
   final Future<void> Function() onResetAllAppData;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -563,25 +631,25 @@ class _DataManagementCard extends StatelessWidget {
         children: [
           _DangerActionButton(
             icon: Icons.school_outlined,
-            label: 'Reset Study Deck',
+            label: l10n.resetStudyDeck,
             onPressed: onResetStudyDeck,
           ),
           const SizedBox(height: 10),
           _DangerActionButton(
             icon: Icons.insights_outlined,
-            label: 'Reset Progress',
+            label: l10n.resetProgress,
             onPressed: onResetProgress,
           ),
           const SizedBox(height: 10),
           _DangerActionButton(
             icon: Icons.history_toggle_off,
-            label: 'Reset Exam History',
+            label: l10n.resetExamHistory,
             onPressed: onResetExamHistory,
           ),
           const SizedBox(height: 10),
           _DangerActionButton(
             icon: Icons.delete_forever_outlined,
-            label: 'Reset All App Data',
+            label: l10n.resetAllAppData,
             onPressed: onResetAllAppData,
             isPrimaryDestructive: true,
           ),
@@ -690,29 +758,31 @@ class _SectionTitle extends StatelessWidget {
 }
 
 class _XpLegendCard extends StatelessWidget {
-  const _XpLegendCard();
+  const _XpLegendCard({required this.l10n});
+
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
-    return const AppGlassCard(
-      padding: EdgeInsets.all(16),
+    return AppGlassCard(
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           _XpRow(
             icon: Icons.visibility_outlined,
-            label: 'View a card',
+            label: l10n.xpLegendViewCard,
             xp: '+1 XP',
           ),
           Divider(color: Colors.white12, height: 24),
           _XpRow(
             icon: Icons.lightbulb_outline,
-            label: 'Reveal explanation',
+            label: l10n.xpLegendRevealExplanation,
             xp: '+1 XP',
           ),
           Divider(color: Colors.white12, height: 24),
           _XpRow(
             icon: Icons.check_circle_outline,
-            label: 'Correct answer',
+            label: l10n.xpLegendCorrectAnswer,
             xp: '+3 XP',
           ),
         ],
@@ -722,10 +792,15 @@ class _XpLegendCard extends StatelessWidget {
 }
 
 class _AnalyticsEntryCard extends StatelessWidget {
-  const _AnalyticsEntryCard({required this.onOpen, this.deckTitle});
+  const _AnalyticsEntryCard({
+    required this.onOpen,
+    this.deckTitle,
+    required this.l10n,
+  });
 
   final VoidCallback onOpen;
   final String? deckTitle;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -745,23 +820,23 @@ class _AnalyticsEntryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Progress Analytics',
-                  style: TextStyle(
+                Text(
+                  l10n.progressAnalyticsTitle,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
-                  'See answered questions, deck-scoped accuracy, domain performance, and recent activity.',
-                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                Text(
+                  l10n.progressAnalyticsSubtitle,
+                  style: const TextStyle(color: Colors.white54, fontSize: 12),
                 ),
                 if (deckTitle != null) ...[
                   SizedBox(height: 4),
                   Text(
-                    'Current scope: $deckTitle',
+                    '${l10n.currentScopePrefix}$deckTitle',
                     style: TextStyle(color: Color(0xFFADA8FF), fontSize: 11),
                   ),
                 ],

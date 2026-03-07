@@ -30,6 +30,7 @@ class ExamAttempt {
     required this.durationSeconds,
     required this.remainingSeconds,
     required this.questionIds,
+    this.currentIndex = 0,
     Map<String, int>? answers,
     List<String>? flaggedIds,
     this.isCompleted = false,
@@ -55,6 +56,9 @@ class ExamAttempt {
   /// Ordered list of question IDs in this attempt.
   final List<String> questionIds;
 
+  /// Index of the question the user was last viewing.
+  final int currentIndex;
+
   /// questionId → selected option index (0-based).
   final Map<String, int> answers;
 
@@ -79,6 +83,7 @@ class ExamAttempt {
     String? deckTitle,
     DateTime? finishedAt,
     int? remainingSeconds,
+    int? currentIndex,
     Map<String, int>? answers,
     List<String>? flaggedIds,
     bool? isCompleted,
@@ -94,6 +99,7 @@ class ExamAttempt {
     durationSeconds: durationSeconds,
     remainingSeconds: remainingSeconds ?? this.remainingSeconds,
     questionIds: questionIds,
+    currentIndex: currentIndex ?? this.currentIndex,
     answers: answers ?? Map.of(this.answers),
     flaggedIds: flaggedIds ?? List.of(this.flaggedIds),
     isCompleted: isCompleted ?? this.isCompleted,
@@ -113,6 +119,7 @@ class ExamAttempt {
     'durationSeconds': durationSeconds,
     'remainingSeconds': remainingSeconds,
     'questionIds': List.of(questionIds),
+    'currentIndex': currentIndex,
     'answers': Map.of(answers),
     'flaggedIds': List.of(flaggedIds),
     'isCompleted': isCompleted,
@@ -132,6 +139,7 @@ class ExamAttempt {
     durationSeconds: (m['durationSeconds'] as num).toInt(),
     remainingSeconds: (m['remainingSeconds'] as num).toInt(),
     questionIds: (m['questionIds'] as List).map((e) => e as String).toList(),
+    currentIndex: (m['currentIndex'] as num?)?.toInt() ?? 0,
     answers:
         (m['answers'] as Map?)?.map(
           (k, v) => MapEntry(k as String, (v as num).toInt()),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../domain/lesson.dart';
 import 'lesson_repository.dart';
 import 'feed_session_memory.dart';
+import '../../../app/settings/app_settings.dart';
 import '../../analytics/presentation/providers/progress_analytics_provider.dart';
 import '../../study/data/deck_pack.dart';
 import '../../study/domain/study_item.dart';
@@ -26,9 +27,12 @@ final feedSourceItemsProvider = FutureProvider<List<StudyItem>>((ref) async {
   final meta = ref.watch(feedDeckMetaProvider);
   if (meta == null) return const [];
 
+  final isItalian = ref.watch(
+    appSettingsProvider.select((s) => s.language == AppLanguage.italian),
+  );
   final pack = await DeckPack.load(meta);
   return pack.items
-      .map((item) => item.toStudyItem(meta.id))
+      .map((item) => item.toStudyItem(meta.id, isItalian: isItalian))
       .toList(growable: false);
 });
 

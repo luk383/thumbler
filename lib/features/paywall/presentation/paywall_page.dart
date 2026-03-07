@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../../../app/l10n/app_localizations.dart';
 import '../../../core/ui/app_surfaces.dart';
@@ -11,6 +12,22 @@ void openPaywall(BuildContext context, {required String featureName}) {
   final encodedFeature = Uri.encodeComponent(featureName);
   context.push('/pro?feature=$encodedFeature');
 }
+
+// ---------------------------------------------------------------------------
+// Offerings provider
+// ---------------------------------------------------------------------------
+
+final _offeringsProvider = FutureProvider.autoDispose<Offerings?>((ref) async {
+  try {
+    return await Purchases.getOfferings();
+  } catch (_) {
+    return null;
+  }
+});
+
+// ---------------------------------------------------------------------------
+// PaywallPage
+// ---------------------------------------------------------------------------
 
 class PaywallPage extends ConsumerWidget {
   const PaywallPage({
@@ -27,7 +44,7 @@ class PaywallPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final isPro = ref.watch(isProProvider);
+    final isPro = ref.watch(isProProvider).value ?? false;
     final featureLabel = featureName ?? 'premium learning tools';
 
     return Scaffold(
@@ -50,7 +67,11 @@ class PaywallPage extends ConsumerWidget {
             const SizedBox(height: 18),
             const _FeatureListCard(),
             const SizedBox(height: 18),
-            _PricingCard(featureLabel: featureLabel),
+            if (isPro)
+              _ProActiveCard()
+            else
+              _OfferingsSection(featureLabel: featureLabel),
+            // Dev-only toggle (hidden in release builds)
             if (!kReleaseMode) ...[
               const SizedBox(height: 18),
               AppGlassCard(
@@ -69,7 +90,7 @@ class PaywallPage extends ConsumerWidget {
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Local-only toggle for testing premium flows before RevenueCat is wired in.',
+                      'Local-only toggle for testing premium flows.',
                       style: TextStyle(color: Colors.white60, fontSize: 12),
                     ),
                     const SizedBox(height: 12),
@@ -79,7 +100,7 @@ class PaywallPage extends ConsumerWidget {
                         onPressed: () {
                           ref
                               .read(isProProvider.notifier)
-                              .setPro(value: !isPro);
+                              .devSetPro(value: !isPro);
                         },
                         icon: Icon(isPro ? Icons.toggle_on : Icons.toggle_off),
                         label: Text(
@@ -97,6 +118,10 @@ class PaywallPage extends ConsumerWidget {
     );
   }
 }
+
+// ---------------------------------------------------------------------------
+// Hero + feature list (unchanged from original)
+// ---------------------------------------------------------------------------
 
 class _PaywallHero extends StatelessWidget {
   const _PaywallHero();
@@ -229,8 +254,256 @@ class _FeatureListCard extends StatelessWidget {
   }
 }
 
-class _PricingCard extends StatelessWidget {
-  const _PricingCard({required this.featureLabel});
+// ---------------------------------------------------------------------------
+// Pro already active card
+// ---------------------------------------------------------------------------
+
+class _ProActiveCard extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AppGlassCard(
+      padding: const EdgeInsets.all(20),
+      tint: const Color(0xFF12B981),
+      child: Row(
+        children: [
+          const AppSurfaceIcon(
+            icon: Icons.verified_outlined,
+            tint: Color(0xFF12B981),
+            size: 44,
+            iconSize: 22,
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.l10n.paywallProActive,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  context.l10n.paywallProActiveBody,
+                  style: const TextStyle(color: Colors.white60, fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Offerings section — loads packages from RevenueCat
+// ---------------------------------------------------------------------------
+
+class _OfferingsSection extends ConsumerWidget {
+  const _OfferingsSection({required this.featureLabel});
+
+  final String featureLabel;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final offeringsAsync = ref.watch(_offeringsProvider);
+
+    return offeringsAsync.when(
+      loading: () => const AppGlassCard(
+        padding: EdgeInsets.all(24),
+        child: Center(
+          child: SizedBox(
+            width: 24,
+            height: 24,
+            child: CircularProgressIndicator(strokeWidth: 2),
+          ),
+        ),
+      ),
+      error: (e, s) => _OffersUnavailableCard(featureLabel: featureLabel),
+      data: (offerings) {
+        final packages = offerings?.current?.availablePackages ?? [];
+        if (packages.isEmpty) {
+          return _OffersUnavailableCard(featureLabel: featureLabel);
+        }
+        return Column(
+          children: [
+            for (final pkg in packages) ...[
+              _PackageCard(package: pkg),
+              const SizedBox(height: 12),
+            ],
+            _RestoreButton(),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _PackageCard extends ConsumerStatefulWidget {
+  const _PackageCard({required this.package});
+
+  final Package package;
+
+  @override
+  ConsumerState<_PackageCard> createState() => _PackageCardState();
+}
+
+class _PackageCardState extends ConsumerState<_PackageCard> {
+  bool _loading = false;
+
+  String _periodLabel(BuildContext context) {
+    final l10n = context.l10n;
+    return switch (widget.package.packageType) {
+      PackageType.monthly => l10n.paywallMonthly,
+      PackageType.annual => l10n.paywallAnnual,
+      PackageType.lifetime => l10n.paywallLifetime,
+      _ => widget.package.identifier,
+    };
+  }
+
+  Future<void> _purchase() async {
+    setState(() => _loading = true);
+    try {
+      await ref.read(isProProvider.notifier).purchase(widget.package);
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final product = widget.package.storeProduct;
+
+    return AppGlassCard(
+      padding: const EdgeInsets.all(18),
+      tint: const Color(0xFF6C63FF),
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _periodLabel(context),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  product.priceString,
+                  style: const TextStyle(
+                    color: Color(0xFFADA8FF),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                if (product.description.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      product.description,
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          FilledButton(
+            onPressed: _loading ? null : _purchase,
+            child: _loading
+                ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : Text(l10n.paywallSubscribe),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RestoreButton extends ConsumerStatefulWidget {
+  @override
+  ConsumerState<_RestoreButton> createState() => _RestoreButtonState();
+}
+
+class _RestoreButtonState extends ConsumerState<_RestoreButton> {
+  bool _loading = false;
+
+  Future<void> _restore() async {
+    setState(() => _loading = true);
+    try {
+      await ref.read(isProProvider.notifier).restore();
+      if (mounted) {
+        final isPro = ref.read(isProProvider).value ?? false;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              isPro ? context.l10n.paywallRestored : context.l10n.paywallNothingToRestore,
+            ),
+            backgroundColor: isPro ? Colors.green : null,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _loading = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: TextButton(
+        onPressed: _loading ? null : _restore,
+        child: _loading
+            ? const SizedBox(
+                width: 14,
+                height: 14,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : Text(
+                context.l10n.paywallRestorePurchases,
+                style: const TextStyle(color: Colors.white54, fontSize: 13),
+              ),
+      ),
+    );
+  }
+}
+
+class _OffersUnavailableCard extends StatelessWidget {
+  const _OffersUnavailableCard({required this.featureLabel});
 
   final String featureLabel;
 
@@ -239,35 +512,22 @@ class _PricingCard extends StatelessWidget {
     final l10n = context.l10n;
     return AppGlassCard(
       padding: const EdgeInsets.all(18),
-      tint: const Color(0xFF12B981),
+      tint: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.paywallWiringTitle,
+            l10n.paywallOffersUnavailableTitle,
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.w700,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           Text(
-            l10n.paywallWiringBody(featureLabel),
-            style: const TextStyle(
-              color: Colors.white60,
-              fontSize: 12,
-              height: 1.45,
-            ),
-          ),
-          const SizedBox(height: 14),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: null,
-              icon: const Icon(Icons.lock_open_outlined),
-              label: Text(l10n.paywallPurchaseComing),
-            ),
+            l10n.paywallOffersUnavailableBody,
+            style: const TextStyle(color: Colors.white60, fontSize: 13),
           ),
         ],
       ),

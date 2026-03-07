@@ -69,7 +69,7 @@ class ExamHomePage extends ConsumerWidget {
                   _SectionLabel(l10n.questionsLabel),
                   _CountChips(
                     options: countOptions,
-                    selected: s.selectedCount,
+                    selected: s.effectiveQuestionCount,
                     available: s.availableQuestions.length,
                     onSelect: n.setQuestionCount,
                   ),

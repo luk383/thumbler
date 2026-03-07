@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../app/l10n/app_localizations.dart';
 import '../controllers/exam_controller.dart';
 import '../controllers/exam_state.dart';
 
@@ -12,27 +13,28 @@ class ExamSessionPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final s = ref.watch(examProvider);
     final n = ref.read(examProvider.notifier);
+    final l10n = AppLocalizations.of(context);
 
     // Pop intercept → pause dialog.
     return PopScope(
       canPop: false,
-      onPopInvokedWithResult: (didPop, result) => _showPauseDialog(context, n),
+      onPopInvokedWithResult: (didPop, result) => _showPauseDialog(context, n, l10n),
       child: Scaffold(
         backgroundColor: Colors.black,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _TopBar(state: s, notifier: n),
+              _TopBar(state: s, notifier: n, l10n: l10n),
               _ProgressBar(
                 value: s.activeAttempt == null || s.sessionQuestions.isEmpty
                     ? 0
                     : s.currentIndex / s.sessionQuestions.length,
               ),
               Expanded(
-                child: _QuestionArea(state: s, notifier: n),
+                child: _QuestionArea(state: s, notifier: n, l10n: l10n),
               ),
-              _BottomNav(state: s, notifier: n),
+              _BottomNav(state: s, notifier: n, l10n: l10n),
             ],
           ),
         ),
@@ -44,9 +46,10 @@ class ExamSessionPage extends ConsumerWidget {
 // ── Top bar ───────────────────────────────────────────────────────────────────
 
 class _TopBar extends StatelessWidget {
-  const _TopBar({required this.state, required this.notifier});
+  const _TopBar({required this.state, required this.notifier, required this.l10n});
   final ExamState state;
   final ExamNotifier notifier;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +109,7 @@ class _TopBar extends StatelessWidget {
 
           // Answered count
           Text(
-            '$answered/$total answered',
+            l10n.examResumeStatus(answered, total, '').split('  ·  ').first,
             style: const TextStyle(color: Colors.white38, fontSize: 11),
           ),
           const Spacer(),
@@ -121,14 +124,14 @@ class _TopBar extends StatelessWidget {
           // Grid / overview button
           _IconBtn(
             icon: Icons.grid_view_outlined,
-            onTap: () => _showQuestionGrid(context, state, notifier),
+            onTap: () => _showQuestionGrid(context, state, notifier, l10n),
           ),
           const SizedBox(width: 6),
 
           // Pause button
           _IconBtn(
             icon: Icons.pause_circle_outline,
-            onTap: () => _showPauseDialog(context, notifier),
+            onTap: () => _showPauseDialog(context, notifier, l10n),
           ),
         ],
       ),
@@ -161,17 +164,18 @@ class _ProgressBar extends StatelessWidget {
 // ── Question area ─────────────────────────────────────────────────────────────
 
 class _QuestionArea extends StatelessWidget {
-  const _QuestionArea({required this.state, required this.notifier});
+  const _QuestionArea({required this.state, required this.notifier, required this.l10n});
   final ExamState state;
   final ExamNotifier notifier;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
     final item = state.currentQuestion;
     if (item == null) {
-      return const Center(
-        child: Text('No question',
-            style: TextStyle(color: Colors.white54)),
+      return Center(
+        child: Text(l10n.noExamQuestionsAvailable,
+            style: const TextStyle(color: Colors.white54)),
       );
     }
 
@@ -326,9 +330,10 @@ class _QuestionArea extends StatelessWidget {
 // ── Bottom nav ────────────────────────────────────────────────────────────────
 
 class _BottomNav extends StatelessWidget {
-  const _BottomNav({required this.state, required this.notifier});
+  const _BottomNav({required this.state, required this.notifier, required this.l10n});
   final ExamState state;
   final ExamNotifier notifier;
+  final AppLocalizations l10n;
 
   @override
   Widget build(BuildContext context) {
@@ -350,7 +355,7 @@ class _BottomNav extends StatelessWidget {
             ),
             onPressed: isFirst ? null : notifier.previous,
             icon: const Icon(Icons.arrow_back_ios, size: 14),
-            label: const Text('Prev'),
+            label: Text(l10n.prev),
           ),
           const Spacer(),
 
@@ -361,9 +366,9 @@ class _BottomNav extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                   horizontal: 12, vertical: 12),
             ),
-            onPressed: () => _showFinishDialog(context, state, notifier),
-            child: const Text('Submit',
-                style: TextStyle(fontWeight: FontWeight.w700)),
+            onPressed: () => _showFinishDialog(context, state, notifier, l10n),
+            child: Text(l10n.submit,
+                style: const TextStyle(fontWeight: FontWeight.w700)),
           ),
           const Spacer(),
 
@@ -376,12 +381,12 @@ class _BottomNav extends StatelessWidget {
                   const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             ),
             onPressed: isLast
-                ? () => _showFinishDialog(context, state, notifier)
+                ? () => _showFinishDialog(context, state, notifier, l10n)
                 : notifier.next,
             icon: isLast
                 ? const Icon(Icons.done_all, size: 16)
                 : const Icon(Icons.arrow_forward_ios, size: 14),
-            label: Text(isLast ? 'Finish' : 'Next'),
+            label: Text(isLast ? l10n.finish : l10n.next),
           ),
         ],
       ),
@@ -413,7 +418,7 @@ class _IconBtn extends StatelessWidget {
 // ── Question grid sheet ───────────────────────────────────────────────────────
 
 void _showQuestionGrid(
-    BuildContext context, ExamState state, ExamNotifier notifier) {
+    BuildContext context, ExamState state, ExamNotifier notifier, AppLocalizations l10n) {
   showModalBottomSheet<void>(
     context: context,
     backgroundColor: const Color(0xFF0F0D1E),
@@ -421,7 +426,7 @@ void _showQuestionGrid(
       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
     ),
     builder: (_) =>
-        _QuestionGridSheet(state: state, onSelect: (i) {
+        _QuestionGridSheet(state: state, l10n: l10n, onSelect: (i) {
           notifier.goToQuestion(i);
           Navigator.pop(context);
         }),
@@ -430,8 +435,9 @@ void _showQuestionGrid(
 
 class _QuestionGridSheet extends StatelessWidget {
   const _QuestionGridSheet(
-      {required this.state, required this.onSelect});
+      {required this.state, required this.l10n, required this.onSelect});
   final ExamState state;
+  final AppLocalizations l10n;
   final void Function(int) onSelect;
 
   @override
@@ -457,9 +463,9 @@ class _QuestionGridSheet extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 14),
-            const Text(
-              'Question Overview',
-              style: TextStyle(
+            Text(
+              l10n.questionOverview,
+              style: const TextStyle(
                   color: Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.bold),
@@ -467,11 +473,11 @@ class _QuestionGridSheet extends StatelessWidget {
             const SizedBox(height: 4),
             Row(
               children: [
-                _Legend(color: const Color(0xFF6C63FF), label: 'Answered'),
+                _Legend(color: const Color(0xFF6C63FF), label: l10n.answered),
                 const SizedBox(width: 12),
-                _Legend(color: Colors.orange, label: 'Flagged'),
+                _Legend(color: Colors.orange, label: l10n.flagged),
                 const SizedBox(width: 12),
-                _Legend(color: Colors.white24, label: 'Unanswered'),
+                _Legend(color: Colors.white24, label: l10n.unanswered),
               ],
             ),
             const SizedBox(height: 16),
@@ -562,24 +568,24 @@ class _Legend extends StatelessWidget {
 
 // ── Dialogs ───────────────────────────────────────────────────────────────────
 
-void _showPauseDialog(BuildContext context, ExamNotifier notifier) {
+void _showPauseDialog(BuildContext context, ExamNotifier notifier, AppLocalizations l10n) {
   showDialog<void>(
     context: context,
     builder: (ctx) => AlertDialog(
       backgroundColor: const Color(0xFF1A1730),
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      title: const Text('Pause Exam?',
-          style: TextStyle(color: Colors.white, fontSize: 17)),
-      content: const Text(
-        'The timer will stop. You can resume later from the Exam tab.',
-        style: TextStyle(color: Colors.white70, fontSize: 14),
+      title: Text(l10n.pauseExam,
+          style: const TextStyle(color: Colors.white, fontSize: 17)),
+      content: Text(
+        l10n.pauseExamHelp,
+        style: const TextStyle(color: Colors.white70, fontSize: 14),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Keep going',
-              style: TextStyle(color: Colors.white54)),
+          child: Text(l10n.keepGoing,
+              style: const TextStyle(color: Colors.white54)),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -588,7 +594,7 @@ void _showPauseDialog(BuildContext context, ExamNotifier notifier) {
             Navigator.pop(ctx);
             notifier.pause();
           },
-          child: const Text('Pause'),
+          child: Text(l10n.pause),
         ),
       ],
     ),
@@ -596,7 +602,7 @@ void _showPauseDialog(BuildContext context, ExamNotifier notifier) {
 }
 
 void _showFinishDialog(
-    BuildContext context, ExamState state, ExamNotifier notifier) {
+    BuildContext context, ExamState state, ExamNotifier notifier, AppLocalizations l10n) {
   final attempt = state.activeAttempt;
   final unanswered = attempt?.unansweredCount ?? 0;
 
@@ -606,19 +612,19 @@ void _showFinishDialog(
       backgroundColor: const Color(0xFF1A1730),
       shape:
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      title: const Text('Submit Exam?',
-          style: TextStyle(color: Colors.white, fontSize: 17)),
+      title: Text(l10n.submitExam,
+          style: const TextStyle(color: Colors.white, fontSize: 17)),
       content: Text(
         unanswered > 0
-            ? 'You have $unanswered unanswered question${unanswered > 1 ? 's' : ''}. Submit anyway?'
-            : 'All questions answered. Ready to see your results?',
+            ? l10n.submitExamHelp(unanswered)
+            : l10n.submitExamAllAnswered,
         style: const TextStyle(color: Colors.white70, fontSize: 14),
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(ctx),
-          child: const Text('Back',
-              style: TextStyle(color: Colors.white54)),
+          child: Text(l10n.cancelLabel,
+              style: const TextStyle(color: Colors.white54)),
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
@@ -627,7 +633,7 @@ void _showFinishDialog(
             Navigator.pop(ctx);
             notifier.finish();
           },
-          child: const Text('Submit'),
+          child: Text(l10n.submit),
         ),
       ],
     ),

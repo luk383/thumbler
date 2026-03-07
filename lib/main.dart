@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app/app.dart';
+import 'features/paywall/pro_guard.dart' show configureRevenueCat;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +25,8 @@ Future<void> main() async {
   await Hive.openBox('study_box');
   await Hive.openBox('exam_box');
   await Hive.openBox('library_box');
+
+  await configureRevenueCat();
 
   runApp(const ProviderScope(child: ThumblerApp()));
 }

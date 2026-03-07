@@ -13,7 +13,7 @@ import '../../domain/lesson.dart';
 import '../controllers/feed_controller.dart';
 import 'quiz_section.dart';
 
-const _kAutoAdvanceDelay = Duration(milliseconds: 1600);
+const _kAutoAdvanceDelay = Duration(milliseconds: 5000);
 
 class LessonCard extends ConsumerStatefulWidget {
   const LessonCard({
@@ -36,21 +36,6 @@ class LessonCard extends ConsumerStatefulWidget {
 class _LessonCardState extends ConsumerState<LessonCard> {
   static const _overlayClearance = 88.0;
 
-  Timer? _autoAdvanceTimer;
-
-  @override
-  void dispose() {
-    _autoAdvanceTimer?.cancel();
-    super.dispose();
-  }
-
-  void _scheduleAutoAdvance() {
-    _autoAdvanceTimer?.cancel();
-    _autoAdvanceTimer = Timer(widget.autoAdvanceDelay, () {
-      if (mounted) widget.onNext?.call();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -71,7 +56,7 @@ class _LessonCardState extends ConsumerState<LessonCard> {
         (s) => s.cardStateFor(widget.lesson.id).selectedAnswer,
       ),
       (prev, next) {
-        if (next != null && prev == null) _scheduleAutoAdvance();
+        // Auto-advance disabled: users should read feedback and swipe manually.
       },
     );
 

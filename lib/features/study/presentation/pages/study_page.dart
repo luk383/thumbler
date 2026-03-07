@@ -295,18 +295,25 @@ class _SpeedSessionState extends ConsumerState<_SpeedSession>
     required int timeMs,
     required bool timedOut,
   }) {
-    final delay = 600 + _rng.nextInt(301); // 600–900ms
-    Future.delayed(Duration(milliseconds: delay), () {
-      if (!mounted) return;
-      ref
-          .read(studyProvider.notifier)
-          .recordSpeedAnswer(
-            id,
-            correct: correct,
-            timeMs: timeMs,
-            timedOut: timedOut,
-          );
-    });
+    // Auto-advance removed to allow reading the answer.
+    // The state now needs a manual trigger or we use a very long delay as a fallback.
+    // But better to add a "Next" button in the UI when answered.
+  }
+
+  void _onNextManual() {
+    if (!_answered) return;
+    final item = widget.studyState.currentItem!;
+    final correct = _selectedIndex == item.correctAnswerIndex;
+    final elapsed = _questionStart != null 
+        ? DateTime.now().difference(_questionStart!).inMilliseconds 
+        : 0;
+    
+    ref.read(studyProvider.notifier).recordSpeedAnswer(
+          item.id,
+          correct: correct,
+          timeMs: elapsed,
+          timedOut: _selectedIndex == null,
+        );
   }
 
   static final _rng = Random();
@@ -508,18 +515,33 @@ class _SpeedSessionState extends ConsumerState<_SpeedSession>
                         );
                       }),
 
-                      // Timeout label
-                      if (_answered && _selectedIndex == null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Text(
-                            '⏱  Tempo scaduto!',
-                            style: TextStyle(
-                              color: Colors.orange.shade300,
-                              fontSize: 13,
+                      // Timeout or Next button
+                      if (_answered) ...[
+                        const SizedBox(height: 20),
+                        if (_selectedIndex == null)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: Text(
+                              '⏱  Tempo scaduto!',
+                              style: TextStyle(
+                                color: Colors.orange.shade300,
+                                fontSize: 13,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: _onNextManual,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF6C63FF),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                            ),
+                            child: const Text('Next Question'),
+                          ),
                         ),
+                      ],
                     ],
                   ),
                 ),

@@ -30,7 +30,7 @@ class DeckLibrarySheet extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final lib = ref.watch(deckLibraryProvider);
-    final isPro = ref.watch(isProProvider);
+    final isPro = ref.watch(isProProvider).value ?? false;
     final progressByDeck = ref.watch(deckProgressSummariesProvider);
     final notifier = ref.read(deckLibraryProvider.notifier);
     final maxHeight = MediaQuery.of(context).size.height * 0.88;

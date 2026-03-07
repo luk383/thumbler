@@ -45,6 +45,7 @@ class ExamNotifier extends Notifier<ExamState> {
       history: history,
       results: results,
       activeAttempt: activeAttempt,
+      currentIndex: activeAttempt?.currentIndex ?? 0,
       phase: activeAttempt != null ? ExamPhase.paused : ExamPhase.home,
       // Restore session questions if there's an incomplete attempt.
       sessionQuestions: activeAttempt != null
@@ -81,6 +82,7 @@ class ExamNotifier extends Notifier<ExamState> {
       phase: activeAttempt != null ? ExamPhase.paused : ExamPhase.home,
       availableQuestions: questions,
       activeAttempt: activeAttempt,
+      currentIndex: activeAttempt?.currentIndex ?? 0,
       sessionQuestions: activeAttempt != null
           ? _resolveQuestions(activeAttempt.questionIds, questions)
           : const [],
@@ -113,6 +115,7 @@ class ExamNotifier extends Notifier<ExamState> {
       durationSeconds: durationSeconds,
       remainingSeconds: durationSeconds,
       questionIds: sessionQuestions.map((q) => q.id).toList(),
+      currentIndex: 0,
     );
 
     ref.read(examAttemptStorageProvider).saveActive(attempt);
@@ -139,7 +142,7 @@ class ExamNotifier extends Notifier<ExamState> {
     state = state.copyWith(
       phase: ExamPhase.active,
       sessionQuestions: questions,
-      currentIndex: 0,
+      currentIndex: attempt.currentIndex,
     );
 
     _startTimer();
@@ -181,13 +184,29 @@ class ExamNotifier extends Notifier<ExamState> {
         ? state.reviewQuestions.length - 1
         : state.sessionQuestions.length - 1;
     if (state.currentIndex < max) {
-      state = state.copyWith(currentIndex: state.currentIndex + 1);
+      final nextIndex = state.currentIndex + 1;
+      state = state.copyWith(currentIndex: nextIndex);
+      
+      // Persist currentIndex in active attempt
+      if (state.phase == ExamPhase.active && state.activeAttempt != null) {
+        final updated = state.activeAttempt!.copyWith(currentIndex: nextIndex);
+        ref.read(examAttemptStorageProvider).saveActive(updated);
+        state = state.copyWith(activeAttempt: updated);
+      }
     }
   }
 
   void previous() {
     if (state.currentIndex > 0) {
-      state = state.copyWith(currentIndex: state.currentIndex - 1);
+      final nextIndex = state.currentIndex - 1;
+      state = state.copyWith(currentIndex: nextIndex);
+
+      // Persist currentIndex in active attempt
+      if (state.phase == ExamPhase.active && state.activeAttempt != null) {
+        final updated = state.activeAttempt!.copyWith(currentIndex: nextIndex);
+        ref.read(examAttemptStorageProvider).saveActive(updated);
+        state = state.copyWith(activeAttempt: updated);
+      }
     }
   }
 
@@ -195,6 +214,13 @@ class ExamNotifier extends Notifier<ExamState> {
     final max = state.sessionQuestions.length - 1;
     if (index >= 0 && index <= max) {
       state = state.copyWith(currentIndex: index);
+
+      // Persist currentIndex in active attempt
+      if (state.phase == ExamPhase.active && state.activeAttempt != null) {
+        final updated = state.activeAttempt!.copyWith(currentIndex: index);
+        ref.read(examAttemptStorageProvider).saveActive(updated);
+        state = state.copyWith(activeAttempt: updated);
+      }
     }
   }
 
