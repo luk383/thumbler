@@ -13,6 +13,7 @@ import '../widgets/feed_overlay.dart';
 import '../widgets/lesson_card.dart';
 import '../controllers/feed_queue_controller.dart';
 import '../controllers/feed_controller.dart';
+import '../../data/providers.dart';
 
 class FeedPage extends ConsumerStatefulWidget {
   const FeedPage({super.key});
@@ -97,12 +98,13 @@ class _FeedPageState extends ConsumerState<FeedPage> {
     });
 
     final lessonsAsync = ref.watch(feedQueueProvider);
-    final activeDeck = ref.watch(activeDeckMetaProvider);
+    final activeDeck = ref.watch(feedDeckMetaProvider);
+    final isDiscovering = ref.watch(deckLibraryProvider.select((s) => s.isDiscovering));
 
     return lessonsAsync.when(
       loading: () => Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: Center(child: CircularProgressIndicator()),
+        body: const Center(child: CircularProgressIndicator()),
       ),
       error: (error, _) => Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -118,6 +120,13 @@ class _FeedPageState extends ConsumerState<FeedPage> {
         final currentLesson = lessons.isEmpty
             ? null
             : lessons[_currentIndex.clamp(0, lessons.length - 1)];
+
+        if (lessons.isEmpty && isDiscovering) {
+          return Scaffold(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            body: const Center(child: CircularProgressIndicator()),
+          );
+        }
 
         return Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,

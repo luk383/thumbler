@@ -214,11 +214,11 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
   }
 
   String? _defaultDeckId(List<DeckPackMeta> packs) {
-    final importable = packs.where((pack) => pack.isImportable).toList();
-    if (importable.isEmpty) return null;
+    final validDecks = packs.where((pack) => !pack.hasInvalidJson && pack.hasQuestions).toList();
+    if (validDecks.isEmpty) return null;
 
     final preferredGeneralDecks =
-        importable
+        validDecks
             .where(
               (pack) =>
                   pack.librarySection == 'General Knowledge' &&
@@ -245,8 +245,8 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
           });
     if (preferredGeneralDecks.isNotEmpty) return preferredGeneralDecks.first.id;
 
-    if (importable.length == 1) return importable.first.id;
-    return importable.first.id;
+    if (validDecks.length == 1) return validDecks.first.id;
+    return validDecks.first.id;
   }
 
   Future<void> _ensureDeckImportedById(

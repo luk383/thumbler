@@ -14,7 +14,7 @@ class FeedQueueNotifier extends AsyncNotifier<List<Lesson>> {
 
   @override
   Future<List<Lesson>> build() async {
-    ref.watch(activeDeckIdProvider);
+    ref.watch(feedDeckMetaProvider);
     ref.watch(deckLibraryDataVersionProvider);
     
     // Use read instead of watch to avoid rebuilding the whole queue 

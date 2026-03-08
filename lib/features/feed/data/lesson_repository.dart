@@ -123,10 +123,10 @@ DeckPackMeta? resolveFeedDeckMeta({
 }
 
 bool _isPreferredFeedDeck(DeckPackMeta? pack) =>
-    pack != null && pack.isImportable && pack.supportsFeed;
+    pack != null && (pack.isImportable || pack.isStarter) && pack.supportsFeed;
 
 bool _isFallbackFeedDeck(DeckPackMeta? pack) =>
-    pack != null && pack.isImportable && pack.hasQuestions;
+    pack != null && (pack.isImportable || pack.isStarter) && pack.hasQuestions;
 
 int _compareFeedPriority(DeckPackMeta a, DeckPackMeta b) {
   final sectionScoreA = a.librarySection == 'General Knowledge' ? 1 : 0;

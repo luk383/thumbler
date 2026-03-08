@@ -1,4 +1,4 @@
-package com.example.thumbler
+package com.thumbler.app
 
 import io.flutter.embedding.android.FlutterActivity
 

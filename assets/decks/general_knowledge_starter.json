@@ -4,6 +4,8 @@
   "category": "General Knowledge",
   "description": "Mixed bite-sized questions designed for the public Thumbler launch and daily feed usage.",
   "version": "2",
+  "isStarter": true,
+  "availabilityNote": "Included in public build",
   "questionCount": 25,
   "domains": [
     "Everyday Science",
