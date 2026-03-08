@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.thumbler.app">
+    package="it.luk383.thumbler">
     <application
         android:label="Thumbler"
         android:name="${applicationName}"
