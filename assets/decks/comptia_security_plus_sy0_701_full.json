@@ -3,8 +3,8 @@
   "title": "CompTIA Security+ Full Exam Prep",
   "examCode": "SY0-701",
   "category": "Cybersecurity",
-  "description": "Comprehensive CompTIA Security+ (SY0-701) practice deck containing 150 questions covering all exam domains.",
-  "version": "1",
+  "description": "Comprehensive CompTIA Security+ (SY0-701) practice deck containing 200 questions covering all exam domains.",
+  "version": "2",
   "domains": [
     "General Security Concepts",
     "Threats, Vulnerabilities, and Mitigations",
@@ -2263,7 +2263,907 @@
       ],
       "correctIndex": 0,
       "explanation": "Segmentation slows lateral spread and patching closes the vulnerabilities worms exploit."
+    },
+    {
+      "id": "sec701_exam_c_001",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Controls",
+      "subtopic": "Control Types",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "question": "A security guard at the entrance of a building is an example of which type of control?",
+      "answers": [
+        "Technical",
+        "Physical",
+        "Managerial",
+        "Deterrent"
+      ],
+      "correctIndex": 1,
+      "explanation": "A security guard is a physical control that protects the perimeter and access points."
+    },
+    {
+      "id": "sec701_exam_c_002",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Controls",
+      "subtopic": "Control Functions",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "question": "A system that automatically disables an account after five failed login attempts is which type of control function?",
+      "answers": [
+        "Preventive",
+        "Detective",
+        "Corrective",
+        "Compensating"
+      ],
+      "correctIndex": 0,
+      "explanation": "Account lockout is a preventive control because it stops an attack (brute force) before it succeeds."
+    },
+    {
+      "id": "sec701_exam_c_003",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Fundamental Security Concepts",
+      "subtopic": "Gap Analysis",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "question": "An organization compares its current security posture against its desired target state. What is this process called?",
+      "answers": [
+        "Vulnerability assessment",
+        "Gap analysis",
+        "Risk appetite review",
+        "Impact analysis"
+      ],
+      "correctIndex": 1,
+      "explanation": "Gap analysis identifies the differences between the current state and the goal or standard."
+    },
+    {
+      "id": "sec701_exam_c_004",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Fundamental Security Concepts",
+      "subtopic": "Zero Trust",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "question": "Which principle is central to a Zero Trust architecture?",
+      "answers": [
+        "Trust but verify",
+        "Implicit trust for internal users",
+        "Never trust, always verify",
+        "Trust based on network location"
+      ],
+      "correctIndex": 2,
+      "explanation": "Zero Trust operates on the principle of 'Never trust, always verify' regardless of location."
+    },
+    {
+      "id": "sec701_exam_c_005",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Fundamental Security Concepts",
+      "subtopic": "Data Types",
+      "objectiveId": "1.5",
+      "difficulty": 1,
+      "question": "Information such as medical records or health insurance IDs is classified as which of the following?",
+      "answers": [
+        "PII",
+        "PHI",
+        "PCI",
+        "IP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Protected Health Information (PHI) specifically refers to health-related data."
+    },
+    {
+      "id": "sec701_exam_c_006",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Fundamental Security Concepts",
+      "subtopic": "Data Types",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "question": "Which data type includes information about how data is structured, used, or managed?",
+      "answers": [
+        "Metadata",
+        "Sensitive data",
+        "Public data",
+        "Encrypted data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Metadata is 'data about data,' providing context and information about other data."
+    },
+    {
+      "id": "sec701_exam_c_007",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Threat Actors",
+      "subtopic": "Nation-State",
+      "objectiveId": "2.1",
+      "difficulty": 2,
+      "question": "Which type of threat actor is most likely to be well-funded and use Advanced Persistent Threats (APTs) for long-term espionage?",
+      "answers": [
+        "Script kiddie",
+        "Hacktivist",
+        "Nation-state",
+        "Insider threat"
+      ],
+      "correctIndex": 2,
+      "explanation": "Nation-state actors have significant resources and often engage in long-term, targeted espionage."
+    },
+    {
+      "id": "sec701_exam_c_008",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Threat Actors",
+      "subtopic": "Shadow IT",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "question": "An employee uses an unauthorized cloud storage service to share company files. What is this practice called?",
+      "answers": [
+        "Social engineering",
+        "Shadow IT",
+        "Supply chain risk",
+        "Privilege escalation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Shadow IT is the use of IT systems, software, or services without explicit organizational approval."
+    },
+    {
+      "id": "sec701_exam_c_009",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Social Engineering",
+      "subtopic": "Pretexting",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "question": "An attacker creates a fabricated scenario to trick a victim into revealing information. Which social engineering technique is this?",
+      "answers": [
+        "Shoulder surfing",
+        "Pretexting",
+        "Baiting",
+        "Tailgating"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pretexting involves creating a false narrative or 'pretext' to manipulate the target."
+    },
+    {
+      "id": "sec701_exam_c_010",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Social Engineering",
+      "subtopic": "Spam",
+      "objectiveId": "2.2",
+      "difficulty": 1,
+      "question": "Which term describes unsolicited and unwanted messages, typically sent over email or instant messaging?",
+      "answers": [
+        "Phishing",
+        "Spam",
+        "Hoax",
+        "Scareware"
+      ],
+      "correctIndex": 1,
+      "explanation": "Spam is the digital equivalent of 'junk mail'—unsolicited bulk messages."
+    },
+    {
+      "id": "sec701_exam_c_011",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware",
+      "subtopic": "Ransomware",
+      "objectiveId": "2.3",
+      "difficulty": 1,
+      "question": "Which type of malware encrypts a user's files and demands payment for the decryption key?",
+      "answers": [
+        "Spyware",
+        "Rootkit",
+        "Ransomware",
+        "Worm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ransomware holds data hostage for a ransom payment."
+    },
+    {
+      "id": "sec701_exam_c_012",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware",
+      "subtopic": "Logic Bomb",
+      "objectiveId": "2.3",
+      "difficulty": 2,
+      "question": "A disgruntled employee leaves code behind that will delete the company database on the first day of next year. What is this called?",
+      "answers": [
+        "Trojan",
+        "Logic bomb",
+        "Keylogger",
+        "Backdoor"
+      ],
+      "correctIndex": 1,
+      "explanation": "A logic bomb is malicious code that triggers when specific conditions (like a date) are met."
+    },
+    {
+      "id": "sec701_exam_c_013",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Attacks",
+      "subtopic": "Buffer Overflow",
+      "objectiveId": "2.4",
+      "difficulty": 3,
+      "question": "Which attack occurs when an application writes more data to a memory area than it can hold?",
+      "answers": [
+        "SQL injection",
+        "Buffer overflow",
+        "Directory traversal",
+        "Cross-site scripting"
+      ],
+      "correctIndex": 1,
+      "explanation": "A buffer overflow overwrites adjacent memory, which can lead to system crashes or remote code execution."
+    },
+    {
+      "id": "sec701_exam_c_014",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Attacks",
+      "subtopic": "SQL Injection",
+      "objectiveId": "2.4",
+      "difficulty": 2,
+      "question": "What is the primary goal of a SQL injection attack?",
+      "answers": [
+        "To crash the web server",
+        "To steal user passwords through phishing",
+        "To manipulate or extract data from a backend database",
+        "To spoof the user's IP address"
+      ],
+      "correctIndex": 2,
+      "explanation": "SQL injection targets the database layer by inserting malicious SQL queries into input fields."
+    },
+    {
+      "id": "sec701_exam_c_015",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Network Attacks",
+      "subtopic": "DDoS",
+      "objectiveId": "2.4",
+      "difficulty": 1,
+      "question": "Which attack uses a botnet to overwhelm a target with a massive amount of traffic?",
+      "answers": [
+        "Brute force",
+        "MITM",
+        "DDoS",
+        "Replay attack"
+      ],
+      "correctIndex": 2,
+      "explanation": "A Distributed Denial of Service (DDoS) attack uses many sources to exhaust a target's resources."
+    },
+    {
+      "id": "sec701_exam_c_016",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Network Attacks",
+      "subtopic": "On-Path Attack",
+      "objectiveId": "2.4",
+      "difficulty": 2,
+      "question": "An attacker positions themselves between two parties to intercept and potentially alter communication. What is this called in SY0-701?",
+      "answers": [
+        "Man-in-the-browser",
+        "On-path attack",
+        "Side-channel attack",
+        "Watering hole"
+      ],
+      "correctIndex": 1,
+      "explanation": "The term 'On-path attack' (formerly Man-in-the-Middle) describes intercepting communication between two points."
+    },
+    {
+      "id": "sec701_exam_c_017",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Hardware Vulnerabilities",
+      "subtopic": "Supply Chain",
+      "objectiveId": "2.5",
+      "difficulty": 2,
+      "question": "A company discovers that its newly purchased servers contain malicious firmware installed during manufacturing. This is an example of what?",
+      "answers": [
+        "Zero-day exploit",
+        "Supply chain attack",
+        "Internal threat",
+        "Social engineering"
+      ],
+      "correctIndex": 1,
+      "explanation": "Supply chain attacks target products or services during their creation, distribution, or update phase."
+    },
+    {
+      "id": "sec701_exam_c_018",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Network Design",
+      "subtopic": "Microsegmentation",
+      "objectiveId": "3.2",
+      "difficulty": 3,
+      "question": "Which architectural approach provides granular security policies for individual workloads in a cloud environment?",
+      "answers": [
+        "VLAN tagging",
+        "Microsegmentation",
+        "Subnetting",
+        "VPN tunneling"
+      ],
+      "correctIndex": 1,
+      "explanation": "Microsegmentation allows security policies to be applied at the level of individual workloads or containers."
+    },
+    {
+      "id": "sec701_exam_c_019",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Network Design",
+      "subtopic": "CASB",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "question": "Which technology acts as a security enforcement point between cloud service users and cloud applications?",
+      "answers": [
+        "WAF",
+        "CASB",
+        "NGFW",
+        "DLP"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Cloud Access Security Broker (CASB) provides visibility and control over cloud usage."
+    },
+    {
+      "id": "sec701_exam_c_020",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Cloud Models",
+      "subtopic": "Shared Responsibility",
+      "objectiveId": "3.2",
+      "difficulty": 2,
+      "question": "In a Software-as-a-Service (SaaS) model, who is primarily responsible for securing the underlying infrastructure?",
+      "answers": [
+        "The customer",
+        "The cloud provider",
+        "The ISP",
+        "The end-user"
+      ],
+      "correctIndex": 1,
+      "explanation": "In SaaS, the provider manages and secures the entire infrastructure; the customer is responsible for data and identity."
+    },
+    {
+      "id": "sec701_exam_c_021",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Cloud Models",
+      "subtopic": "IaaS",
+      "objectiveId": "3.2",
+      "difficulty": 1,
+      "question": "Which cloud model gives the customer the most control over the operating system and installed software?",
+      "answers": [
+        "SaaS",
+        "PaaS",
+        "IaaS",
+        "FaaS"
+      ],
+      "correctIndex": 2,
+      "explanation": "Infrastructure as a Service (IaaS) provides virtualized computing resources, allowing customers to manage the OS and apps."
+    },
+    {
+      "id": "sec701_exam_c_022",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "Hardening",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "question": "What is the process of removing unnecessary services, closing unused ports, and applying patches called?",
+      "answers": [
+        "System hardening",
+        "Vulnerability scanning",
+        "Network mapping",
+        "Asset discovery"
+      ],
+      "correctIndex": 0,
+      "explanation": "System hardening reduces the attack surface of a host."
+    },
+    {
+      "id": "sec701_exam_c_023",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "Mobile Device Management",
+      "objectiveId": "3.3",
+      "difficulty": 1,
+      "question": "Which technology allows an organization to remotely wipe data from a lost or stolen employee phone?",
+      "answers": [
+        "MAM",
+        "MDM",
+        "VDI",
+        "HSM"
+      ],
+      "correctIndex": 1,
+      "explanation": "Mobile Device Management (MDM) tools can enforce security policies and perform remote wipes."
+    },
+    {
+      "id": "sec701_exam_c_024",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "Secure Coding",
+      "objectiveId": "3.4",
+      "difficulty": 2,
+      "question": "Which practice involves reviewing code for security flaws while the application is not running?",
+      "answers": [
+        "DAST",
+        "SAST",
+        "Fuzzing",
+        "Penetration testing"
+      ],
+      "correctIndex": 1,
+      "explanation": "Static Application Security Testing (SAST) analyzes source code or binaries without executing the program."
+    },
+    {
+      "id": "sec701_exam_c_025",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "Secure Coding",
+      "objectiveId": "3.4",
+      "difficulty": 2,
+      "question": "Which technique involves providing random or malformed input to an application to find vulnerabilities?",
+      "answers": [
+        "Code signing",
+        "Fuzzing",
+        "Sandboxing",
+        "Input validation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Fuzzing (fuzz testing) is used to discover bugs and vulnerabilities by sending unexpected data."
+    },
+    {
+      "id": "sec701_exam_c_026",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Cryptography",
+      "subtopic": "Symmetric vs Asymmetric",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "question": "Which type of encryption uses a single key for both encryption and decryption?",
+      "answers": [
+        "Asymmetric",
+        "Symmetric",
+        "Hashing",
+        "Steganography"
+      ],
+      "correctIndex": 1,
+      "explanation": "Symmetric encryption uses a shared secret key for both operations."
+    },
+    {
+      "id": "sec701_exam_c_027",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "subtopic": "IR Phases",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "question": "During which phase of the incident response lifecycle do analysts work to understand the root cause of an attack?",
+      "answers": [
+        "Containment",
+        "Eradication",
+        "Post-incident activity",
+        "Detection and analysis"
+      ],
+      "correctIndex": 3,
+      "explanation": "Detection and analysis involves identifying that an event occurred and determining its nature and cause."
+    },
+    {
+      "id": "sec701_exam_c_028",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "subtopic": "Playbooks",
+      "objectiveId": "4.2",
+      "difficulty": 1,
+      "question": "What is the purpose of an incident response playbook?",
+      "answers": [
+        "To provide legal advice",
+        "To automate all security patches",
+        "To provide a repeatable framework for responding to specific threats",
+        "To replace the incident response team"
+      ],
+      "correctIndex": 2,
+      "explanation": "Playbooks define standardized responses for common scenarios like malware or phishing."
+    },
+    {
+      "id": "sec701_exam_c_029",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Security Monitoring",
+      "subtopic": "SIEM",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "Which tool aggregates and correlates logs from multiple sources to provide a centralized view of security events?",
+      "answers": [
+        "IDS",
+        "IPS",
+        "SIEM",
+        "Honeypot"
+      ],
+      "correctIndex": 2,
+      "explanation": "Security Information and Event Management (SIEM) provides real-time analysis of security alerts."
+    },
+    {
+      "id": "sec701_exam_c_030",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Security Monitoring",
+      "subtopic": "SOAR",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "question": "Which technology helps automate response actions, such as isolating a host or blocking an IP address?",
+      "answers": [
+        "SIEM",
+        "SOAR",
+        "Netflow",
+        "SNMP"
+      ],
+      "correctIndex": 1,
+      "explanation": "Security Orchestration, Automation, and Response (SOAR) focuses on streamlining and automating IR tasks."
+    },
+    {
+      "id": "sec701_exam_c_031",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Forensics",
+      "subtopic": "Order of Volatility",
+      "objectiveId": "4.5",
+      "difficulty": 3,
+      "question": "When collecting evidence from a running system, which of the following should be collected FIRST?",
+      "answers": [
+        "Hard drive contents",
+        "CPU cache and registers",
+        "System logs",
+        "Backups"
+      ],
+      "correctIndex": 1,
+      "explanation": "Evidence collection follows the order of volatility; the most transient data (cache/registers) must be captured first."
+    },
+    {
+      "id": "sec701_exam_c_032",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Forensics",
+      "subtopic": "Chain of Custody",
+      "objectiveId": "4.5",
+      "difficulty": 2,
+      "question": "What is the primary purpose of a chain of custody document?",
+      "answers": [
+        "To track who has handled evidence to ensure it remains admissible in court",
+        "To list the serial numbers of all seized equipment",
+        "To provide a summary of the forensic findings",
+        "To authorize the start of a forensic investigation"
+      ],
+      "correctIndex": 0,
+      "explanation": "The chain of custody proves that evidence has not been tampered with since collection."
+    },
+    {
+      "id": "sec701_exam_c_033",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Security Operations and Monitoring",
+      "subtopic": "Vulnerability Scanning",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "A vulnerability scanner finds an issue on a server that has already been decommissioned. This is an example of what?",
+      "answers": [
+        "False negative",
+        "False positive",
+        "True positive",
+        "Zero day"
+      ],
+      "correctIndex": 1,
+      "explanation": "A false positive occurs when a tool reports a vulnerability that does not actually exist (or is not applicable)."
+    },
+    {
+      "id": "sec701_exam_c_034",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Security Operations and Monitoring",
+      "subtopic": "Patch Management",
+      "objectiveId": "4.1",
+      "difficulty": 2,
+      "question": "What is the most important step before deploying a security patch to all production systems?",
+      "answers": [
+        "Updating the documentation",
+        "Testing the patch in a non-production environment",
+        "Notifying all end-users",
+        "Scheduling a full system backup"
+      ],
+      "correctIndex": 1,
+      "explanation": "Testing is critical to ensure the patch does not break existing functionality."
+    },
+    {
+      "id": "sec701_exam_c_035",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "subtopic": "Communication",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "question": "Which of the following is an example of an out-of-band communication channel used during an incident?",
+      "answers": [
+        "The company's standard email system",
+        "An encrypted messaging app on separate devices",
+        "The internal help desk ticketing system",
+        "The corporate intranet"
+      ],
+      "correctIndex": 1,
+      "explanation": "Out-of-band communication uses channels not connected to the compromised network to prevent attackers from eavesdropping."
+    },
+    {
+      "id": "sec701_exam_c_036",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Security Monitoring",
+      "subtopic": "Honeypot",
+      "objectiveId": "4.3",
+      "difficulty": 1,
+      "question": "A system specifically designed to attract and trap attackers is known as what?",
+      "answers": [
+        "IDS",
+        "WAF",
+        "Honeypot",
+        "Proxy"
+      ],
+      "correctIndex": 2,
+      "explanation": "A honeypot is a decoy system used to observe attacker behavior and gather intelligence."
+    },
+    {
+      "id": "sec701_exam_c_037",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Security Operations and Monitoring",
+      "subtopic": "SNMP",
+      "objectiveId": "4.3",
+      "difficulty": 2,
+      "question": "Which protocol version is preferred for secure network management and monitoring due to its support for encryption?",
+      "answers": [
+        "SNMPv1",
+        "SNMPv2c",
+        "SNMPv3",
+        "ICMP"
+      ],
+      "correctIndex": 2,
+      "explanation": "SNMPv3 adds encryption and authentication, making it significantly more secure than previous versions."
+    },
+    {
+      "id": "sec701_exam_c_038",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Infrastructure",
+      "subtopic": "Load Balancing",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "question": "Which availability concept distributes incoming requests across multiple servers?",
+      "answers": [
+        "RAID",
+        "Clustering",
+        "Load balancing",
+        "Replication"
+      ],
+      "correctIndex": 2,
+      "explanation": "Load balancers distribute traffic to ensure no single server is overwhelmed and to provide redundancy."
+    },
+    {
+      "id": "sec701_exam_c_039",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Infrastructure",
+      "subtopic": "RAID",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "question": "Which RAID level provides disk mirroring for high availability but no performance gain through striping?",
+      "answers": [
+        "RAID 0",
+        "RAID 1",
+        "RAID 5",
+        "RAID 10"
+      ],
+      "correctIndex": 1,
+      "explanation": "RAID 1 mirrors data across two disks."
+    },
+    {
+      "id": "sec701_exam_c_040",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "subtopic": "Preparation",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "question": "A 'Tabletop Exercise' is most commonly used in which phase of incident response?",
+      "answers": [
+        "Preparation",
+        "Detection",
+        "Containment",
+        "Eradication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tabletop exercises are training and preparation activities to test IR plans."
+    },
+    {
+      "id": "sec701_exam_c_041",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Risk Management",
+      "subtopic": "Risk Appetite",
+      "objectiveId": "5.2",
+      "difficulty": 2,
+      "question": "What term describes the amount of risk an organization is willing to accept to achieve its goals?",
+      "answers": [
+        "Residual risk",
+        "Risk appetite",
+        "Risk tolerance",
+        "Inherent risk"
+      ],
+      "correctIndex": 1,
+      "explanation": "Risk appetite is the high-level description of how much risk an organization is willing to take."
+    },
+    {
+      "id": "sec701_exam_c_042",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Risk Management",
+      "subtopic": "Quantitative Risk",
+      "objectiveId": "5.2",
+      "difficulty": 3,
+      "question": "An asset is worth $100,000. The exposure factor for a fire is 20%. What is the Single Loss Expectancy (SLE)?",
+      "answers": [
+        "$20,000",
+        "$80,000",
+        "$100,000",
+        "$5,000"
+      ],
+      "correctIndex": 0,
+      "explanation": "SLE = Asset Value * Exposure Factor ($100,000 * 0.20 = $20,000)."
+    },
+    {
+      "id": "sec701_exam_c_043",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Governance",
+      "subtopic": "Policies",
+      "objectiveId": "5.1",
+      "difficulty": 1,
+      "question": "Which policy defines the rules for how employees may use company-owned equipment and internet access?",
+      "answers": [
+        "NDA",
+        "AUP",
+        "SLA",
+        "MOU"
+      ],
+      "correctIndex": 1,
+      "explanation": "An Acceptable Use Policy (AUP) outlines the 'do's and don'ts' for using corporate resources."
+    },
+    {
+      "id": "sec701_exam_c_044",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Governance",
+      "subtopic": "Awareness",
+      "objectiveId": "5.1",
+      "difficulty": 1,
+      "question": "What is the most effective way to reduce the success rate of social engineering attacks?",
+      "answers": [
+        "Installing a better firewall",
+        "Implementing stronger encryption",
+        "Security awareness training for employees",
+        "Increasing the frequency of backups"
+      ],
+      "correctIndex": 2,
+      "explanation": "Since social engineering targets people, training is the most effective defense."
+    },
+    {
+      "id": "sec701_exam_c_045",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Governance",
+      "subtopic": "Separation of Duties",
+      "objectiveId": "5.3",
+      "difficulty": 2,
+      "question": "Ensuring that the same person who requests a purchase cannot also approve the payment is an example of what?",
+      "answers": [
+        "Least privilege",
+        "Separation of duties",
+        "Mandatory vacation",
+        "Job rotation"
+      ],
+      "correctIndex": 1,
+      "explanation": "Separation of duties prevents fraud by requiring more than one person to complete a critical task."
+    },
+    {
+      "id": "sec701_exam_c_046",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Third-Party Risk",
+      "subtopic": "Supply Chain",
+      "objectiveId": "5.3",
+      "difficulty": 2,
+      "question": "Which agreement is used to protect sensitive information from being shared by a third-party vendor?",
+      "answers": [
+        "SLA",
+        "NDA",
+        "BPA",
+        "ISA"
+      ],
+      "correctIndex": 1,
+      "explanation": "A Non-Disclosure Agreement (NDA) legally binds parties to secrecy regarding confidential information."
+    },
+    {
+      "id": "sec701_exam_c_047",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Compliance",
+      "subtopic": "Privacy Regulations",
+      "objectiveId": "5.4",
+      "difficulty": 2,
+      "question": "Which regulation provides privacy protections for European Union citizens' personal data?",
+      "answers": [
+        "HIPAA",
+        "PCI DSS",
+        "GDPR",
+        "FISMA"
+      ],
+      "correctIndex": 2,
+      "explanation": "The General Data Protection Regulation (GDPR) is a comprehensive EU privacy law."
+    },
+    {
+      "id": "sec701_exam_c_048",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Compliance",
+      "subtopic": "Industry Standards",
+      "objectiveId": "5.4",
+      "difficulty": 1,
+      "question": "Any organization that handles credit card transactions must comply with which standard?",
+      "answers": [
+        "ISO 27001",
+        "PCI DSS",
+        "SOC 2",
+        "NIST CSF"
+      ],
+      "correctIndex": 1,
+      "explanation": "The Payment Card Industry Data Security Standard (PCI DSS) is mandatory for organizations processing card payments."
+    },
+    {
+      "id": "sec701_exam_c_049",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Governance",
+      "subtopic": "Business Impact Analysis",
+      "objectiveId": "5.2",
+      "difficulty": 3,
+      "question": "What is the primary goal of a Business Impact Analysis (BIA)?",
+      "answers": [
+        "To identify and prioritize critical business functions and their recovery requirements",
+        "To test the organization's disaster recovery site",
+        "To calculate the annual loss expectancy for all risks",
+        "To perform a vulnerability scan of all systems"
+      ],
+      "correctIndex": 0,
+      "explanation": "The BIA determines what is critical and how quickly it must be restored after a disruption."
+    },
+    {
+      "id": "sec701_exam_c_050",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Change Management",
+      "subtopic": "Approvals",
+      "objectiveId": "5.3",
+      "difficulty": 2,
+      "question": "Which group is typically responsible for reviewing and approving major changes in an organization?",
+      "answers": [
+        "The board of directors",
+        "The Change Advisory Board (CAB)",
+        "The incident response team",
+        "The physical security team"
+      ],
+      "correctIndex": 1,
+      "explanation": "The CAB evaluates requested changes for risk and impact before they are implemented."
     }
   ],
-  "questionCount": 150
+  "questionCount": 200
 }
