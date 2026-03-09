@@ -57,7 +57,7 @@ class ShareService {
       final bytes = byteData!.buffer.asUint8List();
 
       final dir = await getTemporaryDirectory();
-      final file = File('${dir.path}/thumbler_${lesson.id}.png');
+      final file = File('${dir.path}/wolf_lab_${lesson.id}.png');
       await file.writeAsBytes(bytes);
 
       await SharePlus.instance.share(

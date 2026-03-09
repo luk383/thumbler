@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:thumbler/features/study/data/deck_pack.dart';
+import 'package:wolf_lab/features/study/data/deck_pack.dart';
 
 void main() {
   test('parses standardized questions-based deck format', () {

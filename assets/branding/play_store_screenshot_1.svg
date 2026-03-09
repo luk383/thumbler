@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1920" width="1080" height="1920">
+
+  <defs>
+    <clipPath id="screen">
+      <rect x="262" y="592" width="556" height="1196" rx="36"/>
+    </clipPath>
+  </defs>
+
+  <!-- ── Canvas background ────────────────────────────────────── -->
+  <rect width="1080" height="1920" fill="#070B12"/>
+
+  <!-- ── Top orange accent bar ───────────────────────────────── -->
+  <rect x="0" y="0" width="1080" height="3" fill="#FF7A00"/>
+
+  <!-- ── WAJE wordmark ─────────────────────────────────────────── -->
+  <text x="540" y="148" text-anchor="middle"
+        font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+        font-size="26" font-weight="900" letter-spacing="14" fill="#FF7A00">WAJE</text>
+
+  <!-- Wordmark underline -->
+  <rect x="496" y="160" width="88" height="2" fill="#FF7A00"/>
+
+  <!-- ── Headline ─────────────────────────────────────────────── -->
+  <text x="540" y="282" text-anchor="middle"
+        font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+        font-size="102" font-weight="900" fill="#FFFFFF">Build Your</text>
+
+  <text x="540" y="398" text-anchor="middle"
+        font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+        font-size="102" font-weight="900" fill="#FF7A00">Engine.</text>
+
+  <!-- ── Subtitle ─────────────────────────────────────────────── -->
+  <text x="540" y="478" text-anchor="middle"
+        font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+        font-size="30" fill="#3E5470">Advanced cycling performance system.</text>
+
+  <!-- ── Phone — outer frame ─────────────────────────────────── -->
+  <rect x="242" y="530" width="596" height="1308" rx="58"
+        fill="#0B1524" stroke="#1B2B40" stroke-width="2"/>
+
+  <!-- ── Phone — screen ──────────────────────────────────────── -->
+  <rect x="262" y="592" width="556" height="1196" rx="36" fill="#070B12"/>
+
+  <!-- Camera pill -->
+  <rect x="451" y="601" width="138" height="22" rx="11" fill="#0B1524"/>
+
+  <!-- Side buttons -->
+  <rect x="238" y="710" width="4" height="58" rx="2" fill="#16253A"/>
+  <rect x="238" y="784" width="4" height="58" rx="2" fill="#16253A"/>
+  <rect x="838" y="748" width="4" height="80" rx="2" fill="#16253A"/>
+
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <!-- Screen content — clipped                                    -->
+  <!-- ════════════════════════════════════════════════════════════ -->
+  <g clip-path="url(#screen)">
+
+    <!-- Status bar -->
+    <text x="282" y="641"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="17" font-weight="600" fill="#687E99">9:41</text>
+    <!-- Battery shell -->
+    <rect x="775" y="628" width="32" height="16" rx="3"
+          fill="none" stroke="#687E99" stroke-width="1.5"/>
+    <rect x="807" y="633" width="4" height="6" rx="1" fill="#687E99"/>
+    <!-- Battery fill (80%) -->
+    <rect x="777" y="630" width="24" height="12" rx="1.5" fill="#687E99"/>
+
+    <!-- App bar -->
+    <rect x="262" y="648" width="556" height="56" fill="#070B12"/>
+    <text x="282" y="686"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="21" font-weight="900" letter-spacing="4" fill="#FF7A00">WAJE</text>
+    <!-- Divider -->
+    <line x1="262" y1="704" x2="818" y2="704" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- ── Card 1: This Week ─────────────────────────────────── -->
+    <rect x="278" y="716" width="524" height="142" rx="12" fill="#0E1626"/>
+
+    <text x="298" y="742"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="12" font-weight="700" letter-spacing="2.5" fill="#3A5068">THIS WEEK</text>
+
+    <!-- Duration -->
+    <text x="372" y="812" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="36" font-weight="700" fill="#FFFFFF">6:40</text>
+    <text x="372" y="836" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="13" fill="#3A5068">Duration</text>
+
+    <!-- TSS (orange highlight) -->
+    <text x="540" y="812" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="36" font-weight="700" fill="#FF7A00">318</text>
+    <text x="540" y="836" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="13" fill="#3A5068">TSS</text>
+
+    <!-- Rides -->
+    <text x="708" y="812" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="36" font-weight="700" fill="#FFFFFF">4</text>
+    <text x="708" y="836" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="13" fill="#3A5068">Rides</text>
+
+    <!-- ── Card 2: Last Session ──────────────────────────────── -->
+    <rect x="278" y="870" width="524" height="206" rx="12" fill="#0E1626"/>
+
+    <text x="298" y="896"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="12" font-weight="700" letter-spacing="2.5" fill="#3A5068">LAST SESSION</text>
+
+    <!-- HARD intensity badge -->
+    <rect x="704" y="878" width="84" height="28" rx="5" fill="#FF7A00"/>
+    <text x="746" y="897" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="12" font-weight="800" fill="#070B12">HARD</text>
+
+    <!-- Session title + date -->
+    <text x="298" y="930"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="17" font-weight="600" fill="#FFFFFF">FIT Import 2025-02-22</text>
+    <text x="298" y="954"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="14" fill="#3A5068">Sat Feb 22</text>
+
+    <!-- Session metrics -->
+    <!-- Duration -->
+    <text x="372" y="1012" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="30" font-weight="700" fill="#FFFFFF">2:05</text>
+    <text x="372" y="1034" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="13" fill="#3A5068">Duration</text>
+
+    <!-- IF (orange) -->
+    <text x="540" y="1012" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="30" font-weight="700" fill="#FF7A00">0.87</text>
+    <text x="540" y="1034" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="13" fill="#3A5068">IF</text>
+
+    <!-- TSS -->
+    <text x="708" y="1012" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="30" font-weight="700" fill="#FFFFFF">142</text>
+    <text x="708" y="1034" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="13" fill="#3A5068">TSS</text>
+
+    <!-- ── Card 3: Next 7 Days ───────────────────────────────── -->
+    <rect x="278" y="1088" width="524" height="374" rx="12" fill="#0E1626"/>
+
+    <text x="298" y="1114"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="12" font-weight="700" letter-spacing="2.5" fill="#3A5068">NEXT 7 DAYS</text>
+
+    <!-- Row: Mon Feb 24 -->
+    <text x="298" y="1150"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Mon Feb 24</text>
+    <text x="522" y="1150"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#FFFFFF">Endurance</text>
+    <line x1="298" y1="1162" x2="782" y2="1162" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Row: Tue Feb 25 -->
+    <text x="298" y="1194"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Tue Feb 25</text>
+    <text x="522" y="1194"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#FFFFFF">Recovery</text>
+    <line x1="298" y1="1206" x2="782" y2="1206" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Row: Wed Feb 26 -->
+    <text x="298" y="1238"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Wed Feb 26</text>
+    <text x="522" y="1238"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#FFFFFF">Threshold</text>
+    <line x1="298" y1="1250" x2="782" y2="1250" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Row: Thu Feb 27 -->
+    <text x="298" y="1282"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Thu Feb 27</text>
+    <text x="522" y="1282"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#FFFFFF">Rest</text>
+    <line x1="298" y1="1294" x2="782" y2="1294" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Row: Fri Feb 28 -->
+    <text x="298" y="1326"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Fri Feb 28</text>
+    <text x="522" y="1326"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" font-weight="600" fill="#FF7A00">Hard</text>
+    <line x1="298" y1="1338" x2="782" y2="1338" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Row: Sat Mar 1 -->
+    <text x="298" y="1370"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Sat Mar 1</text>
+    <text x="522" y="1370"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#FFFFFF">Long Ride</text>
+    <line x1="298" y1="1382" x2="782" y2="1382" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Row: Sun Mar 2 -->
+    <text x="298" y="1414"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#5A7292">Sun Mar 2</text>
+    <text x="522" y="1414"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="15" fill="#FFFFFF">Rest</text>
+
+    <!-- ── Bottom nav bar ──────────────────────────────────────── -->
+    <rect x="262" y="1736" width="556" height="52" fill="#0B1524"/>
+    <line x1="262" y1="1736" x2="818" y2="1736" stroke="#111D2B" stroke-width="1"/>
+
+    <!-- Active indicator pill (Home) -->
+    <rect x="312" y="1740" width="66" height="34" rx="17" fill="#FF7A00" opacity="0.15"/>
+
+    <!-- Home icon (active, orange) — centered x=345 -->
+    <!-- Roof -->
+    <polygon points="345,1748 327,1762 363,1762" fill="#FF7A00"/>
+    <!-- Body -->
+    <rect x="333" y="1760" width="24" height="16" rx="2" fill="#FF7A00"/>
+    <!-- Door -->
+    <rect x="340" y="1766" width="10" height="10" rx="1" fill="#0B1524"/>
+    <!-- Label -->
+    <text x="345" y="1784" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="11" fill="#FF7A00">Home</text>
+
+    <!-- Training icon (bar chart, inactive) — x=475 -->
+    <rect x="463" y="1760" width="8" height="14" rx="1.5" fill="#253548"/>
+    <rect x="474" y="1752" width="8" height="22" rx="1.5" fill="#253548"/>
+    <rect x="485" y="1756" width="8" height="18" rx="1.5" fill="#253548"/>
+    <text x="479" y="1784" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="11" fill="#253548">Training</text>
+
+    <!-- Trips icon (calendar, inactive) — x=605 -->
+    <rect x="592" y="1749" width="26" height="24" rx="3"
+          fill="none" stroke="#253548" stroke-width="1.8"/>
+    <line x1="596" y1="1745" x2="596" y2="1753" stroke="#253548" stroke-width="1.8"/>
+    <line x1="614" y1="1745" x2="614" y2="1753" stroke="#253548" stroke-width="1.8"/>
+    <line x1="592" y1="1757" x2="618" y2="1757" stroke="#253548" stroke-width="1.2"/>
+    <rect x="595" y="1761" width="5" height="5" rx="1" fill="#253548"/>
+    <rect x="604" y="1761" width="5" height="5" rx="1" fill="#253548"/>
+    <text x="605" y="1784" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="11" fill="#253548">Trips</text>
+
+    <!-- Settings icon (gear, inactive) — x=735 -->
+    <circle cx="735" cy="1762" r="11" fill="none" stroke="#253548" stroke-width="1.8"/>
+    <circle cx="735" cy="1762" r="4" fill="#253548"/>
+    <!-- Gear teeth (4) -->
+    <rect x="732" y="1748" width="6" height="5" rx="1" fill="#253548"/>
+    <rect x="732" y="1771" width="6" height="5" rx="1" fill="#253548"/>
+    <rect x="721" y="1759" width="5" height="6" rx="1" fill="#253548"/>
+    <rect x="744" y="1759" width="5" height="6" rx="1" fill="#253548"/>
+    <text x="735" y="1784" text-anchor="middle"
+          font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+          font-size="11" fill="#253548">Settings</text>
+
+    <!-- Home indicator bar -->
+    <rect x="430" y="1782" width="200" height="4" rx="2" fill="#1C2D40"/>
+
+  </g>
+
+  <!-- ── Bottom tag ─────────────────────────────────────────────── -->
+  <text x="540" y="1900" text-anchor="middle"
+        font-family="system-ui, -apple-system, Helvetica, Arial, sans-serif"
+        font-size="20" fill="#192436">waje.app</text>
+
+</svg>

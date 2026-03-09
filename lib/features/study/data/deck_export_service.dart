@@ -26,7 +26,7 @@ class DeckExportService {
       ShareParams(
         files: [XFile(file.path)],
         subject: meta.title,
-        text: 'Thumbler deck: ${meta.title}',
+        text: 'Wolf Lab deck: ${meta.title}',
       ),
     );
   }
@@ -37,7 +37,7 @@ class DeckExportService {
       ShareParams(
         files: [XFile(file.path)],
         subject: '${meta.title} JSON export',
-        text: 'Exported Thumbler deck JSON: ${meta.title}',
+        text: 'Exported Wolf Lab deck JSON: ${meta.title}',
       ),
     );
   }

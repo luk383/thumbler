@@ -6,14 +6,14 @@ import 'router.dart';
 import 'settings/app_settings.dart';
 import 'theme/app_theme.dart';
 
-class ThumblerApp extends ConsumerWidget {
-  const ThumblerApp({super.key});
+class WolfLabApp extends ConsumerWidget {
+  const WolfLabApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(appSettingsProvider);
     return MaterialApp.router(
-      title: 'Thumbler',
+      title: 'Wolf Lab',
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,

@@ -1,6 +1,6 @@
 import AppKit
 
-let outputPath = CommandLine.arguments.dropFirst().first ?? "assets/branding/thumbler_app_icon_master.png"
+let outputPath = CommandLine.arguments.dropFirst().first ?? "assets/branding/wolf_lab_app_icon_master.png"
 let size = CGSize(width: 1024, height: 1024)
 
 let image = NSImage(size: size)

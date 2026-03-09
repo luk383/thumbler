@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:thumbler/features/bookmarks/data/bookmarks_repository.dart';
+import 'package:wolf_lab/features/bookmarks/data/bookmarks_repository.dart';
 
 void main() {
   late Box box;
@@ -10,7 +10,7 @@ void main() {
   late Directory hiveDir;
 
   setUp(() async {
-    hiveDir = await Directory.systemTemp.createTemp('thumbler_bookmarks_test');
+    hiveDir = await Directory.systemTemp.createTemp('wolf_lab_bookmarks_test');
     Hive.init(hiveDir.path);
     box = await Hive.openBox('bookmarks_test_box');
     repository = HiveBookmarksRepository(box);

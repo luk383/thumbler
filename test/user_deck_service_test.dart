@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:thumbler/features/study/data/deck_pack.dart';
-import 'package:thumbler/features/study/data/user_deck_service.dart';
-import 'package:thumbler/features/study/domain/user_deck_draft.dart';
+import 'package:wolf_lab/features/study/data/deck_pack.dart';
+import 'package:wolf_lab/features/study/data/user_deck_service.dart';
+import 'package:wolf_lab/features/study/domain/user_deck_draft.dart';
 
 void main() {
   const service = UserDeckService();

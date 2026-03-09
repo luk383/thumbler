@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:thumbler/app/l10n/app_localizations.dart';
-import 'package:thumbler/features/feed/domain/lesson.dart';
-import 'package:thumbler/features/feed/presentation/widgets/feed_overlay.dart';
-import 'package:thumbler/features/growth/daily_quest/daily_quest_state.dart';
-import 'package:thumbler/features/growth/streak/streak_state.dart';
+import 'package:wolf_lab/app/l10n/app_localizations.dart';
+import 'package:wolf_lab/features/feed/domain/lesson.dart';
+import 'package:wolf_lab/features/feed/presentation/widgets/feed_overlay.dart';
+import 'package:wolf_lab/features/growth/daily_quest/daily_quest_state.dart';
+import 'package:wolf_lab/features/growth/streak/streak_state.dart';
 
 void main() {
   const l10n = AppLocalizations(Locale('en'));

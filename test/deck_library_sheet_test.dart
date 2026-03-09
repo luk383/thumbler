@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:thumbler/app/l10n/app_localizations.dart';
-import 'package:thumbler/features/study/data/deck_pack.dart';
-import 'package:thumbler/features/study/presentation/controllers/deck_library_controller.dart';
-import 'package:thumbler/features/study/presentation/widgets/deck_library_sheet.dart';
+import 'package:wolf_lab/app/l10n/app_localizations.dart';
+import 'package:wolf_lab/features/study/data/deck_pack.dart';
+import 'package:wolf_lab/features/study/presentation/controllers/deck_library_controller.dart';
+import 'package:wolf_lab/features/study/presentation/widgets/deck_library_sheet.dart';
 
 void main() {
   testWidgets('featured excludes active deck already shown in continue learning', (

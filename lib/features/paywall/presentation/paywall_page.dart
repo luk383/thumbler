@@ -33,7 +33,7 @@ class PaywallPage extends ConsumerWidget {
   const PaywallPage({
     super.key,
     this.featureName,
-    this.title = 'Unlock Thumbler Pro',
+    this.title = 'Unlock Wolf Lab Pro',
     this.subtitle,
   });
 
@@ -54,7 +54,7 @@ class PaywallPage extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(20, 20, 20, 36),
           children: [
             AppPageIntro(
-              title: title == 'Unlock Thumbler Pro' ? l10n.paywallTitle : title,
+              title: title == 'Unlock Wolf Lab Pro' ? l10n.paywallTitle : title,
               subtitle: subtitle ?? l10n.paywallSubtitle(featureLabel),
               trailing: AppStatusBadge(
                 label: isPro ? l10n.paywallProActive : l10n.paywallProFeature,

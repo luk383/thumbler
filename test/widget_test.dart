@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:thumbler/features/feed/domain/lesson.dart';
-import 'package:thumbler/features/share/share_card_widget.dart';
+import 'package:wolf_lab/features/feed/domain/lesson.dart';
+import 'package:wolf_lab/features/share/share_card_widget.dart';
 
 void main() {
   testWidgets('Share card renders lesson content and branding', (tester) async {
@@ -27,6 +27,6 @@ void main() {
       find.text('Use unique passwords for every critical account.'),
       findsOneWidget,
     );
-    expect(find.text('Thumbler'), findsOneWidget);
+    expect(find.text('Wolf Lab'), findsOneWidget);
   });
 }

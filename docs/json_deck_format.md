@@ -1,6 +1,6 @@
-# Thumbler JSON Deck Format
+# Wolf Lab JSON Deck Format
 
-Thumbler supports a standardized local deck format with backward compatibility
+Wolf Lab supports a standardized local deck format with backward compatibility
 for older list-based packs and legacy `items` wrappers.
 
 ## Preferred Root Shape
@@ -44,7 +44,7 @@ for older list-based packs and legacy `items` wrappers.
 ## Reference Implementation
 
 The Security+ SY0-701 deck set is the canonical reference for the standardized
-Thumbler format. Use these files as the source of truth when authoring new exam
+Wolf Lab format. Use these files as the source of truth when authoring new exam
 or subject decks:
 
 - `assets/decks/sec701_exam_pack_20.json`
@@ -87,7 +87,7 @@ number of entries in `questions`/`items`.
 
 ## Backward Compatibility
 
-Thumbler still accepts:
+Wolf Lab still accepts:
 
 1. a raw JSON array of questions/items
 2. legacy wrapped packs using:

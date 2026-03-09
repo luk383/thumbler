@@ -40,11 +40,11 @@ class PrivacyPolicyPage extends StatelessWidget {
             title: 'No Personal Data Collected',
             titleIt: 'Nessun dato personale raccolto',
             body:
-                'Thumbler does not collect, process, or share any personal '
+                'Wolf Lab does not collect, process, or share any personal '
                 'information. No account registration is required. '
                 'No email addresses, names, or device identifiers are collected.',
             bodyIt:
-                'Thumbler non raccoglie, elabora o condivide alcuna informazione personale. '
+                'Wolf Lab non raccoglie, elabora o condivide alcuna informazione personale. '
                 'Non e richiesta alcuna registrazione. '
                 'Non vengono raccolti indirizzi email, nomi o identificatori del dispositivo.',
           ),
@@ -53,10 +53,10 @@ class PrivacyPolicyPage extends StatelessWidget {
             title: 'Analytics & Tracking',
             titleIt: 'Analytics e tracciamento',
             body:
-                'Thumbler does not use any analytics, advertising, or tracking SDKs. '
+                'Wolf Lab does not use any analytics, advertising, or tracking SDKs. '
                 'No third-party trackers are present in this application.',
             bodyIt:
-                'Thumbler non utilizza analytics, pubblicita o SDK di tracciamento. '
+                'Wolf Lab non utilizza analytics, pubblicita o SDK di tracciamento. '
                 'Non sono presenti tracker di terze parti in questa applicazione.',
           ),
           const SizedBox(height: 14),
@@ -66,12 +66,12 @@ class PrivacyPolicyPage extends StatelessWidget {
             body:
                 'Purchase transactions are handled by Apple App Store / Google Play '
                 'and RevenueCat. These services have their own privacy policies. '
-                'Thumbler only receives confirmation of your subscription status — '
+                'Wolf Lab only receives confirmation of your subscription status — '
                 'no payment details are accessible to the app.',
             bodyIt:
                 'Le transazioni di acquisto sono gestite da Apple App Store / Google Play '
                 'e RevenueCat. Questi servizi hanno le proprie informative sulla privacy. '
-                'Thumbler riceve solo la conferma dello stato del tuo abbonamento — '
+                'Wolf Lab riceve solo la conferma dello stato del tuo abbonamento — '
                 'nessun dato di pagamento e accessibile all\'app.',
           ),
           const SizedBox(height: 14),
@@ -92,9 +92,9 @@ class PrivacyPolicyPage extends StatelessWidget {
             title: 'Contact',
             titleIt: 'Contatti',
             body:
-                'For any privacy-related question, contact us at: privacy@thumbler.app',
+                'For any privacy-related question, contact us at: privacy@wolf_lab.app',
             bodyIt:
-                'Per qualsiasi domanda sulla privacy, contattaci a: privacy@thumbler.app',
+                'Per qualsiasi domanda sulla privacy, contattaci a: privacy@wolf_lab.app',
           ),
           const SizedBox(height: 24),
           Text(

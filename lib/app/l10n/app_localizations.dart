@@ -23,7 +23,7 @@ class AppLocalizations {
 
   bool get isItalian => locale.languageCode == 'it';
 
-  String get appTitle => isItalian ? 'Thumbler' : 'Thumbler';
+  String get appTitle => isItalian ? 'Wolf Lab' : 'Wolf Lab';
   String get navFeed => isItalian ? 'Feed' : 'Feed';
   String get navStudy => isItalian ? 'Studio' : 'Study';
   String get navExam => isItalian ? 'Esame' : 'Exam';
@@ -55,7 +55,7 @@ class AppLocalizations {
       : 'No setup friction. Just one useful question at a time.';
 
   String get paywallTitle =>
-      isItalian ? 'Sblocca Thumbler Pro' : 'Unlock Thumbler Pro';
+      isItalian ? 'Sblocca Wolf Lab Pro' : 'Unlock Wolf Lab Pro';
   String paywallSubtitle(String feature) => isItalian
       ? '$feature fa parte del piano Pro. La versione gratuita resta centrata sul Feed quotidiano e su argomenti ampi.'
       : '$feature is part of the Pro plan. The free app stays focused on the daily Feed and broad learning topics.';
@@ -216,8 +216,8 @@ class AppLocalizations {
   String get examModeProTitle =>
       isItalian ? 'La modalità esame è Pro' : 'Exam mode is Pro';
   String get examModeProSubtitle => isItalian
-      ? 'Il lancio pubblico di Thumbler resta gratuito attorno al Feed e ai topic generali. Le sessioni esame a tempo si sbloccano con Pro.'
-      : 'The public launch keeps Thumbler free around the Feed and broad topic decks. Timed exam runs unlock with Pro.';
+      ? 'Il lancio pubblico di Wolf Lab resta gratuito attorno al Feed e ai topic generali. Le sessioni esame a tempo si sbloccano con Pro.'
+      : 'The public launch keeps Wolf Lab free around the Feed and broad topic decks. Timed exam runs unlock with Pro.';
   String get examTitle => isItalian ? 'Esame' : 'Exam';
   String examQuestionsAvailable(int count) => isItalian
       ? '$count domande esame disponibili'

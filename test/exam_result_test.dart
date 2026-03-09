@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:thumbler/features/exam/domain/exam_attempt.dart';
-import 'package:thumbler/features/exam/domain/exam_result.dart';
-import 'package:thumbler/features/study/domain/study_item.dart';
+import 'package:wolf_lab/features/exam/domain/exam_attempt.dart';
+import 'package:wolf_lab/features/exam/domain/exam_result.dart';
+import 'package:wolf_lab/features/study/domain/study_item.dart';
 
 void main() {
   test('ExamResult.fromAttempt computes score, wrong ids, and weakest domain', () {

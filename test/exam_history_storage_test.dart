@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:thumbler/features/exam/data/exam_attempt_storage.dart';
-import 'package:thumbler/features/exam/data/exam_history_storage.dart';
-import 'package:thumbler/features/exam/domain/exam_attempt.dart';
-import 'package:thumbler/features/exam/domain/exam_result.dart';
+import 'package:wolf_lab/features/exam/data/exam_attempt_storage.dart';
+import 'package:wolf_lab/features/exam/data/exam_history_storage.dart';
+import 'package:wolf_lab/features/exam/domain/exam_attempt.dart';
+import 'package:wolf_lab/features/exam/domain/exam_result.dart';
 
 void main() {
   late Directory hiveDir;
@@ -14,7 +14,7 @@ void main() {
   late ExamHistoryStorage resultStorage;
 
   setUp(() async {
-    hiveDir = await Directory.systemTemp.createTemp('thumbler_exam_history');
+    hiveDir = await Directory.systemTemp.createTemp('wolf_lab_exam_history');
     Hive.init(hiveDir.path);
     examBox = await Hive.openBox(ExamAttemptStorage.boxName);
     attemptStorage = ExamAttemptStorage();

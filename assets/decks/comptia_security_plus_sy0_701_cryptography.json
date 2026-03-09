@@ -1,0 +1,79 @@
+{
+  "id": "comptia_security_plus_sy0_701_cryptography",
+  "title": "CompTIA Security+ Cryptography",
+  "examCode": "SY0-701",
+  "category": "Cybersecurity",
+  "description": "Cryptography concepts, encryption, and digital signatures for Security+.",
+  "version": "1",
+  "domains": [
+    "General Security Concepts",
+    "Security Architecture"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "sec701_crypto_001",
+      "domain": "General Security Concepts",
+      "question": "What is cryptography?",
+      "answers": ["Building strong walls", "The practice of securing information by transforming it into an unreadable format using algorithms and keys", "A way to backup data", "A type of physical lock"],
+      "correctIndex": 1,
+      "explanation": "Cryptography secures information by transforming it into an unreadable format."
+    },
+    {
+      "id": "sec701_crypto_002",
+      "domain": "General Security Concepts",
+      "question": "What is encryption?",
+      "answers": ["A process of compressing files", "The process of converting plaintext into ciphertext to protect data confidentiality", "A way to delete files", "A method for internet connection"],
+      "correctIndex": 1,
+      "explanation": "Encryption converts plaintext to ciphertext for confidentiality."
+    },
+    {
+      "id": "sec701_crypto_003",
+      "domain": "General Security Concepts",
+      "question": "What is decryption?",
+      "answers": ["A way to hide files", "The process of converting ciphertext back into plaintext", "A process of adding a password", "A method for sending emails"],
+      "correctIndex": 1,
+      "explanation": "Decryption converts ciphertext back to plaintext."
+    },
+    {
+      "id": "sec701_crypto_004",
+      "domain": "General Security Concepts",
+      "question": "What is plaintext?",
+      "answers": ["Encrypted data", "Readable, unencrypted data", "A type of paper", "A basic operating system"],
+      "correctIndex": 1,
+      "explanation": "Plaintext is readable, unencrypted data."
+    },
+    {
+      "id": "sec701_crypto_005",
+      "domain": "General Security Concepts",
+      "question": "What is ciphertext?",
+      "answers": ["Readable data", "Encrypted unreadable data", "A code for software", "A list of passwords"],
+      "correctIndex": 1,
+      "explanation": "Ciphertext is encrypted, unreadable data."
+    },
+    {
+      "id": "sec701_crypto_010",
+      "domain": "General Security Concepts",
+      "question": "What is a hashing algorithm?",
+      "answers": ["A tool for cutting data", "A one-way cryptographic function that converts data into a fixed-length hash value", "A method to compress files", "A two-way encryption"],
+      "correctIndex": 1,
+      "explanation": "Hashing is a one-way function producing a fixed-length value."
+    },
+    {
+      "id": "sec701_crypto_012",
+      "domain": "General Security Concepts",
+      "question": "What is the purpose of hashing?",
+      "answers": ["To ensure confidentiality", "To ensure data integrity", "To encrypt passwords", "To speed up internet"],
+      "correctIndex": 1,
+      "explanation": "The primary purpose of hashing is to ensure data integrity."
+    },
+    {
+      "id": "sec701_crypto_014",
+      "domain": "General Security Concepts",
+      "question": "What is a digital signature?",
+      "answers": ["A signature on a screen", "A cryptographic method used to verify the authenticity and integrity of a message", "A scanned handwritten signature", "A type of password"],
+      "correctIndex": 1,
+      "explanation": "Digital signatures verify authenticity and integrity."
+    }
+  ]
+}

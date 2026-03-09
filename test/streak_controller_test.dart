@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive/hive.dart';
-import 'package:thumbler/features/growth/streak/streak_controller.dart';
-import 'package:thumbler/features/growth/streak/streak_state.dart';
+import 'package:wolf_lab/features/growth/streak/streak_controller.dart';
+import 'package:wolf_lab/features/growth/streak/streak_state.dart';
 
 class _TestStreakNotifier extends StreakNotifier {
   _TestStreakNotifier(this._now);
@@ -27,7 +27,7 @@ void main() {
   late NotifierProvider<_TestStreakNotifier, StreakState> provider;
 
   setUp(() async {
-    tempDir = await Directory.systemTemp.createTemp('thumbler_streak_test');
+    tempDir = await Directory.systemTemp.createTemp('wolf_lab_streak_test');
     Hive.init(tempDir.path);
     box = await Hive.openBox('streak_box');
     await box.clear();

@@ -28,5 +28,5 @@ Future<void> main() async {
 
   await configureRevenueCat();
 
-  runApp(const ProviderScope(child: ThumblerApp()));
+  runApp(const ProviderScope(child: WolfLabApp()));
 }

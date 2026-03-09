@@ -65,7 +65,7 @@ class ShareCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'Thumbler',
+                  'Wolf Lab',
                   style: TextStyle(
                     color: Color(0xFF6C63FF),
                     fontSize: 13,

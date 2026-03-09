@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:thumbler/features/analytics/domain/progress_analytics.dart';
-import 'package:thumbler/features/exam/domain/exam_result.dart';
-import 'package:thumbler/features/study/domain/study_item.dart';
+import 'package:wolf_lab/features/analytics/domain/progress_analytics.dart';
+import 'package:wolf_lab/features/exam/domain/exam_result.dart';
+import 'package:wolf_lab/features/study/domain/study_item.dart';
 
 void main() {
   test('buildProgressAnalytics aggregates study stats, domains, and exams', () {

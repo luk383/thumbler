@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:thumbler/features/feed/data/feed_selection_service.dart';
-import 'package:thumbler/features/feed/data/feed_session_memory.dart';
-import 'package:thumbler/features/feed/data/lesson_repository.dart';
-import 'package:thumbler/features/study/data/deck_pack.dart';
-import 'package:thumbler/features/study/domain/study_item.dart';
+import 'package:wolf_lab/features/feed/data/feed_selection_service.dart';
+import 'package:wolf_lab/features/feed/data/feed_session_memory.dart';
+import 'package:wolf_lab/features/feed/data/lesson_repository.dart';
+import 'package:wolf_lab/features/study/data/deck_pack.dart';
+import 'package:wolf_lab/features/study/domain/study_item.dart';
 
 void main() {
   const service = SmartFeedSelectionService();
