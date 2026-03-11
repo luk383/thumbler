@@ -48,10 +48,13 @@ class UserDeckService {
         fallbackCategory;
 
     final normalizedQuestions = <UserDeckQuestionDraft>[];
+    final errors = <String>[];
+
     for (var i = 0; i < questions.length; i++) {
       final rawQuestion = questions[i];
       if (rawQuestion is! Map<String, dynamic>) {
-        throw FormatException('Question ${i + 1} must be an object');
+        errors.add('Question ${i + 1} is not a valid object');
+        continue;
       }
 
       final questionText =
@@ -60,18 +63,27 @@ class UserDeckService {
       final answers = _stringList(
         rawQuestion['answers'] ?? rawQuestion['options'],
       );
-      final correctIndex = _intValue(
-        rawQuestion['correctIndex'] ?? rawQuestion['correctAnswerIndex'],
-      );
+      
+      int? correctIndex;
+      try {
+        correctIndex = _intValue(
+          rawQuestion['correctIndex'] ?? rawQuestion['correctAnswerIndex'],
+        );
+      } catch (_) {
+        // Fallback or skip if correct index is missing/invalid
+      }
 
       if (questionText == null) {
-        throw FormatException('Question ${i + 1} is missing "question"');
+        errors.add('Question ${i + 1} is missing "question" text');
+        continue;
       }
-      if (answers.length != 4) {
-        throw FormatException('Question ${i + 1} must have exactly 4 answers');
+      if (answers.length < 2) {
+        errors.add('Question ${i + 1} must have at least 2 answers (found ${answers.length})');
+        continue;
       }
-      if (correctIndex < 0 || correctIndex >= answers.length) {
-        throw FormatException('Question ${i + 1} has an invalid correctIndex');
+      if (correctIndex == null || correctIndex < 0 || correctIndex >= answers.length) {
+        errors.add('Question ${i + 1} has an invalid or missing correct index ($correctIndex)');
+        continue;
       }
 
       normalizedQuestions.add(
@@ -90,6 +102,13 @@ class UserDeckService {
               category,
         ),
       );
+    }
+
+    if (normalizedQuestions.isEmpty) {
+      if (errors.isNotEmpty) {
+        throw FormatException('Failed to import any questions:\n${errors.take(3).join('\n')}');
+      }
+      throw const FormatException('No valid questions found in the JSON file');
     }
 
     return UserDeckDraft(

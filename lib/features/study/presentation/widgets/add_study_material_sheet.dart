@@ -44,26 +44,40 @@ Future<void> importJsonDeck(
     Navigator.of(context).pop();
   }
   try {
+    debugPrint('[Import] Starting file pick...');
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: const ['json'],
       withData: true,
     );
+    debugPrint('[Import] Picker returned. Result null? ${result == null}');
+    
     final file = result?.files.single;
-    if (file == null) return;
+    if (file == null) {
+      debugPrint('[Import] No file selected.');
+      return;
+    }
+    debugPrint('[Import] Selected: ${file.name}, path: ${file.path}, size: ${file.size}');
 
     final bytes =
         file.bytes ??
         (file.path == null ? null : await File(file.path!).readAsBytes());
+    
+    debugPrint('[Import] Bytes read? ${bytes != null}, length: ${bytes?.length}');
+    
     if (bytes == null || bytes.isEmpty) {
       throw const FormatException('Unable to read the selected JSON file');
     }
 
     final raw = utf8.decode(bytes);
+    debugPrint('[Import] Decoded JSON string length: ${raw.length}');
+    
     final draft = const UserDeckService().normalizeImportedJson(
       raw,
       fallbackCategory: 'Imported Deck',
     );
+    debugPrint('[Import] Normalized draft: ${draft.title} (${draft.questions.length} questions)');
+    
     await const UserDeckService().saveDeck(draft);
     await ref.read(deckLibraryProvider.notifier).discoverPacks();
 
@@ -74,7 +88,9 @@ Future<void> importJsonDeck(
         backgroundColor: const Color(0xFF0D8B5F),
       ),
     );
-  } catch (error) {
+  } catch (error, stackTrace) {
+    debugPrint('[Import] ERROR: $error');
+    debugPrint('[Import] STACK: $stackTrace');
     if (!context.mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -141,41 +157,43 @@ class _AddStudyMaterialSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            AppPageIntro(
-              title: l10n.addStudyMaterialTitle,
-              subtitle: l10n.addStudyMaterialSubtitle,
-            ),
-            const SizedBox(height: 16),
-            _OptionCard(
-              icon: Icons.note_alt_outlined,
-              title: 'Generate from Notes or Text',
-              subtitle:
-                  'Paste notes or upload a PDF, then review generated questions before saving.',
-              onTap: () => _openGenerate(context),
-            ),
-            const SizedBox(height: 12),
-            _OptionCard(
-              icon: Icons.edit_note_outlined,
-              title: 'Create Deck Manually',
-              subtitle:
-                  'Write your own deck title, questions, answers, and explanations from scratch.',
-              onTap: () => _openManual(context),
-            ),
-            const SizedBox(height: 12),
-            _OptionCard(
-              icon: Icons.file_upload_outlined,
-              title: 'Import JSON Deck',
-              subtitle:
-                  'Choose a local JSON deck file, validate it, and add it straight to your library.',
-              onTap: () => _importJson(context),
-            ),
-          ],
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 28),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              AppPageIntro(
+                title: l10n.addStudyMaterialTitle,
+                subtitle: l10n.addStudyMaterialSubtitle,
+              ),
+              const SizedBox(height: 16),
+              _OptionCard(
+                icon: Icons.note_alt_outlined,
+                title: 'Generate from Notes or Text',
+                subtitle:
+                    'Paste notes or upload a PDF, then review generated questions before saving.',
+                onTap: () => _openGenerate(context),
+              ),
+              const SizedBox(height: 12),
+              _OptionCard(
+                icon: Icons.edit_note_outlined,
+                title: 'Create Deck Manually',
+                subtitle:
+                    'Write your own deck title, questions, answers, and explanations from scratch.',
+                onTap: () => _openManual(context),
+              ),
+              const SizedBox(height: 12),
+              _OptionCard(
+                icon: Icons.file_upload_outlined,
+                title: 'Import JSON Deck',
+                subtitle:
+                    'Choose a local JSON deck file, validate it, and add it straight to your library.',
+                onTap: () => _importJson(context),
+              ),
+            ],
+          ),
         ),
       ),
     );

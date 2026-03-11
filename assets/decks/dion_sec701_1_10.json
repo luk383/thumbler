@@ -1,0 +1,3732 @@
+{
+  "id": "dion_sec701_sections_1_10",
+  "title": "Security+ SY0-701 (Dion Sections 1-10)",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "questions": [
+    {
+      "id": "q1",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the primary goal of the CompTIA Security+ SY0-701 exam?",
+      "answers": [
+        "To validate baseline security skills",
+        "To become a professional hacker",
+        "To learn how to code in C++",
+        "To manage a large data center"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Security+ exam validates the baseline skills necessary to perform core security functions and pursue an IT security career."
+    },
+    {
+      "id": "q2",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which domain in SY0-701 covers CIA and AAA concepts?",
+      "answers": [
+        "General Security Concepts",
+        "Threats, Attacks, and Vulnerabilities",
+        "Security Architecture",
+        "Security Operations"
+      ],
+      "correctIndex": 0,
+      "explanation": "General Security Concepts (Domain 1.0) covers foundational elements like CIA, AAA, and security controls."
+    },
+    {
+      "id": "q3",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What does the 'I' in the CIA triad stand for?",
+      "answers": [
+        "Integrity",
+        "Identification",
+        "Information",
+        "Infrastructure"
+      ],
+      "correctIndex": 0,
+      "explanation": "The CIA triad consists of Confidentiality, Integrity, and Availability."
+    },
+    {
+      "id": "q4",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the focus of Section 2 in Jason Dion's course?",
+      "answers": [
+        "Fundamentals of Security",
+        "Malware",
+        "Cloud Security",
+        "Governance"
+      ],
+      "correctIndex": 0,
+      "explanation": "Section 2 focuses on the fundamentals of security, including core concepts like CIA and AAA."
+    },
+    {
+      "id": "q5",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Why is the SY0-701 version different from previous versions?",
+      "answers": [
+        "Updated for modern threats and technologies",
+        "It is shorter",
+        "It only covers hardware",
+        "It is easier"
+      ],
+      "correctIndex": 0,
+      "explanation": "CompTIA updates the exam every 3 years to reflect current industry trends, modern threats, and new technologies."
+    },
+    {
+      "id": "q6",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which CIA triad member ensures that data is not modified by unauthorized users?",
+      "answers": [
+        "Integrity",
+        "Confidentiality",
+        "Availability",
+        "Authentication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Integrity ensures that data remains accurate and has not been altered by unauthorized parties."
+    },
+    {
+      "id": "q7",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "An attacker uses a DoS attack to take down a website. Which CIA triad member is being targeted?",
+      "answers": [
+        "Availability",
+        "Confidentiality",
+        "Integrity",
+        "Non-repudiation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Availability ensures that systems and data are accessible when needed. A DoS attack directly impacts this."
+    },
+    {
+      "id": "q8",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Encryption of data at rest primarily protects which part of the CIA triad?",
+      "answers": [
+        "Confidentiality",
+        "Integrity",
+        "Availability",
+        "Authorization"
+      ],
+      "correctIndex": 0,
+      "explanation": "Encryption ensures that only authorized users can read the data, protecting its confidentiality."
+    },
+    {
+      "id": "q9",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What does AAA stand for in security?",
+      "answers": [
+        "Authentication, Authorization, Accounting",
+        "Access, Audit, Action",
+        "Always Available Assets",
+        "Authentication, Application, Audit"
+      ],
+      "correctIndex": 0,
+      "explanation": "AAA stands for Authentication (proving who you are), Authorization (what you can do), and Accounting (logging what you did)."
+    },
+    {
+      "id": "q10",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which AAA component tracks user activity on a system?",
+      "answers": [
+        "Accounting",
+        "Authentication",
+        "Authorization",
+        "Auditing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Accounting (often called auditing) involves logging and tracking user actions for security and compliance."
+    },
+    {
+      "id": "q11",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A user provides a username and a password. Which AAA process are they performing?",
+      "answers": [
+        "Authentication",
+        "Authorization",
+        "Accounting",
+        "Non-repudiation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Providing credentials to prove identity is the Authentication phase."
+    },
+    {
+      "id": "q12",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Granting a user 'Read-Only' access to a folder is an example of which AAA process?",
+      "answers": [
+        "Authorization",
+        "Authentication",
+        "Accounting",
+        "Identification"
+      ],
+      "correctIndex": 0,
+      "explanation": "Authorization determines the permissions and access levels granted to an authenticated user."
+    },
+    {
+      "id": "q13",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What concept ensures that a sender cannot deny sending a message?",
+      "answers": [
+        "Non-repudiation",
+        "Confidentiality",
+        "Integrity",
+        "Availability"
+      ],
+      "correctIndex": 0,
+      "explanation": "Non-repudiation provides proof of the origin and delivery of data so the sender cannot deny their action."
+    },
+    {
+      "id": "q14",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Digital signatures are often used to provide which security benefit?",
+      "answers": [
+        "Non-repudiation and Integrity",
+        "Confidentiality and Availability",
+        "Authorization and Accounting",
+        "Privacy and Speed"
+      ],
+      "correctIndex": 0,
+      "explanation": "Digital signatures verify the sender's identity (non-repudiation) and ensure the message hasn't been changed (integrity)."
+    },
+    {
+      "id": "q15",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Gap Analysis' in the context of security?",
+      "answers": [
+        "Comparing current security state to a desired goal",
+        "Analyzing the gaps between network cables",
+        "A type of vulnerability scan",
+        "Checking for missing firewall rules"
+      ],
+      "correctIndex": 0,
+      "explanation": "Gap analysis identifies the difference between where an organization's security currently is and where it needs to be."
+    },
+    {
+      "id": "q16",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which security model assumes that every user and device is a potential threat, even if they are inside the network?",
+      "answers": [
+        "Zero Trust",
+        "Implicit Trust",
+        "Perimeter Security",
+        "Open Access"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zero Trust operates on the principle of 'never trust, always verify,' regardless of location."
+    },
+    {
+      "id": "q17",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "In a Zero Trust architecture, what is 'Least Privilege'?",
+      "answers": [
+        "Giving users only the access they need to do their job",
+        "Giving all users administrative rights",
+        "Restricting all users from any access",
+        "Allowing access based on seniority"
+      ],
+      "correctIndex": 0,
+      "explanation": "Least privilege ensures users have the minimum necessary access required for their specific tasks."
+    },
+    {
+      "id": "q18",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of the following is NOT a core pillar of Zero Trust?",
+      "answers": [
+        "Implicit Trust",
+        "Verify Explicitly",
+        "Use Least Privilege",
+        "Assume Breach"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zero Trust moves away from implicit trust, requiring explicit verification for every access request."
+    },
+    {
+      "id": "q19",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the 'Control Plane' in Zero Trust?",
+      "answers": [
+        "The layer that manages and coordinates security policies",
+        "The layer where actual data flows",
+        "A physical security room",
+        "A type of firewall hardware"
+      ],
+      "correctIndex": 0,
+      "explanation": "The control plane manages the signaling and policy decisions in a Zero Trust environment."
+    },
+    {
+      "id": "q20",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the 'Data Plane' in Zero Trust?",
+      "answers": [
+        "The layer where user traffic and data actually flow",
+        "The layer that authenticates users",
+        "A backup storage system",
+        "A policy engine"
+      ],
+      "correctIndex": 0,
+      "explanation": "The data plane is responsible for the actual movement of data between users and resources."
+    },
+    {
+      "id": "q21",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the main goal of 'Defense in Depth'?",
+      "answers": [
+        "Layering multiple security controls to protect an asset",
+        "Using only one very strong firewall",
+        "Hiring more security guards",
+        "Moving all data to the cloud"
+      ],
+      "correctIndex": 0,
+      "explanation": "Defense in depth uses multiple layers of security so that if one fails, others are in place to stop the threat."
+    },
+    {
+      "id": "q22",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which principle suggests that if one security control fails, another should be present to catch the failure?",
+      "answers": [
+        "Redundancy/Defense in Depth",
+        "Single Point of Failure",
+        "Gap Analysis",
+        "Zero Trust"
+      ],
+      "correctIndex": 0,
+      "explanation": "Defense in depth (or layered security) ensures redundancy in security measures."
+    },
+    {
+      "id": "q23",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Physical Security' in the context of CIA?",
+      "answers": [
+        "Protecting hardware and infrastructure from physical access",
+        "Using a physical key for a software",
+        "Running 5 miles a day",
+        "Checking if the firewall is physically hot"
+      ],
+      "correctIndex": 0,
+      "explanation": "Physical security involves protecting the actual hardware, facilities, and people from physical threats."
+    },
+    {
+      "id": "q24",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of the following is an example of 'something you are' in authentication?",
+      "answers": [
+        "Fingerprint scan",
+        "Password",
+        "Smart card",
+        "Knowledge of a secret"
+      ],
+      "correctIndex": 0,
+      "explanation": "Biometrics like fingerprints, retina scans, or facial recognition are 'something you are' factors."
+    },
+    {
+      "id": "q25",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which factor of authentication is a Hardware Token?",
+      "answers": [
+        "Something you have",
+        "Something you know",
+        "Something you are",
+        "Somewhere you are"
+      ],
+      "correctIndex": 0,
+      "explanation": "A hardware token is a physical object in your possession, hence 'something you have'."
+    },
+    {
+      "id": "q26",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A PIN used with a debit card is which factor of authentication?",
+      "answers": [
+        "Something you know",
+        "Something you have",
+        "Something you are",
+        "Something you do"
+      ],
+      "correctIndex": 0,
+      "explanation": "A PIN is a piece of information you memorize, which is 'something you know'."
+    },
+    {
+      "id": "q27",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Two-Factor Authentication' (2FA)?",
+      "answers": [
+        "Using two different factors (e.g., password + SMS code)",
+        "Using two different passwords",
+        "Asking two different people for access",
+        "Logging in from two different devices"
+      ],
+      "correctIndex": 0,
+      "explanation": "2FA requires factors from two different categories (e.g., Knowledge and Possession)."
+    },
+    {
+      "id": "q28",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Implicit Trust'?",
+      "answers": [
+        "Trusting a user or device automatically based on their location",
+        "Trusting no one",
+        "Trusting only the administrator",
+        "Trusting only encrypted traffic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Implicit trust is the old model where being inside the corporate network meant you were automatically trusted."
+    },
+    {
+      "id": "q29",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What does 'Assume Breach' mean in Zero Trust?",
+      "answers": [
+        "Operating as if attackers are already in the environment",
+        "Waiting for a breach to happen before acting",
+        "Deactivating all security after a breach",
+        "Blaming the IT department for every error"
+      ],
+      "correctIndex": 0,
+      "explanation": "Assume Breach means you design security assuming that your defenses will be or have been compromised."
+    },
+    {
+      "id": "q30",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of the following is an Administrative Control?",
+      "answers": [
+        "Written security policy",
+        "Firewall",
+        "Security guard",
+        "Encryption"
+      ],
+      "correctIndex": 0,
+      "explanation": "Administrative (Managerial) controls include policies, procedures, and training."
+    },
+    {
+      "id": "q31",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "An Access Control List (ACL) on a router is what type of control?",
+      "answers": [
+        "Technical",
+        "Administrative",
+        "Physical",
+        "Operational"
+      ],
+      "correctIndex": 0,
+      "explanation": "ACLs are technical controls implemented through software and hardware configurations."
+    },
+    {
+      "id": "q32",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the primary purpose of a 'Deterrent Control'?",
+      "answers": [
+        "To discourage an attacker from attempting an attack",
+        "To stop an attack in progress",
+        "To restore a system after an attack",
+        "To identify that an attack happened"
+      ],
+      "correctIndex": 0,
+      "explanation": "Deterrent controls, like 'No Trespassing' signs, aim to discourage potential attackers."
+    },
+    {
+      "id": "q33",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Corrective Control'?",
+      "answers": [
+        "A control that fixes a problem after it has occurred",
+        "A control that prevents a problem",
+        "A control that warns of a problem",
+        "A control that logs a problem"
+      ],
+      "correctIndex": 0,
+      "explanation": "Corrective controls, like backups or rebooting a system, fix issues after they are detected."
+    },
+    {
+      "id": "q34",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A motion sensor that triggers an alarm is which type of control?",
+      "answers": [
+        "Detective",
+        "Preventive",
+        "Deterrent",
+        "Corrective"
+      ],
+      "correctIndex": 0,
+      "explanation": "Detective controls identify and alert when a security event occurs."
+    },
+    {
+      "id": "q35",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which control type is a 'Mantrap'?",
+      "answers": [
+        "Physical and Preventive",
+        "Technical and Detective",
+        "Administrative and Deterrent",
+        "Physical and Corrective"
+      ],
+      "correctIndex": 0,
+      "explanation": "A mantrap is a physical barrier designed to prevent unauthorized entry."
+    },
+    {
+      "id": "q36",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which security control category includes security awareness training?",
+      "answers": [
+        "Operational",
+        "Technical",
+        "Managerial",
+        "Physical"
+      ],
+      "correctIndex": 0,
+      "explanation": "Operational controls are implemented by people (rather than systems) and include training and daily procedures."
+    },
+    {
+      "id": "q37",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Managerial Control'?",
+      "answers": [
+        "Strategic and administrative controls like risk assessments",
+        "A firewall configuration",
+        "A physical lock",
+        "A backup process"
+      ],
+      "correctIndex": 0,
+      "explanation": "Managerial (Administrative) controls focus on the oversight and management of security risks."
+    },
+    {
+      "id": "q38",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Incident response planning is considered what category of control?",
+      "answers": [
+        "Operational",
+        "Technical",
+        "Physical",
+        "Managerial"
+      ],
+      "correctIndex": 0,
+      "explanation": "Incident response is a procedural action taken by staff, making it an operational control."
+    },
+    {
+      "id": "q39",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A 'Compensating Control' is used when:",
+      "answers": [
+        "A primary control cannot be implemented",
+        "An attack has already happened",
+        "A system is being decommissioned",
+        "A user needs a password reset"
+      ],
+      "correctIndex": 0,
+      "explanation": "Compensating controls provide an alternative measure when the standard security control is not feasible."
+    },
+    {
+      "id": "q40",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "If an organization cannot use MFA, but uses a very long password and frequent rotations, the long password is what type of control?",
+      "answers": [
+        "Compensating",
+        "Preventive",
+        "Detective",
+        "Deterrent"
+      ],
+      "correctIndex": 0,
+      "explanation": "It compensates for the lack of MFA by strengthening another aspect of authentication."
+    },
+    {
+      "id": "q41",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the primary function of a 'Preventive Control'?",
+      "answers": [
+        "To block an unauthorized activity from occurring",
+        "To alert when an activity occurs",
+        "To fix a system after a crash",
+        "To log all user attempts"
+      ],
+      "correctIndex": 0,
+      "explanation": "Preventive controls are proactive and aim to stop a security breach before it happens."
+    },
+    {
+      "id": "q42",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A firewall is a classic example of which control type?",
+      "answers": [
+        "Preventive",
+        "Detective",
+        "Corrective",
+        "Deterrent"
+      ],
+      "correctIndex": 0,
+      "explanation": "A firewall prevents unauthorized network traffic from passing through."
+    },
+    {
+      "id": "q43",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Reviewing audit logs is which type of control?",
+      "answers": [
+        "Detective",
+        "Preventive",
+        "Corrective",
+        "Deterrent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reviewing logs helps detect activities that have already occurred."
+    },
+    {
+      "id": "q44",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Control Diversity'?",
+      "answers": [
+        "Using different types of controls (Administrative, Technical, Physical)",
+        "Using only firewalls from different vendors",
+        "Hiring diverse staff",
+        "Changing passwords every day"
+      ],
+      "correctIndex": 0,
+      "explanation": "Control diversity involves using a mix of control categories to create a more robust defense."
+    },
+    {
+      "id": "q45",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vendor Diversity'?",
+      "answers": [
+        "Using security products from different manufacturers",
+        "Buying all software from one vendor",
+        "Having multiple office locations",
+        "Selling products to many customers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Vendor diversity reduces the risk that a single vendor's vulnerability will compromise the entire system."
+    },
+    {
+      "id": "q46",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Security guards are what type of control category?",
+      "answers": [
+        "Physical",
+        "Technical",
+        "Administrative",
+        "Compensating"
+      ],
+      "correctIndex": 0,
+      "explanation": "Security guards are a physical presence used to secure facilities."
+    },
+    {
+      "id": "q47",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the goal of Change Management?",
+      "answers": [
+        "To ensure changes are made in a controlled and documented manner",
+        "To prevent any changes from ever happening",
+        "To allow users to change their own passwords",
+        "To replace all old hardware"
+      ],
+      "correctIndex": 0,
+      "explanation": "Change management ensures that modifications to the IT environment do not cause unintended disruptions."
+    },
+    {
+      "id": "q48",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the first step in a formal Change Management process?",
+      "answers": [
+        "Request for Change (RFC)",
+        "Implementation",
+        "Testing",
+        "Backout Plan"
+      ],
+      "correctIndex": 0,
+      "explanation": "The process typically starts with a formal request (RFC) detailing the proposed change."
+    },
+    {
+      "id": "q49",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What does a CAB stand for in Change Management?",
+      "answers": [
+        "Change Advisory Board",
+        "Control and Audit Bureau",
+        "Central Access Batch",
+        "Common Application Build"
+      ],
+      "correctIndex": 0,
+      "explanation": "The CAB is a group of stakeholders who review and approve/deny change requests."
+    },
+    {
+      "id": "q50",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Why is a 'Backout Plan' important?",
+      "answers": [
+        "To revert to the previous state if a change fails",
+        "To ensure the change is permanent",
+        "To document who made the change",
+        "To save money on hardware"
+      ],
+      "correctIndex": 0,
+      "explanation": "A backout (or rollback) plan allows the organization to restore service quickly if a change causes issues."
+    },
+    {
+      "id": "q51",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of the following is a risk of poor change management?",
+      "answers": [
+        "System downtime and instability",
+        "Too much documentation",
+        "Too many security guards",
+        "Better system performance"
+      ],
+      "correctIndex": 0,
+      "explanation": "Unauthorized or untested changes can lead to crashes, security vulnerabilities, and service outages."
+    },
+    {
+      "id": "q52",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Testing a change in a separate environment before production is called:",
+      "answers": [
+        "Staging",
+        "Shadowing",
+        "Cloning",
+        "Backing up"
+      ],
+      "correctIndex": 0,
+      "explanation": "A staging or test environment allows the change to be verified without impacting live users."
+    },
+    {
+      "id": "q53",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Configuration Management'?",
+      "answers": [
+        "Maintaining the consistency of a product's performance and attributes",
+        "Installing new software every day",
+        "Deleting old log files",
+        "Managing user passwords"
+      ],
+      "correctIndex": 0,
+      "explanation": "Configuration management ensures that systems are configured correctly and that these configurations are documented."
+    },
+    {
+      "id": "q54",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A 'Baseline' in configuration management is:",
+      "answers": [
+        "A known good starting point for a system's configuration",
+        "The bottom of a server rack",
+        "A type of network cable",
+        "A minimum security guard salary"
+      ],
+      "correctIndex": 0,
+      "explanation": "A baseline is a snapshot of a system's configuration that has been approved and is used as a reference."
+    },
+    {
+      "id": "q55",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Version Control' primarily used for?",
+      "answers": [
+        "Tracking changes to software code and documents",
+        "Determining which version of Windows to buy",
+        "Calculating the age of a server",
+        "Managing hardware inventory"
+      ],
+      "correctIndex": 0,
+      "explanation": "Version control allows multiple people to work on the same files while tracking every change made."
+    },
+    {
+      "id": "q56",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Patch Management is a subset of which process?",
+      "answers": [
+        "Change Management",
+        "Risk Assessment",
+        "Physical Security",
+        "AAA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Updating software (patching) is a change to the system and must follow change management procedures."
+    },
+    {
+      "id": "q57",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the goal of 'Impact Analysis' in change management?",
+      "answers": [
+        "To predict the effects of a change on the organization",
+        "To see how hard a server was hit during an earthquake",
+        "To measure the speed of a network",
+        "To calculate the cost of a new firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "Impact analysis evaluates how a proposed change will affect systems, users, and security."
+    },
+    {
+      "id": "q58",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of these is a Technical Control?",
+      "answers": [
+        "Intrusion Prevention System (IPS)",
+        "Security Policy",
+        "Employee Handbook",
+        "User Training"
+      ],
+      "correctIndex": 0,
+      "explanation": "IPS is a technical device/software that blocks malicious activity."
+    },
+    {
+      "id": "q59",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Operational Control' example?",
+      "answers": [
+        "Performing a weekly backup",
+        "Configuring a router",
+        "Writing a law",
+        "Installing a lock"
+      ],
+      "correctIndex": 0,
+      "explanation": "Running backups is a procedural task performed by operations staff."
+    },
+    {
+      "id": "q60",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which control type is designed to restore a system to a functional state?",
+      "answers": [
+        "Corrective",
+        "Preventive",
+        "Detective",
+        "Deterrent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Corrective controls fix issues and restore normal operations."
+    },
+    {
+      "id": "q61",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "A 'Security Audit' is what type of control?",
+      "answers": [
+        "Detective",
+        "Preventive",
+        "Corrective",
+        "Deterrent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Audits examine what has happened to detect violations or weaknesses."
+    },
+    {
+      "id": "q62",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "In Change Management, what is 'Post-Implementation Review'?",
+      "answers": [
+        "Analyzing the results after a change is made",
+        "Checking the change before it starts",
+        "A meeting to decide the budget",
+        "Testing the backout plan"
+      ],
+      "correctIndex": 0,
+      "explanation": "After a change, the team reviews it to ensure it met objectives and didn't cause new problems."
+    },
+    {
+      "id": "q63",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Standard Change'?",
+      "answers": [
+        "A low-risk, pre-approved change",
+        "A change that happens every day",
+        "A change to the company logo",
+        "A change that requires CAB approval"
+      ],
+      "correctIndex": 0,
+      "explanation": "Standard changes are routine and have a well-known process, often not requiring full CAB review each time."
+    },
+    {
+      "id": "q64",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Emergency Change'?",
+      "answers": [
+        "A change that must be implemented immediately to fix a critical issue",
+        "A change that happens on a weekend",
+        "A change that costs a lot of money",
+        "A change to the fire exit"
+      ],
+      "correctIndex": 0,
+      "explanation": "Emergency changes bypass some standard procedures to resolve urgent service failures or security threats."
+    },
+    {
+      "id": "q65",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Asset Management'?",
+      "answers": [
+        "Identifying and tracking all hardware and software in an organization",
+        "Managing the company's bank accounts",
+        "Hiring new employees",
+        "Selling old computers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Asset management ensures that all IT components are accounted for, which is vital for security and change management."
+    },
+    {
+      "id": "q66",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Media Disposal'?",
+      "answers": [
+        "Securely destroying data and physical storage devices",
+        "Throwing old CDs in the trash",
+        "Selling used hard drives on eBay",
+        "Donating old computers to a school"
+      ],
+      "correctIndex": 0,
+      "explanation": "Media disposal ensures that sensitive data cannot be recovered from decommissioned hardware."
+    },
+    {
+      "id": "q67",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Degaussing'?",
+      "answers": [
+        "Using a powerful magnet to erase data from magnetic media",
+        "Cleaning a hard drive with soap",
+        "Formatting a USB drive",
+        "Shredding a piece of paper"
+      ],
+      "correctIndex": 0,
+      "explanation": "Degaussing ruins the magnetic field of a drive, making the data unrecoverable."
+    },
+    {
+      "id": "q68",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Pulverizing'?",
+      "answers": [
+        "Physically crushing a device into small pieces",
+        "Deleting files from a folder",
+        "Compressing a database",
+        "Encrypting a hard drive"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pulverizing is a physical destruction method for media."
+    },
+    {
+      "id": "q69",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Why is 'Separation of Duties' important in change management?",
+      "answers": [
+        "To prevent one person from having too much control over a process",
+        "To make sure everyone has a job",
+        "To increase the speed of changes",
+        "To reduce the number of meetings"
+      ],
+      "correctIndex": 0,
+      "explanation": "Separation of duties ensures that the person requesting the change is not the same person who approves it, reducing the risk of fraud or error."
+    },
+    {
+      "id": "q70",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Job Rotation'?",
+      "answers": [
+        "Moving employees between different jobs to prevent fraud",
+        "Moving a desk to a new office",
+        "Changing the time an employee starts work",
+        "Hiring new staff every year"
+      ],
+      "correctIndex": 0,
+      "explanation": "Job rotation helps detect fraudulent activity by ensuring multiple people handle a role over time."
+    },
+    {
+      "id": "q71",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Symmetric Encryption'?",
+      "answers": [
+        "Using the same key for both encryption and decryption",
+        "Using two different keys",
+        "Using no keys",
+        "Using a public key only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Symmetric encryption (secret-key) uses one shared key."
+    },
+    {
+      "id": "q72",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of the following is a Symmetric algorithm?",
+      "answers": [
+        "AES",
+        "RSA",
+        "Diffie-Hellman",
+        "ECC"
+      ],
+      "correctIndex": 0,
+      "explanation": "AES (Advanced Encryption Standard) is the most common symmetric algorithm."
+    },
+    {
+      "id": "q73",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Asymmetric Encryption'?",
+      "answers": [
+        "Using a pair of keys (Public and Private)",
+        "Using one key for everything",
+        "Encryption that happens at different times",
+        "A type of hashing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Asymmetric encryption (public-key) uses a public key to encrypt and a private key to decrypt."
+    },
+    {
+      "id": "q74",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which key is used to decrypt a message in asymmetric encryption?",
+      "answers": [
+        "Private Key",
+        "Public Key",
+        "Shared Key",
+        "Session Key"
+      ],
+      "correctIndex": 0,
+      "explanation": "Only the recipient's private key can decrypt a message encrypted with their public key."
+    },
+    {
+      "id": "q75",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Hashing'?",
+      "answers": [
+        "Creating a fixed-length unique string from data to ensure integrity",
+        "Encrypting a password",
+        "Compiling code",
+        "Sending a message over the network"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hashing is a one-way process used to verify that data has not been changed."
+    },
+    {
+      "id": "q76",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of these is a common Hashing algorithm?",
+      "answers": [
+        "SHA-256",
+        "AES-256",
+        "DES",
+        "RSA"
+      ],
+      "correctIndex": 0,
+      "explanation": "SHA (Secure Hash Algorithm) is used for creating hashes."
+    },
+    {
+      "id": "q77",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Collision' in hashing?",
+      "answers": [
+        "When two different inputs produce the same hash output",
+        "When two computers crash",
+        "When a password is forgotten",
+        "When a network is slow"
+      ],
+      "correctIndex": 0,
+      "explanation": "A collision occurs when different data results in the same hash, indicating a weak algorithm."
+    },
+    {
+      "id": "q78",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Salting' in the context of hashing passwords?",
+      "answers": [
+        "Adding random data to a password before hashing it",
+        "Making a password taste better",
+        "Encrypting the hash",
+        "Changing the hash every day"
+      ],
+      "correctIndex": 0,
+      "explanation": "Salting makes brute-force and rainbow table attacks much harder by ensuring identical passwords have different hashes."
+    },
+    {
+      "id": "q79",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Digital Signature'?",
+      "answers": [
+        "A hash encrypted with a private key to provide non-repudiation",
+        "A picture of your signature",
+        "A scan of your fingerprint",
+        "A password typed in cursive"
+      ],
+      "correctIndex": 0,
+      "explanation": "Digital signatures prove who sent the message and that it hasn't been altered."
+    },
+    {
+      "id": "q80",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What does 'PKI' stand for?",
+      "answers": [
+        "Public Key Infrastructure",
+        "Private Key Integrity",
+        "Password Key Interface",
+        "Public Knowledge Information"
+      ],
+      "correctIndex": 0,
+      "explanation": "PKI is the system of hardware, software, people, and policies used to manage digital certificates."
+    },
+    {
+      "id": "q81",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the role of a 'Certificate Authority' (CA)?",
+      "answers": [
+        "To issue and manage digital certificates",
+        "To store passwords",
+        "To scan for viruses",
+        "To manage the firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "The CA is a trusted third party that verifies identities and issues certificates."
+    },
+    {
+      "id": "q82",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Digital Certificate'?",
+      "answers": [
+        "A document that binds a public key to an identity",
+        "A degree in computer science",
+        "A printed password",
+        "A type of encrypted email"
+      ],
+      "correctIndex": 0,
+      "explanation": "Certificates allow users to verify that a public key belongs to a specific person or organization."
+    },
+    {
+      "id": "q83",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'CRL' in PKI?",
+      "answers": [
+        "Certificate Revocation List",
+        "Common Root Location",
+        "Central Registry Log",
+        "Certified Resource Link"
+      ],
+      "correctIndex": 0,
+      "explanation": "The CRL contains certificates that have been cancelled before their expiration date."
+    },
+    {
+      "id": "q84",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'OCSP'?",
+      "answers": [
+        "Online Certificate Status Protocol",
+        "Open Control Security Policy",
+        "Online Client Support Portal",
+        "Official Certificate Storage Point"
+      ],
+      "correctIndex": 0,
+      "explanation": "OCSP is a faster way to check the revocation status of a certificate compared to downloading a full CRL."
+    },
+    {
+      "id": "q85",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Key Escrow'?",
+      "answers": [
+        "Storing a copy of encryption keys with a trusted third party",
+        "Deleting old keys",
+        "Changing keys every month",
+        "Giving your key to a friend"
+      ],
+      "correctIndex": 0,
+      "explanation": "Key escrow allows authorized parties (like law enforcement or company management) to recover data if the original key is lost."
+    },
+    {
+      "id": "q86",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Steganography'?",
+      "answers": [
+        "Hiding data within another file (like an image)",
+        "A type of high-speed encryption",
+        "Studying ancient security methods",
+        "Writing in code"
+      ],
+      "correctIndex": 0,
+      "explanation": "Steganography hides the existence of the message itself."
+    },
+    {
+      "id": "q87",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Obfuscation'?",
+      "answers": [
+        "Making code or data difficult for humans to understand",
+        "Deleting data",
+        "Encrypting data",
+        "Backing up data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Obfuscation is used to hide the logic of a program or the meaning of data without necessarily using encryption."
+    },
+    {
+      "id": "q88",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Perfect Forward Secrecy' (PFS)?",
+      "answers": [
+        "Ensuring a compromised long-term key doesn't compromise past session keys",
+        "A password that never expires",
+        "The highest level of encryption",
+        "A type of physical lock"
+      ],
+      "correctIndex": 0,
+      "explanation": "PFS uses unique session keys for every communication, so even if one key is stolen, other sessions remain safe."
+    },
+    {
+      "id": "q89",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Quantum Computing's' threat to cryptography?",
+      "answers": [
+        "It can potentially break current asymmetric algorithms like RSA",
+        "It makes internet speeds slower",
+        "It requires too much electricity",
+        "It only works in cold rooms"
+      ],
+      "correctIndex": 0,
+      "explanation": "Quantum computers can solve the mathematical problems behind RSA and ECC much faster than classical computers."
+    },
+    {
+      "id": "q90",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Ephemeral Key'?",
+      "answers": [
+        "A temporary key used for a single session",
+        "A key that lasts for 10 years",
+        "A key made of paper",
+        "A key stored on a cloud server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ephemeral keys are generated for each connection and discarded afterward, supporting Perfect Forward Secrecy."
+    },
+    {
+      "id": "q91",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Script Kiddie'?",
+      "answers": [
+        "An unskilled attacker who uses existing tools and scripts",
+        "A young person who writes their own code",
+        "A professional penetration tester",
+        "A type of malware that targets children"
+      ],
+      "correctIndex": 0,
+      "explanation": "Script kiddies lack technical expertise and rely on automated tools created by others."
+    },
+    {
+      "id": "q92",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What defines a 'Hacktivist'?",
+      "answers": [
+        "An attacker motivated by social or political causes",
+        "An attacker who works for a government",
+        "An attacker who wants to steal money",
+        "A person who fixes bugs for free"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hacktivists use hacking to promote a political agenda or social change."
+    },
+    {
+      "id": "q93",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Nation-State Actor'?",
+      "answers": [
+        "An attacker supported by a government for espionage or disruption",
+        "An attacker who only targets one country",
+        "A person who hacks their own government",
+        "A type of firewall used by governments"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nation-state actors are highly sophisticated, well-funded, and target other nations or organizations for strategic reasons."
+    },
+    {
+      "id": "q94",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Insider Threat'?",
+      "answers": [
+        "A person within an organization who misuses their access",
+        "A virus that stays inside a computer",
+        "A threat that comes from the internet",
+        "A type of internal firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "Insider threats can be malicious employees, contractors, or partners, or they can be accidental (negligent)."
+    },
+    {
+      "id": "q95",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Shadow IT'?",
+      "answers": [
+        "IT systems or software used within an organization without official approval",
+        "A secret IT department",
+        "Using computers in the dark",
+        "Backup systems that only run at night"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shadow IT introduces security risks because the systems are not managed or secured by the official IT department."
+    },
+    {
+      "id": "q96",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What characterizes 'Organized Crime' as a threat actor?",
+      "answers": [
+        "Motivation for financial gain through illegal cyber activities",
+        "Hacking for fun",
+        "Hacking for religious reasons",
+        "Protecting the community"
+      ],
+      "correctIndex": 0,
+      "explanation": "Organized crime groups are professional, well-funded, and focused on making money (e.g., through ransomware)."
+    },
+    {
+      "id": "q97",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Advanced Persistent Threat' (APT)?",
+      "answers": [
+        "A sophisticated, long-term campaign by a well-resourced attacker",
+        "A fast-spreading virus",
+        "A password that is hard to guess",
+        "A user who keeps asking for help"
+      ],
+      "correctIndex": 0,
+      "explanation": "APTs are often nation-state actors who stay in a network for a long time to steal data."
+    },
+    {
+      "id": "q98",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Initial Access Broker'?",
+      "answers": [
+        "An attacker who gains entry to a network and then sells that access to others",
+        "A person who buys new computers",
+        "A type of router",
+        "An insurance agent for cybercrime"
+      ],
+      "correctIndex": 0,
+      "explanation": "Initial access brokers specialize in the first stage of a breach and sell 'entry points' to ransomware groups."
+    },
+    {
+      "id": "q99",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Competitor' as a threat actor?",
+      "answers": [
+        "A rival company seeking to steal trade secrets or disrupt operations",
+        "A person playing a video game",
+        "A business partner",
+        "A type of benchmarking tool"
+      ],
+      "correctIndex": 0,
+      "explanation": "Corporate espionage involves competitors using cyber attacks to gain an unfair advantage."
+    },
+    {
+      "id": "q100",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What does 'Sophistication' refer to in threat actor profiles?",
+      "answers": [
+        "The level of technical skill and resources available to the actor",
+        "How well the actor dresses",
+        "The age of the actor",
+        "The number of people in the actor's group"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sophistication ranges from script kiddies (low) to nation-state actors (high)."
+    },
+    {
+      "id": "q101",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'External' threat actor?",
+      "answers": [
+        "An actor who has no authorized access to the target's systems",
+        "An actor who works outside in the garden",
+        "A hardware device",
+        "A type of cloud service"
+      ],
+      "correctIndex": 0,
+      "explanation": "External actors must find a way into the organization from the outside."
+    },
+    {
+      "id": "q102",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Threat Intelligence'?",
+      "answers": [
+        "Information about current and potential threats used to improve security",
+        "Being smart enough to hack a system",
+        "A type of AI for hacking",
+        "A secret code"
+      ],
+      "correctIndex": 0,
+      "explanation": "Threat intelligence helps organizations understand who is attacking them and what methods they use."
+    },
+    {
+      "id": "q103",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Open-Source Intelligence' (OSINT)?",
+      "answers": [
+        "Information gathered from publicly available sources",
+        "Information from a secret spy",
+        "Using open-source software like Linux",
+        "A type of encrypted message"
+      ],
+      "correctIndex": 0,
+      "explanation": "OSINT includes data from social media, news, public records, and the dark web."
+    },
+    {
+      "id": "q104",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Threat Vector'?",
+      "answers": [
+        "The path or means an attacker uses to gain access to a target",
+        "A mathematical arrow",
+        "A type of virus",
+        "A security policy document"
+      ],
+      "correctIndex": 0,
+      "explanation": "Examples of threat vectors include email (phishing), vulnerable software, or physical access."
+    },
+    {
+      "id": "q105",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Attack Surface'?",
+      "answers": [
+        "The total sum of all possible points where an attacker can enter an environment",
+        "The screen of a computer",
+        "The floor of a data center",
+        "A list of all employees"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reducing the attack surface (e.g., closing unused ports) is a key security goal."
+    },
+    {
+      "id": "q106",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of the following is a 'Supply Chain' threat vector?",
+      "answers": [
+        "Compromising a third-party vendor to reach the final target",
+        "An attack on a delivery truck",
+        "A virus in a vending machine",
+        "Running out of network cables"
+      ],
+      "correctIndex": 0,
+      "explanation": "Supply chain attacks exploit the trust between an organization and its suppliers."
+    },
+    {
+      "id": "q107",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Social Media' threat vector?",
+      "answers": [
+        "Using social platforms to spread malware or gather OSINT",
+        "Watching videos during work",
+        "Posting a picture of a cat",
+        "Deleting a Facebook account"
+      ],
+      "correctIndex": 0,
+      "explanation": "Attackers use social media for social engineering and to find information about targets."
+    },
+    {
+      "id": "q108",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Removable Media' as a threat vector?",
+      "answers": [
+        "Infected USB drives or external hard drives",
+        "A CD player",
+        "A cloud storage account",
+        "A floppy disk from 1995"
+      ],
+      "correctIndex": 0,
+      "explanation": "USB drives are a common way to bypass network defenses and introduce malware."
+    },
+    {
+      "id": "q109",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Cloud-based' threat vector?",
+      "answers": [
+        "Misconfigured cloud storage or insecure APIs",
+        "An attack that only happens when it rains",
+        "A virus in a weather app",
+        "A slow internet connection"
+      ],
+      "correctIndex": 0,
+      "explanation": "As organizations move to the cloud, the cloud infrastructure becomes a major part of the attack surface."
+    },
+    {
+      "id": "q110",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Direct Access'?",
+      "answers": [
+        "An attacker having physical access to the target hardware",
+        "Logging in as an administrator",
+        "Using a VPN",
+        "Calling the CEO"
+      ],
+      "correctIndex": 0,
+      "explanation": "Physical access often bypasses most technical and logical security controls."
+    },
+    {
+      "id": "q111",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Wireless' as a threat vector?",
+      "answers": [
+        "Exploiting Wi-Fi, Bluetooth, or NFC connections",
+        "Using a computer without a mouse",
+        "A radio station",
+        "A cell phone tower"
+      ],
+      "correctIndex": 0,
+      "explanation": "Wireless signals can be intercepted or used to gain unauthorized entry into a network."
+    },
+    {
+      "id": "q112",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "How does 'Shadow IT' increase the attack surface?",
+      "answers": [
+        "By introducing unmanaged and potentially vulnerable systems",
+        "By making the IT department work harder",
+        "By using too much power",
+        "By increasing the cost of software"
+      ],
+      "correctIndex": 0,
+      "explanation": "Unmanaged systems often lack patches and proper security configurations."
+    },
+    {
+      "id": "q113",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'API' threat vector?",
+      "answers": [
+        "Exploiting weaknesses in Application Programming Interfaces",
+        "A type of virus that targets bees",
+        "A slow computer",
+        "Using a mobile app"
+      ],
+      "correctIndex": 0,
+      "explanation": "Insecure APIs can allow attackers to steal data or bypass authentication."
+    },
+    {
+      "id": "q114",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Phishing'?",
+      "answers": [
+        "A social engineering attack using deceptive emails to steal info",
+        "Catching fish for dinner",
+        "A type of network scan",
+        "Installing a new firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "Phishing is a very common and effective threat vector."
+    },
+    {
+      "id": "q115",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vulnerability' in the context of attack surface?",
+      "answers": [
+        "A specific flaw that an attacker can exploit",
+        "A strong password",
+        "A secure network",
+        "A high-speed router"
+      ],
+      "correctIndex": 0,
+      "explanation": "The more vulnerabilities a system has, the larger its effective attack surface."
+    },
+    {
+      "id": "q116",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Social Engineering'?",
+      "answers": [
+        "Manipulating people into performing actions or divesting info",
+        "Building a bridge for a city",
+        "Designing a new social media app",
+        "Hiring a social worker"
+      ],
+      "correctIndex": 0,
+      "explanation": "Social engineering targets the 'human element' of security."
+    },
+    {
+      "id": "q117",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Spear Phishing'?",
+      "answers": [
+        "A targeted phishing attack aimed at a specific person or group",
+        "Phishing with a large spear",
+        "Phishing that only targets IT staff",
+        "A type of whaling"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spear phishing emails are customized to look more legitimate to the specific target."
+    },
+    {
+      "id": "q118",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Whaling'?",
+      "answers": [
+        "Phishing targeting high-level executives (CEOs, CFOs)",
+        "Hunting large sea mammals",
+        "A very large phishing campaign for everyone",
+        "An attack on a fishing company"
+      ],
+      "correctIndex": 0,
+      "explanation": "Whaling targets 'big fish' within an organization."
+    },
+    {
+      "id": "q119",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vishing'?",
+      "answers": [
+        "Voice Phishing (using a phone call)",
+        "Video Phishing",
+        "Virtual Phishing",
+        "Phishing via a website"
+      ],
+      "correctIndex": 0,
+      "explanation": "Vishing involves using voice communication to trick victims."
+    },
+    {
+      "id": "q120",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Smishing'?",
+      "answers": [
+        "SMS Phishing (using text messages)",
+        "Small Phishing",
+        "Phishing targeting social media",
+        "Smelling a phishing email"
+      ],
+      "correctIndex": 0,
+      "explanation": "Smishing uses text messages to deliver malicious links or requests."
+    },
+    {
+      "id": "q121",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Business Email Compromise' (BEC)?",
+      "answers": [
+        "An attacker impersonating an executive to request fraudulent payments",
+        "A broken email server",
+        "Forgetting a company password",
+        "Sending too many emails"
+      ],
+      "correctIndex": 0,
+      "explanation": "BEC is a highly profitable form of social engineering targeting financial transactions."
+    },
+    {
+      "id": "q122",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Pretexting'?",
+      "answers": [
+        "Creating a fake scenario to trick a victim into giving info",
+        "Testing a system before an attack",
+        "Writing a text message",
+        "Using a fake ID"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pretexting involves building a credible 'story' or reason for the interaction."
+    },
+    {
+      "id": "q123",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Baiting'?",
+      "answers": [
+        "Offering something enticing (like a free movie) to infect a user",
+        "Setting a trap for a mouse",
+        "A type of fishing",
+        "Using a password manager"
+      ],
+      "correctIndex": 0,
+      "explanation": "Baiting plays on curiosity or greed."
+    },
+    {
+      "id": "q124",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Quid Pro Quo' in social engineering?",
+      "answers": [
+        "Offering a service or benefit in exchange for information",
+        "A type of Latin music",
+        "A legal term for a contract",
+        "Hacking for free"
+      ],
+      "correctIndex": 0,
+      "explanation": "Example: An attacker pretends to be tech support and 'fixes' a non-existent problem in exchange for the user's password."
+    },
+    {
+      "id": "q125",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Tailgating'?",
+      "answers": [
+        "Following an authorized person through a secure door without scanning",
+        "A party in a parking lot",
+        "Driving too close to another car",
+        "Using someone else's computer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tailgating (or piggybacking) relies on social politeness (holding the door)."
+    },
+    {
+      "id": "q126",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Shoulder Surfing'?",
+      "answers": [
+        "Looking over someone's shoulder to see their screen or PIN",
+        "A type of water sport",
+        "Helping someone with their work",
+        "Cleaning a computer monitor"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shoulder surfing is a low-tech way to steal credentials."
+    },
+    {
+      "id": "q127",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Dumpster Diving'?",
+      "answers": [
+        "Searching through trash for sensitive documents or info",
+        "Cleaning a large waste container",
+        "A type of extreme sport",
+        "Deleting old files"
+      ],
+      "correctIndex": 0,
+      "explanation": "Dumpster diving can reveal passwords, customer data, or organizational charts."
+    },
+    {
+      "id": "q128",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Watering Hole Attack'?",
+      "answers": [
+        "Infecting a website frequently visited by a specific group of users",
+        "Poisoning a real well",
+        "A DoS attack on a water company",
+        "An attack on a public swimming pool"
+      ],
+      "correctIndex": 0,
+      "explanation": "The attacker 'waits' at the watering hole for the victims to come to them."
+    },
+    {
+      "id": "q129",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Typosquatting' (URL Hijacking)?",
+      "answers": [
+        "Registering domains that are common misspellings of popular sites",
+        "A type of exercise",
+        "Typing very fast",
+        "A virus that targets keyboards"
+      ],
+      "correctIndex": 0,
+      "explanation": "Example: gogle.com instead of google.com."
+    },
+    {
+      "id": "q130",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Influence Campaign'?",
+      "answers": [
+        "Coordinated efforts to sway public opinion or behavior",
+        "Hiring an Instagram influencer",
+        "A political debate",
+        "Advertising a new product"
+      ],
+      "correctIndex": 0,
+      "explanation": "Influence campaigns often use social media and 'fake news' to create division or spread misinformation."
+    },
+    {
+      "id": "q131",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "In social engineering, what is the principle of 'Urgency'?",
+      "answers": [
+        "Making the victim believe they must act immediately to avoid a penalty",
+        "Running to the bathroom",
+        "Working very fast",
+        "A type of emergency siren"
+      ],
+      "correctIndex": 0,
+      "explanation": "Urgency prevents the victim from taking the time to think or verify the request."
+    },
+    {
+      "id": "q132",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "In social engineering, what is 'Authority'?",
+      "answers": [
+        "The attacker impersonating a boss, police officer, or IT staff",
+        "Being the owner of a company",
+        "A type of government agency",
+        "A strong password"
+      ],
+      "correctIndex": 0,
+      "explanation": "People are conditioned to obey those in positions of authority."
+    },
+    {
+      "id": "q133",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "In social engineering, what is 'Scarcity'?",
+      "answers": [
+        "Claiming that a resource or offer is in limited supply",
+        "Not having enough food",
+        "A low number of network ports",
+        "A rare type of malware"
+      ],
+      "correctIndex": 0,
+      "explanation": "Scarcity creates a sense of 'fear of missing out' (FOMO)."
+    },
+    {
+      "id": "q134",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "In social engineering, what is 'Consensus' (Social Proof)?",
+      "answers": [
+        "Making the victim believe everyone else is doing it",
+        "A group meeting",
+        "A vote among employees",
+        "A type of blockchain"
+      ],
+      "correctIndex": 0,
+      "explanation": "If others have already done it, the victim feels it is safe or expected."
+    },
+    {
+      "id": "q135",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Familiarity' (Liking) in social engineering?",
+      "answers": [
+        "The attacker building a rapport or pretending to be a friend",
+        "Knowing how to use a computer",
+        "A type of family reunion",
+        "A common password"
+      ],
+      "correctIndex": 0,
+      "explanation": "We are more likely to help people we know and like."
+    },
+    {
+      "id": "q136",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Hoax'?",
+      "answers": [
+        "A false warning about a non-existent threat",
+        "A type of virus",
+        "A secret code",
+        "A joke told in the office"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hoaxes waste time and can lead users to take harmful actions (like deleting important files)."
+    },
+    {
+      "id": "q137",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'SPIM'?",
+      "answers": [
+        "Spam over Instant Messaging",
+        "Spam over Email",
+        "Spam over Phone",
+        "A type of malware"
+      ],
+      "correctIndex": 0,
+      "explanation": "SPIM targets IM platforms like WhatsApp, Slack, or Teams."
+    },
+    {
+      "id": "q138",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Pharmig'?",
+      "answers": [
+        "Redirecting a user to a fake website by poisoning DNS",
+        "A type of agriculture",
+        "A drug company",
+        "A phishing email"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pharming is more dangerous than phishing because the user types the correct URL but is still redirected."
+    },
+    {
+      "id": "q139",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Identity Theft'?",
+      "answers": [
+        "Stealing personal info to impersonate someone",
+        "Taking a person's driver's license",
+        "Stealing a computer",
+        "Forgetting your own name"
+      ],
+      "correctIndex": 0,
+      "explanation": "Social engineering is often the first step in identity theft."
+    },
+    {
+      "id": "q140",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Deepfake'?",
+      "answers": [
+        "AI-generated fake audio or video of a person",
+        "A very deep hole",
+        "A type of encryption",
+        "A secret folder"
+      ],
+      "correctIndex": 0,
+      "explanation": "Deepfakes make social engineering much more convincing by mimicking voices or faces."
+    },
+    {
+      "id": "q141",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Bollard'?",
+      "answers": [
+        "A short, sturdy post designed to prevent vehicle ramming",
+        "A type of bird",
+        "A network cable organizer",
+        "A light fixture"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bollards are physical security measures for perimeter defense."
+    },
+    {
+      "id": "q142",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is the purpose of 'Fencing'?",
+      "answers": [
+        "To define boundaries and delay unauthorized entry",
+        "A type of sword fighting",
+        "To build a cage for a server",
+        "To organize cables"
+      ],
+      "correctIndex": 0,
+      "explanation": "Fences are part of a layered physical security strategy."
+    },
+    {
+      "id": "q143",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'CCTV'?",
+      "answers": [
+        "Closed-Circuit Television for surveillance",
+        "A type of cable TV",
+        "A Chinese news station",
+        "A computer monitor"
+      ],
+      "correctIndex": 0,
+      "explanation": "CCTV is a detective control used to monitor and record activity."
+    },
+    {
+      "id": "q144",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Mantrap' (Access Control Vestibule)?",
+      "answers": [
+        "A small room with two doors to prevent unauthorized entry",
+        "A trap for humans",
+        "A type of elevator",
+        "A secure server rack"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mantraps ensure that only one person enters at a time, preventing tailgating."
+    },
+    {
+      "id": "q145",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'HVAC' in the context of data centers?",
+      "answers": [
+        "Heating, Ventilation, and Air Conditioning",
+        "High Voltage AC",
+        "A type of network protocol",
+        "A hardware manufacturer"
+      ],
+      "correctIndex": 0,
+      "explanation": "HVAC is critical for maintaining the proper temperature and humidity for servers."
+    },
+    {
+      "id": "q146",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Fire Suppression'?",
+      "answers": [
+        "Systems designed to extinguish fires in a data center",
+        "Not allowing people to smoke",
+        "A firewall for the internet",
+        "A type of water fountain"
+      ],
+      "correctIndex": 0,
+      "explanation": "Data centers use specialized fire suppression (like clean agents) that won't damage electronics."
+    },
+    {
+      "id": "q147",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Faraday Cage'?",
+      "answers": [
+        "An enclosure that blocks electromagnetic signals",
+        "A cage for an animal named Faraday",
+        "A type of server rack",
+        "A very large data center"
+      ],
+      "correctIndex": 0,
+      "explanation": "Faraday cages prevent wireless signals from entering or leaving a space."
+    },
+    {
+      "id": "q148",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Biometric' access control?",
+      "answers": [
+        "Using physical characteristics (fingerprint, iris) for access",
+        "Using a key with a chip",
+        "Measuring the height of an employee",
+        "A type of password"
+      ],
+      "correctIndex": 0,
+      "explanation": "Biometrics are 'something you are' factors."
+    },
+    {
+      "id": "q149",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Smart Card'?",
+      "answers": [
+        "A card with an embedded chip for authentication",
+        "A card that can do math",
+        "A credit card",
+        "A student ID"
+      ],
+      "correctIndex": 0,
+      "explanation": "Smart cards are 'something you have' factors."
+    },
+    {
+      "id": "q150",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Proximity Card'?",
+      "answers": [
+        "A card that is read by being near a reader (RFID/NFC)",
+        "A card used for measuring distance",
+        "A map of the office",
+        "A card that shows who is nearby"
+      ],
+      "correctIndex": 0,
+      "explanation": "Proximity cards are commonly used for building access."
+    },
+    {
+      "id": "q151",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Salted Hash' used for primarily?",
+      "answers": [
+        "Protecting stored passwords against rainbow table attacks",
+        "Making encryption faster",
+        "Hiding the length of a message",
+        "Sending a secret key"
+      ],
+      "correctIndex": 0,
+      "explanation": "Salting adds unique random data to each password so that identical passwords result in different hashes."
+    },
+    {
+      "id": "q152",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which of these is a 'Key Stretching' algorithm?",
+      "answers": [
+        "bcrypt",
+        "AES",
+        "MD5",
+        "SHA-1"
+      ],
+      "correctIndex": 0,
+      "explanation": "Key stretching algorithms like bcrypt or PBKDF2 make password cracking much slower by repeating the hashing process thousands of times."
+    },
+    {
+      "id": "q153",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Block Cipher'?",
+      "answers": [
+        "An encryption method that encrypts data in fixed-size chunks",
+        "Encryption that happens one bit at a time",
+        "A type of physical lock",
+        "A firewall rule"
+      ],
+      "correctIndex": 0,
+      "explanation": "AES is a common block cipher that encrypts data in 128-bit blocks."
+    },
+    {
+      "id": "q154",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Stream Cipher'?",
+      "answers": [
+        "An encryption method that encrypts data one bit or byte at a time",
+        "Encryption used for video streaming only",
+        "A type of network cable",
+        "A backup process"
+      ],
+      "correctIndex": 0,
+      "explanation": "Stream ciphers are generally faster than block ciphers and are used when the size of the data is unknown or comes in a stream."
+    },
+    {
+      "id": "q155",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Symmetric Key Distribution' problem?",
+      "answers": [
+        "The challenge of securely sharing a single secret key between parties",
+        "Not having enough keys",
+        "Keys being too long",
+        "Keys being too short"
+      ],
+      "correctIndex": 0,
+      "explanation": "If the secret key is intercepted during distribution, the entire encrypted communication is compromised."
+    },
+    {
+      "id": "q156",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "How does Diffie-Hellman (DH) help with key exchange?",
+      "answers": [
+        "It allows two parties to create a shared secret key over an insecure channel",
+        "It encrypts files very fast",
+        "It creates digital signatures",
+        "It stores keys in the cloud"
+      ],
+      "correctIndex": 0,
+      "explanation": "DH is a method for securely exchanging cryptographic keys over a public channel."
+    },
+    {
+      "id": "q157",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'RSA' primarily used for?",
+      "answers": [
+        "Asymmetric encryption and digital signatures",
+        "Symmetric encryption of hard drives",
+        "Hashing passwords",
+        "Generating random numbers"
+      ],
+      "correctIndex": 0,
+      "explanation": "RSA is one of the most widely used asymmetric algorithms."
+    },
+    {
+      "id": "q158",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'ECC' (Elliptic Curve Cryptography)?",
+      "answers": [
+        "A type of asymmetric encryption that provides high security with smaller keys",
+        "Encryption for circles",
+        "A symmetric algorithm",
+        "A hashing method"
+      ],
+      "correctIndex": 0,
+      "explanation": "ECC is efficient and popular for mobile devices and web security (SSL/TLS)."
+    },
+    {
+      "id": "q159",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Key Management'?",
+      "answers": [
+        "The lifecycle of generating, storing, distributing, and retiring keys",
+        "Hiring a manager for the IT department",
+        "Using a physical key box",
+        "Changing passwords every day"
+      ],
+      "correctIndex": 0,
+      "explanation": "Proper key management is essential; if keys are lost or stolen, encryption is useless."
+    },
+    {
+      "id": "q160",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Root Certificate'?",
+      "answers": [
+        "A self-signed certificate that identifies the Root CA",
+        "The first certificate ever made",
+        "A certificate for a plant",
+        "A certificate stored on a USB drive"
+      ],
+      "correctIndex": 0,
+      "explanation": "The root certificate is the top of the trust hierarchy in PKI."
+    },
+    {
+      "id": "q161",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Competitor' threat actor's main goal?",
+      "answers": [
+        "Stealing intellectual property or trade secrets",
+        "Shutting down the internet",
+        "Helping the community",
+        "Buying the other company"
+      ],
+      "correctIndex": 0,
+      "explanation": "Competitors use corporate espionage to gain a business advantage."
+    },
+    {
+      "id": "q162",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "Which threat actor has the highest level of 'Resources' and 'Persistence'?",
+      "answers": [
+        "Nation-State Actor",
+        "Script Kiddie",
+        "Hacktivist",
+        "Insider Threat"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nation-states have significant funding and long-term strategic goals."
+    },
+    {
+      "id": "q163",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is an 'Intentional' insider threat?",
+      "answers": [
+        "A disgruntled employee who steals data on purpose",
+        "An employee who accidentally deletes a file",
+        "An employee who forgets their password",
+        "A person who brings a virus on a laptop"
+      ],
+      "correctIndex": 0,
+      "explanation": "Intentional threats involve malicious intent, while unintentional threats are caused by negligence or error."
+    },
+    {
+      "id": "q164",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Supply Chain' attack?",
+      "answers": [
+        "Attacking a target by compromising its suppliers or vendors",
+        "An attack on a warehouse",
+        "Stealing a delivery truck",
+        "A virus in a factory"
+      ],
+      "correctIndex": 0,
+      "explanation": "Supply chain attacks (like the SolarWinds breach) can have a massive impact."
+    },
+    {
+      "id": "q165",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Resource Level' in threat modeling?",
+      "answers": [
+        "The amount of money and manpower available to an attacker",
+        "The number of servers an organization has",
+        "The speed of the internet",
+        "The number of employees"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nation-states have high resources; script kiddies have low resources."
+    },
+    {
+      "id": "q166",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Motivation' in threat actor profiles?",
+      "answers": [
+        "The reason why an actor is attacking (Money, Politics, Revenge)",
+        "How fast the actor can type",
+        "How many tools the actor uses",
+        "The actor's favorite color"
+      ],
+      "correctIndex": 0,
+      "explanation": "Understanding motivation helps in predicting and defending against attacks."
+    },
+    {
+      "id": "q167",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Attribution' in cybersecurity?",
+      "answers": [
+        "The process of identifying the person or group responsible for an attack",
+        "Naming a file",
+        "Giving credit to a programmer",
+        "A type of encryption"
+      ],
+      "correctIndex": 0,
+      "explanation": "Attribution is often difficult because attackers use techniques to hide their identity."
+    },
+    {
+      "id": "q168",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Direct Access' threat vector?",
+      "answers": [
+        "Physical access to a server or workstation",
+        "Logging in with a password",
+        "Using a remote desktop",
+        "Calling the help desk"
+      ],
+      "correctIndex": 0,
+      "explanation": "If an attacker can touch the machine, they can often compromise it."
+    },
+    {
+      "id": "q169",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Wireless' attack vector?",
+      "answers": [
+        "Exploiting Wi-Fi, Bluetooth, or RFID",
+        "Using a wireless mouse",
+        "A cell phone call",
+        "A radio station"
+      ],
+      "correctIndex": 0,
+      "explanation": "Wireless signals are easier to intercept than wired ones."
+    },
+    {
+      "id": "q170",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Cloud' attack surface?",
+      "answers": [
+        "All the resources and services an organization has in the cloud",
+        "The sky on a rainy day",
+        "A type of weather app",
+        "A backup drive"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloud services must be properly configured to prevent unauthorized access."
+    },
+    {
+      "id": "q171",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Supply Chain' attack surface?",
+      "answers": [
+        "The risk introduced by all third-party software and hardware providers",
+        "The road where delivery trucks drive",
+        "A list of all products in a store",
+        "A chain link fence"
+      ],
+      "correctIndex": 0,
+      "explanation": "Every vendor you use adds to your attack surface."
+    },
+    {
+      "id": "q172",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Human' attack surface?",
+      "answers": [
+        "The people in an organization who can be targeted by social engineering",
+        "The physical body of an employee",
+        "A type of biology class",
+        "A crowd of people"
+      ],
+      "correctIndex": 0,
+      "explanation": "Training employees is the best way to reduce the human attack surface."
+    },
+    {
+      "id": "q173",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Software' attack surface?",
+      "answers": [
+        "All the code, applications, and services running on a system",
+        "The box the software comes in",
+        "A mouse and keyboard",
+        "A computer monitor"
+      ],
+      "correctIndex": 0,
+      "explanation": "Removing unnecessary software reduces the attack surface."
+    },
+    {
+      "id": "q174",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Network' attack surface?",
+      "answers": [
+        "All the ports, protocols, and services exposed to the network",
+        "A fishing net",
+        "A group of friends",
+        "A TV station"
+      ],
+      "correctIndex": 0,
+      "explanation": "Firewalls and network segmentation help manage the network attack surface."
+    },
+    {
+      "id": "q175",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vulnerability Management'?",
+      "answers": [
+        "The process of identifying, prioritizing, and fixing security flaws",
+        "Managing people who are sad",
+        "A type of antivirus",
+        "A list of old computers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Regular scanning and patching are key parts of vulnerability management."
+    },
+    {
+      "id": "q176",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Influence' in social engineering?",
+      "answers": [
+        "Using psychological tactics to get someone to do something",
+        "Being famous on social media",
+        "A type of cold medicine",
+        "The power of a boss"
+      ],
+      "correctIndex": 0,
+      "explanation": "Principles like authority, urgency, and scarcity are influence tactics."
+    },
+    {
+      "id": "q177",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Tailgating' vs 'Piggybacking'?",
+      "answers": [
+        "Tailgating is without consent; Piggybacking is with consent",
+        "They are the same",
+        "Tailgating is for cars; Piggybacking is for computers",
+        "Piggybacking is without consent; Tailgating is with consent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Both involve following someone into a secure area, but piggybacking usually implies the authorized person knows."
+    },
+    {
+      "id": "q178",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Badge Reader'?",
+      "answers": [
+        "A device that reads access cards",
+        "A person who checks ID cards",
+        "A machine that prints labels",
+        "A type of computer screen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Badge readers are a standard physical security control for door access."
+    },
+    {
+      "id": "q179",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Hot and Cold Aisles'?",
+      "answers": [
+        "A layout for data centers to manage airflow and cooling",
+        "A grocery store section",
+        "A type of HVAC system",
+        "A weather phenomenon"
+      ],
+      "correctIndex": 0,
+      "explanation": "Servers face each other in 'cold' aisles, and their backs face each other in 'hot' aisles."
+    },
+    {
+      "id": "q180",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Physical Port Security'?",
+      "answers": [
+        "Physically blocking unused USB or Ethernet ports",
+        "Checking ships at a harbor",
+        "A firewall for the network",
+        "A password on a router"
+      ],
+      "correctIndex": 0,
+      "explanation": "Physical port blockers or locking cabinets help prevent unauthorized devices from being connected."
+    },
+    {
+      "id": "q181",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Motion Detection'?",
+      "answers": [
+        "Sensors that detect movement and trigger an alert",
+        "A type of exercise",
+        "A video game controller",
+        "A fast car"
+      ],
+      "correctIndex": 0,
+      "explanation": "Motion detectors are part of a detective physical security system."
+    },
+    {
+      "id": "q182",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Asset Tagging'?",
+      "answers": [
+        "Putting physical stickers with IDs on equipment",
+        "Playing a game in the office",
+        "Naming a server",
+        "Writing a price on a laptop"
+      ],
+      "correctIndex": 0,
+      "explanation": "Asset tags help track and identify hardware for inventory and security purposes."
+    },
+    {
+      "id": "q183",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Logging' in physical security?",
+      "answers": [
+        "Keeping a record of who enters and leaves a facility",
+        "Cutting down trees",
+        "Writing code",
+        "Restarting a server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Visitor logs and badge reader records provide an audit trail of physical access."
+    },
+    {
+      "id": "q184",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Malware'?",
+      "answers": [
+        "Malicious software designed to cause harm",
+        "Bad hardware",
+        "A type of clothing",
+        "A slow computer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Malware is a broad term for viruses, worms, trojans, etc."
+    },
+    {
+      "id": "q185",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Virus'?",
+      "answers": [
+        "Malware that requires a host file to replicate",
+        "A standalone malicious program",
+        "A type of biological illness",
+        "A computer error"
+      ],
+      "correctIndex": 0,
+      "explanation": "Viruses attach to legitimate programs and spread when the program is run."
+    },
+    {
+      "id": "q186",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Worm'?",
+      "answers": [
+        "Self-replicating malware that spreads across a network",
+        "An insect",
+        "A small cable",
+        "A type of storage device"
+      ],
+      "correctIndex": 0,
+      "explanation": "Worms do not need a host file or user interaction to spread."
+    },
+    {
+      "id": "q187",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Trojan'?",
+      "answers": [
+        "Malware disguised as legitimate software",
+        "A strong computer",
+        "A type of firewall",
+        "A fast network"
+      ],
+      "correctIndex": 0,
+      "explanation": "Trojans rely on users being tricked into installing them."
+    },
+    {
+      "id": "q188",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Ransomware'?",
+      "answers": [
+        "Malware that encrypts files and demands payment",
+        "Software that costs a lot of money",
+        "A type of backup software",
+        "A virus that steals passwords"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ransomware is one of the most significant threats to organizations today."
+    },
+    {
+      "id": "q189",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Spyware'?",
+      "answers": [
+        "Malware that secretly monitors user activity",
+        "Software for secret agents",
+        "A type of camera",
+        "A secure browser"
+      ],
+      "correctIndex": 0,
+      "explanation": "Spyware can record keystrokes, screenshots, and browsing habits."
+    },
+    {
+      "id": "q190",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Rootkit'?",
+      "answers": [
+        "Malware that gains administrative control and hides itself",
+        "A tool for fixing computers",
+        "A type of base-level software",
+        "A virus that only affects the hard drive"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rootkits are very difficult to detect because they often modify the operating system."
+    },
+    {
+      "id": "q191",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Keylogger'?",
+      "answers": [
+        "A type of spyware that records every keystroke",
+        "A person who makes keys",
+        "A device that locks doors",
+        "A tool for typing fast"
+      ],
+      "correctIndex": 0,
+      "explanation": "Keyloggers are used to steal passwords and other sensitive information."
+    },
+    {
+      "id": "q192",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Adware'?",
+      "answers": [
+        "Malware that displays unwanted advertisements",
+        "Software for marketing companies",
+        "A type of firewall",
+        "A tool for blocking ads"
+      ],
+      "correctIndex": 0,
+      "explanation": "Adware is often bundled with free software and can be very annoying and sometimes malicious."
+    },
+    {
+      "id": "q193",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Botnet'?",
+      "answers": [
+        "A collection of compromised 'zombie' computers controlled by a master",
+        "A network of robots",
+        "A fast internet connection",
+        "A type of server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Botnets are used for DDoS attacks, spam, and other illegal activities."
+    },
+    {
+      "id": "q194",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Logic Bomb'?",
+      "answers": [
+        "Malicious code that executes when a specific condition is met",
+        "A bomb that uses logic",
+        "A type of computer error",
+        "A puzzle game"
+      ],
+      "correctIndex": 0,
+      "explanation": "A logic bomb might 'explode' (e.g., delete files) on a certain date or if a specific user account is deleted."
+    },
+    {
+      "id": "q195",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Backdoor'?",
+      "answers": [
+        "A hidden way to bypass normal authentication",
+        "The rear exit of a building",
+        "A type of network cable",
+        "A virus that steals data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Attackers often install backdoors to maintain access to a compromised system."
+    },
+    {
+      "id": "q196",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Fileless Malware'?",
+      "answers": [
+        "Malware that operates in memory without saving files to disk",
+        "A virus that deletes all files",
+        "A computer with no hard drive",
+        "A type of cloud storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Fileless malware is harder to detect with traditional antivirus software."
+    },
+    {
+      "id": "q197",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Brute Force' attack?",
+      "answers": [
+        "Trying every possible password until one works",
+        "Using physical force to open a door",
+        "A type of malware",
+        "Guessing common passwords"
+      ],
+      "correctIndex": 0,
+      "explanation": "Brute force attacks are slow but guaranteed to work if enough time is given."
+    },
+    {
+      "id": "q198",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Dictionary Attack'?",
+      "answers": [
+        "Using a list of common words and passwords for cracking",
+        "Stealing a dictionary",
+        "A virus that targets word processors",
+        "A type of spelling error"
+      ],
+      "correctIndex": 0,
+      "explanation": "Dictionary attacks are much faster than brute force because they target likely passwords."
+    },
+    {
+      "id": "q199",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Password Spraying'?",
+      "answers": [
+        "Trying a few common passwords against many different accounts",
+        "Guessing many passwords for one account",
+        "Using a tool to generate passwords",
+        "Writing down passwords"
+      ],
+      "correctIndex": 0,
+      "explanation": "Password spraying avoids account lockouts by only trying a few attempts per user."
+    },
+    {
+      "id": "q200",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Credential Stuffing'?",
+      "answers": [
+        "Using leaked username/password pairs from one site on other sites",
+        "Filling out forms automatically",
+        "Saving passwords in a browser",
+        "A type of phishing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Credential stuffing relies on the fact that many people reuse passwords across different services."
+    },
+    {
+      "id": "q201",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Rainbow Table'?",
+      "answers": [
+        "A precomputed table of hashes for cracking passwords",
+        "A colorful piece of furniture",
+        "A type of network diagram",
+        "A list of IP addresses"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rainbow tables allow attackers to quickly look up the plain-text password for a given hash."
+    },
+    {
+      "id": "q202",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'On-path Attack' (Man-in-the-Middle)?",
+      "answers": [
+        "An attacker intercepting communication between two parties",
+        "A person standing in a hallway",
+        "A type of road construction",
+        "A virus on a router"
+      ],
+      "correctIndex": 0,
+      "explanation": "The attacker can see, and sometimes modify, the data being sent."
+    },
+    {
+      "id": "q203",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'ARP Poisoning'?",
+      "answers": [
+        "Sending fake ARP messages to map an IP to a different MAC address",
+        "A type of biological attack",
+        "A virus on a printer",
+        "A slow network connection"
+      ],
+      "correctIndex": 0,
+      "explanation": "ARP poisoning is often used to launch on-path attacks on a local network."
+    },
+    {
+      "id": "q204",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'DNS Poisoning'?",
+      "answers": [
+        "Providing false information to a DNS cache to redirect users",
+        "A virus on a DNS server",
+        "A type of phishing",
+        "Blocking all DNS traffic"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS poisoning can send users to malicious websites even if they type the correct URL."
+    },
+    {
+      "id": "q205",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Domain Hijacking'?",
+      "answers": [
+        "Stealing control of a domain name from the legitimate owner",
+        "Taking over a ship",
+        "A type of phishing",
+        "A virus on a computer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Domain hijacking can result in the loss of email, website, and brand reputation."
+    },
+    {
+      "id": "q206",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Zero-day' attack?",
+      "answers": [
+        "An attack exploiting a vulnerability that is unknown to the vendor",
+        "An attack that happens on the first day of the month",
+        "A very fast attack",
+        "An attack that costs zero dollars"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zero-day attacks are dangerous because there are no patches or signatures available to stop them."
+    },
+    {
+      "id": "q207",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Replay Attack'?",
+      "answers": [
+        "Intercepting a valid data transmission and sending it again later",
+        "Watching a video twice",
+        "A type of computer game",
+        "A virus that repeats its actions"
+      ],
+      "correctIndex": 0,
+      "explanation": "Replay attacks are often used to bypass authentication (e.g., replaying a login session)."
+    },
+    {
+      "id": "q208",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'SQL Injection' (SQLi)?",
+      "answers": [
+        "Inserting malicious SQL code into a database query via user input",
+        "A type of vaccine",
+        "A database backup method",
+        "A way to speed up a website"
+      ],
+      "correctIndex": 0,
+      "explanation": "SQLi can allow attackers to steal, modify, or delete database data."
+    },
+    {
+      "id": "q209",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Cross-Site Scripting' (XSS)?",
+      "answers": [
+        "Injecting malicious scripts into a web page viewed by other users",
+        "A type of computer code",
+        "A virus that targets browsers",
+        "A way to share files between sites"
+      ],
+      "correctIndex": 0,
+      "explanation": "XSS can be used to steal session cookies, deface websites, or redirect users."
+    },
+    {
+      "id": "q210",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Cross-Site Request Forgery' (CSRF)?",
+      "answers": [
+        "Tricking a victim's browser into performing an action on a different site",
+        "A type of phishing",
+        "A virus on a web server",
+        "A way to steal passwords"
+      ],
+      "correctIndex": 0,
+      "explanation": "CSRF exploits the trust a site has in the user's browser."
+    },
+    {
+      "id": "q211",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Privilege Escalation'?",
+      "answers": [
+        "Gaining higher-level permissions than intended",
+        "Getting a promotion at work",
+        "Changing a password",
+        "Moving a computer to a new floor"
+      ],
+      "correctIndex": 0,
+      "explanation": "Attackers use vulnerabilities to move from a standard user account to an administrative one."
+    },
+    {
+      "id": "q212",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vertical Privilege Escalation'?",
+      "answers": [
+        "Gaining a higher level of access (e.g., User to Admin)",
+        "Gaining access to another user's account at the same level",
+        "Moving to a higher floor in a building",
+        "Upgrading a server's RAM"
+      ],
+      "correctIndex": 0,
+      "explanation": "Vertical escalation is moving up the hierarchy of permissions."
+    },
+    {
+      "id": "q213",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Horizontal Privilege Escalation'?",
+      "answers": [
+        "Gaining access to resources belonging to another user with similar permissions",
+        "Gaining admin rights",
+        "Moving to a different desk",
+        "Connecting to a new network"
+      ],
+      "correctIndex": 0,
+      "explanation": "Horizontal escalation is moving sideways across accounts at the same permission level."
+    },
+    {
+      "id": "q214",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Lateral Movement' in an attack?",
+      "answers": [
+        "The process by which an attacker spreads through a network after initial entry",
+        "Moving a computer sideways",
+        "Changing network cables",
+        "A type of dance"
+      ],
+      "correctIndex": 0,
+      "explanation": "Lateral movement involves exploring the network to find high-value targets."
+    },
+    {
+      "id": "q215",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Persistence'?",
+      "answers": [
+        "The ability of an attacker to maintain access even after a reboot or password change",
+        "Trying a password many times",
+        "A long-term project",
+        "Staying at work late"
+      ],
+      "correctIndex": 0,
+      "explanation": "Attackers use backdoors and registry keys to ensure they can get back into a system."
+    },
+    {
+      "id": "q216",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Detective Control' example in physical security?",
+      "answers": [
+        "CCTV recording",
+        "A locked door",
+        "A security policy",
+        "A firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "CCTV detects and records events after they happen."
+    },
+    {
+      "id": "q217",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Preventive Control' example in physical security?",
+      "answers": [
+        "A physical lock",
+        "An alarm system",
+        "A motion sensor",
+        "An incident log"
+      ],
+      "correctIndex": 0,
+      "explanation": "Locks prevent unauthorized people from entering a space."
+    },
+    {
+      "id": "q218",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Deterrent Control' example in physical security?",
+      "answers": [
+        "A 'Warning: Security Cameras in Use' sign",
+        "A backup generator",
+        "A fire extinguisher",
+        "A password"
+      ],
+      "correctIndex": 0,
+      "explanation": "Signs discourage people from attempting to break in."
+    },
+    {
+      "id": "q219",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Corrective Control' example in physical security?",
+      "answers": [
+        "Repairing a broken window after a break-in",
+        "Installing a new fence",
+        "Hiring a security guard",
+        "Writing a report"
+      ],
+      "correctIndex": 0,
+      "explanation": "Corrective controls restore security after it has been compromised."
+    },
+    {
+      "id": "q220",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Industrial Camouflage'?",
+      "answers": [
+        "Making a secure facility look like an ordinary, unimportant building",
+        "Wearing camo clothes in a factory",
+        "Painting a server green",
+        "A type of malware for industry"
+      ],
+      "correctIndex": 0,
+      "explanation": "If an attacker doesn't know a building is important, they are less likely to target it."
+    },
+    {
+      "id": "q221",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Lighting' as a physical security control?",
+      "answers": [
+        "Providing enough light to deter attackers and improve surveillance",
+        "Turning off lights to save money",
+        "A type of flash for a camera",
+        "A weather event"
+      ],
+      "correctIndex": 0,
+      "explanation": "Well-lit areas are harder for attackers to hide in."
+    },
+    {
+      "id": "q222",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Security Guard' as a control?",
+      "answers": [
+        "A human presence that provides deterrent, preventive, and detective benefits",
+        "A software program",
+        "A type of lock",
+        "A security policy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Guards are a versatile but expensive physical security control."
+    },
+    {
+      "id": "q223",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Two-Person Integrity' (TPI)?",
+      "answers": [
+        "Requiring two people to be present for a sensitive task",
+        "Being honest with your partner",
+        "Having two passwords",
+        "Two people working at the same desk"
+      ],
+      "correctIndex": 0,
+      "explanation": "TPI prevents a single person from performing a critical action alone (like opening a vault)."
+    },
+    {
+      "id": "q224",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Tailgating'?",
+      "answers": [
+        "Following someone into a building without their knowledge",
+        "Following someone with their knowledge",
+        "A party at a stadium",
+        "Using someone else's badge"
+      ],
+      "correctIndex": 0,
+      "explanation": "Tailgating is a common way to bypass physical access controls."
+    },
+    {
+      "id": "q225",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Piggybacking'?",
+      "answers": [
+        "Following someone into a building with their consent",
+        "Following someone without their consent",
+        "Riding on someone's back",
+        "Using two badges at once"
+      ],
+      "correctIndex": 0,
+      "explanation": "In piggybacking, the authorized person knowingly allows the other person to enter."
+    },
+    {
+      "id": "q226",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Change Management' board approval?",
+      "answers": [
+        "The formal sign-off from stakeholders for a system change",
+        "A board game played by IT",
+        "A list of all changes made",
+        "A type of wooden board"
+      ],
+      "correctIndex": 0,
+      "explanation": "The Change Advisory Board (CAB) provides this approval."
+    },
+    {
+      "id": "q227",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Technical Control' for change management?",
+      "answers": [
+        "Automated software deployment tools with built-in checks",
+        "A manual checklist",
+        "A physical lock on the server",
+        "A meeting with the boss"
+      ],
+      "correctIndex": 0,
+      "explanation": "Automated tools ensure changes are applied consistently and safely."
+    },
+    {
+      "id": "q228",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Configuration Baseline'?",
+      "answers": [
+        "A set of standard security settings for a system",
+        "The bottom of a computer case",
+        "A type of network cable",
+        "A minimum speed for the internet"
+      ],
+      "correctIndex": 0,
+      "explanation": "Baselines ensure all systems start with a known, secure configuration."
+    },
+    {
+      "id": "q229",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Configuration Drift'?",
+      "answers": [
+        "When a system's settings slowly move away from the approved baseline",
+        "A car racing technique",
+        "Moving a server to a new room",
+        "A type of network error"
+      ],
+      "correctIndex": 0,
+      "explanation": "Drift happens as manual changes and updates are made over time without proper tracking."
+    },
+    {
+      "id": "q230",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Infrastructure as Code' (IaC)?",
+      "answers": [
+        "Managing and provisioning infrastructure through machine-readable definition files",
+        "Writing code on a piece of paper",
+        "A type of high-speed internet",
+        "A physical server made of code"
+      ],
+      "correctIndex": 0,
+      "explanation": "IaC allows for consistent and repeatable deployment of infrastructure, improving change management."
+    },
+    {
+      "id": "q231",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Change Management Documentation'?",
+      "answers": [
+        "Records of what was changed, who changed it, and when",
+        "A book about security",
+        "A list of all employees",
+        "A user manual for a laptop"
+      ],
+      "correctIndex": 0,
+      "explanation": "Documentation is essential for auditing and troubleshooting changes."
+    },
+    {
+      "id": "q232",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Validation' in change management?",
+      "answers": [
+        "Confirming that a change achieved its intended goal and didn't cause issues",
+        "Checking a parking ticket",
+        "Giving a person a high-five",
+        "A type of encryption"
+      ],
+      "correctIndex": 0,
+      "explanation": "Post-implementation testing is used for validation."
+    },
+    {
+      "id": "q233",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Rollback'?",
+      "answers": [
+        "Returning a system to its state before a change was made",
+        "A type of exercise",
+        "A price discount",
+        "A way to move a server on wheels"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rollback is the primary action taken when a change fails."
+    },
+    {
+      "id": "q234",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Managerial' (Administrative) control?",
+      "answers": [
+        "Policies, procedures, and training",
+        "A firewall",
+        "A lock",
+        "A backup"
+      ],
+      "correctIndex": 0,
+      "explanation": "Administrative controls are the 'paperwork' and 'people' part of security."
+    },
+    {
+      "id": "q235",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Operational' control?",
+      "answers": [
+        "Processes performed by people in their daily roles (like backups or patching)",
+        "A strategic plan",
+        "A physical barrier",
+        "A router configuration"
+      ],
+      "correctIndex": 0,
+      "explanation": "Operational controls focus on the day-to-day running of security."
+    },
+    {
+      "id": "q236",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Technical' control?",
+      "answers": [
+        "Hardware or software used to protect a system (like MFA or IPS)",
+        "A training manual",
+        "A security guard",
+        "A written policy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Technical (Logical) controls use technology to enforce security."
+    },
+    {
+      "id": "q237",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Control Transparency'?",
+      "answers": [
+        "A security control that is invisible to the user",
+        "A clear plastic case for a server",
+        "A policy that everyone can read",
+        "A type of window"
+      ],
+      "correctIndex": 0,
+      "explanation": "Transparent controls (like a background virus scan) do not disrupt the user's workflow."
+    },
+    {
+      "id": "q238",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Shadow IT' as a threat actor source?",
+      "answers": [
+        "Employees who use unapproved technology out of convenience",
+        "A secret spy",
+        "A hacker from the dark web",
+        "An IT department that works at night"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shadow IT is an unintentional insider threat."
+    },
+    {
+      "id": "q239",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Nation-State' sophistication?",
+      "answers": [
+        "Extremely high; they use custom-built exploits and have massive funding",
+        "Low; they use common tools",
+        "Medium; they are motivated by politics",
+        "Unknown"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nation-states are the most sophisticated threat actors."
+    },
+    {
+      "id": "q240",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Broker' in the context of cybercrime?",
+      "answers": [
+        "A middleman who sells stolen data or access to other criminals",
+        "A person who buys stocks",
+        "A type of network switch",
+        "A security guard"
+      ],
+      "correctIndex": 0,
+      "explanation": "Brokers are part of the organized crime ecosystem."
+    },
+    {
+      "id": "q241",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is a 'Hacktivist's' primary motivation?",
+      "answers": [
+        "Political or ideological change",
+        "Money",
+        "Espionage",
+        "Fun"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hacktivists use cyber attacks to make a statement or promote a cause."
+    },
+    {
+      "id": "q242",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Organized Crime's' primary motivation?",
+      "answers": [
+        "Financial gain",
+        "Politics",
+        "Revenge",
+        "Education"
+      ],
+      "correctIndex": 0,
+      "explanation": "Organized crime groups are in it for the money."
+    },
+    {
+      "id": "q243",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Script Kiddie' motivation?",
+      "answers": [
+        "Seeking thrill, status, or learning",
+        "Nation-state strategic goals",
+        "Political revolution",
+        "Stealing trade secrets"
+      ],
+      "correctIndex": 0,
+      "explanation": "Script kiddies often want to prove themselves or just see what they can do."
+    },
+    {
+      "id": "q244",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Insider' motivation?",
+      "answers": [
+        "Greed, revenge, or coercion (malicious) or simple negligence",
+        "Saving the world",
+        "Hacking for a foreign government",
+        "Testing a new tool"
+      ],
+      "correctIndex": 0,
+      "explanation": "Insider motivation varies widely depending on the individual."
+    },
+    {
+      "id": "q245",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Attack Surface Reduction'?",
+      "answers": [
+        "Removing unnecessary software, services, and users to decrease risk",
+        "Making a screen smaller",
+        "Cleaning a keyboard",
+        "Reducing the number of employees"
+      ],
+      "correctIndex": 0,
+      "explanation": "Less complexity means fewer opportunities for an attacker to find a vulnerability."
+    },
+    {
+      "id": "q246",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vulnerability Scanning'?",
+      "answers": [
+        "Automated process of finding known weaknesses in a system",
+        "Looking for holes in a fence",
+        "A type of physical search",
+        "Checking a computer for dust"
+      ],
+      "correctIndex": 0,
+      "explanation": "Regular scans are vital for maintaining a strong security posture."
+    },
+    {
+      "id": "q247",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Penetration Testing' (Pen Test)?",
+      "answers": [
+        "A simulated cyber attack against a system to check for exploitable vulnerabilities",
+        "Testing the ink in a pen",
+        "A type of physical stress test",
+        "A network speed test"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pen testing goes a step further than scanning by actually trying to exploit the findings."
+    },
+    {
+      "id": "q248",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Phishing' targeting?",
+      "answers": [
+        "The user's lack of awareness or vigilance",
+        "A flaw in the firewall",
+        "A bug in the OS",
+        "A hardware defect"
+      ],
+      "correctIndex": 0,
+      "explanation": "Phishing is a social attack, not a technical one."
+    },
+    {
+      "id": "q249",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Zero-Day' vulnerability?",
+      "answers": [
+        "A flaw for which no patch or defense exists yet",
+        "A flaw that is 0 years old",
+        "A flaw discovered by a 0-year-old",
+        "A flaw with 0 impact"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zero-day vulnerabilities are highly prized by attackers."
+    },
+    {
+      "id": "q250",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Supply Chain' security?",
+      "answers": [
+        "Ensuring that third-party vendors and products are secure",
+        "Locking up a metal chain",
+        "A type of warehouse security",
+        "Hiring a new supplier"
+      ],
+      "correctIndex": 0,
+      "explanation": "You are only as secure as your weakest link in the supply chain."
+    },
+    {
+      "id": "q251",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Social Proof' (Consensus)?",
+      "answers": [
+        "Tricking a person into thinking others have already taken an action",
+        "Showing a photo of a group",
+        "A type of social media post",
+        "A letter of recommendation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Consensus makes the victim feel safer about performing the requested action."
+    },
+    {
+      "id": "q252",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Reciprocity' in social engineering?",
+      "answers": [
+        "The feeling of obligation to return a favor",
+        "A type of math problem",
+        "A network signal going both ways",
+        "A shared password"
+      ],
+      "correctIndex": 0,
+      "explanation": "If an attacker does something small for the victim, the victim is more likely to help them later."
+    },
+    {
+      "id": "q253",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Ransomware-as-a-Service' (RaaS)?",
+      "answers": [
+        "A business model where ransomware developers lease their tools to other criminals",
+        "A type of cloud storage",
+        "A security service that stops ransomware",
+        "A way to pay a ransom with a credit card"
+      ],
+      "correctIndex": 0,
+      "explanation": "RaaS allows low-skill attackers to launch sophisticated ransomware campaigns."
+    },
+    {
+      "id": "q254",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Data Exfiltration'?",
+      "answers": [
+        "The unauthorized transfer of data out of an organization",
+        "Deleting data",
+        "Compressing data",
+        "Backing up data to a cloud"
+      ],
+      "correctIndex": 0,
+      "explanation": "Exfiltration is the final goal of many data breaches."
+    },
+    {
+      "id": "q255",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Command and Control' (C2)?",
+      "answers": [
+        "The infrastructure used by an attacker to send instructions to compromised systems",
+        "A keyboard shortcut",
+        "A type of manager in an office",
+        "A main server at a company"
+      ],
+      "correctIndex": 0,
+      "explanation": "C2 is the 'brain' of a botnet."
+    },
+    {
+      "id": "q256",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Wiping'?",
+      "answers": [
+        "Using software to overwrite data multiple times so it cannot be recovered",
+        "Cleaning a screen",
+        "Deleting a file once",
+        "Formatting a hard drive"
+      ],
+      "correctIndex": 0,
+      "explanation": "Wiping is a secure data destruction method for reusable media."
+    },
+    {
+      "id": "q257",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Shredding' in physical security?",
+      "answers": [
+        "Physically cutting paper or media into tiny pieces",
+        "Playing a guitar fast",
+        "Exercising at the gym",
+        "Breaking a server with a hammer"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shredding ensures that information cannot be reconstructed from physical trash."
+    },
+    {
+      "id": "q258",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Gap Analysis' used for?",
+      "answers": [
+        "Determining the difference between current security and required security",
+        "Measuring the distance between servers",
+        "A type of network scan",
+        "Checking for missing firewall rules"
+      ],
+      "correctIndex": 0,
+      "explanation": "Gap analysis helps organizations prioritize their security improvements."
+    },
+    {
+      "id": "q259",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Baseline'?",
+      "answers": [
+        "A reference point used for comparison",
+        "The bottom of a graph",
+        "A type of network speed",
+        "A standard password"
+      ],
+      "correctIndex": 0,
+      "explanation": "Baselines are used in configuration, performance, and security monitoring."
+    },
+    {
+      "id": "q260",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Security Posture'?",
+      "answers": [
+        "The overall security status of an organization",
+        "How a security guard stands",
+        "A type of exercise",
+        "A list of all firewalls"
+      ],
+      "correctIndex": 0,
+      "explanation": "Posture includes all controls, policies, and risks."
+    },
+    {
+      "id": "q261",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Risk Assessment'?",
+      "answers": [
+        "Identifying and evaluating potential threats and their impact",
+        "Calculating the cost of insurance",
+        "Testing a new firewall",
+        "Hiring a security consultant"
+      ],
+      "correctIndex": 0,
+      "explanation": "Risk assessment is a core part of a security program."
+    },
+    {
+      "id": "q262",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Vulnerability' vs 'Threat'?",
+      "answers": [
+        "Vulnerability is a weakness; Threat is a potential danger that exploits it",
+        "They are the same",
+        "Threat is a weakness; Vulnerability is a danger",
+        "A vulnerability is a person; A threat is a virus"
+      ],
+      "correctIndex": 0,
+      "explanation": "You can have a vulnerability with no threat, or a threat with no vulnerability. Risk happens when they meet."
+    },
+    {
+      "id": "q263",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Remediation'?",
+      "answers": [
+        "The process of fixing a vulnerability or security issue",
+        "A type of school",
+        "A data backup method",
+        "A legal settlement"
+      ],
+      "correctIndex": 0,
+      "explanation": "Remediation is the 'fix' phase of vulnerability management."
+    },
+    {
+      "id": "q264",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Mitigation'?",
+      "answers": [
+        "Reducing the impact or likelihood of a risk without completely fixing it",
+        "A type of bird",
+        "Moving to a new office",
+        "Ignoring a problem"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mitigation is used when a full fix is too expensive or impossible."
+    },
+    {
+      "id": "q265",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Risk Acceptance'?",
+      "answers": [
+        "Deciding that the cost of fixing a risk is higher than the risk itself",
+        "Accepting a new job",
+        "Forgetting a problem",
+        "Paying for a new firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "Acceptance must be a conscious, documented decision by management."
+    },
+    {
+      "id": "q266",
+      "type": "micro_card",
+      "category": "Cybersecurity",
+      "question": "What is 'Risk Transfer'?",
+      "answers": [
+        "Moving the financial impact of a risk to a third party (like insurance)",
+        "Moving a risk to another computer",
+        "Giving a risk to a friend",
+        "Changing a password"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cyber insurance is a common form of risk transfer."
+    }
+  ]
+}

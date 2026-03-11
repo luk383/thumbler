@@ -129,106 +129,121 @@ class DeckLibrarySheet extends ConsumerWidget {
                   ),
                 ),
               ),
-              AppPageIntro(
-                title: l10n.libraryTitle,
-                subtitle: lib.activeDeck == null
-                    ? 'Choose a broad topic deck for the Feed, or unlock Pro for personal and exam content.'
-                    : 'Current focus: ${lib.activeDeck!.title}',
-                trailing: lib.activeDeck == null
-                    ? null
-                    : const AppStatusBadge(
-                        label: 'Active deck',
-                        icon: Icons.layers_outlined,
-                      ),
-              ),
-              const SizedBox(height: 18),
-              OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.white70,
-                  side: BorderSide(color: Colors.white.withAlpha(30)),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                onPressed: lib.isDiscovering ? null : notifier.discoverPacks,
-                icon: const Icon(Icons.refresh, size: 16),
-                label: Text(l10n.libraryRefresh),
-              ),
-              const SizedBox(height: 12),
-              FilledButton.icon(
-                onPressed: () {
-                  if (isPro) {
-                    showAddStudyMaterialSheet(context, ref);
-                    return;
-                  }
-                  openPaywall(context, featureName: 'Personal decks');
-                },
-                icon: Icon(
-                  isPro ? Icons.add_circle_outline : Icons.lock_outline,
-                ),
-                label: Text(
-                  isPro
-                      ? l10n.libraryAddStudyMaterial
-                      : l10n.libraryUnlockPersonalDecks,
-                ),
-              ),
-              const SizedBox(height: 8),
-              if (isPro)
-                TextButton.icon(
-                  onPressed: () => importJsonDeck(context, ref),
-                  icon: const Icon(Icons.file_upload_outlined),
-                  label: Text(l10n.libraryImportJson),
-                )
-              else
-                TextButton.icon(
-                  onPressed: () =>
-                      openPaywall(context, featureName: 'JSON deck import'),
-                  icon: const Icon(Icons.workspace_premium_outlined),
-                  label: Text(l10n.libraryProImport),
-                ),
-              if (!isPro) ...[
-                const SizedBox(height: 12),
-                AppGlassCard(
-                  padding: const EdgeInsets.all(14),
-                  tint: const Color(0xFF6C63FF),
-                  child: Text(
-                    l10n.libraryPublicBuildNote,
-                    style: const TextStyle(color: Colors.white70, fontSize: 12),
-                  ),
-                ),
-              ],
-              const SizedBox(height: 12),
-              if (lib.lastError != null)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Text(
-                    lib.lastError!,
-                    style: const TextStyle(
-                      color: Colors.redAccent,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
               Expanded(
-                child: lib.isDiscovering && lib.packs.isEmpty
-                    ? const Center(
-                        child: CircularProgressIndicator(
-                          color: Color(0xFF6C63FF),
-                        ),
-                      )
-                    : lib.packs.isEmpty
-                    ? const _EmptyLibraryState()
-                    : _LibraryHub(
-                        packs: lib.packs,
-                        activeDeckId: lib.activeDeckId,
-                        isLoading: lib.isLoading,
-                        resultFor: lib.resultFor,
-                        progressByDeck: progressByDeck,
-                        onActivate: activateDeck,
-                        onStudy: goToStudy,
-                        onPractice: goToPractice,
-                        onExam: goToExam,
-                        onExport: exportDeck,
-                        onShare: shareDeck,
+                child: CustomScrollView(
+                  shrinkWrap: true,
+                  slivers: [
+                    SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          AppPageIntro(
+                            title: l10n.libraryTitle,
+                            subtitle: lib.activeDeck == null
+                                ? 'Choose a broad topic deck for the Feed, or unlock Pro for personal and exam content.'
+                                : 'Current focus: ${lib.activeDeck!.title}',
+                            trailing: lib.activeDeck == null
+                                ? null
+                                : const AppStatusBadge(
+                                    label: 'Active deck',
+                                    icon: Icons.layers_outlined,
+                                  ),
+                          ),
+                          const SizedBox(height: 18),
+                          OutlinedButton.icon(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white70,
+                              side: BorderSide(color: Colors.white.withAlpha(30)),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                            ),
+                            onPressed: lib.isDiscovering ? null : notifier.discoverPacks,
+                            icon: const Icon(Icons.refresh, size: 16),
+                            label: Text(l10n.libraryRefresh),
+                          ),
+                          const SizedBox(height: 12),
+                          FilledButton.icon(
+                            onPressed: () {
+                              if (isPro) {
+                                showAddStudyMaterialSheet(context, ref);
+                                return;
+                              }
+                              openPaywall(context, featureName: 'Personal decks');
+                            },
+                            icon: Icon(
+                              isPro ? Icons.add_circle_outline : Icons.lock_outline,
+                            ),
+                            label: Text(
+                              isPro
+                                  ? l10n.libraryAddStudyMaterial
+                                  : l10n.libraryUnlockPersonalDecks,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          if (isPro)
+                            TextButton.icon(
+                              onPressed: () => importJsonDeck(context, ref),
+                              icon: const Icon(Icons.file_upload_outlined),
+                              label: Text(l10n.libraryImportJson),
+                            )
+                          else
+                            TextButton.icon(
+                              onPressed: () =>
+                                  openPaywall(context, featureName: 'JSON deck import'),
+                              icon: const Icon(Icons.workspace_premium_outlined),
+                              label: Text(l10n.libraryProImport),
+                            ),
+                          if (!isPro) ...[
+                            const SizedBox(height: 12),
+                            AppGlassCard(
+                              padding: const EdgeInsets.all(14),
+                              tint: const Color(0xFF6C63FF),
+                              child: Text(
+                                l10n.libraryPublicBuildNote,
+                                style: const TextStyle(color: Colors.white70, fontSize: 12),
+                              ),
+                            ),
+                          ],
+                          const SizedBox(height: 12),
+                          if (lib.lastError != null)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: Text(
+                                lib.lastError!,
+                                style: const TextStyle(
+                                  color: Colors.redAccent,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                        ],
                       ),
+                    ),
+                    SliverFillRemaining(
+                      hasScrollBody: true,
+                      child: lib.isDiscovering && lib.packs.isEmpty
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: Color(0xFF6C63FF),
+                              ),
+                            )
+                          : lib.packs.isEmpty
+                          ? const _EmptyLibraryState()
+                          : _LibraryHub(
+                              packs: lib.packs,
+                              activeDeckId: lib.activeDeckId,
+                              isLoading: lib.isLoading,
+                              resultFor: lib.resultFor,
+                              progressByDeck: progressByDeck,
+                              onActivate: activateDeck,
+                              onStudy: goToStudy,
+                              onPractice: goToPractice,
+                              onExam: goToExam,
+                              onExport: exportDeck,
+                              onShare: shareDeck,
+                            ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

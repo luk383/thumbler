@@ -51,8 +51,8 @@ class UserDeckDraft {
       if (question.question.trim().isEmpty) {
         issues.add('$label is missing text');
       }
-      if (question.answers.length != 4) {
-        issues.add('$label must have exactly 4 answers');
+      if (question.answers.length < 2 || question.answers.length > 4) {
+        issues.add('$label must have 2 to 4 answers (found ${question.answers.length})');
       }
       final hasBlankAnswer = question.answers.any(
         (answer) => answer.trim().isEmpty,
