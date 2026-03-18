@@ -21,6 +21,7 @@ Future<void> showAddStudyMaterialSheet(
 ) async {
   await showModalBottomSheet<void>(
     context: context,
+    isScrollControlled: true,
     backgroundColor: const Color(0xFF0F0D1E),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(24)),

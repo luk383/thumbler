@@ -1,0 +1,267 @@
+{
+  "id": "dion_sec701_section_16",
+  "title": "Security+ SY0-701 — Section 16: Endpoint Security",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Jason Dion Security+ SY0-701 — Section 16: Endpoint Security. Domain: Security Architecture (3.0) & Security Operations (4.0).",
+  "version": "1",
+  "domains": ["Security Architecture", "Security Operations"],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "s16_q1",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "EDR",
+      "difficulty": 2,
+      "question": "What does EDR stand for and what is its purpose?",
+      "answers": [
+        "Endpoint Detection and Response — detects and responds to threats on endpoints",
+        "Enterprise Data Recovery — backs up endpoint data",
+        "External Device Restriction — blocks USB devices",
+        "Encrypted Data Repository — stores encrypted files"
+      ],
+      "correctIndex": 0,
+      "explanation": "EDR (Endpoint Detection and Response) continuously monitors endpoints to detect, investigate, and respond to cybersecurity threats in real time."
+    },
+    {
+      "id": "s16_q2",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "Antivirus",
+      "difficulty": 1,
+      "question": "What is the difference between signature-based and heuristic antivirus detection?",
+      "answers": [
+        "Signature-based matches known malware patterns; heuristic analyzes behavior for unknown threats",
+        "Signature-based is newer; heuristic is older",
+        "Signature-based is faster; heuristic is more accurate",
+        "They are the same technique"
+      ],
+      "correctIndex": 0,
+      "explanation": "Signature-based detection compares files against a database of known malware signatures. Heuristic detection uses behavioral analysis to identify potentially malicious activity from unknown threats."
+    },
+    {
+      "id": "s16_q3",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "Host-based Firewall",
+      "difficulty": 1,
+      "question": "What is a host-based firewall?",
+      "answers": [
+        "A software firewall installed on individual endpoints to control inbound and outbound traffic",
+        "A firewall built into network routers",
+        "A cloud-based firewall service",
+        "A hardware appliance protecting multiple servers"
+      ],
+      "correctIndex": 0,
+      "explanation": "A host-based firewall runs on individual devices (endpoints) and controls network traffic to and from that specific host, providing an additional layer of defense."
+    },
+    {
+      "id": "s16_q4",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "DLP",
+      "difficulty": 2,
+      "question": "What is Data Loss Prevention (DLP)?",
+      "answers": [
+        "Technology that detects and prevents unauthorized data exfiltration",
+        "A backup system for user data",
+        "Software for recovering deleted files",
+        "A type of encryption for storage devices"
+      ],
+      "correctIndex": 0,
+      "explanation": "DLP solutions monitor, detect, and block sensitive data from leaving the organization through endpoints, network, or cloud services."
+    },
+    {
+      "id": "s16_q5",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "FDE",
+      "difficulty": 1,
+      "question": "What is Full Disk Encryption (FDE)?",
+      "answers": [
+        "Encrypting all data on a storage device to protect it if the device is lost or stolen",
+        "Encrypting only sensitive files",
+        "Encrypting network traffic",
+        "Encrypting email attachments"
+      ],
+      "correctIndex": 0,
+      "explanation": "FDE encrypts the entire contents of a storage device. If the device is lost or stolen, the data remains unreadable without the encryption key. BitLocker and FileVault are common examples."
+    },
+    {
+      "id": "s16_q6",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "Patch Management",
+      "difficulty": 1,
+      "question": "Why is patch management critical for endpoint security?",
+      "answers": [
+        "Patches fix known vulnerabilities that attackers could exploit",
+        "Patches improve system performance only",
+        "Patches are optional updates for new features",
+        "Patches reduce network bandwidth usage"
+      ],
+      "correctIndex": 0,
+      "explanation": "Patch management ensures that security vulnerabilities in operating systems and applications are remediated promptly, reducing the attack surface."
+    },
+    {
+      "id": "s16_q7",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "Application Control",
+      "difficulty": 2,
+      "question": "What is application whitelisting?",
+      "answers": [
+        "Allowing only approved applications to run on an endpoint",
+        "Blocking known malicious applications",
+        "Encrypting application data",
+        "Monitoring application network traffic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Application whitelisting (now often called allowlisting) restricts endpoints to run only pre-approved software, preventing unauthorized or malicious applications from executing."
+    },
+    {
+      "id": "s16_q8",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "MDM",
+      "difficulty": 2,
+      "question": "What does Mobile Device Management (MDM) enable organizations to do?",
+      "answers": [
+        "Remotely manage, enforce policies, and wipe mobile devices",
+        "Monitor mobile device usage statistics",
+        "Provide technical support to mobile users",
+        "Sell mobile devices to employees"
+      ],
+      "correctIndex": 0,
+      "explanation": "MDM allows IT administrators to enroll, configure, secure, and remotely manage mobile devices (phones, tablets) to enforce corporate security policies."
+    },
+    {
+      "id": "s16_q9",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "BYOD",
+      "difficulty": 2,
+      "question": "What is the main security risk of BYOD (Bring Your Own Device) policies?",
+      "answers": [
+        "Personal devices may lack corporate security controls, creating vulnerabilities",
+        "Company data may be too secure on personal devices",
+        "BYOD increases IT hardware costs",
+        "Personal devices are harder to support technically"
+      ],
+      "correctIndex": 0,
+      "explanation": "BYOD introduces risk because personal devices may not meet corporate security standards, may contain malware, or may lack proper encryption and patch management."
+    },
+    {
+      "id": "s16_q10",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "HIDS",
+      "difficulty": 2,
+      "question": "What does a Host-based Intrusion Detection System (HIDS) do?",
+      "answers": [
+        "Monitors a single host for suspicious activity and policy violations",
+        "Monitors all network traffic for intrusions",
+        "Prevents all unauthorized access attempts",
+        "Manages user authentication on a host"
+      ],
+      "correctIndex": 0,
+      "explanation": "HIDS monitors the internals of a computing system (files, logs, processes) for signs of intrusion or policy violations on that specific host."
+    },
+    {
+      "id": "s16_q11",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "Sandboxing",
+      "difficulty": 2,
+      "question": "What is sandboxing in endpoint security?",
+      "answers": [
+        "Isolating suspicious programs in a controlled environment to observe behavior",
+        "Encrypting temporary files on the endpoint",
+        "Storing data in cloud-based storage",
+        "Creating backups of critical system files"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sandboxing isolates untrusted code or applications in a restricted environment where they can be analyzed without risking the host system."
+    },
+    {
+      "id": "s16_q12",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "Secure Boot",
+      "difficulty": 2,
+      "question": "What does Secure Boot protect against?",
+      "answers": [
+        "Unauthorized or malicious code running during the system boot process",
+        "Physical theft of the device",
+        "Unauthorized network access",
+        "Password brute-force attacks"
+      ],
+      "correctIndex": 0,
+      "explanation": "Secure Boot is a UEFI feature that validates the integrity of the OS bootloader and prevents unauthorized or tampered code from loading at startup."
+    },
+    {
+      "id": "s16_q13",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "TPM",
+      "difficulty": 3,
+      "question": "What is a Trusted Platform Module (TPM)?",
+      "answers": [
+        "A hardware chip that provides cryptographic functions and stores security keys",
+        "A software-based password vault",
+        "A type of biometric sensor",
+        "A network authentication protocol"
+      ],
+      "correctIndex": 0,
+      "explanation": "A TPM is a dedicated microcontroller that provides hardware-based security functions, including key generation, secure storage, and platform integrity measurement."
+    },
+    {
+      "id": "s16_q14",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "subtopic": "XDR",
+      "difficulty": 3,
+      "question": "How does XDR (Extended Detection and Response) differ from EDR?",
+      "answers": [
+        "XDR integrates telemetry across endpoints, networks, and cloud; EDR focuses only on endpoints",
+        "XDR is older than EDR",
+        "XDR only works on mobile devices",
+        "XDR requires on-premise deployment"
+      ],
+      "correctIndex": 0,
+      "explanation": "XDR extends EDR capabilities by correlating data across multiple security layers (endpoint, network, email, cloud) to provide a unified threat detection and response platform."
+    },
+    {
+      "id": "s16_q15",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "subtopic": "Asset Management",
+      "difficulty": 1,
+      "question": "Why is hardware asset management important for endpoint security?",
+      "answers": [
+        "You can only secure what you know exists on your network",
+        "It reduces hardware procurement costs",
+        "It improves device performance",
+        "It simplifies user onboarding"
+      ],
+      "correctIndex": 0,
+      "explanation": "Asset management maintains an inventory of all hardware. Without knowing what devices exist on the network, organizations cannot ensure they are patched, configured, and monitored properly."
+    }
+  ]
+}

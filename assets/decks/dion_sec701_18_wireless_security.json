@@ -1,0 +1,267 @@
+{
+  "id": "dion_sec701_section_18",
+  "title": "Security+ SY0-701 — Section 18: Wireless Security",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Jason Dion Security+ SY0-701 — Section 18: Wireless Security. Domain: Security Architecture (3.0).",
+  "version": "1",
+  "domains": ["Security Architecture"],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "s18_q1",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "WPA3",
+      "difficulty": 1,
+      "question": "What improvement does WPA3 provide over WPA2?",
+      "answers": [
+        "Stronger encryption with SAE (Simultaneous Authentication of Equals) and forward secrecy",
+        "Faster wireless speeds",
+        "Longer password requirements",
+        "Support for older devices"
+      ],
+      "correctIndex": 0,
+      "explanation": "WPA3 introduces SAE (replacing PSK handshake), providing stronger protection against offline dictionary attacks, plus individual data encryption per session (forward secrecy)."
+    },
+    {
+      "id": "s18_q2",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Evil Twin",
+      "difficulty": 2,
+      "question": "What is an evil twin attack?",
+      "answers": [
+        "A rogue access point mimicking a legitimate one to intercept wireless traffic",
+        "A denial of service attack on wireless networks",
+        "Stealing wireless passwords via brute force",
+        "Using two wireless cards simultaneously"
+      ],
+      "correctIndex": 0,
+      "explanation": "An evil twin is a fraudulent Wi-Fi access point that appears legitimate, tricking users into connecting so the attacker can intercept their traffic."
+    },
+    {
+      "id": "s18_q3",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "WEP",
+      "difficulty": 1,
+      "question": "Why is WEP (Wired Equivalent Privacy) considered insecure?",
+      "answers": [
+        "It uses weak RC4 encryption with static keys and can be cracked in minutes",
+        "It does not support encryption",
+        "It only works with older devices",
+        "It requires too much processing power"
+      ],
+      "correctIndex": 0,
+      "explanation": "WEP uses RC4 with short, static initialization vectors that can be intercepted and cracked using freely available tools, making it completely insecure."
+    },
+    {
+      "id": "s18_q4",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "802.1X",
+      "difficulty": 2,
+      "question": "What is the purpose of 802.1X in wireless networks?",
+      "answers": [
+        "Port-based network access control using RADIUS for enterprise authentication",
+        "Encrypting wireless traffic with AES",
+        "Providing wireless QoS",
+        "Managing wireless channel selection"
+      ],
+      "correctIndex": 0,
+      "explanation": "802.1X provides port-based access control requiring authenticated credentials (via RADIUS) before network access is granted — used in WPA2/WPA3-Enterprise deployments."
+    },
+    {
+      "id": "s18_q5",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Rogue AP",
+      "difficulty": 1,
+      "question": "What is a rogue access point?",
+      "answers": [
+        "An unauthorized wireless access point connected to the corporate network",
+        "A misconfigured official access point",
+        "An access point with outdated firmware",
+        "An access point with weak encryption"
+      ],
+      "correctIndex": 0,
+      "explanation": "A rogue AP is an unauthorized wireless access point installed on a network without approval, creating a security gap that attackers can exploit."
+    },
+    {
+      "id": "s18_q6",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Jamming",
+      "difficulty": 2,
+      "question": "What is a wireless jamming attack?",
+      "answers": [
+        "Flooding the wireless spectrum with interference to cause denial of service",
+        "Intercepting wireless communications",
+        "Cracking wireless encryption keys",
+        "Spoofing MAC addresses on wireless networks"
+      ],
+      "correctIndex": 0,
+      "explanation": "Wireless jamming involves transmitting radio frequency interference to disrupt legitimate wireless communications, effectively causing a denial-of-service condition."
+    },
+    {
+      "id": "s18_q7",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Bluetooth",
+      "difficulty": 2,
+      "question": "What is bluejacking?",
+      "answers": [
+        "Sending unsolicited messages to Bluetooth-enabled devices",
+        "Hijacking a Bluetooth connection to steal data",
+        "Using Bluetooth to track a device's location",
+        "Disabling a device's Bluetooth functionality"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluejacking involves sending unsolicited messages via Bluetooth to nearby devices. It's more of a nuisance than a serious threat, but demonstrates Bluetooth discovery exposure."
+    },
+    {
+      "id": "s18_q8",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Bluetooth",
+      "difficulty": 2,
+      "question": "What is bluesnarfing?",
+      "answers": [
+        "Unauthorized access to information on a Bluetooth device",
+        "Sending spam messages via Bluetooth",
+        "Disabling a device's Bluetooth",
+        "Tracking a person using Bluetooth"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bluesnarfing is an attack that exploits Bluetooth vulnerabilities to gain unauthorized access to data (contacts, messages, files) on a target device."
+    },
+    {
+      "id": "s18_q9",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "SSID",
+      "difficulty": 1,
+      "question": "Does hiding an SSID provide strong wireless security?",
+      "answers": [
+        "No — SSID hiding is security through obscurity and easily bypassed with wireless scanners",
+        "Yes — hidden SSIDs cannot be detected",
+        "Yes — hidden SSIDs prevent all unauthorized connections",
+        "No — it makes the network slower"
+      ],
+      "correctIndex": 0,
+      "explanation": "SSID hiding is only security through obscurity. Tools like Kismet can easily detect hidden SSIDs by capturing probe requests. It should not be relied upon as a security control."
+    },
+    {
+      "id": "s18_q10",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Captive Portal",
+      "difficulty": 1,
+      "question": "What is a captive portal?",
+      "answers": [
+        "A web page requiring authentication or agreement before granting internet access on a wireless network",
+        "A firewall portal for wireless traffic",
+        "A portal for configuring access points",
+        "A secure VPN gateway for wireless users"
+      ],
+      "correctIndex": 0,
+      "explanation": "Captive portals intercept wireless users and redirect them to a login or acceptance page before granting internet access — commonly used in hotels and airports."
+    },
+    {
+      "id": "s18_q11",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "WPS",
+      "difficulty": 2,
+      "question": "Why should WPS (Wi-Fi Protected Setup) be disabled?",
+      "answers": [
+        "The WPS PIN can be brute-forced in hours, bypassing WPA2/WPA3 encryption",
+        "WPS slows down wireless speeds",
+        "WPS does not support modern encryption",
+        "WPS is only for older devices"
+      ],
+      "correctIndex": 0,
+      "explanation": "WPS uses an 8-digit PIN with a design flaw that effectively reduces it to 11,000 guesses. The Reaver tool can crack WPS in hours, compromising network security."
+    },
+    {
+      "id": "s18_q12",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "TKIP vs CCMP",
+      "difficulty": 3,
+      "question": "Which encryption protocol should be used with WPA2 for best security?",
+      "answers": [
+        "CCMP/AES — TKIP is deprecated and has known vulnerabilities",
+        "TKIP — it is the latest encryption standard",
+        "RC4 — it provides the fastest encryption",
+        "DES — it is the most widely supported"
+      ],
+      "correctIndex": 0,
+      "explanation": "CCMP (Counter Mode CBC-MAC Protocol) using AES is the secure choice for WPA2. TKIP was a temporary fix for WEP and has known vulnerabilities."
+    },
+    {
+      "id": "s18_q13",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Site Survey",
+      "difficulty": 2,
+      "question": "What is the purpose of a wireless site survey?",
+      "answers": [
+        "To map signal coverage, identify dead zones, and detect rogue access points",
+        "To configure access point channels",
+        "To test internet bandwidth",
+        "To update access point firmware"
+      ],
+      "correctIndex": 0,
+      "explanation": "A wireless site survey assesses the physical environment to optimize AP placement, coverage, and security — also used to detect unauthorized or rogue access points."
+    },
+    {
+      "id": "s18_q14",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "NFC",
+      "difficulty": 1,
+      "question": "What security risk is associated with NFC (Near Field Communication)?",
+      "answers": [
+        "Eavesdropping and relay attacks on short-range transactions",
+        "Long-range interception of communications",
+        "Vulnerability to denial-of-service attacks",
+        "Interference with other wireless protocols"
+      ],
+      "correctIndex": 0,
+      "explanation": "NFC operates at very short range (< 20cm), but attackers can use relay attacks or eavesdrop on NFC transactions using specialized equipment."
+    },
+    {
+      "id": "s18_q15",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "subtopic": "Disassociation Attack",
+      "difficulty": 3,
+      "question": "What is a disassociation (deauthentication) attack in wireless security?",
+      "answers": [
+        "Forcing clients to disconnect from an AP by sending spoofed deauth frames",
+        "Blocking all wireless traffic in an area",
+        "Hijacking an authenticated wireless session",
+        "Cracking WPA2 encryption offline"
+      ],
+      "correctIndex": 0,
+      "explanation": "A deauthentication attack exploits the unprotected management frames in 802.11 to force clients to disconnect, often used to capture WPA handshakes for offline cracking."
+    }
+  ]
+}

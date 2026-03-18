@@ -185,6 +185,19 @@ class DeckPackMeta {
       );
     }
 
+    // If the same deck ID exists as both a bundled asset and a user-imported
+    // deck, prefer the asset version and silently drop the user copy.
+    final assetIds = {
+      for (final meta in metas)
+        if (!meta.assetPath.startsWith('user://')) meta.id,
+    };
+    metas.removeWhere(
+      (meta) =>
+          meta.assetPath.startsWith('user://') && assetIds.contains(meta.id),
+    );
+
+    // Flag true duplicates: same ID appearing more than once within the same
+    // source (asset+asset or user+user).
     final duplicatePathsById = <String, List<String>>{};
     for (final meta in metas) {
       duplicatePathsById.putIfAbsent(meta.id, () => []).add(meta.assetPath);

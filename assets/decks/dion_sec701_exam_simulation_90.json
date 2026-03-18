@@ -1,0 +1,1458 @@
+{
+  "id": "dion_sec701_exam_simulation_90",
+  "title": "Security+ SY0-701 — Simulazione Esame 90 Domande",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Simulazione completa esame CompTIA Security+ SY0-701 — 90 domande distribuite su tutti e 5 i domini. Stile e difficoltà reali dell'esame.",
+  "version": "1",
+  "domains": [
+    "General Security Concepts",
+    "Threats, Vulnerabilities, and Mitigations",
+    "Security Architecture",
+    "Security Operations",
+    "Security Program Management and Oversight"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "sim_q1",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "CIA Triad",
+      "difficulty": 1,
+      "question": "A hospital's patient records are unavailable for 4 hours due to a ransomware attack. Which CIA triad component is MOST affected?",
+      "answers": [
+        "Availability",
+        "Confidentiality",
+        "Integrity",
+        "Non-repudiation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Availability ensures systems and data are accessible when needed. Ransomware encrypting files and blocking access is a direct attack on availability."
+    },
+    {
+      "id": "sim_q2",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Controls",
+      "difficulty": 2,
+      "question": "A company installs cameras at server room entrances. What type of control is this?",
+      "answers": [
+        "Deterrent and detective physical control",
+        "Preventive technical control",
+        "Corrective administrative control",
+        "Compensating logical control"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cameras are physical controls. They deter attackers (deterrent) and record events for later review (detective). They do not actively prevent unauthorized entry."
+    },
+    {
+      "id": "sim_q3",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Cryptography",
+      "difficulty": 2,
+      "question": "A developer needs to store user passwords securely. Which approach is BEST?",
+      "answers": [
+        "Hash with bcrypt and a unique salt per password",
+        "Encrypt with AES-256",
+        "Hash with MD5",
+        "Store as Base64-encoded strings"
+      ],
+      "correctIndex": 0,
+      "explanation": "bcrypt is a purpose-built password hashing function with built-in salting and work factor. MD5 is broken. AES encryption is reversible with the key. Base64 is not security."
+    },
+    {
+      "id": "sim_q4",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "PKI",
+      "difficulty": 2,
+      "question": "A user reports that a website shows a certificate error saying the certificate has been revoked. What should the administrator check?",
+      "answers": [
+        "The CRL or OCSP responder to confirm the certificate revocation status",
+        "The website's DNS records",
+        "The server's firewall rules",
+        "The TLS version supported by the server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Certificate revocation is tracked via CRL (Certificate Revocation List) or OCSP (Online Certificate Status Protocol). A revoked certificate could indicate a compromised private key."
+    },
+    {
+      "id": "sim_q5",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Social Engineering",
+      "difficulty": 1,
+      "question": "An attacker calls an employee pretending to be IT support and asks for their password to fix an urgent problem. What type of attack is this?",
+      "answers": [
+        "Vishing (voice phishing)",
+        "Spear phishing",
+        "Pretexting via email",
+        "Tailgating"
+      ],
+      "correctIndex": 0,
+      "explanation": "Vishing is social engineering conducted via voice call (phone). The attacker uses urgency and impersonation to manipulate the victim into revealing credentials."
+    },
+    {
+      "id": "sim_q6",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware",
+      "difficulty": 2,
+      "question": "A piece of malware installs itself in the MBR and loads before the OS. What type of malware is this?",
+      "answers": [
+        "Rootkit (bootkit)",
+        "Ransomware",
+        "Adware",
+        "Keylogger"
+      ],
+      "correctIndex": 0,
+      "explanation": "A bootkit is a type of rootkit that infects the Master Boot Record, loading before the OS to evade detection. It achieves deep persistence and is very difficult to remove."
+    },
+    {
+      "id": "sim_q7",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Network Attacks",
+      "difficulty": 2,
+      "question": "An attacker intercepts traffic between a client and server without either party knowing. What is this attack called?",
+      "answers": [
+        "Man-in-the-Middle (MITM) attack",
+        "Replay attack",
+        "Session hijacking",
+        "DNS poisoning"
+      ],
+      "correctIndex": 0,
+      "explanation": "A MITM attack positions the attacker between two communicating parties, allowing them to intercept, read, or modify traffic without detection."
+    },
+    {
+      "id": "sim_q8",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Attacks",
+      "difficulty": 2,
+      "question": "A web application passes user input directly into a database query without sanitization. What vulnerability exists?",
+      "answers": [
+        "SQL injection",
+        "Cross-site scripting",
+        "Buffer overflow",
+        "CSRF"
+      ],
+      "correctIndex": 0,
+      "explanation": "SQL injection occurs when unsanitized user input is incorporated into database queries, allowing attackers to manipulate the query to access, modify, or delete data."
+    },
+    {
+      "id": "sim_q9",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Vulnerability Management",
+      "difficulty": 2,
+      "question": "A critical CVSS 9.8 vulnerability is found on a system, but the vendor has not yet released a patch. What is the BEST immediate action?",
+      "answers": [
+        "Apply a compensating control such as network isolation or WAF rules while awaiting the patch",
+        "Wait for the vendor patch before taking any action",
+        "Decommission the system immediately",
+        "Reimage the system with a clean OS"
+      ],
+      "correctIndex": 0,
+      "explanation": "When no patch exists, compensating controls (isolating the system, adding WAF rules, blocking specific traffic) reduce risk until an official patch is available."
+    },
+    {
+      "id": "sim_q10",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Threat Intelligence",
+      "difficulty": 2,
+      "question": "An organization wants to share threat indicators with industry peers using a standardized format. Which standards should they use?",
+      "answers": [
+        "STIX for formatting threat data and TAXII for transmission",
+        "MITRE ATT&CK and CVE",
+        "SIEM and SOAR integration",
+        "ISA/IEC 62443"
+      ],
+      "correctIndex": 0,
+      "explanation": "STIX (Structured Threat Information eXpression) defines the format for threat intelligence. TAXII (Trusted Automated eXchange) provides the transport mechanism for sharing it."
+    },
+    {
+      "id": "sim_q11",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Network Security",
+      "difficulty": 2,
+      "question": "A company wants to host a public web server while keeping internal systems protected. What architecture should be used?",
+      "answers": [
+        "Place the web server in a DMZ between two firewalls",
+        "Place the web server on the internal network with strict ACLs",
+        "Host the web server in a VLAN with no internet access",
+        "Connect the web server directly to the internet with no firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "A DMZ isolates public-facing servers from the internal network. Attackers who compromise the web server cannot directly access internal systems."
+    },
+    {
+      "id": "sim_q12",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Zero Trust",
+      "difficulty": 2,
+      "question": "Which principle does Zero Trust architecture enforce for every access request?",
+      "answers": [
+        "Verify explicitly — authenticate and authorize every request regardless of network location",
+        "Trust all internal traffic by default",
+        "Block all external traffic unless whitelisted",
+        "Require VPN for all access"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zero Trust assumes no implicit trust based on network location. Every request must be authenticated, authorized, and continuously validated — even from inside the network perimeter."
+    },
+    {
+      "id": "sim_q13",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "difficulty": 2,
+      "question": "A company uses AWS and discovers an S3 bucket is publicly accessible. What should they do FIRST?",
+      "answers": [
+        "Restrict the bucket's access policy to remove public access immediately",
+        "Notify customers of a potential breach",
+        "Delete the bucket and recreate it",
+        "Contact AWS support"
+      ],
+      "correctIndex": 0,
+      "explanation": "The immediate priority is to restrict access to prevent further exposure. After securing the bucket, investigate what data was accessible and determine if notification obligations apply."
+    },
+    {
+      "id": "sim_q14",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Wireless Security",
+      "difficulty": 2,
+      "question": "A security audit finds an access point using WEP encryption. What should be recommended?",
+      "answers": [
+        "Replace WEP with WPA3 (or at minimum WPA2-AES/CCMP)",
+        "Add MAC filtering to compensate for WEP's weakness",
+        "Hide the SSID to prevent detection",
+        "Increase the WEP key length to 256 bits"
+      ],
+      "correctIndex": 0,
+      "explanation": "WEP is cryptographically broken and can be cracked in minutes. The only acceptable remediation is replacing it with WPA2 (AES/CCMP) or WPA3."
+    },
+    {
+      "id": "sim_q15",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Virtualization",
+      "difficulty": 3,
+      "question": "An attacker exploits a vulnerability to escape a virtual machine and gain access to the hypervisor. What is this attack called?",
+      "answers": [
+        "VM escape",
+        "Container breakout",
+        "Hypervisor hijacking",
+        "Virtual machine injection"
+      ],
+      "correctIndex": 0,
+      "explanation": "VM escape occurs when code running inside a virtual machine exploits hypervisor vulnerabilities to access the host system or other VMs, breaking the isolation boundary."
+    },
+    {
+      "id": "sim_q16",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "IAM",
+      "difficulty": 2,
+      "question": "An employee is transferred from the finance department to HR. Their finance access is not removed. What violation has occurred?",
+      "answers": [
+        "Privilege creep — accumulated permissions exceeding job requirements",
+        "Separation of duties violation",
+        "Least privilege violation during initial provisioning",
+        "Account sharing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Privilege creep occurs when users accumulate permissions over time without old access being revoked. Regular access reviews (attestation) are needed to prevent this."
+    },
+    {
+      "id": "sim_q17",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "difficulty": 2,
+      "question": "During incident response, a security analyst discovers malware on a workstation. What should be done FIRST?",
+      "answers": [
+        "Contain the system — isolate it from the network to prevent lateral movement",
+        "Immediately reimage the workstation",
+        "Report the incident to management",
+        "Run a full antivirus scan"
+      ],
+      "correctIndex": 0,
+      "explanation": "Containment is the priority to prevent the threat from spreading. After isolation, the system can be investigated, evidence preserved, and then eradicated/recovered."
+    },
+    {
+      "id": "sim_q18",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "difficulty": 2,
+      "question": "A forensic investigator needs to acquire evidence from a running system. What should be collected FIRST based on order of volatility?",
+      "answers": [
+        "RAM contents — most volatile data lost when system powers off",
+        "Hard drive image",
+        "System log files",
+        "Network configuration files"
+      ],
+      "correctIndex": 0,
+      "explanation": "Order of volatility: collect most volatile data first. RAM contains running processes, decrypted keys, and network connections that are permanently lost when the system shuts down."
+    },
+    {
+      "id": "sim_q19",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "difficulty": 2,
+      "question": "A SIEM generates 1,000 alerts per day, but most are false positives. What should be implemented to improve efficiency?",
+      "answers": [
+        "Tune SIEM rules and implement SOAR to automate triage of low-risk alerts",
+        "Increase the number of security analysts",
+        "Disable low-priority alert rules",
+        "Switch to a different SIEM platform"
+      ],
+      "correctIndex": 0,
+      "explanation": "SIEM tuning reduces false positives. SOAR automation handles repetitive triage tasks, allowing analysts to focus on genuine high-priority incidents."
+    },
+    {
+      "id": "sim_q20",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Endpoint Security",
+      "difficulty": 1,
+      "question": "An organization wants to remotely wipe a lost company smartphone containing sensitive data. What technology enables this?",
+      "answers": [
+        "Mobile Device Management (MDM)",
+        "Full Disk Encryption only",
+        "Antivirus with remote scan capability",
+        "VPN client installed on the device"
+      ],
+      "correctIndex": 0,
+      "explanation": "MDM platforms can remotely locate, lock, and wipe enrolled mobile devices, protecting sensitive data if a device is lost or stolen."
+    },
+    {
+      "id": "sim_q21",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Risk Management",
+      "difficulty": 2,
+      "question": "A company purchases cyber insurance to cover costs from data breaches. Which risk response is this?",
+      "answers": [
+        "Risk transfer",
+        "Risk acceptance",
+        "Risk avoidance",
+        "Risk mitigation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Risk transfer shifts the financial consequences of a risk to a third party (insurance company or vendor). The risk itself is not eliminated — only the financial impact is transferred."
+    },
+    {
+      "id": "sim_q22",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Compliance",
+      "difficulty": 2,
+      "question": "A US healthcare provider must protect patient data. Which regulation applies?",
+      "answers": [
+        "HIPAA (Health Insurance Portability and Accountability Act)",
+        "GDPR",
+        "PCI DSS",
+        "SOX"
+      ],
+      "correctIndex": 0,
+      "explanation": "HIPAA governs the protection of Protected Health Information (PHI) for covered entities (healthcare providers, insurers) and their business associates in the United States."
+    },
+    {
+      "id": "sim_q23",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Policies",
+      "difficulty": 1,
+      "question": "What is the purpose of an Acceptable Use Policy (AUP)?",
+      "answers": [
+        "Define how employees may use company IT resources and the consequences of misuse",
+        "Specify technical security controls for IT systems",
+        "Define incident response procedures",
+        "Establish password complexity requirements"
+      ],
+      "correctIndex": 0,
+      "explanation": "An AUP communicates to employees what is and is not acceptable use of company technology, setting behavioral expectations and legal protections for the organization."
+    },
+    {
+      "id": "sim_q24",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Business Continuity",
+      "difficulty": 2,
+      "question": "A company's RTO is 4 hours and RPO is 1 hour. What do these metrics define?",
+      "answers": [
+        "RTO: max acceptable downtime; RPO: max acceptable data loss measured in time",
+        "RTO: recovery point in time; RPO: recovery time objective",
+        "RTO: risk tolerance objective; RPO: recovery priority order",
+        "They are the same metric with different names"
+      ],
+      "correctIndex": 0,
+      "explanation": "RTO (Recovery Time Objective) is the maximum acceptable time to restore operations. RPO (Recovery Point Objective) is the maximum acceptable amount of data loss measured in time."
+    },
+    {
+      "id": "sim_q25",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Authentication",
+      "difficulty": 2,
+      "question": "A user authenticates with a password and then receives an OTP via authenticator app. What type of authentication is this?",
+      "answers": [
+        "Multi-factor authentication (something you know + something you have)",
+        "Single factor authentication with two steps",
+        "Biometric authentication",
+        "Context-aware authentication"
+      ],
+      "correctIndex": 0,
+      "explanation": "This is MFA — combining something you know (password) with something you have (authenticator app generating OTP). Two steps from the same factor category is NOT MFA."
+    },
+    {
+      "id": "sim_q26",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Social Engineering",
+      "difficulty": 2,
+      "question": "An attacker sends a targeted email to a CFO impersonating the CEO and requesting an urgent wire transfer. What attack is this?",
+      "answers": [
+        "Whaling / BEC (Business Email Compromise)",
+        "Generic phishing",
+        "Smishing",
+        "Watering hole attack"
+      ],
+      "correctIndex": 0,
+      "explanation": "Whaling targets high-value executives. BEC involves impersonating leadership to manipulate employees into financial transactions or data disclosure."
+    },
+    {
+      "id": "sim_q27",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware",
+      "difficulty": 2,
+      "question": "A user downloads a free game that secretly installs software granting an attacker remote access. What type of malware is this?",
+      "answers": [
+        "Trojan",
+        "Worm",
+        "Ransomware",
+        "Spyware"
+      ],
+      "correctIndex": 0,
+      "explanation": "A Trojan disguises itself as legitimate software while secretly performing malicious actions. Unlike worms, Trojans do not self-replicate — they rely on user execution."
+    },
+    {
+      "id": "sim_q28",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Network Attacks",
+      "difficulty": 2,
+      "question": "An attacker floods a web server with traffic from thousands of compromised devices, making it unavailable. What type of attack is this?",
+      "answers": [
+        "Distributed Denial of Service (DDoS)",
+        "Smurf attack",
+        "ARP poisoning",
+        "Ping of Death"
+      ],
+      "correctIndex": 0,
+      "explanation": "DDoS uses a botnet (many compromised devices) to overwhelm a target with traffic, exhausting resources and denying service to legitimate users."
+    },
+    {
+      "id": "sim_q29",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Wireless Attacks",
+      "difficulty": 2,
+      "question": "A security test reveals that an employee set up a personal access point connected to the corporate network. What is this called?",
+      "answers": [
+        "Rogue access point",
+        "Evil twin",
+        "Unauthorized SSID",
+        "Ad hoc network"
+      ],
+      "correctIndex": 0,
+      "explanation": "A rogue AP is an unauthorized access point connected to the corporate network, creating a backdoor that bypasses security controls."
+    },
+    {
+      "id": "sim_q30",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Physical Security",
+      "difficulty": 1,
+      "question": "An attacker goes through discarded documents in dumpsters to find sensitive information. What technique is this?",
+      "answers": [
+        "Dumpster diving",
+        "Tailgating",
+        "Shoulder surfing",
+        "Pretexting"
+      ],
+      "correctIndex": 0,
+      "explanation": "Dumpster diving recovers sensitive information from discarded materials. Organizations should use cross-cut shredders and implement clean-desk policies to mitigate this risk."
+    },
+    {
+      "id": "sim_q31",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Firewalls",
+      "difficulty": 2,
+      "question": "Which firewall type can inspect application-layer data to identify applications regardless of port?",
+      "answers": [
+        "Next-Generation Firewall (NGFW)",
+        "Stateful packet inspection firewall",
+        "Packet filtering firewall",
+        "Circuit-level gateway"
+      ],
+      "correctIndex": 0,
+      "explanation": "NGFWs include application awareness (Layer 7) using deep packet inspection to identify and control applications, not just ports and protocols."
+    },
+    {
+      "id": "sim_q32",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Network Segmentation",
+      "difficulty": 2,
+      "question": "A company wants to isolate IoT devices from corporate workstations on the same physical network. What is the BEST approach?",
+      "answers": [
+        "Create separate VLANs for IoT and corporate devices with inter-VLAN firewall rules",
+        "Use WPA3 encryption for the IoT devices",
+        "Apply MAC filtering on all IoT devices",
+        "Place all devices in the DMZ"
+      ],
+      "correctIndex": 0,
+      "explanation": "VLANs logically segment network traffic. Firewall rules between VLANs control what communication is permitted, preventing compromised IoT devices from accessing corporate systems."
+    },
+    {
+      "id": "sim_q33",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Protocols",
+      "difficulty": 1,
+      "question": "A network admin needs to remotely manage a switch securely. Which protocol should be used?",
+      "answers": [
+        "SSH (Secure Shell) on port 22",
+        "Telnet on port 23",
+        "HTTP on port 80",
+        "FTP on port 21"
+      ],
+      "correctIndex": 0,
+      "explanation": "SSH encrypts the entire management session including credentials. Telnet, HTTP, and FTP all transmit data in cleartext and should never be used for remote management."
+    },
+    {
+      "id": "sim_q34",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "difficulty": 2,
+      "question": "A company uses a SaaS application. Under the shared responsibility model, what is the provider responsible for?",
+      "answers": [
+        "Physical infrastructure, platform, and application security",
+        "Data classification and access control",
+        "User account management",
+        "Encryption key management for customer data"
+      ],
+      "correctIndex": 0,
+      "explanation": "In SaaS, the provider manages infrastructure, platform, and application. The customer remains responsible for data, user access management, and how they configure the application."
+    },
+    {
+      "id": "sim_q35",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Endpoint Security",
+      "difficulty": 2,
+      "question": "An employee's laptop is stolen. The hard drive is removed and connected to another system, but the data cannot be read. What protection is in place?",
+      "answers": [
+        "Full Disk Encryption (FDE)",
+        "A strong BIOS password",
+        "File-level access control lists",
+        "Remote wipe via MDM"
+      ],
+      "correctIndex": 0,
+      "explanation": "FDE encrypts the entire drive. Without the encryption key, data removed from the original device is unreadable, regardless of the OS or access controls."
+    },
+    {
+      "id": "sim_q36",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Authentication",
+      "difficulty": 2,
+      "question": "Which access control model grants access based on the sensitivity label of data and the user's clearance level?",
+      "answers": [
+        "Mandatory Access Control (MAC)",
+        "Discretionary Access Control (DAC)",
+        "Role-Based Access Control (RBAC)",
+        "Attribute-Based Access Control (ABAC)"
+      ],
+      "correctIndex": 0,
+      "explanation": "MAC uses sensitivity labels (Top Secret, Secret, etc.) and clearance levels. The system enforces policy — users cannot override it. Used in government/military environments."
+    },
+    {
+      "id": "sim_q37",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "difficulty": 2,
+      "question": "After resolving a data breach, the security team identifies that the attacker exploited an unpatched vulnerability. What phase addresses this finding?",
+      "answers": [
+        "Post-incident activity (lessons learned)",
+        "Containment",
+        "Eradication",
+        "Preparation"
+      ],
+      "correctIndex": 0,
+      "explanation": "The lessons learned phase analyzes what happened and identifies improvements — including patching the exploited vulnerability — to prevent recurrence."
+    },
+    {
+      "id": "sim_q38",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Vulnerability Management",
+      "difficulty": 2,
+      "question": "A vulnerability scanner reports a critical finding, but further investigation shows the system is not actually vulnerable. What is this?",
+      "answers": [
+        "False positive",
+        "False negative",
+        "True positive",
+        "Zero-day vulnerability"
+      ],
+      "correctIndex": 0,
+      "explanation": "A false positive is when a scanner reports a vulnerability that does not actually exist. It wastes remediation effort and erodes trust in scan results."
+    },
+    {
+      "id": "sim_q39",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "difficulty": 2,
+      "question": "An analyst notices a workstation is communicating with an external IP at regular 5-minute intervals. What does this likely indicate?",
+      "answers": [
+        "Command and control (C2) beaconing from malware",
+        "Windows Update activity",
+        "Normal DNS resolution",
+        "NTP time synchronization"
+      ],
+      "correctIndex": 0,
+      "explanation": "Regular interval communications to an external IP is a classic malware beacon pattern — the malware is checking in with its C2 server. This should trigger an immediate investigation."
+    },
+    {
+      "id": "sim_q40",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Threat Hunting",
+      "difficulty": 3,
+      "question": "A security team proactively searches for hidden threats that automated tools have not detected. What activity is this?",
+      "answers": [
+        "Threat hunting",
+        "Penetration testing",
+        "Vulnerability scanning",
+        "Security auditing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Threat hunting is a proactive, human-driven investigation to find advanced threats that have evaded automated detection — going beyond reactive alert response."
+    },
+    {
+      "id": "sim_q41",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Risk Management",
+      "difficulty": 2,
+      "question": "A company decides not to use a cloud service because the data privacy risks are too high. What risk response is this?",
+      "answers": [
+        "Risk avoidance",
+        "Risk transfer",
+        "Risk acceptance",
+        "Risk mitigation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Risk avoidance eliminates the risk by not engaging in the risky activity. In this case, the company avoids the cloud risk by not using the service."
+    },
+    {
+      "id": "sim_q42",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Governance",
+      "difficulty": 2,
+      "question": "What does the concept of separation of duties prevent?",
+      "answers": [
+        "A single person having complete control over a critical process, reducing fraud risk",
+        "Employees accessing systems outside work hours",
+        "Users sharing credentials with colleagues",
+        "IT staff having both admin and user accounts"
+      ],
+      "correctIndex": 0,
+      "explanation": "Separation of duties divides critical tasks among multiple people so that no one individual can commit fraud or error without detection (e.g., the person who authorizes payments cannot also issue them)."
+    },
+    {
+      "id": "sim_q43",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Concepts",
+      "difficulty": 1,
+      "question": "Which principle ensures that actions can be traced back to a specific user who cannot deny performing them?",
+      "answers": [
+        "Non-repudiation",
+        "Integrity",
+        "Confidentiality",
+        "Authentication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Non-repudiation ensures that a party cannot deny having performed an action. Digital signatures provide non-repudiation by linking actions to a specific private key holder."
+    },
+    {
+      "id": "sim_q44",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Attacks",
+      "difficulty": 2,
+      "question": "An attacker captures a valid authentication token and replays it later to gain unauthorized access. What attack is this?",
+      "answers": [
+        "Replay attack",
+        "Session hijacking",
+        "Pass-the-hash",
+        "Credential stuffing"
+      ],
+      "correctIndex": 0,
+      "explanation": "A replay attack captures valid authentication data (token, credential) and retransmits it later. Countermeasures include timestamps, nonces, and challenge-response protocols."
+    },
+    {
+      "id": "sim_q45",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Cryptographic Attacks",
+      "difficulty": 3,
+      "question": "An attacker uses a precomputed table of password hashes to quickly crack stolen password hashes. What attack is this?",
+      "answers": [
+        "Rainbow table attack",
+        "Brute force attack",
+        "Dictionary attack",
+        "Birthday attack"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rainbow tables are precomputed hash lookups for common passwords. Adding unique salts to password hashes defeats rainbow table attacks by making precomputation infeasible."
+    },
+    {
+      "id": "sim_q46",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Identity",
+      "difficulty": 2,
+      "question": "A company uses Azure AD for SSO across Microsoft 365, Salesforce, and ServiceNow. What technology enables this?",
+      "answers": [
+        "Identity federation using SAML or OIDC",
+        "VPN tunneling between applications",
+        "LDAP synchronization",
+        "Kerberos ticket sharing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Identity federation (via SAML or OpenID Connect) allows users to authenticate with one identity provider (Azure AD) and access multiple service providers without re-entering credentials."
+    },
+    {
+      "id": "sim_q47",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "difficulty": 2,
+      "question": "A forensic investigator creates a hash of a disk image before and after analysis. The hashes match. What does this confirm?",
+      "answers": [
+        "The evidence has not been modified — integrity is maintained",
+        "The analysis found no malware",
+        "The image was correctly compressed",
+        "The device was not encrypted"
+      ],
+      "correctIndex": 0,
+      "explanation": "Matching hash values (before/after) prove the forensic image has not been altered, confirming evidence integrity and supporting admissibility in legal proceedings."
+    },
+    {
+      "id": "sim_q48",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Supply Chain",
+      "difficulty": 3,
+      "question": "A software update from a trusted vendor is found to contain malicious code. What type of attack is this?",
+      "answers": [
+        "Supply chain attack",
+        "Zero-day exploit",
+        "Insider threat",
+        "Advanced Persistent Threat (APT)"
+      ],
+      "correctIndex": 0,
+      "explanation": "A supply chain attack compromises software or hardware at the source (vendor/developer), so that legitimate updates deliver malicious code to all users of that software."
+    },
+    {
+      "id": "sim_q49",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Containers",
+      "difficulty": 3,
+      "question": "Which security concern is unique to container environments compared to traditional VMs?",
+      "answers": [
+        "Containers share the host kernel, so a kernel exploit can affect all containers",
+        "Containers cannot be encrypted",
+        "Containers lack network isolation",
+        "Container images cannot be scanned for vulnerabilities"
+      ],
+      "correctIndex": 0,
+      "explanation": "Containers share the host OS kernel. A kernel-level exploit can break out of container isolation. VMs have stronger isolation with their own OS kernel per VM."
+    },
+    {
+      "id": "sim_q50",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "difficulty": 1,
+      "question": "What document authorizes a penetration tester to conduct testing and defines its scope?",
+      "answers": [
+        "Rules of Engagement (RoE) / Statement of Work",
+        "Chain of custody form",
+        "Incident response plan",
+        "Security assessment report"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rules of Engagement and the Statement of Work define the legal authorization, scope, timeline, and permitted techniques for a penetration test."
+    },
+    {
+      "id": "sim_q51",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Cryptography",
+      "difficulty": 2,
+      "question": "Which hashing algorithm should be used for password storage in modern applications?",
+      "answers": [
+        "bcrypt, scrypt, or Argon2 — slow algorithms designed for password hashing",
+        "SHA-256 — industry standard",
+        "MD5 — fast and widely supported",
+        "SHA-1 — NIST recommended"
+      ],
+      "correctIndex": 0,
+      "explanation": "Password hashing requires intentionally slow algorithms (bcrypt, scrypt, Argon2) to make brute-force attacks computationally expensive. Fast algorithms like SHA-256 and MD5 are inappropriate for passwords."
+    },
+    {
+      "id": "sim_q52",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Attacks",
+      "difficulty": 2,
+      "question": "A malicious script is stored in a web application's database and executes in every user's browser who views the page. What type of XSS is this?",
+      "answers": [
+        "Stored (persistent) XSS",
+        "Reflected XSS",
+        "DOM-based XSS",
+        "Blind XSS"
+      ],
+      "correctIndex": 0,
+      "explanation": "Stored XSS permanently embeds malicious scripts in the server-side database. Every user who loads the affected page executes the attacker's script — more dangerous than reflected XSS."
+    },
+    {
+      "id": "sim_q53",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Network Security",
+      "difficulty": 2,
+      "question": "An organization wants to detect but not block network intrusions. What should they deploy?",
+      "answers": [
+        "IDS (Intrusion Detection System) in promiscuous/tap mode",
+        "IPS inline between firewall and network",
+        "NGFW with application control",
+        "NAC with posture assessment"
+      ],
+      "correctIndex": 0,
+      "explanation": "An IDS monitors and alerts without blocking traffic. Placing it in promiscuous mode (receiving a copy of traffic) ensures it cannot affect network flow."
+    },
+    {
+      "id": "sim_q54",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Data Protection",
+      "difficulty": 1,
+      "question": "An organization must ensure credit card numbers are not sent in emails or uploaded to cloud storage. What technology should be deployed?",
+      "answers": [
+        "Data Loss Prevention (DLP)",
+        "Endpoint Detection and Response (EDR)",
+        "Web Application Firewall (WAF)",
+        "Cloud Access Security Broker (CASB)"
+      ],
+      "correctIndex": 0,
+      "explanation": "DLP monitors and blocks the transmission of sensitive data (PII, credit card numbers) through communication channels — email, web uploads, USB transfers, and cloud services."
+    },
+    {
+      "id": "sim_q55",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Data Classification",
+      "difficulty": 1,
+      "question": "An employee emails a file marked 'Confidential' to a personal Gmail account. What policy has been violated?",
+      "answers": [
+        "Data handling and acceptable use policy",
+        "Password policy",
+        "Physical security policy",
+        "Change management policy"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sending classified data to personal accounts violates data handling policies (and potentially DLP controls). It creates exfiltration risk and may breach regulatory requirements."
+    },
+    {
+      "id": "sim_q56",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Password Attacks",
+      "difficulty": 2,
+      "question": "An attacker uses a list of commonly used passwords to attempt logins across multiple accounts. What attack is this?",
+      "answers": [
+        "Credential stuffing / password spraying",
+        "Brute force attack",
+        "Rainbow table attack",
+        "Pass-the-hash"
+      ],
+      "correctIndex": 0,
+      "explanation": "Password spraying tries common passwords against many accounts (avoiding lockout). Credential stuffing uses breached username/password pairs against multiple services."
+    },
+    {
+      "id": "sim_q57",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "VPN",
+      "difficulty": 2,
+      "question": "A company wants remote workers to access internal resources securely. What should be deployed?",
+      "answers": [
+        "VPN (Virtual Private Network) with MFA",
+        "Public-facing RDP server",
+        "Direct internet access to internal servers",
+        "FTP server for file transfers"
+      ],
+      "correctIndex": 0,
+      "explanation": "A VPN creates an encrypted tunnel for remote access. Combined with MFA, it provides secure authenticated access to internal resources over the internet."
+    },
+    {
+      "id": "sim_q58",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Log Management",
+      "difficulty": 2,
+      "question": "Why should security logs be sent to a centralized, separate system?",
+      "answers": [
+        "Attackers who compromise a system cannot tamper with logs on a separate system",
+        "Centralized logs are easier to delete when no longer needed",
+        "Central storage reduces the cost of local disk space",
+        "Logs are automatically encrypted when centralized"
+      ],
+      "correctIndex": 0,
+      "explanation": "Centralized log management protects log integrity — an attacker who compromises a host cannot modify logs stored on a remote SIEM. It also enables correlation across systems."
+    },
+    {
+      "id": "sim_q59",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Models",
+      "difficulty": 3,
+      "question": "Which security model is based on the principle 'no write down, no read up' to protect confidentiality?",
+      "answers": [
+        "Bell-LaPadula model",
+        "Biba model",
+        "Clark-Wilson model",
+        "Brewer-Nash model"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bell-LaPadula enforces confidentiality: subjects cannot read data above their clearance (no read up) and cannot write data to lower classification levels (no write down)."
+    },
+    {
+      "id": "sim_q60",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "APT",
+      "difficulty": 3,
+      "question": "An attacker maintains persistent, long-term unauthorized access to an organization's network for months without detection. What type of threat actor is this?",
+      "answers": [
+        "Advanced Persistent Threat (APT)",
+        "Script kiddie",
+        "Hacktivist",
+        "Insider threat"
+      ],
+      "correctIndex": 0,
+      "explanation": "APTs are sophisticated, well-funded threat actors (often nation-state sponsored) who maintain long-term stealthy access to targets, slowly exfiltrating data over months or years."
+    },
+    {
+      "id": "sim_q61",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Architecture",
+      "difficulty": 2,
+      "question": "Which security architecture principle limits the potential damage from a compromised component?",
+      "answers": [
+        "Least privilege and network segmentation",
+        "Defense in depth only",
+        "Full disk encryption",
+        "Strong password policies"
+      ],
+      "correctIndex": 0,
+      "explanation": "Least privilege limits what a compromised account can access. Segmentation limits lateral movement. Together they contain the blast radius of a successful attack."
+    },
+    {
+      "id": "sim_q62",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Backup",
+      "difficulty": 2,
+      "question": "What is the 3-2-1 backup rule?",
+      "answers": [
+        "3 copies of data, 2 different media types, 1 offsite copy",
+        "3 daily backups, 2 weekly, 1 monthly",
+        "3 backup servers, 2 data centers, 1 cloud provider",
+        "Backup every 3 hours, verify every 2 hours, test every 1 week"
+      ],
+      "correctIndex": 0,
+      "explanation": "The 3-2-1 rule provides resilience: 3 total copies of data (1 primary + 2 backups), stored on 2 different media types, with 1 copy stored offsite or in the cloud."
+    },
+    {
+      "id": "sim_q63",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Insider Threats",
+      "difficulty": 2,
+      "question": "A disgruntled employee downloads 50,000 customer records before their resignation. What type of threat is this?",
+      "answers": [
+        "Malicious insider threat",
+        "Accidental data exposure",
+        "Supply chain attack",
+        "Advanced Persistent Threat"
+      ],
+      "correctIndex": 0,
+      "explanation": "A malicious insider intentionally misuses legitimate access. DLP, user behavior analytics (UEBA), and access monitoring help detect and prevent insider data theft."
+    },
+    {
+      "id": "sim_q64",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Third Party Risk",
+      "difficulty": 2,
+      "question": "Before sharing sensitive data with a vendor, what document should be established?",
+      "answers": [
+        "NDA and Data Processing Agreement (DPA) defining security requirements",
+        "SLA for service availability",
+        "Memorandum of Understanding (MOU) for cooperation",
+        "Penetration test authorization"
+      ],
+      "correctIndex": 0,
+      "explanation": "An NDA protects confidential information. A DPA (required under GDPR) formalizes data protection obligations and ensures the vendor meets your security requirements."
+    },
+    {
+      "id": "sim_q65",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Cryptography",
+      "difficulty": 2,
+      "question": "What does Perfect Forward Secrecy (PFS) ensure?",
+      "answers": [
+        "Compromising the long-term private key does not decrypt past captured sessions",
+        "All future communications use stronger encryption",
+        "Session keys are stored for future use",
+        "Each user has a unique long-term key"
+      ],
+      "correctIndex": 0,
+      "explanation": "PFS uses ephemeral keys per session. Even if the server's private key is later stolen, previously captured encrypted sessions cannot be decrypted retroactively."
+    },
+    {
+      "id": "sim_q66",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "DNS Attacks",
+      "difficulty": 2,
+      "question": "An attacker corrupts a DNS resolver's cache to redirect users to a malicious site. What attack is this?",
+      "answers": [
+        "DNS cache poisoning",
+        "DNS amplification",
+        "DNS sinkholeing",
+        "Domain hijacking"
+      ],
+      "correctIndex": 0,
+      "explanation": "DNS cache poisoning injects false DNS records into a resolver's cache, redirecting users to attacker-controlled servers. DNSSEC mitigates this by signing DNS records."
+    },
+    {
+      "id": "sim_q67",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Identity",
+      "difficulty": 3,
+      "question": "What does a CASB provide when employees access unauthorized cloud applications?",
+      "answers": [
+        "Visibility and control over shadow IT and unsanctioned cloud service usage",
+        "Encryption of all cloud-bound traffic",
+        "Authentication for cloud services",
+        "Backup of data stored in cloud applications"
+      ],
+      "correctIndex": 0,
+      "explanation": "A CASB discovers and governs shadow IT (unapproved cloud apps), enforcing security policies on cloud usage, data protection, and compliance."
+    },
+    {
+      "id": "sim_q68",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "IR",
+      "difficulty": 2,
+      "question": "An organization performs a fire drill where teams walk through a ransomware scenario using documentation only. What exercise is this?",
+      "answers": [
+        "Tabletop exercise",
+        "Full-scale simulation",
+        "Red team exercise",
+        "Parallel test"
+      ],
+      "correctIndex": 0,
+      "explanation": "A tabletop exercise is a discussion-based simulation — teams walk through hypothetical scenarios on paper/verbally to identify gaps without touching live systems."
+    },
+    {
+      "id": "sim_q69",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Ransomware",
+      "difficulty": 2,
+      "question": "What is the MOST effective way to recover from a ransomware attack without paying the ransom?",
+      "answers": [
+        "Restore from clean, offline backups that the ransomware could not reach",
+        "Decrypt files using publicly available tools",
+        "Pay the ransom and hope the attacker provides decryption keys",
+        "Reformat and reinstall without data recovery"
+      ],
+      "correctIndex": 0,
+      "explanation": "Offline or immutable backups are the most reliable ransomware defense. Ransomware often targets connected backups — air-gapped or immutable backups cannot be encrypted."
+    },
+    {
+      "id": "sim_q70",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Compliance",
+      "difficulty": 2,
+      "question": "An EU citizen requests that a US company delete all their personal data. Under which regulation is this right granted?",
+      "answers": [
+        "GDPR — Right to Erasure (Right to be Forgotten)",
+        "CCPA",
+        "HIPAA",
+        "SOX"
+      ],
+      "correctIndex": 0,
+      "explanation": "GDPR Article 17 grants EU residents the right to request deletion of their personal data. This applies to any organization processing EU residents' data, regardless of location."
+    },
+    {
+      "id": "sim_q71",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "ICS/SCADA",
+      "difficulty": 3,
+      "question": "What is the PRIMARY security concern for Industrial Control Systems (ICS/SCADA)?",
+      "answers": [
+        "Availability — disruption can cause physical damage or safety risks",
+        "Confidentiality — trade secrets must be protected",
+        "Integrity — preventing data modification",
+        "Authentication — preventing unauthorized logins"
+      ],
+      "correctIndex": 0,
+      "explanation": "In ICS/SCADA, availability is the top priority — downtime can cause physical damage, safety incidents, and service disruptions. Unlike IT, where confidentiality often ranks first."
+    },
+    {
+      "id": "sim_q72",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Physical Threats",
+      "difficulty": 1,
+      "question": "An attacker leaves USB drives in a company parking lot hoping employees will plug them in. What attack is this?",
+      "answers": [
+        "Baiting",
+        "Pretexting",
+        "Vishing",
+        "Watering hole"
+      ],
+      "correctIndex": 0,
+      "explanation": "Baiting lures victims with something enticing (a 'free' USB drive). When plugged in, the device delivers malware or performs attacks through the target's system."
+    },
+    {
+      "id": "sim_q73",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Privileged Access",
+      "difficulty": 2,
+      "question": "What does a Privileged Access Workstation (PAW) provide?",
+      "answers": [
+        "A dedicated, hardened workstation for performing administrative tasks only",
+        "A workstation with elevated user privileges for power users",
+        "A laptop provided to C-suite executives",
+        "A virtual machine for testing security tools"
+      ],
+      "correctIndex": 0,
+      "explanation": "A PAW is a dedicated, hardened device used exclusively for administrative tasks, preventing admin credentials from being exposed on workstations used for browsing or email."
+    },
+    {
+      "id": "sim_q74",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Frameworks",
+      "difficulty": 2,
+      "question": "The MITRE ATT&CK framework documents what type of information?",
+      "answers": [
+        "Adversary tactics, techniques, and procedures (TTPs) observed in real attacks",
+        "A list of known software vulnerabilities",
+        "Security compliance requirements for federal agencies",
+        "Network monitoring best practices"
+      ],
+      "correctIndex": 0,
+      "explanation": "MITRE ATT&CK is a knowledge base of real-world adversary behaviors organized by tactics (why) and techniques (how), used for threat modeling and detection engineering."
+    },
+    {
+      "id": "sim_q75",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware Analysis",
+      "difficulty": 3,
+      "question": "A malware analyst observes a suspicious binary in a sandboxed environment and records its network connections and file system changes. What type of analysis is this?",
+      "answers": [
+        "Dynamic (behavioral) analysis",
+        "Static analysis",
+        "Code review",
+        "Fuzzing"
+      ],
+      "correctIndex": 0,
+      "explanation": "Dynamic analysis executes malware in a controlled environment (sandbox) to observe its behavior at runtime — file changes, registry modifications, network connections — without risking live systems."
+    },
+    {
+      "id": "sim_q76",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Design",
+      "difficulty": 2,
+      "question": "What does the principle of 'fail secure' mean in system design?",
+      "answers": [
+        "When a system fails, it defaults to a secure state (denying access) rather than an open state",
+        "Systems should never fail",
+        "Failures are logged and reported automatically",
+        "Failed login attempts trigger account lockout"
+      ],
+      "correctIndex": 0,
+      "explanation": "Fail secure means that when a system fails or crashes, it defaults to a restrictive, secure state. For example, a firewall that blocks all traffic (rather than allowing all) if it crashes."
+    },
+    {
+      "id": "sim_q77",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Automation",
+      "difficulty": 2,
+      "question": "A security team wants to automatically block IP addresses seen in threat feeds. What should they implement?",
+      "answers": [
+        "SOAR playbook that ingests threat feeds and pushes block rules to firewalls automatically",
+        "Manual review of threat feed alerts each morning",
+        "SIEM with threat intelligence integration only",
+        "EDR with automatic quarantine"
+      ],
+      "correctIndex": 0,
+      "explanation": "SOAR automates threat response by integrating threat intelligence feeds with security controls. Playbooks can automatically push blocking rules to firewalls without human intervention."
+    },
+    {
+      "id": "sim_q78",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Quantitative Risk",
+      "difficulty": 3,
+      "question": "The SLE for a server breach is $50,000 and the ARO is 0.2. What is the ALE?",
+      "answers": [
+        "$10,000",
+        "$50,000",
+        "$250,000",
+        "$100,000"
+      ],
+      "correctIndex": 0,
+      "explanation": "ALE = SLE × ARO = $50,000 × 0.2 = $10,000. This means the expected annual cost of this specific risk is $10,000, helping justify security control investments."
+    },
+    {
+      "id": "sim_q79",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Authentication",
+      "difficulty": 2,
+      "question": "A user attempts to log in but the location is flagged as suspicious. The system requires additional verification. What is this?",
+      "answers": [
+        "Adaptive / Risk-based authentication",
+        "Multi-factor authentication",
+        "Step-up authentication",
+        "Continuous authentication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Adaptive authentication evaluates risk signals (location, device, behavior) and dynamically increases authentication requirements when risk is elevated."
+    },
+    {
+      "id": "sim_q80",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "IoT Security",
+      "difficulty": 2,
+      "question": "What is a common security weakness of IoT devices?",
+      "answers": [
+        "Default credentials, lack of patching, and limited security controls",
+        "Excessive encryption overhead",
+        "Too many authentication requirements",
+        "Overly restrictive network access"
+      ],
+      "correctIndex": 0,
+      "explanation": "IoT devices often ship with default/hardcoded credentials, rarely receive security updates, and have limited processing for security controls — making them prime targets for botnet recruitment."
+    },
+    {
+      "id": "sim_q81",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Redundancy",
+      "difficulty": 1,
+      "question": "A company uses two separate ISPs so that if one goes down, the other maintains connectivity. What is this called?",
+      "answers": [
+        "Network redundancy / failover",
+        "Load balancing",
+        "High availability clustering",
+        "Geographic distribution"
+      ],
+      "correctIndex": 0,
+      "explanation": "Using multiple ISPs provides redundancy — if one connection fails, the other maintains availability, supporting business continuity and the Availability pillar of the CIA triad."
+    },
+    {
+      "id": "sim_q82",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Physical Security",
+      "difficulty": 1,
+      "question": "What is a mantrap (access control vestibule)?",
+      "answers": [
+        "A small room with two doors where the first must close before the second opens, preventing tailgating",
+        "A locked server cabinet",
+        "A motion-sensor alarm system",
+        "A reinforced data center wall"
+      ],
+      "correctIndex": 0,
+      "explanation": "A mantrap/vestibule uses two interlocked doors — only one can be open at a time — to prevent unauthorized persons from following authorized users through secured entrances (tailgating)."
+    },
+    {
+      "id": "sim_q83",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Zero Day",
+      "difficulty": 2,
+      "question": "An attacker exploits a vulnerability that the vendor is unaware of. What type of vulnerability is this?",
+      "answers": [
+        "Zero-day vulnerability",
+        "CVE-listed vulnerability",
+        "Legacy vulnerability",
+        "Misconfiguration"
+      ],
+      "correctIndex": 0,
+      "explanation": "A zero-day vulnerability is unknown to the vendor and has no available patch, giving defenders zero days to prepare. They are highly valuable in offensive security and nation-state operations."
+    },
+    {
+      "id": "sim_q84",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Training",
+      "difficulty": 1,
+      "question": "What is the MOST effective way to reduce phishing success rates in an organization?",
+      "answers": [
+        "Regular security awareness training combined with simulated phishing exercises",
+        "Deploying advanced email filtering only",
+        "Blocking all external email",
+        "Requiring employees to sign an AUP"
+      ],
+      "correctIndex": 0,
+      "explanation": "Training employees to recognize phishing and reinforcing it with simulated exercises creates a human firewall. Technical controls alone cannot stop all phishing — human vigilance is essential."
+    },
+    {
+      "id": "sim_q85",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Certificates",
+      "difficulty": 3,
+      "question": "A developer's code signing certificate expires. What happens to software signed with it?",
+      "answers": [
+        "Existing signatures remain valid if they had a timestamp from when the cert was valid",
+        "All previously signed software immediately stops working",
+        "The software must be re-signed with the expired certificate",
+        "The expired certificate automatically renews"
+      ],
+      "correctIndex": 0,
+      "explanation": "Countersignature/timestamping during signing records that the certificate was valid at signing time. This preserves the validity of existing signatures even after certificate expiration."
+    },
+    {
+      "id": "sim_q86",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "SQL Injection",
+      "difficulty": 2,
+      "question": "What is the BEST defense against SQL injection attacks?",
+      "answers": [
+        "Parameterized queries / prepared statements",
+        "Input length restrictions",
+        "WAF blocking SQL keywords",
+        "Encrypting database contents"
+      ],
+      "correctIndex": 0,
+      "explanation": "Parameterized queries separate SQL code from data — user input can never be interpreted as SQL syntax. WAFs and input validation are supplementary, not primary defenses."
+    },
+    {
+      "id": "sim_q87",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Cloud Security",
+      "difficulty": 3,
+      "question": "A developer accidentally commits an AWS access key to a public GitHub repository. What is the IMMEDIATE first step?",
+      "answers": [
+        "Revoke/rotate the compromised key immediately, then investigate what resources it accessed",
+        "Delete the GitHub repository",
+        "Monitor the key for suspicious activity",
+        "Notify GitHub to remove the key from their systems"
+      ],
+      "correctIndex": 0,
+      "explanation": "Exposed credentials must be revoked immediately — bots scan GitHub for keys within seconds of commit. After revoking, investigate CloudTrail/access logs to determine if it was exploited."
+    },
+    {
+      "id": "sim_q88",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Deception Technology",
+      "difficulty": 3,
+      "question": "What is a honeypot used for in network security?",
+      "answers": [
+        "A decoy system to detect, monitor, and analyze attacker behavior",
+        "A backup system that activates during attacks",
+        "A system for testing security patches safely",
+        "A sandbox for executing malware"
+      ],
+      "correctIndex": 0,
+      "explanation": "A honeypot is a deliberately vulnerable decoy system designed to attract attackers. Any interaction indicates malicious activity, providing early warning and threat intelligence."
+    },
+    {
+      "id": "sim_q89",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Change Management",
+      "difficulty": 2,
+      "question": "Why is change management important for security?",
+      "answers": [
+        "Unauthorized changes are a leading cause of security vulnerabilities and outages",
+        "Changes must be approved by legal counsel before implementation",
+        "Change management ensures all changes are documented for compliance only",
+        "Changes require vendor approval before deployment"
+      ],
+      "correctIndex": 0,
+      "explanation": "Change management controls ensure all modifications to systems are authorized, tested, and documented — preventing accidental misconfigurations and unauthorized changes that create vulnerabilities."
+    },
+    {
+      "id": "sim_q90",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Concepts",
+      "difficulty": 2,
+      "question": "A company implements two-person integrity for access to the server room. What security principle does this enforce?",
+      "answers": [
+        "Dual control / separation of duties — no single person can access alone",
+        "Least privilege — each person has minimum required access",
+        "Defense in depth — multiple layers of physical security",
+        "Need to know — access limited to those who require it"
+      ],
+      "correctIndex": 0,
+      "explanation": "Two-person integrity (dual control) requires two authorized people to be present for access to critical areas/systems, preventing insider threats and ensuring accountability."
+    }
+  ]
+}

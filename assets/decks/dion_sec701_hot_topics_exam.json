@@ -1,0 +1,528 @@
+{
+  "id": "dion_sec701_hot_topics",
+  "title": "Security+ SY0-701 — Hot Topics & Probabili all'Esame",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Argomenti ad alta probabilità di uscita all'esame CompTIA Security+ SY0-701 — basato su obiettivi ufficiali CompTIA, feedback candidati e analisi domini. Studia QUESTI prima dell'esame.",
+  "version": "1",
+  "domains": [
+    "General Security Concepts",
+    "Threats, Vulnerabilities, and Mitigations",
+    "Security Architecture",
+    "Security Operations",
+    "Security Program Management and Oversight"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "hot_q1",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Zero Trust",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Zero Trust richiede quale approccio fondamentale rispetto alla sicurezza perimetrale tradizionale?",
+      "answers": [
+        "Verificare esplicitamente ogni richiesta — nessun utente o dispositivo è trusted di default",
+        "Fidarsi di tutti i dispositivi interni alla rete aziendale",
+        "Usare VPN per tutto il traffico interno",
+        "Bloccare tutto il traffico esterno con firewall"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zero Trust = Never Trust, Always Verify. Non esiste zona trusted. Ogni richiesta richiede autenticazione, autorizzazione e validazione continua — indipendentemente dalla posizione di rete. FREQUENTISSIMO all'esame SY0-701."
+    },
+    {
+      "id": "hot_q2",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Social Engineering",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Quale tecnica di social engineering usa messaggi SMS fraudolenti?",
+      "answers": [
+        "Smishing (SMS phishing)",
+        "Vishing",
+        "Spear phishing",
+        "Whaling"
+      ],
+      "correctIndex": 0,
+      "explanation": "Smishing = SMS phishing. Vishing = voice/phone. Phishing = email generico. Spear phishing = email targeted. Whaling = targeting dirigenti C-suite. Conosci TUTTI i tipi — escono spesso."
+    },
+    {
+      "id": "hot_q3",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Incident Response",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Quale fase del ciclo IR (NIST) viene prima — Eradication o Containment?",
+      "answers": [
+        "Containment viene prima — isola il problema, poi Eradication rimuove la causa",
+        "Eradication viene prima — rimuove il malware, poi Containment previene lo spread",
+        "Sono simultanee",
+        "Recovery viene prima di entrambe"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ordine NIST: Preparation → Detection & Analysis → CONTAINMENT → ERADICATION → Recovery → Post-Incident. Containment = limitare i danni. Eradication = rimuovere la causa root. MEMORIZZA L'ORDINE — esce sempre."
+    },
+    {
+      "id": "hot_q4",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Cloud",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Nel modello IaaS, di cosa è responsabile il CLIENTE per la sicurezza?",
+      "answers": [
+        "OS, middleware, applicazioni, dati e identity management",
+        "Solo i dati — il provider gestisce tutto il resto",
+        "Niente — il provider è responsabile di tutto in IaaS",
+        "Solo la sicurezza fisica dei server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shared Responsibility: IaaS = cliente gestisce OS in su. PaaS = cliente gestisce app e dati. SaaS = cliente gestisce solo dati e accessi. PIÙ CONTROLLO = PIÙ RESPONSABILITÀ. Esce praticamente a ogni esame."
+    },
+    {
+      "id": "hot_q5",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Cryptography",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Quale algoritmo è SBAGLIATO usare per hashing di password nel 2024?",
+      "answers": [
+        "MD5 — è crittograficamente rotto e troppo veloce per password hashing",
+        "bcrypt",
+        "Argon2",
+        "SHA-256 con salt"
+      ],
+      "correctIndex": 0,
+      "explanation": "MD5 è broken per collision attacks ed è troppo veloce (GPU crack in secondi). Per password: bcrypt, scrypt, Argon2. SHA-256 puro senza work factor è anche inadatto per password. MEMORIZZA: MD5 e SHA-1 = INSICURI."
+    },
+    {
+      "id": "hot_q6",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Network Security",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Cosa fa un NGFW (Next-Generation Firewall) che un firewall stateful tradizionale NON fa?",
+      "answers": [
+        "Application awareness — identifica applicazioni indipendentemente dalla porta + IPS integrato + SSL inspection",
+        "Filtraggio per porta e protocollo",
+        "Tracking dello stato delle connessioni",
+        "NAT (Network Address Translation)"
+      ],
+      "correctIndex": 0,
+      "explanation": "Stateful firewall = traccia stato connessioni, filtra per IP/porta. NGFW AGGIUNGE: application awareness (Layer 7), DPI, IPS integrato, SSL/TLS inspection, URL filtering. Differenza frequente all'esame."
+    },
+    {
+      "id": "hot_q7",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "IAM",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Un dipendente cambia reparto ma mantiene i vecchi permessi. Come si chiama questo problema?",
+      "answers": [
+        "Privilege creep — accumulo di permessi nel tempo senza revoca di quelli precedenti",
+        "Least privilege violation",
+        "Separation of duties violation",
+        "Identity federation misconfiguration"
+      ],
+      "correctIndex": 0,
+      "explanation": "Privilege creep = accumulare permessi nei cambi di ruolo senza revocare i vecchi. Soluzione: access recertification/attestation periodica. FREQUENTISSIMO con scenari IAM all'esame."
+    },
+    {
+      "id": "hot_q8",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Malware",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Qual è la DIFFERENZA tra un worm e un virus?",
+      "answers": [
+        "Un worm si auto-replica e si diffonde autonomamente; un virus richiede un file host e l'azione dell'utente",
+        "Un worm è sempre più distruttivo di un virus",
+        "Un virus si auto-replica; un worm richiede un file host",
+        "Sono identici — il termine è intercambiabile"
+      ],
+      "correctIndex": 0,
+      "explanation": "Virus = richiede file host e azione utente per diffondersi. Worm = auto-replica e si propaga autonomamente in rete senza intervento utente. Trojan = sembra legittimo ma è malevolo. Ransomware = cifra dati per riscatto."
+    },
+    {
+      "id": "hot_q9",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "PKI",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Quale protocollo fornisce lo stato di revoca di un singolo certificato in tempo reale?",
+      "answers": [
+        "OCSP (Online Certificate Status Protocol)",
+        "CRL (Certificate Revocation List)",
+        "LDAP",
+        "SCEP"
+      ],
+      "correctIndex": 0,
+      "explanation": "CRL = lista scaricabile di certificati revocati (non real-time, può essere obsoleta). OCSP = query real-time per singolo certificato. OCSP Stapling = server include la risposta OCSP nella handshake TLS (performance migliore)."
+    },
+    {
+      "id": "hot_q10",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Vulnerability Management",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Un sistema legacy non può essere patchato. Quale è la strategia di sicurezza MIGLIORE?",
+      "answers": [
+        "Network isolation + compensating controls (firewall, IPS, monitoraggio) + piano di dismissione",
+        "Ignorare le vulnerabilità poiché il sistema è vecchio",
+        "Esporre il sistema solo alla rete interna senza ulteriori controlli",
+        "Applicare un antivirus aggiornato come unica misura"
+      ],
+      "correctIndex": 0,
+      "explanation": "Sistemi non-patchabili: isola in VLAN separata, circondali con controlli compensativi (WAF, IPS, monitoraggio stretto), applica least privilege, pianifica dismissione. SCENARIO CLASSICO all'esame."
+    },
+    {
+      "id": "hot_q11",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Risk",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Un'azienda decide di accettare il rischio di una vulnerabilità a basso impatto. Quale risk treatment è questo?",
+      "answers": [
+        "Risk acceptance — il costo del controllo supera il potenziale impatto",
+        "Risk avoidance",
+        "Risk transfer",
+        "Risk mitigation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Risk responses: Accept (tolerare), Avoid (eliminare l'attività), Transfer (assicurazione), Mitigate (ridurre con controlli). Acceptance è appropriato quando costo del controllo > impatto del rischio."
+    },
+    {
+      "id": "hot_q12",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Supply Chain",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 3,
+      "question": "ESAME HOT: Il SolarWinds attack del 2020 è un esempio di quale tipo di attacco?",
+      "answers": [
+        "Supply chain attack — codice malevolo iniettato in un aggiornamento software legittimo",
+        "Zero-day exploit",
+        "Insider threat",
+        "DDoS attack"
+      ],
+      "correctIndex": 0,
+      "explanation": "SolarWinds = attacco supply chain per eccellenza. Gli attaccanti (APT29/Cozy Bear) compromisero il processo di build di SolarWinds e inserirono backdoor in aggiornamenti firmati distribuiti a migliaia di clienti."
+    },
+    {
+      "id": "hot_q13",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Authentication",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Quale standard abilita il passwordless authentication con hardware security key?",
+      "answers": [
+        "FIDO2 / WebAuthn",
+        "SAML 2.0",
+        "OAuth 2.0",
+        "Kerberos"
+      ],
+      "correctIndex": 0,
+      "explanation": "FIDO2 = WebAuthn (browser standard) + CTAP (protocollo chiave hardware). Usa crittografia asimmetrica — la private key non lascia mai il dispositivo. Immune a phishing. ARGOMENTO NUOVO E FREQUENTE su SY0-701."
+    },
+    {
+      "id": "hot_q14",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Cosa differenzia SIEM da SOAR?",
+      "answers": [
+        "SIEM raccoglie e correla log/alert; SOAR aggiunge orchestrazione e automazione delle risposte",
+        "SIEM è per reti; SOAR è per endpoint",
+        "SOAR è il successore di SIEM e lo sostituisce completamente",
+        "SIEM è open source; SOAR è sempre commerciale"
+      ],
+      "correctIndex": 0,
+      "explanation": "SIEM = aggregazione log, correlazione eventi, alerting. SOAR = SIEM + automazione risposta + orchestrazione tool + playbook automatizzati. Spesso lavorano insieme. Distinzione FREQUENTE all'esame SY0-701."
+    },
+    {
+      "id": "hot_q15",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Attacks",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Qual è la differenza tra un attacco on-path (MITM) e un replay attack?",
+      "answers": [
+        "MITM intercetta in tempo reale; replay cattura credenziali e le ritrasmette successivamente",
+        "Sono lo stesso attacco con nomi diversi",
+        "MITM è passivo; replay è attivo",
+        "Replay richiede accesso fisico; MITM è sempre remoto"
+      ],
+      "correctIndex": 0,
+      "explanation": "On-path/MITM = posizionamento tra due parti per intercettare/modificare traffico in real-time. Replay = cattura di un'autenticazione valida e ritrasmissione successiva. Contromisura replay: timestamp, nonce, sfide."
+    },
+    {
+      "id": "hot_q16",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Cryptography",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Cosa fornisce una firma digitale che la sola crittografia NON fornisce?",
+      "answers": [
+        "Non-repudiation e integrità — prova chi ha firmato e che il contenuto non è stato alterato",
+        "Confidenzialità — cifra il contenuto",
+        "Disponibilità — garantisce che il messaggio arrivi",
+        "Autenticazione del destinatario"
+      ],
+      "correctIndex": 0,
+      "explanation": "Crittografia = confidenzialità. Firma digitale = integrità + non-repudiation (autenticità). La firma è fatta con la chiave privata del mittente — solo lui ce l'ha. Il destinatario verifica con la chiave pubblica."
+    },
+    {
+      "id": "hot_q17",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Wireless",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: WPA3 usa quale meccanismo per sostituire il WPA2-PSK handshake e perché è migliore?",
+      "answers": [
+        "SAE (Simultaneous Authentication of Equals) — resistente ad attacchi dictionary offline",
+        "AES-CCMP — cifratura più forte di TKIP",
+        "802.1X — autenticazione enterprise con RADIUS",
+        "PEAP — protocollo EAP tunnellato"
+      ],
+      "correctIndex": 0,
+      "explanation": "WPA3 Personal usa SAE invece di PSK. SAE è resistente ad attacchi offline — anche se catturi la 4-way handshake non puoi fare dictionary attack offline. Fornisce anche forward secrecy."
+    },
+    {
+      "id": "hot_q18",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "OWASP",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Come si previene una SQL injection? (risposta più completa e corretta)",
+      "answers": [
+        "Parameterized queries/prepared statements + stored procedures + input validation + WAF",
+        "Solo WAF davanti all'applicazione",
+        "Cifrare il database",
+        "Usare HTTPS per tutte le richieste"
+      ],
+      "correctIndex": 0,
+      "explanation": "La difesa primaria è parametrizzare le query (separare codice SQL dai dati). WAF e input validation sono difese supplementari. HTTPS non previene SQLi. Questo scenario esce spesso in forma pratica."
+    },
+    {
+      "id": "hot_q19",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Compliance",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 1,
+      "question": "ESAME HOT: Abbina regolazione → settore: HIPAA, PCI DSS, GDPR, SOX",
+      "answers": [
+        "HIPAA=Healthcare USA, PCI DSS=Carte di credito, GDPR=Dati personali EU, SOX=Finanza pubblica USA",
+        "HIPAA=Finanza, PCI DSS=Healthcare, GDPR=USA, SOX=EU",
+        "HIPAA=EU healthcare, PCI DSS=US banking, GDPR=global payments, SOX=UK finance",
+        "Tutte si applicano ugualmente a tutti i settori"
+      ],
+      "correctIndex": 0,
+      "explanation": "MEMORIZZA: HIPAA = healthcare USA (PHI). PCI DSS = chiunque processa carte di pagamento. GDPR = dati personali di residenti EU (portata mondiale). SOX = Sarbanes-Oxley, aziende pubbliche USA, rendicontazione finanziaria."
+    },
+    {
+      "id": "hot_q20",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Ordina correttamente la volatilità delle prove digitali (dalla più alla meno volatile)",
+      "answers": [
+        "Registri CPU/cache → RAM → Swap/paging → Traffico rete → Disco → Log remoti → Backup archivio",
+        "Disco → RAM → Log → Cache CPU → Traffico rete",
+        "Backup → Disco → Log → RAM → CPU cache",
+        "La volatilità è identica per tutte le fonti digitali"
+      ],
+      "correctIndex": 0,
+      "explanation": "Order of volatility = raccogli prima ciò che sparisce prima. RAM = persa all'avvio. Disco = persiste ma può essere sovrascritta. Backup = più durevole. CRUCIALE per forensics — esce con scenari pratici."
+    },
+    {
+      "id": "hot_q21",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Controls",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Una guardia di sicurezza all'ingresso è un controllo di quale categoria E tipo?",
+      "answers": [
+        "Categoria: Physical — Tipo: Deterrent (deterrente) e Detective (rilevamento)",
+        "Categoria: Technical — Tipo: Preventive",
+        "Categoria: Administrative — Tipo: Corrective",
+        "Categoria: Physical — Tipo: Compensating solo"
+      ],
+      "correctIndex": 0,
+      "explanation": "I controlli si classificano per CATEGORIA (Physical, Technical, Administrative) e TIPO (Preventive, Detective, Deterrent, Corrective, Compensating, Directive). Una guardia = Physical + Deterrent + Detective. Esce spesso."
+    },
+    {
+      "id": "hot_q22",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Threat Actors",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 1,
+      "question": "ESAME HOT: Quale tipo di threat actor ha le maggiori risorse, capacità e motivazione geopolitica?",
+      "answers": [
+        "Nation-state / APT (Advanced Persistent Threat)",
+        "Script kiddie",
+        "Hacktivist",
+        "Cybercriminal organizzato"
+      ],
+      "correctIndex": 0,
+      "explanation": "Nation-state = massime risorse, zero-day, operazioni lunghe mesi/anni, motivazione spionaggio/sabotaggio. Script kiddie = poche skill, tool esistenti. Hacktivist = motivazione ideologica. Criminal = motivazione finanziaria."
+    },
+    {
+      "id": "hot_q23",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Data Protection",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Qual è la differenza tra tokenizzazione e cifratura?",
+      "answers": [
+        "Tokenizzazione sostituisce i dati sensibili con token non reversibili senza chiave — il dato originale è nel token vault",
+        "Sono equivalenti — entrambi proteggono i dati",
+        "La cifratura è reversibile; la tokenizzazione non lo è mai",
+        "La tokenizzazione usa chiavi simmetriche; la cifratura usa chiavi asimmetriche"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cifratura = dato originale trasformato con chiave, reversibile con la stessa chiave. Tokenizzazione = dato originale sostituito con token casuale, il mapping è nel vault. Se il token viene sottratto, è inutile senza il vault."
+    },
+    {
+      "id": "hot_q24",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "SOAR",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Un analista vuole automatizzare il blocco di IP malevoli su tutti i firewall non appena compaiono in un threat feed. Cosa implementa?",
+      "answers": [
+        "SOAR playbook che integra threat intelligence feed e applica blocchi ai firewall automaticamente",
+        "Regola SIEM che genera un alert per ogni IP",
+        "Script manuale eseguito ogni ora dall'analista",
+        "CASB con policy di blocco URL"
+      ],
+      "correctIndex": 0,
+      "explanation": "SOAR = orchestrazione + automazione. Un playbook può: 1) Ricevere IOC da feed, 2) Arricchire con contesto, 3) Pushare automaticamente blocchi su firewall/EDR. Zero intervento umano per task ripetitivi."
+    },
+    {
+      "id": "hot_q25",
+      "type": "exam_question",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Business Continuity",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: RTO = 2 ore, RPO = 30 minuti. Cosa significa in pratica?",
+      "answers": [
+        "Il sistema deve tornare online entro 2 ore (RTO) e si può perdere max 30 min di dati (RPO)",
+        "Si possono perdere 2 ore di dati e il sistema deve tornare online entro 30 min",
+        "Entrambi definiscono il tempo di downtime accettabile",
+        "RTO = backup frequency; RPO = restore time"
+      ],
+      "correctIndex": 0,
+      "explanation": "RTO (Recovery Time Objective) = quanto tempo puoi stare down. RPO (Recovery Point Objective) = quanti dati puoi perdere (= frequenza minima dei backup). RPO 30 min = backup ogni 30 minuti. SCENARIO FREQUENTE."
+    },
+    {
+      "id": "hot_q26",
+      "type": "exam_question",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Ransomware Defense",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Quale combinazione di controlli è PIÙ EFFICACE contro il ransomware?",
+      "answers": [
+        "Backup immutabili offline + segmentazione di rete + training utenti + EDR + patch management",
+        "Solo antivirus aggiornato",
+        "Firewall perimetrale con IPS",
+        "Password complesse e MFA"
+      ],
+      "correctIndex": 0,
+      "explanation": "Difesa ransomware richiede layer multipli: backup immutabili (non raggiungibili dal malware), segmentazione (limita spread), training (previene il click iniziale), EDR (detection), patch (chiude vuln). Approccio defense in depth."
+    },
+    {
+      "id": "hot_q27",
+      "type": "exam_question",
+      "domain": "Security Architecture",
+      "topic": "Secure Protocols",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 1,
+      "question": "ESAME HOT: Abbina protocollo INSICURO → alternativa SICURA: Telnet, FTP, HTTP, SNMP v1/v2",
+      "answers": [
+        "Telnet→SSH(22), FTP→SFTP/FTPS, HTTP→HTTPS(443), SNMPv1/v2→SNMPv3",
+        "Telnet→RDP, FTP→SCP, HTTP→HTTP/2, SNMP→ICMP",
+        "Telnet→VPN, FTP→NFS, HTTP→TLS, SNMP→RADIUS",
+        "Tutti i protocolli elencati sono già sicuri"
+      ],
+      "correctIndex": 0,
+      "explanation": "MEMORIZZA queste sostituzioni — escono SEMPRE: Telnet(23)→SSH(22), FTP(21)→SFTP(22)/FTPS(990), HTTP(80)→HTTPS(443), SNMPv1/v2→SNMPv3 (aggiunge auth+cifratura)."
+    },
+    {
+      "id": "hot_q28",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "IAM",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Qual è la differenza tra autenticazione e autorizzazione?",
+      "answers": [
+        "Autenticazione = verifica identità (chi sei); Autorizzazione = verifica permessi (cosa puoi fare)",
+        "Sono sinonimi in sicurezza informatica",
+        "Autenticazione = cosa puoi fare; Autorizzazione = chi sei",
+        "Autenticazione viene dopo l'autorizzazione"
+      ],
+      "correctIndex": 0,
+      "explanation": "AuthN (Authentication) = verifica identità. AuthZ (Authorization) = verifica cosa l'identità può fare. Accounting = registra cosa ha fatto. SEMPRE in quest'ordine: prima autentichi, poi autorizzi."
+    },
+    {
+      "id": "hot_q29",
+      "type": "exam_question",
+      "domain": "General Security Concepts",
+      "topic": "Security Concepts",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 3,
+      "question": "ESAME HOT: Qual è la principale minaccia che il quantum computing rappresenta per la crittografia attuale?",
+      "answers": [
+        "Rompe RSA/ECC con l'algoritmo di Shor — necessaria crittografia post-quantum",
+        "Rende obsoleto AES-256 per la simmetrica",
+        "Accelera gli attacchi brute force su qualsiasi algoritmo",
+        "Rende i certificati TLS inutilizzabili"
+      ],
+      "correctIndex": 0,
+      "explanation": "Quantum threat: Algoritmo di Shor rompe RSA e ECC (asimmetrica). AES-256 è considerato resistente con chiavi raddoppiate. NIST sta standardizzando algoritmi post-quantum (CRYSTALS-Kyber, CRYSTALS-Dilithium). Argomento NUOVO su SY0-701."
+    },
+    {
+      "id": "hot_q30",
+      "type": "exam_question",
+      "domain": "Security Operations",
+      "topic": "Endpoint",
+      "subtopic": "HOT TOPIC",
+      "difficulty": 2,
+      "question": "ESAME HOT: Come si differenzia EDR da un tradizionale antivirus?",
+      "answers": [
+        "EDR monitora comportamenti in real-time e permette risposta attiva; AV usa firme per minacce note",
+        "EDR è solo per endpoint mobili; AV è per desktop",
+        "EDR è più lento di AV perché analizza tutto il traffico",
+        "AV è più recente di EDR"
+      ],
+      "correctIndex": 0,
+      "explanation": "Antivirus tradizionale = firme statiche, rileva minacce note. EDR = monitoring comportamentale continuo, threat hunting, risposta attiva (isola endpoint, termina processi, rollback modifiche). XDR estende EDR a più layer."
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "id": "dion_sec701_section_27",
+  "title": "Security+ SY0-701 — Section 27: Automation, Monitoring & Threat Intelligence",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Jason Dion Security+ SY0-701 — Section 27: Security Automation, Monitoring, and Threat Intelligence. Domain: Security Operations (4.0) & Security Program Management (5.0).",
+  "version": "1",
+  "domains": ["Security Operations", "Security Program Management and Oversight"],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "s27_q1",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Security Automation",
+      "subtopic": "Automation Benefits",
+      "difficulty": 1,
+      "question": "What is the primary benefit of security automation?",
+      "answers": [
+        "Faster, consistent responses to threats with reduced human error",
+        "Eliminating the need for security staff",
+        "Reducing the cost of security hardware",
+        "Simplifying compliance audits"
+      ],
+      "correctIndex": 0,
+      "explanation": "Security automation executes repetitive tasks (alert triage, threat blocking, patch deployment) faster than humans, reducing response time and eliminating manual errors."
+    },
+    {
+      "id": "s27_q2",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Security Automation",
+      "subtopic": "SOAR",
+      "difficulty": 2,
+      "question": "What three capabilities does SOAR combine?",
+      "answers": [
+        "Security Orchestration (integrating tools), Automation (executing tasks), Response (executing playbooks)",
+        "Scanning, Observation, Analysis, Reporting",
+        "SIEM, DLP, and EDR integration",
+        "Threat hunting, incident response, and forensics"
+      ],
+      "correctIndex": 0,
+      "explanation": "SOAR platforms orchestrate disparate security tools, automate repetitive tasks, and provide structured playbooks for consistent incident response."
+    },
+    {
+      "id": "s27_q3",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "subtopic": "Continuous Monitoring",
+      "difficulty": 1,
+      "question": "What is continuous security monitoring?",
+      "answers": [
+        "Ongoing real-time visibility into the security posture, threats, and compliance status",
+        "Running vulnerability scans once per month",
+        "Monitoring employee activity logs",
+        "Reviewing firewall rules quarterly"
+      ],
+      "correctIndex": 0,
+      "explanation": "Continuous monitoring provides real-time or near-real-time visibility into security events, configuration changes, and compliance status across the entire IT environment."
+    },
+    {
+      "id": "s27_q4",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "subtopic": "Log Management",
+      "difficulty": 1,
+      "question": "What is the purpose of centralizing security logs?",
+      "answers": [
+        "To correlate events across systems and detect attacks that span multiple sources",
+        "To save disk space on individual servers",
+        "To simplify user access reviews",
+        "To reduce network traffic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Centralized log management (via SIEM) aggregates logs from all sources, enabling correlation across events that appear benign in isolation but indicate an attack when combined."
+    },
+    {
+      "id": "s27_q5",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Threat Intelligence",
+      "subtopic": "CTI",
+      "difficulty": 2,
+      "question": "What is Cyber Threat Intelligence (CTI)?",
+      "answers": [
+        "Evidence-based knowledge about threats used to inform security decisions",
+        "A list of all known malware families",
+        "Automated threat scanning output",
+        "Intelligence gathered only from government sources"
+      ],
+      "correctIndex": 0,
+      "explanation": "CTI is processed information about threats — who is attacking, how they attack, and what they target — used to make proactive, informed security decisions."
+    },
+    {
+      "id": "s27_q6",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Threat Intelligence",
+      "subtopic": "IOC vs IOA",
+      "difficulty": 2,
+      "question": "What is the difference between IOC and IOA in threat intelligence?",
+      "answers": [
+        "IOC (Indicator of Compromise) is evidence of past breach; IOA (Indicator of Attack) detects active attack behaviors",
+        "IOC is for networks; IOA is for endpoints",
+        "IOC is proactive; IOA is reactive",
+        "They are the same concept with different names"
+      ],
+      "correctIndex": 0,
+      "explanation": "IOCs are forensic artifacts (IPs, hashes) indicating a system was compromised. IOAs detect real-time attack behaviors (exploitation attempts, lateral movement) allowing earlier intervention."
+    },
+    {
+      "id": "s27_q7",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Threat Intelligence",
+      "subtopic": "STIX/TAXII",
+      "difficulty": 3,
+      "question": "What are STIX and TAXII used for?",
+      "answers": [
+        "STIX is a standard for describing threats; TAXII is the protocol for sharing threat intelligence",
+        "STIX is a threat hunting tool; TAXII is a threat scoring system",
+        "Both are encryption standards for security data",
+        "STIX is for malware analysis; TAXII is for network scanning"
+      ],
+      "correctIndex": 0,
+      "explanation": "STIX (Structured Threat Information eXpression) is a language for describing cybersecurity threats. TAXII (Trusted Automated eXchange) is the transport protocol for sharing that intelligence."
+    },
+    {
+      "id": "s27_q8",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Threat Intelligence",
+      "subtopic": "Threat Feeds",
+      "difficulty": 1,
+      "question": "What is a threat intelligence feed?",
+      "answers": [
+        "A real-time stream of threat data (malicious IPs, domains, hashes) from external sources",
+        "A social media feed about cybersecurity news",
+        "Internal security event logs",
+        "A vulnerability scanner report"
+      ],
+      "correctIndex": 0,
+      "explanation": "Threat intelligence feeds provide automated streams of indicators (malicious IPs, URLs, file hashes) that can be ingested into security tools to block known threats in real time."
+    },
+    {
+      "id": "s27_q9",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Security Automation",
+      "subtopic": "Scripting",
+      "difficulty": 2,
+      "question": "What is the benefit of using PowerShell or Python in security automation?",
+      "answers": [
+        "Automating repetitive security tasks like log analysis, threat hunting, and incident response",
+        "Replacing SIEM platforms",
+        "Creating security policies automatically",
+        "Encrypting all security data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Scripting languages enable security professionals to automate tedious tasks (parsing logs, querying APIs, blocking IPs), increasing efficiency and consistency."
+    },
+    {
+      "id": "s27_q10",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "subtopic": "Baseline",
+      "difficulty": 2,
+      "question": "What is a security baseline and why is it important for monitoring?",
+      "answers": [
+        "A documented snapshot of normal system configuration and behavior used to detect deviations",
+        "The minimum security requirements for a system",
+        "The initial state of a system before any users log in",
+        "A benchmark for comparing security tool performance"
+      ],
+      "correctIndex": 0,
+      "explanation": "A security baseline documents the expected normal state of systems. Deviations from the baseline (unusual processes, configuration changes, network connections) may indicate compromise."
+    },
+    {
+      "id": "s27_q11",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Threat Intelligence",
+      "subtopic": "Threat Hunting",
+      "difficulty": 3,
+      "question": "What is threat hunting?",
+      "answers": [
+        "Proactively searching for hidden threats that evaded automated detection",
+        "Responding to automated alerts from a SIEM",
+        "Scanning systems for known vulnerabilities",
+        "Monitoring network traffic for anomalies"
+      ],
+      "correctIndex": 0,
+      "explanation": "Threat hunting is a proactive, human-driven process of searching through networks and systems to detect advanced threats that automated tools haven't flagged."
+    },
+    {
+      "id": "s27_q12",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Monitoring",
+      "subtopic": "User Behavior Analytics",
+      "difficulty": 3,
+      "question": "What is UEBA (User and Entity Behavior Analytics)?",
+      "answers": [
+        "Using machine learning to detect anomalous user and entity behavior indicating insider threats or compromise",
+        "Monitoring user activity for compliance",
+        "Tracking user login times",
+        "Analyzing network bandwidth usage by users"
+      ],
+      "correctIndex": 0,
+      "explanation": "UEBA applies machine learning to establish behavioral baselines for users and entities, detecting anomalies that may indicate insider threats, compromised accounts, or malicious activity."
+    },
+    {
+      "id": "s27_q13",
+      "type": "micro_card",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Security Metrics",
+      "subtopic": "KPIs",
+      "difficulty": 2,
+      "question": "What is Mean Time to Detect (MTTD) and why does it matter?",
+      "answers": [
+        "The average time to discover a security incident — lower MTTD reduces attacker dwell time",
+        "The average time to patch a vulnerability",
+        "The time between security audits",
+        "The average response time of security staff"
+      ],
+      "correctIndex": 0,
+      "explanation": "MTTD measures how quickly threats are discovered. Reducing MTTD limits attacker dwell time (time inside the network), minimizing damage and data exposure."
+    },
+    {
+      "id": "s27_q14",
+      "type": "micro_card",
+      "domain": "Security Program Management and Oversight",
+      "topic": "Security Metrics",
+      "subtopic": "MTTR",
+      "difficulty": 2,
+      "question": "What is Mean Time to Respond (MTTR)?",
+      "answers": [
+        "The average time from detection of an incident to its resolution",
+        "The average time between security incidents",
+        "The time required to train new security analysts",
+        "The average time to patch systems"
+      ],
+      "correctIndex": 0,
+      "explanation": "MTTR measures incident response efficiency — from alert detection to full remediation. Reducing MTTR minimizes the duration and impact of security incidents."
+    },
+    {
+      "id": "s27_q15",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Security Automation",
+      "subtopic": "AI in Security",
+      "difficulty": 3,
+      "question": "How is machine learning used in modern security operations?",
+      "answers": [
+        "Detecting anomalies, classifying malware, and improving threat detection accuracy at scale",
+        "Replacing human security analysts entirely",
+        "Writing security policies automatically",
+        "Encrypting data with AI-generated keys"
+      ],
+      "correctIndex": 0,
+      "explanation": "ML models analyze vast amounts of security data to identify patterns, detect anomalies, classify malware, and reduce false positives in ways traditional rule-based systems cannot at scale."
+    }
+  ]
+}

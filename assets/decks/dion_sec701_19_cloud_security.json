@@ -1,0 +1,267 @@
+{
+  "id": "dion_sec701_section_19",
+  "title": "Security+ SY0-701 — Section 19: Cloud Security",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Jason Dion Security+ SY0-701 — Section 19: Cloud Security. Domain: Security Architecture (3.0).",
+  "version": "1",
+  "domains": ["Security Architecture"],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "s19_q1",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Shared Responsibility",
+      "difficulty": 2,
+      "question": "What is the shared responsibility model in cloud security?",
+      "answers": [
+        "Cloud provider secures the infrastructure; customer secures their data and applications",
+        "The customer is responsible for everything in the cloud",
+        "The cloud provider is responsible for all security",
+        "Security responsibilities are split equally between provider and customer"
+      ],
+      "correctIndex": 0,
+      "explanation": "In the shared responsibility model, the CSP secures the underlying infrastructure while the customer is responsible for their data, access management, and application security."
+    },
+    {
+      "id": "s19_q2",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "IaaS vs PaaS vs SaaS",
+      "difficulty": 1,
+      "question": "In which cloud service model does the customer have the most security responsibility?",
+      "answers": [
+        "IaaS (Infrastructure as a Service)",
+        "PaaS (Platform as a Service)",
+        "SaaS (Software as a Service)",
+        "All models have equal responsibility"
+      ],
+      "correctIndex": 0,
+      "explanation": "In IaaS, customers manage the OS, middleware, and applications, giving them more responsibility (and control) compared to PaaS or SaaS where the provider manages more layers."
+    },
+    {
+      "id": "s19_q3",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "CASB",
+      "difficulty": 2,
+      "question": "What is a CASB (Cloud Access Security Broker)?",
+      "answers": [
+        "A security policy enforcement point between users and cloud services",
+        "A backup service for cloud data",
+        "A cloud-based antivirus solution",
+        "A cloud authentication provider"
+      ],
+      "correctIndex": 0,
+      "explanation": "A CASB sits between cloud users and cloud services to enforce security policies, provide visibility into cloud usage, and protect data in the cloud."
+    },
+    {
+      "id": "s19_q4",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Cloud Storage Security",
+      "difficulty": 1,
+      "question": "What is a common misconfiguration that leads to cloud data breaches?",
+      "answers": [
+        "Publicly accessible cloud storage buckets with no access restrictions",
+        "Using strong encryption for stored data",
+        "Enabling multi-factor authentication",
+        "Using private cloud deployment"
+      ],
+      "correctIndex": 0,
+      "explanation": "Misconfigured cloud storage buckets (S3, Azure Blob) set to public access have caused numerous data breaches by exposing sensitive data to anyone on the internet."
+    },
+    {
+      "id": "s19_q5",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Virtualization Security",
+      "difficulty": 2,
+      "question": "What is VM escape?",
+      "answers": [
+        "An attack where a VM breaks out of its isolation to access the hypervisor or other VMs",
+        "A virtual machine migrating to another host",
+        "Shutting down a virtual machine unexpectedly",
+        "A VM consuming excessive resources"
+      ],
+      "correctIndex": 0,
+      "explanation": "VM escape is a critical vulnerability where an attacker running code inside a VM exploits hypervisor vulnerabilities to gain access to the host or other VMs."
+    },
+    {
+      "id": "s19_q6",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Serverless Security",
+      "difficulty": 3,
+      "question": "What is a key security concern for serverless computing (FaaS)?",
+      "answers": [
+        "Insecure function permissions and over-privileged IAM roles",
+        "Lack of encryption support",
+        "Physical server access",
+        "Inability to use VPNs"
+      ],
+      "correctIndex": 0,
+      "explanation": "In serverless environments, overly permissive IAM roles can allow functions to access resources they shouldn't. Following least privilege for function permissions is critical."
+    },
+    {
+      "id": "s19_q7",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Cloud Security Posture",
+      "difficulty": 2,
+      "question": "What does CSPM (Cloud Security Posture Management) do?",
+      "answers": [
+        "Continuously monitors cloud infrastructure for misconfigurations and compliance violations",
+        "Manages cloud user passwords",
+        "Encrypts cloud communications",
+        "Provides cloud-based antivirus scanning"
+      ],
+      "correctIndex": 0,
+      "explanation": "CSPM tools automatically assess and remediate cloud configuration risks, ensuring cloud environments comply with security policies and regulatory requirements."
+    },
+    {
+      "id": "s19_q8",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Containers",
+      "difficulty": 2,
+      "question": "What is a key security difference between containers and virtual machines?",
+      "answers": [
+        "Containers share the host OS kernel, creating a larger attack surface if the kernel is compromised",
+        "Containers are always more secure than VMs",
+        "VMs share the host OS kernel",
+        "Containers cannot be isolated from each other"
+      ],
+      "correctIndex": 0,
+      "explanation": "Containers share the host OS kernel, meaning a kernel vulnerability could impact all containers. VMs are more isolated with their own OS instance per VM."
+    },
+    {
+      "id": "s19_q9",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Data Sovereignty",
+      "difficulty": 2,
+      "question": "What is cloud data sovereignty?",
+      "answers": [
+        "The concept that data stored in a country is subject to that country's laws",
+        "Encrypting data before storing it in the cloud",
+        "Owning your cloud infrastructure",
+        "The right to delete your cloud data"
+      ],
+      "correctIndex": 0,
+      "explanation": "Data sovereignty means that data stored in a specific country may be subject to that nation's laws and regulations, which can affect compliance requirements."
+    },
+    {
+      "id": "s19_q10",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "High Availability",
+      "difficulty": 1,
+      "question": "What does cloud high availability ensure?",
+      "answers": [
+        "Systems remain operational and accessible even when components fail",
+        "Data is encrypted at all times",
+        "Users can access data from any location",
+        "Costs remain within budget"
+      ],
+      "correctIndex": 0,
+      "explanation": "High availability uses redundancy, failover mechanisms, and load balancing to keep systems operational, supporting the Availability pillar of the CIA triad."
+    },
+    {
+      "id": "s19_q11",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Supply Chain Risk",
+      "difficulty": 2,
+      "question": "What is a cloud supply chain risk?",
+      "answers": [
+        "Third-party cloud components or services introducing vulnerabilities into your environment",
+        "Cloud providers charging unexpected fees",
+        "Physical hardware failures in the cloud",
+        "Network latency in cloud communications"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloud supply chain risks arise when third-party components (libraries, APIs, managed services) used in cloud environments contain vulnerabilities or are compromised."
+    },
+    {
+      "id": "s19_q12",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Cloud Encryption",
+      "difficulty": 2,
+      "question": "What is the difference between encryption at rest and encryption in transit in cloud security?",
+      "answers": [
+        "At rest protects stored data; in transit protects data moving across networks",
+        "At rest is faster; in transit is more secure",
+        "At rest uses symmetric encryption; in transit uses asymmetric only",
+        "They are the same concept"
+      ],
+      "correctIndex": 0,
+      "explanation": "Encryption at rest protects data stored in cloud storage, databases, or backups. Encryption in transit (TLS/SSL) protects data moving between systems over the network."
+    },
+    {
+      "id": "s19_q13",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Hybrid Cloud",
+      "difficulty": 1,
+      "question": "What is a hybrid cloud environment?",
+      "answers": [
+        "A combination of on-premises infrastructure with public and/or private cloud services",
+        "Using two different public cloud providers",
+        "A cloud environment with multiple availability zones",
+        "A cloud environment shared between two organizations"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hybrid cloud combines on-premises resources with public cloud services, allowing data and applications to be shared between them based on business needs."
+    },
+    {
+      "id": "s19_q14",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Microservices",
+      "difficulty": 3,
+      "question": "What security consideration is unique to microservices architecture?",
+      "answers": [
+        "Securing inter-service API communication and maintaining service isolation",
+        "Using stronger server hardware",
+        "Eliminating the need for authentication",
+        "Reducing the number of endpoints"
+      ],
+      "correctIndex": 0,
+      "explanation": "Microservices require securing numerous internal API calls between services, implementing proper authentication/authorization per service, and network policies to limit inter-service communication."
+    },
+    {
+      "id": "s19_q15",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Cloud Security",
+      "subtopic": "Infrastructure as Code",
+      "difficulty": 3,
+      "question": "What is a security benefit of Infrastructure as Code (IaC)?",
+      "answers": [
+        "Consistent, auditable, and version-controlled infrastructure deployments reduce misconfiguration",
+        "IaC eliminates the need for security testing",
+        "IaC automatically encrypts all data",
+        "IaC reduces the number of cloud resources needed"
+      ],
+      "correctIndex": 0,
+      "explanation": "IaC allows infrastructure to be defined in code, enabling version control, automated security scanning, consistent deployments, and audit trails to prevent misconfiguration drift."
+    }
+  ]
+}

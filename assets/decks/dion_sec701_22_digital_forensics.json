@@ -1,0 +1,267 @@
+{
+  "id": "dion_sec701_section_22",
+  "title": "Security+ SY0-701 — Section 22: Digital Forensics",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Jason Dion Security+ SY0-701 — Section 22: Digital Forensics. Domain: Security Operations (4.0).",
+  "version": "1",
+  "domains": ["Security Operations"],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "s22_q1",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Forensics Process",
+      "difficulty": 1,
+      "question": "What are the main phases of digital forensics?",
+      "answers": [
+        "Identification, Preservation, Collection, Examination, Analysis, Presentation",
+        "Scan, Collect, Analyze, Report",
+        "Detect, Contain, Investigate, Resolve",
+        "Acquire, Hash, Review, Present"
+      ],
+      "correctIndex": 0,
+      "explanation": "Digital forensics follows: Identify (relevant devices) → Preserve (integrity) → Collect (acquire evidence) → Examine → Analyze → Present findings in court or reports."
+    },
+    {
+      "id": "s22_q2",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Write Blocker",
+      "difficulty": 2,
+      "question": "What is a write blocker used for in digital forensics?",
+      "answers": [
+        "Preventing any writes to evidence media to preserve its original state",
+        "Blocking malware from writing to disk",
+        "Encrypting forensic evidence",
+        "Speeding up disk imaging"
+      ],
+      "correctIndex": 0,
+      "explanation": "A write blocker is a hardware or software device that allows forensic acquisition of storage media without modifying any data on the original device."
+    },
+    {
+      "id": "s22_q3",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Hashing",
+      "difficulty": 1,
+      "question": "Why are hash values used in digital forensics?",
+      "answers": [
+        "To verify that evidence has not been altered since collection",
+        "To encrypt forensic images",
+        "To speed up evidence analysis",
+        "To identify the file type of evidence"
+      ],
+      "correctIndex": 0,
+      "explanation": "Hash values (MD5, SHA-256) create a digital fingerprint of evidence. If the hash matches before and after collection, the evidence has not been altered, proving its integrity."
+    },
+    {
+      "id": "s22_q4",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Forensic Imaging",
+      "difficulty": 2,
+      "question": "What is a forensic disk image?",
+      "answers": [
+        "A bit-for-bit copy of a storage device including all files, deleted files, and slack space",
+        "A screenshot of a system's running processes",
+        "A backup of only the active files on a disk",
+        "A compressed archive of system logs"
+      ],
+      "correctIndex": 0,
+      "explanation": "A forensic image is an exact sector-by-sector copy of a storage device, preserving everything including deleted files, file system metadata, and unallocated space for investigation."
+    },
+    {
+      "id": "s22_q5",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Artifacts",
+      "difficulty": 2,
+      "question": "What are digital artifacts in forensic investigation?",
+      "answers": [
+        "Data remnants left by user or system activity (browser history, logs, registry entries)",
+        "Malware files found on a system",
+        "Encrypted data that cannot be analyzed",
+        "Physical storage media"
+      ],
+      "correctIndex": 0,
+      "explanation": "Digital artifacts are data objects that result from user or system activity — including browser history, registry keys, log files, temporary files, and metadata — that support forensic investigation."
+    },
+    {
+      "id": "s22_q6",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Timeline Analysis",
+      "difficulty": 2,
+      "question": "What is timeline analysis in digital forensics?",
+      "answers": [
+        "Reconstructing a chronological sequence of events from forensic evidence",
+        "Determining how long an investigation will take",
+        "Scheduling forensic analysis tasks",
+        "Documenting when evidence was collected"
+      ],
+      "correctIndex": 0,
+      "explanation": "Timeline analysis correlates timestamps from logs, file system metadata, and other sources to reconstruct the sequence of events during an incident."
+    },
+    {
+      "id": "s22_q7",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Log Analysis",
+      "difficulty": 1,
+      "question": "What types of logs are most valuable for a forensic investigation?",
+      "answers": [
+        "System logs, security logs, application logs, network logs, and authentication logs",
+        "Only system error logs",
+        "Marketing analytics logs",
+        "Database performance logs only"
+      ],
+      "correctIndex": 0,
+      "explanation": "Multiple log sources — OS security logs, authentication logs, network flow data, web server logs, and application logs — collectively reconstruct what happened during an incident."
+    },
+    {
+      "id": "s22_q8",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Network Forensics",
+      "difficulty": 2,
+      "question": "What is network forensics?",
+      "answers": [
+        "Capturing and analyzing network traffic to investigate security incidents",
+        "Auditing network device configurations",
+        "Testing network performance",
+        "Managing network access controls"
+      ],
+      "correctIndex": 0,
+      "explanation": "Network forensics involves capturing, recording, and analyzing network traffic and logs to detect attacks, trace intrusion paths, and gather evidence."
+    },
+    {
+      "id": "s22_q9",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Steganography",
+      "difficulty": 3,
+      "question": "What is steganography and why is it forensically relevant?",
+      "answers": [
+        "Hiding data within other files (images, audio) to conceal exfiltrated information",
+        "A method for encrypting forensic evidence",
+        "A type of hashing algorithm",
+        "A network protocol for covert communication"
+      ],
+      "correctIndex": 0,
+      "explanation": "Steganography conceals data within innocuous-looking files. Forensic investigators look for steganographic content as it may indicate hidden communications or data exfiltration."
+    },
+    {
+      "id": "s22_q10",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Legal Admissibility",
+      "difficulty": 2,
+      "question": "What is required for digital evidence to be admissible in court?",
+      "answers": [
+        "Proper collection, documented chain of custody, and proof evidence was not altered",
+        "Evidence must be on physical media only",
+        "Evidence must be approved by law enforcement",
+        "Evidence must be collected within 24 hours"
+      ],
+      "correctIndex": 0,
+      "explanation": "For digital evidence to be legally admissible, it must be properly collected (with authorization), have a documented chain of custody, and be demonstrated as unaltered (through hashing)."
+    },
+    {
+      "id": "s22_q11",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "File Recovery",
+      "difficulty": 2,
+      "question": "Why can deleted files often be recovered in forensic investigations?",
+      "answers": [
+        "Deletion removes the file system pointer but leaves data in unallocated space until overwritten",
+        "Deleted files are stored in a system recycle bin indefinitely",
+        "File systems encrypt deleted files for later recovery",
+        "Deleted files are automatically backed up to cloud storage"
+      ],
+      "correctIndex": 0,
+      "explanation": "When files are deleted, the OS marks the disk space as available but doesn't immediately overwrite it. Forensic tools can recover this data from unallocated/free space until it's overwritten."
+    },
+    {
+      "id": "s22_q12",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Mobile Forensics",
+      "difficulty": 2,
+      "question": "What is a unique challenge of mobile device forensics?",
+      "answers": [
+        "Data may be encrypted, remotely wiped, or sync'd to cloud making acquisition complex",
+        "Mobile devices have too much storage to analyze",
+        "Mobile devices cannot be connected to forensic tools",
+        "Mobile forensics is only possible with physical possession of the device"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mobile forensics faces challenges including full-disk encryption, biometric locks, remote wipe capabilities, data stored in cloud accounts, and proprietary OS file systems."
+    },
+    {
+      "id": "s22_q13",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Cloud Forensics",
+      "difficulty": 3,
+      "question": "What is a primary challenge of cloud forensics?",
+      "answers": [
+        "Limited access to underlying infrastructure and multi-tenant log isolation",
+        "Cloud data cannot be encrypted",
+        "Cloud providers must testify in court",
+        "Cloud evidence is always admissible without chain of custody"
+      ],
+      "correctIndex": 0,
+      "explanation": "Cloud forensics is challenging because investigators have limited access to hypervisor/infrastructure logs, data may be spread across jurisdictions, and multi-tenant environments complicate isolation."
+    },
+    {
+      "id": "s22_q14",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Metadata",
+      "difficulty": 1,
+      "question": "Why is file metadata important in digital forensics?",
+      "answers": [
+        "It provides information about when files were created, modified, and accessed",
+        "It contains the encrypted content of the file",
+        "It stores backup copies of deleted files",
+        "It reveals the user's password"
+      ],
+      "correctIndex": 0,
+      "explanation": "File metadata (MAC times: Modified, Accessed, Created) helps establish timelines and can reveal when suspicious activity occurred, even if the file contents have been deleted."
+    },
+    {
+      "id": "s22_q15",
+      "type": "micro_card",
+      "domain": "Security Operations",
+      "topic": "Digital Forensics",
+      "subtopic": "Anti-forensics",
+      "difficulty": 3,
+      "question": "What are anti-forensic techniques used by attackers?",
+      "answers": [
+        "Wiping logs, using encryption, timestomping, and steganography to cover tracks",
+        "Installing additional security software",
+        "Encrypting their own network traffic",
+        "Using commercial VPNs"
+      ],
+      "correctIndex": 0,
+      "explanation": "Anti-forensics encompasses techniques to prevent or complicate forensic investigation: log deletion/manipulation, secure file wiping, timestomping (modifying timestamps), and encryption."
+    }
+  ]
+}

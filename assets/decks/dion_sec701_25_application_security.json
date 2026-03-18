@@ -1,0 +1,267 @@
+{
+  "id": "dion_sec701_section_25",
+  "title": "Security+ SY0-701 — Section 25: Application Security",
+  "category": "Cybersecurity",
+  "examCode": "SY0-701",
+  "description": "Jason Dion Security+ SY0-701 — Section 25: Application Security. Domain: Threats, Vulnerabilities & Mitigations (2.0) & Security Architecture (3.0).",
+  "version": "1",
+  "domains": ["Threats, Vulnerabilities, and Mitigations", "Security Architecture"],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "s25_q1",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "OWASP Top 10",
+      "difficulty": 2,
+      "question": "What is the #1 risk in the OWASP Top 10 for web applications?",
+      "answers": [
+        "Broken Access Control — unauthorized access to resources",
+        "SQL Injection",
+        "Cross-Site Scripting (XSS)",
+        "Cryptographic Failures"
+      ],
+      "correctIndex": 0,
+      "explanation": "Broken Access Control has been the #1 OWASP risk, occurring when users can act outside their intended permissions — accessing other users' data or unauthorized functions."
+    },
+    {
+      "id": "s25_q2",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "SQL Injection",
+      "difficulty": 1,
+      "question": "What is SQL injection and how is it prevented?",
+      "answers": [
+        "Inserting malicious SQL into input fields; prevented by parameterized queries and input validation",
+        "Injecting code into database files directly",
+        "Gaining physical access to database servers",
+        "Cracking database passwords using brute force"
+      ],
+      "correctIndex": 0,
+      "explanation": "SQLi attacks manipulate database queries via unsanitized input. Prevention: use parameterized queries/prepared statements, input validation, and stored procedures."
+    },
+    {
+      "id": "s25_q3",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "XSS",
+      "difficulty": 2,
+      "question": "What is Cross-Site Scripting (XSS)?",
+      "answers": [
+        "Injecting malicious scripts into web pages viewed by other users",
+        "Attacking users across different websites simultaneously",
+        "Stealing cookies by accessing the server",
+        "Redirecting users to malicious websites"
+      ],
+      "correctIndex": 0,
+      "explanation": "XSS attacks inject client-side scripts (usually JavaScript) into web pages that other users view, enabling attackers to steal session cookies, redirect users, or deface sites."
+    },
+    {
+      "id": "s25_q4",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "CSRF",
+      "difficulty": 2,
+      "question": "What is CSRF (Cross-Site Request Forgery)?",
+      "answers": [
+        "Tricking authenticated users into unknowingly submitting malicious requests to a web app",
+        "Stealing session tokens from users",
+        "Forging SSL certificates for websites",
+        "Redirecting requests to a different server"
+      ],
+      "correctIndex": 0,
+      "explanation": "CSRF exploits the trust a web application has in an authenticated user's browser, tricking it into submitting requests (fund transfers, password changes) without the user's knowledge."
+    },
+    {
+      "id": "s25_q5",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "SDLC",
+      "difficulty": 1,
+      "question": "What does 'shift left' mean in application security?",
+      "answers": [
+        "Integrating security earlier in the development lifecycle rather than at the end",
+        "Moving security teams to development offices",
+        "Testing applications from left to right",
+        "Shifting security responsibilities to developers"
+      ],
+      "correctIndex": 0,
+      "explanation": "Shift left means incorporating security testing and review early in the SDLC (requirements, design, code) rather than waiting for final QA — finding issues when they're cheaper to fix."
+    },
+    {
+      "id": "s25_q6",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "SAST vs DAST",
+      "difficulty": 2,
+      "question": "What is the difference between SAST and DAST?",
+      "answers": [
+        "SAST analyzes source code without running it; DAST tests running applications from the outside",
+        "SAST is manual; DAST is automated",
+        "SAST tests networks; DAST tests applications",
+        "SAST is for web apps; DAST is for mobile apps"
+      ],
+      "correctIndex": 0,
+      "explanation": "Static Application Security Testing (SAST) examines source code for vulnerabilities. Dynamic Application Security Testing (DAST) tests running applications by simulating external attacks."
+    },
+    {
+      "id": "s25_q7",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "WAF",
+      "difficulty": 2,
+      "question": "What is a Web Application Firewall (WAF)?",
+      "answers": [
+        "A filter that monitors and blocks malicious HTTP/HTTPS traffic to web applications",
+        "A firewall for protecting web servers' network connections",
+        "An encrypted proxy for web traffic",
+        "A tool for testing web application performance"
+      ],
+      "correctIndex": 0,
+      "explanation": "A WAF sits in front of web applications, analyzing HTTP/HTTPS traffic to detect and block common web attacks like SQLi, XSS, and CSRF."
+    },
+    {
+      "id": "s25_q8",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "Buffer Overflow",
+      "difficulty": 2,
+      "question": "What is a buffer overflow attack?",
+      "answers": [
+        "Writing more data than a buffer can hold to overwrite adjacent memory and execute arbitrary code",
+        "Overloading a server with too much data",
+        "Filling a database with excessive records",
+        "Overloading network buffers with traffic"
+      ],
+      "correctIndex": 0,
+      "explanation": "Buffer overflows occur when a program writes more data to a fixed-size buffer than it can hold, overwriting adjacent memory. Attackers exploit this to inject and execute malicious code."
+    },
+    {
+      "id": "s25_q9",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "Input Validation",
+      "difficulty": 1,
+      "question": "Why is input validation critical for application security?",
+      "answers": [
+        "It prevents attackers from injecting malicious data through user inputs",
+        "It improves application performance",
+        "It ensures data is stored in the correct format",
+        "It prevents unauthorized API access"
+      ],
+      "correctIndex": 0,
+      "explanation": "Input validation ensures all user-supplied data is checked for type, length, format, and range before processing, preventing injection attacks, buffer overflows, and data corruption."
+    },
+    {
+      "id": "s25_q10",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "API Security",
+      "difficulty": 2,
+      "question": "What is a common API security vulnerability?",
+      "answers": [
+        "Broken Object Level Authorization — accessing other users' data through API endpoint manipulation",
+        "Using REST instead of SOAP",
+        "Not using API versioning",
+        "Slow API response times"
+      ],
+      "correctIndex": 0,
+      "explanation": "BOLA (Broken Object Level Authorization) is the most critical API vulnerability — APIs that don't properly verify object-level permissions allow users to access others' data by changing IDs in requests."
+    },
+    {
+      "id": "s25_q11",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "Secure Coding",
+      "difficulty": 1,
+      "question": "What is the purpose of code signing?",
+      "answers": [
+        "Using a digital signature to verify the authenticity and integrity of software",
+        "Encrypting source code to protect intellectual property",
+        "Signing developer agreements for code contributions",
+        "Licensing software for distribution"
+      ],
+      "correctIndex": 0,
+      "explanation": "Code signing uses digital certificates to verify that software comes from a legitimate publisher and has not been modified since signing, protecting against tampered or malicious software."
+    },
+    {
+      "id": "s25_q12",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "Session Management",
+      "difficulty": 2,
+      "question": "What is session hijacking?",
+      "answers": [
+        "Stealing or predicting a valid session token to impersonate an authenticated user",
+        "Logging out a user from their session remotely",
+        "Slowing down a user's session speed",
+        "Redirecting a user's session to another server"
+      ],
+      "correctIndex": 0,
+      "explanation": "Session hijacking involves obtaining a valid session ID (via XSS, sniffing, or prediction) to impersonate a legitimate user without needing their credentials."
+    },
+    {
+      "id": "s25_q13",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "DevSecOps",
+      "difficulty": 2,
+      "question": "What is DevSecOps?",
+      "answers": [
+        "Integrating security practices throughout the DevOps pipeline (CI/CD) rather than at the end",
+        "A security team overseeing development operations",
+        "Secure deployment of DevOps tools",
+        "Development of security software using Agile"
+      ],
+      "correctIndex": 0,
+      "explanation": "DevSecOps embeds security into every phase of the DevOps pipeline — automated security testing, vulnerability scanning in CI/CD, and security reviews — making security everyone's responsibility."
+    },
+    {
+      "id": "s25_q14",
+      "type": "micro_card",
+      "domain": "Threats, Vulnerabilities, and Mitigations",
+      "topic": "Application Security",
+      "subtopic": "Race Condition",
+      "difficulty": 3,
+      "question": "What is a race condition vulnerability?",
+      "answers": [
+        "Exploiting a timing gap between security check and resource use (TOCTOU)",
+        "Competing with other users for system resources",
+        "A performance issue caused by excessive API calls",
+        "Running malware faster than security controls"
+      ],
+      "correctIndex": 0,
+      "explanation": "Race conditions (Time of Check to Time of Use / TOCTOU) occur when attackers exploit the gap between checking a condition and acting on it, manipulating the system between these two points."
+    },
+    {
+      "id": "s25_q15",
+      "type": "micro_card",
+      "domain": "Security Architecture",
+      "topic": "Application Security",
+      "subtopic": "Threat Modeling",
+      "difficulty": 2,
+      "question": "What is the STRIDE threat modeling framework?",
+      "answers": [
+        "Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege",
+        "Secure, Test, Review, Implement, Deploy, Evaluate",
+        "A methodology for penetration testing",
+        "A security audit framework"
+      ],
+      "correctIndex": 0,
+      "explanation": "STRIDE is Microsoft's threat categorization framework: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege — used to identify threats during design."
+    }
+  ]
+}
