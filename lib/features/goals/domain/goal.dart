@@ -55,6 +55,14 @@ class Goal {
   double get progress =>
       milestones.isEmpty ? 0 : doneCount / milestones.length;
 
+  /// Days until targetDate (dueDate). Negative if overdue, null if no due date.
+  int? get daysUntilDue {
+    if (targetDate == null) return null;
+    final today = DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    return targetDate!.difference(today).inDays;
+  }
+
   Goal copyWith({
     String? title,
     String? description,

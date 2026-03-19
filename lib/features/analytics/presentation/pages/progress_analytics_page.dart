@@ -63,6 +63,8 @@ class ProgressAnalyticsPage extends ConsumerWidget {
               ),
           ],
           const SizedBox(height: 24),
+          const _WeeklyComparisonSection(),
+          const SizedBox(height: 24),
           const _SessionAccuracyTrendSection(),
           const SizedBox(height: 24),
           const _GrowthDashboardSection(),
@@ -812,4 +814,149 @@ class _GrowthMetric extends StatelessWidget {
               style: const TextStyle(color: Colors.white54, fontSize: 11)),
         ],
       );
+}
+
+// ── Weekly Comparison ─────────────────────────────────────────────────────────
+
+class _WeeklyComparisonSection extends ConsumerWidget {
+  const _WeeklyComparisonSection();
+
+  DateTimeRange _currentWeek() {
+    final now = DateTime.now();
+    final monday = now.subtract(Duration(days: now.weekday - 1));
+    final start = DateTime(monday.year, monday.month, monday.day);
+    return DateTimeRange(start: start, end: start.add(const Duration(days: 6)));
+  }
+
+  bool _inRange(DateTime date, DateTimeRange range) {
+    final d = DateTime(date.year, date.month, date.day);
+    return !d.isBefore(range.start) && !d.isAfter(range.end);
+  }
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final habits = ref.watch(habitsProvider);
+
+    final currentWeek = _currentWeek();
+    final previousWeek = DateTimeRange(
+      start: currentWeek.start.subtract(const Duration(days: 7)),
+      end: currentWeek.end.subtract(const Duration(days: 7)),
+    );
+
+    // Carte studiate
+    final allSessions = StudySessionStorage().getAll();
+    final cardsThisWeek = allSessions
+        .where((s) => _inRange(s.date, currentWeek))
+        .fold<int>(0, (sum, s) => sum + s.cardCount);
+    final cardsLastWeek = allSessions
+        .where((s) => _inRange(s.date, previousWeek))
+        .fold<int>(0, (sum, s) => sum + s.cardCount);
+
+    // Abitudini completate
+    int habitsThisWeek = 0;
+    int habitsLastWeek = 0;
+    for (final habit in habits) {
+      for (final dateStr in habit.completedDates) {
+        final date = DateTime.tryParse(dateStr);
+        if (date == null) continue;
+        if (_inRange(date, currentWeek)) habitsThisWeek++;
+        if (_inRange(date, previousWeek)) habitsLastWeek++;
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader('Confronto Settimanale'),
+        const SizedBox(height: 10),
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          tint: Colors.blueAccent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Questa settimana vs. settimana scorsa',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                ),
+              ),
+              const SizedBox(height: 14),
+              _WeeklyMetricRow(
+                label: 'Carte studiate',
+                thisWeek: cardsThisWeek,
+                lastWeek: cardsLastWeek,
+              ),
+              const SizedBox(height: 10),
+              _WeeklyMetricRow(
+                label: 'Abitudini completate',
+                thisWeek: habitsThisWeek,
+                lastWeek: habitsLastWeek,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _WeeklyMetricRow extends StatelessWidget {
+  const _WeeklyMetricRow({
+    required this.label,
+    required this.thisWeek,
+    required this.lastWeek,
+  });
+
+  final String label;
+  final int thisWeek;
+  final int lastWeek;
+
+  @override
+  Widget build(BuildContext context) {
+    final diff = thisWeek - lastWeek;
+    final Color arrowColor;
+    final IconData arrowIcon;
+    if (diff > 0) {
+      arrowColor = Colors.greenAccent;
+      arrowIcon = Icons.arrow_upward;
+    } else if (diff < 0) {
+      arrowColor = Colors.redAccent;
+      arrowIcon = Icons.arrow_downward;
+    } else {
+      arrowColor = Colors.white38;
+      arrowIcon = Icons.remove;
+    }
+
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            label,
+            style: const TextStyle(color: Colors.white70, fontSize: 13),
+          ),
+        ),
+        Text(
+          '$thisWeek',
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          ),
+        ),
+        const Text(
+          ' / ',
+          style: TextStyle(color: Colors.white38, fontSize: 13),
+        ),
+        Text(
+          '$lastWeek',
+          style: const TextStyle(color: Colors.white54, fontSize: 13),
+        ),
+        const SizedBox(width: 8),
+        Icon(arrowIcon, color: arrowColor, size: 16),
+      ],
+    );
+  }
 }

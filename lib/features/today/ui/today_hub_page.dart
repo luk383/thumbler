@@ -218,6 +218,7 @@ class TodayHubPage extends ConsumerWidget {
                   trailing: _Badge('${goals.length}'),
                   child: Column(
                     children: goals.take(3).map((g) {
+                      final due = g.daysUntilDue;
                       return Padding(
                         padding: const EdgeInsets.only(bottom: 8),
                         child: Row(
@@ -244,10 +245,17 @@ class TodayHubPage extends ConsumerWidget {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            Text(
-                              '${(g.progress * 100).round()}%',
-                              style: Theme.of(context).textTheme.labelSmall,
-                            ),
+                            if (due != null && due < 0)
+                              _Badge('Scaduto', color: Colors.red)
+                            else if (due != null && due == 0)
+                              _Badge('Oggi!', color: Colors.red)
+                            else if (due != null && due <= 7)
+                              _Badge('$due giorni', color: Colors.orange)
+                            else
+                              Text(
+                                '${(g.progress * 100).round()}%',
+                                style: Theme.of(context).textTheme.labelSmall,
+                              ),
                           ],
                         ),
                       );

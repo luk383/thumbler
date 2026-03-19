@@ -9,6 +9,7 @@ class Habit {
     this.completedDates = const [],
     required this.createdAt,
     this.reminderTime,
+    this.scheduledDays = const [],
   });
 
   final String id;
@@ -20,12 +21,45 @@ class Habit {
   final List<String> completedDates; // ISO date strings yyyy-MM-dd
   final DateTime createdAt;
   final String? reminderTime; // "HH:mm" format or null
+  final List<int> scheduledDays; // 0=Monday … 6=Sunday, empty = every day
 
   static String _dateKey(DateTime d) =>
       '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
 
   bool isDoneOn(DateTime date) => completedDates.contains(_dateKey(date));
   bool get isDoneToday => isDoneOn(DateTime.now());
+
+  bool get isScheduledToday {
+    if (scheduledDays.isEmpty) return true;
+    // DateTime.weekday: 1=Mon … 7=Sun → map to 0–6
+    return scheduledDays.contains(DateTime.now().weekday - 1);
+  }
+
+  /// Computed streak that respects scheduledDays (skips non-scheduled days).
+  int get computedStreak {
+    if (completedDates.isEmpty) return 0;
+    int streak = 0;
+    var day = DateTime.now();
+    final todayKey = _dateKey(day);
+    if (!completedDates.contains(todayKey)) {
+      day = day.subtract(const Duration(days: 1));
+    }
+    while (true) {
+      final key = _dateKey(day);
+      final dayIndex = day.weekday - 1;
+      // If habit was not scheduled that day, skip without breaking streak
+      if (scheduledDays.isNotEmpty && !scheduledDays.contains(dayIndex)) {
+        day = day.subtract(const Duration(days: 1));
+        // Safety: don't go back more than 2 years
+        if (DateTime.now().difference(day).inDays > 730) break;
+        continue;
+      }
+      if (!completedDates.contains(key)) break;
+      streak++;
+      day = day.subtract(const Duration(days: 1));
+    }
+    return streak;
+  }
 
   Habit copyWith({
     String? name,
@@ -37,6 +71,7 @@ class Habit {
     List<String>? completedDates,
     String? reminderTime,
     bool clearReminderTime = false,
+    List<int>? scheduledDays,
   }) => Habit(
         id: id,
         name: name ?? this.name,
@@ -47,6 +82,7 @@ class Habit {
         completedDates: completedDates ?? this.completedDates,
         createdAt: createdAt,
         reminderTime: clearReminderTime ? null : (reminderTime ?? this.reminderTime),
+        scheduledDays: scheduledDays ?? this.scheduledDays,
       );
 
   /// Returns a new Habit with today toggled on/off.
@@ -94,6 +130,7 @@ class Habit {
         'completedDates': completedDates,
         'createdAt': createdAt.toIso8601String(),
         'reminderTime': reminderTime,
+        'scheduledDays': scheduledDays,
       };
 
   factory Habit.fromMap(Map map) => Habit(
@@ -109,5 +146,6 @@ class Habit {
         createdAt:
             DateTime.tryParse(map['createdAt'] as String? ?? '') ?? DateTime.now(),
         reminderTime: map['reminderTime'] as String?,
+        scheduledDays: List<int>.from(map['scheduledDays'] ?? []),
       );
 }

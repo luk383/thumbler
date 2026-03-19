@@ -18,6 +18,7 @@ class HabitsNotifier extends Notifier<List<Habit>> {
     required String emoji,
     String? goalId,
     String? reminderTime,
+    List<int> scheduledDays = const [],
   }) {
     final habit = Habit(
       id: 'habit_${DateTime.now().millisecondsSinceEpoch}',
@@ -26,6 +27,7 @@ class HabitsNotifier extends Notifier<List<Habit>> {
       goalId: goalId,
       createdAt: DateTime.now(),
       reminderTime: reminderTime,
+      scheduledDays: scheduledDays,
     );
     HabitsStorage().save(habit);
     state = HabitsStorage().all();
@@ -39,6 +41,7 @@ class HabitsNotifier extends Notifier<List<Habit>> {
     bool clearGoalId = false,
     String? reminderTime,
     bool clearReminderTime = false,
+    List<int>? scheduledDays,
   }) {
     final habit = state.firstWhere((h) => h.id == habitId);
     final updated = habit.copyWith(
@@ -48,6 +51,7 @@ class HabitsNotifier extends Notifier<List<Habit>> {
       clearGoalId: clearGoalId,
       reminderTime: reminderTime,
       clearReminderTime: clearReminderTime,
+      scheduledDays: scheduledDays,
     );
     HabitsStorage().save(updated);
     state = HabitsStorage().all();
