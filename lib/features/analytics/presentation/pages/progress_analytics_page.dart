@@ -67,6 +67,8 @@ class ProgressAnalyticsPage extends ConsumerWidget {
           const SizedBox(height: 24),
           const _SessionAccuracyTrendSection(),
           const SizedBox(height: 24),
+          const _HourlyHeatmapSection(),
+          const SizedBox(height: 24),
           const _GrowthDashboardSection(),
         ],
       ),
@@ -814,6 +816,189 @@ class _GrowthMetric extends StatelessWidget {
               style: const TextStyle(color: Colors.white54, fontSize: 11)),
         ],
       );
+}
+
+// ── Hourly Heatmap ────────────────────────────────────────────────────────────
+
+class _HourlyHeatmapSection extends StatelessWidget {
+  const _HourlyHeatmapSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final sessions = StudySessionStorage().getAll();
+
+    // Count cards studied per hour of day
+    final byHour = List<int>.filled(24, 0);
+    for (final session in sessions) {
+      byHour[session.date.hour] += session.cardCount;
+    }
+    final maxCards = byHour.reduce((a, b) => a > b ? a : b);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader('Quando studi di più'),
+        const SizedBox(height: 10),
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          tint: Colors.cyanAccent,
+          child: sessions.isEmpty
+              ? const Text(
+                  'Nessuna sessione ancora registrata.',
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Carte studiate per fascia oraria',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    // 24-column grid showing morning/afternoon/evening
+                    SizedBox(
+                      height: 80,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: List.generate(24, (hour) {
+                          final count = byHour[hour];
+                          final fraction = maxCards == 0
+                              ? 0.0
+                              : count / maxCards;
+                          final color = hour < 6
+                              ? Colors.blueAccent
+                              : hour < 12
+                                  ? Colors.orangeAccent
+                                  : hour < 18
+                                      ? Colors.cyanAccent
+                                      : Colors.purpleAccent;
+                          return Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 1),
+                              child: Tooltip(
+                                message: '${hour}h: $count carte',
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    AnimatedContainer(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      height:
+                                          (fraction * 60).clamp(2.0, 60.0),
+                                      decoration: BoxDecoration(
+                                        color: count == 0
+                                            ? Colors.white12
+                                            : color.withAlpha(200),
+                                        borderRadius: const BorderRadius.vertical(
+                                          top: Radius.circular(3),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // Hour labels: 0, 6, 12, 18, 23
+                    Row(
+                      children: const [
+                        Expanded(flex: 6, child: Text('0h', style: TextStyle(color: Colors.white38, fontSize: 10))),
+                        Expanded(flex: 6, child: Center(child: Text('6h', style: TextStyle(color: Colors.white38, fontSize: 10)))),
+                        Expanded(flex: 6, child: Center(child: Text('12h', style: TextStyle(color: Colors.white38, fontSize: 10)))),
+                        Expanded(flex: 6, child: Center(child: Text('18h', style: TextStyle(color: Colors.white38, fontSize: 10)))),
+                        Expanded(flex: 1, child: SizedBox()),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    // Legend
+                    const Wrap(
+                      spacing: 12,
+                      children: [
+                        _HourLegend(color: Colors.blueAccent, label: 'Notte (0-5h)'),
+                        _HourLegend(color: Colors.orangeAccent, label: 'Mattina (6-11h)'),
+                        _HourLegend(color: Colors.cyanAccent, label: 'Pomeriggio (12-17h)'),
+                        _HourLegend(color: Colors.purpleAccent, label: 'Sera (18-23h)'),
+                      ],
+                    ),
+                    // Peak hour callout
+                    if (maxCards > 0) ...[
+                      const SizedBox(height: 12),
+                      _PeakHourCallout(byHour: byHour),
+                    ],
+                  ],
+                ),
+        ),
+      ],
+    );
+  }
+}
+
+class _HourLegend extends StatelessWidget {
+  const _HourLegend({required this.color, required this.label});
+  final Color color;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 10,
+            height: 10,
+            decoration: BoxDecoration(
+              color: color.withAlpha(180),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(width: 4),
+          Text(label,
+              style: const TextStyle(color: Colors.white38, fontSize: 10)),
+        ],
+      );
+}
+
+class _PeakHourCallout extends StatelessWidget {
+  const _PeakHourCallout({required this.byHour});
+  final List<int> byHour;
+
+  @override
+  Widget build(BuildContext context) {
+    var peakHour = 0;
+    for (var h = 1; h < 24; h++) {
+      if (byHour[h] > byHour[peakHour]) peakHour = h;
+    }
+    final peakCards = byHour[peakHour];
+    final fascia = peakHour < 6
+        ? 'notte'
+        : peakHour < 12
+            ? 'mattina'
+            : peakHour < 18
+                ? 'pomeriggio'
+                : 'sera';
+
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.cyanAccent.withAlpha(15),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.cyanAccent.withAlpha(40)),
+      ),
+      child: Text(
+        '⚡ Picco alle ${peakHour}h ($fascia) — $peakCards carte studiate',
+        style: const TextStyle(
+            color: Colors.cyanAccent, fontSize: 12, fontWeight: FontWeight.w600),
+      ),
+    );
+  }
 }
 
 // ── Weekly Comparison ─────────────────────────────────────────────────────────

@@ -105,6 +105,10 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
+            // Card stats (edit mode only)
+            if (isEdit) _CardStatsBar(item: widget.existingItem!),
+            if (isEdit) const SizedBox(height: 16),
+
             // Category + Topic
             Row(
               children: [
@@ -235,6 +239,97 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ── Card stats bar (edit mode) ────────────────────────────────────────────────
+
+class _CardStatsBar extends StatelessWidget {
+  const _CardStatsBar({required this.item});
+  final StudyItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final total = item.correctCount + item.wrongCount;
+    final accuracy = total == 0 ? null : (item.correctCount / total * 100).round();
+    final nextReview = item.nextReviewAt;
+    final nextLabel = nextReview == null
+        ? 'Non programmata'
+        : nextReview.isBefore(DateTime.now())
+            ? 'Da ripassare'
+            : 'Tra ${nextReview.difference(DateTime.now()).inDays}g';
+
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: cs.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: cs.outlineVariant),
+      ),
+      child: Row(
+        children: [
+          _StatChip(
+            label: 'Viste',
+            value: '${item.timesSeen}x',
+          ),
+          const SizedBox(width: 8),
+          _StatChip(
+            label: 'Accuratezza',
+            value: accuracy == null ? '—' : '$accuracy%',
+            color: accuracy == null
+                ? null
+                : accuracy >= 75
+                    ? Colors.green
+                    : accuracy >= 50
+                        ? Colors.orange
+                        : Colors.red,
+          ),
+          const SizedBox(width: 8),
+          _StatChip(
+            label: 'Prossima',
+            value: nextLabel,
+          ),
+          const SizedBox(width: 8),
+          _StatChip(
+            label: 'EF',
+            value: item.easeFactor.toStringAsFixed(1),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _StatChip extends StatelessWidget {
+  const _StatChip({required this.label, required this.value, this.color});
+  final String label;
+  final String value;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: color ?? cs.onSurface,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            label,
+            style: TextStyle(fontSize: 10, color: cs.outline),
+            textAlign: TextAlign.center,
+          ),
+        ],
       ),
     );
   }
