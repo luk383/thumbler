@@ -34,6 +34,7 @@ class TodayHubPage extends ConsumerWidget {
 
     final doneHabits = habits.where((h) => h.isDoneToday).length;
     final dueCards = studyState.dueCount;
+    final weakCards = studyState.weakCount;
     final ws = ReflectionEntry.currentWeekStart();
     final hasReflection = reflections.any(
       (r) => r.weekStart.isAtSameMomentAs(ws) && !r.isEmpty,
@@ -125,6 +126,19 @@ class TodayHubPage extends ConsumerWidget {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 10),
+                    _QuickAction(
+                      icon: Icons.trending_down_outlined,
+                      label: 'Carte deboli',
+                      subtitle: weakCards > 0
+                          ? '$weakCards da rivedere'
+                          : 'Nessuna carta debole',
+                      onTap: weakCards > 0
+                          ? () => context.go(
+                              '/study?queueType=weak&autostart=true',
+                            )
+                          : () => context.go('/study'),
                     ),
                   ],
                 ),

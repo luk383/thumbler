@@ -6,8 +6,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../features/feed/data/mock_lessons.dart';
 import '../../../../features/feed/domain/lesson.dart';
 import '../../../../features/growth/streak/streak_notifier.dart';
+import '../../data/study_session_storage.dart';
 import '../../data/study_storage.dart';
 import '../../domain/study_item.dart';
+import '../../domain/study_session.dart';
 import 'deck_library_controller.dart';
 
 // ---------------------------------------------------------------------------
@@ -79,6 +81,7 @@ class StudyExternalSessionRequest {
     this.questionIds,
     this.sessionLength = 10,
     this.lastExamAttemptId,
+    this.queueType,
   });
 
   final String? category;
@@ -89,6 +92,7 @@ class StudyExternalSessionRequest {
   final List<String>? questionIds;
   final int sessionLength;
   final String? lastExamAttemptId;
+  final SessionQueueType? queueType;
 }
 
 // ---------------------------------------------------------------------------
@@ -132,6 +136,8 @@ class StudyState {
     this.startedFromExamBridge = false,
     this.lastTrainedArea,
     this.lastExamAttemptId,
+    this.sessionStartTime,
+    this.sessionCorrectCount = 0,
   });
 
   final List<StudyItem> items;
@@ -172,6 +178,10 @@ class StudyState {
   /// Minimal analytics metadata (in-memory for now).
   final String? lastTrainedArea;
   final String? lastExamAttemptId;
+
+  /// Session timing and scoring for history tracking.
+  final DateTime? sessionStartTime;
+  final int sessionCorrectCount;
 
   // ── Derived ───────────────────────────────────────────────────────────────
 
@@ -397,6 +407,8 @@ class StudyNotifier extends Notifier<StudyState> {
       startedFromExamBridge: false,
       lastTrainedArea: clearSelections ? null : state.lastTrainedArea,
       lastExamAttemptId: clearSelections ? null : state.lastExamAttemptId,
+      sessionStartTime: null,
+      sessionCorrectCount: 0,
     );
   }
 
@@ -445,6 +457,9 @@ class StudyNotifier extends Notifier<StudyState> {
     setTopic(request.topic);
     setMode(request.mode);
     setSessionLength(request.sessionLength);
+    if (request.queueType != null) {
+      setQueueType(request.queueType!);
+    }
     if (request.autostart) {
       startSession();
     }
@@ -487,6 +502,8 @@ class StudyNotifier extends Notifier<StudyState> {
       startedFromExamBridge: false,
       lastTrainedArea: state.lastTrainedArea,
       lastExamAttemptId: state.lastExamAttemptId,
+      sessionStartTime: DateTime.now(),
+      sessionCorrectCount: 0,
     );
   }
 
@@ -519,7 +536,8 @@ class StudyNotifier extends Notifier<StudyState> {
       lastReviewedAt: DateTime.now(),
     ));
     ref.read(streakProvider.notifier).recordStudyQuestion();
-    _advanceSession(storage);
+    final newCorrectCount = state.sessionCorrectCount + (wrong ? 0 : 1);
+    _advanceSessionWithTracking(storage, newCorrectCount);
   }
 
   /// SM-2 algorithm — updates easeFactor, srsInterval, srsRepetitions,
@@ -611,6 +629,18 @@ class StudyNotifier extends Notifier<StudyState> {
         ? 0
         : (state.currentIndex + 1) % state.sessionQueue.length;
 
+    final newAnsweredInSession = state.answeredInSession + 1;
+    final newCorrectCount = state.sessionCorrectCount + (correct ? 1 : 0);
+    final sessionDone = newAnsweredInSession >= state.sessionQueue.length;
+
+    if (sessionDone) {
+      _saveSession(
+        cardCount: state.sessionQueue.length,
+        correctCount: newCorrectCount,
+        activeDeckId: state.activeDeckId,
+      );
+    }
+
     state = StudyState(
       items: activeItems,
       activeDeckId: state.activeDeckId,
@@ -623,10 +653,12 @@ class StudyNotifier extends Notifier<StudyState> {
       isStudying: true,
       sessionQueue: state.sessionQueue,
       currentIndex: nextIndex,
-      answeredInSession: state.answeredInSession + 1,
+      answeredInSession: newAnsweredInSession,
       generation: state.generation + 1,
       speedResults: newResults,
       wrongItemIds: newWrong,
+      sessionStartTime: state.sessionStartTime,
+      sessionCorrectCount: newCorrectCount,
     );
   }
 
@@ -722,6 +754,8 @@ class StudyNotifier extends Notifier<StudyState> {
           ? '$category / $topic'
           : category,
       lastExamAttemptId: lastExamAttemptId,
+      sessionStartTime: DateTime.now(),
+      sessionCorrectCount: 0,
     );
   }
 
@@ -784,14 +818,31 @@ class StudyNotifier extends Notifier<StudyState> {
       startedFromExamBridge: false,
       lastTrainedArea: normalized.join(', '),
       lastExamAttemptId: state.lastExamAttemptId,
+      sessionStartTime: DateTime.now(),
+      sessionCorrectCount: 0,
     );
   }
 
   void _advanceSession(StudyStorage storage) {
+    _advanceSessionWithTracking(storage, state.sessionCorrectCount);
+  }
+
+  void _advanceSessionWithTracking(StudyStorage storage, int newCorrectCount) {
     final items = storage.allForDeck(state.activeDeckId);
     final nextIndex = state.sessionQueue.isEmpty
         ? 0
         : (state.currentIndex + 1) % state.sessionQueue.length;
+    final newAnsweredInSession = state.answeredInSession + 1;
+    final sessionDone = newAnsweredInSession >= state.sessionQueue.length;
+
+    if (sessionDone) {
+      _saveSession(
+        cardCount: state.sessionQueue.length,
+        correctCount: newCorrectCount,
+        activeDeckId: state.activeDeckId,
+      );
+    }
+
     state = StudyState(
       items: items,
       activeDeckId: state.activeDeckId,
@@ -804,14 +855,46 @@ class StudyNotifier extends Notifier<StudyState> {
       isStudying: true,
       sessionQueue: state.sessionQueue,
       currentIndex: nextIndex,
-      answeredInSession: state.answeredInSession + 1,
+      answeredInSession: newAnsweredInSession,
       generation: state.generation + 1,
       speedResults: state.speedResults,
       wrongItemIds: state.wrongItemIds,
       startedFromExamBridge: state.startedFromExamBridge,
       lastTrainedArea: state.lastTrainedArea,
       lastExamAttemptId: state.lastExamAttemptId,
+      sessionStartTime: state.sessionStartTime,
+      sessionCorrectCount: newCorrectCount,
     );
+  }
+
+  void _saveSession({
+    required int cardCount,
+    required int correctCount,
+    required String? activeDeckId,
+  }) {
+    final startTime = state.sessionStartTime;
+    final durationSeconds = startTime != null
+        ? DateTime.now().difference(startTime).inSeconds
+        : 0;
+
+    // Get deck name from library state
+    final deckMeta = ref
+        .read(deckLibraryProvider)
+        .packs
+        .cast<dynamic>()
+        .firstWhere(
+          (p) => p.id == activeDeckId,
+          orElse: () => null,
+        );
+    final deckName = deckMeta?.title as String? ?? activeDeckId ?? 'Senza deck';
+
+    final session = StudySession.create(
+      cardCount: cardCount,
+      correctCount: correctCount,
+      durationSeconds: durationSeconds,
+      deckName: deckName,
+    );
+    StudySessionStorage().save(session);
   }
 
   // ── Queue builder ─────────────────────────────────────────────────────────
@@ -902,6 +985,8 @@ class StudyNotifier extends Notifier<StudyState> {
     bool? startedFromExamBridge,
     Object lastTrainedArea = _nil,
     Object lastExamAttemptId = _nil,
+    Object sessionStartTime = _nil,
+    int? sessionCorrectCount,
   }) {
     return StudyState(
       items: items ?? state.items,
@@ -933,6 +1018,10 @@ class StudyNotifier extends Notifier<StudyState> {
       lastExamAttemptId: identical(lastExamAttemptId, _nil)
           ? state.lastExamAttemptId
           : lastExamAttemptId as String?,
+      sessionStartTime: identical(sessionStartTime, _nil)
+          ? state.sessionStartTime
+          : sessionStartTime as DateTime?,
+      sessionCorrectCount: sessionCorrectCount ?? state.sessionCorrectCount,
     );
   }
 }

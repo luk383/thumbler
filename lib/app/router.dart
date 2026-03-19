@@ -23,6 +23,8 @@ import '../features/profile/presentation/profile_page.dart';
 import '../features/study/data/deck_library_storage.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
 import '../features/study/presentation/pages/card_editor_page.dart';
+import '../features/study/presentation/pages/deck_management_page.dart';
+import '../features/study/presentation/pages/session_history_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import 'shell_scaffold.dart';
 
@@ -62,6 +64,14 @@ final appRouter = GoRouter(
       builder: (context, state) => CardEditorPage(
         existingItem: state.extra as dynamic,
       ),
+    ),
+    GoRoute(
+      path: '/deck-management',
+      builder: (context, state) => const DeckManagementPage(),
+    ),
+    GoRoute(
+      path: '/study/history',
+      builder: (context, state) => const SessionHistoryPage(),
     ),
     GoRoute(
       path: '/pomodoro',
@@ -129,17 +139,28 @@ final appRouter = GoRouter(
                       state.uri.queryParameters['sessionLength'] ?? '',
                     ) ??
                     10;
+                final queueTypeParam =
+                    state.uri.queryParameters['queueType'];
 
                 final mode = modeParam == 'speed'
                     ? StudyMode.speed
                     : StudyMode.srs;
+
+                final queueType = switch (queueTypeParam) {
+                  'weak' => SessionQueueType.weak,
+                  'new' => SessionQueueType.newCards,
+                  'random' => SessionQueueType.random,
+                  'due' => SessionQueueType.due,
+                  _ => null,
+                };
 
                 final fromQuery =
                     (category != null ||
                         topic != null ||
                         modeParam != null ||
                         source != null ||
-                        autostart)
+                        autostart ||
+                        queueTypeParam != null)
                     ? StudyExternalSessionRequest(
                         category: category,
                         topic: topic,
@@ -148,6 +169,7 @@ final appRouter = GoRouter(
                         autostart: autostart,
                         sessionLength: sessionLength,
                         lastExamAttemptId: lastExamAttemptId,
+                        queueType: queueType,
                       )
                     : null;
 

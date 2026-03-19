@@ -158,6 +158,17 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
     }
   }
 
+  Future<void> deleteUserDeck(String deckId) async {
+    await _storage.deleteUserDeck(deckId);
+    // If we just deleted the active deck, clear the active selection
+    String? nextActiveDeckId = state.activeDeckId;
+    if (nextActiveDeckId == deckId) {
+      await _storage.clearActiveDeckId();
+      nextActiveDeckId = null;
+    }
+    await discoverPacks();
+  }
+
   Future<void> chooseDeckForInterests(List<String> interests) async {
     if (interests.isEmpty) {
       if (state.activeDeckId == null) {

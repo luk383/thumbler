@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
@@ -9,6 +10,8 @@ import '../../../journal/domain/journal_entry.dart';
 import '../../../journal/state/journal_notifier.dart';
 import '../../../reflection/domain/reflection_entry.dart';
 import '../../../reflection/state/reflection_notifier.dart';
+import '../../../study/data/study_session_storage.dart';
+import '../../../study/domain/study_session.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../../domain/progress_analytics.dart';
 import '../providers/progress_analytics_provider.dart';
@@ -59,6 +62,8 @@ class ProgressAnalyticsPage extends ConsumerWidget {
                 (summary) => _WeakDomainCard(summary: summary),
               ),
           ],
+          const SizedBox(height: 24),
+          const _SessionAccuracyTrendSection(),
           const SizedBox(height: 24),
           const _GrowthDashboardSection(),
         ],
@@ -479,6 +484,166 @@ class _InfoCard extends StatelessWidget {
       ),
     );
   }
+}
+
+// ── Session Accuracy Trend ────────────────────────────────────────────────────
+
+class _SessionAccuracyTrendSection extends StatelessWidget {
+  const _SessionAccuracyTrendSection();
+
+  @override
+  Widget build(BuildContext context) {
+    final sessions = StudySessionStorage().getLast7Days();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader('Andamento sessioni (7 giorni)'),
+        const SizedBox(height: 10),
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          tint: const Color(0xFF6C63FF),
+          child: sessions.isEmpty
+              ? const Text(
+                  'Nessuna sessione completata negli ultimi 7 giorni.',
+                  style: TextStyle(color: Colors.white54, fontSize: 12),
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Accuratezza per sessione',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 120,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: sessions.take(7).map((session) {
+                          final acc = session.accuracyPct;
+                          final height = (acc / 100) * 90;
+                          final barColor = acc >= 80
+                              ? Colors.greenAccent
+                              : acc >= 60
+                                  ? Colors.orangeAccent
+                                  : Colors.redAccent;
+                          final dateLabel = DateFormat('d/M').format(session.date);
+                          return Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 3),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    '$acc%',
+                                    style: TextStyle(
+                                      color: barColor,
+                                      fontSize: 9,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Container(
+                                    height: height.toDouble().clamp(4.0, 90.0),
+                                    decoration: BoxDecoration(
+                                      color: barColor.withAlpha(180),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    dateLabel,
+                                    style: const TextStyle(
+                                      color: Colors.white30,
+                                      fontSize: 9,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    _SessionSummaryRow(sessions: sessions),
+                  ],
+                ),
+        ),
+      ],
+    );
+  }
+}
+
+class _SessionSummaryRow extends StatelessWidget {
+  const _SessionSummaryRow({required this.sessions});
+
+  final List<StudySession> sessions;
+
+  @override
+  Widget build(BuildContext context) {
+    final totalCards =
+        sessions.fold<int>(0, (sum, s) => sum + s.cardCount);
+    final totalCorrect =
+        sessions.fold<int>(0, (sum, s) => sum + s.correctCount);
+    final avgAccuracy = totalCards == 0
+        ? 0
+        : ((totalCorrect / totalCards) * 100).round();
+
+    return Row(
+      children: [
+        Expanded(
+          child: _MiniMetric(
+            label: 'Sessioni',
+            value: '${sessions.length}',
+          ),
+        ),
+        Expanded(
+          child: _MiniMetric(
+            label: 'Carte tot.',
+            value: '$totalCards',
+          ),
+        ),
+        Expanded(
+          child: _MiniMetric(
+            label: 'Media acc.',
+            value: '$avgAccuracy%',
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _MiniMetric extends StatelessWidget {
+  const _MiniMetric({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 3),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white54, fontSize: 11),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      );
 }
 
 // ── Growth Dashboard ──────────────────────────────────────────────────────────

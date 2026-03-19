@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
@@ -42,12 +43,30 @@ class StudyLauncherPage extends ConsumerWidget {
           children: [
             // ── Header ──────────────────────────────────────────────────
             const SizedBox(height: 20),
-            Text(
-              l10n.studyTitle,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    l10n.studyTitle,
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                IconButton(
+                  onPressed: () => context.push('/study/history'),
+                  icon: const Icon(Icons.history_outlined),
+                  tooltip: 'Storico sessioni',
+                  color: Colors.white54,
+                ),
+                IconButton(
+                  onPressed: () => context.push('/deck-management'),
+                  icon: const Icon(Icons.tune_outlined),
+                  tooltip: 'Gestisci deck',
+                  color: Colors.white54,
+                ),
+              ],
             ),
             const SizedBox(height: 4),
             Text(
