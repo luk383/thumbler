@@ -74,6 +74,11 @@ class TodayHubPage extends ConsumerWidget {
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 100),
             sliver: SliverList.list(children: [
+              // ── Daily quote ──────────────────────────────────────────────
+              const _DailyQuoteCard(),
+
+              const SizedBox(height: 12),
+
               // ── Study due cards ──────────────────────────────────────────
               _SectionCard(
                 icon: Icons.school_outlined,
@@ -468,6 +473,88 @@ class _StatTile extends StatelessWidget {
               textAlign: TextAlign.center),
         ],
       );
+}
+
+class _DailyQuoteCard extends StatelessWidget {
+  const _DailyQuoteCard();
+
+  static const _quotes = [
+    ('La disciplina è il ponte tra obiettivi e risultati.', 'Jim Rohn'),
+    ('Non cercare il tempo, crealo.', 'Anonimo'),
+    ('Il successo è la somma di piccoli sforzi ripetuti ogni giorno.', 'R. Collier'),
+    ('Studia non per superare gli altri, ma per superare te stesso.', 'Anonimo'),
+    ('La conoscenza è l\'unica ricchezza che nessuno può toglierti.', 'Anonimo'),
+    ('Il modo per iniziare è smettere di parlare e cominciare a fare.', 'Walt Disney'),
+    ('Non importa quanto sei lento, l\'importante è non fermarsi.', 'Confucio'),
+    ('Ogni giorno è una nuova opportunità di migliorare.', 'Anonimo'),
+    ('Il talento è nulla senza disciplina.', 'Anonimo'),
+    ('Investi in te stesso: è il rendimento più alto che puoi ottenere.', 'Warren Buffett'),
+    ('Il futuro appartiene a chi crede nella bellezza dei propri sogni.', 'Eleanor Roosevelt'),
+    ('Non è mai tardi per essere quello che avresti potuto essere.', 'George Eliot'),
+    ('La mente è come un paracadute: funziona solo se è aperta.', 'Frank Zappa'),
+    ('Chi smette di imparare è vecchio, che abbia vent\'anni o ottanta.', 'Henry Ford'),
+    ('La fortuna aiuta gli audaci.', 'Virgilio'),
+    ('Non rimandare a domani quello che puoi fare oggi.', 'Benjamin Franklin'),
+    ('Sii il cambiamento che vuoi vedere nel mondo.', 'Mahatma Gandhi'),
+    ('Il momento migliore per iniziare era ieri. Il secondo momento migliore è adesso.', 'Proverbio cinese'),
+    ('Ogni esperto è stato un principiante.', 'Anonimo'),
+    ('Il progresso, non la perfezione, è il vero obiettivo.', 'Anonimo'),
+    ('Impara come se dovessi vivere per sempre.', 'Mahatma Gandhi'),
+    ('La lettura è all\'anima quello che l\'esercizio è al corpo.', 'Joseph Addison'),
+    ('Non aver paura di andare lentamente; abbi paura di fermarti.', 'Proverbio cinese'),
+    ('L\'istruzione è l\'arma più potente che puoi usare per cambiare il mondo.', 'Nelson Mandela'),
+    ('Chi non risica non rosica.', 'Proverbio italiano'),
+    ('La perseveranza è la chiave del successo.', 'Anonimo'),
+    ('Fai del tuo meglio ogni giorno e il meglio si moltiplicherà.', 'Anonimo'),
+    ('La mente cresciuta da una nuova idea non tornerà mai alle sue dimensioni originali.', 'Oliver Wendell Holmes'),
+    ('Sii curioso, non giudicante.', 'Walt Whitman'),
+    ('Ogni passo avanti, anche il più piccolo, è un passo nella direzione giusta.', 'Anonimo'),
+    ('La conoscenza è potere.', 'Francis Bacon'),
+    ('Concentrati sui progressi, non sulla perfezione.', 'Bill Phillips'),
+    ('L\'unico modo per fare un ottimo lavoro è amare quello che fai.', 'Steve Jobs'),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final now = DateTime.now();
+    final dayOfYear = now.difference(DateTime(now.year, 1, 1)).inDays;
+    final entry = _quotes[dayOfYear % _quotes.length];
+    final quote = entry.$1;
+    final author = entry.$2;
+
+    return Card(
+      color: cs.surfaceContainerHighest.withAlpha(80),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: cs.outlineVariant.withAlpha(60)),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '"$quote"',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontStyle: FontStyle.italic,
+                    height: 1.5,
+                  ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '— $author',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: cs.primary,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class _HabitRow extends ConsumerWidget {

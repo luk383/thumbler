@@ -20,6 +20,7 @@ import '../features/paywall/presentation/paywall_page.dart';
 import '../features/notifications/ui/notification_settings_page.dart';
 import '../features/profile/presentation/privacy_policy_page.dart';
 import '../features/profile/presentation/profile_page.dart';
+import '../features/profile/presentation/progress_share_page.dart';
 import '../features/study/data/deck_library_storage.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
 import '../features/study/presentation/pages/card_editor_page.dart';
@@ -54,6 +55,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/privacy',
       builder: (context, state) => const PrivacyPolicyPage(),
+    ),
+    GoRoute(
+      path: '/share',
+      builder: (context, state) => const ProgressSharePage(),
     ),
     GoRoute(
       path: '/notifications',

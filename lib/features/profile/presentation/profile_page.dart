@@ -11,6 +11,7 @@ import '../../../core/ui/app_surfaces.dart';
 import '../../bookmarks/presentation/bookmarks_notifier.dart';
 import '../../goals/ui/goals_page.dart';
 import '../../habits/ui/habits_page.dart';
+import '../../habits/state/habits_notifier.dart';
 import '../../journal/ui/journal_page.dart';
 import '../../reading/ui/reading_page.dart';
 import '../../reflection/ui/reflection_page.dart';
@@ -18,6 +19,7 @@ import '../../achievements/domain/achievement.dart';
 import '../../achievements/state/achievements_notifier.dart';
 import '../../achievements/ui/achievements_page.dart';
 import '../../backup/backup_service.dart';
+import '../../study/data/study_session_storage.dart';
 import '../../study/presentation/controllers/deck_library_controller.dart';
 import '../../growth/streak/streak_notifier.dart';
 import '../../growth/daily_quest/daily_quest_notifier.dart';
@@ -53,6 +55,13 @@ class ProfilePage extends ConsumerWidget {
             stretch: true,
             backgroundColor: const Color(0xFF0A0C11).withAlpha(200),
             surfaceTintColor: Colors.transparent,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.share_outlined, color: Colors.white70),
+                tooltip: 'Condividi progresso',
+                onPressed: () => context.push('/share'),
+              ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: false,
               titlePadding: const EdgeInsets.symmetric(
@@ -121,6 +130,8 @@ class ProfilePage extends ConsumerWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 28),
+                  _YearlyHeatmapSection(),
                   const SizedBox(height: 28),
                   _SectionTitle(l10n.todaysQuest),
                   const SizedBox(height: 12),
@@ -1037,6 +1048,167 @@ class _AchievementsEntryCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ── Yearly heatmap ────────────────────────────────────────────────────────────
+
+class _YearlyHeatmapSection extends ConsumerWidget {
+  const _YearlyHeatmapSection();
+
+  static const _italianMonths = [
+    'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu',
+    'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic',
+  ];
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cs = Theme.of(context).colorScheme;
+    final habits = ref.watch(habitsProvider);
+    final now = DateTime.now();
+    final year = now.year;
+
+    // Build activity map: dateKey -> count
+    final activityMap = <String, int>{};
+
+    // Count study sessions (cardCount per day)
+    try {
+      final sessions = StudySessionStorage().getAll();
+      for (final s in sessions) {
+        final key = _dateKey(s.date);
+        activityMap[key] = (activityMap[key] ?? 0) + s.cardCount;
+      }
+    } catch (_) {}
+
+    // Count habit completions per day
+    for (final habit in habits) {
+      for (final dateStr in habit.completedDates) {
+        activityMap[dateStr] = (activityMap[dateStr] ?? 0) + 1;
+      }
+    }
+
+    // Build 365-day grid starting from 52 weeks ago (Sunday-aligned)
+    final today = DateTime(now.year, now.month, now.day);
+    // Find start: go back 364 days from today
+    final startRaw = today.subtract(const Duration(days: 364));
+    // Align to Sunday (weekday 7 = Sunday in Dart)
+    final startOffset = startRaw.weekday % 7; // 0=Sun,1=Mon...
+    final start = startRaw.subtract(Duration(days: startOffset));
+
+    // Build list of weeks (each week = 7 days)
+    final weeks = <List<DateTime?>>[];
+    var cursor = start;
+    while (cursor.isBefore(today) || cursor.isAtSameMomentAs(today)) {
+      final week = <DateTime?>[];
+      for (var d = 0; d < 7; d++) {
+        final day = cursor.add(Duration(days: d));
+        // Only show days up to today, and within current year context
+        if (day.isAfter(today)) {
+          week.add(null);
+        } else {
+          week.add(day);
+        }
+      }
+      weeks.add(week);
+      cursor = cursor.add(const Duration(days: 7));
+    }
+
+    // Build month label positions
+    final monthLabels = <int, String>{}; // weekIndex -> month label
+    for (var wi = 0; wi < weeks.length; wi++) {
+      final week = weeks[wi];
+      for (final day in week) {
+        if (day != null && day.day == 1) {
+          monthLabels[wi] = _italianMonths[day.month - 1];
+          break;
+        }
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              'Attività $year',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 10),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Month labels row
+              Row(
+                children: List.generate(weeks.length, (wi) {
+                  return SizedBox(
+                    width: 12,
+                    child: monthLabels.containsKey(wi)
+                        ? Text(
+                            monthLabels[wi]!,
+                            style: const TextStyle(
+                              color: Colors.white38,
+                              fontSize: 8,
+                            ),
+                          )
+                        : null,
+                  );
+                }),
+              ),
+              const SizedBox(height: 3),
+              // Heatmap grid
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: weeks.map((week) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 2),
+                    child: Column(
+                      children: week.map((day) {
+                        if (day == null) {
+                          return const SizedBox(width: 10, height: 12);
+                        }
+                        final key = _dateKey(day);
+                        final count = activityMap[key] ?? 0;
+                        final color = _cellColor(cs, count);
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 2),
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              color: color,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  static String _dateKey(DateTime d) =>
+      '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
+
+  Color _cellColor(ColorScheme cs, int count) {
+    if (count == 0) return cs.surfaceContainerHighest.withAlpha(120);
+    if (count <= 2) return cs.primary.withAlpha(80);
+    if (count <= 5) return cs.primary.withAlpha(150);
+    return cs.primary;
   }
 }
 
