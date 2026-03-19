@@ -30,6 +30,9 @@ class StudyItem {
     this.userNote,
     // Flagging
     this.isStarred = false,
+    // FSRS v4 state
+    this.fsrsStability = 0.0,
+    this.fsrsDifficulty = 0.0,
   });
 
   final String id;
@@ -69,6 +72,10 @@ class StudyItem {
   // Flagging
   final bool isStarred;
 
+  // FSRS v4 state (0.0 = not yet initialized → first review uses init formulas)
+  final double fsrsStability;
+  final double fsrsDifficulty;
+
   String get correctAnswer => options[correctAnswerIndex];
 
   StudyItem copyWith({
@@ -86,6 +93,8 @@ class StudyItem {
     int? srsRepetitions,
     Object? userNote = _sentinel,
     bool? isStarred,
+    double? fsrsStability,
+    double? fsrsDifficulty,
   }) => StudyItem(
     id: id,
     deckId: deckId ?? this.deckId,
@@ -112,6 +121,8 @@ class StudyItem {
     srsRepetitions: srsRepetitions ?? this.srsRepetitions,
     userNote: userNote == _sentinel ? this.userNote : userNote as String?,
     isStarred: isStarred ?? this.isStarred,
+    fsrsStability: fsrsStability ?? this.fsrsStability,
+    fsrsDifficulty: fsrsDifficulty ?? this.fsrsDifficulty,
   );
 
   static const Object _sentinel = Object();
@@ -142,6 +153,8 @@ class StudyItem {
     'srsRepetitions': srsRepetitions,
     'userNote': userNote,
     'isStarred': isStarred,
+    'fsrsStability': fsrsStability,
+    'fsrsDifficulty': fsrsDifficulty,
   };
 
   factory StudyItem.fromMap(Map map) => StudyItem(
@@ -175,6 +188,8 @@ class StudyItem {
     srsRepetitions: (map['srsRepetitions'] as num?)?.toInt() ?? 0,
     userNote: map['userNote'] as String?,
     isStarred: (map['isStarred'] as bool?) ?? false,
+    fsrsStability: (map['fsrsStability'] as num?)?.toDouble() ?? 0.0,
+    fsrsDifficulty: (map['fsrsDifficulty'] as num?)?.toDouble() ?? 0.0,
   );
 
   static StudyItem fromLesson({

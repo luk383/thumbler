@@ -929,7 +929,7 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
               ),
             ),
 
-            // Feedback + Again / Good / Easy
+            // Feedback + Again / Hard / Good / Easy (FSRS grades 1–4)
             if (isAnswered)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 20),
@@ -958,6 +958,27 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                             },
                             child: const Text(
                               'Again',
+                              style: TextStyle(fontSize: 13),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.orangeAccent,
+                              side: const BorderSide(
+                                color: Colors.orangeAccent,
+                                width: 1.5,
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 11),
+                            ),
+                            onPressed: () {
+                              HapticFeedback.lightImpact();
+                              widget.onRate(SrsRating.hard);
+                            },
+                            child: const Text(
+                              'Hard',
                               style: TextStyle(fontSize: 13),
                             ),
                           ),

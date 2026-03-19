@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/srs/fsrs.dart';
+
 import '../../../../features/feed/data/mock_lessons.dart';
 import '../../../../features/feed/domain/lesson.dart';
 import '../../../../features/growth/streak/streak_notifier.dart';
@@ -16,21 +18,33 @@ import 'deck_library_controller.dart';
 // Enums
 // ---------------------------------------------------------------------------
 
-/// SRS self-rating after answering a card.
+/// SRS self-rating after answering a card (maps to FSRS grades 1-4).
 enum SrsRating {
-  /// Card not known — review again in 10 minutes.
+  /// Grade 1 — forgot, review soon.
   again,
 
-  /// Card known reasonably well — review in 2 days.
+  /// Grade 2 — remembered with difficulty.
+  hard,
+
+  /// Grade 3 — remembered well.
   good,
 
-  /// Card very easy — review in 7 days.
+  /// Grade 4 — trivially easy.
   easy;
 
   String get label => switch (this) {
     SrsRating.again => 'Again',
+    SrsRating.hard => 'Hard',
     SrsRating.good => 'Good',
     SrsRating.easy => 'Easy',
+  };
+
+  /// FSRS grade (1–4).
+  int get fsrsGrade => switch (this) {
+    SrsRating.again => 1,
+    SrsRating.hard => 2,
+    SrsRating.good => 3,
+    SrsRating.easy => 4,
   };
 }
 
@@ -585,7 +599,9 @@ class StudyNotifier extends Notifier<StudyState> {
     );
   }
 
-  /// SRS: rate the current card using SM-2 algorithm and schedule next review.
+  static const _fsrs = Fsrs();
+
+  /// SRS: rate the current card using FSRS v4 algorithm.
   void rate(String id, {required SrsRating rating}) {
     final storage = StudyStorage();
     final item = state.items.firstWhere(
@@ -593,7 +609,7 @@ class StudyNotifier extends Notifier<StudyState> {
       orElse: () => state.items.first,
     );
     final wrong = rating == SrsRating.again;
-    storage.update(_applySm2(item, rating).copyWith(
+    storage.update(_applyFsrs(item, rating).copyWith(
       againCount: wrong ? item.againCount + 1 : null,
       goodCount: wrong ? null : item.goodCount + 1,
       timesSeen: item.timesSeen + 1,
@@ -606,44 +622,33 @@ class StudyNotifier extends Notifier<StudyState> {
     _advanceSessionWithTracking(storage, newCorrectCount);
   }
 
-  /// SM-2 algorithm — updates easeFactor, srsInterval, srsRepetitions,
-  /// and sets nextReviewAt accordingly.
-  ///
-  /// Quality mapping: again=0, good=3, easy=5
-  static StudyItem _applySm2(StudyItem item, SrsRating rating) {
-    final q = switch (rating) {
-      SrsRating.again => 0,
-      SrsRating.good => 3,
-      SrsRating.easy => 5,
-    };
+  /// FSRS v4 — schedules next review using the Free Spaced Repetition Scheduler.
+  static StudyItem _applyFsrs(StudyItem item, SrsRating rating) {
+    final elapsedDays = item.lastReviewedAt == null
+        ? 0
+        : DateTime.now().difference(item.lastReviewedAt!).inDays;
 
-    // Update ease factor: EF' = max(1.3, EF + 0.1 - (5-q)*(0.08 + (5-q)*0.02))
-    final delta = 0.1 - (5 - q) * (0.08 + (5 - q) * 0.02);
-    final newEF = (item.easeFactor + delta).clamp(1.3, 5.0);
+    // Backward compat: cards reviewed with old SM-2 have fsrsStability == 0.
+    // Seed stability from SM-2 interval so the schedule isn't reset.
+    final initStability = item.fsrsStability == 0.0 && item.srsInterval > 0
+        ? item.srsInterval.toDouble()
+        : item.fsrsStability;
+    final initDifficulty =
+        item.fsrsDifficulty == 0.0 && item.srsInterval > 0 ? 5.0 : item.fsrsDifficulty;
 
-    int newRepetitions;
-    int newInterval;
+    final result = _fsrs.review(
+      grade: rating.fsrsGrade,
+      currentStability: initStability,
+      currentDifficulty: initDifficulty,
+      elapsedDays: elapsedDays,
+    );
 
-    if (q < 3) {
-      // Failed: reset schedule, review again in 1 day
-      newRepetitions = 0;
-      newInterval = 1;
-    } else {
-      // Passed: apply SM-2 interval progression
-      newRepetitions = item.srsRepetitions + 1;
-      newInterval = switch (item.srsRepetitions) {
-        0 => 1,
-        1 => 6,
-        _ => (item.srsInterval * newEF).round().clamp(1, 365),
-      };
-    }
-
-    final nextReview = DateTime.now().add(Duration(days: newInterval));
+    final nextReview = DateTime.now().add(Duration(days: result.intervalDays));
 
     return item.copyWith(
-      easeFactor: newEF,
-      srsInterval: newInterval,
-      srsRepetitions: newRepetitions,
+      fsrsStability: result.stability,
+      fsrsDifficulty: result.difficulty,
+      srsInterval: result.intervalDays,
       nextReviewAt: nextReview,
     );
   }
