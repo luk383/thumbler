@@ -46,6 +46,10 @@ class DeckManagementPage extends ConsumerWidget {
                   accuracyPct: accuracyPct,
                   isActive: isActive,
                   onRename: () => _showRenameDialog(context, ref, pack),
+                  onClone: () => _cloneDeck(context, ref, pack),
+                  onMerge: packs.length > 1
+                      ? () => _showMergeDialog(context, ref, pack, packs)
+                      : null,
                   onDelete: pack.assetPath.startsWith('user://')
                       ? () => _showDeleteDialog(context, ref, pack)
                       : null,
@@ -53,6 +57,148 @@ class DeckManagementPage extends ConsumerWidget {
               },
             ),
     );
+  }
+
+  Future<void> _cloneDeck(
+    BuildContext context,
+    WidgetRef ref,
+    DeckPackMeta pack,
+  ) async {
+    final titleCtrl =
+        TextEditingController(text: '${pack.title} (copia)');
+    final newTitle = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Clona deck'),
+        content: TextField(
+          controller: titleCtrl,
+          decoration: const InputDecoration(
+            labelText: 'Nome del nuovo deck',
+            border: OutlineInputBorder(),
+          ),
+          autofocus: true,
+          onSubmitted: (v) => Navigator.pop(ctx, v.trim()),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Annulla'),
+          ),
+          ElevatedButton(
+            onPressed: () =>
+                Navigator.pop(ctx, titleCtrl.text.trim()),
+            child: const Text('Clona'),
+          ),
+        ],
+      ),
+    );
+    titleCtrl.dispose();
+    if (newTitle == null || newTitle.isEmpty) return;
+
+    try {
+      await ref
+          .read(deckLibraryProvider.notifier)
+          .cloneDeck(pack.id, newTitle: newTitle);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('"$newTitle" creato ✓')),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(e.toString()),
+              backgroundColor: Colors.redAccent),
+        );
+      }
+    }
+  }
+
+  Future<void> _showMergeDialog(
+    BuildContext context,
+    WidgetRef ref,
+    DeckPackMeta source,
+    List<DeckPackMeta> allPacks,
+  ) async {
+    final targets = allPacks.where((p) => p.id != source.id).toList();
+    DeckPackMeta? selected = targets.first;
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setState) => AlertDialog(
+          title: const Text('Unisci deck'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Le carte di "${source.title}" verranno copiate in:',
+                style: const TextStyle(fontSize: 13),
+              ),
+              const SizedBox(height: 12),
+              DropdownButtonFormField<DeckPackMeta>(
+                initialValue: selected,
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder()),
+                items: targets
+                    .map((p) => DropdownMenuItem(
+                          value: p,
+                          child: Text(p.title,
+                              overflow: TextOverflow.ellipsis),
+                        ))
+                    .toList(),
+                onChanged: (v) => setState(() => selected = v),
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'I duplicati (stesso ID) vengono saltati.',
+                style: TextStyle(fontSize: 11, color: Colors.grey),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('Annulla'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text('Unisci'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (confirmed != true || selected == null) return;
+
+    try {
+      final added = await ref
+          .read(deckLibraryProvider.notifier)
+          .mergeDeck(
+            sourceDeckId: source.id,
+            targetDeckId: selected!.id,
+          );
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '$added carte aggiunte a "${selected!.title}".',
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text(e.toString()),
+              backgroundColor: Colors.redAccent),
+        );
+      }
+    }
   }
 
   Future<void> _showRenameDialog(
@@ -191,6 +337,8 @@ class _EmptyState extends StatelessWidget {
   }
 }
 
+enum _DeckAction { clone, merge, delete }
+
 class _DeckCard extends StatelessWidget {
   const _DeckCard({
     required this.pack,
@@ -198,7 +346,9 @@ class _DeckCard extends StatelessWidget {
     required this.accuracyPct,
     required this.isActive,
     required this.onRename,
-    required this.onDelete,
+    required this.onClone,
+    this.onMerge,
+    this.onDelete,
   });
 
   final DeckPackMeta pack;
@@ -206,6 +356,8 @@ class _DeckCard extends StatelessWidget {
   final int? accuracyPct;
   final bool isActive;
   final VoidCallback onRename;
+  final VoidCallback onClone;
+  final VoidCallback? onMerge;
   final VoidCallback? onDelete;
 
   @override
@@ -294,18 +446,59 @@ class _DeckCard extends StatelessWidget {
                     textStyle: const TextStyle(fontSize: 12),
                   ),
                 ),
-                if (onDelete != null) ...[
-                  const SizedBox(width: 6),
-                  TextButton.icon(
-                    onPressed: onDelete,
-                    icon: const Icon(Icons.delete_outline, size: 15),
-                    label: const Text('Elimina'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.redAccent,
-                      textStyle: const TextStyle(fontSize: 12),
+                const SizedBox(width: 4),
+                PopupMenuButton<_DeckAction>(
+                  icon: const Icon(Icons.more_vert, size: 18),
+                  iconColor: cs.onSurfaceVariant,
+                  tooltip: 'Altre azioni',
+                  onSelected: (action) {
+                    switch (action) {
+                      case _DeckAction.clone:
+                        onClone();
+                      case _DeckAction.merge:
+                        onMerge?.call();
+                      case _DeckAction.delete:
+                        onDelete?.call();
+                    }
+                  },
+                  itemBuilder: (_) => [
+                    const PopupMenuItem(
+                      value: _DeckAction.clone,
+                      child: ListTile(
+                        leading: Icon(Icons.copy_outlined),
+                        title: Text('Clona'),
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                      ),
                     ),
-                  ),
-                ],
+                    if (onMerge != null)
+                      const PopupMenuItem(
+                        value: _DeckAction.merge,
+                        child: ListTile(
+                          leading: Icon(Icons.merge_outlined),
+                          title: Text('Unisci in…'),
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                        ),
+                      ),
+                    if (onDelete != null)
+                      const PopupMenuItem(
+                        value: _DeckAction.delete,
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.delete_outline,
+                            color: Colors.redAccent,
+                          ),
+                          title: Text(
+                            'Elimina',
+                            style: TextStyle(color: Colors.redAccent),
+                          ),
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                        ),
+                      ),
+                  ],
+                ),
               ],
             ),
           ],

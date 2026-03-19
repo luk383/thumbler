@@ -120,6 +120,208 @@ class UserDeckService {
     );
   }
 
+  /// Parses a CSV string into a [UserDeckDraft].
+  ///
+  /// Supported formats (auto-detected by delimiter: `;`, `,`, `\t`):
+  ///
+  /// **Full format** (≥ 6 columns):
+  ///   `domanda;A;B;C;D;indice_corretto[;categoria[;spiegazione]]`
+  ///
+  /// **Short format** (2 columns):
+  ///   `fronte;retro`
+  ///   Needs at least 4 rows; uses other backs as distractors.
+  UserDeckDraft importFromCsv({
+    required String title,
+    required String category,
+    String description = '',
+    required String csvText,
+  }) {
+    final delimiter = _detectDelimiter(csvText);
+    final rows = csvText
+        .replaceAll('\r', '\n')
+        .split('\n')
+        .map((l) => l.trim())
+        .where((l) => l.isNotEmpty)
+        .toList(growable: false);
+
+    if (rows.isEmpty) {
+      throw const FormatException('Il CSV è vuoto.');
+    }
+
+    // Skip header row if first cell looks non-data (contains letters from header keywords)
+    final firstCols = rows.first.split(delimiter);
+    final isHeader = firstCols.isNotEmpty &&
+        RegExp(r'^(domanda|question|fronte|front|term)',
+                caseSensitive: false)
+            .hasMatch(firstCols.first.trim());
+    final dataRows = isHeader ? rows.skip(1).toList() : rows;
+
+    if (dataRows.isEmpty) {
+      throw const FormatException('Nessuna riga di dati trovata.');
+    }
+
+    final colCount = dataRows.first.split(delimiter).length;
+    if (colCount >= 6) {
+      return _importFullCsv(
+        title: title,
+        category: category,
+        description: description,
+        dataRows: dataRows,
+        delimiter: delimiter,
+      );
+    }
+    if (colCount == 2) {
+      return _importShortCsv(
+        title: title,
+        category: category,
+        description: description,
+        dataRows: dataRows,
+        delimiter: delimiter,
+      );
+    }
+    throw FormatException(
+      'Formato CSV non riconosciuto: $colCount colonne. '
+      'Usa 2 colonne (fronte;retro) o ≥6 colonne (domanda;A;B;C;D;indice).',
+    );
+  }
+
+  /// Full format: `domanda;A;B;C;D;indice_corretto[;categoria[;spiegazione]]`
+  UserDeckDraft _importFullCsv({
+    required String title,
+    required String category,
+    required String description,
+    required List<String> dataRows,
+    required String delimiter,
+  }) {
+    final questions = <UserDeckQuestionDraft>[];
+    final errors = <String>[];
+
+    for (var i = 0; i < dataRows.length; i++) {
+      final cols = dataRows[i].split(delimiter).map((c) => c.trim()).toList();
+      if (cols.length < 6) {
+        errors.add('Riga ${i + 1}: meno di 6 colonne, saltata.');
+        continue;
+      }
+      final question = cols[0];
+      final answers = cols.sublist(1, min(5, cols.length));
+      final correctIndex = int.tryParse(cols[5]);
+      final rowCategory = cols.length > 6 && cols[6].isNotEmpty
+          ? cols[6]
+          : category;
+      final explanation =
+          cols.length > 7 ? cols[7] : '';
+
+      if (question.isEmpty) {
+        errors.add('Riga ${i + 1}: domanda vuota, saltata.');
+        continue;
+      }
+      if (answers.length < 2) {
+        errors.add('Riga ${i + 1}: meno di 2 risposte, saltata.');
+        continue;
+      }
+      if (correctIndex == null ||
+          correctIndex < 0 ||
+          correctIndex >= answers.length) {
+        errors.add(
+            'Riga ${i + 1}: indice_corretto "$correctIndex" non valido, saltata.');
+        continue;
+      }
+
+      questions.add(UserDeckQuestionDraft(
+        question: question,
+        answers: answers,
+        correctIndex: correctIndex,
+        explanation: explanation,
+        domain: rowCategory,
+      ));
+    }
+
+    if (questions.isEmpty) {
+      final msg = errors.isEmpty
+          ? 'Nessuna domanda valida trovata.'
+          : 'Nessuna domanda valida:\n${errors.take(3).join('\n')}';
+      throw FormatException(msg);
+    }
+
+    return UserDeckDraft(
+      id: _slugify('${title}_${DateTime.now().millisecondsSinceEpoch}'),
+      title: title,
+      category: category,
+      description: description,
+      questions: questions,
+    );
+  }
+
+  /// Short format: `fronte;retro` — uses other backs as distractors.
+  UserDeckDraft _importShortCsv({
+    required String title,
+    required String category,
+    required String description,
+    required List<String> dataRows,
+    required String delimiter,
+  }) {
+    final pairs = <(String front, String back)>[];
+    for (final row in dataRows) {
+      final cols = row.split(delimiter);
+      if (cols.length < 2) continue;
+      final front = cols[0].trim();
+      final back = cols[1].trim();
+      if (front.isEmpty || back.isEmpty) continue;
+      pairs.add((front, back));
+    }
+
+    if (pairs.length < 4) {
+      throw const FormatException(
+        'Formato corto: servono almeno 4 righe per generare distrattori.',
+      );
+    }
+
+    final questions = <UserDeckQuestionDraft>[];
+    for (var i = 0; i < pairs.length; i++) {
+      final (front, back) = pairs[i];
+      final distractors = pairs
+          .where((p) => p.$1 != front)
+          .take(3)
+          .map((p) => p.$2)
+          .toList(growable: false);
+      if (distractors.length < 3) continue;
+
+      final answers = [back, ...distractors];
+      answers.shuffle(Random(front.hashCode));
+      final correctIndex = answers.indexOf(back);
+
+      questions.add(UserDeckQuestionDraft(
+        question: front,
+        answers: answers,
+        correctIndex: correctIndex,
+        explanation: back,
+        domain: category,
+      ));
+    }
+
+    if (questions.isEmpty) {
+      throw const FormatException('Nessuna domanda valida generata.');
+    }
+
+    return UserDeckDraft(
+      id: _slugify('${title}_${DateTime.now().millisecondsSinceEpoch}'),
+      title: title,
+      category: category,
+      description: description,
+      questions: questions,
+    );
+  }
+
+  String _detectDelimiter(String text) {
+    final firstLine = text.split('\n').first;
+    final counts = {
+      ';': ';'.allMatches(firstLine).length,
+      ',': ','.allMatches(firstLine).length,
+      '\t': '\t'.allMatches(firstLine).length,
+    };
+    return counts.entries.reduce((a, b) => a.value >= b.value ? a : b).key;
+  }
+
   UserDeckDraft generateFromText({
     required String title,
     required String category,

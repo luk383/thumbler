@@ -12,6 +12,7 @@ import '../../../paywall/pro_guard.dart';
 import '../../data/user_deck_service.dart';
 import '../../domain/user_deck_draft.dart';
 import '../controllers/deck_library_controller.dart';
+import '../pages/csv_import_page.dart';
 import '../pages/generate_deck_from_notes_page.dart';
 import '../pages/user_deck_editor_page.dart';
 
@@ -154,6 +155,13 @@ class _AddStudyMaterialSheet extends StatelessWidget {
     await importJsonDeck(context, ref, closeCurrentRoute: true);
   }
 
+  Future<void> _openCsvImport(BuildContext context) async {
+    Navigator.of(context).pop();
+    await Navigator.of(context).push(
+      MaterialPageRoute<void>(builder: (_) => const CsvImportPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -184,6 +192,14 @@ class _AddStudyMaterialSheet extends StatelessWidget {
                 subtitle:
                     'Write your own deck title, questions, answers, and explanations from scratch.',
                 onTap: () => _openManual(context),
+              ),
+              const SizedBox(height: 12),
+              _OptionCard(
+                icon: Icons.table_chart_outlined,
+                title: 'Importa da CSV',
+                subtitle:
+                    'Importa flashcard da un file CSV o incolla il testo direttamente. Supporta formato completo e corto.',
+                onTap: () => _openCsvImport(context),
               ),
               const SizedBox(height: 12),
               _OptionCard(

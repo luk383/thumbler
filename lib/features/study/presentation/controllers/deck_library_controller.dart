@@ -169,6 +169,119 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
     await discoverPacks();
   }
 
+  /// Creates a copy of [deckId] with a new ID and fresh progress stats.
+  Future<String> cloneDeck(String sourceDeckId, {String? newTitle}) async {
+    final storage = StudyStorage();
+    final sourceItems = storage.allForDeck(sourceDeckId);
+    if (sourceItems.isEmpty) throw FormatException('Deck "$sourceDeckId" è vuoto.');
+
+    final newDeckId =
+        '${sourceDeckId}_clone_${DateTime.now().millisecondsSinceEpoch}';
+    final clonedItems = sourceItems.map((item) {
+      return StudyItem(
+        id: '${item.id}_clone',
+        deckId: newDeckId,
+        contentType: item.contentType,
+        category: item.category,
+        topic: item.topic,
+        subtopic: item.subtopic,
+        objectiveId: item.objectiveId,
+        promptText: item.promptText,
+        explanationText: item.explanationText,
+        options: item.options,
+        correctAnswerIndex: item.correctAnswerIndex,
+        difficulty: item.difficulty,
+        userNote: item.userNote,
+        // Progress reset
+        easeFactor: 2.5,
+        srsInterval: 0,
+        srsRepetitions: 0,
+      );
+    }).toList(growable: false);
+
+    for (final item in clonedItems) {
+      storage.add(item);
+    }
+
+    // Persist a user-deck JSON entry so it shows in library
+    final sourcePack = state.packs
+        .cast<DeckPackMeta?>()
+        .firstWhere((p) => p?.id == sourceDeckId, orElse: () => null);
+    final sourceJson = _storage.loadUserDeckJson(sourceDeckId);
+    if (sourceJson != null) {
+      final decoded = sourceJson.replaceFirst(
+        '"id": "$sourceDeckId"',
+        '"id": "$newDeckId"',
+      );
+      final titled = newTitle != null
+          ? decoded.replaceFirst(
+              RegExp(r'"title":\s*"[^"]*"'),
+              '"title": "$newTitle"',
+            )
+          : decoded;
+      await _storage.saveUserDeckJson(newDeckId, titled);
+    } else {
+      // Fallback: build minimal JSON
+      final title = newTitle ??
+          (sourcePack?.title != null ? '${sourcePack!.title} (copia)' : '$sourceDeckId (copia)');
+      final minimalJson = '{"id":"$newDeckId","title":"$title","category":"Importato","description":"","questions":[]}';
+      await _storage.saveUserDeckJson(newDeckId, minimalJson);
+    }
+
+    await discoverPacks();
+    return newDeckId;
+  }
+
+  /// Copies all cards from [sourceDeckId] into [targetDeckId] (skipping duplicates by ID).
+  Future<int> mergeDeck({
+    required String sourceDeckId,
+    required String targetDeckId,
+  }) async {
+    if (sourceDeckId == targetDeckId) return 0;
+    final storage = StudyStorage();
+    final sourceItems = storage.allForDeck(sourceDeckId);
+    final targetItems = storage.allForDeck(targetDeckId);
+    final existingIds = {for (final i in targetItems) i.id};
+
+    var added = 0;
+    for (final item in sourceItems) {
+      final mergedId = '${targetDeckId}_${item.id}';
+      if (existingIds.contains(mergedId) || existingIds.contains(item.id)) {
+        continue;
+      }
+      storage.add(StudyItem(
+        id: mergedId,
+        deckId: targetDeckId,
+        contentType: item.contentType,
+        category: item.category,
+        topic: item.topic,
+        subtopic: item.subtopic,
+        objectiveId: item.objectiveId,
+        promptText: item.promptText,
+        explanationText: item.explanationText,
+        options: item.options,
+        correctAnswerIndex: item.correctAnswerIndex,
+        difficulty: item.difficulty,
+        userNote: item.userNote,
+        easeFactor: 2.5,
+        srsInterval: 0,
+        srsRepetitions: 0,
+      ));
+      added++;
+    }
+
+    state = DeckLibraryState(
+      packs: state.packs,
+      activeDeckId: state.activeDeckId,
+      loadingPackId: null,
+      results: state.results,
+      isDiscovering: false,
+      lastError: null,
+      dataVersion: state.dataVersion + 1,
+    );
+    return added;
+  }
+
   Future<void> chooseDeckForInterests(List<String> interests) async {
     if (interests.isEmpty) {
       if (state.activeDeckId == null) {
