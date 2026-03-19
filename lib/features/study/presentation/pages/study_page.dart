@@ -822,22 +822,48 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
             ),
           ),
 
-          // Prompt (hook / question)
+          // Prompt — cloze shows blanks; MCQ shows raw text
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 20, 16, 0),
-            child: Text(
-              item.promptText,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                height: 1.35,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            child: item.contentType == ContentType.clozeCard
+                ? _ClozePromptText(
+                    promptText: item.promptText,
+                    revealed: _revealed,
+                  )
+                : Text(
+                    item.promptText,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      height: 1.35,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
           ),
 
-          if (!_revealed)
+          // Cloze: "Mostra risposta" button (no reveal step needed for MCQ)
+          if (item.contentType == ContentType.clozeCard && !_revealed)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF6C63FF),
+                  padding: const EdgeInsets.symmetric(vertical: 13),
+                ),
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  setState(() {
+                    _revealed = true;
+                    _selectedIndex = 0; // marks isAnswered = true
+                  });
+                },
+                child: const Text('Mostra risposta'),
+              ),
+            ),
+
+          // MCQ: reveal button
+          if (item.contentType != ContentType.clozeCard && !_revealed)
             Padding(
               padding: const EdgeInsets.fromLTRB(16, 24, 16, 20),
               child: ElevatedButton(
@@ -871,63 +897,64 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                 ),
               ),
 
-            // Options
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
-              child: Column(
-                children: List.generate(item.options.length, (i) {
-                  final isCorrect = i == item.correctAnswerIndex;
-                  final isSelected = _selectedIndex == i;
+            // Options (MCQ only)
+            if (item.contentType != ContentType.clozeCard)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 20, 16, 8),
+                child: Column(
+                  children: List.generate(item.options.length, (i) {
+                    final isCorrect = i == item.correctAnswerIndex;
+                    final isSelected = _selectedIndex == i;
 
-                  Color bg = Colors.white.withAlpha(13);
-                  Color border = Colors.white24;
-                  Color textColor = Colors.white70;
+                    Color bg = Colors.white.withAlpha(13);
+                    Color border = Colors.white24;
+                    Color textColor = Colors.white70;
 
-                  if (isAnswered) {
-                    if (isCorrect) {
-                      bg = Colors.green.withAlpha(38);
-                      border = Colors.green;
-                      textColor = Colors.green;
-                    } else if (isSelected) {
-                      bg = Colors.redAccent.withAlpha(38);
-                      border = Colors.redAccent;
-                      textColor = Colors.redAccent;
+                    if (isAnswered) {
+                      if (isCorrect) {
+                        bg = Colors.green.withAlpha(38);
+                        border = Colors.green;
+                        textColor = Colors.green;
+                      } else if (isSelected) {
+                        bg = Colors.redAccent.withAlpha(38);
+                        border = Colors.redAccent;
+                        textColor = Colors.redAccent;
+                      }
                     }
-                  }
 
-                  return GestureDetector(
-                    onTap: isAnswered
-                        ? null
-                        : () {
-                            HapticFeedback.mediumImpact();
-                            setState(() => _selectedIndex = i);
-                          },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 200),
-                      margin: const EdgeInsets.only(bottom: 8),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 11,
-                      ),
-                      decoration: BoxDecoration(
-                        color: bg,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: border),
-                      ),
-                      child: Text(
-                        item.options[i],
-                        style: TextStyle(
-                          color: textColor,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                    return GestureDetector(
+                      onTap: isAnswered
+                          ? null
+                          : () {
+                              HapticFeedback.mediumImpact();
+                              setState(() => _selectedIndex = i);
+                            },
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        margin: const EdgeInsets.only(bottom: 8),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 11,
                         ),
-                        textAlign: TextAlign.center,
+                        decoration: BoxDecoration(
+                          color: bg,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: border),
+                        ),
+                        child: Text(
+                          item.options[i],
+                          style: TextStyle(
+                            color: textColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+                ),
               ),
-            ),
 
             // Feedback + Again / Hard / Good / Easy (FSRS grades 1–4)
             if (isAnswered)
@@ -935,10 +962,11 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 20),
                 child: Column(
                   children: [
-                    _FeedbackBanner(
-                      correct: _selectedIndex == item.correctAnswerIndex,
-                      correctAnswer: item.correctAnswer,
-                    ),
+                    if (item.contentType != ContentType.clozeCard)
+                      _FeedbackBanner(
+                        correct: _selectedIndex == item.correctAnswerIndex,
+                        correctAnswer: item.correctAnswer,
+                      ),
                     const SizedBox(height: 16),
                     Row(
                       children: [
@@ -1446,6 +1474,96 @@ class _CategoryTag extends StatelessWidget {
     );
   }
 }
+
+// ── Cloze prompt renderer ─────────────────────────────────────────────────────
+
+class _ClozePromptText extends StatelessWidget {
+  const _ClozePromptText({required this.promptText, required this.revealed});
+  final String promptText;
+  final bool revealed;
+
+  static final _pattern = RegExp(r'\{\{([^}]+)\}\}');
+
+  @override
+  Widget build(BuildContext context) {
+    final spans = <InlineSpan>[];
+    int last = 0;
+
+    for (final match in _pattern.allMatches(promptText)) {
+      if (match.start > last) {
+        spans.add(TextSpan(text: promptText.substring(last, match.start)));
+      }
+      final answer = match.group(1)!;
+      if (revealed) {
+        spans.add(
+          WidgetSpan(
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: const Color(0xFF69F0AE).withAlpha(40),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(color: const Color(0xFF69F0AE).withAlpha(120)),
+              ),
+              child: Text(
+                answer,
+                style: const TextStyle(
+                  color: Color(0xFF69F0AE),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        );
+      } else {
+        spans.add(
+          WidgetSpan(
+            alignment: PlaceholderAlignment.baseline,
+            baseline: TextBaseline.alphabetic,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha(18),
+                borderRadius: BorderRadius.circular(6),
+                border: Border.all(
+                  color: Colors.white38,
+                  style: BorderStyle.solid,
+                ),
+              ),
+              child: Text(
+                '　' * answer.length.clamp(2, 8),
+                style: const TextStyle(fontSize: 20),
+              ),
+            ),
+          ),
+        );
+      }
+      last = match.end;
+    }
+    if (last < promptText.length) {
+      spans.add(TextSpan(text: promptText.substring(last)));
+    }
+
+    return Text.rich(
+      TextSpan(
+        children: spans,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          height: 1.45,
+        ),
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+}
+
+// ── Feedback banner ────────────────────────────────────────────────────────────
 
 class _FeedbackBanner extends StatelessWidget {
   const _FeedbackBanner({required this.correct, required this.correctAnswer});

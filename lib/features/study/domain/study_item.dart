@@ -1,4 +1,4 @@
-enum ContentType { microCard, examQuestion }
+enum ContentType { microCard, examQuestion, clozeCard }
 
 class StudyItem {
   const StudyItem({
