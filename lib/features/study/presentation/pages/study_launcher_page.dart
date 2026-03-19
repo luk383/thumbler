@@ -55,6 +55,12 @@ class StudyLauncherPage extends ConsumerWidget {
                   ),
                 ),
                 IconButton(
+                  onPressed: () => context.push('/study/calendar'),
+                  icon: const Icon(Icons.calendar_month_outlined),
+                  tooltip: 'Review calendar',
+                  color: Colors.white54,
+                ),
+                IconButton(
                   onPressed: () => context.push('/study/history'),
                   icon: const Icon(Icons.history_outlined),
                   tooltip: 'Storico sessioni',

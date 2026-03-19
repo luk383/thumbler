@@ -70,8 +70,17 @@ class _ResultsContent extends StatelessWidget {
     final passed = pct >= 75;
     final scoreColor = passed ? Colors.green : Colors.redAccent;
 
+    final grade = _gradeFromPct(pct);
+    final gradeColor = _gradeColor(grade);
+    final avgSecPerQ = attempt.totalQuestions == 0
+        ? 0
+        : attempt.elapsedSeconds ~/ attempt.totalQuestions;
+
     final elapsedMin = attempt.elapsedSeconds ~/ 60;
     final elapsedSec = attempt.elapsedSeconds % 60;
+
+    // Best previous attempt score from state
+    final bestPct = notifier.bestScorePct;
 
     final domainStats = calculateDomainStats(
       questions: sessionQuestions,
@@ -130,6 +139,28 @@ class _ResultsContent extends StatelessWidget {
             ),
             const SizedBox(height: 28),
 
+            // ── Grade badge ──────────────────────────────────────────────
+            Center(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+                decoration: BoxDecoration(
+                  color: gradeColor.withAlpha(30),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(color: gradeColor.withAlpha(100)),
+                ),
+                child: Text(
+                  'Grade $grade',
+                  style: TextStyle(
+                    color: gradeColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.1,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+
             // ── Stats chips ──────────────────────────────────────────────
             Wrap(
               alignment: WrapAlignment.center,
@@ -157,6 +188,17 @@ class _ResultsContent extends StatelessWidget {
                   value: '${elapsedMin}m ${elapsedSec}s',
                   color: Colors.white60,
                 ),
+                _StatChip(
+                  label: 'Avg / question',
+                  value: '${avgSecPerQ}s',
+                  color: const Color(0xFFADA8FF),
+                ),
+                if (bestPct > 0)
+                  _StatChip(
+                    label: 'Best score',
+                    value: '$bestPct%',
+                    color: pct >= bestPct ? Colors.greenAccent : Colors.white54,
+                  ),
               ],
             ),
             const SizedBox(height: 32),
@@ -252,6 +294,22 @@ class _ResultsContent extends StatelessWidget {
     );
   }
 }
+
+String _gradeFromPct(int pct) {
+  if (pct >= 90) return 'A';
+  if (pct >= 80) return 'B';
+  if (pct >= 70) return 'C';
+  if (pct >= 60) return 'D';
+  return 'F';
+}
+
+Color _gradeColor(String grade) => switch (grade) {
+  'A' => const Color(0xFF69F0AE),
+  'B' => const Color(0xFFB2FF59),
+  'C' => const Color(0xFFFFD740),
+  'D' => const Color(0xFFFF6D00),
+  _ => const Color(0xFFFF5252),
+};
 
 List<MapEntry<String, DomainStats>> _sortDomainPerformance(
   Map<String, DomainStats> stats,

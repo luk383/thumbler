@@ -358,6 +358,17 @@ class StudyNotifier extends Notifier<StudyState> {
     state = _copyWith(items: storage.allForDeck(state.activeDeckId));
   }
 
+  /// Snooze a card by 1 day without touching SM-2 parameters.
+  void snoozeCard(String itemId) {
+    final storage = StudyStorage();
+    final item = storage.getById(itemId, deckId: state.activeDeckId);
+    if (item == null) return;
+    final current = item.nextReviewAt ?? DateTime.now();
+    final snoozed = current.add(const Duration(days: 1));
+    storage.update(item.copyWith(nextReviewAt: snoozed));
+    state = _copyWith(items: storage.allForDeck(state.activeDeckId));
+  }
+
   void updateUserNote(String itemId, String? note) {
     final storage = StudyStorage();
     final item = storage.getById(itemId, deckId: state.activeDeckId);

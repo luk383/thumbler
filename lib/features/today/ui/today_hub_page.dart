@@ -15,6 +15,7 @@ import '../../../features/reflection/state/reflection_notifier.dart';
 import '../../../features/habits/domain/habit.dart';
 import '../../../features/achievements/state/achievements_notifier.dart';
 import '../../../features/study/presentation/controllers/study_controller.dart';
+import '../../../features/widget/home_widget_service.dart';
 
 class TodayHubPage extends ConsumerWidget {
   const TodayHubPage({super.key});
@@ -44,6 +45,11 @@ class TodayHubPage extends ConsumerWidget {
     final hasReflection = reflections.any(
       (r) => r.weekStart.isAtSameMomentAs(ws) && !r.isEmpty,
     );
+
+    // Update home screen widget in background
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      HomeWidgetService.update(streak: streak, xp: xp, study: studyState);
+    });
 
     // Check for new achievements once per build (debounced by Hive comparison)
     WidgetsBinding.instance.addPostFrameCallback((_) {

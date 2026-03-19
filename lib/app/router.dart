@@ -27,6 +27,7 @@ import '../features/study/presentation/controllers/study_controller.dart';
 import '../features/study/presentation/pages/card_editor_page.dart';
 import '../features/study/presentation/pages/deck_management_page.dart';
 import '../features/study/presentation/pages/session_history_page.dart';
+import '../features/study/presentation/pages/srs_calendar_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import 'shell_scaffold.dart';
 
@@ -82,6 +83,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/study/history',
       builder: (context, state) => const SessionHistoryPage(),
+    ),
+    GoRoute(
+      path: '/study/calendar',
+      builder: (context, state) => const SrsCalendarPage(),
     ),
     GoRoute(
       path: '/pomodoro',

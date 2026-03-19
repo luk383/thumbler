@@ -404,6 +404,17 @@ class ExamNotifier extends Notifier<ExamState> {
     state = state.copyWith(activeAttempt: updated);
   }
 
+  // ── Derived ───────────────────────────────────────────────────────────────
+
+  /// Best score percentage across all completed history attempts.
+  int get bestScorePct {
+    final completed = state.history.where((a) => a.isCompleted && a.totalQuestions > 0);
+    if (completed.isEmpty) return 0;
+    return completed
+        .map((a) => (a.scoreCorrect / a.totalQuestions * 100).round())
+        .reduce((a, b) => a > b ? a : b);
+  }
+
   // ── Helpers ───────────────────────────────────────────────────────────────
 
   static List<StudyItem> _resolveQuestions(
