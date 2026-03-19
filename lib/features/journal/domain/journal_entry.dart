@@ -21,6 +21,8 @@ class JournalEntry {
     required this.text,
     this.mood,
     this.tags = const [],
+    this.goalId,
+    this.habitId,
     required this.createdAt,
   });
 
@@ -28,6 +30,8 @@ class JournalEntry {
   final String text;
   final JournalMood? mood;
   final List<String> tags;
+  final String? goalId;
+  final String? habitId;
   final DateTime createdAt;
 
   String get preview =>
@@ -37,11 +41,17 @@ class JournalEntry {
     String? text,
     JournalMood? mood,
     List<String>? tags,
+    String? goalId,
+    bool clearGoalId = false,
+    String? habitId,
+    bool clearHabitId = false,
   }) => JournalEntry(
         id: id,
         text: text ?? this.text,
         mood: mood ?? this.mood,
         tags: tags ?? this.tags,
+        goalId: clearGoalId ? null : (goalId ?? this.goalId),
+        habitId: clearHabitId ? null : (habitId ?? this.habitId),
         createdAt: createdAt,
       );
 
@@ -50,6 +60,8 @@ class JournalEntry {
         'text': text,
         'mood': mood?.index,
         'tags': tags,
+        'goalId': goalId,
+        'habitId': habitId,
         'createdAt': createdAt.toIso8601String(),
       };
 
@@ -60,6 +72,8 @@ class JournalEntry {
             ? JournalMood.values[(map['mood'] as num).toInt()]
             : null,
         tags: (map['tags'] as List? ?? []).map((e) => e as String).toList(),
+        goalId: map['goalId'] as String?,
+        habitId: map['habitId'] as String?,
         createdAt: DateTime.tryParse(map['createdAt'] as String? ?? '') ??
             DateTime.now(),
       );

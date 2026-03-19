@@ -2,6 +2,12 @@ import 'package:go_router/go_router.dart';
 
 import '../features/analytics/presentation/pages/progress_analytics_page.dart';
 import '../features/bookmarks/presentation/bookmarks_page.dart';
+import '../features/feed/presentation/pages/feed_page.dart';
+import '../features/goals/ui/goals_page.dart';
+import '../features/habits/ui/habits_page.dart';
+import '../features/journal/ui/journal_page.dart';
+import '../features/reading/ui/reading_page.dart';
+import '../features/reflection/ui/reflection_page.dart';
 import '../features/today/ui/today_hub_page.dart';
 import '../features/exam/presentation/pages/exam_page.dart';
 import '../features/exam/presentation/pages/exam_history_page.dart';
@@ -49,6 +55,30 @@ final appRouter = GoRouter(
       builder: (context, state) => CardEditorPage(
         existingItem: state.extra as dynamic,
       ),
+    ),
+    GoRoute(
+      path: '/feed',
+      builder: (context, state) => const FeedPage(),
+    ),
+    GoRoute(
+      path: '/habits',
+      builder: (context, state) => const HabitsPage(),
+    ),
+    GoRoute(
+      path: '/goals',
+      builder: (context, state) => const GoalsPage(),
+    ),
+    GoRoute(
+      path: '/reflection',
+      builder: (context, state) => const ReflectionPage(),
+    ),
+    GoRoute(
+      path: '/journal',
+      builder: (context, state) => const JournalPage(),
+    ),
+    GoRoute(
+      path: '/reading',
+      builder: (context, state) => const ReadingPage(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => ShellScaffold(navigationShell: shell),

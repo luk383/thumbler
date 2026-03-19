@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../habits/state/habits_notifier.dart';
+import '../../journal/domain/journal_entry.dart';
+import '../../journal/state/journal_notifier.dart';
+import '../../journal/ui/journal_page.dart';
 import '../domain/goal.dart';
 import '../state/goals_notifier.dart';
 import 'goal_form_page.dart';
@@ -225,6 +228,11 @@ class GoalDetailPage extends ConsumerWidget {
           _LinkedHabitsSection(goalId: current.id),
 
           const SizedBox(height: 20),
+
+          // Linked journal entries
+          _LinkedJournalSection(goalId: current.id),
+
+          const SizedBox(height: 20),
           FilledButton.icon(
             onPressed: () =>
                 ref.read(goalsProvider.notifier).toggleCompleted(current.id),
@@ -298,6 +306,65 @@ class _LinkedHabitsSection extends ConsumerWidget {
                   : Icon(Icons.radio_button_unchecked,
                       color: Theme.of(context).colorScheme.outline, size: 20),
             )),
+      ],
+    );
+  }
+}
+
+// ── Linked journal entries ────────────────────────────────────────────────────
+
+class _LinkedJournalSection extends ConsumerWidget {
+  const _LinkedJournalSection({required this.goalId});
+  final String goalId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final linked = ref
+        .watch(journalProvider)
+        .where((e) => e.goalId == goalId)
+        .toList()
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    if (linked.isEmpty) return const SizedBox.shrink();
+
+    final cs = Theme.of(context).colorScheme;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Note collegate', style: Theme.of(context).textTheme.titleSmall),
+        const SizedBox(height: 8),
+        ...linked.take(3).map((e) {
+          final d = e.createdAt;
+          final dateStr =
+              '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}';
+          return ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Text(e.mood?.emoji ?? '📓',
+                style: const TextStyle(fontSize: 20)),
+            title: Text(
+              e.preview,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            trailing: Text(dateStr,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(color: cs.outline)),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => JournalEntryPage(existingEntry: e),
+              ),
+            ),
+          );
+        }),
+        if (linked.length > 3)
+          TextButton(
+            onPressed: null,
+            child: Text('+ ${linked.length - 3} altre note'),
+          ),
       ],
     );
   }

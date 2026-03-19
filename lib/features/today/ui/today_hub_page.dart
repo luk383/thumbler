@@ -86,6 +86,15 @@ class TodayHubPage extends ConsumerWidget {
                             context.go('/study?mode=speed&autostart=true'),
                       ),
                     ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _QuickAction(
+                        icon: Icons.layers_outlined,
+                        label: 'Feed',
+                        subtitle: 'Scorri le carte',
+                        onTap: () => context.push('/feed'),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -126,6 +135,7 @@ class TodayHubPage extends ConsumerWidget {
                 _SectionCard(
                   icon: Icons.check_circle_outline,
                   label: 'Abitudini',
+                  onHeaderTap: () => context.push('/habits'),
                   trailing: _Badge(
                     '$doneHabits/${habits.length}',
                     color: doneHabits == habits.length
@@ -145,7 +155,7 @@ class TodayHubPage extends ConsumerWidget {
                       ...habits.take(4).map((h) => _HabitRow(h)),
                       if (habits.length > 4)
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => context.push('/habits'),
                           child: Text('+ ${habits.length - 4} altre abitudini'),
                         ),
                     ],
@@ -159,6 +169,7 @@ class TodayHubPage extends ConsumerWidget {
                 _SectionCard(
                   icon: Icons.flag_outlined,
                   label: 'Obiettivi attivi',
+                  onHeaderTap: () => context.push('/goals'),
                   trailing: _Badge('${goals.length}'),
                   child: Column(
                     children: goals.take(3).map((g) {
@@ -206,10 +217,16 @@ class TodayHubPage extends ConsumerWidget {
                 _SectionCard(
                   icon: Icons.auto_awesome_outlined,
                   label: 'Riflessione settimanale',
+                  onHeaderTap: () => context.push('/reflection'),
                   trailing: const _Badge('Da fare', color: Colors.orange),
-                  child: Text(
-                    'Dedica 2 minuti a riflettere sulla settimana.',
-                    style: Theme.of(context).textTheme.bodySmall,
+                  child: GestureDetector(
+                    onTap: () => context.push('/reflection'),
+                    child: Text(
+                      'Tocca per riflettere sulla settimana →',
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                    ),
                   ),
                 ),
             ]),
@@ -264,31 +281,40 @@ class _SectionCard extends StatelessWidget {
     required this.label,
     required this.child,
     this.trailing,
+    this.onHeaderTap,
   });
 
   final IconData icon;
   final String label;
   final Widget child;
   final Widget? trailing;
+  final VoidCallback? onHeaderTap;
 
   @override
   Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Icon(icon, size: 18,
-                    color: Theme.of(context).colorScheme.primary),
-                const SizedBox(width: 6),
-                Text(label,
-                    style: Theme.of(context).textTheme.titleSmall),
-                const Spacer(),
-                if (trailing != null) trailing!,
-              ],
+            GestureDetector(
+              onTap: onHeaderTap,
+              child: Row(
+                children: [
+                  Icon(icon, size: 18, color: cs.primary),
+                  const SizedBox(width: 6),
+                  Text(label,
+                      style: Theme.of(context).textTheme.titleSmall),
+                  const Spacer(),
+                  if (trailing case final t?) t,
+                  if (onHeaderTap != null) ...[
+                    const SizedBox(width: 4),
+                    Icon(Icons.chevron_right, size: 16, color: cs.outline),
+                  ],
+                ],
+              ),
             ),
             const SizedBox(height: 12),
             child,

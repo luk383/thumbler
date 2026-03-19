@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../goals/state/goals_notifier.dart';
+import '../../habits/state/habits_notifier.dart';
 import '../domain/journal_entry.dart';
 import '../state/journal_notifier.dart';
 
@@ -98,13 +100,27 @@ class _EntryCard extends ConsumerWidget {
                     Text(dateStr,
                         style: Theme.of(context).textTheme.labelSmall),
                     const Spacer(),
+                    if (entry.goalId != null)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: Icon(Icons.flag, size: 13, color: cs.primary),
+                      ),
+                    if (entry.habitId != null)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: Icon(Icons.check_circle,
+                            size: 13, color: cs.primary),
+                      ),
                     if (entry.tags.isNotEmpty)
-                      Text(
-                        entry.tags.take(2).map((t) => '#$t').join(' '),
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelSmall
-                            ?.copyWith(color: cs.primary),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 4),
+                        child: Text(
+                          entry.tags.take(2).map((t) => '#$t').join(' '),
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelSmall
+                              ?.copyWith(color: cs.primary),
+                        ),
                       ),
                   ],
                 ),
@@ -138,6 +154,8 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
   late final TextEditingController _textCtrl;
   late final TextEditingController _tagsCtrl;
   JournalMood? _mood;
+  String? _goalId;
+  String? _habitId;
 
   @override
   void initState() {
@@ -147,6 +165,8 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
     _tagsCtrl = TextEditingController(
         text: widget.existingEntry?.tags.join(', ') ?? '');
     _mood = widget.existingEntry?.mood;
+    _goalId = widget.existingEntry?.goalId;
+    _habitId = widget.existingEntry?.habitId;
   }
 
   @override
@@ -173,6 +193,8 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
       text: _textCtrl.text.trim(),
       mood: _mood,
       tags: tags,
+      goalId: _goalId,
+      habitId: _habitId,
       createdAt: widget.existingEntry?.createdAt ?? DateTime.now(),
     );
     ref.read(journalProvider.notifier).save(entry);
@@ -182,6 +204,8 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
   @override
   Widget build(BuildContext context) {
     final isEdit = widget.existingEntry != null;
+    final goals = ref.watch(goalsProvider).where((g) => !g.completed).toList();
+    final habits = ref.watch(habitsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -196,26 +220,26 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
           // Mood selector
           Text('Come stai?', style: Theme.of(context).textTheme.labelLarge),
           const SizedBox(height: 8),
-          Row(
+          Wrap(
+            spacing: 8,
             children: JournalMood.values
-                .map((m) => Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: GestureDetector(
-                        onTap: () =>
-                            setState(() => _mood = _mood == m ? null : m),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 150),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12, vertical: 8),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: _mood == m
-                                ? Theme.of(context).colorScheme.primaryContainer
-                                : Theme.of(context).colorScheme.surfaceContainerHighest,
-                          ),
-                          child: Text('${m.emoji} ${m.label}',
-                              style: Theme.of(context).textTheme.labelMedium),
+                .map((m) => GestureDetector(
+                      onTap: () =>
+                          setState(() => _mood = _mood == m ? null : m),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 150),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: _mood == m
+                              ? Theme.of(context).colorScheme.primaryContainer
+                              : Theme.of(context)
+                                  .colorScheme
+                                  .surfaceContainerHighest,
                         ),
+                        child: Text('${m.emoji} ${m.label}',
+                            style: Theme.of(context).textTheme.labelMedium),
                       ),
                     ))
                 .toList(),
@@ -225,7 +249,7 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
           // Text
           TextFormField(
             controller: _textCtrl,
-            maxLines: 12,
+            maxLines: 10,
             autofocus: !isEdit,
             decoration: const InputDecoration(
               hintText: 'Cosa hai in mente?',
@@ -244,6 +268,50 @@ class _JournalEntryPageState extends ConsumerState<JournalEntryPage> {
               prefixIcon: Icon(Icons.tag),
             ),
           ),
+          const SizedBox(height: 14),
+
+          // Goal link
+          if (goals.isNotEmpty)
+            DropdownButtonFormField<String?>(
+              initialValue: _goalId,
+              decoration: const InputDecoration(
+                labelText: 'Collega a obiettivo (opz.)',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.flag_outlined),
+              ),
+              items: [
+                const DropdownMenuItem(value: null, child: Text('Nessuno')),
+                ...goals.map((g) => DropdownMenuItem(
+                      value: g.id,
+                      child: Text('${g.area.emoji} ${g.title}',
+                          overflow: TextOverflow.ellipsis),
+                    )),
+              ],
+              onChanged: (v) => setState(() => _goalId = v),
+            ),
+
+          if (goals.isNotEmpty) const SizedBox(height: 14),
+
+          // Habit link
+          if (habits.isNotEmpty)
+            DropdownButtonFormField<String?>(
+              initialValue: _habitId,
+              decoration: const InputDecoration(
+                labelText: 'Collega ad abitudine (opz.)',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.check_circle_outline),
+              ),
+              items: [
+                const DropdownMenuItem(value: null, child: Text('Nessuna')),
+                ...habits.map((h) => DropdownMenuItem(
+                      value: h.id,
+                      child: Text('${h.emoji} ${h.name}',
+                          overflow: TextOverflow.ellipsis),
+                    )),
+              ],
+              onChanged: (v) => setState(() => _habitId = v),
+            ),
+
           const SizedBox(height: 32),
 
           FilledButton.icon(

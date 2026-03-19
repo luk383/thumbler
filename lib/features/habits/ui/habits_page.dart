@@ -214,6 +214,7 @@ class _HabitTile extends ConsumerWidget {
         margin: EdgeInsets.zero,
         color: done ? cs.primaryContainer.withAlpha(80) : null,
         child: ListTile(
+          onTap: () => _showHeatmap(context),
           leading: Text(habit.emoji, style: const TextStyle(fontSize: 26)),
           title: Text(
             habit.name,
@@ -248,6 +249,172 @@ class _HabitTile extends ConsumerWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  void _showHeatmap(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (_) => _HabitHeatmapSheet(habit: habit),
+    );
+  }
+}
+
+// ── Habit Heatmap ─────────────────────────────────────────────────────────────
+
+class _HabitHeatmapSheet extends StatelessWidget {
+  const _HabitHeatmapSheet({required this.habit});
+  final Habit habit;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    final now = DateTime.now();
+    // Show 5 weeks (35 days) back from today
+    const days = 35;
+    final cells = List.generate(days, (i) {
+      final d = now.subtract(Duration(days: days - 1 - i));
+      return (date: d, done: habit.isDoneOn(d));
+    });
+
+    // Weekday labels: L M M G V S D
+    const dayLabels = ['L', 'M', 'M', 'G', 'V', 'S', 'D'];
+    // Align grid so first cell starts on correct weekday
+    final firstDay = cells.first.date;
+    final offset = (firstDay.weekday - 1) % 7; // Mon=0
+
+    return DraggableScrollableSheet(
+      initialChildSize: 0.55,
+      minChildSize: 0.4,
+      maxChildSize: 0.75,
+      expand: false,
+      builder: (_, ctrl) => ListView(
+        controller: ctrl,
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+        children: [
+          // Handle
+          Center(
+            child: Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: cs.outline.withAlpha(80),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          // Header
+          Row(
+            children: [
+              Text(habit.emoji, style: const TextStyle(fontSize: 28)),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(habit.name,
+                        style: Theme.of(context).textTheme.titleMedium),
+                    Text(
+                      '🔥 Streak: ${habit.currentStreak}  ·  Best: ${habit.longestStreak}',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 20),
+
+          // Day labels row
+          Row(
+            children: dayLabels
+                .map((l) => Expanded(
+                      child: Center(
+                        child: Text(l,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(color: cs.outline)),
+                      ),
+                    ))
+                .toList(),
+          ),
+          const SizedBox(height: 6),
+
+          // Grid — 5 rows of 7
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 7,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+            ),
+            itemCount: offset + cells.length,
+            itemBuilder: (_, i) {
+              if (i < offset) return const SizedBox.shrink();
+              final cell = cells[i - offset];
+              final isToday = cell.date.year == now.year &&
+                  cell.date.month == now.month &&
+                  cell.date.day == now.day;
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                decoration: BoxDecoration(
+                  color: cell.done
+                      ? cs.primary
+                      : cs.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(6),
+                  border: isToday
+                      ? Border.all(color: cs.primary, width: 2)
+                      : null,
+                ),
+                child: cell.done
+                    ? const Center(
+                        child: Icon(Icons.check, size: 14, color: Colors.white),
+                      )
+                    : null,
+              );
+            },
+          ),
+          const SizedBox(height: 16),
+
+          // Legend
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: cs.surfaceContainerHighest,
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text('Non completata',
+                  style: Theme.of(context).textTheme.labelSmall),
+              const SizedBox(width: 16),
+              Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(
+                  color: cs.primary,
+                  borderRadius: BorderRadius.circular(3),
+                ),
+              ),
+              const SizedBox(width: 6),
+              Text('Completata',
+                  style: Theme.of(context).textTheme.labelSmall),
+            ],
+          ),
+        ],
       ),
     );
   }
