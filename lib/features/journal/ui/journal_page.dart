@@ -6,12 +6,42 @@ import '../../habits/state/habits_notifier.dart';
 import '../domain/journal_entry.dart';
 import '../state/journal_notifier.dart';
 
-class JournalPage extends ConsumerWidget {
+class JournalPage extends ConsumerStatefulWidget {
   const JournalPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<JournalPage> createState() => _JournalPageState();
+}
+
+class _JournalPageState extends ConsumerState<JournalPage> {
+  final _searchCtrl = TextEditingController();
+  String _query = '';
+  JournalMood? _moodFilter;
+
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    super.dispose();
+  }
+
+  List<JournalEntry> _filter(List<JournalEntry> entries) {
+    var result = entries;
+    if (_moodFilter != null) {
+      result = result.where((e) => e.mood == _moodFilter).toList();
+    }
+    final q = _query.trim().toLowerCase();
+    if (q.isEmpty) return result;
+    return result
+        .where((e) =>
+            e.text.toLowerCase().contains(q) ||
+            e.tags.any((t) => t.toLowerCase().contains(q)))
+        .toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final entries = ref.watch(journalProvider);
+    final filtered = _filter(entries);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Diario')),
@@ -26,12 +56,203 @@ class JournalPage extends ConsumerWidget {
           ? _EmptyState(onWrite: () => Navigator.of(context).push(
               MaterialPageRoute(builder: (_) => const JournalEntryPage()),
             ))
-          : ListView.separated(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
-              itemCount: entries.length,
-              separatorBuilder: (_, _) => const SizedBox(height: 8),
-              itemBuilder: (_, i) => _EntryCard(entries[i]),
+          : Column(
+              children: [
+                // ── Mood trend chart ──────────────────────────────────────
+                _MoodTrendBar(entries: entries),
+
+                // ── Search bar ────────────────────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: SearchBar(
+                    controller: _searchCtrl,
+                    hintText: 'Cerca nelle note…',
+                    leading: const Icon(Icons.search, size: 20),
+                    trailing: [
+                      if (_query.isNotEmpty)
+                        IconButton(
+                          icon: const Icon(Icons.close, size: 18),
+                          onPressed: () {
+                            _searchCtrl.clear();
+                            setState(() => _query = '');
+                          },
+                        ),
+                    ],
+                    onChanged: (v) => setState(() => _query = v),
+                    padding: const WidgetStatePropertyAll(
+                      EdgeInsets.symmetric(horizontal: 12),
+                    ),
+                  ),
+                ),
+
+                // ── Mood filter chips ─────────────────────────────────────
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                  child: Row(
+                    children: [
+                      FilterChip(
+                        label: const Text('Tutti'),
+                        selected: _moodFilter == null,
+                        onSelected: (_) =>
+                            setState(() => _moodFilter = null),
+                      ),
+                      const SizedBox(width: 6),
+                      ...JournalMood.values.map((mood) => Padding(
+                            padding: const EdgeInsets.only(right: 6),
+                            child: FilterChip(
+                              avatar: Text(mood.emoji,
+                                  style: const TextStyle(fontSize: 14)),
+                              label: Text(mood.label),
+                              selected: _moodFilter == mood,
+                              onSelected: (_) => setState(
+                                () => _moodFilter =
+                                    _moodFilter == mood ? null : mood,
+                              ),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 8),
+
+                // ── Entry list ────────────────────────────────────────────
+                Expanded(
+                  child: filtered.isEmpty
+                      ? Center(
+                          child: Text(
+                            'Nessuna nota trovata.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .outline),
+                          ),
+                        )
+                      : ListView.separated(
+                          padding:
+                              const EdgeInsets.fromLTRB(16, 0, 16, 100),
+                          itemCount: filtered.length,
+                          separatorBuilder: (_, _) =>
+                              const SizedBox(height: 8),
+                          itemBuilder: (_, i) => _EntryCard(filtered[i]),
+                        ),
+                ),
+              ],
             ),
+    );
+  }
+}
+
+// ── Mood trend bar (last 14 days) ─────────────────────────────────────────────
+
+class _MoodTrendBar extends StatelessWidget {
+  const _MoodTrendBar({required this.entries});
+  final List<JournalEntry> entries;
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    // Build 14-day grid
+    final days = List.generate(14, (i) {
+      final date = now.subtract(Duration(days: 13 - i));
+      return DateTime(date.year, date.month, date.day);
+    });
+
+    // Find mood per day (most recent entry with mood that day)
+    JournalMood? moodForDay(DateTime day) {
+      for (final entry in entries) {
+        if (entry.mood == null) continue;
+        final d = DateTime(
+            entry.createdAt.year, entry.createdAt.month, entry.createdAt.day);
+        if (d == day) return entry.mood;
+      }
+      return null;
+    }
+
+    final moodColors = {
+      JournalMood.great: Colors.green,
+      JournalMood.good: Colors.lightGreen,
+      JournalMood.ok: Colors.orange,
+      JournalMood.bad: Colors.red,
+    };
+
+    final hasMoodData = entries.any((e) => e.mood != null);
+    if (!hasMoodData) return const SizedBox.shrink();
+
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+            color: Theme.of(context).colorScheme.outlineVariant),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Umore — ultimi 14 giorni',
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: days.map((day) {
+              final mood = moodForDay(day);
+              return Expanded(
+                child: Tooltip(
+                  message: mood == null
+                      ? '${day.day}/${day.month}: —'
+                      : '${day.day}/${day.month}: ${mood.label} ${mood.emoji}',
+                  child: Container(
+                    height: 28,
+                    margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                    decoration: BoxDecoration(
+                      color: mood == null
+                          ? Theme.of(context).colorScheme.surfaceContainerHigh
+                          : moodColors[mood]!.withAlpha(180),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: mood != null
+                        ? Center(
+                            child: Text(mood.emoji,
+                                style: const TextStyle(fontSize: 12)),
+                          )
+                        : null,
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+          const SizedBox(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '${days.first.day}/${days.first.month}',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(fontSize: 10),
+              ),
+              Text(
+                'oggi',
+                style: Theme.of(context)
+                    .textTheme
+                    .labelSmall
+                    ?.copyWith(fontSize: 10),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
