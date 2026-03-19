@@ -343,6 +343,17 @@ class StudyNotifier extends Notifier<StudyState> {
     );
   }
 
+  void updateUserNote(String itemId, String? note) {
+    final storage = StudyStorage();
+    final item = storage.getById(itemId, deckId: state.activeDeckId);
+    if (item == null) return;
+    final trimmed = note?.trim();
+    storage.update(
+      item.copyWith(userNote: trimmed?.isEmpty == true ? null : trimmed),
+    );
+    state = _copyWith(items: storage.allForDeck(state.activeDeckId));
+  }
+
   // ── Setup ─────────────────────────────────────────────────────────────────
 
   void setCategory(String? category) {

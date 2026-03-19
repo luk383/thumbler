@@ -20,6 +20,7 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _questionCtrl;
   late final TextEditingController _explanationCtrl;
+  late final TextEditingController _noteCtrl;
   late final List<TextEditingController> _optionCtrls;
   late int _correctIndex;
   late String _category;
@@ -33,6 +34,7 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
     final item = widget.existingItem;
     _questionCtrl = TextEditingController(text: item?.promptText ?? '');
     _explanationCtrl = TextEditingController(text: item?.explanationText ?? '');
+    _noteCtrl = TextEditingController(text: item?.userNote ?? '');
     _correctIndex = item?.correctAnswerIndex ?? 0;
     _category = item?.category ?? 'Generale';
     _topic = item?.topic;
@@ -47,6 +49,7 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
   void dispose() {
     _questionCtrl.dispose();
     _explanationCtrl.dispose();
+    _noteCtrl.dispose();
     for (final c in _optionCtrls) { c.dispose(); }
     super.dispose();
   }
@@ -58,6 +61,7 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
     final options = _optionCtrls.map((c) => c.text.trim()).toList();
     final activeDeckId = ref.read(activeDeckIdProvider);
 
+    final noteText = _noteCtrl.text.trim();
     final item = StudyItem(
       id: widget.existingItem?.id ??
           'custom_${DateTime.now().millisecondsSinceEpoch}',
@@ -71,6 +75,7 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
           : _explanationCtrl.text.trim(),
       options: options,
       correctAnswerIndex: _correctIndex,
+      userNote: noteText.isEmpty ? null : noteText,
     );
 
     ref.read(studyProvider.notifier).addCustomItem(item);
@@ -199,6 +204,25 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
               maxLines: 4,
               decoration: const InputDecoration(
                 hintText: 'Aggiungi contesto o approfondimento…',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Personal note
+            Row(
+              children: [
+                const Icon(Icons.sticky_note_2_outlined, size: 16),
+                const SizedBox(width: 6),
+                Text('Nota personale (opzionale)', style: tt.labelLarge),
+              ],
+            ),
+            const SizedBox(height: 8),
+            TextFormField(
+              controller: _noteCtrl,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                hintText: 'Appunto visibile durante il ripasso…',
                 border: OutlineInputBorder(),
               ),
             ),

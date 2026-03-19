@@ -24,10 +24,27 @@ extension AppLanguageX on AppLanguage {
   }
 }
 
+extension AppThemeModeX on ThemeMode {
+  String get storageValue => switch (this) {
+    ThemeMode.light => 'light',
+    ThemeMode.dark => 'dark',
+    ThemeMode.system => 'system',
+  };
+
+  static ThemeMode fromStorage(String? value) {
+    return switch (value) {
+      'light' => ThemeMode.light,
+      'dark' => ThemeMode.dark,
+      _ => ThemeMode.system,
+    };
+  }
+}
+
 class AppSettingsState {
-  const AppSettingsState({required this.language});
+  const AppSettingsState({required this.language, required this.themeMode});
 
   final AppLanguage language;
+  final ThemeMode themeMode;
 
   Locale get locale => language.locale;
 }
@@ -40,12 +57,18 @@ class AppSettingsNotifier extends Notifier<AppSettingsState> {
     final language = AppLanguageX.fromStorage(
       _storage.loadPreferredLanguageCode(),
     );
-    return AppSettingsState(language: language);
+    final themeMode = AppThemeModeX.fromStorage(_storage.loadThemeMode());
+    return AppSettingsState(language: language, themeMode: themeMode);
   }
 
   Future<void> setLanguage(AppLanguage language) async {
     await _storage.savePreferredLanguageCode(language.storageValue);
-    state = AppSettingsState(language: language);
+    state = AppSettingsState(language: language, themeMode: state.themeMode);
+  }
+
+  Future<void> setThemeMode(ThemeMode mode) async {
+    await _storage.saveThemeMode(mode.storageValue);
+    state = AppSettingsState(language: state.language, themeMode: mode);
   }
 }
 

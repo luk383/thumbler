@@ -184,6 +184,9 @@ class ProfilePage extends ConsumerWidget {
                     onLanguageChanged: (lang) => ref
                         .read(appSettingsProvider.notifier)
                         .setLanguage(lang),
+                    onThemeModeChanged: (mode) => ref
+                        .read(appSettingsProvider.notifier)
+                        .setThemeMode(mode),
                   ),
                   const SizedBox(height: 32),
                   _SectionTitle('Data Management'),
@@ -313,10 +316,12 @@ class _SettingsCard extends StatelessWidget {
   const _SettingsCard({
     required this.settings,
     required this.onLanguageChanged,
+    required this.onThemeModeChanged,
   });
 
   final AppSettingsState settings;
   final ValueChanged<AppLanguage> onLanguageChanged;
+  final ValueChanged<ThemeMode> onThemeModeChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -375,9 +380,27 @@ class _SettingsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            l10n.appearanceSystem,
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
+          SegmentedButton<ThemeMode>(
+            segments: const [
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.system,
+                icon: Icon(Icons.brightness_auto_outlined, size: 16),
+                label: Text('Auto'),
+              ),
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.light,
+                icon: Icon(Icons.light_mode_outlined, size: 16),
+                label: Text('Chiaro'),
+              ),
+              ButtonSegment<ThemeMode>(
+                value: ThemeMode.dark,
+                icon: Icon(Icons.dark_mode_outlined, size: 16),
+                label: Text('Scuro'),
+              ),
+            ],
+            selected: {settings.themeMode},
+            onSelectionChanged: (selection) =>
+                onThemeModeChanged(selection.first),
           ),
           const SizedBox(height: 16),
           const Divider(color: Colors.white12, height: 1),

@@ -26,6 +26,8 @@ class StudyItem {
     this.easeFactor = 2.5,
     this.srsInterval = 0,
     this.srsRepetitions = 0,
+    // Personal note
+    this.userNote,
   });
 
   final String id;
@@ -59,6 +61,9 @@ class StudyItem {
   final int srsInterval;     // interval in days
   final int srsRepetitions;  // consecutive correct reviews
 
+  // Personal annotation
+  final String? userNote;
+
   String get correctAnswer => options[correctAnswerIndex];
 
   StudyItem copyWith({
@@ -74,6 +79,7 @@ class StudyItem {
     double? easeFactor,
     int? srsInterval,
     int? srsRepetitions,
+    Object? userNote = _sentinel,
   }) => StudyItem(
     id: id,
     deckId: deckId ?? this.deckId,
@@ -98,7 +104,10 @@ class StudyItem {
     easeFactor: easeFactor ?? this.easeFactor,
     srsInterval: srsInterval ?? this.srsInterval,
     srsRepetitions: srsRepetitions ?? this.srsRepetitions,
+    userNote: userNote == _sentinel ? this.userNote : userNote as String?,
   );
+
+  static const Object _sentinel = Object();
 
   Map<String, dynamic> toMap() => {
     'id': id,
@@ -124,6 +133,7 @@ class StudyItem {
     'easeFactor': easeFactor,
     'srsInterval': srsInterval,
     'srsRepetitions': srsRepetitions,
+    'userNote': userNote,
   };
 
   factory StudyItem.fromMap(Map map) => StudyItem(
@@ -155,6 +165,7 @@ class StudyItem {
     easeFactor: (map['easeFactor'] as num?)?.toDouble() ?? 2.5,
     srsInterval: (map['srsInterval'] as num?)?.toInt() ?? 0,
     srsRepetitions: (map['srsRepetitions'] as num?)?.toInt() ?? 0,
+    userNote: map['userNote'] as String?,
   );
 
   static StudyItem fromLesson({

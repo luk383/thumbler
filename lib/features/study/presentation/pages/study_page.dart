@@ -767,16 +767,16 @@ class _SpeedResultsState extends State<_SpeedResults> {
 // SRS session: card widget
 // ============================================================================
 
-class _SrsCard extends StatefulWidget {
+class _SrsCard extends ConsumerStatefulWidget {
   const _SrsCard({super.key, required this.item, required this.onRate});
   final StudyItem item;
   final void Function(SrsRating rating) onRate;
 
   @override
-  State<_SrsCard> createState() => _SrsCardState();
+  ConsumerState<_SrsCard> createState() => _SrsCardState();
 }
 
-class _SrsCardState extends State<_SrsCard> {
+class _SrsCardState extends ConsumerState<_SrsCard> {
   bool _revealed = false;
   int? _selectedIndex;
 
@@ -914,7 +914,7 @@ class _SrsCardState extends State<_SrsCard> {
               ),
             ),
 
-            // Feedback + Again / Good
+            // Feedback + Again / Good / Easy
             if (isAnswered)
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 4, 16, 20),
@@ -985,12 +985,153 @@ class _SrsCardState extends State<_SrsCard> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 12),
+                    _UserNoteSection(item: item),
                   ],
                 ),
               ),
           ],
         ],
       ),
+    );
+  }
+}
+
+// ── User Note Section ─────────────────────────────────────────────────────────
+
+class _UserNoteSection extends ConsumerStatefulWidget {
+  const _UserNoteSection({required this.item});
+  final StudyItem item;
+
+  @override
+  ConsumerState<_UserNoteSection> createState() => _UserNoteSectionState();
+}
+
+class _UserNoteSectionState extends ConsumerState<_UserNoteSection> {
+  bool _editing = false;
+  late TextEditingController _ctrl;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = TextEditingController(text: widget.item.userNote ?? '');
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  void _save() {
+    ref.read(studyProvider.notifier).updateUserNote(widget.item.id, _ctrl.text);
+    setState(() => _editing = false);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final hasNote = widget.item.userNote?.isNotEmpty == true;
+
+    if (_editing) {
+      return Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.amber.withAlpha(20),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.amber.withAlpha(60)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.sticky_note_2_outlined,
+                    color: Colors.amber, size: 14),
+                const SizedBox(width: 6),
+                const Text('Nota personale',
+                    style: TextStyle(
+                        color: Colors.amber,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600)),
+                const Spacer(),
+                GestureDetector(
+                  onTap: () => setState(() => _editing = false),
+                  child: const Icon(Icons.close, color: Colors.white38, size: 16),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              controller: _ctrl,
+              autofocus: true,
+              maxLines: 4,
+              style: const TextStyle(color: Colors.white, fontSize: 13),
+              decoration: InputDecoration(
+                hintText: 'Aggiungi un appunto su questa carta…',
+                hintStyle: const TextStyle(color: Colors.white30, fontSize: 13),
+                filled: true,
+                fillColor: Colors.white.withAlpha(10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            ElevatedButton(
+              onPressed: _save,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.amber,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 10),
+              ),
+              child: const Text('Salva nota', style: TextStyle(fontSize: 13)),
+            ),
+          ],
+        ),
+      );
+    }
+
+    if (hasNote) {
+      return GestureDetector(
+        onTap: () {
+          _ctrl.text = widget.item.userNote ?? '';
+          setState(() => _editing = true);
+        },
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.amber.withAlpha(15),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.amber.withAlpha(40)),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.sticky_note_2_outlined,
+                  color: Colors.amber, size: 14),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  widget.item.userNote!,
+                  style: const TextStyle(
+                      color: Colors.amber, fontSize: 13, height: 1.4),
+                ),
+              ),
+              const Icon(Icons.edit_outlined, color: Colors.amber, size: 14),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return TextButton.icon(
+      onPressed: () => setState(() => _editing = true),
+      icon: const Icon(Icons.sticky_note_2_outlined, size: 14,
+          color: Colors.white38),
+      label: const Text('Aggiungi nota',
+          style: TextStyle(color: Colors.white38, fontSize: 12)),
+      style: TextButton.styleFrom(padding: EdgeInsets.zero),
     );
   }
 }

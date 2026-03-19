@@ -16,7 +16,7 @@ class WolfLabApp extends ConsumerWidget {
       title: 'Wolf Lab',
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
+      themeMode: settings.themeMode,
       locale: settings.locale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
