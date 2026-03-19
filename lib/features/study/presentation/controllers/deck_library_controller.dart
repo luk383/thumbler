@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -156,6 +158,18 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       );
       rethrow;
     }
+  }
+
+  /// Updates the `domains` (tags) for a user deck by patching the stored JSON.
+  Future<void> updateUserDeckTags(String deckId, List<String> tags) async {
+    final rawJson = _storage.loadUserDeckJson(deckId);
+    if (rawJson == null) return;
+    try {
+      final decoded = jsonDecode(rawJson) as Map<String, dynamic>;
+      decoded['domains'] = tags;
+      await _storage.saveUserDeckJson(deckId, jsonEncode(decoded));
+      await discoverPacks();
+    } catch (_) {}
   }
 
   Future<void> deleteUserDeck(String deckId) async {

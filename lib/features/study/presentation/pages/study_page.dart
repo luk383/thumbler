@@ -782,17 +782,59 @@ class _SrsCard extends ConsumerStatefulWidget {
 class _SrsCardState extends ConsumerState<_SrsCard> {
   bool _revealed = false;
   int? _selectedIndex;
+  double _dragDx = 0;
+
+  static const _swipeThreshold = 80.0;
+
+  void _onDragUpdate(DragUpdateDetails d) {
+    if (_selectedIndex == null) return;
+    setState(() => _dragDx += d.delta.dx);
+  }
+
+  void _onDragEnd(DragEndDetails _) {
+    if (_selectedIndex == null) {
+      setState(() => _dragDx = 0);
+      return;
+    }
+    if (_dragDx > _swipeThreshold) {
+      widget.onRate(SrsRating.good);
+    } else if (_dragDx < -_swipeThreshold) {
+      widget.onRate(SrsRating.again);
+    } else {
+      setState(() => _dragDx = 0);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final item = widget.item;
     final isAnswered = _selectedIndex != null;
 
-    return Container(
+    // Swipe overlay color
+    Color? swipeColor;
+    double swipeOpacity = 0;
+    if (isAnswered && _dragDx.abs() > 20) {
+      swipeOpacity = (_dragDx.abs() / _swipeThreshold).clamp(0.0, 0.8);
+      swipeColor = _dragDx > 0 ? Colors.green : Colors.red;
+    }
+
+    return GestureDetector(
+      onHorizontalDragUpdate: _onDragUpdate,
+      onHorizontalDragEnd: _onDragEnd,
+      onHorizontalDragCancel: () => setState(() => _dragDx = 0),
+      child: Transform.translate(
+        offset: Offset(_dragDx * 0.25, 0),
+        child: Stack(
+          children: [
+            Container(
       decoration: BoxDecoration(
         color: const Color(0xFF0F0D1E),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withAlpha(18)),
+        border: Border.all(
+          color: swipeColor?.withAlpha((swipeOpacity * 200).toInt()) ??
+              Colors.white.withAlpha(18),
+          width: swipeColor != null ? 2 : 1,
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -1057,6 +1099,38 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
           ],
         ],
       ),
+          ),
+            // Swipe direction overlay
+            if (swipeColor != null && swipeOpacity > 0.1)
+              Positioned.fill(
+                child: IgnorePointer(
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 50),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: swipeColor!.withAlpha((swipeOpacity * 60).toInt()),
+                    ),
+                    child: Align(
+                      alignment: _dragDx > 0
+                          ? Alignment.centerLeft
+                          : Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Icon(
+                          _dragDx > 0
+                              ? Icons.thumb_up_outlined
+                              : Icons.replay_outlined,
+                          color: swipeColor!.withAlpha((swipeOpacity * 220).toInt()),
+                          size: 36,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -1204,7 +1278,7 @@ class _UserNoteSectionState extends ConsumerState<_UserNoteSection> {
 // SRS complete screen
 // ============================================================================
 
-class _SrsComplete extends StatelessWidget {
+class _SrsComplete extends StatefulWidget {
   const _SrsComplete({
     required this.state,
     required this.onRestart,
@@ -1217,114 +1291,264 @@ class _SrsComplete extends StatelessWidget {
   final VoidCallback? onRetryWrong;
 
   @override
+  State<_SrsComplete> createState() => _SrsCompleteState();
+}
+
+class _SrsCompleteState extends State<_SrsComplete>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animCtrl;
+  late Animation<double> _fadeAnim;
+
+  @override
+  void initState() {
+    super.initState();
+    _animCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _fadeAnim = CurvedAnimation(parent: _animCtrl, curve: Curves.easeOut);
+    _animCtrl.forward();
+  }
+
+  @override
+  void dispose() {
+    _animCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final state = widget.state;
     final total = state.answeredInSession;
-    final correct = state.sessionCorrectCount;
+    final accuracy = total == 0 ? 0 : ((state.sessionCorrectCount / total) * 100).round();
     final wrong = state.wrongItemIds.length;
-    final accuracy = total == 0 ? 0 : ((correct / total) * 100).round();
+    final xpEarned = state.sessionCorrectCount * 3 + total;
+
+    // Duration
+    final start = state.sessionStartTime;
+    final elapsed = start != null ? DateTime.now().difference(start) : Duration.zero;
+    final mm = elapsed.inMinutes.toString().padLeft(2, '0');
+    final ss = (elapsed.inSeconds % 60).toString().padLeft(2, '0');
+
     final emoji = accuracy >= 80 ? '🏆' : accuracy >= 50 ? '📊' : '💪';
-    final xpEarned = correct * 3 + total;
+    final message = accuracy >= 80
+        ? 'Ottimo lavoro!'
+        : accuracy >= 50
+            ? 'Continua ad allenarci!'
+            : 'Non mollare, ci si migliora!';
 
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(32, 48, 32, 40),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(emoji, style: const TextStyle(fontSize: 56)),
-          const SizedBox(height: 16),
-          const Text(
-            'Sessione completata!',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
+    final accColor = accuracy >= 80
+        ? Colors.greenAccent
+        : accuracy >= 50
+            ? Colors.orangeAccent
+            : Colors.redAccent;
+
+    return FadeTransition(
+      opacity: _fadeAnim,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(24, 40, 24, 40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(emoji, style: const TextStyle(fontSize: 52)),
+            const SizedBox(height: 10),
+            Text(
+              'Sessione completata!',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          const SizedBox(height: 24),
+            const SizedBox(height: 4),
+            Text(
+              message,
+              style: const TextStyle(color: Colors.white54, fontSize: 13),
+            ),
+            const SizedBox(height: 24),
 
-          // Stats grid
-          Row(
-            children: [
-              _SrsStatTile(label: 'Carte', value: '$total'),
-              _SrsStatTile(
-                label: 'Accuratezza',
-                value: '$accuracy%',
-                color: accuracy >= 80
-                    ? Colors.greenAccent
-                    : accuracy >= 50
-                        ? Colors.orangeAccent
-                        : Colors.redAccent,
-              ),
-              _SrsStatTile(
-                label: 'XP stimati',
-                value: '+$xpEarned',
-                color: Colors.amber,
-              ),
-            ],
-          ),
-
-          if (wrong > 0) ...[
-            const SizedBox(height: 12),
+            // Accuracy ring + key stats
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.redAccent.withAlpha(20),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.redAccent.withAlpha(60)),
+                color: Colors.white.withAlpha(8),
+                borderRadius: BorderRadius.circular(18),
+                border: Border.all(color: Colors.white.withAlpha(18)),
               ),
-              child: Row(
+              child: Column(
                 children: [
-                  const Icon(Icons.trending_down_outlined,
-                      color: Colors.redAccent, size: 16),
-                  const SizedBox(width: 8),
-                  Text(
-                    '$wrong ${wrong == 1 ? 'carta sbagliata' : 'carte sbagliate'}',
-                    style: const TextStyle(
-                        color: Colors.redAccent, fontSize: 13),
+                  // Big accuracy circle
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                        width: 90,
+                        height: 90,
+                        child: CircularProgressIndicator(
+                          value: total == 0 ? 0 : accuracy / 100,
+                          strokeWidth: 7,
+                          backgroundColor: Colors.white12,
+                          valueColor: AlwaysStoppedAnimation(accColor),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '$accuracy%',
+                            style: TextStyle(
+                              color: accColor,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const Text(
+                            'accuracy',
+                            style: TextStyle(color: Colors.white38, fontSize: 10),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Stats row
+                  Row(
+                    children: [
+                      _SrsStatTile(label: 'Carte', value: '$total'),
+                      _SrsStatTile(label: 'Durata', value: '$mm:$ss'),
+                      _SrsStatTile(
+                        label: 'XP',
+                        value: '+$xpEarned',
+                        color: Colors.amber,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+
+                  // FSRS rating breakdown bar
+                  _RatingBreakdownBar(
+                    again: state.sessionAgainCount,
+                    hard: state.sessionHardCount,
+                    good: state.sessionGoodCount,
+                    easy: state.sessionEasyCount,
                   ),
                 ],
               ),
             ),
-          ],
 
-          const SizedBox(height: 28),
+            const SizedBox(height: 24),
 
-          // Retry wrong (primary if there are wrongs)
-          if (onRetryWrong != null) ...[
+            // Retry wrong (primary if there are wrongs)
+            if (widget.onRetryWrong != null) ...[
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.icon(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: Colors.redAccent,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: widget.onRetryWrong,
+                  icon: const Icon(Icons.replay_outlined),
+                  label: Text('Ripassa $wrong errate'),
+                ),
+              ),
+              const SizedBox(height: 10),
+            ],
+
             SizedBox(
               width: double.infinity,
-              child: FilledButton.icon(
-                style: FilledButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                onPressed: onRetryWrong,
-                icon: const Icon(Icons.replay_outlined),
-                label: Text('Ripassa $wrong errate'),
+              child: ElevatedButton.icon(
+                onPressed: widget.onRestart,
+                icon: const Icon(Icons.replay),
+                label: const Text('Nuova sessione'),
               ),
             ),
             const SizedBox(height: 10),
+            TextButton(
+              onPressed: widget.onExit,
+              child: const Text(
+                'Torna al setup',
+                style: TextStyle(color: Colors.white54),
+              ),
+            ),
           ],
-
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onRestart,
-              icon: const Icon(Icons.replay),
-              label: const Text('Nuova sessione'),
-            ),
-          ),
-          const SizedBox(height: 10),
-          TextButton(
-            onPressed: onExit,
-            child: const Text(
-              'Torna al setup',
-              style: TextStyle(color: Colors.white54),
-            ),
-          ),
-        ],
+        ),
       ),
+    );
+  }
+}
+
+// ── Rating breakdown bar ──────────────────────────────────────────────────────
+
+class _RatingBreakdownBar extends StatelessWidget {
+  const _RatingBreakdownBar({
+    required this.again,
+    required this.hard,
+    required this.good,
+    required this.easy,
+  });
+  final int again;
+  final int hard;
+  final int good;
+  final int easy;
+
+  @override
+  Widget build(BuildContext context) {
+    final total = again + hard + good + easy;
+    if (total == 0) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Rating distribution',
+          style: TextStyle(color: Colors.white38, fontSize: 11),
+        ),
+        const SizedBox(height: 6),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: Row(
+            children: [
+              if (again > 0) Expanded(flex: again, child: Container(height: 8, color: Colors.redAccent)),
+              if (hard > 0) Expanded(flex: hard, child: Container(height: 8, color: Colors.orangeAccent)),
+              if (good > 0) Expanded(flex: good, child: Container(height: 8, color: Colors.lightGreenAccent)),
+              if (easy > 0) Expanded(flex: easy, child: Container(height: 8, color: Colors.greenAccent)),
+            ],
+          ),
+        ),
+        const SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (again > 0) _RatingLabel(label: 'Again', count: again, color: Colors.redAccent),
+            if (hard > 0) _RatingLabel(label: 'Hard', count: hard, color: Colors.orangeAccent),
+            if (good > 0) _RatingLabel(label: 'Good', count: good, color: Colors.lightGreenAccent),
+            if (easy > 0) _RatingLabel(label: 'Easy', count: easy, color: Colors.greenAccent),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _RatingLabel extends StatelessWidget {
+  const _RatingLabel({required this.label, required this.count, required this.color});
+  final String label;
+  final int count;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(width: 8, height: 8, decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
+        const SizedBox(width: 4),
+        Text(
+          '$label $count',
+          style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w600),
+        ),
+      ],
     );
   }
 }

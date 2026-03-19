@@ -11,58 +11,115 @@ import '../../data/study_storage.dart';
 import '../../data/deck_pack.dart';
 import '../controllers/deck_library_controller.dart';
 
-class DeckManagementPage extends ConsumerWidget {
+class DeckManagementPage extends ConsumerStatefulWidget {
   const DeckManagementPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DeckManagementPage> createState() => _DeckManagementPageState();
+}
+
+class _DeckManagementPageState extends ConsumerState<DeckManagementPage> {
+  String? _filterTag;
+
+  @override
+  Widget build(BuildContext context) {
     final libraryState = ref.watch(deckLibraryProvider);
-    final packs = libraryState.packs.where((p) => p.isImportable).toList();
+    final allPacks = libraryState.packs.where((p) => p.isImportable).toList();
     final storage = StudyStorage();
+
+    // Collect all tags across all packs
+    final allTags = <String>{};
+    for (final pack in allPacks) {
+      allTags.addAll(pack.domains);
+    }
+
+    // Apply tag filter
+    final packs = _filterTag == null
+        ? allPacks
+        : allPacks.where((p) => p.domains.contains(_filterTag)).toList();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Gestisci deck'),
       ),
-      body: packs.isEmpty
-          ? const _EmptyState()
-          : ListView.separated(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
-              itemCount: packs.length,
-              separatorBuilder: (_, _) => const SizedBox(height: 10),
-              itemBuilder: (context, index) {
-                final pack = packs[index];
-                final cards = storage.allForDeck(pack.id);
-                final totalAnswered = cards.fold<int>(
-                  0,
-                  (sum, c) => sum + c.correctCount + c.wrongCount,
-                );
-                final totalCorrect = cards.fold<int>(
-                  0,
-                  (sum, c) => sum + c.correctCount,
-                );
-                final accuracyPct = totalAnswered == 0
-                    ? null
-                    : ((totalCorrect / totalAnswered) * 100).round();
-                final isActive = libraryState.activeDeckId == pack.id;
-
-                return _DeckCard(
-                  pack: pack,
-                  cardCount: cards.length,
-                  accuracyPct: accuracyPct,
-                  isActive: isActive,
-                  onRename: () => _showRenameDialog(context, ref, pack),
-                  onClone: () => _cloneDeck(context, ref, pack),
-                  onMerge: packs.length > 1
-                      ? () => _showMergeDialog(context, ref, pack, packs)
-                      : null,
-                  onExport: () => _exportDeck(context, pack),
-                  onDelete: pack.assetPath.startsWith('user://')
-                      ? () => _showDeleteDialog(context, ref, pack)
-                      : null,
-                );
-              },
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Tag filter chips
+          if (allTags.isNotEmpty)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+              child: Row(
+                children: [
+                  _FilterChip(
+                    label: 'Tutti',
+                    selected: _filterTag == null,
+                    onTap: () => setState(() => _filterTag = null),
+                  ),
+                  for (final tag in (allTags.toList()..sort()))
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: _FilterChip(
+                        label: tag,
+                        selected: _filterTag == tag,
+                        onTap: () => setState(
+                          () => _filterTag = _filterTag == tag ? null : tag,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             ),
+
+          // Deck list
+          Expanded(
+            child: packs.isEmpty
+                ? const _EmptyState()
+                : ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+                    itemCount: packs.length,
+                    separatorBuilder: (_, _) => const SizedBox(height: 10),
+                    itemBuilder: (context, index) {
+                      final pack = packs[index];
+                      final cards = storage.allForDeck(pack.id);
+                      final totalAnswered = cards.fold<int>(
+                        0,
+                        (sum, c) => sum + c.correctCount + c.wrongCount,
+                      );
+                      final totalCorrect = cards.fold<int>(
+                        0,
+                        (sum, c) => sum + c.correctCount,
+                      );
+                      final accuracyPct = totalAnswered == 0
+                          ? null
+                          : ((totalCorrect / totalAnswered) * 100).round();
+                      final isActive = libraryState.activeDeckId == pack.id;
+
+                      return _DeckCard(
+                        pack: pack,
+                        cardCount: cards.length,
+                        accuracyPct: accuracyPct,
+                        isActive: isActive,
+                        onRename: () => _showRenameDialog(context, ref, pack),
+                        onClone: () => _cloneDeck(context, ref, pack),
+                        onMerge: allPacks.length > 1
+                            ? () => _showMergeDialog(
+                                context, ref, pack, allPacks)
+                            : null,
+                        onExport: () => _exportDeck(context, pack),
+                        onEditTags: pack.assetPath.startsWith('user://')
+                            ? () => _showEditTagsDialog(context, ref, pack)
+                            : null,
+                        onDelete: pack.assetPath.startsWith('user://')
+                            ? () => _showDeleteDialog(context, ref, pack)
+                            : null,
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -307,6 +364,67 @@ class DeckManagementPage extends ConsumerWidget {
     }
   }
 
+  Future<void> _showEditTagsDialog(
+    BuildContext context,
+    WidgetRef ref,
+    DeckPackMeta pack,
+  ) async {
+    final controller = TextEditingController(
+      text: pack.domains.join(', '),
+    );
+    final result = await showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Modifica tag'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextField(
+              controller: controller,
+              decoration: const InputDecoration(
+                labelText: 'Tag (separati da virgola)',
+                hintText: 'es. storia, scienze, ripasso',
+                border: OutlineInputBorder(),
+              ),
+              autofocus: true,
+              onSubmitted: (v) => Navigator.pop(ctx, v.trim()),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'I tag vengono usati per filtrare i deck nella lista.',
+              style: TextStyle(fontSize: 11, color: Colors.grey),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Annulla'),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, controller.text.trim()),
+            child: const Text('Salva'),
+          ),
+        ],
+      ),
+    );
+    controller.dispose();
+    if (result == null) return;
+
+    final tags = result
+        .split(',')
+        .map((t) => t.trim())
+        .where((t) => t.isNotEmpty)
+        .toList();
+    await ref.read(deckLibraryProvider.notifier).updateUserDeckTags(pack.id, tags);
+    if (context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Tag aggiornati ✓')),
+      );
+    }
+  }
+
   Future<void> _showDeleteDialog(
     BuildContext context,
     WidgetRef ref,
@@ -390,7 +508,7 @@ class _EmptyState extends StatelessWidget {
   }
 }
 
-enum _DeckAction { clone, merge, export, delete }
+enum _DeckAction { clone, merge, export, editTags, delete }
 
 class _DeckCard extends StatelessWidget {
   const _DeckCard({
@@ -402,6 +520,7 @@ class _DeckCard extends StatelessWidget {
     required this.onClone,
     required this.onExport,
     this.onMerge,
+    this.onEditTags,
     this.onDelete,
   });
 
@@ -413,6 +532,7 @@ class _DeckCard extends StatelessWidget {
   final VoidCallback onClone;
   final VoidCallback onExport;
   final VoidCallback? onMerge;
+  final VoidCallback? onEditTags;
   final VoidCallback? onDelete;
 
   @override
@@ -488,6 +608,29 @@ class _DeckCard extends StatelessWidget {
                   ),
               ],
             ),
+            if (pack.domains.isNotEmpty) ...[
+              const SizedBox(height: 6),
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: pack.domains.map((tag) => Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: cs.primaryContainer.withAlpha(60),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: cs.primary.withAlpha(60)),
+                  ),
+                  child: Text(
+                    tag,
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: cs.primary,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                )).toList(),
+              ),
+            ],
             const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -514,6 +657,8 @@ class _DeckCard extends StatelessWidget {
                         onMerge?.call();
                       case _DeckAction.export:
                         onExport();
+                      case _DeckAction.editTags:
+                        onEditTags?.call();
                       case _DeckAction.delete:
                         onDelete?.call();
                     }
@@ -543,6 +688,16 @@ class _DeckCard extends StatelessWidget {
                         child: ListTile(
                           leading: Icon(Icons.merge_outlined),
                           title: Text('Unisci in…'),
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                        ),
+                      ),
+                    if (onEditTags != null)
+                      const PopupMenuItem(
+                        value: _DeckAction.editTags,
+                        child: ListTile(
+                          leading: Icon(Icons.label_outline),
+                          title: Text('Modifica tag'),
                           contentPadding: EdgeInsets.zero,
                           dense: true,
                         ),
@@ -609,6 +764,44 @@ class _InfoChip extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _FilterChip extends StatelessWidget {
+  const _FilterChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 160),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: selected ? cs.primaryContainer : cs.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: selected ? cs.primary : cs.outlineVariant,
+          ),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: selected ? cs.primary : cs.onSurfaceVariant,
+          ),
+        ),
       ),
     );
   }

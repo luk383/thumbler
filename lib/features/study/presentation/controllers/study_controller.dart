@@ -155,6 +155,10 @@ class StudyState {
     this.lastExamAttemptId,
     this.sessionStartTime,
     this.sessionCorrectCount = 0,
+    this.sessionAgainCount = 0,
+    this.sessionHardCount = 0,
+    this.sessionGoodCount = 0,
+    this.sessionEasyCount = 0,
   });
 
   final List<StudyItem> items;
@@ -199,6 +203,12 @@ class StudyState {
   /// Session timing and scoring for history tracking.
   final DateTime? sessionStartTime;
   final int sessionCorrectCount;
+
+  /// Per-rating counts for session summary.
+  final int sessionAgainCount;
+  final int sessionHardCount;
+  final int sessionGoodCount;
+  final int sessionEasyCount;
 
   // ── Derived ───────────────────────────────────────────────────────────────
 
@@ -460,6 +470,10 @@ class StudyNotifier extends Notifier<StudyState> {
       lastExamAttemptId: clearSelections ? null : state.lastExamAttemptId,
       sessionStartTime: null,
       sessionCorrectCount: 0,
+      sessionAgainCount: 0,
+      sessionHardCount: 0,
+      sessionGoodCount: 0,
+      sessionEasyCount: 0,
     );
   }
 
@@ -555,6 +569,10 @@ class StudyNotifier extends Notifier<StudyState> {
       lastExamAttemptId: state.lastExamAttemptId,
       sessionStartTime: DateTime.now(),
       sessionCorrectCount: 0,
+      sessionAgainCount: 0,
+      sessionHardCount: 0,
+      sessionGoodCount: 0,
+      sessionEasyCount: 0,
     );
   }
 
@@ -596,6 +614,10 @@ class StudyNotifier extends Notifier<StudyState> {
       startedFromExamBridge: false,
       sessionStartTime: DateTime.now(),
       sessionCorrectCount: 0,
+      sessionAgainCount: 0,
+      sessionHardCount: 0,
+      sessionGoodCount: 0,
+      sessionEasyCount: 0,
     );
   }
 
@@ -619,7 +641,18 @@ class StudyNotifier extends Notifier<StudyState> {
     ));
     ref.read(streakProvider.notifier).recordStudyQuestion();
     final newCorrectCount = state.sessionCorrectCount + (wrong ? 0 : 1);
-    _advanceSessionWithTracking(storage, newCorrectCount);
+    final newAgainCount = state.sessionAgainCount + (rating == SrsRating.again ? 1 : 0);
+    final newHardCount = state.sessionHardCount + (rating == SrsRating.hard ? 1 : 0);
+    final newGoodCount = state.sessionGoodCount + (rating == SrsRating.good ? 1 : 0);
+    final newEasyCount = state.sessionEasyCount + (rating == SrsRating.easy ? 1 : 0);
+    _advanceSessionWithTracking(
+      storage,
+      newCorrectCount,
+      newAgainCount,
+      newHardCount,
+      newGoodCount,
+      newEasyCount,
+    );
   }
 
   /// FSRS v4 — schedules next review using the Free Spaced Repetition Scheduler.
@@ -730,6 +763,10 @@ class StudyNotifier extends Notifier<StudyState> {
       wrongItemIds: newWrong,
       sessionStartTime: state.sessionStartTime,
       sessionCorrectCount: newCorrectCount,
+      sessionAgainCount: state.sessionAgainCount,
+      sessionHardCount: state.sessionHardCount,
+      sessionGoodCount: state.sessionGoodCount,
+      sessionEasyCount: state.sessionEasyCount,
     );
   }
 
@@ -891,14 +928,32 @@ class StudyNotifier extends Notifier<StudyState> {
       lastExamAttemptId: state.lastExamAttemptId,
       sessionStartTime: DateTime.now(),
       sessionCorrectCount: 0,
+      sessionAgainCount: 0,
+      sessionHardCount: 0,
+      sessionGoodCount: 0,
+      sessionEasyCount: 0,
     );
   }
 
   void _advanceSession(StudyStorage storage) {
-    _advanceSessionWithTracking(storage, state.sessionCorrectCount);
+    _advanceSessionWithTracking(
+      storage,
+      state.sessionCorrectCount,
+      state.sessionAgainCount,
+      state.sessionHardCount,
+      state.sessionGoodCount,
+      state.sessionEasyCount,
+    );
   }
 
-  void _advanceSessionWithTracking(StudyStorage storage, int newCorrectCount) {
+  void _advanceSessionWithTracking(
+    StudyStorage storage,
+    int newCorrectCount,
+    int newAgainCount,
+    int newHardCount,
+    int newGoodCount,
+    int newEasyCount,
+  ) {
     final items = storage.allForDeck(state.activeDeckId);
     final nextIndex = state.sessionQueue.isEmpty
         ? 0
@@ -935,6 +990,10 @@ class StudyNotifier extends Notifier<StudyState> {
       lastExamAttemptId: state.lastExamAttemptId,
       sessionStartTime: state.sessionStartTime,
       sessionCorrectCount: newCorrectCount,
+      sessionAgainCount: newAgainCount,
+      sessionHardCount: newHardCount,
+      sessionGoodCount: newGoodCount,
+      sessionEasyCount: newEasyCount,
     );
   }
 
@@ -1062,6 +1121,10 @@ class StudyNotifier extends Notifier<StudyState> {
     Object lastExamAttemptId = _nil,
     Object sessionStartTime = _nil,
     int? sessionCorrectCount,
+    int? sessionAgainCount,
+    int? sessionHardCount,
+    int? sessionGoodCount,
+    int? sessionEasyCount,
   }) {
     return StudyState(
       items: items ?? state.items,
@@ -1097,6 +1160,10 @@ class StudyNotifier extends Notifier<StudyState> {
           ? state.sessionStartTime
           : sessionStartTime as DateTime?,
       sessionCorrectCount: sessionCorrectCount ?? state.sessionCorrectCount,
+      sessionAgainCount: sessionAgainCount ?? state.sessionAgainCount,
+      sessionHardCount: sessionHardCount ?? state.sessionHardCount,
+      sessionGoodCount: sessionGoodCount ?? state.sessionGoodCount,
+      sessionEasyCount: sessionEasyCount ?? state.sessionEasyCount,
     );
   }
 }
