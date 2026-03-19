@@ -28,11 +28,7 @@ class ReadingPage extends ConsumerWidget {
         onImportUrl: () => _importUrl(context),
       ),
       body: items.isEmpty
-          ? _EmptyState(
-              onAdd: () => Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const ReadingFormPage()),
-              ),
-            )
+          ? const _EmptyState()
           : ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
               children: [
@@ -716,28 +712,37 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
 // ── Empty state ───────────────────────────────────────────────────────────────
 
 class _EmptyState extends StatelessWidget {
-  const _EmptyState({required this.onAdd});
-  final VoidCallback onAdd;
+  const _EmptyState();
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('📚', style: TextStyle(fontSize: 56)),
+            Icon(
+              Icons.menu_book_outlined,
+              size: 64,
+              color: cs.primary.withAlpha(120),
+            ),
             const SizedBox(height: 16),
-            Text('Nessuna lettura',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Lista letture vuota',
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
-            Text('Aggiungi libri, corsi e articoli',
-                style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(height: 20),
-            FilledButton.icon(
-              onPressed: onAdd,
-              icon: const Icon(Icons.add),
-              label: const Text('Aggiungi'),
+            Text(
+              'Aggiungi un libro, articolo, podcast o corso.',
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
             ),
           ],
         ),
-      );
+      ),
+    );
+  }
 }

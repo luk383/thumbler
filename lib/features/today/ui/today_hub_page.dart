@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,6 +62,13 @@ class TodayHubPage extends ConsumerWidget {
           SliverAppBar.large(
             title: Text(greeting),
             expandedHeight: 120,
+            actions: [
+              IconButton(
+                icon: const Icon(Icons.search),
+                tooltip: 'Cerca',
+                onPressed: () => context.push('/search'),
+              ),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               background: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -582,8 +590,10 @@ class _HabitRow extends ConsumerWidget {
             ),
           ),
           GestureDetector(
-            onTap: () =>
-                ref.read(habitsProvider.notifier).toggleToday(habit.id),
+            onTap: () {
+              HapticFeedback.mediumImpact();
+              ref.read(habitsProvider.notifier).toggleToday(habit.id);
+            },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               width: 26,

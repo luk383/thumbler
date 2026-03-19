@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../goals/state/goals_notifier.dart';
@@ -363,8 +364,10 @@ class _HabitTile extends ConsumerWidget {
                 ),
               if (scheduledToday)
                 GestureDetector(
-                  onTap: () =>
-                      ref.read(habitsProvider.notifier).toggleToday(habit.id),
+                  onTap: () {
+                    HapticFeedback.mediumImpact();
+                    ref.read(habitsProvider.notifier).toggleToday(habit.id);
+                  },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     width: 32,
@@ -577,18 +580,32 @@ class _EmptyState extends StatelessWidget {
   final VoidCallback onAdd;
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('🌱', style: TextStyle(fontSize: 56)),
+            Icon(
+              Icons.check_circle_outline,
+              size: 64,
+              color: cs.primary.withAlpha(120),
+            ),
             const SizedBox(height: 16),
-            Text('Nessuna abitudine',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Nessuna abitudine ancora',
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
-            Text('Costruisci una routine quotidiana',
-                style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(height: 20),
+            Text(
+              'Aggiungi la tua prima abitudine per iniziare a costruire routine solide.',
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
             FilledButton.icon(
               onPressed: onAdd,
               icon: const Icon(Icons.add),
@@ -596,5 +613,7 @@ class _EmptyState extends StatelessWidget {
             ),
           ],
         ),
-      );
+      ),
+    );
+  }
 }

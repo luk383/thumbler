@@ -377,24 +377,40 @@ class _EmptyState extends StatelessWidget {
   final VoidCallback onAdd;
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('🎯', style: TextStyle(fontSize: 56)),
+            Icon(
+              Icons.flag_outlined,
+              size: 64,
+              color: cs.primary.withAlpha(120),
+            ),
             const SizedBox(height: 16),
-            Text('Nessun obiettivo',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Nessun obiettivo attivo',
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
-            Text('Aggiungi il tuo primo obiettivo',
-                style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(height: 20),
+            Text(
+              'Definisci un obiettivo per dare direzione al tuo studio.',
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
             FilledButton.icon(
               onPressed: onAdd,
               icon: const Icon(Icons.add),
-              label: const Text('Nuovo obiettivo'),
+              label: const Text('Crea obiettivo'),
             ),
           ],
         ),
-      );
+      ),
+    );
+  }
 }

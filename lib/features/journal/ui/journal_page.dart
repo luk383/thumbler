@@ -332,24 +332,40 @@ class _EmptyState extends StatelessWidget {
   final VoidCallback onWrite;
 
   @override
-  Widget build(BuildContext context) => Center(
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('✍️', style: TextStyle(fontSize: 56)),
+            Icon(
+              Icons.book_outlined,
+              size: 64,
+              color: cs.primary.withAlpha(120),
+            ),
             const SizedBox(height: 16),
-            Text('Nessuna nota',
-                style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              'Il diario è vuoto',
+              style: Theme.of(context).textTheme.titleMedium,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
-            Text('Scrivi pensieri, insight e idee',
-                style: Theme.of(context).textTheme.bodySmall),
-            const SizedBox(height: 20),
+            Text(
+              'Scrivi il tuo primo pensiero. Anche solo una riga.',
+              style: Theme.of(context).textTheme.bodySmall,
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
             FilledButton.icon(
               onPressed: onWrite,
               icon: const Icon(Icons.edit_outlined),
-              label: const Text('Scrivi'),
+              label: const Text('Scrivi qualcosa'),
             ),
           ],
         ),
-      );
+      ),
+    );
+  }
 }

@@ -21,6 +21,7 @@ import '../features/notifications/ui/notification_settings_page.dart';
 import '../features/profile/presentation/privacy_policy_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/profile/presentation/progress_share_page.dart';
+import '../features/search/ui/search_page.dart';
 import '../features/study/data/deck_library_storage.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
 import '../features/study/presentation/pages/card_editor_page.dart';
@@ -46,6 +47,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/onboarding',
       builder: (context, state) => const OnboardingPage(),
+    ),
+    GoRoute(
+      path: '/search',
+      builder: (context, state) => const SearchPage(),
     ),
     GoRoute(
       path: '/pro',

@@ -1,13 +1,33 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../state/pomodoro_notifier.dart';
 
-class PomodoroPage extends ConsumerWidget {
+class PomodoroPage extends ConsumerStatefulWidget {
   const PomodoroPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PomodoroPage> createState() => _PomodoroPageState();
+}
+
+class _PomodoroPageState extends ConsumerState<PomodoroPage> {
+  @override
+  void initState() {
+    super.initState();
+    // Listen for phase transitions to vibrate
+    ref.listenManual(
+      pomodoroProvider.select((s) => s.phase),
+      (previous, next) {
+        if (previous != null && previous != next) {
+          HapticFeedback.vibrate();
+        }
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(pomodoroProvider);
     final notifier = ref.read(pomodoroProvider.notifier);
     final cs = Theme.of(context).colorScheme;

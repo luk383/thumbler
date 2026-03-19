@@ -937,7 +937,10 @@ class _SrsCardState extends State<_SrsCard> {
                               ),
                               padding: const EdgeInsets.symmetric(vertical: 11),
                             ),
-                            onPressed: () => widget.onRate(SrsRating.again),
+                            onPressed: () {
+                              HapticFeedback.heavyImpact();
+                              widget.onRate(SrsRating.again);
+                            },
                             child: const Text(
                               'Again',
                               style: TextStyle(fontSize: 13),
@@ -952,7 +955,10 @@ class _SrsCardState extends State<_SrsCard> {
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 11),
                             ),
-                            onPressed: () => widget.onRate(SrsRating.good),
+                            onPressed: () {
+                              HapticFeedback.lightImpact();
+                              widget.onRate(SrsRating.good);
+                            },
                             child: const Text(
                               'Good',
                               style: TextStyle(fontSize: 13),
@@ -967,7 +973,10 @@ class _SrsCardState extends State<_SrsCard> {
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 11),
                             ),
-                            onPressed: () => widget.onRate(SrsRating.easy),
+                            onPressed: () {
+                              HapticFeedback.lightImpact();
+                              widget.onRate(SrsRating.easy);
+                            },
                             child: const Text(
                               'Easy',
                               style: TextStyle(fontSize: 13),
