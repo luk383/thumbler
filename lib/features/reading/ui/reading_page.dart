@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/book_lookup_service.dart';
+import '../data/url_metadata_service.dart';
 import '../domain/reading_item.dart';
 import '../state/reading_notifier.dart';
+import 'isbn_scanner_page.dart';
 
 class ReadingPage extends ConsumerWidget {
   const ReadingPage({super.key});
@@ -17,17 +20,19 @@ class ReadingPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Letture & Corsi')),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => Navigator.of(context).push(
+      floatingActionButton: _AddFab(
+        onManual: () => Navigator.of(context).push(
           MaterialPageRoute(builder: (_) => const ReadingFormPage()),
         ),
-        icon: const Icon(Icons.add),
-        label: const Text('Aggiungi'),
+        onScanIsbn: () => _scanIsbn(context),
+        onImportUrl: () => _importUrl(context),
       ),
       body: items.isEmpty
-          ? _EmptyState(onAdd: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => const ReadingFormPage()),
-            ))
+          ? _EmptyState(
+              onAdd: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const ReadingFormPage()),
+              ),
+            )
           : ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
               children: [
@@ -49,7 +54,205 @@ class ReadingPage extends ConsumerWidget {
             ),
     );
   }
+
+  Future<void> _scanIsbn(BuildContext context) async {
+    final book = await Navigator.of(context).push<BookInfo>(
+      MaterialPageRoute(builder: (_) => const IsbnScannerPage()),
+    );
+    if (book == null || !context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ReadingFormPage(prefillFromBook: book),
+      ),
+    );
+  }
+
+  Future<void> _importUrl(BuildContext context) async {
+    final url = await _showUrlDialog(context);
+    if (url == null || url.trim().isEmpty || !context.mounted) return;
+
+    final loading = ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Recupero informazioni…'),
+        duration: Duration(seconds: 30),
+      ),
+    );
+
+    final metadata = await UrlMetadataService().fetch(url);
+    loading.close();
+
+    if (!context.mounted) return;
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ReadingFormPage(prefillFromUrl: metadata, rawUrl: url),
+      ),
+    );
+  }
+
+  Future<String?> _showUrlDialog(BuildContext context) {
+    final ctrl = TextEditingController();
+    return showDialog<String>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Importa da URL'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Incolla un link YouTube, Spotify, Udemy, articolo…',
+              style: Theme.of(ctx).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: ctrl,
+              autofocus: true,
+              keyboardType: TextInputType.url,
+              decoration: const InputDecoration(
+                hintText: 'https://...',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.link),
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Annulla'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, ctrl.text),
+            child: const Text('Importa'),
+          ),
+        ],
+      ),
+    );
+  }
 }
+
+// ── FAB with speed dial ───────────────────────────────────────────────────────
+
+class _AddFab extends StatefulWidget {
+  const _AddFab({
+    required this.onManual,
+    required this.onScanIsbn,
+    required this.onImportUrl,
+  });
+
+  final VoidCallback onManual;
+  final VoidCallback onScanIsbn;
+  final VoidCallback onImportUrl;
+
+  @override
+  State<_AddFab> createState() => _AddFabState();
+}
+
+class _AddFabState extends State<_AddFab>
+    with SingleTickerProviderStateMixin {
+  bool _open = false;
+  late final AnimationController _anim;
+
+  @override
+  void initState() {
+    super.initState();
+    _anim = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+  }
+
+  @override
+  void dispose() {
+    _anim.dispose();
+    super.dispose();
+  }
+
+  void _toggle() {
+    setState(() => _open = !_open);
+    _open ? _anim.forward() : _anim.reverse();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        if (_open) ...[
+          _MiniAction(
+            icon: Icons.add,
+            label: 'Manuale',
+            onTap: () { _toggle(); widget.onManual(); },
+          ),
+          const SizedBox(height: 10),
+          _MiniAction(
+            icon: Icons.qr_code_scanner,
+            label: 'Scansiona ISBN',
+            onTap: () { _toggle(); widget.onScanIsbn(); },
+          ),
+          const SizedBox(height: 10),
+          _MiniAction(
+            icon: Icons.link,
+            label: 'Importa URL',
+            onTap: () { _toggle(); widget.onImportUrl(); },
+          ),
+          const SizedBox(height: 16),
+        ],
+        FloatingActionButton(
+          onPressed: _toggle,
+          child: AnimatedRotation(
+            turns: _open ? 0.125 : 0,
+            duration: const Duration(milliseconds: 200),
+            child: const Icon(Icons.add),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _MiniAction extends StatelessWidget {
+  const _MiniAction({
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+            decoration: BoxDecoration(
+              color: cs.surfaceContainerHighest,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(label,
+                style: Theme.of(context).textTheme.labelMedium),
+          ),
+          const SizedBox(width: 8),
+          FloatingActionButton.small(
+            heroTag: label,
+            onPressed: onTap,
+            child: Icon(icon, size: 20),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// ── Section header ────────────────────────────────────────────────────────────
 
 class _SectionHeader extends StatelessWidget {
   const _SectionHeader(this.label);
@@ -66,6 +269,8 @@ class _SectionHeader extends StatelessWidget {
         ),
       );
 }
+
+// ── Reading card ──────────────────────────────────────────────────────────────
 
 class _ReadingCard extends ConsumerWidget {
   const _ReadingCard(this.item);
@@ -85,10 +290,23 @@ class _ReadingCard extends ConsumerWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(14),
+          padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              Text(item.type.emoji, style: const TextStyle(fontSize: 28)),
+              // Thumbnail or emoji
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: item.thumbnailUrl != null
+                    ? Image.network(
+                        item.thumbnailUrl!,
+                        width: 44,
+                        height: 60,
+                        fit: BoxFit.cover,
+                        errorBuilder: (_, _, _) =>
+                            _EmojiThumb(item.type.emoji),
+                      )
+                    : _EmojiThumb(item.type.emoji),
+              ),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -96,11 +314,13 @@ class _ReadingCard extends ConsumerWidget {
                   children: [
                     Text(item.title,
                         style: Theme.of(context).textTheme.titleSmall,
-                        maxLines: 1,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis),
                     if (item.author != null)
                       Text(item.author!,
-                          style: Theme.of(context).textTheme.bodySmall),
+                          style: Theme.of(context).textTheme.bodySmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis),
                     if (item.status == ReadingStatus.reading &&
                         item.totalPages != null) ...[
                       const SizedBox(height: 6),
@@ -136,7 +356,26 @@ class _ReadingCard extends ConsumerWidget {
   }
 }
 
-// ── Detail page ──────────────────────────────────────────────────────────────
+class _EmojiThumb extends StatelessWidget {
+  const _EmojiThumb(this.emoji);
+  final String emoji;
+
+  @override
+  Widget build(BuildContext context) => Container(
+        width: 44,
+        height: 60,
+        decoration: BoxDecoration(
+          color:
+              Theme.of(context).colorScheme.surfaceContainerHighest,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Center(
+          child: Text(emoji, style: const TextStyle(fontSize: 24)),
+        ),
+      );
+}
+
+// ── Detail page ───────────────────────────────────────────────────────────────
 
 class ReadingDetailPage extends ConsumerWidget {
   const ReadingDetailPage({super.key, required this.item});
@@ -173,11 +412,49 @@ class ReadingDetailPage extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Text(current.title,
-              style: Theme.of(context).textTheme.headlineSmall),
-          if (current.author != null)
-            Text(current.author!,
-                style: Theme.of(context).textTheme.bodyMedium),
+          // Header with thumbnail
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (current.thumbnailUrl != null)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    current.thumbnailUrl!,
+                    width: 80,
+                    height: 110,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  ),
+                ),
+              if (current.thumbnailUrl != null) const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(current.title,
+                        style: Theme.of(context).textTheme.headlineSmall),
+                    if (current.author != null)
+                      Text(current.author!,
+                          style: Theme.of(context).textTheme.bodyMedium),
+                    if (current.sourceUrl != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        current.sourceUrl!,
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelSmall
+                            ?.copyWith(
+                                color: Theme.of(context).colorScheme.primary),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 16),
 
           // Status picker
@@ -226,11 +503,21 @@ class ReadingDetailPage extends ConsumerWidget {
   }
 }
 
-// ── Form page ────────────────────────────────────────────────────────────────
+// ── Form page ─────────────────────────────────────────────────────────────────
 
 class ReadingFormPage extends ConsumerStatefulWidget {
-  const ReadingFormPage({super.key, this.existingItem});
+  const ReadingFormPage({
+    super.key,
+    this.existingItem,
+    this.prefillFromBook,
+    this.prefillFromUrl,
+    this.rawUrl,
+  });
+
   final ReadingItem? existingItem;
+  final BookInfo? prefillFromBook;
+  final UrlMetadata? prefillFromUrl;
+  final String? rawUrl;
 
   @override
   ConsumerState<ReadingFormPage> createState() => _ReadingFormPageState();
@@ -244,18 +531,44 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
   late final TextEditingController _notesCtrl;
   late ReadingType _type;
   late ReadingStatus _status;
+  String? _thumbnailUrl;
+  String? _sourceUrl;
 
   @override
   void initState() {
     super.initState();
     final i = widget.existingItem;
-    _titleCtrl = TextEditingController(text: i?.title ?? '');
-    _authorCtrl = TextEditingController(text: i?.author ?? '');
-    _pagesCtrl =
-        TextEditingController(text: i?.totalPages?.toString() ?? '');
-    _notesCtrl = TextEditingController(text: i?.notes ?? '');
-    _type = i?.type ?? ReadingType.book;
+    final book = widget.prefillFromBook;
+    final url = widget.prefillFromUrl;
+
+    _titleCtrl = TextEditingController(
+      text: i?.title ?? book?.title ?? url?.title ?? '',
+    );
+    _authorCtrl = TextEditingController(
+      text: i?.author ?? book?.author ?? url?.author ?? '',
+    );
+    _pagesCtrl = TextEditingController(
+      text: i?.totalPages?.toString() ?? book?.pages?.toString() ?? '',
+    );
+    _notesCtrl = TextEditingController(
+      text: i?.notes ?? book?.description?.substring(
+                0,
+                (book.description!.length > 300)
+                    ? 300
+                    : book.description!.length,
+              ) ??
+          url?.description?.substring(
+                0,
+                (url.description!.length > 300)
+                    ? 300
+                    : url.description!.length,
+              ) ??
+          '',
+    );
+    _type = i?.type ?? url?.type ?? ReadingType.book;
     _status = i?.status ?? ReadingStatus.wishlist;
+    _thumbnailUrl = i?.thumbnailUrl ?? book?.thumbnailUrl ?? url?.thumbnailUrl;
+    _sourceUrl = i?.sourceUrl ?? widget.rawUrl;
   }
 
   @override
@@ -279,6 +592,8 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
       totalPages: int.tryParse(_pagesCtrl.text),
       currentPage: widget.existingItem?.currentPage,
       notes: _notesCtrl.text.trim().isEmpty ? null : _notesCtrl.text.trim(),
+      thumbnailUrl: _thumbnailUrl,
+      sourceUrl: _sourceUrl,
       startedAt: widget.existingItem?.startedAt,
       completedAt: widget.existingItem?.completedAt,
       createdAt: widget.existingItem?.createdAt ?? DateTime.now(),
@@ -289,10 +604,11 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isEdit = widget.existingItem != null;
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            widget.existingItem != null ? 'Modifica' : 'Aggiungi'),
+        title: Text(isEdit ? 'Modifica' : 'Aggiungi'),
         actions: [TextButton(onPressed: _save, child: const Text('Salva'))],
       ),
       body: Form(
@@ -300,7 +616,22 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
         child: ListView(
           padding: const EdgeInsets.all(16),
           children: [
-            // Type
+            // Thumbnail preview
+            if (_thumbnailUrl != null)
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    _thumbnailUrl!,
+                    height: 120,
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                  ),
+                ),
+              ),
+            if (_thumbnailUrl != null) const SizedBox(height: 16),
+
+            // Type chips
             Wrap(
               spacing: 8,
               children: ReadingType.values
@@ -338,16 +669,14 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
                 controller: _pagesCtrl,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  labelText: _type == ReadingType.book
-                      ? 'Pagine totali'
-                      : 'Ore totali',
+                  labelText:
+                      _type == ReadingType.book ? 'Pagine totali' : 'Ore totali',
                   border: const OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 12),
             ],
 
-            // Status
             DropdownButtonFormField<ReadingStatus>(
               initialValue: _status,
               decoration: const InputDecoration(
@@ -384,7 +713,7 @@ class _ReadingFormPageState extends ConsumerState<ReadingFormPage> {
   }
 }
 
-// ── Empty state ──────────────────────────────────────────────────────────────
+// ── Empty state ───────────────────────────────────────────────────────────────
 
 class _EmptyState extends StatelessWidget {
   const _EmptyState({required this.onAdd});

@@ -40,6 +40,8 @@ class ReadingItem {
     this.totalPages,
     this.currentPage,
     this.notes,
+    this.thumbnailUrl,
+    this.sourceUrl,
     this.startedAt,
     this.completedAt,
     required this.createdAt,
@@ -53,6 +55,8 @@ class ReadingItem {
   final int? totalPages;
   final int? currentPage;
   final String? notes;
+  final String? thumbnailUrl; // book cover or video thumbnail
+  final String? sourceUrl;   // original URL (YouTube, Spotify, etc.)
   final DateTime? startedAt;
   final DateTime? completedAt;
   final DateTime createdAt;
@@ -70,6 +74,8 @@ class ReadingItem {
     int? totalPages,
     int? currentPage,
     String? notes,
+    String? thumbnailUrl,
+    String? sourceUrl,
     DateTime? startedAt,
     DateTime? completedAt,
   }) => ReadingItem(
@@ -81,6 +87,8 @@ class ReadingItem {
         totalPages: totalPages ?? this.totalPages,
         currentPage: currentPage ?? this.currentPage,
         notes: notes ?? this.notes,
+        thumbnailUrl: thumbnailUrl ?? this.thumbnailUrl,
+        sourceUrl: sourceUrl ?? this.sourceUrl,
         startedAt: startedAt ?? this.startedAt,
         completedAt: completedAt ?? this.completedAt,
         createdAt: createdAt,
@@ -95,6 +103,8 @@ class ReadingItem {
         'totalPages': totalPages,
         'currentPage': currentPage,
         'notes': notes,
+        'thumbnailUrl': thumbnailUrl,
+        'sourceUrl': sourceUrl,
         'startedAt': startedAt?.toIso8601String(),
         'completedAt': completedAt?.toIso8601String(),
         'createdAt': createdAt.toIso8601String(),
@@ -109,6 +119,8 @@ class ReadingItem {
         totalPages: (map['totalPages'] as num?)?.toInt(),
         currentPage: (map['currentPage'] as num?)?.toInt(),
         notes: map['notes'] as String?,
+        thumbnailUrl: map['thumbnailUrl'] as String?,
+        sourceUrl: map['sourceUrl'] as String?,
         startedAt: map['startedAt'] != null
             ? DateTime.tryParse(map['startedAt'] as String)
             : null,
