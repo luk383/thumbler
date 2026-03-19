@@ -277,6 +277,12 @@ class StudyNotifier extends Notifier<StudyState> {
 
   // ── Deck management ───────────────────────────────────────────────────────
 
+  /// Adds a fully custom StudyItem (user-created card).
+  void addCustomItem(StudyItem item) {
+    StudyStorage().add(item);
+    state = _copyWith(items: StudyStorage().allForDeck(state.activeDeckId));
+  }
+
   void addLesson(Lesson lesson) {
     if (state.inDeck(lesson.id)) return;
     StudyStorage().add(
@@ -496,8 +502,7 @@ class StudyNotifier extends Notifier<StudyState> {
     );
   }
 
-  /// SRS: rate the current card and schedule next review.
-  /// TODO: replace interval logic with SM-2 algorithm (SRS v2)
+  /// SRS: rate the current card using SM-2 algorithm and schedule next review.
   void rate(String id, {required SrsRating rating}) {
     final storage = StudyStorage();
     final item = state.items.firstWhere(
@@ -505,29 +510,58 @@ class StudyNotifier extends Notifier<StudyState> {
       orElse: () => state.items.first,
     );
     final wrong = rating == SrsRating.again;
-    storage.update(
-      item.copyWith(
-        againCount: wrong ? item.againCount + 1 : null,
-        goodCount: wrong ? null : item.goodCount + 1,
-        timesSeen: item.timesSeen + 1,
-        correctCount: wrong ? null : item.correctCount + 1,
-        wrongCount: wrong ? item.wrongCount + 1 : null,
-        lastReviewedAt: DateTime.now(),
-        nextReviewAt: _nextReview(rating),
-      ),
-    );
+    storage.update(_applySm2(item, rating).copyWith(
+      againCount: wrong ? item.againCount + 1 : null,
+      goodCount: wrong ? null : item.goodCount + 1,
+      timesSeen: item.timesSeen + 1,
+      correctCount: wrong ? null : item.correctCount + 1,
+      wrongCount: wrong ? item.wrongCount + 1 : null,
+      lastReviewedAt: DateTime.now(),
+    ));
     ref.read(streakProvider.notifier).recordStudyQuestion();
     _advanceSession(storage);
   }
 
-  /// Computes the next review timestamp from the given SRS rating.
-  static DateTime _nextReview(SrsRating rating) {
-    final now = DateTime.now();
-    return switch (rating) {
-      SrsRating.again => now.add(const Duration(minutes: 10)),
-      SrsRating.good => now.add(const Duration(days: 2)),
-      SrsRating.easy => now.add(const Duration(days: 7)),
+  /// SM-2 algorithm — updates easeFactor, srsInterval, srsRepetitions,
+  /// and sets nextReviewAt accordingly.
+  ///
+  /// Quality mapping: again=0, good=3, easy=5
+  static StudyItem _applySm2(StudyItem item, SrsRating rating) {
+    final q = switch (rating) {
+      SrsRating.again => 0,
+      SrsRating.good => 3,
+      SrsRating.easy => 5,
     };
+
+    // Update ease factor: EF' = max(1.3, EF + 0.1 - (5-q)*(0.08 + (5-q)*0.02))
+    final delta = 0.1 - (5 - q) * (0.08 + (5 - q) * 0.02);
+    final newEF = (item.easeFactor + delta).clamp(1.3, 5.0);
+
+    int newRepetitions;
+    int newInterval;
+
+    if (q < 3) {
+      // Failed: reset schedule, review again in 1 day
+      newRepetitions = 0;
+      newInterval = 1;
+    } else {
+      // Passed: apply SM-2 interval progression
+      newRepetitions = item.srsRepetitions + 1;
+      newInterval = switch (item.srsRepetitions) {
+        0 => 1,
+        1 => 6,
+        _ => (item.srsInterval * newEF).round().clamp(1, 365),
+      };
+    }
+
+    final nextReview = DateTime.now().add(Duration(days: newInterval));
+
+    return item.copyWith(
+      easeFactor: newEF,
+      srsInterval: newInterval,
+      srsRepetitions: newRepetitions,
+      nextReviewAt: nextReview,
+    );
   }
 
   /// Speed: record result, persist stats, advance.

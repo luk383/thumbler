@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -315,8 +314,6 @@ class _SpeedSessionState extends ConsumerState<_SpeedSession>
           timedOut: _selectedIndex == null,
         );
   }
-
-  static final _rng = Random();
 
   @override
   void dispose() {

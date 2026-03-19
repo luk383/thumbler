@@ -4,10 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/l10n/app_localizations.dart';
+import '../../../app/services/notifications/notification_service.dart';
 import '../../../app/settings/app_settings.dart';
 import '../../../core/data/reset_service.dart';
 import '../../../core/ui/app_surfaces.dart';
 import '../../bookmarks/presentation/bookmarks_notifier.dart';
+import '../../goals/ui/goals_page.dart';
+import '../../habits/ui/habits_page.dart';
+import '../../journal/ui/journal_page.dart';
+import '../../reading/ui/reading_page.dart';
+import '../../reflection/ui/reflection_page.dart';
 import '../../study/presentation/controllers/deck_library_controller.dart';
 import '../../growth/streak/streak_notifier.dart';
 import '../../growth/daily_quest/daily_quest_notifier.dart';
@@ -135,10 +141,16 @@ class ProfilePage extends ConsumerWidget {
                     deckTitle: activeDeck?.title,
                     l10n: l10n,
                   ),
+                  const SizedBox(height: 32),
+                  _SectionTitle('🌱 Crescita Personale'),
+                  const SizedBox(height: 12),
+                  _GrowthHubCard(),
                   const SizedBox(height: 20),
                   _SectionTitle(l10n.xpLegendTitle),
                   const SizedBox(height: 12),
                   _XpLegendCard(l10n: l10n),
+                  const SizedBox(height: 32),
+                  _NotificationsCard(),
                   const SizedBox(height: 32),
                   _SettingsCard(
                     settings: settings,
@@ -882,6 +894,104 @@ class _XpRow extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+// ── Growth hub card ──────────────────────────────────────────────────────────
+
+class _GrowthHubCard extends StatelessWidget {
+  const _GrowthHubCard();
+
+  static const _items = [
+    _GrowthItem('🎯', 'Obiettivi', GoalsPage()),
+    _GrowthItem('🌱', 'Abitudini', HabitsPage()),
+    _GrowthItem('📅', 'Riflessione', ReflectionPage()),
+    _GrowthItem('✍️', 'Diario', JournalPage()),
+    _GrowthItem('📚', 'Letture', ReadingPage()),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: _items.map((item) => ListTile(
+          leading: Text(item.emoji, style: const TextStyle(fontSize: 22)),
+          title: Text(item.label,
+              style: const TextStyle(fontWeight: FontWeight.w600)),
+          trailing: const Icon(Icons.chevron_right),
+          onTap: () => Navigator.of(context).push(
+            MaterialPageRoute(builder: (_) => item.page),
+          ),
+        )).toList(),
+      ),
+    );
+  }
+}
+
+class _GrowthItem {
+  const _GrowthItem(this.emoji, this.label, this.page);
+  final String emoji;
+  final String label;
+  final Widget page;
+}
+
+// ── Notifications card ───────────────────────────────────────────────────────
+
+class _NotificationsCard extends ConsumerWidget {
+  const _NotificationsCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(notificationSettingsProvider);
+    final isItalian = context.l10n.isItalian;
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('🔔 Promemoria studio',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+            const SizedBox(height: 8),
+            SwitchListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text('Reminder giornaliero'),
+              value: settings.enabled,
+              onChanged: (v) => ref
+                  .read(notificationSettingsProvider.notifier)
+                  .setEnabled(v, italian: isItalian),
+            ),
+            if (settings.enabled) ...[
+              const Divider(),
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.access_time_outlined),
+                title: Text(
+                  '${settings.hour.toString().padLeft(2, '0')}:${settings.minute.toString().padLeft(2, '0')}',
+                  style: const TextStyle(fontWeight: FontWeight.w600),
+                ),
+                subtitle: const Text('Tocca per cambiare orario'),
+                onTap: () async {
+                  final picked = await showTimePicker(
+                    context: context,
+                    initialTime:
+                        TimeOfDay(hour: settings.hour, minute: settings.minute),
+                  );
+                  if (picked != null) {
+                    ref.read(notificationSettingsProvider.notifier).setTime(
+                          picked.hour,
+                          picked.minute,
+                          italian: isItalian,
+                        );
+                  }
+                },
+              ),
+            ],
+          ],
+        ),
+      ),
     );
   }
 }

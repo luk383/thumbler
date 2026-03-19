@@ -20,22 +20,23 @@ class StudyItem {
     this.correctCount = 0,
     this.wrongCount = 0,
     this.avgTimeMs,
-    // SRS placeholders (TODO: implement scheduling v2)
     this.nextReviewAt,
     this.lastReviewedAt,
+    // SM-2 fields
+    this.easeFactor = 2.5,
+    this.srsInterval = 0,
+    this.srsRepetitions = 0,
   });
 
-  final String id; // lessonId for microCard, custom uuid for examQuestion
+  final String id;
   final String? deckId;
   final ContentType contentType;
   final String category;
-
-  /// Optional subtopic within a category (e.g. "Security" within "Technology").
   final String? topic;
   final String? subtopic;
   final String? objectiveId;
 
-  final String promptText; // hook (microCard) or question (examQuestion)
+  final String promptText;
   final String? explanationText;
   final List<String> options;
   final int correctAnswerIndex;
@@ -49,9 +50,14 @@ class StudyItem {
   final int wrongCount;
   final int? avgTimeMs;
 
-  // SRS (TODO: use for scheduling v2)
+  // SRS scheduling
   final DateTime? nextReviewAt;
   final DateTime? lastReviewedAt;
+
+  // SM-2 state
+  final double easeFactor;   // starts at 2.5, min 1.3
+  final int srsInterval;     // interval in days
+  final int srsRepetitions;  // consecutive correct reviews
 
   String get correctAnswer => options[correctAnswerIndex];
 
@@ -65,6 +71,9 @@ class StudyItem {
     int? avgTimeMs,
     DateTime? nextReviewAt,
     DateTime? lastReviewedAt,
+    double? easeFactor,
+    int? srsInterval,
+    int? srsRepetitions,
   }) => StudyItem(
     id: id,
     deckId: deckId ?? this.deckId,
@@ -86,6 +95,9 @@ class StudyItem {
     avgTimeMs: avgTimeMs ?? this.avgTimeMs,
     nextReviewAt: nextReviewAt ?? this.nextReviewAt,
     lastReviewedAt: lastReviewedAt ?? this.lastReviewedAt,
+    easeFactor: easeFactor ?? this.easeFactor,
+    srsInterval: srsInterval ?? this.srsInterval,
+    srsRepetitions: srsRepetitions ?? this.srsRepetitions,
   );
 
   Map<String, dynamic> toMap() => {
@@ -109,6 +121,9 @@ class StudyItem {
     'avgTimeMs': avgTimeMs,
     'nextReviewAt': nextReviewAt?.toIso8601String(),
     'lastReviewedAt': lastReviewedAt?.toIso8601String(),
+    'easeFactor': easeFactor,
+    'srsInterval': srsInterval,
+    'srsRepetitions': srsRepetitions,
   };
 
   factory StudyItem.fromMap(Map map) => StudyItem(
@@ -137,9 +152,11 @@ class StudyItem {
     lastReviewedAt: map['lastReviewedAt'] != null
         ? DateTime.tryParse(map['lastReviewedAt'] as String)
         : null,
+    easeFactor: (map['easeFactor'] as num?)?.toDouble() ?? 2.5,
+    srsInterval: (map['srsInterval'] as num?)?.toInt() ?? 0,
+    srsRepetitions: (map['srsRepetitions'] as num?)?.toInt() ?? 0,
   );
 
-  /// Build a StudyItem from a feed Lesson (micro_card type).
   static StudyItem fromLesson({
     required String id,
     String? deckId,

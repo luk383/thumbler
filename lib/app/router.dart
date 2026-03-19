@@ -13,6 +13,7 @@ import '../features/profile/presentation/privacy_policy_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/study/data/deck_library_storage.dart';
 import '../features/study/presentation/controllers/study_controller.dart';
+import '../features/study/presentation/pages/card_editor_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import 'shell_scaffold.dart';
 
@@ -42,6 +43,12 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/privacy',
       builder: (context, state) => const PrivacyPolicyPage(),
+    ),
+    GoRoute(
+      path: '/card-editor',
+      builder: (context, state) => CardEditorPage(
+        existingItem: state.extra as dynamic,
+      ),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, shell) => ShellScaffold(navigationShell: shell),

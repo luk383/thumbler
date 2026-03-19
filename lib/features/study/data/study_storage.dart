@@ -79,6 +79,9 @@ class StudyStorage {
           avgTimeMs: null,
           nextReviewAt: null,
           lastReviewedAt: null,
+          easeFactor: 2.5,
+          srsInterval: 0,
+          srsRepetitions: 0,
         ),
       );
     }
