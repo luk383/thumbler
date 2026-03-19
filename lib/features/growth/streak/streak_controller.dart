@@ -9,6 +9,8 @@ class StreakNotifier extends Notifier<StreakState> {
   static const _keyLastStudyDate = 'last_study_date';
   static const _keyDailyCountDate = 'daily_count_date';
   static const _keyAnsweredToday = 'answered_today_count';
+  static const _keyFreezeTokens = 'freeze_tokens';
+  static const int _maxFreezeTokens = 3;
 
   late final Box _box;
 
@@ -20,14 +22,27 @@ class StreakNotifier extends Notifier<StreakState> {
 
   StreakState _computeState() {
     final today = _todayString();
-    final lastStudyDate =
+    final yesterday = _yesterdayString();
+    var lastStudyDate =
         (_box.get(_keyLastStudyDate, defaultValue: '') as String).trim();
     final dailyCountDate =
         (_box.get(_keyDailyCountDate, defaultValue: '') as String).trim();
     final answeredToday = dailyCountDate == today
         ? (_box.get(_keyAnsweredToday, defaultValue: 0) as num).toInt()
         : 0;
-    final streak = (_box.get(_keyStreak, defaultValue: 0) as num).toInt();
+    var streak = (_box.get(_keyStreak, defaultValue: 0) as num).toInt();
+    var freezeTokens =
+        (_box.get(_keyFreezeTokens, defaultValue: 0) as num).toInt();
+
+    // Auto-apply freeze token: missed exactly yesterday, but have a token
+    if (lastStudyDate == _dayBeforeYesterdayString() &&
+        freezeTokens > 0 &&
+        streak > 0) {
+      freezeTokens -= 1;
+      _box.put(_keyFreezeTokens, freezeTokens);
+      _box.put(_keyLastStudyDate, yesterday);
+      lastStudyDate = yesterday;
+    }
 
     if (lastStudyDate == today) {
       return StreakState(
@@ -35,14 +50,16 @@ class StreakNotifier extends Notifier<StreakState> {
         currentStreak: streak,
         completedToday: true,
         answeredToday: answeredToday,
+        freezeTokens: freezeTokens,
       );
     }
-    if (lastStudyDate == _yesterdayString()) {
+    if (lastStudyDate == yesterday) {
       return StreakState(
         lastStudyDate: lastStudyDate,
         currentStreak: streak,
         completedToday: false,
         answeredToday: answeredToday,
+        freezeTokens: freezeTokens,
       );
     }
     return StreakState(
@@ -50,6 +67,7 @@ class StreakNotifier extends Notifier<StreakState> {
       currentStreak: 0,
       completedToday: false,
       answeredToday: answeredToday,
+      freezeTokens: freezeTokens,
     );
   }
 
@@ -82,6 +100,15 @@ class StreakNotifier extends Notifier<StreakState> {
       _box.put(_keyLastStudyDate, today);
       completedToday = true;
       effectiveLastStudyDate = today;
+
+      // Earn a freeze token every 7 consecutive days (max 3)
+      if (storedStreak > 0 && storedStreak % 7 == 0) {
+        var tokens =
+            (_box.get(_keyFreezeTokens, defaultValue: 0) as num).toInt();
+        if (tokens < _maxFreezeTokens) {
+          _box.put(_keyFreezeTokens, tokens + 1);
+        }
+      }
     }
 
     state = StreakState(
@@ -110,6 +137,10 @@ class StreakNotifier extends Notifier<StreakState> {
   String _todayString() => currentTime().toIso8601String().substring(0, 10);
   String _yesterdayString() => currentTime()
       .subtract(const Duration(days: 1))
+      .toIso8601String()
+      .substring(0, 10);
+  String _dayBeforeYesterdayString() => currentTime()
+      .subtract(const Duration(days: 2))
       .toIso8601String()
       .substring(0, 10);
 }

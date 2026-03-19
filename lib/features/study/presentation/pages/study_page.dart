@@ -181,6 +181,9 @@ class _SrsSession extends ConsumerWidget {
             ? _SrsComplete(
                 state: studyState,
                 onRestart: n.startSession,
+                onRetryWrong: studyState.wrongItemIds.isNotEmpty
+                    ? n.retryWrongItems
+                    : null,
                 onExit: closeSession,
               )
             : () {
@@ -1145,50 +1148,158 @@ class _SrsComplete extends StatelessWidget {
     required this.state,
     required this.onRestart,
     required this.onExit,
+    this.onRetryWrong,
   });
   final StudyState state;
   final VoidCallback onRestart;
   final VoidCallback onExit;
+  final VoidCallback? onRetryWrong;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(40),
+    final total = state.answeredInSession;
+    final correct = state.sessionCorrectCount;
+    final wrong = state.wrongItemIds.length;
+    final accuracy = total == 0 ? 0 : ((correct / total) * 100).round();
+    final emoji = accuracy >= 80 ? '🏆' : accuracy >= 50 ? '📊' : '💪';
+    final xpEarned = correct * 3 + total;
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(32, 48, 32, 40),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(emoji, style: const TextStyle(fontSize: 56)),
+          const SizedBox(height: 16),
+          const Text(
+            'Sessione completata!',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 24),
+
+          // Stats grid
+          Row(
+            children: [
+              _SrsStatTile(label: 'Carte', value: '$total'),
+              _SrsStatTile(
+                label: 'Accuratezza',
+                value: '$accuracy%',
+                color: accuracy >= 80
+                    ? Colors.greenAccent
+                    : accuracy >= 50
+                        ? Colors.orangeAccent
+                        : Colors.redAccent,
+              ),
+              _SrsStatTile(
+                label: 'XP stimati',
+                value: '+$xpEarned',
+                color: Colors.amber,
+              ),
+            ],
+          ),
+
+          if (wrong > 0) ...[
+            const SizedBox(height: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration: BoxDecoration(
+                color: Colors.redAccent.withAlpha(20),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.redAccent.withAlpha(60)),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.trending_down_outlined,
+                      color: Colors.redAccent, size: 16),
+                  const SizedBox(width: 8),
+                  Text(
+                    '$wrong ${wrong == 1 ? 'carta sbagliata' : 'carte sbagliate'}',
+                    style: const TextStyle(
+                        color: Colors.redAccent, fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+          ],
+
+          const SizedBox(height: 28),
+
+          // Retry wrong (primary if there are wrongs)
+          if (onRetryWrong != null) ...[
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                ),
+                onPressed: onRetryWrong,
+                icon: const Icon(Icons.replay_outlined),
+                label: Text('Ripassa $wrong errate'),
+              ),
+            ),
+            const SizedBox(height: 10),
+          ],
+
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton.icon(
+              onPressed: onRestart,
+              icon: const Icon(Icons.replay),
+              label: const Text('Nuova sessione'),
+            ),
+          ),
+          const SizedBox(height: 10),
+          TextButton(
+            onPressed: onExit,
+            child: const Text(
+              'Torna al setup',
+              style: TextStyle(color: Colors.white54),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SrsStatTile extends StatelessWidget {
+  const _SrsStatTile({required this.label, required this.value, this.color});
+  final String label;
+  final String value;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        decoration: BoxDecoration(
+          color: Colors.white.withAlpha(10),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.white.withAlpha(18)),
+        ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('🎉', style: TextStyle(fontSize: 56)),
-            const SizedBox(height: 16),
-            const Text(
-              'Sessione completata!',
+            Text(
+              value,
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
+                color: color ?? Colors.white,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(
-              '${state.answeredInSession} carte studiate',
-              style: const TextStyle(color: Colors.white60, fontSize: 14),
-            ),
-            const SizedBox(height: 32),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: onRestart,
-                icon: const Icon(Icons.replay),
-                label: const Text('Studia di nuovo'),
-              ),
-            ),
-            const SizedBox(height: 12),
-            TextButton(
-              onPressed: onExit,
-              child: const Text(
-                'Torna al setup',
-                style: TextStyle(color: Colors.white54),
-              ),
+              label,
+              style: const TextStyle(color: Colors.white54, fontSize: 11),
+              textAlign: TextAlign.center,
             ),
           ],
         ),

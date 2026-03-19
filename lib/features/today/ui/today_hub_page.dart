@@ -166,22 +166,48 @@ class TodayHubPage extends ConsumerWidget {
                 trailing: streak.currentStreak > 0
                     ? _Badge('🔥 ${streak.currentStreak} giorni')
                     : null,
-                child: Row(
+                child: Column(
                   children: [
-                    Expanded(
-                      child: _StatTile(
-                        value: '${streak.answeredToday}',
-                        label: 'Risposte oggi',
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _StatTile(
+                            value: '${streak.answeredToday}',
+                            label: 'Risposte oggi',
+                          ),
+                        ),
+                        Expanded(
+                          child: _StatTile(
+                            value: streak.completedToday ? '✅' : '${streak.remainingToday} rimaste',
+                            label: streak.completedToday
+                                ? 'Obiettivo giornaliero'
+                                : 'Per completare oggi',
+                          ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: _StatTile(
-                        value: streak.completedToday ? '✅' : '${streak.remainingToday} rimaste',
-                        label: streak.completedToday
-                            ? 'Obiettivo giornaliero'
-                            : 'Per completare oggi',
+                    if (streak.freezeTokens > 0) ...[
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          const Text('🛡️', style: TextStyle(fontSize: 14)),
+                          const SizedBox(width: 6),
+                          Text(
+                            '${streak.freezeTokens} ${streak.freezeTokens == 1 ? 'freeze' : 'freeze'} disponibil${streak.freezeTokens == 1 ? 'e' : 'i'}',
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.blueAccent.shade100,
+                            ),
+                          ),
+                          const SizedBox(width: 4),
+                          Tooltip(
+                            message: 'Il freeze protegge la streak se salti un giorno. Guadagni 1 ogni 7 giorni consecutivi.',
+                            child: Icon(Icons.info_outline, size: 13,
+                                color: Colors.white38),
+                          ),
+                        ],
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ),

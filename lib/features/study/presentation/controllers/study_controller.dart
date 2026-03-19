@@ -530,6 +530,35 @@ class StudyNotifier extends Notifier<StudyState> {
     );
   }
 
+  /// Launches a new SRS session with only the cards marked wrong in the
+  /// previous session.
+  void retryWrongItems() {
+    final wrongItems = state.items
+        .where((i) => state.wrongItemIds.contains(i.id))
+        .toList();
+    if (wrongItems.isEmpty) return;
+    state = StudyState(
+      items: state.items,
+      activeDeckId: state.activeDeckId,
+      selectedCategory: state.selectedCategory,
+      selectedTopic: state.selectedTopic,
+      selectedMode: StudyMode.srs,
+      selectedQueueType: state.selectedQueueType,
+      sessionLength: wrongItems.length,
+      timerSeconds: state.timerSeconds,
+      isStudying: true,
+      sessionQueue: wrongItems,
+      currentIndex: 0,
+      answeredInSession: 0,
+      generation: state.generation + 1,
+      speedResults: const [],
+      wrongItemIds: const [],
+      startedFromExamBridge: false,
+      sessionStartTime: DateTime.now(),
+      sessionCorrectCount: 0,
+    );
+  }
+
   /// SRS: rate the current card using SM-2 algorithm and schedule next review.
   void rate(String id, {required SrsRating rating}) {
     final storage = StudyStorage();
