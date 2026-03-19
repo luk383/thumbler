@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../habits/state/habits_notifier.dart';
 import '../domain/goal.dart';
 import '../state/goals_notifier.dart';
 import 'goal_form_page.dart';
@@ -219,6 +220,11 @@ class GoalDetailPage extends ConsumerWidget {
           ],
 
           const SizedBox(height: 20),
+
+          // Linked habits
+          _LinkedHabitsSection(goalId: current.id),
+
+          const SizedBox(height: 20),
           FilledButton.icon(
             onPressed: () =>
                 ref.read(goalsProvider.notifier).toggleCompleted(current.id),
@@ -253,6 +259,46 @@ class GoalDetailPage extends ConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+// ── Linked habits section ─────────────────────────────────────────────────────
+
+class _LinkedHabitsSection extends ConsumerWidget {
+  const _LinkedHabitsSection({required this.goalId});
+  final String goalId;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final linked = ref
+        .watch(habitsProvider)
+        .where((h) => h.goalId == goalId)
+        .toList();
+
+    if (linked.isEmpty) return const SizedBox.shrink();
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Abitudini collegate',
+            style: Theme.of(context).textTheme.titleSmall),
+        const SizedBox(height: 8),
+        ...linked.map((h) => ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Text(h.emoji, style: const TextStyle(fontSize: 22)),
+              title: Text(h.name),
+              subtitle: h.currentStreak > 0
+                  ? Text('🔥 ${h.currentStreak} giorni',
+                      style: Theme.of(context).textTheme.labelSmall)
+                  : null,
+              trailing: h.isDoneToday
+                  ? Icon(Icons.check_circle,
+                      color: Theme.of(context).colorScheme.primary, size: 20)
+                  : Icon(Icons.radio_button_unchecked,
+                      color: Theme.of(context).colorScheme.outline, size: 20),
+            )),
+      ],
     );
   }
 }

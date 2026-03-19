@@ -4,14 +4,40 @@ import 'package:hive_flutter/hive_flutter.dart';
 const int dailyGoal = 10;
 
 enum XpEvent {
+  // Study
   viewCard,
   reveal,
-  correctAnswer;
+  correctAnswer,
+  // Personal growth
+  habitComplete,
+  goalMilestone,
+  journalEntry,
+  weeklyReflection,
+  bookCompleted,
+  customCard;
 
   int get points => switch (this) {
     XpEvent.viewCard => 1,
     XpEvent.reveal => 1,
     XpEvent.correctAnswer => 3,
+    XpEvent.habitComplete => 5,
+    XpEvent.goalMilestone => 10,
+    XpEvent.journalEntry => 2,
+    XpEvent.weeklyReflection => 10,
+    XpEvent.bookCompleted => 5,
+    XpEvent.customCard => 3,
+  };
+
+  String get label => switch (this) {
+    XpEvent.viewCard => 'Carta vista',
+    XpEvent.reveal => 'Spiegazione letta',
+    XpEvent.correctAnswer => 'Risposta corretta',
+    XpEvent.habitComplete => 'Abitudine completata',
+    XpEvent.goalMilestone => 'Milestone raggiunto',
+    XpEvent.journalEntry => 'Nota scritta',
+    XpEvent.weeklyReflection => 'Riflessione settimanale',
+    XpEvent.bookCompleted => 'Libro/corso completato',
+    XpEvent.customCard => 'Carta creata',
   };
 }
 

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../growth/xp/xp_notifier.dart';
 import '../data/goals_storage.dart';
 import '../domain/goal.dart';
 
@@ -19,6 +20,8 @@ class GoalsNotifier extends Notifier<List<Goal>> {
 
   void toggleMilestone(String goalId, String milestoneId) {
     final goal = state.firstWhere((g) => g.id == goalId);
+    final milestone = goal.milestones.firstWhere((m) => m.id == milestoneId);
+    final wasNotDone = !milestone.done;
     final updated = goal.copyWith(
       milestones: goal.milestones
           .map((m) => m.id == milestoneId ? m.copyWith(done: !m.done) : m)
@@ -29,6 +32,10 @@ class GoalsNotifier extends Notifier<List<Goal>> {
         updated.milestones.isNotEmpty && updated.milestones.every((m) => m.done);
     GoalsStorage().save(allDone ? updated.copyWith(completed: true) : updated);
     state = GoalsStorage().all();
+    // Award XP only when completing a milestone (not unchecking)
+    if (wasNotDone) {
+      ref.read(xpProvider.notifier).addXp(XpEvent.goalMilestone);
+    }
   }
 
   void toggleCompleted(String goalId) {

@@ -24,9 +24,9 @@ class ShellScaffold extends StatelessWidget {
         },
         destinations: [
           NavigationDestination(
-            icon: Icon(Icons.home_outlined),
-            selectedIcon: Icon(Icons.home),
-            label: l10n.navFeed,
+            icon: Icon(Icons.today_outlined),
+            selectedIcon: Icon(Icons.today),
+            label: l10n.navToday,
           ),
           NavigationDestination(
             icon: Icon(Icons.school_outlined),

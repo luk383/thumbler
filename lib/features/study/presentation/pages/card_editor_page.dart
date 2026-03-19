@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../features/growth/xp/xp_notifier.dart';
 import '../../domain/study_item.dart';
 import '../controllers/deck_library_controller.dart';
 import '../controllers/study_controller.dart';
@@ -73,6 +74,7 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
     );
 
     ref.read(studyProvider.notifier).addCustomItem(item);
+    ref.read(xpProvider.notifier).addXp(XpEvent.customCard);
 
     if (mounted) Navigator.of(context).pop();
   }

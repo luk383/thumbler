@@ -3,6 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../app/l10n/app_localizations.dart';
 import '../../../../core/ui/app_surfaces.dart';
+import '../../../goals/state/goals_notifier.dart';
+import '../../../habits/state/habits_notifier.dart';
+import '../../../journal/domain/journal_entry.dart';
+import '../../../journal/state/journal_notifier.dart';
+import '../../../reflection/domain/reflection_entry.dart';
+import '../../../reflection/state/reflection_notifier.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../../domain/progress_analytics.dart';
 import '../providers/progress_analytics_provider.dart';
@@ -53,6 +59,8 @@ class ProgressAnalyticsPage extends ConsumerWidget {
                 (summary) => _WeakDomainCard(summary: summary),
               ),
           ],
+          const SizedBox(height: 24),
+          const _GrowthDashboardSection(),
         ],
       ),
     );
@@ -471,4 +479,172 @@ class _InfoCard extends StatelessWidget {
       ),
     );
   }
+}
+
+// ── Growth Dashboard ──────────────────────────────────────────────────────────
+
+class _GrowthDashboardSection extends ConsumerWidget {
+  const _GrowthDashboardSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final habits = ref.watch(habitsProvider);
+    final goals = ref.watch(goalsProvider);
+    final journal = ref.watch(journalProvider);
+    final reflections = ref.watch(reflectionProvider);
+
+    // Habit completion rate — last 7 days
+    final habitRate = _habitRate7Days(habits);
+
+    // Goal progress — avg across active goals
+    final activeGoals = goals.where((g) => !g.completed).toList();
+    final goalProgress = activeGoals.isEmpty
+        ? 0.0
+        : activeGoals.fold<double>(0, (s, g) => s + g.progress) /
+            activeGoals.length;
+
+    // Mood trend — last 5 journal entries with mood
+    final moodEntries = journal
+        .where((e) => e.mood != null)
+        .toList()
+      ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    final recentMoods = moodEntries.take(5).cast<JournalEntry>().toList();
+
+    // Reflection completion — last 4 weeks
+    final reflectionRate = _reflectionRate4Weeks(reflections);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader('Crescita Personale'),
+        const SizedBox(height: 10),
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          tint: Colors.tealAccent,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: _GrowthMetric(
+                      icon: '✅',
+                      label: 'Abitudini\n(7 giorni)',
+                      value: '${(habitRate * 100).round()}%',
+                      color: habitRate >= 0.7
+                          ? Colors.greenAccent
+                          : habitRate >= 0.4
+                              ? Colors.orangeAccent
+                              : Colors.redAccent,
+                    ),
+                  ),
+                  Expanded(
+                    child: _GrowthMetric(
+                      icon: '🎯',
+                      label: 'Progressi\nobiettivi',
+                      value: '${(goalProgress * 100).round()}%',
+                      color: Colors.tealAccent,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                children: [
+                  Expanded(
+                    child: _GrowthMetric(
+                      icon: '📓',
+                      label: 'Riflessioni\n(4 settimane)',
+                      value: '${(reflectionRate * 100).round()}%',
+                      color: Colors.purpleAccent,
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        const Text('😊 Umore recente',
+                            style: TextStyle(
+                                color: Colors.white70, fontSize: 11)),
+                        const SizedBox(height: 6),
+                        if (recentMoods.isEmpty)
+                          const Text('—',
+                              style: TextStyle(color: Colors.white54))
+                        else
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: recentMoods
+                                .map((e) => Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 2),
+                                      child: Text(e.mood!.emoji,
+                                          style: const TextStyle(fontSize: 18)),
+                                    ))
+                                .toList(),
+                          ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  double _habitRate7Days(List habits) {
+    if (habits.isEmpty) return 0;
+    final now = DateTime.now();
+    var total = 0;
+    var done = 0;
+    for (var i = 0; i < 7; i++) {
+      final d = now.subtract(Duration(days: i));
+      total += habits.length;
+      done +=
+          habits.where((h) => h.isDoneOn(d)).length;
+    }
+    return total == 0 ? 0 : done / total;
+  }
+
+  double _reflectionRate4Weeks(List reflections) {
+    var done = 0;
+    for (var i = 0; i < 4; i++) {
+      final weekStart = ReflectionEntry.currentWeekStart()
+          .subtract(Duration(days: 7 * i));
+      final found = reflections.any(
+        (r) => r.weekStart.isAtSameMomentAs(weekStart) && !r.isEmpty,
+      );
+      if (found) done++;
+    }
+    return done / 4;
+  }
+}
+
+class _GrowthMetric extends StatelessWidget {
+  const _GrowthMetric({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.color,
+  });
+
+  final String icon;
+  final String label;
+  final String value;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) => Column(
+        children: [
+          Text('$icon $value',
+              style: TextStyle(
+                  color: color,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+          const SizedBox(height: 4),
+          Text(label,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white54, fontSize: 11)),
+        ],
+      );
 }

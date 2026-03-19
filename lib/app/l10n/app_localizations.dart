@@ -24,6 +24,7 @@ class AppLocalizations {
   bool get isItalian => locale.languageCode == 'it';
 
   String get appTitle => isItalian ? 'Wolf Lab' : 'Wolf Lab';
+  String get navToday => isItalian ? 'Oggi' : 'Today';
   String get navFeed => isItalian ? 'Feed' : 'Feed';
   String get navStudy => isItalian ? 'Studio' : 'Study';
   String get navExam => isItalian ? 'Esame' : 'Exam';

@@ -2,11 +2,11 @@ import 'package:go_router/go_router.dart';
 
 import '../features/analytics/presentation/pages/progress_analytics_page.dart';
 import '../features/bookmarks/presentation/bookmarks_page.dart';
+import '../features/today/ui/today_hub_page.dart';
 import '../features/exam/presentation/pages/exam_page.dart';
 import '../features/exam/presentation/pages/exam_history_page.dart';
 import '../features/exam/presentation/pages/exam_result_detail_page.dart';
 import '../features/exam/domain/exam_result.dart';
-import '../features/feed/presentation/pages/feed_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/paywall/presentation/paywall_page.dart';
 import '../features/profile/presentation/privacy_policy_page.dart';
@@ -55,7 +55,10 @@ final appRouter = GoRouter(
       branches: [
         StatefulShellBranch(
           routes: [
-            GoRoute(path: '/', builder: (context, state) => const FeedPage()),
+            GoRoute(
+              path: '/',
+              builder: (context, state) => const TodayHubPage(),
+            ),
           ],
         ),
         StatefulShellBranch(

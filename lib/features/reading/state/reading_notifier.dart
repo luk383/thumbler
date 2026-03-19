@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../growth/xp/xp_notifier.dart';
 import '../data/reading_storage.dart';
 import '../domain/reading_item.dart';
 
@@ -14,6 +15,7 @@ class ReadingNotifier extends Notifier<List<ReadingItem>> {
 
   void setStatus(String id, ReadingStatus status) {
     final item = state.firstWhere((i) => i.id == id);
+    final wasNotCompleted = item.status != ReadingStatus.completed;
     ReadingStorage().save(item.copyWith(
       status: status,
       startedAt: status == ReadingStatus.reading && item.startedAt == null
@@ -23,6 +25,10 @@ class ReadingNotifier extends Notifier<List<ReadingItem>> {
           status == ReadingStatus.completed ? DateTime.now() : null,
     ));
     state = ReadingStorage().all();
+    // Award XP when marking as completed for the first time
+    if (status == ReadingStatus.completed && wasNotCompleted) {
+      ref.read(xpProvider.notifier).addXp(XpEvent.bookCompleted);
+    }
   }
 
   void updateProgress(String id, int currentPage) {

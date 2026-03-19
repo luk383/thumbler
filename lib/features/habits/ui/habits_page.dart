@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../goals/state/goals_notifier.dart';
 import '../domain/habit.dart';
 import '../state/habits_notifier.dart';
 
@@ -75,6 +76,9 @@ class HabitsPage extends ConsumerWidget {
   void _showAddDialog(BuildContext context, WidgetRef ref) {
     final nameCtrl = TextEditingController();
     var emoji = '✅';
+    String? selectedGoalId;
+    final goals = ref.read(goalsProvider).where((g) => !g.completed).toList();
+
     showDialog(
       context: context,
       builder: (ctx) => StatefulBuilder(
@@ -115,6 +119,29 @@ class HabitsPage extends ConsumerWidget {
                 ),
                 autofocus: true,
               ),
+              if (goals.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String?>(
+                  initialValue: selectedGoalId,
+                  decoration: const InputDecoration(
+                    labelText: 'Collega a obiettivo (opz.)',
+                    border: OutlineInputBorder(),
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  ),
+                  items: [
+                    const DropdownMenuItem(value: null, child: Text('Nessuno')),
+                    ...goals.map((g) => DropdownMenuItem(
+                          value: g.id,
+                          child: Text(
+                            '${g.area.emoji} ${g.title}',
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )),
+                  ],
+                  onChanged: (v) => setS(() => selectedGoalId = v),
+                ),
+              ],
             ],
           ),
           actions: [
@@ -129,6 +156,7 @@ class HabitsPage extends ConsumerWidget {
                         id: 'habit_${DateTime.now().millisecondsSinceEpoch}',
                         name: nameCtrl.text.trim(),
                         emoji: emoji,
+                        goalId: selectedGoalId,
                         createdAt: DateTime.now(),
                       ),
                     );

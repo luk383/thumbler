@@ -3,6 +3,7 @@ class Habit {
     required this.id,
     required this.name,
     this.emoji = '✅',
+    this.goalId,
     this.currentStreak = 0,
     this.longestStreak = 0,
     this.completedDates = const [],
@@ -12,6 +13,7 @@ class Habit {
   final String id;
   final String name;
   final String emoji;
+  final String? goalId; // optional link to a Goal
   final int currentStreak;
   final int longestStreak;
   final List<String> completedDates; // ISO date strings yyyy-MM-dd
@@ -26,6 +28,8 @@ class Habit {
   Habit copyWith({
     String? name,
     String? emoji,
+    String? goalId,
+    bool clearGoalId = false,
     int? currentStreak,
     int? longestStreak,
     List<String>? completedDates,
@@ -33,6 +37,7 @@ class Habit {
         id: id,
         name: name ?? this.name,
         emoji: emoji ?? this.emoji,
+        goalId: clearGoalId ? null : (goalId ?? this.goalId),
         currentStreak: currentStreak ?? this.currentStreak,
         longestStreak: longestStreak ?? this.longestStreak,
         completedDates: completedDates ?? this.completedDates,
@@ -78,6 +83,7 @@ class Habit {
         'id': id,
         'name': name,
         'emoji': emoji,
+        'goalId': goalId,
         'currentStreak': currentStreak,
         'longestStreak': longestStreak,
         'completedDates': completedDates,
@@ -88,6 +94,7 @@ class Habit {
         id: map['id'] as String,
         name: map['name'] as String,
         emoji: map['emoji'] as String? ?? '✅',
+        goalId: map['goalId'] as String?,
         currentStreak: (map['currentStreak'] as num?)?.toInt() ?? 0,
         longestStreak: (map['longestStreak'] as num?)?.toInt() ?? 0,
         completedDates: (map['completedDates'] as List? ?? [])

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../goals/state/goals_notifier.dart';
+import '../../habits/state/habits_notifier.dart';
+import '../../study/presentation/controllers/study_controller.dart';
 import '../domain/reflection_entry.dart';
 import '../state/reflection_notifier.dart';
 
@@ -224,6 +227,8 @@ class _ReflectionFormPageState extends ConsumerState<ReflectionFormPage> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          const _ContextualSummaryCard(),
+          const SizedBox(height: 16),
           _PromptField(
             emoji: '📖',
             prompt: 'Cosa ho imparato questa settimana?',
@@ -258,6 +263,136 @@ class _ReflectionFormPageState extends ConsumerState<ReflectionFormPage> {
       ),
     );
   }
+}
+
+// ── Contextual summary ────────────────────────────────────────────────────────
+
+class _ContextualSummaryCard extends ConsumerWidget {
+  const _ContextualSummaryCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cs = Theme.of(context).colorScheme;
+    final habits = ref.watch(habitsProvider);
+    final goals = ref.watch(goalsProvider);
+    final studyState = ref.watch(studyProvider);
+
+    // Habit completion this week (last 7 days)
+    final now = DateTime.now();
+    var totalSlots = 0;
+    var doneSlots = 0;
+    for (var i = 0; i < 7; i++) {
+      final d = now.subtract(Duration(days: i));
+      totalSlots += habits.length;
+      doneSlots += habits.where((h) => h.isDoneOn(d)).length;
+    }
+    final habitRate =
+        totalSlots == 0 ? 0.0 : doneSlots / totalSlots;
+
+    // Milestones completed this week
+    final completedMilestones = <String>[];
+    for (final g in goals) {
+      for (final m in g.milestones) {
+        if (m.done) completedMilestones.add('${g.area.emoji} ${m.text}');
+      }
+    }
+
+    // Weak areas from study
+    final weakCount = studyState.weakCount;
+
+    final hasContent = habits.isNotEmpty ||
+        completedMilestones.isNotEmpty ||
+        weakCount > 0;
+
+    if (!hasContent) return const SizedBox.shrink();
+
+    return Card(
+      color: cs.surfaceContainerHighest,
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.auto_awesome_outlined,
+                    size: 16, color: cs.primary),
+                const SizedBox(width: 6),
+                Text('Riepilogo settimana',
+                    style: Theme.of(context)
+                        .textTheme
+                        .labelLarge
+                        ?.copyWith(color: cs.primary)),
+              ],
+            ),
+            const SizedBox(height: 10),
+
+            if (habits.isNotEmpty) ...[
+              _SummaryRow(
+                icon: '✅',
+                text:
+                    'Abitudini completate: ${(habitRate * 100).round()}% ($doneSlots/$totalSlots slot)',
+                good: habitRate >= 0.6,
+              ),
+              const SizedBox(height: 6),
+            ],
+
+            if (completedMilestones.isNotEmpty) ...[
+              Text('🎯 Milestone raggiunti:',
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      )),
+              const SizedBox(height: 4),
+              ...completedMilestones.take(3).map((m) => Padding(
+                    padding: const EdgeInsets.only(left: 8, bottom: 2),
+                    child: Text('• $m',
+                        style: Theme.of(context).textTheme.bodySmall),
+                  )),
+              const SizedBox(height: 6),
+            ],
+
+            if (weakCount > 0)
+              _SummaryRow(
+                icon: '📚',
+                text:
+                    '$weakCount carte deboli da ripassare',
+                good: false,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SummaryRow extends StatelessWidget {
+  const _SummaryRow({
+    required this.icon,
+    required this.text,
+    required this.good,
+  });
+  final String icon;
+  final String text;
+  final bool good;
+
+  @override
+  Widget build(BuildContext context) => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(icon, style: const TextStyle(fontSize: 14)),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              text,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: good
+                        ? Colors.green.shade700
+                        : Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+            ),
+          ),
+        ],
+      );
 }
 
 class _PromptField extends StatelessWidget {
