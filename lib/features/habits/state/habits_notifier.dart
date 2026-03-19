@@ -13,6 +13,46 @@ class HabitsNotifier extends Notifier<List<Habit>> {
     state = HabitsStorage().all();
   }
 
+  void addHabit({
+    required String name,
+    required String emoji,
+    String? goalId,
+    String? reminderTime,
+  }) {
+    final habit = Habit(
+      id: 'habit_${DateTime.now().millisecondsSinceEpoch}',
+      name: name,
+      emoji: emoji,
+      goalId: goalId,
+      createdAt: DateTime.now(),
+      reminderTime: reminderTime,
+    );
+    HabitsStorage().save(habit);
+    state = HabitsStorage().all();
+  }
+
+  void updateHabit(
+    String habitId, {
+    String? name,
+    String? emoji,
+    String? goalId,
+    bool clearGoalId = false,
+    String? reminderTime,
+    bool clearReminderTime = false,
+  }) {
+    final habit = state.firstWhere((h) => h.id == habitId);
+    final updated = habit.copyWith(
+      name: name,
+      emoji: emoji,
+      goalId: goalId,
+      clearGoalId: clearGoalId,
+      reminderTime: reminderTime,
+      clearReminderTime: clearReminderTime,
+    );
+    HabitsStorage().save(updated);
+    state = HabitsStorage().all();
+  }
+
   void toggleToday(String habitId) {
     final habit = state.firstWhere((h) => h.id == habitId);
     final wasNotDone = !habit.isDoneToday;

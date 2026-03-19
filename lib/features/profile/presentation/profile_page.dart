@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../app/l10n/app_localizations.dart';
-import '../../../app/services/notifications/notification_service.dart';
+import '../../../features/notifications/state/notification_settings_notifier.dart';
 import '../../../app/settings/app_settings.dart';
 import '../../../core/data/reset_service.dart';
 import '../../../core/ui/app_surfaces.dart';
@@ -962,53 +962,19 @@ class _NotificationsCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(notificationSettingsProvider);
-    final isItalian = context.l10n.isItalian;
+    final anyEnabled =
+        settings.studyReminderEnabled || settings.streakProtectionEnabled;
 
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('🔔 Promemoria studio',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
-            const SizedBox(height: 8),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: const Text('Reminder giornaliero'),
-              value: settings.enabled,
-              onChanged: (v) => ref
-                  .read(notificationSettingsProvider.notifier)
-                  .setEnabled(v, italian: isItalian),
-            ),
-            if (settings.enabled) ...[
-              const Divider(),
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.access_time_outlined),
-                title: Text(
-                  '${settings.hour.toString().padLeft(2, '0')}:${settings.minute.toString().padLeft(2, '0')}',
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-                subtitle: const Text('Tocca per cambiare orario'),
-                onTap: () async {
-                  final picked = await showTimePicker(
-                    context: context,
-                    initialTime:
-                        TimeOfDay(hour: settings.hour, minute: settings.minute),
-                  );
-                  if (picked != null) {
-                    ref.read(notificationSettingsProvider.notifier).setTime(
-                          picked.hour,
-                          picked.minute,
-                          italian: isItalian,
-                        );
-                  }
-                },
-              ),
-            ],
-          ],
+      child: ListTile(
+        leading: const Icon(Icons.notifications_outlined),
+        title: const Text(
+          'Notifiche e promemoria',
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
+        subtitle: Text(anyEnabled ? 'Attive' : 'Disattivate'),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () => context.push('/notifications'),
       ),
     );
   }

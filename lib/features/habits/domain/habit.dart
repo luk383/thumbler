@@ -8,6 +8,7 @@ class Habit {
     this.longestStreak = 0,
     this.completedDates = const [],
     required this.createdAt,
+    this.reminderTime,
   });
 
   final String id;
@@ -18,6 +19,7 @@ class Habit {
   final int longestStreak;
   final List<String> completedDates; // ISO date strings yyyy-MM-dd
   final DateTime createdAt;
+  final String? reminderTime; // "HH:mm" format or null
 
   static String _dateKey(DateTime d) =>
       '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
@@ -33,6 +35,8 @@ class Habit {
     int? currentStreak,
     int? longestStreak,
     List<String>? completedDates,
+    String? reminderTime,
+    bool clearReminderTime = false,
   }) => Habit(
         id: id,
         name: name ?? this.name,
@@ -42,6 +46,7 @@ class Habit {
         longestStreak: longestStreak ?? this.longestStreak,
         completedDates: completedDates ?? this.completedDates,
         createdAt: createdAt,
+        reminderTime: clearReminderTime ? null : (reminderTime ?? this.reminderTime),
       );
 
   /// Returns a new Habit with today toggled on/off.
@@ -88,6 +93,7 @@ class Habit {
         'longestStreak': longestStreak,
         'completedDates': completedDates,
         'createdAt': createdAt.toIso8601String(),
+        'reminderTime': reminderTime,
       };
 
   factory Habit.fromMap(Map map) => Habit(
@@ -102,5 +108,6 @@ class Habit {
             .toList(),
         createdAt:
             DateTime.tryParse(map['createdAt'] as String? ?? '') ?? DateTime.now(),
+        reminderTime: map['reminderTime'] as String?,
       );
 }

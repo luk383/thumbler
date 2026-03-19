@@ -17,6 +17,7 @@ import '../features/achievements/ui/achievements_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
 import '../features/pomodoro/ui/pomodoro_page.dart';
 import '../features/paywall/presentation/paywall_page.dart';
+import '../features/notifications/ui/notification_settings_page.dart';
 import '../features/profile/presentation/privacy_policy_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/study/data/deck_library_storage.dart';
@@ -51,6 +52,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/privacy',
       builder: (context, state) => const PrivacyPolicyPage(),
+    ),
+    GoRoute(
+      path: '/notifications',
+      builder: (context, state) => const NotificationSettingsPage(),
     ),
     GoRoute(
       path: '/card-editor',

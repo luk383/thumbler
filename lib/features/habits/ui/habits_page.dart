@@ -77,6 +77,7 @@ class HabitsPage extends ConsumerWidget {
     final nameCtrl = TextEditingController();
     var emoji = '✅';
     String? selectedGoalId;
+    String? reminderTime;
     final goals = ref.read(goalsProvider).where((g) => !g.completed).toList();
 
     showDialog(
@@ -142,6 +143,43 @@ class HabitsPage extends ConsumerWidget {
                   onChanged: (v) => setS(() => selectedGoalId = v),
                 ),
               ],
+              const SizedBox(height: 12),
+              // Reminder row
+              ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Icons.notifications_outlined),
+                title: const Text('Promemoria'),
+                subtitle: Text(reminderTime ?? 'Nessuno'),
+                onTap: () async {
+                  final initial = reminderTime != null
+                      ? () {
+                          final parts = reminderTime!.split(':');
+                          return TimeOfDay(
+                            hour: int.tryParse(parts[0]) ?? 9,
+                            minute: int.tryParse(
+                                    parts.length > 1 ? parts[1] : '0') ??
+                                0,
+                          );
+                        }()
+                      : const TimeOfDay(hour: 9, minute: 0);
+                  final picked = await showTimePicker(
+                    context: ctx,
+                    initialTime: initial,
+                  );
+                  if (picked != null) {
+                    setS(() {
+                      reminderTime =
+                          '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}';
+                    });
+                  }
+                },
+                trailing: reminderTime != null
+                    ? IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: () => setS(() => reminderTime = null),
+                      )
+                    : null,
+              ),
             ],
           ),
           actions: [
@@ -151,14 +189,11 @@ class HabitsPage extends ConsumerWidget {
             FilledButton(
               onPressed: () {
                 if (nameCtrl.text.trim().isEmpty) return;
-                ref.read(habitsProvider.notifier).add(
-                      Habit(
-                        id: 'habit_${DateTime.now().millisecondsSinceEpoch}',
-                        name: nameCtrl.text.trim(),
-                        emoji: emoji,
-                        goalId: selectedGoalId,
-                        createdAt: DateTime.now(),
-                      ),
+                ref.read(habitsProvider.notifier).addHabit(
+                      name: nameCtrl.text.trim(),
+                      emoji: emoji,
+                      goalId: selectedGoalId,
+                      reminderTime: reminderTime,
                     );
                 Navigator.pop(ctx);
               },
@@ -228,25 +263,39 @@ class _HabitTile extends ConsumerWidget {
               ? Text('🔥 ${habit.currentStreak} giorni consecutivi',
                   style: Theme.of(context).textTheme.labelSmall)
               : null,
-          trailing: GestureDetector(
-            onTap: () =>
-                ref.read(habitsProvider.notifier).toggleToday(habit.id),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: done ? cs.primary : Colors.transparent,
-                border: Border.all(
-                  color: done ? cs.primary : cs.outline,
-                  width: 2,
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (habit.reminderTime != null)
+                Padding(
+                  padding: const EdgeInsets.only(right: 6),
+                  child: Icon(
+                    Icons.notifications_active_outlined,
+                    size: 16,
+                    color: cs.primary,
+                  ),
+                ),
+              GestureDetector(
+                onTap: () =>
+                    ref.read(habitsProvider.notifier).toggleToday(habit.id),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: done ? cs.primary : Colors.transparent,
+                    border: Border.all(
+                      color: done ? cs.primary : cs.outline,
+                      width: 2,
+                    ),
+                  ),
+                  child: done
+                      ? const Icon(Icons.check, color: Colors.white, size: 18)
+                      : null,
                 ),
               ),
-              child: done
-                  ? const Icon(Icons.check, color: Colors.white, size: 18)
-                  : null,
-            ),
+            ],
           ),
         ),
       ),
