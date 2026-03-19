@@ -190,6 +190,12 @@ class ProfilePage extends ConsumerWidget {
                     onDailyCardGoalChanged: (goal) => ref
                         .read(appSettingsProvider.notifier)
                         .setDailyCardGoal(goal),
+                    onCardFontScaleChanged: (scale) => ref
+                        .read(appSettingsProvider.notifier)
+                        .setCardFontScale(scale),
+                    onAmoledDarkChanged: (enabled) => ref
+                        .read(appSettingsProvider.notifier)
+                        .setAmoledDark(enabled),
                   ),
                   const SizedBox(height: 32),
                   _SectionTitle('Data Management'),
@@ -321,12 +327,16 @@ class _SettingsCard extends StatelessWidget {
     required this.onLanguageChanged,
     required this.onThemeModeChanged,
     required this.onDailyCardGoalChanged,
+    required this.onCardFontScaleChanged,
+    required this.onAmoledDarkChanged,
   });
 
   final AppSettingsState settings;
   final ValueChanged<AppLanguage> onLanguageChanged;
   final ValueChanged<ThemeMode> onThemeModeChanged;
   final ValueChanged<int> onDailyCardGoalChanged;
+  final ValueChanged<double> onCardFontScaleChanged;
+  final ValueChanged<bool> onAmoledDarkChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -434,6 +444,44 @@ class _SettingsCard extends StatelessWidget {
             style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
           const SizedBox(height: 16),
+          Text(
+            'Dimensione testo carte',
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          SegmentedButton<double>(
+            segments: const [
+              ButtonSegment<double>(value: 0.85, label: Text('S')),
+              ButtonSegment<double>(value: 1.0, label: Text('M')),
+              ButtonSegment<double>(value: 1.2, label: Text('L')),
+              ButtonSegment<double>(value: 1.4, label: Text('XL')),
+            ],
+            selected: {settings.cardFontScale},
+            onSelectionChanged: (sel) => onCardFontScaleChanged(sel.first),
+          ),
+          const SizedBox(height: 16),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: const Text(
+              'AMOLED Dark',
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            subtitle: const Text(
+              'Sfondo nero puro per schermi OLED',
+              style: TextStyle(color: Colors.white38, fontSize: 12),
+            ),
+            value: settings.amoledDark,
+            onChanged: onAmoledDarkChanged,
+            activeThumbColor: const Color(0xFF6C63FF),
+          ),
           const Divider(color: Colors.white12, height: 1),
           const SizedBox(height: 12),
           GestureDetector(

@@ -67,6 +67,12 @@ class StudyLauncherPage extends ConsumerWidget {
                   color: Colors.white54,
                 ),
                 IconButton(
+                  onPressed: () => context.push('/study/cards'),
+                  icon: const Icon(Icons.style_outlined),
+                  tooltip: 'Sfoglia carte',
+                  color: Colors.white54,
+                ),
+                IconButton(
                   onPressed: () => context.push('/deck-management'),
                   icon: const Icon(Icons.tune_outlined),
                   tooltip: 'Gestisci deck',

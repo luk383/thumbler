@@ -11,6 +11,8 @@ class DeckLibraryStorage {
   static const _preferredLanguageCodeKey = 'preferred_language_code';
   static const _themeModeKey = 'theme_mode';
   static const _dailyCardGoalKey = 'daily_card_goal';
+  static const _cardFontScaleKey = 'card_font_scale';
+  static const _amoledDarkKey = 'amoled_dark';
 
   Box get _box => Hive.box(boxName);
 
@@ -72,4 +74,16 @@ class DeckLibraryStorage {
 
   Future<void> saveDailyCardGoal(int goal) =>
       _box.put(_dailyCardGoalKey, goal);
+
+  double loadCardFontScale() =>
+      (_box.get(_cardFontScaleKey, defaultValue: 1.0) as num).toDouble();
+
+  Future<void> saveCardFontScale(double scale) =>
+      _box.put(_cardFontScaleKey, scale);
+
+  bool loadAmoledDark() =>
+      (_box.get(_amoledDarkKey, defaultValue: false) as bool?) ?? false;
+
+  Future<void> saveAmoledDark(bool enabled) =>
+      _box.put(_amoledDarkKey, enabled);
 }

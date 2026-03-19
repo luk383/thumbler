@@ -12,10 +12,11 @@ class WolfLabApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(appSettingsProvider);
+    final effectiveDark = settings.amoledDark ? AppTheme.amoled : AppTheme.dark;
     return MaterialApp.router(
       title: 'Wolf Lab',
       theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
+      darkTheme: effectiveDark,
       themeMode: settings.themeMode,
       locale: settings.locale,
       supportedLocales: AppLocalizations.supportedLocales,

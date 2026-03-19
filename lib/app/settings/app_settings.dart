@@ -45,11 +45,15 @@ class AppSettingsState {
     required this.language,
     required this.themeMode,
     this.dailyCardGoal = 20,
+    this.cardFontScale = 1.0,
+    this.amoledDark = false,
   });
 
   final AppLanguage language;
   final ThemeMode themeMode;
   final int dailyCardGoal;
+  final double cardFontScale;
+  final bool amoledDark;
 
   Locale get locale => language.locale;
 }
@@ -64,10 +68,14 @@ class AppSettingsNotifier extends Notifier<AppSettingsState> {
     );
     final themeMode = AppThemeModeX.fromStorage(_storage.loadThemeMode());
     final dailyCardGoal = _storage.loadDailyCardGoal();
+    final cardFontScale = _storage.loadCardFontScale();
+    final amoledDark = _storage.loadAmoledDark();
     return AppSettingsState(
       language: language,
       themeMode: themeMode,
       dailyCardGoal: dailyCardGoal,
+      cardFontScale: cardFontScale,
+      amoledDark: amoledDark,
     );
   }
 
@@ -77,6 +85,8 @@ class AppSettingsNotifier extends Notifier<AppSettingsState> {
       language: language,
       themeMode: state.themeMode,
       dailyCardGoal: state.dailyCardGoal,
+      cardFontScale: state.cardFontScale,
+      amoledDark: state.amoledDark,
     );
   }
 
@@ -86,6 +96,8 @@ class AppSettingsNotifier extends Notifier<AppSettingsState> {
       language: state.language,
       themeMode: mode,
       dailyCardGoal: state.dailyCardGoal,
+      cardFontScale: state.cardFontScale,
+      amoledDark: state.amoledDark,
     );
   }
 
@@ -95,6 +107,30 @@ class AppSettingsNotifier extends Notifier<AppSettingsState> {
       language: state.language,
       themeMode: state.themeMode,
       dailyCardGoal: goal,
+      cardFontScale: state.cardFontScale,
+      amoledDark: state.amoledDark,
+    );
+  }
+
+  Future<void> setCardFontScale(double scale) async {
+    await _storage.saveCardFontScale(scale);
+    state = AppSettingsState(
+      language: state.language,
+      themeMode: state.themeMode,
+      dailyCardGoal: state.dailyCardGoal,
+      cardFontScale: scale,
+      amoledDark: state.amoledDark,
+    );
+  }
+
+  Future<void> setAmoledDark(bool enabled) async {
+    await _storage.saveAmoledDark(enabled);
+    state = AppSettingsState(
+      language: state.language,
+      themeMode: state.themeMode,
+      dailyCardGoal: state.dailyCardGoal,
+      cardFontScale: state.cardFontScale,
+      amoledDark: enabled,
     );
   }
 }

@@ -20,6 +20,14 @@ class DeckManagementPage extends ConsumerStatefulWidget {
 
 class _DeckManagementPageState extends ConsumerState<DeckManagementPage> {
   String? _filterTag;
+  String _searchQuery = '';
+  final _searchCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +41,45 @@ class _DeckManagementPageState extends ConsumerState<DeckManagementPage> {
       allTags.addAll(pack.domains);
     }
 
-    // Apply tag filter
-    final packs = _filterTag == null
-        ? allPacks
-        : allPacks.where((p) => p.domains.contains(_filterTag)).toList();
+    // Apply tag + search filters
+    final q = _searchQuery.toLowerCase();
+    final packs = allPacks.where((p) {
+      final matchesTag = _filterTag == null || p.domains.contains(_filterTag);
+      final matchesSearch = q.isEmpty || p.title.toLowerCase().contains(q);
+      return matchesTag && matchesSearch;
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Gestisci deck'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(52),
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+            child: TextField(
+              controller: _searchCtrl,
+              onChanged: (v) => setState(() => _searchQuery = v),
+              decoration: InputDecoration(
+                hintText: 'Cerca deck…',
+                prefixIcon: const Icon(Icons.search, size: 20),
+                suffixIcon: _searchQuery.isNotEmpty
+                    ? IconButton(
+                        icon: const Icon(Icons.clear, size: 18),
+                        onPressed: () {
+                          _searchCtrl.clear();
+                          setState(() => _searchQuery = '');
+                        },
+                      )
+                    : null,
+                contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                isDense: true,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

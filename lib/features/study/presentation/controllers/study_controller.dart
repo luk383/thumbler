@@ -159,6 +159,9 @@ class StudyState {
     this.sessionHardCount = 0,
     this.sessionGoodCount = 0,
     this.sessionEasyCount = 0,
+    this.lastRatedSnapshot,
+    this.lastRatedIndex,
+    this.lastRatedRating,
   });
 
   final List<StudyItem> items;
@@ -209,6 +212,11 @@ class StudyState {
   final int sessionHardCount;
   final int sessionGoodCount;
   final int sessionEasyCount;
+
+  /// Snapshot for undo: item state before last rating, its queue index, and the rating.
+  final StudyItem? lastRatedSnapshot;
+  final int? lastRatedIndex;
+  final SrsRating? lastRatedRating;
 
   // ── Derived ───────────────────────────────────────────────────────────────
 
@@ -630,6 +638,9 @@ class StudyNotifier extends Notifier<StudyState> {
       (i) => i.id == id,
       orElse: () => state.items.first,
     );
+    // Save snapshot before mutating, for undo support
+    final snapshot = item;
+    final snapshotIndex = state.currentIndex;
     final wrong = rating == SrsRating.again;
     storage.update(_applyFsrs(item, rating).copyWith(
       againCount: wrong ? item.againCount + 1 : null,
@@ -652,6 +663,59 @@ class StudyNotifier extends Notifier<StudyState> {
       newHardCount,
       newGoodCount,
       newEasyCount,
+      snapshot: snapshot,
+      snapshotIndex: snapshotIndex,
+      snapshotRating: rating,
+    );
+  }
+
+  /// Undoes the last rating: restores the card's FSRS state and goes back one card.
+  void undoLastRating() {
+    final snap = state.lastRatedSnapshot;
+    if (snap == null || state.lastRatedIndex == null) return;
+    final storage = StudyStorage();
+    storage.update(snap);
+    final rating = state.lastRatedRating;
+    final wasWrong = rating == SrsRating.again;
+    final prevCorrectCount =
+        state.sessionCorrectCount - (wasWrong ? 0 : 1);
+    final prevAgainCount =
+        state.sessionAgainCount - (rating == SrsRating.again ? 1 : 0);
+    final prevHardCount =
+        state.sessionHardCount - (rating == SrsRating.hard ? 1 : 0);
+    final prevGoodCount =
+        state.sessionGoodCount - (rating == SrsRating.good ? 1 : 0);
+    final prevEasyCount =
+        state.sessionEasyCount - (rating == SrsRating.easy ? 1 : 0);
+    final prevWrongIds = wasWrong
+        ? (state.wrongItemIds.toList()..remove(snap.id))
+        : state.wrongItemIds;
+    final items = storage.allForDeck(state.activeDeckId);
+    state = StudyState(
+      items: items,
+      activeDeckId: state.activeDeckId,
+      selectedCategory: state.selectedCategory,
+      selectedTopic: state.selectedTopic,
+      selectedMode: state.selectedMode,
+      selectedQueueType: state.selectedQueueType,
+      sessionLength: state.sessionLength,
+      timerSeconds: state.timerSeconds,
+      isStudying: true,
+      sessionQueue: state.sessionQueue,
+      currentIndex: state.lastRatedIndex!,
+      answeredInSession: state.answeredInSession - 1,
+      generation: state.generation + 1,
+      speedResults: state.speedResults,
+      wrongItemIds: prevWrongIds,
+      startedFromExamBridge: state.startedFromExamBridge,
+      lastTrainedArea: state.lastTrainedArea,
+      lastExamAttemptId: state.lastExamAttemptId,
+      sessionStartTime: state.sessionStartTime,
+      sessionCorrectCount: prevCorrectCount.clamp(0, 9999),
+      sessionAgainCount: prevAgainCount.clamp(0, 9999),
+      sessionHardCount: prevHardCount.clamp(0, 9999),
+      sessionGoodCount: prevGoodCount.clamp(0, 9999),
+      sessionEasyCount: prevEasyCount.clamp(0, 9999),
     );
   }
 
@@ -952,8 +1016,11 @@ class StudyNotifier extends Notifier<StudyState> {
     int newAgainCount,
     int newHardCount,
     int newGoodCount,
-    int newEasyCount,
-  ) {
+    int newEasyCount, {
+    StudyItem? snapshot,
+    int? snapshotIndex,
+    SrsRating? snapshotRating,
+  }) {
     final items = storage.allForDeck(state.activeDeckId);
     final nextIndex = state.sessionQueue.isEmpty
         ? 0
@@ -994,6 +1061,9 @@ class StudyNotifier extends Notifier<StudyState> {
       sessionHardCount: newHardCount,
       sessionGoodCount: newGoodCount,
       sessionEasyCount: newEasyCount,
+      lastRatedSnapshot: snapshot,
+      lastRatedIndex: snapshotIndex,
+      lastRatedRating: snapshotRating,
     );
   }
 

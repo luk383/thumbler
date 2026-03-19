@@ -144,6 +144,33 @@ abstract final class AppTheme {
     ),
   );
 
+  static final amoled = dark.copyWith(
+    scaffoldBackgroundColor: Colors.black,
+    cardColor: const Color(0xFF080808),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: Colors.black,
+      indicatorColor: _accent.withAlpha(51),
+      labelTextStyle: WidgetStateProperty.all(
+        const TextStyle(color: Colors.white70, fontSize: 12),
+      ),
+    ),
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: _accent,
+      brightness: Brightness.dark,
+      surface: const Color(0xFF080808),
+    ),
+    dialogTheme: DialogThemeData(
+      backgroundColor: const Color(0xFF0E0E0E),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      titleTextStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+      ),
+      contentTextStyle: const TextStyle(color: Colors.white70, fontSize: 14),
+    ),
+  );
+
   static final light = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,

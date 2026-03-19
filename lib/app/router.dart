@@ -28,6 +28,7 @@ import '../features/study/presentation/pages/card_editor_page.dart';
 import '../features/study/presentation/pages/deck_management_page.dart';
 import '../features/study/presentation/pages/session_history_page.dart';
 import '../features/study/presentation/pages/srs_calendar_page.dart';
+import '../features/study/presentation/pages/deck_card_browser_page.dart';
 import '../features/study/presentation/pages/study_page.dart';
 import 'shell_scaffold.dart';
 
@@ -79,6 +80,10 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/deck-management',
       builder: (context, state) => const DeckManagementPage(),
+    ),
+    GoRoute(
+      path: '/study/cards',
+      builder: (context, state) => const DeckCardBrowserPage(),
     ),
     GoRoute(
       path: '/study/history',

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../app/settings/app_settings.dart';
 import '../../../growth/streak/streak_notifier.dart';
 import '../controllers/study_controller.dart';
 import '../pages/study_launcher_page.dart';
@@ -161,7 +162,21 @@ class _SrsSession extends ConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 4),
+                if (studyState.lastRatedSnapshot != null && !studyState.sessionComplete)
+                  IconButton(
+                    onPressed: () {
+                      HapticFeedback.selectionClick();
+                      n.undoLastRating();
+                    },
+                    icon: const Icon(Icons.undo_rounded, color: Colors.white54, size: 20),
+                    tooltip: 'Annulla ultima valutazione',
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white.withAlpha(10),
+                      minimumSize: const Size(36, 36),
+                    ),
+                  ),
+                const SizedBox(width: 4),
                 _CloseBtn(onTap: closeSession),
               ],
             ),
@@ -189,11 +204,15 @@ class _SrsSession extends ConsumerWidget {
             : () {
                 final item = studyState.currentItem;
                 if (item == null) return const SizedBox();
+                final fontScale = ref.watch(
+                  appSettingsProvider.select((s) => s.cardFontScale),
+                );
                 return SingleChildScrollView(
                   padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
                   child: _SrsCard(
                     key: ValueKey(studyState.generation),
                     item: item,
+                    fontScale: fontScale,
                     onRate: (rating) => n.rate(item.id, rating: rating),
                   ),
                 );
@@ -771,9 +790,15 @@ class _SpeedResultsState extends State<_SpeedResults> {
 // ============================================================================
 
 class _SrsCard extends ConsumerStatefulWidget {
-  const _SrsCard({super.key, required this.item, required this.onRate});
+  const _SrsCard({
+    super.key,
+    required this.item,
+    required this.onRate,
+    this.fontScale = 1.0,
+  });
   final StudyItem item;
   final void Function(SrsRating rating) onRate;
+  final double fontScale;
 
   @override
   ConsumerState<_SrsCard> createState() => _SrsCardState();
@@ -871,12 +896,13 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                 ? _ClozePromptText(
                     promptText: item.promptText,
                     revealed: _revealed,
+                    fontScale: widget.fontScale,
                   )
                 : Text(
                     item.promptText,
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 20 * widget.fontScale,
                       fontWeight: FontWeight.bold,
                       height: 1.35,
                     ),
@@ -1108,7 +1134,7 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                     duration: const Duration(milliseconds: 50),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: swipeColor!.withAlpha((swipeOpacity * 60).toInt()),
+                      color: swipeColor.withAlpha((swipeOpacity * 60).toInt()),
                     ),
                     child: Align(
                       alignment: _dragDx > 0
@@ -1120,7 +1146,7 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                           _dragDx > 0
                               ? Icons.thumb_up_outlined
                               : Icons.replay_outlined,
-                          color: swipeColor!.withAlpha((swipeOpacity * 220).toInt()),
+                          color: swipeColor.withAlpha((swipeOpacity * 220).toInt()),
                           size: 36,
                         ),
                       ),
@@ -1702,9 +1728,14 @@ class _CategoryTag extends StatelessWidget {
 // ── Cloze prompt renderer ─────────────────────────────────────────────────────
 
 class _ClozePromptText extends StatelessWidget {
-  const _ClozePromptText({required this.promptText, required this.revealed});
+  const _ClozePromptText({
+    required this.promptText,
+    required this.revealed,
+    this.fontScale = 1.0,
+  });
   final String promptText;
   final bool revealed;
+  final double fontScale;
 
   static final _pattern = RegExp(r'\{\{([^}]+)\}\}');
 
@@ -1733,9 +1764,9 @@ class _ClozePromptText extends StatelessWidget {
               ),
               child: Text(
                 answer,
-                style: const TextStyle(
-                  color: Color(0xFF69F0AE),
-                  fontSize: 20,
+                style: TextStyle(
+                  color: const Color(0xFF69F0AE),
+                  fontSize: 20 * fontScale,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -1760,7 +1791,7 @@ class _ClozePromptText extends StatelessWidget {
               ),
               child: Text(
                 '　' * answer.length.clamp(2, 8),
-                style: const TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20 * fontScale),
               ),
             ),
           ),
@@ -1775,9 +1806,9 @@ class _ClozePromptText extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: spans,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.white,
-          fontSize: 20,
+          fontSize: 20 * fontScale,
           fontWeight: FontWeight.bold,
           height: 1.45,
         ),
