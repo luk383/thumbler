@@ -34,6 +34,8 @@ Future<void> main() async {
   await Hive.openBox('journal_box');
   await Hive.openBox('reading_box');
   await Hive.openBox('notifications_box');
+  await Hive.openBox('pomodoro_box');
+  await Hive.openBox('achievements_box');
 
   await configureRevenueCat();
   await NotificationService.init();

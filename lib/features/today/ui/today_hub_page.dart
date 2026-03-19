@@ -9,6 +9,7 @@ import '../../../features/goals/state/goals_notifier.dart';
 import '../../../features/reflection/domain/reflection_entry.dart';
 import '../../../features/reflection/state/reflection_notifier.dart';
 import '../../../features/habits/domain/habit.dart';
+import '../../../features/achievements/state/achievements_notifier.dart';
 import '../../../features/study/presentation/controllers/study_controller.dart';
 
 class TodayHubPage extends ConsumerWidget {
@@ -38,6 +39,21 @@ class TodayHubPage extends ConsumerWidget {
       (r) => r.weekStart.isAtSameMomentAs(ws) && !r.isEmpty,
     );
 
+    // Check for new achievements once per build (debounced by Hive comparison)
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final newBadges = ref.read(achievementsProvider.notifier).checkAndUnlock();
+      if (newBadges.isNotEmpty && context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              '🏆 Badge sbloccato: ${newBadges.map((b) => b.title).join(', ')}',
+            ),
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    });
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -64,36 +80,51 @@ class TodayHubPage extends ConsumerWidget {
                 trailing: dueCards > 0
                     ? _Badge('$dueCards da ripassare')
                     : const _Badge('In pari!', color: Colors.green),
-                child: Row(
+                child: Column(
                   children: [
-                    Expanded(
-                      child: _QuickAction(
-                        icon: Icons.psychology_outlined,
-                        label: 'Ripassa ora',
-                        subtitle: dueCards > 0
-                            ? '$dueCards carte'
-                            : 'Nessuna carta scaduta',
-                        onTap: () => context.go('/study'),
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _QuickAction(
+                            icon: Icons.psychology_outlined,
+                            label: 'Ripassa ora',
+                            subtitle: dueCards > 0 ? '$dueCards carte' : 'In pari!',
+                            onTap: () => context.go('/study'),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: _QuickAction(
+                            icon: Icons.bolt,
+                            label: 'Speed run',
+                            subtitle: 'Allena la velocità',
+                            onTap: () =>
+                                context.go('/study?mode=speed&autostart=true'),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _QuickAction(
-                        icon: Icons.bolt,
-                        label: 'Speed run',
-                        subtitle: 'Allena la velocità',
-                        onTap: () =>
-                            context.go('/study?mode=speed&autostart=true'),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: _QuickAction(
-                        icon: Icons.layers_outlined,
-                        label: 'Feed',
-                        subtitle: 'Scorri le carte',
-                        onTap: () => context.push('/feed'),
-                      ),
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _QuickAction(
+                            icon: Icons.layers_outlined,
+                            label: 'Feed',
+                            subtitle: 'Scorri le carte',
+                            onTap: () => context.push('/feed'),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: _QuickAction(
+                            icon: Icons.timer_outlined,
+                            label: 'Pomodoro',
+                            subtitle: 'Focus timer',
+                            onTap: () => context.push('/pomodoro'),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -308,7 +339,7 @@ class _SectionCard extends StatelessWidget {
                   Text(label,
                       style: Theme.of(context).textTheme.titleSmall),
                   const Spacer(),
-                  if (trailing case final t?) t,
+                  ?trailing,
                   if (onHeaderTap != null) ...[
                     const SizedBox(width: 4),
                     Icon(Icons.chevron_right, size: 16, color: cs.outline),

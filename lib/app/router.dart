@@ -13,7 +13,9 @@ import '../features/exam/presentation/pages/exam_page.dart';
 import '../features/exam/presentation/pages/exam_history_page.dart';
 import '../features/exam/presentation/pages/exam_result_detail_page.dart';
 import '../features/exam/domain/exam_result.dart';
+import '../features/achievements/ui/achievements_page.dart';
 import '../features/onboarding/presentation/pages/onboarding_page.dart';
+import '../features/pomodoro/ui/pomodoro_page.dart';
 import '../features/paywall/presentation/paywall_page.dart';
 import '../features/profile/presentation/privacy_policy_page.dart';
 import '../features/profile/presentation/profile_page.dart';
@@ -55,6 +57,14 @@ final appRouter = GoRouter(
       builder: (context, state) => CardEditorPage(
         existingItem: state.extra as dynamic,
       ),
+    ),
+    GoRoute(
+      path: '/pomodoro',
+      builder: (context, state) => const PomodoroPage(),
+    ),
+    GoRoute(
+      path: '/achievements',
+      builder: (context, state) => const AchievementsPage(),
     ),
     GoRoute(
       path: '/feed',

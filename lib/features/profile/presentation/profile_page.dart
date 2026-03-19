@@ -14,6 +14,10 @@ import '../../habits/ui/habits_page.dart';
 import '../../journal/ui/journal_page.dart';
 import '../../reading/ui/reading_page.dart';
 import '../../reflection/ui/reflection_page.dart';
+import '../../achievements/domain/achievement.dart';
+import '../../achievements/state/achievements_notifier.dart';
+import '../../achievements/ui/achievements_page.dart';
+import '../../backup/backup_service.dart';
 import '../../study/presentation/controllers/deck_library_controller.dart';
 import '../../growth/streak/streak_notifier.dart';
 import '../../growth/daily_quest/daily_quest_notifier.dart';
@@ -31,6 +35,8 @@ class ProfilePage extends ConsumerWidget {
     final bookmarkCount = ref.watch(bookmarksProvider).length;
     final quest = ref.watch(dailyQuestProvider);
     final activeDeck = ref.watch(activeDeckMetaProvider);
+    final unlockedCount = ref.watch(achievementsProvider).length;
+    final totalAchievements = allAchievements.length;
 
     final dailyProgress = (xp.dailyXp / dailyGoal).clamp(0.0, 1.0);
     final goalReached = dailyProgress >= 1.0;
@@ -142,6 +148,16 @@ class ProfilePage extends ConsumerWidget {
                     l10n: l10n,
                   ),
                   const SizedBox(height: 32),
+                  _SectionTitle('🏆 Badge'),
+                  const SizedBox(height: 12),
+                  _AchievementsEntryCard(
+                    unlocked: unlockedCount,
+                    total: totalAchievements,
+                    onOpen: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const AchievementsPage()),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
                   _SectionTitle('🌱 Crescita Personale'),
                   const SizedBox(height: 12),
                   _GrowthHubCard(),
@@ -212,6 +228,8 @@ class ProfilePage extends ConsumerWidget {
                     ),
                     l10n: l10n,
                   ),
+                  const SizedBox(height: 20),
+                  const _BackupCard(),
                   const SizedBox(height: 60),
                 ],
               ),
@@ -991,6 +1009,135 @@ class _NotificationsCard extends ConsumerWidget {
             ],
           ],
         ),
+      ),
+    );
+  }
+}
+
+// ── Achievements entry card ───────────────────────────────────────────────────
+
+class _AchievementsEntryCard extends StatelessWidget {
+  const _AchievementsEntryCard({
+    required this.unlocked,
+    required this.total,
+    required this.onOpen,
+  });
+
+  final int unlocked;
+  final int total;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppGlassCard(
+      padding: const EdgeInsets.all(16),
+      tint: Colors.amber,
+      child: InkWell(
+        onTap: onOpen,
+        child: Row(
+          children: [
+            const Text('🏆', style: TextStyle(fontSize: 32)),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'I tuoi badge',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                    ),
+                  ),
+                  Text(
+                    '$unlocked / $total sbloccati',
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                  ),
+                  const SizedBox(height: 6),
+                  LinearProgressIndicator(
+                    value: total == 0 ? 0 : unlocked / total,
+                    backgroundColor: Colors.white24,
+                    valueColor:
+                        const AlwaysStoppedAnimation(Colors.amberAccent),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10),
+            const Icon(Icons.chevron_right, color: Colors.white54),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ── Backup card ───────────────────────────────────────────────────────────────
+
+class _BackupCard extends StatelessWidget {
+  const _BackupCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return AppGlassCard(
+      padding: const EdgeInsets.all(16),
+      tint: Colors.blueAccent,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '💾 Backup dati',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+            ),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            'Esporta o ripristina goals, abitudini, diario, letture e riflessioni.',
+            style: TextStyle(color: Colors.white60, fontSize: 12),
+          ),
+          const SizedBox(height: 14),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.white30),
+                  ),
+                  icon: const Icon(Icons.upload_outlined, size: 18),
+                  label: const Text('Esporta'),
+                  onPressed: () => BackupService.exportAndShare(context),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: OutlinedButton.icon(
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(color: Colors.white30),
+                  ),
+                  icon: const Icon(Icons.download_outlined, size: 18),
+                  label: const Text('Importa'),
+                  onPressed: () async {
+                    final ok = await BackupService.importFromFile(context);
+                    if (ok && context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Backup ripristinato!'),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

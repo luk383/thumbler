@@ -14,7 +14,8 @@ enum XpEvent {
   journalEntry,
   weeklyReflection,
   bookCompleted,
-  customCard;
+  customCard,
+  pomodoroComplete;
 
   int get points => switch (this) {
     XpEvent.viewCard => 1,
@@ -26,6 +27,7 @@ enum XpEvent {
     XpEvent.weeklyReflection => 10,
     XpEvent.bookCompleted => 5,
     XpEvent.customCard => 3,
+    XpEvent.pomodoroComplete => 8,
   };
 
   String get label => switch (this) {
@@ -38,6 +40,7 @@ enum XpEvent {
     XpEvent.weeklyReflection => 'Riflessione settimanale',
     XpEvent.bookCompleted => 'Libro/corso completato',
     XpEvent.customCard => 'Carta creata',
+    XpEvent.pomodoroComplete => 'Pomodoro completato',
   };
 }
 
