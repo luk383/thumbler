@@ -54,13 +54,15 @@ enum SessionQueueType {
   due,
   weak,
   newCards,
-  random;
+  random,
+  starred;
 
   String get label => switch (this) {
     SessionQueueType.due => 'Due',
     SessionQueueType.weak => 'Weak',
     SessionQueueType.newCards => 'New',
     SessionQueueType.random => 'Random',
+    SessionQueueType.starred => 'Starred',
   };
 
   IconData get icon => switch (this) {
@@ -68,6 +70,7 @@ enum SessionQueueType {
     SessionQueueType.weak => Icons.trending_down_outlined,
     SessionQueueType.newCards => Icons.fiber_new_outlined,
     SessionQueueType.random => Icons.shuffle_outlined,
+    SessionQueueType.starred => Icons.star_outlined,
   };
 }
 
@@ -235,12 +238,16 @@ class StudyState {
   /// Cards never seen before (timesSeen == 0).
   int get newCount => filtered.where((i) => i.timesSeen == 0).length;
 
+  /// Starred cards.
+  int get starredCount => filtered.where((i) => i.isStarred).length;
+
   /// Count for the currently selected queue type.
   int get queueCount => switch (selectedQueueType) {
     SessionQueueType.due => dueCount,
     SessionQueueType.weak => weakCount,
     SessionQueueType.newCards => newCount,
     SessionQueueType.random => availableCount,
+    SessionQueueType.starred => starredCount,
   };
 
   /// Estimated minutes: SRS ~3 cards/min, Speed ~30s/card.
@@ -341,6 +348,14 @@ class StudyNotifier extends Notifier<StudyState> {
       sessionQueue: const [],
       currentIndex: 0,
     );
+  }
+
+  void toggleStar(String itemId) {
+    final storage = StudyStorage();
+    final item = storage.getById(itemId, deckId: state.activeDeckId);
+    if (item == null) return;
+    storage.update(item.copyWith(isStarred: !item.isStarred));
+    state = _copyWith(items: storage.allForDeck(state.activeDeckId));
   }
 
   void updateUserNote(String itemId, String? note) {
@@ -957,6 +972,8 @@ class StudyNotifier extends Notifier<StudyState> {
       SessionQueueType.newCards =>
         candidates.where((i) => i.timesSeen == 0).toList(),
       SessionQueueType.random => candidates,
+      SessionQueueType.starred =>
+        candidates.where((i) => i.isStarred).toList(),
     };
   }
 
@@ -995,6 +1012,8 @@ class StudyNotifier extends Notifier<StudyState> {
       case SessionQueueType.newCards:
         ordered = [...candidates]..shuffle(_rng);
       case SessionQueueType.random:
+        ordered = [...candidates]..shuffle(_rng);
+      case SessionQueueType.starred:
         ordered = [...candidates]..shuffle(_rng);
     }
     final count = min(maxLength, ordered.length);

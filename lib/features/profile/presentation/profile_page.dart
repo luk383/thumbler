@@ -187,6 +187,9 @@ class ProfilePage extends ConsumerWidget {
                     onThemeModeChanged: (mode) => ref
                         .read(appSettingsProvider.notifier)
                         .setThemeMode(mode),
+                    onDailyCardGoalChanged: (goal) => ref
+                        .read(appSettingsProvider.notifier)
+                        .setDailyCardGoal(goal),
                   ),
                   const SizedBox(height: 32),
                   _SectionTitle('Data Management'),
@@ -317,11 +320,13 @@ class _SettingsCard extends StatelessWidget {
     required this.settings,
     required this.onLanguageChanged,
     required this.onThemeModeChanged,
+    required this.onDailyCardGoalChanged,
   });
 
   final AppSettingsState settings;
   final ValueChanged<AppLanguage> onLanguageChanged;
   final ValueChanged<ThemeMode> onThemeModeChanged;
+  final ValueChanged<int> onDailyCardGoalChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -401,6 +406,32 @@ class _SettingsCard extends StatelessWidget {
             selected: {settings.themeMode},
             onSelectionChanged: (selection) =>
                 onThemeModeChanged(selection.first),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Obiettivo carte giornaliero',
+            style: const TextStyle(
+              color: Colors.white70,
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          SegmentedButton<int>(
+            segments: const [
+              ButtonSegment<int>(value: 10, label: Text('10')),
+              ButtonSegment<int>(value: 20, label: Text('20')),
+              ButtonSegment<int>(value: 30, label: Text('30')),
+              ButtonSegment<int>(value: 50, label: Text('50')),
+            ],
+            selected: {settings.dailyCardGoal},
+            onSelectionChanged: (selection) =>
+                onDailyCardGoalChanged(selection.first),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            'Numero di carte da studiare al giorno per completare l\'obiettivo.',
+            style: const TextStyle(color: Colors.white54, fontSize: 12),
           ),
           const SizedBox(height: 16),
           const Divider(color: Colors.white12, height: 1),
@@ -1258,7 +1289,7 @@ class _BackupCard extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           const Text(
-            'Esporta o ripristina goals, abitudini, diario, letture e riflessioni.',
+            'Esporta o ripristina tutto: deck, progressi SRS, goals, abitudini, diario, letture e riflessioni.',
             style: TextStyle(color: Colors.white60, fontSize: 12),
           ),
           const SizedBox(height: 14),

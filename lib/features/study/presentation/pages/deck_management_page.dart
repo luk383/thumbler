@@ -1,6 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share_plus/share_plus.dart' show SharePlus, ShareParams, XFile;
 
+import '../../data/deck_library_storage.dart';
 import '../../data/study_storage.dart';
 import '../../data/deck_pack.dart';
 import '../controllers/deck_library_controller.dart';
@@ -50,6 +56,7 @@ class DeckManagementPage extends ConsumerWidget {
                   onMerge: packs.length > 1
                       ? () => _showMergeDialog(context, ref, pack, packs)
                       : null,
+                  onExport: () => _exportDeck(context, pack),
                   onDelete: pack.assetPath.startsWith('user://')
                       ? () => _showDeleteDialog(context, ref, pack)
                       : null,
@@ -57,6 +64,52 @@ class DeckManagementPage extends ConsumerWidget {
               },
             ),
     );
+  }
+
+  Future<void> _exportDeck(
+    BuildContext context,
+    DeckPackMeta pack,
+  ) async {
+    try {
+      // Prefer the stored user-deck JSON; fall back to building from study items
+      String? rawJson = const DeckLibraryStorage().loadUserDeckJson(pack.id);
+      if (rawJson == null) {
+        final items = StudyStorage().allForDeck(pack.id);
+        final questions = items.map((item) => {
+          'id': item.id,
+          'question': item.promptText,
+          'answers': item.options,
+          'correctIndex': item.correctAnswerIndex,
+          'explanation': item.explanationText ?? '',
+          'domain': item.category,
+        }).toList();
+        rawJson = const JsonEncoder.withIndent('  ').convert({
+          'id': pack.id,
+          'title': pack.title,
+          'category': pack.category ?? '',
+          'description': '',
+          'questions': questions,
+        });
+      }
+
+      final dir = await getTemporaryDirectory();
+      final safeTitle = pack.title.replaceAll(RegExp(r'[^\w\s-]'), '').trim();
+      final file = File('${dir.path}/$safeTitle.json');
+      await file.writeAsString(rawJson);
+
+      await SharePlus.instance.share(
+        ShareParams(
+          files: [XFile(file.path)],
+          subject: 'Deck: ${pack.title}',
+        ),
+      );
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Errore export: $e'), backgroundColor: Colors.redAccent),
+        );
+      }
+    }
   }
 
   Future<void> _cloneDeck(
@@ -337,7 +390,7 @@ class _EmptyState extends StatelessWidget {
   }
 }
 
-enum _DeckAction { clone, merge, delete }
+enum _DeckAction { clone, merge, export, delete }
 
 class _DeckCard extends StatelessWidget {
   const _DeckCard({
@@ -347,6 +400,7 @@ class _DeckCard extends StatelessWidget {
     required this.isActive,
     required this.onRename,
     required this.onClone,
+    required this.onExport,
     this.onMerge,
     this.onDelete,
   });
@@ -357,6 +411,7 @@ class _DeckCard extends StatelessWidget {
   final bool isActive;
   final VoidCallback onRename;
   final VoidCallback onClone;
+  final VoidCallback onExport;
   final VoidCallback? onMerge;
   final VoidCallback? onDelete;
 
@@ -457,6 +512,8 @@ class _DeckCard extends StatelessWidget {
                         onClone();
                       case _DeckAction.merge:
                         onMerge?.call();
+                      case _DeckAction.export:
+                        onExport();
                       case _DeckAction.delete:
                         onDelete?.call();
                     }
@@ -467,6 +524,15 @@ class _DeckCard extends StatelessWidget {
                       child: ListTile(
                         leading: Icon(Icons.copy_outlined),
                         title: Text('Clona'),
+                        contentPadding: EdgeInsets.zero,
+                        dense: true,
+                      ),
+                    ),
+                    const PopupMenuItem(
+                      value: _DeckAction.export,
+                      child: ListTile(
+                        leading: Icon(Icons.share_outlined),
+                        title: Text('Esporta JSON'),
                         contentPadding: EdgeInsets.zero,
                         dense: true,
                       ),

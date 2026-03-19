@@ -41,10 +41,15 @@ extension AppThemeModeX on ThemeMode {
 }
 
 class AppSettingsState {
-  const AppSettingsState({required this.language, required this.themeMode});
+  const AppSettingsState({
+    required this.language,
+    required this.themeMode,
+    this.dailyCardGoal = 20,
+  });
 
   final AppLanguage language;
   final ThemeMode themeMode;
+  final int dailyCardGoal;
 
   Locale get locale => language.locale;
 }
@@ -58,17 +63,39 @@ class AppSettingsNotifier extends Notifier<AppSettingsState> {
       _storage.loadPreferredLanguageCode(),
     );
     final themeMode = AppThemeModeX.fromStorage(_storage.loadThemeMode());
-    return AppSettingsState(language: language, themeMode: themeMode);
+    final dailyCardGoal = _storage.loadDailyCardGoal();
+    return AppSettingsState(
+      language: language,
+      themeMode: themeMode,
+      dailyCardGoal: dailyCardGoal,
+    );
   }
 
   Future<void> setLanguage(AppLanguage language) async {
     await _storage.savePreferredLanguageCode(language.storageValue);
-    state = AppSettingsState(language: language, themeMode: state.themeMode);
+    state = AppSettingsState(
+      language: language,
+      themeMode: state.themeMode,
+      dailyCardGoal: state.dailyCardGoal,
+    );
   }
 
   Future<void> setThemeMode(ThemeMode mode) async {
     await _storage.saveThemeMode(mode.storageValue);
-    state = AppSettingsState(language: state.language, themeMode: mode);
+    state = AppSettingsState(
+      language: state.language,
+      themeMode: mode,
+      dailyCardGoal: state.dailyCardGoal,
+    );
+  }
+
+  Future<void> setDailyCardGoal(int goal) async {
+    await _storage.saveDailyCardGoal(goal);
+    state = AppSettingsState(
+      language: state.language,
+      themeMode: state.themeMode,
+      dailyCardGoal: goal,
+    );
   }
 }
 

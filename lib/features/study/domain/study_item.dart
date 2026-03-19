@@ -28,6 +28,8 @@ class StudyItem {
     this.srsRepetitions = 0,
     // Personal note
     this.userNote,
+    // Flagging
+    this.isStarred = false,
   });
 
   final String id;
@@ -64,6 +66,9 @@ class StudyItem {
   // Personal annotation
   final String? userNote;
 
+  // Flagging
+  final bool isStarred;
+
   String get correctAnswer => options[correctAnswerIndex];
 
   StudyItem copyWith({
@@ -80,6 +85,7 @@ class StudyItem {
     int? srsInterval,
     int? srsRepetitions,
     Object? userNote = _sentinel,
+    bool? isStarred,
   }) => StudyItem(
     id: id,
     deckId: deckId ?? this.deckId,
@@ -105,6 +111,7 @@ class StudyItem {
     srsInterval: srsInterval ?? this.srsInterval,
     srsRepetitions: srsRepetitions ?? this.srsRepetitions,
     userNote: userNote == _sentinel ? this.userNote : userNote as String?,
+    isStarred: isStarred ?? this.isStarred,
   );
 
   static const Object _sentinel = Object();
@@ -134,6 +141,7 @@ class StudyItem {
     'srsInterval': srsInterval,
     'srsRepetitions': srsRepetitions,
     'userNote': userNote,
+    'isStarred': isStarred,
   };
 
   factory StudyItem.fromMap(Map map) => StudyItem(
@@ -166,6 +174,7 @@ class StudyItem {
     srsInterval: (map['srsInterval'] as num?)?.toInt() ?? 0,
     srsRepetitions: (map['srsRepetitions'] as num?)?.toInt() ?? 0,
     userNote: map['userNote'] as String?,
+    isStarred: (map['isStarred'] as bool?) ?? false,
   );
 
   static StudyItem fromLesson({

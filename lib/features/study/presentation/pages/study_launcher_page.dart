@@ -983,6 +983,7 @@ class _QueueTypeChipRow extends StatelessWidget {
             SessionQueueType.weak => state.weakCount,
             SessionQueueType.newCards => state.newCount,
             SessionQueueType.random => state.availableCount,
+            SessionQueueType.starred => state.starredCount,
           };
           final isSelected = type == selected;
           return GestureDetector(
@@ -1118,6 +1119,10 @@ class _EmptyQueueBanner extends StatelessWidget {
         'No new cards left.\nImport a deck pack or add from Feed.',
       ),
       SessionQueueType.random => ('🃏', 'No cards available.'),
+      SessionQueueType.starred => (
+        '⭐',
+        'No starred cards yet.\nTap the star on any card to add it here.',
+      ),
     };
 
     return Container(

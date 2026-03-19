@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -11,6 +14,7 @@ import '../../../journal/state/journal_notifier.dart';
 import '../../../reflection/domain/reflection_entry.dart';
 import '../../../reflection/state/reflection_notifier.dart';
 import '../../../study/data/study_session_storage.dart';
+import '../../../study/data/study_storage.dart';
 import '../../../study/domain/study_session.dart';
 import '../../../study/presentation/controllers/deck_library_controller.dart';
 import '../../domain/progress_analytics.dart';
@@ -68,6 +72,8 @@ class ProgressAnalyticsPage extends ConsumerWidget {
           const _SessionAccuracyTrendSection(),
           const SizedBox(height: 24),
           const _HourlyHeatmapSection(),
+          const SizedBox(height: 24),
+          const _DeckStatsSection(),
           const SizedBox(height: 24),
           const _GrowthDashboardSection(),
         ],
@@ -1144,4 +1150,293 @@ class _WeeklyMetricRow extends StatelessWidget {
       ],
     );
   }
+}
+
+// ── Deck stats section ────────────────────────────────────────────────────────
+
+class _DeckStatsSection extends ConsumerWidget {
+  const _DeckStatsSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final activeDeckId = ref.watch(activeDeckIdProvider);
+    if (activeDeckId == null) return const SizedBox.shrink();
+
+    final items = StudyStorage().allForDeck(activeDeckId);
+    if (items.isEmpty) return const SizedBox.shrink();
+
+    // ── Difficulty distribution ──────────────────────────────────────────────
+    final reviewed = items.where((i) => i.timesSeen > 0).toList();
+    final easy = reviewed.where((i) {
+      final total = i.correctCount + i.wrongCount;
+      return total > 0 && (i.correctCount / total) >= 0.8;
+    }).length;
+    final hard = reviewed.where((i) {
+      final total = i.correctCount + i.wrongCount;
+      return total > 0 && (i.correctCount / total) < 0.5;
+    }).length;
+    final medium = reviewed.length - easy - hard;
+    final total = reviewed.length;
+
+    // ── Average time per answer ──────────────────────────────────────────────
+    final withTime = items.where((i) => i.avgTimeMs != null && i.avgTimeMs! > 0).toList();
+    final avgMs = withTime.isEmpty
+        ? null
+        : withTime.fold<int>(0, (s, i) => s + i.avgTimeMs!) ~/ withTime.length;
+
+    // ── Retention curve: accuracy buckets per interval ───────────────────────
+    final byInterval = <int, List<double>>{};
+    for (final item in reviewed) {
+      final bucket = (item.srsInterval ~/ 7).clamp(0, 5); // 0=<1w, 1=1-2w, ...
+      final totalAns = item.correctCount + item.wrongCount;
+      if (totalAns == 0) continue;
+      byInterval.putIfAbsent(bucket, () => []).add(item.correctCount / totalAns);
+    }
+    final bucketLabels = ['<1s', '1-2s', '2-4s', '1m', '2m', '>2m'];
+    final retentionPoints = List.generate(6, (i) {
+      final vals = byInterval[i];
+      if (vals == null || vals.isEmpty) return null;
+      return vals.reduce((a, b) => a + b) / vals.length;
+    });
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppSectionHeader('Statistiche deck'),
+        const SizedBox(height: 12),
+
+        // Difficulty distribution
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Distribuzione difficoltà',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                '${reviewed.length} carte studiate su ${items.length}',
+                style: const TextStyle(color: Colors.white54, fontSize: 12),
+              ),
+              const SizedBox(height: 14),
+              if (total == 0)
+                const Text(
+                  'Nessun dato ancora.',
+                  style: TextStyle(color: Colors.white38, fontSize: 12),
+                )
+              else ...[
+                _DiffBar(label: 'Facile', count: easy, total: total, color: Colors.greenAccent),
+                const SizedBox(height: 8),
+                _DiffBar(label: 'Medio', count: medium, total: total, color: Colors.orangeAccent),
+                const SizedBox(height: 8),
+                _DiffBar(label: 'Difficile', count: hard, total: total, color: Colors.redAccent),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Average response time
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              const Icon(Icons.timer_outlined, color: Colors.white54, size: 28),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Tempo medio per risposta',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      avgMs == null
+                          ? 'Dati non disponibili'
+                          : avgMs < 1000
+                              ? '< 1 secondo'
+                              : '${(avgMs / 1000).toStringAsFixed(1)} secondi',
+                      style: TextStyle(
+                        color: avgMs == null ? Colors.white38 : Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+
+        // Retention curve
+        AppGlassCard(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Curva di retention',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                ),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Accuratezza media per intervallo SRS',
+                style: TextStyle(color: Colors.white54, fontSize: 12),
+              ),
+              const SizedBox(height: 14),
+              SizedBox(
+                height: 120,
+                child: CustomPaint(
+                  painter: _RetentionCurvePainter(
+                    points: retentionPoints,
+                    labels: bucketLabels,
+                  ),
+                  size: Size.infinite,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _DiffBar extends StatelessWidget {
+  const _DiffBar({
+    required this.label,
+    required this.count,
+    required this.total,
+    required this.color,
+  });
+
+  final String label;
+  final int count;
+  final int total;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    final frac = total == 0 ? 0.0 : count / total;
+    final pct = (frac * 100).round();
+    return Row(
+      children: [
+        SizedBox(
+          width: 60,
+          child: Text(
+            label,
+            style: const TextStyle(color: Colors.white70, fontSize: 12),
+          ),
+        ),
+        Expanded(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: frac,
+              minHeight: 10,
+              backgroundColor: Colors.white10,
+              valueColor: AlwaysStoppedAnimation<Color>(color),
+            ),
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(
+          '$pct% ($count)',
+          style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.w600),
+        ),
+      ],
+    );
+  }
+}
+
+class _RetentionCurvePainter extends CustomPainter {
+  const _RetentionCurvePainter({
+    required this.points,
+    required this.labels,
+  });
+
+  final List<double?> points;
+  final List<String> labels;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    const labelHeight = 20.0;
+    final chartH = size.height - labelHeight;
+    final n = points.length;
+    if (n < 2) return;
+
+    final stepW = size.width / (n - 1);
+
+    // Grid lines
+    final gridPaint = Paint()
+      ..color = Colors.white12
+      ..strokeWidth = 1;
+    for (var i = 0; i <= 4; i++) {
+      final y = chartH * (1 - i / 4);
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), gridPaint);
+    }
+
+    // Curve
+    final linePaint = Paint()
+      ..color = const Color(0xFF6C63FF)
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round
+      ..strokeJoin = StrokeJoin.round;
+
+    final dotPaint = Paint()
+      ..color = const Color(0xFF6C63FF)
+      ..style = PaintingStyle.fill;
+
+    final path = Path();
+    bool started = false;
+
+    for (var i = 0; i < n; i++) {
+      final val = points[i];
+      if (val == null) continue;
+      final x = stepW * i;
+      final y = chartH * (1 - val.clamp(0.0, 1.0));
+      if (!started) {
+        path.moveTo(x, y);
+        started = true;
+      } else {
+        path.lineTo(x, y);
+      }
+      canvas.drawCircle(Offset(x, y), 4, dotPaint);
+    }
+    canvas.drawPath(path, linePaint);
+
+    // Labels
+    final tp = TextPainter();
+    for (var i = 0; i < n; i++) {
+      tp.text = TextSpan(
+        text: labels[i],
+        style: const TextStyle(color: Colors.white38, fontSize: 9),
+      );
+      tp.textDirection = ui.TextDirection.ltr;
+      tp.layout();
+      final x = stepW * i - tp.width / 2;
+      tp.paint(canvas, Offset(math.max(0, x), chartH + 4));
+    }
+  }
+
+  @override
+  bool shouldRepaint(_RetentionCurvePainter old) => false;
 }

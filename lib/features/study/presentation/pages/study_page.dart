@@ -806,6 +806,18 @@ class _SrsCardState extends ConsumerState<_SrsCard> {
                 const SizedBox(width: 8),
                 if (item.goodCount > 0 || item.againCount > 0)
                   _RatingBadge(good: item.goodCount, again: item.againCount),
+                const SizedBox(width: 4),
+                GestureDetector(
+                  onTap: () {
+                    HapticFeedback.selectionClick();
+                    ref.read(studyProvider.notifier).toggleStar(item.id);
+                  },
+                  child: Icon(
+                    item.isStarred ? Icons.star_rounded : Icons.star_outline_rounded,
+                    color: item.isStarred ? Colors.amber : Colors.white38,
+                    size: 22,
+                  ),
+                ),
               ],
             ),
           ),

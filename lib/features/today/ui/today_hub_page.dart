@@ -1,8 +1,11 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../app/settings/app_settings.dart';
 import '../../../features/growth/streak/streak_notifier.dart';
 import '../../../features/growth/xp/xp_notifier.dart';
 import '../../../features/habits/state/habits_notifier.dart';
@@ -23,6 +26,7 @@ class TodayHubPage extends ConsumerWidget {
     final habits = ref.watch(habitsProvider);
     final goals = ref.watch(goalsProvider).where((g) => !g.completed).toList();
     final studyState = ref.watch(studyProvider);
+    final settings = ref.watch(appSettingsProvider);
     final reflections = ref.watch(reflectionProvider);
 
     final now = DateTime.now();
@@ -91,9 +95,10 @@ class TodayHubPage extends ConsumerWidget {
               _SectionCard(
                 icon: Icons.school_outlined,
                 label: 'Studio',
-                trailing: dueCards > 0
-                    ? _Badge('$dueCards da ripassare')
-                    : const _Badge('In pari!', color: Colors.green),
+                trailing: _DailyCardGoalRing(
+                  answered: streak.answeredToday,
+                  goal: settings.dailyCardGoal,
+                ),
                 child: Column(
                   children: [
                     Row(
@@ -589,6 +594,85 @@ class _DailyQuoteCard extends StatelessWidget {
       ),
     );
   }
+}
+
+// ── Daily card goal ring ───────────────────────────────────────────────────────
+
+class _DailyCardGoalRing extends StatelessWidget {
+  const _DailyCardGoalRing({required this.answered, required this.goal});
+
+  final int answered;
+  final int goal;
+
+  @override
+  Widget build(BuildContext context) {
+    final progress = (answered / goal).clamp(0.0, 1.0);
+    final done = answered >= goal;
+    final color = done ? Colors.greenAccent : const Color(0xFF6C63FF);
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          '$answered/$goal',
+          style: TextStyle(
+            fontSize: 11,
+            color: done ? Colors.greenAccent : Colors.white60,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(width: 6),
+        SizedBox(
+          width: 28,
+          height: 28,
+          child: CustomPaint(
+            painter: _RingPainter(progress: progress, color: color),
+            child: done
+                ? const Icon(Icons.check, size: 14, color: Colors.greenAccent)
+                : null,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _RingPainter extends CustomPainter {
+  const _RingPainter({required this.progress, required this.color});
+
+  final double progress;
+  final Color color;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = math.min(size.width, size.height) / 2 - 2;
+    const strokeWidth = 3.0;
+
+    final bg = Paint()
+      ..color = Colors.white12
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth;
+
+    final fg = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = strokeWidth
+      ..strokeCap = StrokeCap.round;
+
+    canvas.drawCircle(center, radius, bg);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -math.pi / 2,
+      2 * math.pi * progress,
+      false,
+      fg,
+    );
+  }
+
+  @override
+  bool shouldRepaint(_RingPainter old) =>
+      old.progress != progress || old.color != color;
 }
 
 class _HabitRow extends ConsumerWidget {

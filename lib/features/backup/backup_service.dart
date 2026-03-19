@@ -7,13 +7,15 @@ import 'package:share_plus/share_plus.dart' show SharePlus, ShareParams, XFile;
 import 'package:file_picker/file_picker.dart';
 
 class BackupService {
-  static const _version = 1;
+  static const _version = 2;
   static const _exportableBoxes = [
     'goals_box',
     'habits_box',
     'journal_box',
     'reflection_box',
     'reading_box',
+    'study_box',
+    'library_box',
   ];
 
   /// Export all growth data to a JSON file and share it.
@@ -31,6 +33,10 @@ class BackupService {
           final value = box.get(key);
           if (value is Map) {
             entries[key.toString()] = Map<String, dynamic>.from(value);
+          } else if (value is String || value is num || value is bool) {
+            entries[key.toString()] = value;
+          } else if (value is List) {
+            entries[key.toString()] = value;
           }
         }
         data[boxName] = entries;
@@ -73,7 +79,7 @@ class BackupService {
       final data = jsonDecode(content) as Map<String, dynamic>;
 
       final version = data['version'] as int? ?? 0;
-      if (version != _version) {
+      if (version < 1 || version > _version) {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('Formato backup non compatibile')),
@@ -87,10 +93,15 @@ class BackupService {
         final box = Hive.box(boxName);
         final entries = data[boxName] as Map<String, dynamic>;
         for (final entry in entries.entries) {
-          await box.put(
-            entry.key,
-            Map<dynamic, dynamic>.from(entry.value as Map),
-          );
+          final value = entry.value;
+          if (value is Map) {
+            await box.put(
+              entry.key,
+              Map<dynamic, dynamic>.from(value),
+            );
+          } else {
+            await box.put(entry.key, value);
+          }
         }
       }
 

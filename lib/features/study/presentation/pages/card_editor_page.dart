@@ -94,6 +94,26 @@ class _CardEditorPageState extends ConsumerState<CardEditorPage> {
       appBar: AppBar(
         title: Text(isEdit ? 'Modifica carta' : 'Nuova carta'),
         actions: [
+          if (isEdit)
+            IconButton(
+              icon: Icon(
+                widget.existingItem!.isStarred
+                    ? Icons.star_rounded
+                    : Icons.star_outline_rounded,
+                color: widget.existingItem!.isStarred
+                    ? Colors.amber
+                    : null,
+              ),
+              tooltip: widget.existingItem!.isStarred
+                  ? 'Rimuovi dai preferiti'
+                  : 'Aggiungi ai preferiti',
+              onPressed: () {
+                ref
+                    .read(studyProvider.notifier)
+                    .toggleStar(widget.existingItem!.id);
+                Navigator.of(context).pop();
+              },
+            ),
           TextButton(
             onPressed: _saving ? null : _save,
             child: const Text('Salva'),

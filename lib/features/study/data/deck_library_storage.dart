@@ -10,6 +10,7 @@ class DeckLibraryStorage {
   static const _onboardingInterestsKey = 'onboarding_interests';
   static const _preferredLanguageCodeKey = 'preferred_language_code';
   static const _themeModeKey = 'theme_mode';
+  static const _dailyCardGoalKey = 'daily_card_goal';
 
   Box get _box => Hive.box(boxName);
 
@@ -65,4 +66,10 @@ class DeckLibraryStorage {
   String? loadThemeMode() => _box.get(_themeModeKey) as String?;
 
   Future<void> saveThemeMode(String mode) => _box.put(_themeModeKey, mode);
+
+  int loadDailyCardGoal() =>
+      (_box.get(_dailyCardGoalKey, defaultValue: 20) as num).toInt();
+
+  Future<void> saveDailyCardGoal(int goal) =>
+      _box.put(_dailyCardGoalKey, goal);
 }
