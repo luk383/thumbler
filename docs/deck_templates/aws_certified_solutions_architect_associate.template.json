@@ -1,0 +1,56 @@
+{
+  "id": "aws_certified_solutions_architect_associate_saa_c03",
+  "provider": "aws",
+  "certificationId": "aws_saa",
+  "certificationTitle": "AWS Certified Solutions Architect - Associate",
+  "track": "Associate",
+  "title": "AWS Certified Solutions Architect - Associate",
+  "examCode": "SAA-C03",
+  "category": "AWS Architecture",
+  "description": "Starter template for AWS Certified Solutions Architect - Associate decks.",
+  "version": "3",
+  "questionCount": 1,
+  "domains": [
+    "Design Secure Architectures",
+    "Design Resilient Architectures",
+    "Design High-Performing Architectures",
+    "Design Cost-Optimized Architectures"
+  ],
+  "tags": [
+    "aws",
+    "aws_saa",
+    "saa-c03",
+    "associate"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "saa_c03_ex_01_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company stores regulated documents in Amazon S3 and needs centralized key management, audit trails, and the ability to disable a key immediately. Which option best meets the requirement?",
+      "answers": [
+        "SSE-S3 with bucket keys",
+        "SSE-KMS with a customer managed KMS key",
+        "Client-side compression before upload",
+        "S3 Transfer Acceleration"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter.",
+      "fullExplanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter.",
+      "explanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter."
+    }
+  ]
+}

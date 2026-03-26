@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_solutions_architect_associate_saa_c03_saa-resilient_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_saa",
+  "certificationTitle": "AWS Certified Solutions Architect - Associate",
+  "track": "Associate",
+  "title": "AWS Certified Solutions Architect - Associate",
+  "examCode": "SAA-C03",
+  "category": "AWS Architecture",
+  "description": "Scenario practice batch for Design Resilient Architectures.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Design Resilient Architectures"
+  ],
+  "tags": [
+    "aws",
+    "aws_saa",
+    "saa-c03",
+    "associate"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "saa_c03_ex_02_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "2.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company runs an application on EC2 instances and wants unhealthy instances replaced automatically with minimal operational effort. Which design should be used?",
+      "answers": [
+        "A single EC2 instance with detailed monitoring",
+        "An Auto Scaling group across multiple Availability Zones",
+        "An EC2 instance with manual snapshots",
+        "A dedicated host in one AZ"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "An Auto Scaling group across multiple AZs provides both self-healing and resilience to a single-AZ failure.",
+      "fullExplanation": "An Auto Scaling group across multiple AZs provides both self-healing and resilience to a single-AZ failure.",
+      "explanation": "An Auto Scaling group across multiple AZs provides both self-healing and resilience to a single-AZ failure."
+    },
+    {
+      "id": "saa_c03_ex_02_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A workload must continue if one Availability Zone fails. Which database deployment option best meets that requirement with minimal application changes?",
+      "answers": [
+        "Amazon RDS Multi-AZ",
+        "A single Amazon Aurora reader",
+        "Amazon Redshift Serverless",
+        "Amazon Athena"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "RDS Multi-AZ offers managed synchronous standby and automated failover with minimal app changes.",
+      "fullExplanation": "RDS Multi-AZ offers managed synchronous standby and automated failover with minimal app changes.",
+      "explanation": "RDS Multi-AZ offers managed synchronous standby and automated failover with minimal app changes."
+    },
+    {
+      "id": "saa_c03_ex_02_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "2.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A spike in orders can overwhelm a downstream order processor. Which service best decouples the application tiers and smooths bursts?",
+      "answers": [
+        "Amazon SQS",
+        "AWS Artifact",
+        "Amazon Route 53",
+        "AWS Glue DataBrew"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon SQS buffers burst traffic so the downstream processor can catch up at a stable rate.",
+      "fullExplanation": "Amazon SQS buffers burst traffic so the downstream processor can catch up at a stable rate.",
+      "explanation": "Amazon SQS buffers burst traffic so the downstream processor can catch up at a stable rate."
+    },
+    {
+      "id": "saa_c03_ex_02_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "2.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company needs DNS-based failover from a primary Region to a disaster recovery Region. Which service should control the failover?",
+      "answers": [
+        "AWS Config",
+        "Amazon Route 53 health checks and failover routing",
+        "Amazon Inspector",
+        "AWS License Manager"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Route 53 failover routing is built for health-check-driven DNS redirection between endpoints or Regions.",
+      "fullExplanation": "Route 53 failover routing is built for health-check-driven DNS redirection between endpoints or Regions.",
+      "explanation": "Route 53 failover routing is built for health-check-driven DNS redirection between endpoints or Regions."
+    },
+    {
+      "id": "saa_c03_ex_02_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "2.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "An architect wants to reduce duplicate order processing caused by retries from an event source. What application pattern should be added?",
+      "answers": [
+        "Synchronous batch writes only",
+        "Idempotency for consumers",
+        "Longer DNS TTL values",
+        "Dedicated tenancy"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Idempotent processing avoids duplicate business actions when the same message is retried or replayed.",
+      "fullExplanation": "Idempotent processing avoids duplicate business actions when the same message is retried or replayed.",
+      "explanation": "Idempotent processing avoids duplicate business actions when the same message is retried or replayed."
+    },
+    {
+      "id": "saa_c03_ex_02_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "2.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A team needs object storage for backups with very high durability and native cross-Region replication options. Which service is the best fit?",
+      "answers": [
+        "Amazon EBS",
+        "Amazon S3",
+        "Amazon ElastiCache",
+        "Amazon FSx for Windows"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Amazon S3 provides high durability, lifecycle controls, and built-in replication features suitable for resilient backups.",
+      "fullExplanation": "Amazon S3 provides high durability, lifecycle controls, and built-in replication features suitable for resilient backups.",
+      "explanation": "Amazon S3 provides high durability, lifecycle controls, and built-in replication features suitable for resilient backups."
+    },
+    {
+      "id": "saa_c03_ex_02_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "2.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A system must recover in another Region within hours while keeping cost lower than active-active. Which disaster recovery strategy is usually the best fit?",
+      "answers": [
+        "Backup and restore only",
+        "Pilot light",
+        "Active-active across every Region",
+        "Single-AZ"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Pilot light balances cost and recovery speed by keeping the most critical components pre-positioned.",
+      "fullExplanation": "Pilot light balances cost and recovery speed by keeping the most critical components pre-positioned.",
+      "explanation": "Pilot light balances cost and recovery speed by keeping the most critical components pre-positioned."
+    },
+    {
+      "id": "saa_c03_ex_02_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "2.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "Which design choice most reduces cascading failure between microservices?",
+      "answers": [
+        "Hard-coded synchronous dependencies for every call",
+        "Loose coupling with asynchronous messaging",
+        "One large database transaction across all services",
+        "Keeping all services on one instance"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Loose coupling and asynchronous messaging reduce shared failure paths and simplify independent recovery.",
+      "fullExplanation": "Loose coupling and asynchronous messaging reduce shared failure paths and simplify independent recovery.",
+      "explanation": "Loose coupling and asynchronous messaging reduce shared failure paths and simplify independent recovery."
+    },
+    {
+      "id": "saa_c03_ex_02_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "2.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A database serves many read-heavy queries and the primary is becoming saturated. Which option improves resilience and read scalability?",
+      "answers": [
+        "Add read replicas",
+        "Disable backups",
+        "Move the database into a public subnet",
+        "Use smaller instance types"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Read replicas offload read traffic from the writer and can improve both scale and failure isolation.",
+      "fullExplanation": "Read replicas offload read traffic from the writer and can improve both scale and failure isolation.",
+      "explanation": "Read replicas offload read traffic from the writer and can improve both scale and failure isolation."
+    },
+    {
+      "id": "saa_c03_ex_02_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "2.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A team has backups but has never attempted a restore. What is the biggest risk?",
+      "answers": [
+        "The backups will cost more",
+        "The backups may fail when needed",
+        "The instances will scale too fast",
+        "CloudTrail will stop recording"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Backup validity is unproven until restores are tested, and many real failures surface only during recovery.",
+      "fullExplanation": "Backup validity is unproven until restores are tested, and many real failures surface only during recovery.",
+      "explanation": "Backup validity is unproven until restores are tested, and many real failures surface only during recovery."
+    },
+    {
+      "id": "saa_c03_ex_02_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "2.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A queue consumer repeatedly fails on the same malformed message and healthy messages are piling up behind it. What should be added?",
+      "answers": [
+        "More IAM users",
+        "A dead-letter queue",
+        "A larger VPC CIDR",
+        "An internet gateway"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "A dead-letter queue removes poison messages from the main flow so healthy processing can continue.",
+      "fullExplanation": "A dead-letter queue removes poison messages from the main flow so healthy processing can continue.",
+      "explanation": "A dead-letter queue removes poison messages from the main flow so healthy processing can continue."
+    },
+    {
+      "id": "saa_c03_ex_02_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "2.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company wants its application to keep serving read-only requests if a noncritical write dependency fails. Which design principle is most relevant?",
+      "answers": [
+        "Graceful degradation",
+        "Dedicated tenancy",
+        "Longer session tokens",
+        "Bastion-only access"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Graceful degradation preserves core user value by temporarily disabling noncritical functionality during partial failure.",
+      "fullExplanation": "Graceful degradation preserves core user value by temporarily disabling noncritical functionality during partial failure.",
+      "explanation": "Graceful degradation preserves core user value by temporarily disabling noncritical functionality during partial failure."
+    },
+    {
+      "id": "saa_c03_ex_02_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "2.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "An architecture spans multiple tiers and the team wants to minimize the impact of one service failure. Which principle best applies?",
+      "answers": [
+        "Failure isolation boundaries",
+        "Use the root account for automation",
+        "Single-AZ deployment",
+        "Synchronous writes everywhere"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Deliberate failure isolation keeps one tier or dependency problem from propagating across the whole system.",
+      "fullExplanation": "Deliberate failure isolation keeps one tier or dependency problem from propagating across the whole system.",
+      "explanation": "Deliberate failure isolation keeps one tier or dependency problem from propagating across the whole system."
+    },
+    {
+      "id": "saa_c03_ex_02_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "2.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company needs near-zero data loss but can accept a longer recovery time in another Region. Which design concern is the highest priority?",
+      "answers": [
+        "Minimizing RPO through replication",
+        "Reducing IAM policy count",
+        "Adding public subnets",
+        "Choosing Spot for every workload"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "When near-zero data loss is required, the design must prioritize replication patterns that minimize RPO.",
+      "fullExplanation": "When near-zero data loss is required, the design must prioritize replication patterns that minimize RPO.",
+      "explanation": "When near-zero data loss is required, the design must prioritize replication patterns that minimize RPO."
+    },
+    {
+      "id": "saa_c03_ex_02_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "2.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A health check continually reports failed targets but traffic is still being sent to them. What is most likely missing?",
+      "answers": [
+        "A control action tied to the health check result",
+        "Another Availability Zone",
+        "An S3 bucket policy",
+        "An EC2 key pair"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Health checks only improve resilience when they trigger routing, scaling, or recovery actions automatically.",
+      "fullExplanation": "Health checks only improve resilience when they trigger routing, scaling, or recovery actions automatically.",
+      "explanation": "Health checks only improve resilience when they trigger routing, scaling, or recovery actions automatically."
+    }
+  ]
+}

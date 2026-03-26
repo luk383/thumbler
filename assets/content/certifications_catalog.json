@@ -1,0 +1,94 @@
+{
+  "certifications": [
+    {
+      "id": "aws_saa",
+      "provider": "aws",
+      "title": "AWS Certified Solutions Architect - Associate",
+      "shortTitle": "Solutions Architect Associate",
+      "examCode": "SAA-C03",
+      "order": 1,
+      "description": "Architecture-focused preparation covering secure, resilient, high-performing, and cost-optimized AWS designs.",
+      "deckIds": [
+        "aws_certified_solutions_architect_associate_saa_c03"
+      ],
+      "flashcardCount": 80,
+      "questionCount": 60,
+      "tags": [
+        "aws",
+        "architecture",
+        "associate"
+      ],
+      "domains": [
+        {
+          "id": "saa-secure",
+          "title": "Design Secure Architectures",
+          "order": 1,
+          "description": "Core domain for design secure architectures."
+        },
+        {
+          "id": "saa-resilient",
+          "title": "Design Resilient Architectures",
+          "order": 2,
+          "description": "Core domain for design resilient architectures."
+        },
+        {
+          "id": "saa-performance",
+          "title": "Design High-Performing Architectures",
+          "order": 3,
+          "description": "Core domain for design high-performing architectures."
+        },
+        {
+          "id": "saa-cost",
+          "title": "Design Cost-Optimized Architectures",
+          "order": 4,
+          "description": "Core domain for design cost-optimized architectures."
+        }
+      ]
+    },
+    {
+      "id": "aws_scs",
+      "provider": "aws",
+      "title": "AWS Certified Security - Specialty",
+      "shortTitle": "Security Specialty",
+      "examCode": "SCS-C02",
+      "order": 2,
+      "description": "Security-focused preparation spanning detection, identity, cryptography, and incident response on AWS.",
+      "deckIds": [
+        "aws_certified_security_specialty_scs_c02"
+      ],
+      "flashcardCount": 80,
+      "questionCount": 60,
+      "tags": [
+        "aws",
+        "security",
+        "specialty"
+      ],
+      "domains": [
+        {
+          "id": "scs-threat-detection",
+          "title": "Threat Detection and Monitoring",
+          "order": 1,
+          "description": "Core domain for threat detection and monitoring."
+        },
+        {
+          "id": "scs-identity",
+          "title": "Identity, Access, and Perimeter Controls",
+          "order": 2,
+          "description": "Core domain for identity, access, and perimeter controls."
+        },
+        {
+          "id": "scs-data-protection",
+          "title": "Data Protection and Cryptography",
+          "order": 3,
+          "description": "Core domain for data protection and cryptography."
+        },
+        {
+          "id": "scs-incident-response",
+          "title": "Incident Response and Infrastructure Protection",
+          "order": 4,
+          "description": "Core domain for incident response and infrastructure protection."
+        }
+      ]
+    }
+  ]
+}

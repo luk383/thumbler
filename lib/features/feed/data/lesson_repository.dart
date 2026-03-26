@@ -129,8 +129,8 @@ bool _isFallbackFeedDeck(DeckPackMeta? pack) =>
     pack != null && (pack.isImportable || pack.isStarter) && pack.hasQuestions;
 
 int _compareFeedPriority(DeckPackMeta a, DeckPackMeta b) {
-  final sectionScoreA = a.librarySection == 'General Knowledge' ? 1 : 0;
-  final sectionScoreB = b.librarySection == 'General Knowledge' ? 1 : 0;
+  final sectionScoreA = (a.supportsFeed ? 1 : 0) + (a.supportsExam ? 1 : 0);
+  final sectionScoreB = (b.supportsFeed ? 1 : 0) + (b.supportsExam ? 1 : 0);
   final bySection = sectionScoreB.compareTo(sectionScoreA);
   if (bySection != 0) return bySection;
 

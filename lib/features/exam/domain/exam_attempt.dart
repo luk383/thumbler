@@ -25,6 +25,9 @@ class ExamAttempt {
     required this.startedAt,
     this.deckId,
     this.deckTitle,
+    this.provider,
+    this.certificationId,
+    this.examCode,
     this.finishedAt,
     required this.totalQuestions,
     required this.durationSeconds,
@@ -44,6 +47,9 @@ class ExamAttempt {
   final DateTime startedAt;
   final String? deckId;
   final String? deckTitle;
+  final String? provider;
+  final String? certificationId;
+  final String? examCode;
   final DateTime? finishedAt;
   final int totalQuestions;
 
@@ -81,6 +87,9 @@ class ExamAttempt {
   ExamAttempt copyWith({
     String? deckId,
     String? deckTitle,
+    Object? provider = _sentinel,
+    Object? certificationId = _sentinel,
+    Object? examCode = _sentinel,
     DateTime? finishedAt,
     int? remainingSeconds,
     int? currentIndex,
@@ -94,6 +103,11 @@ class ExamAttempt {
     startedAt: startedAt,
     deckId: deckId ?? this.deckId,
     deckTitle: deckTitle ?? this.deckTitle,
+    provider: provider == _sentinel ? this.provider : provider as String?,
+    certificationId: certificationId == _sentinel
+        ? this.certificationId
+        : certificationId as String?,
+    examCode: examCode == _sentinel ? this.examCode : examCode as String?,
     finishedAt: finishedAt ?? this.finishedAt,
     totalQuestions: totalQuestions,
     durationSeconds: durationSeconds,
@@ -114,6 +128,9 @@ class ExamAttempt {
     'startedAt': startedAt.toIso8601String(),
     'deckId': deckId,
     'deckTitle': deckTitle,
+    'provider': provider,
+    'certificationId': certificationId,
+    'examCode': examCode,
     'finishedAt': finishedAt?.toIso8601String(),
     'totalQuestions': totalQuestions,
     'durationSeconds': durationSeconds,
@@ -132,6 +149,9 @@ class ExamAttempt {
     startedAt: DateTime.parse(m['startedAt'] as String),
     deckId: m['deckId'] as String?,
     deckTitle: m['deckTitle'] as String?,
+    provider: m['provider'] as String?,
+    certificationId: m['certificationId'] as String?,
+    examCode: m['examCode'] as String?,
     finishedAt: m['finishedAt'] != null
         ? DateTime.parse(m['finishedAt'] as String)
         : null,
@@ -155,4 +175,6 @@ class ExamAttempt {
         ) ??
         {},
   );
+
+  static const Object _sentinel = Object();
 }

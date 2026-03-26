@@ -8,6 +8,9 @@ class ExamResult {
     required this.completedAt,
     this.deckId,
     this.deckTitle,
+    this.provider,
+    this.certificationId,
+    this.examCode,
     this.durationSeconds,
     required this.totalQuestions,
     required this.correctAnswers,
@@ -23,6 +26,9 @@ class ExamResult {
   final DateTime completedAt;
   final String? deckId;
   final String? deckTitle;
+  final String? provider;
+  final String? certificationId;
+  final String? examCode;
   final int? durationSeconds;
   final int totalQuestions;
   final int correctAnswers;
@@ -38,6 +44,9 @@ class ExamResult {
     'completedAt': completedAt.toIso8601String(),
     'deckId': deckId,
     'deckTitle': deckTitle,
+    'provider': provider,
+    'certificationId': certificationId,
+    'examCode': examCode,
     'durationSeconds': durationSeconds,
     'totalQuestions': totalQuestions,
     'correctAnswers': correctAnswers,
@@ -54,6 +63,9 @@ class ExamResult {
     completedAt: DateTime.parse(map['completedAt'] as String),
     deckId: map['deckId'] as String?,
     deckTitle: map['deckTitle'] as String?,
+    provider: map['provider'] as String?,
+    certificationId: map['certificationId'] as String?,
+    examCode: map['examCode'] as String?,
     durationSeconds: (map['durationSeconds'] as num?)?.toInt(),
     totalQuestions: (map['totalQuestions'] as num).toInt(),
     correctAnswers: (map['correctAnswers'] as num).toInt(),
@@ -103,6 +115,9 @@ class ExamResult {
       completedAt: attempt.finishedAt ?? DateTime.now(),
       deckId: attempt.deckId,
       deckTitle: attempt.deckTitle,
+      provider: attempt.provider,
+      certificationId: attempt.certificationId,
+      examCode: attempt.examCode,
       durationSeconds: attempt.elapsedSeconds,
       totalQuestions: attempt.totalQuestions,
       correctAnswers: correctAnswers,

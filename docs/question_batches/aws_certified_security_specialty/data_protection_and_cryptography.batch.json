@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_security_specialty_scs_c02_scs-data-protection_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_scs",
+  "certificationTitle": "AWS Certified Security - Specialty",
+  "track": "Specialty",
+  "title": "AWS Certified Security - Specialty",
+  "examCode": "SCS-C02",
+  "category": "AWS Security",
+  "description": "Scenario practice batch for Data Protection and Cryptography.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Data Protection and Cryptography"
+  ],
+  "tags": [
+    "aws",
+    "aws_scs",
+    "scs-c02",
+    "specialty"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "scs_c02_ex_03_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 1",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A company needs full auditability and fine-grained control over the keys used to encrypt an Amazon S3 bucket. Which option is best?",
+      "answers": [
+        "SSE-S3",
+        "SSE-KMS with a customer managed key",
+        "Public read access",
+        "S3 website hosting"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Customer-managed KMS keys provide explicit policy control and better auditability than SSE-S3 alone.",
+      "fullExplanation": "Customer-managed KMS keys provide explicit policy control and better auditability than SSE-S3 alone.",
+      "explanation": "Customer-managed KMS keys provide explicit policy control and better auditability than SSE-S3 alone."
+    },
+    {
+      "id": "scs_c02_ex_03_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 2",
+      "objectiveId": "3.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "An application stores database credentials in AWS and requires automatic rotation. Which service should manage those secrets?",
+      "answers": [
+        "AWS Secrets Manager",
+        "Amazon Route 53",
+        "AWS Cost Explorer",
+        "Amazon MQ"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Secrets Manager is built for storing and rotating application secrets such as database credentials.",
+      "fullExplanation": "Secrets Manager is built for storing and rotating application secrets such as database credentials.",
+      "explanation": "Secrets Manager is built for storing and rotating application secrets such as database credentials."
+    },
+    {
+      "id": "scs_c02_ex_03_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 3",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team wants to identify buckets that contain personally identifiable information. Which managed service helps most?",
+      "answers": [
+        "Amazon Macie",
+        "AWS Shield Standard",
+        "AWS Batch",
+        "Amazon Route 53 Resolver"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Macie is the AWS service intended for PII discovery and classification in S3.",
+      "fullExplanation": "Amazon Macie is the AWS service intended for PII discovery and classification in S3.",
+      "explanation": "Amazon Macie is the AWS service intended for PII discovery and classification in S3."
+    },
+    {
+      "id": "scs_c02_ex_03_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 4",
+      "objectiveId": "3.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A security engineer plans to schedule deletion of a KMS key that still protects active data. What is the main risk?",
+      "answers": [
+        "Lower NAT gateway cost",
+        "Data may become permanently inaccessible",
+        "Improved CloudTrail retention",
+        "Automatic S3 replication"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Deleting an active KMS key can make encrypted data unreadable once the waiting period expires.",
+      "fullExplanation": "Deleting an active KMS key can make encrypted data unreadable once the waiting period expires.",
+      "explanation": "Deleting an active KMS key can make encrypted data unreadable once the waiting period expires."
+    },
+    {
+      "id": "scs_c02_ex_03_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 5",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team needs to protect data both in transit and at rest. Which pair of controls addresses both goals?",
+      "answers": [
+        "TLS plus encryption at rest",
+        "CloudWatch plus budgets",
+        "Security groups plus tags",
+        "S3 Transfer Acceleration plus Route 53"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Transit and at-rest protection are separate concerns and both must be addressed explicitly.",
+      "fullExplanation": "Transit and at-rest protection are separate concerns and both must be addressed explicitly.",
+      "explanation": "Transit and at-rest protection are separate concerns and both must be addressed explicitly."
+    },
+    {
+      "id": "scs_c02_ex_03_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 6",
+      "objectiveId": "3.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "Why might a security team choose a customer managed KMS key over an AWS managed key?",
+      "answers": [
+        "To remove all IAM requirements",
+        "To gain explicit policy control and lifecycle ownership",
+        "To disable CloudTrail",
+        "To avoid encryption costs entirely"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Customer managed keys are preferred when the team needs control over policy, grants, or lifecycle actions.",
+      "fullExplanation": "Customer managed keys are preferred when the team needs control over policy, grants, or lifecycle actions.",
+      "explanation": "Customer managed keys are preferred when the team needs control over policy, grants, or lifecycle actions."
+    },
+    {
+      "id": "scs_c02_ex_03_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 7",
+      "objectiveId": "3.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A data protection program wants to reduce the amount of sensitive data exposed to downstream systems. Which approach helps most?",
+      "answers": [
+        "Tokenization or data minimization",
+        "Public snapshots",
+        "Wider CIDR ranges",
+        "Longer SSH sessions"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Tokenization and minimization reduce how much sensitive data downstream systems ever handle.",
+      "fullExplanation": "Tokenization and minimization reduce how much sensitive data downstream systems ever handle.",
+      "explanation": "Tokenization and minimization reduce how much sensitive data downstream systems ever handle."
+    },
+    {
+      "id": "scs_c02_ex_03_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 8",
+      "objectiveId": "3.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "Which statement about backups is correct in a secure AWS design?",
+      "answers": [
+        "Backups can be less protected than primary data",
+        "Backups should be protected to the same standard as primary data",
+        "Backups do not need encryption",
+        "Backups do not need monitoring"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Backups often contain the same sensitive data and should receive equivalent protection.",
+      "fullExplanation": "Backups often contain the same sensitive data and should receive equivalent protection.",
+      "explanation": "Backups often contain the same sensitive data and should receive equivalent protection."
+    },
+    {
+      "id": "scs_c02_ex_03_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 9",
+      "objectiveId": "3.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team needs cryptographic controls for large-scale data processing with centralized key protection. Which pattern is commonly used?",
+      "answers": [
+        "Envelope encryption",
+        "Opening more ports",
+        "Disabling TLS",
+        "Public AMIs"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Envelope encryption scales cryptographic operations while keeping top-level keys centrally protected.",
+      "fullExplanation": "Envelope encryption scales cryptographic operations while keeping top-level keys centrally protected.",
+      "explanation": "Envelope encryption scales cryptographic operations while keeping top-level keys centrally protected."
+    },
+    {
+      "id": "scs_c02_ex_03_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 10",
+      "objectiveId": "3.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A company retains sensitive records indefinitely without a legal reason. What security issue does this create?",
+      "answers": [
+        "Reduced KMS API usage",
+        "Unnecessary long-term exposure",
+        "Improved least privilege",
+        "Faster scaling"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Unnecessary retention increases breach impact and expands the data that must be defended.",
+      "fullExplanation": "Unnecessary retention increases breach impact and expands the data that must be defended.",
+      "explanation": "Unnecessary retention increases breach impact and expands the data that must be defended."
+    },
+    {
+      "id": "scs_c02_ex_03_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 11",
+      "objectiveId": "3.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team believes Macie alone is enough to protect sensitive files in S3. What is the best correction?",
+      "answers": [
+        "Macie discovers data but encryption and access controls are still required",
+        "Macie replaces KMS entirely",
+        "Macie removes IAM requirements",
+        "Macie is a firewall service"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Macie helps find and classify sensitive data but does not replace preventive and detective controls around it.",
+      "fullExplanation": "Macie helps find and classify sensitive data but does not replace preventive and detective controls around it.",
+      "explanation": "Macie helps find and classify sensitive data but does not replace preventive and detective controls around it."
+    },
+    {
+      "id": "scs_c02_ex_03_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 12",
+      "objectiveId": "3.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A workload uses KMS heavily and needs to let one service use a key without broadening the key policy for everyone. What should be evaluated?",
+      "answers": [
+        "KMS grants",
+        "S3 inventory",
+        "Route 53 geolocation",
+        "Dedicated hosts"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "KMS grants are designed for scoped key usage delegation without large policy changes.",
+      "fullExplanation": "KMS grants are designed for scoped key usage delegation without large policy changes.",
+      "explanation": "KMS grants are designed for scoped key usage delegation without large policy changes."
+    },
+    {
+      "id": "scs_c02_ex_03_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 13",
+      "objectiveId": "3.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A security review shows TLS is terminated at a load balancer and traffic to backend services is plaintext. What is the concern?",
+      "answers": [
+        "The trust boundary may end too early for the sensitivity of the data",
+        "The S3 bucket will become public",
+        "KMS key rotation will stop",
+        "GuardDuty cannot run"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "TLS termination location matters because plaintext traffic behind the load balancer may still violate security requirements.",
+      "fullExplanation": "TLS termination location matters because plaintext traffic behind the load balancer may still violate security requirements.",
+      "explanation": "TLS termination location matters because plaintext traffic behind the load balancer may still violate security requirements."
+    },
+    {
+      "id": "scs_c02_ex_03_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 14",
+      "objectiveId": "3.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A compliance team needs to know which principals used a customer-managed key and when. Which AWS capability is most relevant?",
+      "answers": [
+        "KMS usage logged in CloudTrail",
+        "S3 lifecycle transitions",
+        "Route 53 query logging only",
+        "AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail records KMS API activity and supports auditing of key usage and administration.",
+      "fullExplanation": "CloudTrail records KMS API activity and supports auditing of key usage and administration.",
+      "explanation": "CloudTrail records KMS API activity and supports auditing of key usage and administration."
+    },
+    {
+      "id": "scs_c02_ex_03_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 15",
+      "objectiveId": "3.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A company encrypts everything at rest but does not classify its data. What is the main gap?",
+      "answers": [
+        "It may misapply controls and retention because it does not know what is sensitive",
+        "Encryption becomes invalid without tags",
+        "MFA stops working",
+        "S3 replication is disabled"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Classification is needed to prioritize controls, retention, and monitoring based on sensitivity and business impact.",
+      "fullExplanation": "Classification is needed to prioritize controls, retention, and monitoring based on sensitivity and business impact.",
+      "explanation": "Classification is needed to prioritize controls, retention, and monitoring based on sensitivity and business impact."
+    }
+  ]
+}

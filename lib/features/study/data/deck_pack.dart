@@ -13,11 +13,17 @@ class DeckPackMeta {
     required this.questionCount,
     required this.microCardCount,
     required this.examQuestionCount,
+    this.provider,
+    this.certificationId,
+    this.certificationTitle,
+    this.track,
     this.examCode,
     this.category,
     this.description,
     this.version,
     this.domains = const [],
+    this.tags = const [],
+    this.aliases = const [],
     this.isStarter = false,
     this.availabilityNote,
     this.invalidJsonMessage,
@@ -26,11 +32,17 @@ class DeckPackMeta {
   final String id;
   final String title;
   final String assetPath;
+  final String? provider;
+  final String? certificationId;
+  final String? certificationTitle;
+  final String? track;
   final String? examCode;
   final String? category;
   final String? description;
   final String? version;
   final List<String> domains;
+  final List<String> tags;
+  final List<String> aliases;
   final bool isStarter;
   final String? availabilityNote;
   final int questionCount;
@@ -43,9 +55,10 @@ class DeckPackMeta {
   bool get supportsFeed => microCardCount > 0;
   bool get supportsExam => examQuestionCount > 0;
   bool get isImportable => !hasInvalidJson && !isStarter && hasQuestions;
-  bool get isCertificationDeck => (examCode?.trim().isNotEmpty ?? false);
-  String get librarySection =>
-      isCertificationDeck ? 'Certifications' : 'General Knowledge';
+  bool get isCertificationDeck =>
+      (certificationId?.trim().isNotEmpty ?? false) ||
+      (examCode?.trim().isNotEmpty ?? false);
+  String get librarySection => 'Certifications';
 
   String get subtitle {
     final parts = <String>[
@@ -79,10 +92,16 @@ class DeckPackMeta {
       String id = fallbackId;
       String title = fallbackTitle;
       String? description;
+      String? provider;
+      String? certificationId;
+      String? certificationTitle;
+      String? track;
       String? examCode = _deriveExamCodeFromFilename(filename);
       String? category;
       String? version;
       List<String> domains = const [];
+      List<String> tags = const [];
+      List<String> aliases = const [];
       bool isStarter = false;
       String? availabilityNote;
       int questionCount = 0;
@@ -96,10 +115,16 @@ class DeckPackMeta {
         id = inspected.id;
         title = inspected.title;
         description = inspected.description;
+        provider = inspected.provider;
+        certificationId = inspected.certificationId;
+        certificationTitle = inspected.certificationTitle;
+        track = inspected.track;
         examCode = inspected.examCode ?? examCode;
         category = inspected.category;
         version = inspected.version;
         domains = inspected.domains;
+        tags = inspected.tags;
+        aliases = inspected.aliases;
         isStarter = inspected.isStarter;
         availabilityNote = inspected.availabilityNote;
         questionCount = inspected.questionCount;
@@ -114,11 +139,17 @@ class DeckPackMeta {
           id: id,
           title: title,
           assetPath: path,
+          provider: provider,
+          certificationId: certificationId,
+          certificationTitle: certificationTitle,
+          track: track,
           examCode: examCode,
           category: category,
           description: description,
           version: version,
           domains: domains,
+          tags: tags,
+          aliases: aliases,
           isStarter: isStarter,
           availabilityNote: availabilityNote,
           questionCount: questionCount,
@@ -137,10 +168,16 @@ class DeckPackMeta {
       final pseudoPath = 'user://$deckId';
       String title = deckId;
       String? description;
+      String? provider;
+      String? certificationId;
+      String? certificationTitle;
+      String? track;
       String? examCode;
       String? category;
       String? version;
       List<String> domains = const [];
+      List<String> tags = const [];
+      List<String> aliases = const [];
       bool isStarter = false;
       String? availabilityNote;
       int questionCount = 0;
@@ -152,10 +189,16 @@ class DeckPackMeta {
         final inspected = inspectJsonString(raw, assetPath: pseudoPath);
         title = inspected.title;
         description = inspected.description;
+        provider = inspected.provider;
+        certificationId = inspected.certificationId;
+        certificationTitle = inspected.certificationTitle;
+        track = inspected.track;
         examCode = inspected.examCode;
         category = inspected.category;
         version = inspected.version;
         domains = inspected.domains;
+        tags = inspected.tags;
+        aliases = inspected.aliases;
         isStarter = inspected.isStarter;
         availabilityNote = inspected.availabilityNote;
         questionCount = inspected.questionCount;
@@ -170,11 +213,17 @@ class DeckPackMeta {
           id: deckId,
           title: title,
           assetPath: pseudoPath,
+          provider: provider,
+          certificationId: certificationId,
+          certificationTitle: certificationTitle,
+          track: track,
           examCode: examCode,
           category: category,
           description: description,
           version: version,
           domains: domains,
+          tags: tags,
+          aliases: aliases,
           isStarter: isStarter,
           availabilityNote: availabilityNote,
           questionCount: questionCount,
@@ -215,11 +264,17 @@ class DeckPackMeta {
           id: meta.id,
           title: meta.title,
           assetPath: meta.assetPath,
+          provider: meta.provider,
+          certificationId: meta.certificationId,
+          certificationTitle: meta.certificationTitle,
+          track: meta.track,
           examCode: meta.examCode,
           category: meta.category,
           description: meta.description,
           version: meta.version,
           domains: meta.domains,
+          tags: meta.tags,
+          aliases: meta.aliases,
           isStarter: meta.isStarter,
           availabilityNote: meta.availabilityNote,
           questionCount: meta.questionCount,
@@ -243,9 +298,11 @@ class DeckPackItem {
     required this.id,
     required this.contentType,
     required this.category,
+    this.domainId,
     this.topic,
     this.subtopic,
     this.objectiveId,
+    this.tags = const [],
     required this.promptText,
     this.promptTextIt,
     this.explanationText,
@@ -259,9 +316,11 @@ class DeckPackItem {
   final String id;
   final String contentType;
   final String category;
+  final String? domainId;
   final String? topic;
   final String? subtopic;
   final String? objectiveId;
+  final List<String> tags;
   final String promptText;
   final String? promptTextIt;
   final String? explanationText;
@@ -321,9 +380,11 @@ class DeckPackItem {
           _nonEmptyString(j['category']) ??
           _nonEmptyString(j['domain']) ??
           _requiredString(j, 'category'),
+      domainId: _asString(j['domainId']),
       topic: _asString(j['topic']),
       subtopic: _asString(j['subtopic']),
       objectiveId: _asString(j['objectiveId']),
+      tags: _stringListOrEmpty(j['tags']),
       promptText:
           _nonEmptyString(j['promptText']) ??
           _nonEmptyString(j['question']) ??
@@ -339,17 +400,28 @@ class DeckPackItem {
     );
   }
 
-  StudyItem toStudyItem(String deckId, {bool isItalian = false}) => StudyItem(
+  StudyItem toStudyItem(
+    String deckId, {
+    String? provider,
+    String? certificationId,
+    bool isItalian = false,
+  }) => StudyItem(
     id: id,
     deckId: deckId,
+    provider: provider,
+    certificationId: certificationId,
     contentType: contentType == 'exam_question'
         ? ContentType.examQuestion
         : ContentType.microCard,
     category: category,
+    domainId: domainId,
     topic: topic,
     subtopic: subtopic,
     objectiveId: objectiveId,
-    promptText: (isItalian && promptTextIt != null) ? promptTextIt! : promptText,
+    tags: tags,
+    promptText: (isItalian && promptTextIt != null)
+        ? promptTextIt!
+        : promptText,
     explanationText: (isItalian && explanationTextIt != null)
         ? explanationTextIt
         : explanationText,
@@ -461,7 +533,8 @@ String _titleFromFilename(String filename) {
 
 String? _deriveExamCodeFromFilename(String filename) {
   final lower = filename.toLowerCase();
-  if (lower.contains('sec701')) return 'SY0-701';
+  if (lower.contains('saa_c03')) return 'SAA-C03';
+  if (lower.contains('scs_c02')) return 'SCS-C02';
   return null;
 }
 
@@ -503,10 +576,16 @@ DeckPackMeta _inspectDecodedDeck(dynamic decoded, {required String assetPath}) {
   String? id = fallbackId;
   String? title = fallbackTitle;
   String? description;
+  String? provider;
+  String? certificationId;
+  String? certificationTitle;
+  String? track;
   String? examCode = _deriveExamCodeFromFilename(filename);
   String? category;
   String? version;
   List<String> domains = const [];
+  List<String> tags = const [];
+  List<String> aliases = const [];
   bool isStarter = false;
   String? availabilityNote;
 
@@ -517,10 +596,16 @@ DeckPackMeta _inspectDecodedDeck(dynamic decoded, {required String assetPath}) {
         _nonEmptyString(decoded['name']) ??
         fallbackTitle;
     description = _nonEmptyString(decoded['description']);
+    provider = _nonEmptyString(decoded['provider']);
+    certificationId = _nonEmptyString(decoded['certificationId']);
+    certificationTitle = _nonEmptyString(decoded['certificationTitle']);
+    track = _nonEmptyString(decoded['track']);
     examCode = _nonEmptyString(decoded['examCode']) ?? examCode;
     category = _nonEmptyString(decoded['category']);
     version = _asString(decoded['version']);
     domains = _stringListOrEmpty(decoded['domains']);
+    tags = _stringListOrEmpty(decoded['tags']);
+    aliases = _stringListOrEmpty(decoded['aliases']);
     isStarter = (decoded['isStarter'] as bool?) ?? false;
     availabilityNote = _nonEmptyString(decoded['availabilityNote']);
   }
@@ -555,11 +640,17 @@ DeckPackMeta _inspectDecodedDeck(dynamic decoded, {required String assetPath}) {
     id: id,
     title: title,
     assetPath: assetPath,
+    provider: provider,
+    certificationId: certificationId,
+    certificationTitle: certificationTitle,
+    track: track,
     examCode: examCode,
     category: category,
     description: description,
     version: version,
     domains: domains,
+    tags: tags,
+    aliases: aliases,
     isStarter: isStarter,
     availabilityNote: availabilityNote,
     questionCount: list.length,

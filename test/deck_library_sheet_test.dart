@@ -7,38 +7,41 @@ import 'package:wolf_lab/features/study/presentation/controllers/deck_library_co
 import 'package:wolf_lab/features/study/presentation/widgets/deck_library_sheet.dart';
 
 void main() {
-  testWidgets('featured excludes active deck already shown in continue learning', (
+  testWidgets('library shows available AWS certification tracks', (
     tester,
   ) async {
-    const linuxDeck = DeckPackMeta(
-      id: 'linux_essentials_010_160',
-      assetPath: 'assets/decks/linux_essentials_010_160.json',
-      title: 'Linux Essentials',
-      category: 'Linux Administration',
-      examCode: '010-160',
-      description: 'Linux certification deck',
-      questionCount: 25,
-      domains: ['Linux'],
-      examQuestionCount: 25,
-      microCardCount: 0,
-      isStarter: false,
-      availabilityNote: null,
-      invalidJsonMessage: null,
+    const saaDeck = DeckPackMeta(
+      id: 'aws_certified_solutions_architect_associate_saa_c03',
+      assetPath:
+          'assets/decks/aws_certified_solutions_architect_associate_saa_c03.json',
+      provider: 'aws',
+      certificationId: 'aws_saa',
+      certificationTitle: 'AWS Certified Solutions Architect - Associate',
+      track: 'Associate',
+      title: 'AWS Certified Solutions Architect - Associate',
+      category: 'AWS Architecture',
+      examCode: 'SAA-C03',
+      description: 'Architecture study deck',
+      questionCount: 100,
+      domains: ['Design Secure Architectures'],
+      examQuestionCount: 40,
+      microCardCount: 60,
     );
-    const securityDeck = DeckPackMeta(
-      id: 'comptia_security_plus_sy0_701_pack_20',
-      assetPath: 'assets/decks/sec701_exam_pack_20.json',
-      title: 'CompTIA Security+ Pack 20',
-      category: 'Cybersecurity',
-      examCode: 'SY0-701',
-      description: 'Security+ deck',
-      questionCount: 20,
-      domains: ['Security'],
-      examQuestionCount: 20,
-      microCardCount: 0,
-      isStarter: false,
-      availabilityNote: null,
-      invalidJsonMessage: null,
+    const scsDeck = DeckPackMeta(
+      id: 'aws_certified_security_specialty_scs_c02',
+      assetPath: 'assets/decks/aws_certified_security_specialty_scs_c02.json',
+      provider: 'aws',
+      certificationId: 'aws_scs',
+      certificationTitle: 'AWS Certified Security - Specialty',
+      track: 'Specialty',
+      title: 'AWS Certified Security - Specialty',
+      category: 'AWS Security',
+      examCode: 'SCS-C02',
+      description: 'Security study deck',
+      questionCount: 100,
+      domains: ['Threat Detection and Monitoring'],
+      examQuestionCount: 40,
+      microCardCount: 60,
     );
 
     await tester.pumpWidget(
@@ -47,20 +50,20 @@ void main() {
           deckLibraryProvider.overrideWith(
             () => _FakeDeckLibraryNotifier(
               const DeckLibraryState(
-                packs: [linuxDeck, securityDeck],
-                activeDeckId: 'linux_essentials_010_160',
+                packs: [saaDeck, scsDeck],
+                activeDeckId:
+                    'aws_certified_solutions_architect_associate_saa_c03',
               ),
             ),
           ),
-          deckProgressSummariesProvider.overrideWithValue(
-            const {
-              'linux_essentials_010_160': DeckProgressSummary(
-                deckId: 'linux_essentials_010_160',
-                totalItems: 25,
-                reviewedItems: 3,
-              ),
-            },
-          ),
+          deckProgressSummariesProvider.overrideWithValue(const {
+            'aws_certified_solutions_architect_associate_saa_c03':
+                DeckProgressSummary(
+                  deckId: 'aws_certified_solutions_architect_associate_saa_c03',
+                  totalItems: 100,
+                  reviewedItems: 8,
+                ),
+          }),
         ],
         child: const MaterialApp(
           supportedLocales: AppLocalizations.supportedLocales,
@@ -72,11 +75,13 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    final libraryText = find.text('Linux Essentials');
-    expect(libraryText, findsOneWidget);
+    expect(
+      find.text('AWS Certified Solutions Architect - Associate'),
+      findsOneWidget,
+    );
     await tester.drag(find.byType(ListView), const Offset(0, -500));
     await tester.pumpAndSettle();
-    expect(find.text('CompTIA Security+ Pack 20'), findsOneWidget);
+    expect(find.text('AWS Certified Security - Specialty'), findsOneWidget);
   });
 }
 

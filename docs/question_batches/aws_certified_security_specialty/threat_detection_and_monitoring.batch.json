@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_security_specialty_scs_c02_scs-threat-detection_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_scs",
+  "certificationTitle": "AWS Certified Security - Specialty",
+  "track": "Specialty",
+  "title": "AWS Certified Security - Specialty",
+  "examCode": "SCS-C02",
+  "category": "AWS Security",
+  "description": "Scenario practice batch for Threat Detection and Monitoring.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Threat Detection and Monitoring"
+  ],
+  "tags": [
+    "aws",
+    "aws_scs",
+    "scs-c02",
+    "specialty"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "scs_c02_ex_01_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 1",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security team wants managed threat detection for malicious API activity, unusual data access, and suspicious instance behavior across AWS accounts. Which service should they enable?",
+      "answers": [
+        "AWS GuardDuty",
+        "AWS DataSync",
+        "Amazon Aurora",
+        "Amazon Route 53"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry.",
+      "fullExplanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry.",
+      "explanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry."
+    },
+    {
+      "id": "scs_c02_ex_01_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 2",
+      "objectiveId": "1.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "The team needs one place to aggregate security findings from GuardDuty, Inspector, and partner tools. Which service should be used?",
+      "answers": [
+        "AWS Security Hub",
+        "Amazon EventBridge Scheduler",
+        "AWS Artifact",
+        "AWS Backup"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Security Hub is the aggregation layer for findings and posture data from integrated security services.",
+      "fullExplanation": "Security Hub is the aggregation layer for findings and posture data from integrated security services.",
+      "explanation": "Security Hub is the aggregation layer for findings and posture data from integrated security services."
+    },
+    {
+      "id": "scs_c02_ex_01_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 3",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "An analyst wants to investigate which IP addresses communicated with an EC2 instance during a suspected intrusion. Which telemetry source is most helpful?",
+      "answers": [
+        "VPC Flow Logs",
+        "AWS Budgets",
+        "S3 Inventory",
+        "Amazon CloudFront Functions"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "VPC Flow Logs are the direct network telemetry source for accepted and rejected traffic patterns in a VPC.",
+      "fullExplanation": "VPC Flow Logs are the direct network telemetry source for accepted and rejected traffic patterns in a VPC.",
+      "explanation": "VPC Flow Logs are the direct network telemetry source for accepted and rejected traffic patterns in a VPC."
+    },
+    {
+      "id": "scs_c02_ex_01_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 4",
+      "objectiveId": "1.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A company wants notifications whenever an IAM policy change occurs in a production account. Which foundational service must be enabled?",
+      "answers": [
+        "AWS CloudTrail",
+        "Amazon FSx",
+        "Amazon MQ",
+        "AWS Snowball"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail is required because it records IAM and other AWS API changes that can then trigger alerting.",
+      "fullExplanation": "CloudTrail is required because it records IAM and other AWS API changes that can then trigger alerting.",
+      "explanation": "CloudTrail is required because it records IAM and other AWS API changes that can then trigger alerting."
+    },
+    {
+      "id": "scs_c02_ex_01_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 5",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security team wants to discover sensitive data such as PII stored in S3 buckets. Which service best fits?",
+      "answers": [
+        "Amazon Macie",
+        "Amazon Detective",
+        "AWS Shield Standard",
+        "AWS AppConfig"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Macie is purpose-built for sensitive data discovery and classification in Amazon S3.",
+      "fullExplanation": "Macie is purpose-built for sensitive data discovery and classification in Amazon S3.",
+      "explanation": "Macie is purpose-built for sensitive data discovery and classification in Amazon S3."
+    },
+    {
+      "id": "scs_c02_ex_01_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 6",
+      "objectiveId": "1.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "Which service helps analysts pivot through related events, users, IP addresses, and resources during an AWS security investigation?",
+      "answers": [
+        "Amazon Detective",
+        "AWS Lambda",
+        "AWS Organizations",
+        "AWS Data Exchange"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Detective builds a graph of relationships that helps analysts investigate findings faster.",
+      "fullExplanation": "Detective builds a graph of relationships that helps analysts investigate findings faster.",
+      "explanation": "Detective builds a graph of relationships that helps analysts investigate findings faster."
+    },
+    {
+      "id": "scs_c02_ex_01_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 7",
+      "objectiveId": "1.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A multi-account environment needs centralized security visibility with findings rolled up into a delegated admin account. Which pattern is best?",
+      "answers": [
+        "Enable every service only in the management account",
+        "Use organization-wide delegated administration for security tooling",
+        "Create separate root users in each account",
+        "Turn off member account logging"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Delegated administration gives a central security account visibility while preserving account boundaries.",
+      "fullExplanation": "Delegated administration gives a central security account visibility while preserving account boundaries.",
+      "explanation": "Delegated administration gives a central security account visibility while preserving account boundaries."
+    },
+    {
+      "id": "scs_c02_ex_01_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 8",
+      "objectiveId": "1.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A team receives too many low-value alerts and important findings are missed. What process improvement has the highest impact?",
+      "answers": [
+        "Increase log retention only",
+        "Tune detections and add severity-based triage",
+        "Disable GuardDuty",
+        "Reduce CloudTrail coverage"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Better tuning and severity-based triage improve analyst focus and reduce alert fatigue.",
+      "fullExplanation": "Better tuning and severity-based triage improve analyst focus and reduce alert fatigue.",
+      "explanation": "Better tuning and severity-based triage improve analyst focus and reduce alert fatigue."
+    },
+    {
+      "id": "scs_c02_ex_01_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 9",
+      "objectiveId": "1.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "An architect wants to know whenever a security group allows unrestricted SSH access. Which service can continuously evaluate that configuration?",
+      "answers": [
+        "AWS Config",
+        "Amazon Personalize",
+        "AWS DataSync",
+        "Amazon AppFlow"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS Config can continuously evaluate resources against rules such as unrestricted SSH access.",
+      "fullExplanation": "AWS Config can continuously evaluate resources against rules such as unrestricted SSH access.",
+      "explanation": "AWS Config can continuously evaluate resources against rules such as unrestricted SSH access."
+    },
+    {
+      "id": "scs_c02_ex_01_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 10",
+      "objectiveId": "1.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "The team wants automated notification when a high-severity GuardDuty finding appears. What is a common serverless pattern?",
+      "answers": [
+        "GuardDuty -> EventBridge -> Lambda or SNS",
+        "GuardDuty -> Route 53 -> NAT gateway",
+        "CloudFormation -> Budgets -> S3",
+        "Inspector -> VPC peering -> IAM"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "EventBridge is commonly used to route findings to automated responders or notification targets.",
+      "fullExplanation": "EventBridge is commonly used to route findings to automated responders or notification targets.",
+      "explanation": "EventBridge is commonly used to route findings to automated responders or notification targets."
+    },
+    {
+      "id": "scs_c02_ex_01_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 11",
+      "objectiveId": "1.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A company centralizes logs but analysts still cannot quickly tell which team owns an affected resource. What should be added?",
+      "answers": [
+        "Tag-based enrichment in the alert pipeline",
+        "More NAT gateways",
+        "Longer VPC CIDR ranges",
+        "Dedicated hosts"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Enriching alerts with ownership context reduces triage time and improves response routing.",
+      "fullExplanation": "Enriching alerts with ownership context reduces triage time and improves response routing.",
+      "explanation": "Enriching alerts with ownership context reduces triage time and improves response routing."
+    },
+    {
+      "id": "scs_c02_ex_01_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 12",
+      "objectiveId": "1.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security lead wants both raw telemetry and interpreted threat findings. Which combination best fits?",
+      "answers": [
+        "CloudTrail plus GuardDuty",
+        "Security groups plus Route 53",
+        "AWS Backup plus S3 Inventory",
+        "Macie plus Savings Plans"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail supplies the raw API trail while GuardDuty turns AWS telemetry into threat detections.",
+      "fullExplanation": "CloudTrail supplies the raw API trail while GuardDuty turns AWS telemetry into threat detections.",
+      "explanation": "CloudTrail supplies the raw API trail while GuardDuty turns AWS telemetry into threat detections."
+    },
+    {
+      "id": "scs_c02_ex_01_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 13",
+      "objectiveId": "1.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "An organization wants one security team to see findings from every member account without logging into each account manually. What is the best design?",
+      "answers": [
+        "Use a centralized delegated admin account for the services",
+        "Share root credentials among analysts",
+        "Create a bastion host in every account",
+        "Disable IAM roles"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Central delegated administration is the scalable pattern for shared visibility across AWS Organizations.",
+      "fullExplanation": "Central delegated administration is the scalable pattern for shared visibility across AWS Organizations.",
+      "explanation": "Central delegated administration is the scalable pattern for shared visibility across AWS Organizations."
+    },
+    {
+      "id": "scs_c02_ex_01_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 14",
+      "objectiveId": "1.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A SOC notices many medium-severity alerts from expected penetration tests. What is the best next step?",
+      "answers": [
+        "Tune or suppress expected findings with documented process",
+        "Disable all alerting",
+        "Delete CloudTrail trails",
+        "Reduce VPC Flow Logs retention to one day"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Expected activity should be tuned carefully to preserve signal quality without removing important coverage.",
+      "fullExplanation": "Expected activity should be tuned carefully to preserve signal quality without removing important coverage.",
+      "explanation": "Expected activity should be tuned carefully to preserve signal quality without removing important coverage."
+    },
+    {
+      "id": "scs_c02_ex_01_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 15",
+      "objectiveId": "1.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A new monitoring architecture only logs API calls but ignores data access and network telemetry. What is the biggest weakness?",
+      "answers": [
+        "Coverage gaps will miss whole classes of suspicious behavior",
+        "CloudTrail will stop working",
+        "Security Hub will delete findings",
+        "IAM roles cannot be used"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Detection quality suffers when visibility excludes network flows and sensitive data access patterns.",
+      "fullExplanation": "Detection quality suffers when visibility excludes network flows and sensitive data access patterns.",
+      "explanation": "Detection quality suffers when visibility excludes network flows and sensitive data access patterns."
+    }
+  ]
+}

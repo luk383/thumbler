@@ -111,6 +111,9 @@ class ExamNotifier extends Notifier<ExamState> {
       startedAt: DateTime.now(),
       deckId: activeDeck?.id,
       deckTitle: activeDeck?.title,
+      provider: activeDeck?.provider,
+      certificationId: activeDeck?.certificationId,
+      examCode: activeDeck?.examCode,
       totalQuestions: count,
       durationSeconds: durationSeconds,
       remainingSeconds: durationSeconds,
@@ -186,7 +189,7 @@ class ExamNotifier extends Notifier<ExamState> {
     if (state.currentIndex < max) {
       final nextIndex = state.currentIndex + 1;
       state = state.copyWith(currentIndex: nextIndex);
-      
+
       // Persist currentIndex in active attempt
       if (state.phase == ExamPhase.active && state.activeAttempt != null) {
         final updated = state.activeAttempt!.copyWith(currentIndex: nextIndex);
@@ -313,8 +316,10 @@ class ExamNotifier extends Notifier<ExamState> {
 
     final nextResults = ref.read(examHistoryStorageProvider).loadResults();
     final nextHistory = ref.read(examAttemptStorageProvider).loadHistory();
-    final deletingCurrent = state.activeAttempt?.deckId == activeDeckId &&
-        (state.phase == ExamPhase.results || state.phase == ExamPhase.reviewing);
+    final deletingCurrent =
+        state.activeAttempt?.deckId == activeDeckId &&
+        (state.phase == ExamPhase.results ||
+            state.phase == ExamPhase.reviewing);
     final questions = ExamQuestionRepository().loadAll(deckId: activeDeckId);
 
     state = state.copyWith(
@@ -408,7 +413,9 @@ class ExamNotifier extends Notifier<ExamState> {
 
   /// Best score percentage across all completed history attempts.
   int get bestScorePct {
-    final completed = state.history.where((a) => a.isCompleted && a.totalQuestions > 0);
+    final completed = state.history.where(
+      (a) => a.isCompleted && a.totalQuestions > 0,
+    );
     if (completed.isEmpty) return 0;
     return completed
         .map((a) => (a.scoreCorrect / a.totalQuestions * 100).round())

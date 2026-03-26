@@ -1,0 +1,56 @@
+{
+  "id": "aws_certified_security_specialty_scs_c02",
+  "provider": "aws",
+  "certificationId": "aws_scs",
+  "certificationTitle": "AWS Certified Security - Specialty",
+  "track": "Specialty",
+  "title": "AWS Certified Security - Specialty",
+  "examCode": "SCS-C02",
+  "category": "AWS Security",
+  "description": "Starter template for AWS Certified Security - Specialty decks.",
+  "version": "3",
+  "questionCount": 1,
+  "domains": [
+    "Threat Detection and Monitoring",
+    "Identity, Access, and Perimeter Controls",
+    "Data Protection and Cryptography",
+    "Incident Response and Infrastructure Protection"
+  ],
+  "tags": [
+    "aws",
+    "aws_scs",
+    "scs-c02",
+    "specialty"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "scs_c02_ex_01_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 1",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security team wants managed threat detection for malicious API activity, unusual data access, and suspicious instance behavior across AWS accounts. Which service should they enable?",
+      "answers": [
+        "AWS GuardDuty",
+        "AWS DataSync",
+        "Amazon Aurora",
+        "Amazon Route 53"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry.",
+      "fullExplanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry.",
+      "explanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry."
+    }
+  ]
+}

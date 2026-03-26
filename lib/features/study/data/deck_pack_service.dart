@@ -16,7 +16,11 @@ class DeckPackService {
         continue;
       }
 
-      final nextItem = item.toStudyItem(pack.meta.id);
+      final nextItem = item.toStudyItem(
+        pack.meta.id,
+        provider: pack.meta.provider,
+        certificationId: pack.meta.certificationId,
+      );
       final existing =
           storage.getById(item.id, deckId: pack.meta.id) ??
           storage.getById(item.id);

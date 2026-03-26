@@ -140,7 +140,7 @@ class DeckLibrarySheet extends ConsumerWidget {
                           AppPageIntro(
                             title: l10n.libraryTitle,
                             subtitle: lib.activeDeck == null
-                                ? 'Choose a broad topic deck for the Feed, or unlock Pro for personal and exam content.'
+                                ? 'Activate an AWS certification deck for flashcards, practice, and exam sessions.'
                                 : 'Current focus: ${lib.activeDeck!.title}',
                             trailing: lib.activeDeck == null
                                 ? null
@@ -153,10 +153,14 @@ class DeckLibrarySheet extends ConsumerWidget {
                           OutlinedButton.icon(
                             style: OutlinedButton.styleFrom(
                               foregroundColor: Colors.white70,
-                              side: BorderSide(color: Colors.white.withAlpha(30)),
+                              side: BorderSide(
+                                color: Colors.white.withAlpha(30),
+                              ),
                               padding: const EdgeInsets.symmetric(vertical: 14),
                             ),
-                            onPressed: lib.isDiscovering ? null : notifier.discoverPacks,
+                            onPressed: lib.isDiscovering
+                                ? null
+                                : notifier.discoverPacks,
                             icon: const Icon(Icons.refresh, size: 16),
                             label: Text(l10n.libraryRefresh),
                           ),
@@ -167,10 +171,15 @@ class DeckLibrarySheet extends ConsumerWidget {
                                 showAddStudyMaterialSheet(context, ref);
                                 return;
                               }
-                              openPaywall(context, featureName: 'Personal decks');
+                              openPaywall(
+                                context,
+                                featureName: 'Personal decks',
+                              );
                             },
                             icon: Icon(
-                              isPro ? Icons.add_circle_outline : Icons.lock_outline,
+                              isPro
+                                  ? Icons.add_circle_outline
+                                  : Icons.lock_outline,
                             ),
                             label: Text(
                               isPro
@@ -187,9 +196,13 @@ class DeckLibrarySheet extends ConsumerWidget {
                             )
                           else
                             TextButton.icon(
-                              onPressed: () =>
-                                  openPaywall(context, featureName: 'JSON deck import'),
-                              icon: const Icon(Icons.workspace_premium_outlined),
+                              onPressed: () => openPaywall(
+                                context,
+                                featureName: 'JSON deck import',
+                              ),
+                              icon: const Icon(
+                                Icons.workspace_premium_outlined,
+                              ),
                               label: Text(l10n.libraryProImport),
                             ),
                           if (!isPro) ...[
@@ -199,7 +212,10 @@ class DeckLibrarySheet extends ConsumerWidget {
                               tint: const Color(0xFF6C63FF),
                               child: Text(
                                 l10n.libraryPublicBuildNote,
-                                style: const TextStyle(color: Colors.white70, fontSize: 12),
+                                style: const TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           ],
@@ -308,12 +324,7 @@ class _LibraryHub extends StatelessWidget {
             orElse: () => null,
           );
 
-    final certificationPacks = packs
-        .where((pack) => pack.librarySection == 'Certifications')
-        .toList();
-    final topicPacks = packs
-        .where((pack) => pack.librarySection == 'General Knowledge')
-        .toList();
+    final certificationPacks = packs.toList();
 
     final continueLearning = _continueLearningPacks(
       packs: packs,
@@ -332,9 +343,11 @@ class _LibraryHub extends StatelessWidget {
     final certificationBrowse = certificationPacks
         .where((pack) => !pinnedIds.contains(pack.id))
         .toList();
-    final topicBrowse = topicPacks
-        .where((pack) => !pinnedIds.contains(pack.id))
-        .toList();
+    final groupedBrowse = <String, List<DeckPackMeta>>{};
+    for (final pack in certificationBrowse) {
+      final key = pack.certificationTitle ?? pack.title;
+      groupedBrowse.putIfAbsent(key, () => []).add(pack);
+    }
 
     return ListView(
       children: [
@@ -364,9 +377,9 @@ class _LibraryHub extends StatelessWidget {
           const SizedBox(height: 18),
         ],
         _LibrarySection(
-          title: 'Featured',
+          title: 'AWS Tracks',
           subtitle:
-              'A short list of broad topic decks that work well with the Feed.',
+              'Built-in certification decks with feed-ready flashcards and timed practice questions.',
           children: featured
               .map(
                 (meta) => _DeckHubCard(
@@ -386,12 +399,12 @@ class _LibraryHub extends StatelessWidget {
               .toList(),
         ),
         const SizedBox(height: 18),
-        if (certificationBrowse.isNotEmpty)
+        for (final entry in groupedBrowse.entries) ...[
           _LibrarySection(
-            title: 'Certifications',
+            title: entry.key,
             subtitle:
-                'Structured exam tracks live behind Pro and are best for timed practice.',
-            children: certificationBrowse
+                'Offline-first flashcards, guided practice, and exam questions mapped to certification domains.',
+            children: entry.value
                 .map(
                   (meta) => _DeckHubCard(
                     meta: meta,
@@ -409,30 +422,8 @@ class _LibraryHub extends StatelessWidget {
                 )
                 .toList(),
           ),
-        if (certificationBrowse.isNotEmpty) const SizedBox(height: 18),
-        if (topicBrowse.isNotEmpty)
-          _LibrarySection(
-            title: 'Explore Topics',
-            subtitle:
-                'General knowledge decks for broader learning and lightweight daily practice.',
-            children: topicBrowse
-                .map(
-                  (meta) => _DeckHubCard(
-                    meta: meta,
-                    progress: progressByDeck[meta.id],
-                    isActive: meta.id == activeDeckId,
-                    isLoading: isLoading(meta.id),
-                    result: resultFor(meta.id),
-                    onActivate: () => onActivate(meta),
-                    onStudy: () => onStudy(meta),
-                    onPractice: () => onPractice(meta),
-                    onExam: meta.supportsExam ? () => onExam(meta) : null,
-                    onExport: () => onExport(meta),
-                    onShare: () => onShare(meta),
-                  ),
-                )
-                .toList(),
-          ),
+          const SizedBox(height: 18),
+        ],
       ],
     );
   }
@@ -525,9 +516,7 @@ class _DeckHubCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppSurfaceIcon(
-                icon: meta.librarySection == 'Certifications'
-                    ? Icons.workspace_premium_outlined
-                    : Icons.explore_outlined,
+                icon: Icons.workspace_premium_outlined,
                 tint: status.tint,
                 size: 40,
               ),
@@ -571,13 +560,11 @@ class _DeckHubCard extends StatelessWidget {
             children: [
               _InfoChip(label: countLabel),
               _InfoChip(
-                label: meta.librarySection == 'Certifications'
-                    ? (meta.examCode ?? 'Certification')
-                    : 'Topic deck',
-                tint: meta.librarySection == 'Certifications'
-                    ? const Color(0xFF6C63FF)
-                    : Colors.tealAccent,
+                label: meta.examCode ?? 'AWS track',
+                tint: const Color(0xFF6C63FF),
               ),
+              if (meta.track?.trim().isNotEmpty == true)
+                _InfoChip(label: meta.track!, tint: Colors.tealAccent),
               if (meta.isStarter)
                 const _InfoChip(
                   label: 'Starter entry',
@@ -808,11 +795,8 @@ List<DeckPackMeta> _featuredPacks({
   Set<String> excludedIds = const {},
 }) {
   const preferredOrder = [
-    'general_knowledge_daily',
-    'technology_basics_daily',
-    'basic_science_daily',
-    'world_history_daily',
-    'world_geography_daily',
+    'aws_certified_solutions_architect_associate_saa_c03',
+    'aws_certified_security_specialty_scs_c02',
   ];
 
   final byId = {for (final pack in packs) pack.id: pack};

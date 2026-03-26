@@ -187,40 +187,44 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
   Future<String> cloneDeck(String sourceDeckId, {String? newTitle}) async {
     final storage = StudyStorage();
     final sourceItems = storage.allForDeck(sourceDeckId);
-    if (sourceItems.isEmpty) throw FormatException('Deck "$sourceDeckId" è vuoto.');
+    if (sourceItems.isEmpty)
+      throw FormatException('Deck "$sourceDeckId" è vuoto.');
 
     final newDeckId =
         '${sourceDeckId}_clone_${DateTime.now().millisecondsSinceEpoch}';
-    final clonedItems = sourceItems.map((item) {
-      return StudyItem(
-        id: '${item.id}_clone',
-        deckId: newDeckId,
-        contentType: item.contentType,
-        category: item.category,
-        topic: item.topic,
-        subtopic: item.subtopic,
-        objectiveId: item.objectiveId,
-        promptText: item.promptText,
-        explanationText: item.explanationText,
-        options: item.options,
-        correctAnswerIndex: item.correctAnswerIndex,
-        difficulty: item.difficulty,
-        userNote: item.userNote,
-        // Progress reset
-        easeFactor: 2.5,
-        srsInterval: 0,
-        srsRepetitions: 0,
-      );
-    }).toList(growable: false);
+    final clonedItems = sourceItems
+        .map((item) {
+          return StudyItem(
+            id: '${item.id}_clone',
+            deckId: newDeckId,
+            contentType: item.contentType,
+            category: item.category,
+            topic: item.topic,
+            subtopic: item.subtopic,
+            objectiveId: item.objectiveId,
+            promptText: item.promptText,
+            explanationText: item.explanationText,
+            options: item.options,
+            correctAnswerIndex: item.correctAnswerIndex,
+            difficulty: item.difficulty,
+            userNote: item.userNote,
+            // Progress reset
+            easeFactor: 2.5,
+            srsInterval: 0,
+            srsRepetitions: 0,
+          );
+        })
+        .toList(growable: false);
 
     for (final item in clonedItems) {
       storage.add(item);
     }
 
     // Persist a user-deck JSON entry so it shows in library
-    final sourcePack = state.packs
-        .cast<DeckPackMeta?>()
-        .firstWhere((p) => p?.id == sourceDeckId, orElse: () => null);
+    final sourcePack = state.packs.cast<DeckPackMeta?>().firstWhere(
+      (p) => p?.id == sourceDeckId,
+      orElse: () => null,
+    );
     final sourceJson = _storage.loadUserDeckJson(sourceDeckId);
     if (sourceJson != null) {
       final decoded = sourceJson.replaceFirst(
@@ -236,9 +240,13 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       await _storage.saveUserDeckJson(newDeckId, titled);
     } else {
       // Fallback: build minimal JSON
-      final title = newTitle ??
-          (sourcePack?.title != null ? '${sourcePack!.title} (copia)' : '$sourceDeckId (copia)');
-      final minimalJson = '{"id":"$newDeckId","title":"$title","category":"Importato","description":"","questions":[]}';
+      final title =
+          newTitle ??
+          (sourcePack?.title != null
+              ? '${sourcePack!.title} (copia)'
+              : '$sourceDeckId (copia)');
+      final minimalJson =
+          '{"id":"$newDeckId","title":"$title","category":"Importato","description":"","questions":[]}';
       await _storage.saveUserDeckJson(newDeckId, minimalJson);
     }
 
@@ -263,24 +271,26 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
       if (existingIds.contains(mergedId) || existingIds.contains(item.id)) {
         continue;
       }
-      storage.add(StudyItem(
-        id: mergedId,
-        deckId: targetDeckId,
-        contentType: item.contentType,
-        category: item.category,
-        topic: item.topic,
-        subtopic: item.subtopic,
-        objectiveId: item.objectiveId,
-        promptText: item.promptText,
-        explanationText: item.explanationText,
-        options: item.options,
-        correctAnswerIndex: item.correctAnswerIndex,
-        difficulty: item.difficulty,
-        userNote: item.userNote,
-        easeFactor: 2.5,
-        srsInterval: 0,
-        srsRepetitions: 0,
-      ));
+      storage.add(
+        StudyItem(
+          id: mergedId,
+          deckId: targetDeckId,
+          contentType: item.contentType,
+          category: item.category,
+          topic: item.topic,
+          subtopic: item.subtopic,
+          objectiveId: item.objectiveId,
+          promptText: item.promptText,
+          explanationText: item.explanationText,
+          options: item.options,
+          correctAnswerIndex: item.correctAnswerIndex,
+          difficulty: item.difficulty,
+          userNote: item.userNote,
+          easeFactor: 2.5,
+          srsInterval: 0,
+          srsRepetitions: 0,
+        ),
+      );
       added++;
     }
 
@@ -314,6 +324,7 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
     if (importable.isEmpty) return;
 
     final rankedCandidates = [
+      ...importable.where((pack) => pack.supportsFeed && pack.supportsExam),
       ...importable.where((pack) => pack.supportsFeed),
       ...importable.where((pack) => !pack.supportsFeed),
     ];
@@ -327,14 +338,17 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
     for (final pack in rankedCandidates) {
       final haystack = [
         pack.title,
+        pack.certificationTitle ?? '',
+        pack.track ?? '',
         pack.category ?? '',
         pack.examCode ?? '',
+        ...pack.tags,
         ...pack.domains,
       ].join(' ').toLowerCase();
 
       var score = 0;
       if (pack.supportsFeed) score += 2;
-      if (pack.librarySection == 'General Knowledge') score += 1;
+      if (pack.supportsExam) score += 2;
       for (final keywords in interestKeywords.values) {
         if (keywords.any(haystack.contains)) {
           score += 2;
@@ -352,23 +366,19 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
   }
 
   String? _defaultDeckId(List<DeckPackMeta> packs) {
-    final validDecks = packs.where((pack) => !pack.hasInvalidJson && pack.hasQuestions).toList();
+    final validDecks = packs
+        .where((pack) => !pack.hasInvalidJson && pack.hasQuestions)
+        .toList();
     if (validDecks.isEmpty) return null;
 
-    final preferredGeneralDecks =
+    final preferredDecks =
         validDecks
-            .where(
-              (pack) =>
-                  pack.librarySection == 'General Knowledge' &&
-                  pack.supportsFeed,
-            )
+            .where((pack) => pack.supportsFeed && pack.supportsExam)
             .toList()
           ..sort((a, b) {
             final preferredIds = [
-              'general_knowledge_daily',
-              'technology_basics_daily',
-              'basic_science_daily',
-              'world_history_daily',
+              'aws_certified_solutions_architect_associate_saa_c03',
+              'aws_certified_security_specialty_scs_c02',
             ];
             final aIndex = preferredIds.indexOf(a.id);
             final bIndex = preferredIds.indexOf(b.id);
@@ -381,7 +391,7 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
             if (byQuestions != 0) return byQuestions;
             return a.title.toLowerCase().compareTo(b.title.toLowerCase());
           });
-    if (preferredGeneralDecks.isNotEmpty) return preferredGeneralDecks.first.id;
+    if (preferredDecks.isNotEmpty) return preferredDecks.first.id;
 
     if (validDecks.length == 1) return validDecks.first.id;
     return validDecks.first.id;
@@ -402,16 +412,21 @@ class DeckLibraryNotifier extends Notifier<DeckLibraryState> {
 
 List<String> _interestKeywords(String interest) {
   switch (interest.toLowerCase()) {
-    case 'cybersecurity':
-      return const ['security', 'cyber', 'linux', 'threat'];
-    case 'cloud':
-      return const ['cloud', 'aws', 'architecture'];
-    case 'technology':
-      return const ['technology', 'computer', 'internet', 'ai', 'network'];
-    case 'science':
-      return const ['science', 'physics', 'chemistry', 'biology', 'astronomy'];
-    case 'history':
-      return const ['history', 'civilization', 'medieval', 'modern'];
+    case 'aws architecture':
+      return const ['aws', 'architecture', 'resilient', 'cost', 'compute'];
+    case 'aws security':
+      return const [
+        'aws',
+        'security',
+        'identity',
+        'kms',
+        'detective',
+        'guardduty',
+      ];
+    case 'cloud security':
+      return const ['cloud', 'security', 'iam', 'encryption', 'incident'];
+    case 'solutions design':
+      return const ['architecture', 'scalability', 'networking', 'storage'];
   }
   return [interest.toLowerCase()];
 }

@@ -1,0 +1,3952 @@
+{
+  "id": "aws_certified_security_specialty_scs_c02",
+  "provider": "aws",
+  "certificationId": "aws_scs",
+  "certificationTitle": "AWS Certified Security - Specialty",
+  "track": "Specialty",
+  "aliases": [
+    "aws_security_specialty_scs_c02",
+    "aws_certified_security_specialty"
+  ],
+  "title": "AWS Certified Security - Specialty",
+  "examCode": "SCS-C02",
+  "category": "AWS Security",
+  "description": "AWS Certified Security - Specialty offline study deck with exam-focused flashcards and scenario-based practice questions.",
+  "version": "3",
+  "questionCount": 140,
+  "domains": [
+    "Threat Detection and Monitoring",
+    "Identity, Access, and Perimeter Controls",
+    "Data Protection and Cryptography",
+    "Incident Response and Infrastructure Protection"
+  ],
+  "tags": [
+    "aws",
+    "aws_scs",
+    "scs-c02",
+    "specialty"
+  ],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "scs_c02_fc_01_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Detection",
+      "subtopic": "Managed Threat Detection",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "detection",
+        "managed-threat-detection"
+      ],
+      "question": "What is the best exam takeaway about guardduty finds suspicious behavior?",
+      "answers": [
+        "Amazon GuardDuty analyzes multiple AWS telemetry sources to surface threat findings without agent management.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon GuardDuty analyzes multiple AWS telemetry sources to surface threat findings without agent management.",
+      "fullExplanation": "Amazon GuardDuty analyzes multiple AWS telemetry sources to surface threat findings without agent management.",
+      "explanation": "Amazon GuardDuty analyzes multiple AWS telemetry sources to surface threat findings without agent management."
+    },
+    {
+      "id": "scs_c02_fc_01_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Posture",
+      "subtopic": "Centralized Findings",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "posture",
+        "centralized-findings"
+      ],
+      "question": "What is the best exam takeaway about security hub aggregates posture?",
+      "answers": [
+        "AWS Security Hub centralizes findings from security services and partner tools.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS Security Hub centralizes findings from security services and partner tools.",
+      "fullExplanation": "AWS Security Hub centralizes findings from security services and partner tools.",
+      "explanation": "AWS Security Hub centralizes findings from security services and partner tools."
+    },
+    {
+      "id": "scs_c02_fc_01_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Logging",
+      "subtopic": "API Telemetry",
+      "objectiveId": "1.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "logging",
+        "api-telemetry"
+      ],
+      "question": "What is the best exam takeaway about cloudtrail is foundational telemetry?",
+      "answers": [
+        "CloudTrail is the core source of AWS API activity used in monitoring and forensics.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail is the core source of AWS API activity used in monitoring and forensics.",
+      "fullExplanation": "CloudTrail is the core source of AWS API activity used in monitoring and forensics.",
+      "explanation": "CloudTrail is the core source of AWS API activity used in monitoring and forensics."
+    },
+    {
+      "id": "scs_c02_fc_01_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Networking",
+      "subtopic": "Traffic Visibility",
+      "objectiveId": "1.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "networking",
+        "traffic-visibility"
+      ],
+      "question": "What is the best exam takeaway about vpc flow logs show network paths?",
+      "answers": [
+        "Flow Logs help analysts understand accepted and rejected traffic in a VPC.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Flow Logs help analysts understand accepted and rejected traffic in a VPC.",
+      "fullExplanation": "Flow Logs help analysts understand accepted and rejected traffic in a VPC.",
+      "explanation": "Flow Logs help analysts understand accepted and rejected traffic in a VPC."
+    },
+    {
+      "id": "scs_c02_fc_01_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Monitoring",
+      "subtopic": "Alerting",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "monitoring",
+        "alerting"
+      ],
+      "question": "What is the best exam takeaway about cloudwatch alarms drive response?",
+      "answers": [
+        "Metric and log alarms can trigger notifications and automated containment workflows.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Metric and log alarms can trigger notifications and automated containment workflows.",
+      "fullExplanation": "Metric and log alarms can trigger notifications and automated containment workflows.",
+      "explanation": "Metric and log alarms can trigger notifications and automated containment workflows."
+    },
+    {
+      "id": "scs_c02_fc_01_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Compliance",
+      "subtopic": "Configuration Monitoring",
+      "objectiveId": "1.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "compliance",
+        "configuration-monitoring"
+      ],
+      "question": "What is the best exam takeaway about config tracks configuration drift?",
+      "answers": [
+        "AWS Config records configuration state and evaluates compliance continuously.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS Config records configuration state and evaluates compliance continuously.",
+      "fullExplanation": "AWS Config records configuration state and evaluates compliance continuously.",
+      "explanation": "AWS Config records configuration state and evaluates compliance continuously."
+    },
+    {
+      "id": "scs_c02_fc_01_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Data Security",
+      "subtopic": "Sensitive Data Discovery",
+      "objectiveId": "1.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "data-security",
+        "sensitive-data-discovery"
+      ],
+      "question": "What is the best exam takeaway about macie helps classify data?",
+      "answers": [
+        "Amazon Macie discovers and classifies sensitive data in S3.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Macie discovers and classifies sensitive data in S3.",
+      "fullExplanation": "Amazon Macie discovers and classifies sensitive data in S3.",
+      "explanation": "Amazon Macie discovers and classifies sensitive data in S3."
+    },
+    {
+      "id": "scs_c02_fc_01_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Investigations",
+      "subtopic": "Behavior Graph",
+      "objectiveId": "1.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "investigations",
+        "behavior-graph"
+      ],
+      "question": "What is the best exam takeaway about detective accelerates investigations?",
+      "answers": [
+        "Amazon Detective helps pivot across related entities during investigations.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Detective helps pivot across related entities during investigations.",
+      "fullExplanation": "Amazon Detective helps pivot across related entities during investigations.",
+      "explanation": "Amazon Detective helps pivot across related entities during investigations."
+    },
+    {
+      "id": "scs_c02_fc_01_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Forensics",
+      "subtopic": "Retention",
+      "objectiveId": "1.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "forensics",
+        "retention"
+      ],
+      "question": "What is the best exam takeaway about central log retention supports forensics?",
+      "answers": [
+        "Investigation quality improves when logs are centralized and retained appropriately.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Investigation quality improves when logs are centralized and retained appropriately.",
+      "fullExplanation": "Investigation quality improves when logs are centralized and retained appropriately.",
+      "explanation": "Investigation quality improves when logs are centralized and retained appropriately."
+    },
+    {
+      "id": "scs_c02_fc_01_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Operations",
+      "subtopic": "Behavior Baselines",
+      "objectiveId": "1.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "behavior-baselines"
+      ],
+      "question": "What is the best exam takeaway about baselines improve signal?",
+      "answers": [
+        "Understanding normal activity makes suspicious deviations easier to spot.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Understanding normal activity makes suspicious deviations easier to spot.",
+      "fullExplanation": "Understanding normal activity makes suspicious deviations easier to spot.",
+      "explanation": "Understanding normal activity makes suspicious deviations easier to spot."
+    },
+    {
+      "id": "scs_c02_fc_01_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Governance",
+      "subtopic": "Centralized Visibility",
+      "objectiveId": "1.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "governance",
+        "centralized-visibility"
+      ],
+      "question": "What is the best exam takeaway about cross-account visibility matters?",
+      "answers": [
+        "Central security accounts reduce blind spots in multi-account AWS organizations.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Central security accounts reduce blind spots in multi-account AWS organizations.",
+      "fullExplanation": "Central security accounts reduce blind spots in multi-account AWS organizations.",
+      "explanation": "Central security accounts reduce blind spots in multi-account AWS organizations."
+    },
+    {
+      "id": "scs_c02_fc_01_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Operations",
+      "subtopic": "Signal Quality",
+      "objectiveId": "1.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "signal-quality"
+      ],
+      "question": "What is the best exam takeaway about actionable alerts reduce fatigue?",
+      "answers": [
+        "Alert quality matters more than alert volume for an effective SOC.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Alert quality matters more than alert volume for an effective SOC.",
+      "fullExplanation": "Alert quality matters more than alert volume for an effective SOC.",
+      "explanation": "Alert quality matters more than alert volume for an effective SOC."
+    },
+    {
+      "id": "scs_c02_fc_01_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Architecture",
+      "subtopic": "Coverage",
+      "objectiveId": "1.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "coverage"
+      ],
+      "question": "What is the best exam takeaway about monitoring spans identity and network?",
+      "answers": [
+        "Effective monitoring covers identity events, network paths, resource changes, and data access.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Effective monitoring covers identity events, network paths, resource changes, and data access.",
+      "fullExplanation": "Effective monitoring covers identity events, network paths, resource changes, and data access.",
+      "explanation": "Effective monitoring covers identity events, network paths, resource changes, and data access."
+    },
+    {
+      "id": "scs_c02_fc_01_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Operations",
+      "subtopic": "Response Ownership",
+      "objectiveId": "1.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "response-ownership"
+      ],
+      "question": "What is the best exam takeaway about detections need ownership?",
+      "answers": [
+        "A finding is only useful if a team knows how to triage and respond to it.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "A finding is only useful if a team knows how to triage and respond to it.",
+      "fullExplanation": "A finding is only useful if a team knows how to triage and respond to it.",
+      "explanation": "A finding is only useful if a team knows how to triage and respond to it."
+    },
+    {
+      "id": "scs_c02_fc_01_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Automation",
+      "subtopic": "Enrichment",
+      "objectiveId": "1.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "automation",
+        "enrichment"
+      ],
+      "question": "What is the best exam takeaway about automated enrichment saves time?",
+      "answers": [
+        "Adding context like owner, environment, or resource type shortens triage time.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Adding context like owner, environment, or resource type shortens triage time.",
+      "fullExplanation": "Adding context like owner, environment, or resource type shortens triage time.",
+      "explanation": "Adding context like owner, environment, or resource type shortens triage time."
+    },
+    {
+      "id": "scs_c02_fc_01_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Operations",
+      "subtopic": "Prioritization",
+      "objectiveId": "1.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "prioritization"
+      ],
+      "question": "What is the best exam takeaway about findings need prioritization?",
+      "answers": [
+        "Severity and business impact help analysts focus on what matters first.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Severity and business impact help analysts focus on what matters first.",
+      "fullExplanation": "Severity and business impact help analysts focus on what matters first.",
+      "explanation": "Severity and business impact help analysts focus on what matters first."
+    },
+    {
+      "id": "scs_c02_fc_01_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Detection",
+      "subtopic": "Telemetry Layers",
+      "objectiveId": "1.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "detection",
+        "telemetry-layers"
+      ],
+      "question": "What is the best exam takeaway about cloudtrail plus guardduty is complementary?",
+      "answers": [
+        "CloudTrail records activity while GuardDuty interprets signals into findings.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail records activity while GuardDuty interprets signals into findings.",
+      "fullExplanation": "CloudTrail records activity while GuardDuty interprets signals into findings.",
+      "explanation": "CloudTrail records activity while GuardDuty interprets signals into findings."
+    },
+    {
+      "id": "scs_c02_fc_01_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Governance",
+      "subtopic": "Security Operations Model",
+      "objectiveId": "1.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "governance",
+        "security-operations-model"
+      ],
+      "question": "What is the best exam takeaway about visibility should be centralized?",
+      "answers": [
+        "Centralized security operations are easier when findings and logs converge in one place.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Centralized security operations are easier when findings and logs converge in one place.",
+      "fullExplanation": "Centralized security operations are easier when findings and logs converge in one place.",
+      "explanation": "Centralized security operations are easier when findings and logs converge in one place."
+    },
+    {
+      "id": "scs_c02_fc_01_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Operations",
+      "subtopic": "False Positives",
+      "objectiveId": "1.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "false-positives"
+      ],
+      "question": "What is the best exam takeaway about noisy controls can be harmful?",
+      "answers": [
+        "High false-positive volume can hide the few alerts that actually matter.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "High false-positive volume can hide the few alerts that actually matter.",
+      "fullExplanation": "High false-positive volume can hide the few alerts that actually matter.",
+      "explanation": "High false-positive volume can hide the few alerts that actually matter."
+    },
+    {
+      "id": "scs_c02_fc_01_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Architecture",
+      "subtopic": "Monitoring by Design",
+      "objectiveId": "1.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "monitoring-by-design"
+      ],
+      "question": "What is the best exam takeaway about monitoring design is a security architecture decision?",
+      "answers": [
+        "Security monitoring is not an afterthought; it influences account structure, logging, and ownership.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Security monitoring is not an afterthought; it influences account structure, logging, and ownership.",
+      "fullExplanation": "Security monitoring is not an afterthought; it influences account structure, logging, and ownership.",
+      "explanation": "Security monitoring is not an afterthought; it influences account structure, logging, and ownership."
+    },
+    {
+      "id": "scs_c02_fc_02_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Federation",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "federation"
+      ],
+      "question": "What is the best exam takeaway about federation reduces user sprawl?",
+      "answers": [
+        "Federated access centralizes workforce identity instead of creating many standalone IAM users.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Federated access centralizes workforce identity instead of creating many standalone IAM users.",
+      "fullExplanation": "Federated access centralizes workforce identity instead of creating many standalone IAM users.",
+      "explanation": "Federated access centralizes workforce identity instead of creating many standalone IAM users."
+    },
+    {
+      "id": "scs_c02_fc_02_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Delegation Guardrails",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "delegation-guardrails"
+      ],
+      "question": "What is the best exam takeaway about permission boundaries constrain delegation?",
+      "answers": [
+        "Permission boundaries cap the maximum permissions delegated admins can grant.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Permission boundaries cap the maximum permissions delegated admins can grant.",
+      "fullExplanation": "Permission boundaries cap the maximum permissions delegated admins can grant.",
+      "explanation": "Permission boundaries cap the maximum permissions delegated admins can grant."
+    },
+    {
+      "id": "scs_c02_fc_02_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Organizations",
+      "subtopic": "Guardrails",
+      "objectiveId": "2.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "organizations",
+        "guardrails"
+      ],
+      "question": "What is the best exam takeaway about scps set account guardrails?",
+      "answers": [
+        "Service control policies define the permission ceiling for accounts in an organization.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Service control policies define the permission ceiling for accounts in an organization.",
+      "fullExplanation": "Service control policies define the permission ceiling for accounts in an organization.",
+      "explanation": "Service control policies define the permission ceiling for accounts in an organization."
+    },
+    {
+      "id": "scs_c02_fc_02_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "MFA",
+      "objectiveId": "2.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "mfa"
+      ],
+      "question": "What is the best exam takeaway about mfa raises the bar?",
+      "answers": [
+        "MFA reduces the impact of password compromise and credential reuse.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "MFA reduces the impact of password compromise and credential reuse.",
+      "fullExplanation": "MFA reduces the impact of password compromise and credential reuse.",
+      "explanation": "MFA reduces the impact of password compromise and credential reuse."
+    },
+    {
+      "id": "scs_c02_fc_02_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Credential Strategy",
+      "objectiveId": "2.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "credential-strategy"
+      ],
+      "question": "What is the best exam takeaway about short-lived credentials are safer?",
+      "answers": [
+        "Temporary credentials lower exposure compared with long-lived access keys.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Temporary credentials lower exposure compared with long-lived access keys.",
+      "fullExplanation": "Temporary credentials lower exposure compared with long-lived access keys.",
+      "explanation": "Temporary credentials lower exposure compared with long-lived access keys."
+    },
+    {
+      "id": "scs_c02_fc_02_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Policy Evaluation",
+      "objectiveId": "2.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "policy-evaluation"
+      ],
+      "question": "What is the best exam takeaway about resource policies matter too?",
+      "answers": [
+        "Authorization can depend on both identity-based and resource-based policy evaluation.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Authorization can depend on both identity-based and resource-based policy evaluation.",
+      "fullExplanation": "Authorization can depend on both identity-based and resource-based policy evaluation.",
+      "explanation": "Authorization can depend on both identity-based and resource-based policy evaluation."
+    },
+    {
+      "id": "scs_c02_fc_02_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "ABAC",
+      "objectiveId": "2.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "abac"
+      ],
+      "question": "What is the best exam takeaway about session tags aid authorization?",
+      "answers": [
+        "Session tags let authorization decisions incorporate identity context dynamically.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Session tags let authorization decisions incorporate identity context dynamically.",
+      "fullExplanation": "Session tags let authorization decisions incorporate identity context dynamically.",
+      "explanation": "Session tags let authorization decisions incorporate identity context dynamically."
+    },
+    {
+      "id": "scs_c02_fc_02_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "ABAC",
+      "objectiveId": "2.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "abac"
+      ],
+      "question": "What is the best exam takeaway about abac scales with tags?",
+      "answers": [
+        "Attribute-based access control is often simpler than many static role permutations.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Attribute-based access control is often simpler than many static role permutations.",
+      "fullExplanation": "Attribute-based access control is often simpler than many static role permutations.",
+      "explanation": "Attribute-based access control is often simpler than many static role permutations."
+    },
+    {
+      "id": "scs_c02_fc_02_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Networking",
+      "subtopic": "Private Access",
+      "objectiveId": "2.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "networking",
+        "private-access"
+      ],
+      "question": "What is the best exam takeaway about private endpoints shrink perimeter?",
+      "answers": [
+        "Private service access reduces the need to expose administrative traffic to the internet.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Private service access reduces the need to expose administrative traffic to the internet.",
+      "fullExplanation": "Private service access reduces the need to expose administrative traffic to the internet.",
+      "explanation": "Private service access reduces the need to expose administrative traffic to the internet."
+    },
+    {
+      "id": "scs_c02_fc_02_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Continuous Least Privilege",
+      "objectiveId": "2.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "continuous-least-privilege"
+      ],
+      "question": "What is the best exam takeaway about least privilege is iterative?",
+      "answers": [
+        "Observed usage should continually refine overbroad permissions.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Observed usage should continually refine overbroad permissions.",
+      "fullExplanation": "Observed usage should continually refine overbroad permissions.",
+      "explanation": "Observed usage should continually refine overbroad permissions."
+    },
+    {
+      "id": "scs_c02_fc_02_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Operations",
+      "subtopic": "Break Glass",
+      "objectiveId": "2.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "break-glass"
+      ],
+      "question": "What is the best exam takeaway about break-glass access needs controls?",
+      "answers": [
+        "Emergency access must be monitored, restricted, and rotated after use.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Emergency access must be monitored, restricted, and rotated after use.",
+      "fullExplanation": "Emergency access must be monitored, restricted, and rotated after use.",
+      "explanation": "Emergency access must be monitored, restricted, and rotated after use."
+    },
+    {
+      "id": "scs_c02_fc_02_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Evaluation Logic",
+      "objectiveId": "2.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "evaluation-logic"
+      ],
+      "question": "What is the best exam takeaway about explicit deny wins?",
+      "answers": [
+        "In AWS policy evaluation, explicit deny overrides any allow.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "In AWS policy evaluation, explicit deny overrides any allow.",
+      "fullExplanation": "In AWS policy evaluation, explicit deny overrides any allow.",
+      "explanation": "In AWS policy evaluation, explicit deny overrides any allow."
+    },
+    {
+      "id": "scs_c02_fc_02_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Role Chaining",
+      "objectiveId": "2.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "role-chaining"
+      ],
+      "question": "What is the best exam takeaway about role chaining has limits?",
+      "answers": [
+        "Role chaining can affect session duration and operational design.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Role chaining can affect session duration and operational design.",
+      "fullExplanation": "Role chaining can affect session duration and operational design.",
+      "explanation": "Role chaining can affect session duration and operational design."
+    },
+    {
+      "id": "scs_c02_fc_02_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Organizations",
+      "subtopic": "Account Isolation",
+      "objectiveId": "2.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "organizations",
+        "account-isolation"
+      ],
+      "question": "What is the best exam takeaway about boundary between accounts matters?",
+      "answers": [
+        "Separate accounts are a first-class security and governance boundary.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Separate accounts are a first-class security and governance boundary.",
+      "fullExplanation": "Separate accounts are a first-class security and governance boundary.",
+      "explanation": "Separate accounts are a first-class security and governance boundary."
+    },
+    {
+      "id": "scs_c02_fc_02_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Architecture",
+      "subtopic": "Defense in Depth",
+      "objectiveId": "2.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "defense-in-depth"
+      ],
+      "question": "What is the best exam takeaway about identity and network controls complement each other?",
+      "answers": [
+        "Strong authorization and network segmentation work together in defense in depth.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Strong authorization and network segmentation work together in defense in depth.",
+      "fullExplanation": "Strong authorization and network segmentation work together in defense in depth.",
+      "explanation": "Strong authorization and network segmentation work together in defense in depth."
+    },
+    {
+      "id": "scs_c02_fc_02_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Workforce Access",
+      "objectiveId": "2.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "workforce-access"
+      ],
+      "question": "What is the best exam takeaway about iam identity center simplifies workforce access?",
+      "answers": [
+        "Identity Center is often the right choice for human access across multiple accounts.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Identity Center is often the right choice for human access across multiple accounts.",
+      "fullExplanation": "Identity Center is often the right choice for human access across multiple accounts.",
+      "explanation": "Identity Center is often the right choice for human access across multiple accounts."
+    },
+    {
+      "id": "scs_c02_fc_02_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Trust Policies",
+      "objectiveId": "2.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "trust-policies"
+      ],
+      "question": "What is the best exam takeaway about trust policies are half the picture?",
+      "answers": [
+        "Permissions do not matter if a principal cannot assume the role in the first place.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Permissions do not matter if a principal cannot assume the role in the first place.",
+      "fullExplanation": "Permissions do not matter if a principal cannot assume the role in the first place.",
+      "explanation": "Permissions do not matter if a principal cannot assume the role in the first place."
+    },
+    {
+      "id": "scs_c02_fc_02_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Role Design",
+      "objectiveId": "2.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "role-design"
+      ],
+      "question": "What is the best exam takeaway about permissions should map to job function?",
+      "answers": [
+        "Role design is strongest when aligned to responsibilities instead of individuals.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Role design is strongest when aligned to responsibilities instead of individuals.",
+      "fullExplanation": "Role design is strongest when aligned to responsibilities instead of individuals.",
+      "explanation": "Role design is strongest when aligned to responsibilities instead of individuals."
+    },
+    {
+      "id": "scs_c02_fc_02_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "IAM",
+      "subtopic": "Root Usage",
+      "objectiveId": "2.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "iam",
+        "root-usage"
+      ],
+      "question": "What is the best exam takeaway about root is not an admin account?",
+      "answers": [
+        "The root user is a break-glass account, not a daily operations persona.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "The root user is a break-glass account, not a daily operations persona.",
+      "fullExplanation": "The root user is a break-glass account, not a daily operations persona.",
+      "explanation": "The root user is a break-glass account, not a daily operations persona."
+    },
+    {
+      "id": "scs_c02_fc_02_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Architecture",
+      "subtopic": "Security Layers",
+      "objectiveId": "2.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "security-layers"
+      ],
+      "question": "What is the best exam takeaway about network isolation is not authorization?",
+      "answers": [
+        "Private networking does not replace IAM and resource policy enforcement.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Private networking does not replace IAM and resource policy enforcement.",
+      "fullExplanation": "Private networking does not replace IAM and resource policy enforcement.",
+      "explanation": "Private networking does not replace IAM and resource policy enforcement."
+    },
+    {
+      "id": "scs_c02_fc_03_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Cryptography",
+      "subtopic": "At Rest",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "cryptography",
+        "at-rest"
+      ],
+      "question": "What is the best exam takeaway about encryption at rest is table stakes?",
+      "answers": [
+        "Sensitive data should be encrypted at rest using service-native or customer-managed controls.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Sensitive data should be encrypted at rest using service-native or customer-managed controls.",
+      "fullExplanation": "Sensitive data should be encrypted at rest using service-native or customer-managed controls.",
+      "explanation": "Sensitive data should be encrypted at rest using service-native or customer-managed controls."
+    },
+    {
+      "id": "scs_c02_fc_03_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Cryptography",
+      "subtopic": "In Transit",
+      "objectiveId": "3.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "cryptography",
+        "in-transit"
+      ],
+      "question": "What is the best exam takeaway about encryption in transit is separate?",
+      "answers": [
+        "TLS protects data in transit and must be considered independently from storage encryption.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "TLS protects data in transit and must be considered independently from storage encryption.",
+      "fullExplanation": "TLS protects data in transit and must be considered independently from storage encryption.",
+      "explanation": "TLS protects data in transit and must be considered independently from storage encryption."
+    },
+    {
+      "id": "scs_c02_fc_03_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "KMS",
+      "subtopic": "Rotation",
+      "objectiveId": "3.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "kms",
+        "rotation"
+      ],
+      "question": "What is the best exam takeaway about key rotation reduces exposure?",
+      "answers": [
+        "Key rotation is part of healthy cryptographic lifecycle management.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Key rotation is part of healthy cryptographic lifecycle management.",
+      "fullExplanation": "Key rotation is part of healthy cryptographic lifecycle management.",
+      "explanation": "Key rotation is part of healthy cryptographic lifecycle management."
+    },
+    {
+      "id": "scs_c02_fc_03_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "KMS",
+      "subtopic": "Separation of Duties",
+      "objectiveId": "3.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "kms",
+        "separation-of-duties"
+      ],
+      "question": "What is the best exam takeaway about separation of duties matters?",
+      "answers": [
+        "Key administrators and data users should not always be the same principals.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Key administrators and data users should not always be the same principals.",
+      "fullExplanation": "Key administrators and data users should not always be the same principals.",
+      "explanation": "Key administrators and data users should not always be the same principals."
+    },
+    {
+      "id": "scs_c02_fc_03_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Security",
+      "subtopic": "Tokenization",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "data-security",
+        "tokenization"
+      ],
+      "question": "What is the best exam takeaway about tokenization can reduce scope?",
+      "answers": [
+        "Tokenization can reduce the downstream spread of sensitive values.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Tokenization can reduce the downstream spread of sensitive values.",
+      "fullExplanation": "Tokenization can reduce the downstream spread of sensitive values.",
+      "explanation": "Tokenization can reduce the downstream spread of sensitive values."
+    },
+    {
+      "id": "scs_c02_fc_03_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Security",
+      "subtopic": "Classification",
+      "objectiveId": "3.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "data-security",
+        "classification"
+      ],
+      "question": "What is the best exam takeaway about classify before protecting?",
+      "answers": [
+        "You need to know where sensitive data lives before choosing the right controls.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "You need to know where sensitive data lives before choosing the right controls.",
+      "fullExplanation": "You need to know where sensitive data lives before choosing the right controls.",
+      "explanation": "You need to know where sensitive data lives before choosing the right controls."
+    },
+    {
+      "id": "scs_c02_fc_03_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Security",
+      "subtopic": "Backup Security",
+      "objectiveId": "3.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "data-security",
+        "backup-security"
+      ],
+      "question": "What is the best exam takeaway about backups inherit sensitivity?",
+      "answers": [
+        "Backups and replicas must be protected to the same standard as primary data.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Backups and replicas must be protected to the same standard as primary data.",
+      "fullExplanation": "Backups and replicas must be protected to the same standard as primary data.",
+      "explanation": "Backups and replicas must be protected to the same standard as primary data."
+    },
+    {
+      "id": "scs_c02_fc_03_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "KMS",
+      "subtopic": "CMKs",
+      "objectiveId": "3.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "kms",
+        "cmks"
+      ],
+      "question": "What is the best exam takeaway about use customer-managed keys when control matters?",
+      "answers": [
+        "Customer-managed keys give the most flexibility for policy and lifecycle control.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Customer-managed keys give the most flexibility for policy and lifecycle control.",
+      "fullExplanation": "Customer-managed keys give the most flexibility for policy and lifecycle control.",
+      "explanation": "Customer-managed keys give the most flexibility for policy and lifecycle control."
+    },
+    {
+      "id": "scs_c02_fc_03_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Cryptography",
+      "subtopic": "Envelope Encryption",
+      "objectiveId": "3.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "cryptography",
+        "envelope-encryption"
+      ],
+      "question": "What is the best exam takeaway about envelope encryption scales?",
+      "answers": [
+        "Envelope encryption combines data keys with higher-level key protection for scalable cryptography.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Envelope encryption combines data keys with higher-level key protection for scalable cryptography.",
+      "fullExplanation": "Envelope encryption combines data keys with higher-level key protection for scalable cryptography.",
+      "explanation": "Envelope encryption combines data keys with higher-level key protection for scalable cryptography."
+    },
+    {
+      "id": "scs_c02_fc_03_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Governance",
+      "subtopic": "Data Minimization",
+      "objectiveId": "3.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "governance",
+        "data-minimization"
+      ],
+      "question": "What is the best exam takeaway about data minimization lowers risk?",
+      "answers": [
+        "The least risky sensitive data is the data you never store or retain unnecessarily.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "The least risky sensitive data is the data you never store or retain unnecessarily.",
+      "fullExplanation": "The least risky sensitive data is the data you never store or retain unnecessarily.",
+      "explanation": "The least risky sensitive data is the data you never store or retain unnecessarily."
+    },
+    {
+      "id": "scs_c02_fc_03_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Monitoring",
+      "subtopic": "Data Access Monitoring",
+      "objectiveId": "3.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "monitoring",
+        "data-access-monitoring"
+      ],
+      "question": "What is the best exam takeaway about access logs support data security?",
+      "answers": [
+        "Monitoring data access helps detect abuse and support investigations.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Monitoring data access helps detect abuse and support investigations.",
+      "fullExplanation": "Monitoring data access helps detect abuse and support investigations.",
+      "explanation": "Monitoring data access helps detect abuse and support investigations."
+    },
+    {
+      "id": "scs_c02_fc_03_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "KMS",
+      "subtopic": "Lifecycle Safety",
+      "objectiveId": "3.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "kms",
+        "lifecycle-safety"
+      ],
+      "question": "What is the best exam takeaway about key deletion needs planning?",
+      "answers": [
+        "Scheduling KMS key deletion without dependency analysis can break applications and recovery paths.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Scheduling KMS key deletion without dependency analysis can break applications and recovery paths.",
+      "fullExplanation": "Scheduling KMS key deletion without dependency analysis can break applications and recovery paths.",
+      "explanation": "Scheduling KMS key deletion without dependency analysis can break applications and recovery paths."
+    },
+    {
+      "id": "scs_c02_fc_03_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Cryptography",
+      "subtopic": "Control Tradeoffs",
+      "objectiveId": "3.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "cryptography",
+        "control-tradeoffs"
+      ],
+      "question": "What is the best exam takeaway about client-side versus server-side tradeoffs?",
+      "answers": [
+        "Client-side encryption increases control but also operational complexity.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Client-side encryption increases control but also operational complexity.",
+      "fullExplanation": "Client-side encryption increases control but also operational complexity.",
+      "explanation": "Client-side encryption increases control but also operational complexity."
+    },
+    {
+      "id": "scs_c02_fc_03_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Secrets",
+      "subtopic": "Classification",
+      "objectiveId": "3.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "secrets",
+        "classification"
+      ],
+      "question": "What is the best exam takeaway about secrets are not the same as keys?",
+      "answers": [
+        "Application secrets and cryptographic keys have different lifecycle and usage patterns.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Application secrets and cryptographic keys have different lifecycle and usage patterns.",
+      "fullExplanation": "Application secrets and cryptographic keys have different lifecycle and usage patterns.",
+      "explanation": "Application secrets and cryptographic keys have different lifecycle and usage patterns."
+    },
+    {
+      "id": "scs_c02_fc_03_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Governance",
+      "subtopic": "Retention",
+      "objectiveId": "3.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "governance",
+        "retention"
+      ],
+      "question": "What is the best exam takeaway about retention should be policy driven?",
+      "answers": [
+        "Sensitive data should not outlive the business or regulatory need for it.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Sensitive data should not outlive the business or regulatory need for it.",
+      "fullExplanation": "Sensitive data should not outlive the business or regulatory need for it.",
+      "explanation": "Sensitive data should not outlive the business or regulatory need for it."
+    },
+    {
+      "id": "scs_c02_fc_03_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Security",
+      "subtopic": "Tool Roles",
+      "objectiveId": "3.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "data-security",
+        "tool-roles"
+      ],
+      "question": "What is the best exam takeaway about macie is discovery, not encryption?",
+      "answers": [
+        "Macie helps find sensitive data but does not replace encryption or access control.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Macie helps find sensitive data but does not replace encryption or access control.",
+      "fullExplanation": "Macie helps find sensitive data but does not replace encryption or access control.",
+      "explanation": "Macie helps find sensitive data but does not replace encryption or access control."
+    },
+    {
+      "id": "scs_c02_fc_03_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "KMS",
+      "subtopic": "Grants",
+      "objectiveId": "3.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "kms",
+        "grants"
+      ],
+      "question": "What is the best exam takeaway about kms grants are operational tools?",
+      "answers": [
+        "Grants can enable specific services or workloads to use keys without broad policy edits.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Grants can enable specific services or workloads to use keys without broad policy edits.",
+      "fullExplanation": "Grants can enable specific services or workloads to use keys without broad policy edits.",
+      "explanation": "Grants can enable specific services or workloads to use keys without broad policy edits."
+    },
+    {
+      "id": "scs_c02_fc_03_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Cryptography",
+      "subtopic": "Termination Points",
+      "objectiveId": "3.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "cryptography",
+        "termination-points"
+      ],
+      "question": "What is the best exam takeaway about tls termination location matters?",
+      "answers": [
+        "Where TLS is terminated changes the trust boundary and the remaining internal exposure.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Where TLS is terminated changes the trust boundary and the remaining internal exposure.",
+      "fullExplanation": "Where TLS is terminated changes the trust boundary and the remaining internal exposure.",
+      "explanation": "Where TLS is terminated changes the trust boundary and the remaining internal exposure."
+    },
+    {
+      "id": "scs_c02_fc_03_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "KMS",
+      "subtopic": "Auditability",
+      "objectiveId": "3.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "kms",
+        "auditability"
+      ],
+      "question": "What is the best exam takeaway about auditability is part of protection?",
+      "answers": [
+        "Strong data protection includes who used a key, when, and for what purpose.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Strong data protection includes who used a key, when, and for what purpose.",
+      "fullExplanation": "Strong data protection includes who used a key, when, and for what purpose.",
+      "explanation": "Strong data protection includes who used a key, when, and for what purpose."
+    },
+    {
+      "id": "scs_c02_fc_03_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Architecture",
+      "subtopic": "Layered Controls",
+      "objectiveId": "3.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "layered-controls"
+      ],
+      "question": "What is the best exam takeaway about data protection is layered?",
+      "answers": [
+        "Encryption, access control, classification, and monitoring all contribute to secure data handling.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Encryption, access control, classification, and monitoring all contribute to secure data handling.",
+      "fullExplanation": "Encryption, access control, classification, and monitoring all contribute to secure data handling.",
+      "explanation": "Encryption, access control, classification, and monitoring all contribute to secure data handling."
+    },
+    {
+      "id": "scs_c02_fc_04_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response",
+      "subtopic": "Preparation",
+      "objectiveId": "4.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "incident-response",
+        "preparation"
+      ],
+      "question": "What is the best exam takeaway about preparation shortens incidents?",
+      "answers": [
+        "Runbooks, tested access, and clear ownership reduce time to contain and recover.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Runbooks, tested access, and clear ownership reduce time to contain and recover.",
+      "fullExplanation": "Runbooks, tested access, and clear ownership reduce time to contain and recover.",
+      "explanation": "Runbooks, tested access, and clear ownership reduce time to contain and recover."
+    },
+    {
+      "id": "scs_c02_fc_04_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response",
+      "subtopic": "Containment",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "incident-response",
+        "containment"
+      ],
+      "question": "What is the best exam takeaway about isolation limits blast radius?",
+      "answers": [
+        "Rapid containment is one of the most important objectives in incident response.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Rapid containment is one of the most important objectives in incident response.",
+      "fullExplanation": "Rapid containment is one of the most important objectives in incident response.",
+      "explanation": "Rapid containment is one of the most important objectives in incident response."
+    },
+    {
+      "id": "scs_c02_fc_04_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Forensics",
+      "subtopic": "Evidence Preservation",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "forensics",
+        "evidence-preservation"
+      ],
+      "question": "What is the best exam takeaway about forensics need evidence handling?",
+      "answers": [
+        "Logs, snapshots, and timelines must be preserved carefully for useful investigation.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Logs, snapshots, and timelines must be preserved carefully for useful investigation.",
+      "fullExplanation": "Logs, snapshots, and timelines must be preserved carefully for useful investigation.",
+      "explanation": "Logs, snapshots, and timelines must be preserved carefully for useful investigation."
+    },
+    {
+      "id": "scs_c02_fc_04_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Automation",
+      "subtopic": "Rapid Response",
+      "objectiveId": "4.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "automation",
+        "rapid-response"
+      ],
+      "question": "What is the best exam takeaway about automation speeds containment?",
+      "answers": [
+        "Serverless automation can isolate resources in seconds when findings appear.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Serverless automation can isolate resources in seconds when findings appear.",
+      "fullExplanation": "Serverless automation can isolate resources in seconds when findings appear.",
+      "explanation": "Serverless automation can isolate resources in seconds when findings appear."
+    },
+    {
+      "id": "scs_c02_fc_04_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Recovery",
+      "subtopic": "Validation",
+      "objectiveId": "4.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "recovery",
+        "validation"
+      ],
+      "question": "What is the best exam takeaway about recovery requires validation?",
+      "answers": [
+        "Recovery is incomplete until systems are verified and monitored for recurrence.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Recovery is incomplete until systems are verified and monitored for recurrence.",
+      "fullExplanation": "Recovery is incomplete until systems are verified and monitored for recurrence.",
+      "explanation": "Recovery is incomplete until systems are verified and monitored for recurrence."
+    },
+    {
+      "id": "scs_c02_fc_04_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response",
+      "subtopic": "Cloud-Specific Planning",
+      "objectiveId": "4.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "incident-response",
+        "cloud-specific-planning"
+      ],
+      "question": "What is the best exam takeaway about ir plans must reflect cloud reality?",
+      "answers": [
+        "Response plans should account for ephemeral resources, IAM, and managed services.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Response plans should account for ephemeral resources, IAM, and managed services.",
+      "fullExplanation": "Response plans should account for ephemeral resources, IAM, and managed services.",
+      "explanation": "Response plans should account for ephemeral resources, IAM, and managed services."
+    },
+    {
+      "id": "scs_c02_fc_04_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Infrastructure Security",
+      "subtopic": "Patching",
+      "objectiveId": "4.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "infrastructure-security",
+        "patching"
+      ],
+      "question": "What is the best exam takeaway about patch management is preventive security?",
+      "answers": [
+        "Timely patching reduces exposure to known exploitable vulnerabilities.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Timely patching reduces exposure to known exploitable vulnerabilities.",
+      "fullExplanation": "Timely patching reduces exposure to known exploitable vulnerabilities.",
+      "explanation": "Timely patching reduces exposure to known exploitable vulnerabilities."
+    },
+    {
+      "id": "scs_c02_fc_04_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Infrastructure Security",
+      "subtopic": "Edge Protection",
+      "objectiveId": "4.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "infrastructure-security",
+        "edge-protection"
+      ],
+      "question": "What is the best exam takeaway about waf and shield protect internet-facing apps?",
+      "answers": [
+        "Edge protections help absorb and block attacks before they reach origin services.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Edge protections help absorb and block attacks before they reach origin services.",
+      "fullExplanation": "Edge protections help absorb and block attacks before they reach origin services.",
+      "explanation": "Edge protections help absorb and block attacks before they reach origin services."
+    },
+    {
+      "id": "scs_c02_fc_04_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Infrastructure Security",
+      "subtopic": "Vulnerability Assessment",
+      "objectiveId": "4.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "infrastructure-security",
+        "vulnerability-assessment"
+      ],
+      "question": "What is the best exam takeaway about inspector supports vulnerability visibility?",
+      "answers": [
+        "Amazon Inspector helps identify vulnerabilities and unintended exposure on supported workloads.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Inspector helps identify vulnerabilities and unintended exposure on supported workloads.",
+      "fullExplanation": "Amazon Inspector helps identify vulnerabilities and unintended exposure on supported workloads.",
+      "explanation": "Amazon Inspector helps identify vulnerabilities and unintended exposure on supported workloads."
+    },
+    {
+      "id": "scs_c02_fc_04_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Architecture",
+      "subtopic": "Segmentation",
+      "objectiveId": "4.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "segmentation"
+      ],
+      "question": "What is the best exam takeaway about segmentation helps containment?",
+      "answers": [
+        "Smaller trust zones make containment easier during an incident.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Smaller trust zones make containment easier during an incident.",
+      "fullExplanation": "Smaller trust zones make containment easier during an incident.",
+      "explanation": "Smaller trust zones make containment easier during an incident."
+    },
+    {
+      "id": "scs_c02_fc_04_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Forensics",
+      "subtopic": "Snapshots",
+      "objectiveId": "4.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "forensics",
+        "snapshots"
+      ],
+      "question": "What is the best exam takeaway about snapshots can preserve state?",
+      "answers": [
+        "Snapshots can be useful for preserving evidence and accelerating recovery decisions.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Snapshots can be useful for preserving evidence and accelerating recovery decisions.",
+      "fullExplanation": "Snapshots can be useful for preserving evidence and accelerating recovery decisions.",
+      "explanation": "Snapshots can be useful for preserving evidence and accelerating recovery decisions."
+    },
+    {
+      "id": "scs_c02_fc_04_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response",
+      "subtopic": "Coordination",
+      "objectiveId": "4.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "incident-response",
+        "coordination"
+      ],
+      "question": "What is the best exam takeaway about communication matters during incidents?",
+      "answers": [
+        "Clear communication reduces confusion and supports coordinated decision-making.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Clear communication reduces confusion and supports coordinated decision-making.",
+      "fullExplanation": "Clear communication reduces confusion and supports coordinated decision-making.",
+      "explanation": "Clear communication reduces confusion and supports coordinated decision-making."
+    },
+    {
+      "id": "scs_c02_fc_04_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response",
+      "subtopic": "Tabletop Exercises",
+      "objectiveId": "4.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "incident-response",
+        "tabletop-exercises"
+      ],
+      "question": "What is the best exam takeaway about playbooks should be rehearsed?",
+      "answers": [
+        "Tabletops and exercises reveal missing permissions and unclear response steps.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Tabletops and exercises reveal missing permissions and unclear response steps.",
+      "fullExplanation": "Tabletops and exercises reveal missing permissions and unclear response steps.",
+      "explanation": "Tabletops and exercises reveal missing permissions and unclear response steps."
+    },
+    {
+      "id": "scs_c02_fc_04_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Operations",
+      "subtopic": "Continuous Improvement",
+      "objectiveId": "4.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "operations",
+        "continuous-improvement"
+      ],
+      "question": "What is the best exam takeaway about post-incident learning closes gaps?",
+      "answers": [
+        "Lessons learned should drive improvements in architecture and operations.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Lessons learned should drive improvements in architecture and operations.",
+      "fullExplanation": "Lessons learned should drive improvements in architecture and operations.",
+      "explanation": "Lessons learned should drive improvements in architecture and operations."
+    },
+    {
+      "id": "scs_c02_fc_04_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Architecture",
+      "subtopic": "Layered Protection",
+      "objectiveId": "4.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "layered-protection"
+      ],
+      "question": "What is the best exam takeaway about protection is layered?",
+      "answers": [
+        "Patching, segmentation, identity controls, and detections work together to reduce infrastructure risk.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Patching, segmentation, identity controls, and detections work together to reduce infrastructure risk.",
+      "fullExplanation": "Patching, segmentation, identity controls, and detections work together to reduce infrastructure risk.",
+      "explanation": "Patching, segmentation, identity controls, and detections work together to reduce infrastructure risk."
+    },
+    {
+      "id": "scs_c02_fc_04_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response",
+      "subtopic": "Quarantine Design",
+      "objectiveId": "4.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "incident-response",
+        "quarantine-design"
+      ],
+      "question": "What is the best exam takeaway about quarantine patterns should be predesigned?",
+      "answers": [
+        "You respond faster when isolation mechanisms exist before the incident begins.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "You respond faster when isolation mechanisms exist before the incident begins.",
+      "fullExplanation": "You respond faster when isolation mechanisms exist before the incident begins.",
+      "explanation": "You respond faster when isolation mechanisms exist before the incident begins."
+    },
+    {
+      "id": "scs_c02_fc_04_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Forensics",
+      "subtopic": "Ephemeral Evidence",
+      "objectiveId": "4.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "forensics",
+        "ephemeral-evidence"
+      ],
+      "question": "What is the best exam takeaway about evidence can disappear quickly?",
+      "answers": [
+        "Ephemeral cloud resources make log centralization and rapid evidence capture especially important.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Ephemeral cloud resources make log centralization and rapid evidence capture especially important.",
+      "fullExplanation": "Ephemeral cloud resources make log centralization and rapid evidence capture especially important.",
+      "explanation": "Ephemeral cloud resources make log centralization and rapid evidence capture especially important."
+    },
+    {
+      "id": "scs_c02_fc_04_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Recovery",
+      "subtopic": "Safe Recovery",
+      "objectiveId": "4.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "recovery",
+        "safe-recovery"
+      ],
+      "question": "What is the best exam takeaway about recovery should preserve trust?",
+      "answers": [
+        "Returning to service too quickly without validation can reintroduce compromise.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Returning to service too quickly without validation can reintroduce compromise.",
+      "fullExplanation": "Returning to service too quickly without validation can reintroduce compromise.",
+      "explanation": "Returning to service too quickly without validation can reintroduce compromise."
+    },
+    {
+      "id": "scs_c02_fc_04_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Infrastructure Security",
+      "subtopic": "DDoS Architecture",
+      "objectiveId": "4.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "infrastructure-security",
+        "ddos-architecture"
+      ],
+      "question": "What is the best exam takeaway about ddos defense is architectural?",
+      "answers": [
+        "Public application protection depends on edge services, scaling patterns, and response plans.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Public application protection depends on edge services, scaling patterns, and response plans.",
+      "fullExplanation": "Public application protection depends on edge services, scaling patterns, and response plans.",
+      "explanation": "Public application protection depends on edge services, scaling patterns, and response plans."
+    },
+    {
+      "id": "scs_c02_fc_04_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Architecture",
+      "subtopic": "Operating Model",
+      "objectiveId": "4.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "architecture",
+        "operating-model"
+      ],
+      "question": "What is the best exam takeaway about incident response is a systems discipline?",
+      "answers": [
+        "Good response depends on architecture, tooling, people, and process working together.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Security - Specialty.",
+        "It removes the need for IAM and network controls in AWS Certified Security - Specialty.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Good response depends on architecture, tooling, people, and process working together.",
+      "fullExplanation": "Good response depends on architecture, tooling, people, and process working together.",
+      "explanation": "Good response depends on architecture, tooling, people, and process working together."
+    },
+    {
+      "id": "scs_c02_ex_01_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 1",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security team wants managed threat detection for malicious API activity, unusual data access, and suspicious instance behavior across AWS accounts. Which service should they enable?",
+      "answers": [
+        "AWS GuardDuty",
+        "AWS DataSync",
+        "Amazon Aurora",
+        "Amazon Route 53"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry.",
+      "fullExplanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry.",
+      "explanation": "GuardDuty is AWS managed threat detection and is designed to surface malicious or anomalous behavior from AWS telemetry."
+    },
+    {
+      "id": "scs_c02_ex_01_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 2",
+      "objectiveId": "1.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "The team needs one place to aggregate security findings from GuardDuty, Inspector, and partner tools. Which service should be used?",
+      "answers": [
+        "AWS Security Hub",
+        "Amazon EventBridge Scheduler",
+        "AWS Artifact",
+        "AWS Backup"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Security Hub is the aggregation layer for findings and posture data from integrated security services.",
+      "fullExplanation": "Security Hub is the aggregation layer for findings and posture data from integrated security services.",
+      "explanation": "Security Hub is the aggregation layer for findings and posture data from integrated security services."
+    },
+    {
+      "id": "scs_c02_ex_01_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 3",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "An analyst wants to investigate which IP addresses communicated with an EC2 instance during a suspected intrusion. Which telemetry source is most helpful?",
+      "answers": [
+        "VPC Flow Logs",
+        "AWS Budgets",
+        "S3 Inventory",
+        "Amazon CloudFront Functions"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "VPC Flow Logs are the direct network telemetry source for accepted and rejected traffic patterns in a VPC.",
+      "fullExplanation": "VPC Flow Logs are the direct network telemetry source for accepted and rejected traffic patterns in a VPC.",
+      "explanation": "VPC Flow Logs are the direct network telemetry source for accepted and rejected traffic patterns in a VPC."
+    },
+    {
+      "id": "scs_c02_ex_01_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 4",
+      "objectiveId": "1.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A company wants notifications whenever an IAM policy change occurs in a production account. Which foundational service must be enabled?",
+      "answers": [
+        "AWS CloudTrail",
+        "Amazon FSx",
+        "Amazon MQ",
+        "AWS Snowball"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail is required because it records IAM and other AWS API changes that can then trigger alerting.",
+      "fullExplanation": "CloudTrail is required because it records IAM and other AWS API changes that can then trigger alerting.",
+      "explanation": "CloudTrail is required because it records IAM and other AWS API changes that can then trigger alerting."
+    },
+    {
+      "id": "scs_c02_ex_01_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 5",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security team wants to discover sensitive data such as PII stored in S3 buckets. Which service best fits?",
+      "answers": [
+        "Amazon Macie",
+        "Amazon Detective",
+        "AWS Shield Standard",
+        "AWS AppConfig"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Macie is purpose-built for sensitive data discovery and classification in Amazon S3.",
+      "fullExplanation": "Macie is purpose-built for sensitive data discovery and classification in Amazon S3.",
+      "explanation": "Macie is purpose-built for sensitive data discovery and classification in Amazon S3."
+    },
+    {
+      "id": "scs_c02_ex_01_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 6",
+      "objectiveId": "1.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "Which service helps analysts pivot through related events, users, IP addresses, and resources during an AWS security investigation?",
+      "answers": [
+        "Amazon Detective",
+        "AWS Lambda",
+        "AWS Organizations",
+        "AWS Data Exchange"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Detective builds a graph of relationships that helps analysts investigate findings faster.",
+      "fullExplanation": "Detective builds a graph of relationships that helps analysts investigate findings faster.",
+      "explanation": "Detective builds a graph of relationships that helps analysts investigate findings faster."
+    },
+    {
+      "id": "scs_c02_ex_01_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 7",
+      "objectiveId": "1.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A multi-account environment needs centralized security visibility with findings rolled up into a delegated admin account. Which pattern is best?",
+      "answers": [
+        "Enable every service only in the management account",
+        "Use organization-wide delegated administration for security tooling",
+        "Create separate root users in each account",
+        "Turn off member account logging"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Delegated administration gives a central security account visibility while preserving account boundaries.",
+      "fullExplanation": "Delegated administration gives a central security account visibility while preserving account boundaries.",
+      "explanation": "Delegated administration gives a central security account visibility while preserving account boundaries."
+    },
+    {
+      "id": "scs_c02_ex_01_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 8",
+      "objectiveId": "1.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A team receives too many low-value alerts and important findings are missed. What process improvement has the highest impact?",
+      "answers": [
+        "Increase log retention only",
+        "Tune detections and add severity-based triage",
+        "Disable GuardDuty",
+        "Reduce CloudTrail coverage"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Better tuning and severity-based triage improve analyst focus and reduce alert fatigue.",
+      "fullExplanation": "Better tuning and severity-based triage improve analyst focus and reduce alert fatigue.",
+      "explanation": "Better tuning and severity-based triage improve analyst focus and reduce alert fatigue."
+    },
+    {
+      "id": "scs_c02_ex_01_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 9",
+      "objectiveId": "1.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "An architect wants to know whenever a security group allows unrestricted SSH access. Which service can continuously evaluate that configuration?",
+      "answers": [
+        "AWS Config",
+        "Amazon Personalize",
+        "AWS DataSync",
+        "Amazon AppFlow"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS Config can continuously evaluate resources against rules such as unrestricted SSH access.",
+      "fullExplanation": "AWS Config can continuously evaluate resources against rules such as unrestricted SSH access.",
+      "explanation": "AWS Config can continuously evaluate resources against rules such as unrestricted SSH access."
+    },
+    {
+      "id": "scs_c02_ex_01_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 10",
+      "objectiveId": "1.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "The team wants automated notification when a high-severity GuardDuty finding appears. What is a common serverless pattern?",
+      "answers": [
+        "GuardDuty -> EventBridge -> Lambda or SNS",
+        "GuardDuty -> Route 53 -> NAT gateway",
+        "CloudFormation -> Budgets -> S3",
+        "Inspector -> VPC peering -> IAM"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "EventBridge is commonly used to route findings to automated responders or notification targets.",
+      "fullExplanation": "EventBridge is commonly used to route findings to automated responders or notification targets.",
+      "explanation": "EventBridge is commonly used to route findings to automated responders or notification targets."
+    },
+    {
+      "id": "scs_c02_ex_01_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 11",
+      "objectiveId": "1.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A company centralizes logs but analysts still cannot quickly tell which team owns an affected resource. What should be added?",
+      "answers": [
+        "Tag-based enrichment in the alert pipeline",
+        "More NAT gateways",
+        "Longer VPC CIDR ranges",
+        "Dedicated hosts"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Enriching alerts with ownership context reduces triage time and improves response routing.",
+      "fullExplanation": "Enriching alerts with ownership context reduces triage time and improves response routing.",
+      "explanation": "Enriching alerts with ownership context reduces triage time and improves response routing."
+    },
+    {
+      "id": "scs_c02_ex_01_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 12",
+      "objectiveId": "1.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A security lead wants both raw telemetry and interpreted threat findings. Which combination best fits?",
+      "answers": [
+        "CloudTrail plus GuardDuty",
+        "Security groups plus Route 53",
+        "AWS Backup plus S3 Inventory",
+        "Macie plus Savings Plans"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail supplies the raw API trail while GuardDuty turns AWS telemetry into threat detections.",
+      "fullExplanation": "CloudTrail supplies the raw API trail while GuardDuty turns AWS telemetry into threat detections.",
+      "explanation": "CloudTrail supplies the raw API trail while GuardDuty turns AWS telemetry into threat detections."
+    },
+    {
+      "id": "scs_c02_ex_01_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 13",
+      "objectiveId": "1.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "An organization wants one security team to see findings from every member account without logging into each account manually. What is the best design?",
+      "answers": [
+        "Use a centralized delegated admin account for the services",
+        "Share root credentials among analysts",
+        "Create a bastion host in every account",
+        "Disable IAM roles"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Central delegated administration is the scalable pattern for shared visibility across AWS Organizations.",
+      "fullExplanation": "Central delegated administration is the scalable pattern for shared visibility across AWS Organizations.",
+      "explanation": "Central delegated administration is the scalable pattern for shared visibility across AWS Organizations."
+    },
+    {
+      "id": "scs_c02_ex_01_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 14",
+      "objectiveId": "1.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A SOC notices many medium-severity alerts from expected penetration tests. What is the best next step?",
+      "answers": [
+        "Tune or suppress expected findings with documented process",
+        "Disable all alerting",
+        "Delete CloudTrail trails",
+        "Reduce VPC Flow Logs retention to one day"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Expected activity should be tuned carefully to preserve signal quality without removing important coverage.",
+      "fullExplanation": "Expected activity should be tuned carefully to preserve signal quality without removing important coverage.",
+      "explanation": "Expected activity should be tuned carefully to preserve signal quality without removing important coverage."
+    },
+    {
+      "id": "scs_c02_ex_01_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-threat-detection",
+      "domain": "Threat Detection and Monitoring",
+      "topic": "Threat Detection and Monitoring",
+      "subtopic": "Scenario 15",
+      "objectiveId": "1.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-threat-detection",
+        "scenario-based"
+      ],
+      "question": "A new monitoring architecture only logs API calls but ignores data access and network telemetry. What is the biggest weakness?",
+      "answers": [
+        "Coverage gaps will miss whole classes of suspicious behavior",
+        "CloudTrail will stop working",
+        "Security Hub will delete findings",
+        "IAM roles cannot be used"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Detection quality suffers when visibility excludes network flows and sensitive data access patterns.",
+      "fullExplanation": "Detection quality suffers when visibility excludes network flows and sensitive data access patterns.",
+      "explanation": "Detection quality suffers when visibility excludes network flows and sensitive data access patterns."
+    },
+    {
+      "id": "scs_c02_ex_02_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 1",
+      "objectiveId": "2.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A company wants developers to use their corporate identity provider to access AWS without creating IAM users in every account. Which approach is best?",
+      "answers": [
+        "IAM users with shared passwords",
+        "Federation through IAM Identity Center or a SAML/OIDC provider",
+        "Root user credentials for each team",
+        "Security groups with port 22 open"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Federation centralizes identity and avoids long-term IAM user sprawl in each AWS account.",
+      "fullExplanation": "Federation centralizes identity and avoids long-term IAM user sprawl in each AWS account.",
+      "explanation": "Federation centralizes identity and avoids long-term IAM user sprawl in each AWS account."
+    },
+    {
+      "id": "scs_c02_ex_02_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 2",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "An organization wants to prevent member accounts from disabling CloudTrail, even if an administrator in that account has broad permissions. Which control should be used?",
+      "answers": [
+        "A service control policy",
+        "A bucket ACL",
+        "A Lambda function timeout",
+        "An S3 lifecycle rule"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "SCPs define the maximum permissions allowed in the account and can block CloudTrail disable actions.",
+      "fullExplanation": "SCPs define the maximum permissions allowed in the account and can block CloudTrail disable actions.",
+      "explanation": "SCPs define the maximum permissions allowed in the account and can block CloudTrail disable actions."
+    },
+    {
+      "id": "scs_c02_ex_02_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 3",
+      "objectiveId": "2.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A platform team can create roles for application teams, but security wants to ensure those roles never exceed a defined maximum privilege level. What should be applied?",
+      "answers": [
+        "Permission boundaries",
+        "CloudFront origin groups",
+        "Amazon Inspector agents",
+        "NAT instances"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Permission boundaries cap the permissions delegated administrators can grant, which is exactly this use case.",
+      "fullExplanation": "Permission boundaries cap the permissions delegated administrators can grant, which is exactly this use case.",
+      "explanation": "Permission boundaries cap the permissions delegated administrators can grant, which is exactly this use case."
+    },
+    {
+      "id": "scs_c02_ex_02_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 4",
+      "objectiveId": "2.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A privileged role should require an additional verification step before use. Which feature should be enforced?",
+      "answers": [
+        "MFA",
+        "Faster snapshot restore",
+        "Reserved Instances",
+        "Enhanced networking"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "MFA is the standard control for increasing assurance on privileged role use.",
+      "fullExplanation": "MFA is the standard control for increasing assurance on privileged role use.",
+      "explanation": "MFA is the standard control for increasing assurance on privileged role use."
+    },
+    {
+      "id": "scs_c02_ex_02_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 5",
+      "objectiveId": "2.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A workload needs access to AWS APIs without exposing management traffic to the public internet. What should the architect add?",
+      "answers": [
+        "Interface VPC endpoints",
+        "Internet gateways in every subnet",
+        "Public IAM users",
+        "S3 static websites"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Interface endpoints let private subnets reach supported AWS APIs without public internet access.",
+      "fullExplanation": "Interface endpoints let private subnets reach supported AWS APIs without public internet access.",
+      "explanation": "Interface endpoints let private subnets reach supported AWS APIs without public internet access."
+    },
+    {
+      "id": "scs_c02_ex_02_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 6",
+      "objectiveId": "2.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "Security wants to authorize access based on tags such as project and environment rather than writing separate policies for every resource. Which model is best?",
+      "answers": [
+        "ABAC with session and resource tags",
+        "Static public IP allow lists only",
+        "Dedicated Hosts",
+        "Spot placement groups"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "ABAC scales authorization by matching tagged identities to tagged resources.",
+      "fullExplanation": "ABAC scales authorization by matching tagged identities to tagged resources.",
+      "explanation": "ABAC scales authorization by matching tagged identities to tagged resources."
+    },
+    {
+      "id": "scs_c02_ex_02_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 7",
+      "objectiveId": "2.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "Which statement about IAM policy evaluation is correct?",
+      "answers": [
+        "An explicit allow always wins",
+        "An explicit deny overrides allows",
+        "Resource policies are ignored",
+        "Permission boundaries grant access automatically"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Explicit deny has precedence over allow in AWS authorization evaluation.",
+      "fullExplanation": "Explicit deny has precedence over allow in AWS authorization evaluation.",
+      "explanation": "Explicit deny has precedence over allow in AWS authorization evaluation."
+    },
+    {
+      "id": "scs_c02_ex_02_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 8",
+      "objectiveId": "2.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A security team wants to reduce the risk of long-lived access keys for workloads. Which design is preferred?",
+      "answers": [
+        "Store keys in plaintext on disk",
+        "Use IAM roles and temporary credentials",
+        "Use the root user for automation",
+        "Disable CloudTrail"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "IAM roles provide temporary credentials and are the preferred way to authenticate workloads.",
+      "fullExplanation": "IAM roles provide temporary credentials and are the preferred way to authenticate workloads.",
+      "explanation": "IAM roles provide temporary credentials and are the preferred way to authenticate workloads."
+    },
+    {
+      "id": "scs_c02_ex_02_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 9",
+      "objectiveId": "2.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "An organization wants to isolate workloads with different trust levels and billing models. Which AWS concept provides a strong first-class boundary?",
+      "answers": [
+        "Separate AWS accounts",
+        "Separate IAM groups only",
+        "Separate VPC subnets only",
+        "Separate security groups only"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS accounts are a strong security, governance, and billing boundary.",
+      "fullExplanation": "AWS accounts are a strong security, governance, and billing boundary.",
+      "explanation": "AWS accounts are a strong security, governance, and billing boundary."
+    },
+    {
+      "id": "scs_c02_ex_02_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 10",
+      "objectiveId": "2.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "Emergency break-glass credentials are created for incident response. What additional control is most important?",
+      "answers": [
+        "Documented monitoring and credential rotation after use",
+        "Making them permanent for convenience",
+        "Disabling MFA on the account",
+        "Sharing them broadly across teams"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Break-glass access should be tightly monitored and rotated after use to preserve trust and accountability.",
+      "fullExplanation": "Break-glass access should be tightly monitored and rotated after use to preserve trust and accountability.",
+      "explanation": "Break-glass access should be tightly monitored and rotated after use to preserve trust and accountability."
+    },
+    {
+      "id": "scs_c02_ex_02_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 11",
+      "objectiveId": "2.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A team creates a role with broad permissions but forgets to update the trust policy for the identity provider. What is the practical result?",
+      "answers": [
+        "The role cannot be assumed as intended",
+        "The role becomes public automatically",
+        "The account loses CloudTrail",
+        "The VPC endpoint is deleted"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Without a correct trust policy, the principal cannot assume the role regardless of its permissions.",
+      "fullExplanation": "Without a correct trust policy, the principal cannot assume the role regardless of its permissions.",
+      "explanation": "Without a correct trust policy, the principal cannot assume the role regardless of its permissions."
+    },
+    {
+      "id": "scs_c02_ex_02_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 12",
+      "objectiveId": "2.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A company is building multi-account AWS access for employees. Which service is usually best for centralized workforce access at scale?",
+      "answers": [
+        "IAM Identity Center",
+        "Amazon Inspector",
+        "AWS Batch",
+        "Amazon MQ"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "IAM Identity Center is purpose-built for centralized human access across multiple AWS accounts.",
+      "fullExplanation": "IAM Identity Center is purpose-built for centralized human access across multiple AWS accounts.",
+      "explanation": "IAM Identity Center is purpose-built for centralized human access across multiple AWS accounts."
+    },
+    {
+      "id": "scs_c02_ex_02_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 13",
+      "objectiveId": "2.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A security architect says private subnets alone are enough to secure sensitive resources. What is the best response?",
+      "answers": [
+        "Private networking is helpful but IAM and resource policies are still required",
+        "Yes, IAM is unnecessary inside private subnets",
+        "Only root user access is needed",
+        "NACLs replace authorization entirely"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Network isolation does not replace identity and authorization controls in AWS.",
+      "fullExplanation": "Network isolation does not replace identity and authorization controls in AWS.",
+      "explanation": "Network isolation does not replace identity and authorization controls in AWS."
+    },
+    {
+      "id": "scs_c02_ex_02_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 14",
+      "objectiveId": "2.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A team wants admin rights for one hour during a deployment, then automatic expiration. Which design fits best?",
+      "answers": [
+        "Short-lived federated or assumed-role credentials",
+        "Permanent IAM users with admin access",
+        "Shared root credentials",
+        "A public bastion with static keys"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Temporary credentials align to least privilege and reduce long-lived admin exposure.",
+      "fullExplanation": "Temporary credentials align to least privilege and reduce long-lived admin exposure.",
+      "explanation": "Temporary credentials align to least privilege and reduce long-lived admin exposure."
+    },
+    {
+      "id": "scs_c02_ex_02_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 15",
+      "objectiveId": "2.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A company has dozens of nearly identical roles for each project and environment. Which authorization strategy may simplify the design?",
+      "answers": [
+        "ABAC based on tags",
+        "Dedicated hosts for each team",
+        "S3 Transfer Acceleration",
+        "Static passwords in Secrets Manager"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "ABAC can reduce role explosion by evaluating shared policy logic against tags.",
+      "fullExplanation": "ABAC can reduce role explosion by evaluating shared policy logic against tags.",
+      "explanation": "ABAC can reduce role explosion by evaluating shared policy logic against tags."
+    },
+    {
+      "id": "scs_c02_ex_03_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 1",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A company needs full auditability and fine-grained control over the keys used to encrypt an Amazon S3 bucket. Which option is best?",
+      "answers": [
+        "SSE-S3",
+        "SSE-KMS with a customer managed key",
+        "Public read access",
+        "S3 website hosting"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Customer-managed KMS keys provide explicit policy control and better auditability than SSE-S3 alone.",
+      "fullExplanation": "Customer-managed KMS keys provide explicit policy control and better auditability than SSE-S3 alone.",
+      "explanation": "Customer-managed KMS keys provide explicit policy control and better auditability than SSE-S3 alone."
+    },
+    {
+      "id": "scs_c02_ex_03_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 2",
+      "objectiveId": "3.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "An application stores database credentials in AWS and requires automatic rotation. Which service should manage those secrets?",
+      "answers": [
+        "AWS Secrets Manager",
+        "Amazon Route 53",
+        "AWS Cost Explorer",
+        "Amazon MQ"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Secrets Manager is built for storing and rotating application secrets such as database credentials.",
+      "fullExplanation": "Secrets Manager is built for storing and rotating application secrets such as database credentials.",
+      "explanation": "Secrets Manager is built for storing and rotating application secrets such as database credentials."
+    },
+    {
+      "id": "scs_c02_ex_03_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 3",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team wants to identify buckets that contain personally identifiable information. Which managed service helps most?",
+      "answers": [
+        "Amazon Macie",
+        "AWS Shield Standard",
+        "AWS Batch",
+        "Amazon Route 53 Resolver"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Macie is the AWS service intended for PII discovery and classification in S3.",
+      "fullExplanation": "Amazon Macie is the AWS service intended for PII discovery and classification in S3.",
+      "explanation": "Amazon Macie is the AWS service intended for PII discovery and classification in S3."
+    },
+    {
+      "id": "scs_c02_ex_03_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 4",
+      "objectiveId": "3.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A security engineer plans to schedule deletion of a KMS key that still protects active data. What is the main risk?",
+      "answers": [
+        "Lower NAT gateway cost",
+        "Data may become permanently inaccessible",
+        "Improved CloudTrail retention",
+        "Automatic S3 replication"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Deleting an active KMS key can make encrypted data unreadable once the waiting period expires.",
+      "fullExplanation": "Deleting an active KMS key can make encrypted data unreadable once the waiting period expires.",
+      "explanation": "Deleting an active KMS key can make encrypted data unreadable once the waiting period expires."
+    },
+    {
+      "id": "scs_c02_ex_03_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 5",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team needs to protect data both in transit and at rest. Which pair of controls addresses both goals?",
+      "answers": [
+        "TLS plus encryption at rest",
+        "CloudWatch plus budgets",
+        "Security groups plus tags",
+        "S3 Transfer Acceleration plus Route 53"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Transit and at-rest protection are separate concerns and both must be addressed explicitly.",
+      "fullExplanation": "Transit and at-rest protection are separate concerns and both must be addressed explicitly.",
+      "explanation": "Transit and at-rest protection are separate concerns and both must be addressed explicitly."
+    },
+    {
+      "id": "scs_c02_ex_03_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 6",
+      "objectiveId": "3.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "Why might a security team choose a customer managed KMS key over an AWS managed key?",
+      "answers": [
+        "To remove all IAM requirements",
+        "To gain explicit policy control and lifecycle ownership",
+        "To disable CloudTrail",
+        "To avoid encryption costs entirely"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Customer managed keys are preferred when the team needs control over policy, grants, or lifecycle actions.",
+      "fullExplanation": "Customer managed keys are preferred when the team needs control over policy, grants, or lifecycle actions.",
+      "explanation": "Customer managed keys are preferred when the team needs control over policy, grants, or lifecycle actions."
+    },
+    {
+      "id": "scs_c02_ex_03_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 7",
+      "objectiveId": "3.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A data protection program wants to reduce the amount of sensitive data exposed to downstream systems. Which approach helps most?",
+      "answers": [
+        "Tokenization or data minimization",
+        "Public snapshots",
+        "Wider CIDR ranges",
+        "Longer SSH sessions"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Tokenization and minimization reduce how much sensitive data downstream systems ever handle.",
+      "fullExplanation": "Tokenization and minimization reduce how much sensitive data downstream systems ever handle.",
+      "explanation": "Tokenization and minimization reduce how much sensitive data downstream systems ever handle."
+    },
+    {
+      "id": "scs_c02_ex_03_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 8",
+      "objectiveId": "3.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "Which statement about backups is correct in a secure AWS design?",
+      "answers": [
+        "Backups can be less protected than primary data",
+        "Backups should be protected to the same standard as primary data",
+        "Backups do not need encryption",
+        "Backups do not need monitoring"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Backups often contain the same sensitive data and should receive equivalent protection.",
+      "fullExplanation": "Backups often contain the same sensitive data and should receive equivalent protection.",
+      "explanation": "Backups often contain the same sensitive data and should receive equivalent protection."
+    },
+    {
+      "id": "scs_c02_ex_03_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 9",
+      "objectiveId": "3.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team needs cryptographic controls for large-scale data processing with centralized key protection. Which pattern is commonly used?",
+      "answers": [
+        "Envelope encryption",
+        "Opening more ports",
+        "Disabling TLS",
+        "Public AMIs"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Envelope encryption scales cryptographic operations while keeping top-level keys centrally protected.",
+      "fullExplanation": "Envelope encryption scales cryptographic operations while keeping top-level keys centrally protected.",
+      "explanation": "Envelope encryption scales cryptographic operations while keeping top-level keys centrally protected."
+    },
+    {
+      "id": "scs_c02_ex_03_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 10",
+      "objectiveId": "3.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A company retains sensitive records indefinitely without a legal reason. What security issue does this create?",
+      "answers": [
+        "Reduced KMS API usage",
+        "Unnecessary long-term exposure",
+        "Improved least privilege",
+        "Faster scaling"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Unnecessary retention increases breach impact and expands the data that must be defended.",
+      "fullExplanation": "Unnecessary retention increases breach impact and expands the data that must be defended.",
+      "explanation": "Unnecessary retention increases breach impact and expands the data that must be defended."
+    },
+    {
+      "id": "scs_c02_ex_03_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 11",
+      "objectiveId": "3.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A team believes Macie alone is enough to protect sensitive files in S3. What is the best correction?",
+      "answers": [
+        "Macie discovers data but encryption and access controls are still required",
+        "Macie replaces KMS entirely",
+        "Macie removes IAM requirements",
+        "Macie is a firewall service"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Macie helps find and classify sensitive data but does not replace preventive and detective controls around it.",
+      "fullExplanation": "Macie helps find and classify sensitive data but does not replace preventive and detective controls around it.",
+      "explanation": "Macie helps find and classify sensitive data but does not replace preventive and detective controls around it."
+    },
+    {
+      "id": "scs_c02_ex_03_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 12",
+      "objectiveId": "3.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A workload uses KMS heavily and needs to let one service use a key without broadening the key policy for everyone. What should be evaluated?",
+      "answers": [
+        "KMS grants",
+        "S3 inventory",
+        "Route 53 geolocation",
+        "Dedicated hosts"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "KMS grants are designed for scoped key usage delegation without large policy changes.",
+      "fullExplanation": "KMS grants are designed for scoped key usage delegation without large policy changes.",
+      "explanation": "KMS grants are designed for scoped key usage delegation without large policy changes."
+    },
+    {
+      "id": "scs_c02_ex_03_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 13",
+      "objectiveId": "3.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A security review shows TLS is terminated at a load balancer and traffic to backend services is plaintext. What is the concern?",
+      "answers": [
+        "The trust boundary may end too early for the sensitivity of the data",
+        "The S3 bucket will become public",
+        "KMS key rotation will stop",
+        "GuardDuty cannot run"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "TLS termination location matters because plaintext traffic behind the load balancer may still violate security requirements.",
+      "fullExplanation": "TLS termination location matters because plaintext traffic behind the load balancer may still violate security requirements.",
+      "explanation": "TLS termination location matters because plaintext traffic behind the load balancer may still violate security requirements."
+    },
+    {
+      "id": "scs_c02_ex_03_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 14",
+      "objectiveId": "3.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A compliance team needs to know which principals used a customer-managed key and when. Which AWS capability is most relevant?",
+      "answers": [
+        "KMS usage logged in CloudTrail",
+        "S3 lifecycle transitions",
+        "Route 53 query logging only",
+        "AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail records KMS API activity and supports auditing of key usage and administration.",
+      "fullExplanation": "CloudTrail records KMS API activity and supports auditing of key usage and administration.",
+      "explanation": "CloudTrail records KMS API activity and supports auditing of key usage and administration."
+    },
+    {
+      "id": "scs_c02_ex_03_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-data-protection",
+      "domain": "Data Protection and Cryptography",
+      "topic": "Data Protection and Cryptography",
+      "subtopic": "Scenario 15",
+      "objectiveId": "3.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-data-protection",
+        "scenario-based"
+      ],
+      "question": "A company encrypts everything at rest but does not classify its data. What is the main gap?",
+      "answers": [
+        "It may misapply controls and retention because it does not know what is sensitive",
+        "Encryption becomes invalid without tags",
+        "MFA stops working",
+        "S3 replication is disabled"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Classification is needed to prioritize controls, retention, and monitoring based on sensitivity and business impact.",
+      "fullExplanation": "Classification is needed to prioritize controls, retention, and monitoring based on sensitivity and business impact.",
+      "explanation": "Classification is needed to prioritize controls, retention, and monitoring based on sensitivity and business impact."
+    },
+    {
+      "id": "scs_c02_ex_04_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 1",
+      "objectiveId": "4.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "An EC2 instance is suspected of compromise and must be isolated quickly while preserving evidence. What is a strong first step?",
+      "answers": [
+        "Terminate the instance immediately",
+        "Quarantine the instance by updating security controls and preserve evidence",
+        "Disable CloudTrail",
+        "Delete all snapshots"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Containment should reduce blast radius without destroying the evidence needed for analysis.",
+      "fullExplanation": "Containment should reduce blast radius without destroying the evidence needed for analysis.",
+      "explanation": "Containment should reduce blast radius without destroying the evidence needed for analysis."
+    },
+    {
+      "id": "scs_c02_ex_04_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 2",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A team wants to automate quarantine of an EC2 instance when a critical finding is raised. Which pattern is common?",
+      "answers": [
+        "EventBridge triggers a Lambda function that updates controls",
+        "Route 53 changes the domain name",
+        "AWS Budgets stops all spending",
+        "CloudFront clears the cache"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "EventBridge plus Lambda is a common response automation pattern for security findings.",
+      "fullExplanation": "EventBridge plus Lambda is a common response automation pattern for security findings.",
+      "explanation": "EventBridge plus Lambda is a common response automation pattern for security findings."
+    },
+    {
+      "id": "scs_c02_ex_04_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 3",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "Which service helps identify software vulnerabilities on supported compute workloads in AWS?",
+      "answers": [
+        "Amazon Inspector",
+        "AWS Budgets",
+        "Amazon AppStream 2.0",
+        "Amazon Polly"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Inspector is the managed vulnerability and exposure assessment service for supported workloads.",
+      "fullExplanation": "Amazon Inspector is the managed vulnerability and exposure assessment service for supported workloads.",
+      "explanation": "Amazon Inspector is the managed vulnerability and exposure assessment service for supported workloads."
+    },
+    {
+      "id": "scs_c02_ex_04_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 4",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "An internet-facing application needs managed DDoS protection beyond the baseline level. Which service should be evaluated?",
+      "answers": [
+        "AWS Shield Advanced",
+        "Amazon Macie",
+        "AWS Organizations",
+        "AWS Glue"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Shield Advanced adds enhanced DDoS protections and response capabilities for public applications.",
+      "fullExplanation": "Shield Advanced adds enhanced DDoS protections and response capabilities for public applications.",
+      "explanation": "Shield Advanced adds enhanced DDoS protections and response capabilities for public applications."
+    },
+    {
+      "id": "scs_c02_ex_04_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 5",
+      "objectiveId": "4.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "During an investigation, why is preserving CloudTrail logs and related snapshots important?",
+      "answers": [
+        "To reduce IAM complexity",
+        "To retain evidence for forensic analysis",
+        "To increase Spot capacity",
+        "To lower S3 retrieval costs"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Incident response depends on trustworthy logs and preserved system state for timeline reconstruction.",
+      "fullExplanation": "Incident response depends on trustworthy logs and preserved system state for timeline reconstruction.",
+      "explanation": "Incident response depends on trustworthy logs and preserved system state for timeline reconstruction."
+    },
+    {
+      "id": "scs_c02_ex_04_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 6",
+      "objectiveId": "4.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A security team wants to reduce blast radius in future incidents. Which architectural principle most helps?",
+      "answers": [
+        "Flat networks and shared credentials",
+        "Segmentation and least privilege",
+        "Bigger instance types",
+        "Longer DNS TTLs"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Segmentation plus least privilege limits lateral movement and narrows the affected area during compromise.",
+      "fullExplanation": "Segmentation plus least privilege limits lateral movement and narrows the affected area during compromise.",
+      "explanation": "Segmentation plus least privilege limits lateral movement and narrows the affected area during compromise."
+    },
+    {
+      "id": "scs_c02_ex_04_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 7",
+      "objectiveId": "4.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "Why should incident response runbooks be rehearsed regularly?",
+      "answers": [
+        "To make the document longer",
+        "To reveal missing access, unclear steps, and weak assumptions",
+        "To disable CloudTrail automatically",
+        "To increase route table limits"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Exercises expose practical gaps that are usually invisible until a real incident occurs.",
+      "fullExplanation": "Exercises expose practical gaps that are usually invisible until a real incident occurs.",
+      "explanation": "Exercises expose practical gaps that are usually invisible until a real incident occurs."
+    },
+    {
+      "id": "scs_c02_ex_04_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 8",
+      "objectiveId": "4.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "After a security incident is contained, what should happen before the event is considered fully resolved?",
+      "answers": [
+        "Delete all logs",
+        "Validate recovery and monitor for recurrence",
+        "Disable MFA for responders",
+        "Remove all metrics"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Recovery should be tested and monitored to ensure compromise has not persisted or recurred.",
+      "fullExplanation": "Recovery should be tested and monitored to ensure compromise has not persisted or recurred.",
+      "explanation": "Recovery should be tested and monitored to ensure compromise has not persisted or recurred."
+    },
+    {
+      "id": "scs_c02_ex_04_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 9",
+      "objectiveId": "4.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A public application needs protection from common web exploits while retaining edge performance. Which combination is most appropriate?",
+      "answers": [
+        "CloudFront with AWS WAF",
+        "IAM users with passwords",
+        "S3 Glacier with Route 53",
+        "Amazon SNS with AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudFront with WAF is the standard edge security combination for performance and filtering.",
+      "fullExplanation": "CloudFront with WAF is the standard edge security combination for performance and filtering.",
+      "explanation": "CloudFront with WAF is the standard edge security combination for performance and filtering."
+    },
+    {
+      "id": "scs_c02_ex_04_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 10",
+      "objectiveId": "4.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "What is the primary purpose of a post-incident review?",
+      "answers": [
+        "To increase log ingestion cost",
+        "To identify systemic improvements and prevent recurrence",
+        "To make backups smaller",
+        "To change VPC CIDR blocks"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "The goal is to strengthen systems and processes so similar incidents are less likely or less damaging.",
+      "fullExplanation": "The goal is to strengthen systems and processes so similar incidents are less likely or less damaging.",
+      "explanation": "The goal is to strengthen systems and processes so similar incidents are less likely or less damaging."
+    },
+    {
+      "id": "scs_c02_ex_04_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 11",
+      "objectiveId": "4.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A company discovers that evidence from short-lived compute instances often disappears before analysts can collect it. What control should be improved first?",
+      "answers": [
+        "Centralized logging and rapid evidence capture automation",
+        "Route 53 failover records",
+        "Savings Plans coverage",
+        "Bucket naming conventions"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Ephemeral infrastructure requires centralized logs and automated capture because instance-local evidence disappears quickly.",
+      "fullExplanation": "Ephemeral infrastructure requires centralized logs and automated capture because instance-local evidence disappears quickly.",
+      "explanation": "Ephemeral infrastructure requires centralized logs and automated capture because instance-local evidence disappears quickly."
+    },
+    {
+      "id": "scs_c02_ex_04_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 12",
+      "objectiveId": "4.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A quarantine playbook requires manual security group edits and takes twenty minutes to execute. What is the strongest improvement?",
+      "answers": [
+        "Prebuilt automated quarantine workflows",
+        "More IAM users",
+        "Longer DNS TTLs",
+        "Disable Config rules"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Predesigned and automated quarantine reduces response time and inconsistency during active incidents.",
+      "fullExplanation": "Predesigned and automated quarantine reduces response time and inconsistency during active incidents.",
+      "explanation": "Predesigned and automated quarantine reduces response time and inconsistency during active incidents."
+    },
+    {
+      "id": "scs_c02_ex_04_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 13",
+      "objectiveId": "4.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A team restores a system after compromise but does not verify integrity or monitor it closely afterward. What is the main risk?",
+      "answers": [
+        "The compromise could persist or recur unnoticed",
+        "KMS charges will double immediately",
+        "CloudTrail will stop logging",
+        "The VPC will lose subnets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Recovery without validation can return an attacker or persistence mechanism to service.",
+      "fullExplanation": "Recovery without validation can return an attacker or persistence mechanism to service.",
+      "explanation": "Recovery without validation can return an attacker or persistence mechanism to service."
+    },
+    {
+      "id": "scs_c02_ex_04_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 14",
+      "objectiveId": "4.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A company wants stronger DDoS resilience for a public application. Which answer reflects the best exam mindset?",
+      "answers": [
+        "Treat DDoS protection as an architectural pattern, not only one service",
+        "Use only one EC2 instance with detailed monitoring",
+        "Disable Auto Scaling to reduce attack surface",
+        "Move all traffic through a bastion host"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "DDoS resilience depends on edge protection, scaling, routing, and operational response, not one checkbox service.",
+      "fullExplanation": "DDoS resilience depends on edge protection, scaling, routing, and operational response, not one checkbox service.",
+      "explanation": "DDoS resilience depends on edge protection, scaling, routing, and operational response, not one checkbox service."
+    },
+    {
+      "id": "scs_c02_ex_04_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 15",
+      "objectiveId": "4.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "An incident response leader says tooling alone will solve future incidents. Which response is most accurate?",
+      "answers": [
+        "Incident response also depends on process, ownership, and architecture",
+        "Yes, tools replace runbooks completely",
+        "Only more EC2 capacity is needed",
+        "CloudTrail makes all runbooks unnecessary"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Effective response is a systems discipline involving people, process, architecture, and tooling together.",
+      "fullExplanation": "Effective response is a systems discipline involving people, process, architecture, and tooling together.",
+      "explanation": "Effective response is a systems discipline involving people, process, architecture, and tooling together."
+    }
+  ]
+}

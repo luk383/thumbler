@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_solutions_architect_associate_saa_c03_saa-cost_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_saa",
+  "certificationTitle": "AWS Certified Solutions Architect - Associate",
+  "track": "Associate",
+  "title": "AWS Certified Solutions Architect - Associate",
+  "examCode": "SAA-C03",
+  "category": "AWS Architecture",
+  "description": "Scenario practice batch for Design Cost-Optimized Architectures.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Design Cost-Optimized Architectures"
+  ],
+  "tags": [
+    "aws",
+    "aws_saa",
+    "saa-c03",
+    "associate"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "saa_c03_ex_04_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "4.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A development environment is used only during business hours on weekdays. Which change usually reduces cost the most with little risk?",
+      "answers": [
+        "Move it to a larger instance family",
+        "Schedule the environment to stop when not in use",
+        "Replicate it to more Regions",
+        "Disable monitoring"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Stopping dev and test systems outside their active window is often the fastest and safest way to reduce waste.",
+      "fullExplanation": "Stopping dev and test systems outside their active window is often the fastest and safest way to reduce waste.",
+      "explanation": "Stopping dev and test systems outside their active window is often the fastest and safest way to reduce waste."
+    },
+    {
+      "id": "saa_c03_ex_04_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload stores logs that are rarely read after 90 days but must remain accessible for audits. Which S3 feature should be configured?",
+      "answers": [
+        "S3 lifecycle transitions",
+        "Route 53 failover",
+        "EBS fast snapshot restore",
+        "CloudFront origin groups"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Lifecycle transitions automatically move aging data to cheaper storage classes aligned to access frequency.",
+      "fullExplanation": "Lifecycle transitions automatically move aging data to cheaper storage classes aligned to access frequency.",
+      "explanation": "Lifecycle transitions automatically move aging data to cheaper storage classes aligned to access frequency."
+    },
+    {
+      "id": "saa_c03_ex_04_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A batch analytics job is fault tolerant and can tolerate interruptions. Which EC2 pricing model is most cost effective?",
+      "answers": [
+        "On-Demand only",
+        "Dedicated Hosts",
+        "Spot Instances",
+        "Capacity Blocks only"
+      ],
+      "correctIndex": 2,
+      "shortExplanation": "Spot Instances are built for interruptible workloads and often provide the largest cost savings.",
+      "fullExplanation": "Spot Instances are built for interruptible workloads and often provide the largest cost savings.",
+      "explanation": "Spot Instances are built for interruptible workloads and often provide the largest cost savings."
+    },
+    {
+      "id": "saa_c03_ex_04_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A company has steady baseline EC2 usage year-round. Which purchasing option should be evaluated to lower cost?",
+      "answers": [
+        "Savings Plans or Reserved capacity",
+        "Public IPv4 addresses for all instances",
+        "More NAT gateways",
+        "Larger root volumes"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Commitment-based pricing works best against steady baseline usage where utilization is predictable.",
+      "fullExplanation": "Commitment-based pricing works best against steady baseline usage where utilization is predictable.",
+      "explanation": "Commitment-based pricing works best against steady baseline usage where utilization is predictable."
+    },
+    {
+      "id": "saa_c03_ex_04_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "4.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A team wants to optimize cost but does not yet know which services are driving spend. What should they review first?",
+      "answers": [
+        "AWS Cost Explorer and tags",
+        "IAM role trust policies",
+        "Security group names",
+        "CloudFormation stack outputs"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Cost Explorer and tagging provide the evidence needed to prioritize optimization work effectively.",
+      "fullExplanation": "Cost Explorer and tagging provide the evidence needed to prioritize optimization work effectively.",
+      "explanation": "Cost Explorer and tagging provide the evidence needed to prioritize optimization work effectively."
+    },
+    {
+      "id": "saa_c03_ex_04_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "4.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A spiky API runs continuously on underutilized EC2 instances. Which redesign often improves cost efficiency?",
+      "answers": [
+        "Migrate to Lambda or a more elastic managed service",
+        "Use larger instances permanently",
+        "Add more Availability Zones only",
+        "Turn off logging"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Bursty workloads often benefit from pay-per-use compute so the business is not paying for idle baseline servers.",
+      "fullExplanation": "Bursty workloads often benefit from pay-per-use compute so the business is not paying for idle baseline servers.",
+      "explanation": "Bursty workloads often benefit from pay-per-use compute so the business is not paying for idle baseline servers."
+    },
+    {
+      "id": "saa_c03_ex_04_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "4.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A storage team keeps every snapshot forever and costs keep rising. What control should be introduced?",
+      "answers": [
+        "Snapshot retention policy and cleanup automation",
+        "Longer password rotation",
+        "Route table summarization",
+        "Bigger instance metadata limits"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Retention controls stop forgotten snapshots from accumulating silently over time.",
+      "fullExplanation": "Retention controls stop forgotten snapshots from accumulating silently over time.",
+      "explanation": "Retention controls stop forgotten snapshots from accumulating silently over time."
+    },
+    {
+      "id": "saa_c03_ex_04_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "4.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload can run on Graviton without code changes. Why should the architect evaluate it?",
+      "answers": [
+        "It removes the need for IAM",
+        "It can improve price-performance",
+        "It disables multi-AZ billing",
+        "It guarantees zero downtime"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Graviton often delivers favorable price-performance and is a common cost optimization path.",
+      "fullExplanation": "Graviton often delivers favorable price-performance and is a common cost optimization path.",
+      "explanation": "Graviton often delivers favorable price-performance and is a common cost optimization path."
+    },
+    {
+      "id": "saa_c03_ex_04_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "4.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "An application sends large amounts of data across Regions unnecessarily. What is the likely result?",
+      "answers": [
+        "Lower CloudTrail costs",
+        "Higher data transfer charges",
+        "Automatic latency reduction",
+        "Free S3 replication"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Cross-Region data transfer can materially increase total spend and should be minimized where possible.",
+      "fullExplanation": "Cross-Region data transfer can materially increase total spend and should be minimized where possible.",
+      "explanation": "Cross-Region data transfer can materially increase total spend and should be minimized where possible."
+    },
+    {
+      "id": "saa_c03_ex_04_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "4.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload scales out correctly during peaks but never scales back in. What is the cost consequence?",
+      "answers": [
+        "Improved Reserved Instance coverage",
+        "Unnecessary spend on idle capacity",
+        "Lower storage costs",
+        "Fewer CloudWatch metrics"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Scale-out without scale-in defeats elasticity and leaves idle compute running after demand subsides.",
+      "fullExplanation": "Scale-out without scale-in defeats elasticity and leaves idle compute running after demand subsides.",
+      "explanation": "Scale-out without scale-in defeats elasticity and leaves idle compute running after demand subsides."
+    },
+    {
+      "id": "saa_c03_ex_04_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "4.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A company uses warm standby in multiple Regions but business stakeholders only require recovery in 24 hours. What architecture concern should be revisited?",
+      "answers": [
+        "Whether the resilience pattern is overbuilt for the RTO",
+        "Whether CloudTrail is enabled",
+        "Whether Route 53 has enough records",
+        "Whether IAM groups are nested"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "If business recovery requirements are loose, an expensive warm-standby design may be more than the business actually needs.",
+      "fullExplanation": "If business recovery requirements are loose, an expensive warm-standby design may be more than the business actually needs.",
+      "explanation": "If business recovery requirements are loose, an expensive warm-standby design may be more than the business actually needs."
+    },
+    {
+      "id": "saa_c03_ex_04_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "4.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A team plans to buy Savings Plans for an unpredictable workload that spikes heavily during one month each quarter. What is the key risk?",
+      "answers": [
+        "They may commit above the steady baseline and underuse the commitment",
+        "The workload will lose encryption",
+        "The account will stop scaling",
+        "The VPC endpoints will be deleted"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Savings commitments should map to the predictable baseline, not temporary peaks, or the value erodes.",
+      "fullExplanation": "Savings commitments should map to the predictable baseline, not temporary peaks, or the value erodes.",
+      "explanation": "Savings commitments should map to the predictable baseline, not temporary peaks, or the value erodes."
+    },
+    {
+      "id": "saa_c03_ex_04_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "4.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A company archives data in a very cheap tier but suddenly needs frequent retrieval. What tradeoff did the original design underestimate?",
+      "answers": [
+        "Archive retrieval cost and delay",
+        "Security group rule count",
+        "Transit gateway route scale",
+        "AMI launch time"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Low storage price is only one side of the equation; retrieval fees and restore times also matter.",
+      "fullExplanation": "Low storage price is only one side of the equation; retrieval fees and restore times also matter.",
+      "explanation": "Low storage price is only one side of the equation; retrieval fees and restore times also matter."
+    },
+    {
+      "id": "saa_c03_ex_04_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "4.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload runs on self-managed databases even though the team spends many hours each week patching and maintaining them. Which cost concept is most relevant?",
+      "answers": [
+        "Operational overhead should be included in cost decisions",
+        "Public IPs are always cheaper",
+        "Cross-AZ traffic is free",
+        "Spot always fits databases"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "True cost includes team time and operational risk, not just resource hourly rates.",
+      "fullExplanation": "True cost includes team time and operational risk, not just resource hourly rates.",
+      "explanation": "True cost includes team time and operational risk, not just resource hourly rates."
+    },
+    {
+      "id": "saa_c03_ex_04_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "4.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A report shows many lightly used instances running around the clock. What should the architect examine first?",
+      "answers": [
+        "Rightsizing and scheduling opportunities",
+        "Root account aliases",
+        "S3 bucket ownership",
+        "WAF WebACL capacity"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Low utilization is usually a sign that rightsizing or scheduled shutdown could immediately reduce cost.",
+      "fullExplanation": "Low utilization is usually a sign that rightsizing or scheduled shutdown could immediately reduce cost.",
+      "explanation": "Low utilization is usually a sign that rightsizing or scheduled shutdown could immediately reduce cost."
+    }
+  ]
+}

@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_solutions_architect_associate_saa_c03_saa-performance_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_saa",
+  "certificationTitle": "AWS Certified Solutions Architect - Associate",
+  "track": "Associate",
+  "title": "AWS Certified Solutions Architect - Associate",
+  "examCode": "SAA-C03",
+  "category": "AWS Architecture",
+  "description": "Scenario practice batch for Design High-Performing Architectures.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Design High-Performing Architectures"
+  ],
+  "tags": [
+    "aws",
+    "aws_saa",
+    "saa-c03",
+    "associate"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "saa_c03_ex_03_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "Users around the world download static assets from an S3 bucket, but latency is high in distant Regions. Which change will improve performance the most?",
+      "answers": [
+        "Move the bucket to a public subnet",
+        "Use Amazon CloudFront in front of S3",
+        "Store the files on Amazon EBS",
+        "Replace HTTPS with HTTP"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "CloudFront caches content at edge locations and is the standard way to reduce latency for globally distributed users.",
+      "fullExplanation": "CloudFront caches content at edge locations and is the standard way to reduce latency for globally distributed users.",
+      "explanation": "CloudFront caches content at edge locations and is the standard way to reduce latency for globally distributed users."
+    },
+    {
+      "id": "saa_c03_ex_03_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "3.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A DynamoDB table experiences uneven traffic and throttling on a small set of partition keys. What should the architect review first?",
+      "answers": [
+        "The VPC route table",
+        "The partition key design",
+        "The AWS account alias",
+        "The NAT gateway count"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Hot partitions are usually a partition key design problem rather than a network problem.",
+      "fullExplanation": "Hot partitions are usually a partition key design problem rather than a network problem.",
+      "explanation": "Hot partitions are usually a partition key design problem rather than a network problem."
+    },
+    {
+      "id": "saa_c03_ex_03_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "An API reads the same product catalog data repeatedly and the database is becoming a bottleneck. Which option should be added?",
+      "answers": [
+        "Amazon ElastiCache",
+        "AWS Artifact",
+        "Amazon Inspector",
+        "AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "ElastiCache is the managed caching layer intended to offload repeated reads from the primary database.",
+      "fullExplanation": "ElastiCache is the managed caching layer intended to offload repeated reads from the primary database.",
+      "explanation": "ElastiCache is the managed caching layer intended to offload repeated reads from the primary database."
+    },
+    {
+      "id": "saa_c03_ex_03_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "3.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A team is lifting a CPU-intensive application to AWS. Which EC2 family should be evaluated first?",
+      "answers": [
+        "Compute optimized instances",
+        "Storage gateway appliances",
+        "T-series burstable instances only",
+        "Memory optimized instances only"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CPU-bound workloads usually start with compute optimized families because they match the bottleneck profile.",
+      "fullExplanation": "CPU-bound workloads usually start with compute optimized families because they match the bottleneck profile.",
+      "explanation": "CPU-bound workloads usually start with compute optimized families because they match the bottleneck profile."
+    },
+    {
+      "id": "saa_c03_ex_03_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A media processing pipeline can run many tasks independently. Which design improves throughput?",
+      "answers": [
+        "Serialize every task on one instance",
+        "Parallelize the jobs across multiple workers",
+        "Move the files to a public S3 bucket",
+        "Reduce the number of metrics collected"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Independent work should be parallelized to increase throughput and shorten total processing time.",
+      "fullExplanation": "Independent work should be parallelized to increase throughput and shorten total processing time.",
+      "explanation": "Independent work should be parallelized to increase throughput and shorten total processing time."
+    },
+    {
+      "id": "saa_c03_ex_03_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "3.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "An application experiences slow startup on every Lambda invocation because it recreates clients for downstream services. What should be changed?",
+      "answers": [
+        "Create clients outside the handler for reuse",
+        "Increase DNS TTLs",
+        "Move the function into a public subnet",
+        "Disable retries"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Reusing clients outside the handler is a common Lambda optimization that cuts repeated setup latency.",
+      "fullExplanation": "Reusing clients outside the handler is a common Lambda optimization that cuts repeated setup latency.",
+      "explanation": "Reusing clients outside the handler is a common Lambda optimization that cuts repeated setup latency."
+    },
+    {
+      "id": "saa_c03_ex_03_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "3.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A workload needs high throughput block storage for a database on EC2. Which option should be considered?",
+      "answers": [
+        "General Purpose SSD or Provisioned IOPS EBS volumes",
+        "S3 Glacier Deep Archive",
+        "Amazon Route 53 Resolver",
+        "AWS Trusted Advisor"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Database performance on EC2 depends heavily on choosing an EBS volume type that fits the required IOPS and throughput.",
+      "fullExplanation": "Database performance on EC2 depends heavily on choosing an EBS volume type that fits the required IOPS and throughput.",
+      "explanation": "Database performance on EC2 depends heavily on choosing an EBS volume type that fits the required IOPS and throughput."
+    },
+    {
+      "id": "saa_c03_ex_03_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "3.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A user-facing request triggers a long image rendering task. What architectural change most improves response time?",
+      "answers": [
+        "Do all rendering synchronously before replying",
+        "Move the render into an asynchronous workflow",
+        "Lower the EC2 security group limits",
+        "Add more IAM users"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Asynchronous processing removes slow operations from the request path and improves user-perceived performance.",
+      "fullExplanation": "Asynchronous processing removes slow operations from the request path and improves user-perceived performance.",
+      "explanation": "Asynchronous processing removes slow operations from the request path and improves user-perceived performance."
+    },
+    {
+      "id": "saa_c03_ex_03_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "3.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A team wants to understand which service call contributes most to end-user latency before optimizing. What should be added?",
+      "answers": [
+        "Distributed tracing and metrics",
+        "More public IPs",
+        "Dedicated hosts for every service",
+        "Additional root users"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Tracing and metrics expose where the time is actually being spent so tuning effort stays evidence-based.",
+      "fullExplanation": "Tracing and metrics expose where the time is actually being spent so tuning effort stays evidence-based.",
+      "explanation": "Tracing and metrics expose where the time is actually being spent so tuning effort stays evidence-based."
+    },
+    {
+      "id": "saa_c03_ex_03_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "3.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A workload receives unpredictable bursts of event traffic and needs to scale quickly without provisioning idle servers. Which option fits best?",
+      "answers": [
+        "AWS Lambda with event-driven triggers",
+        "One large EC2 instance with cron jobs",
+        "A fixed-size Auto Scaling group of one",
+        "A manual deployment pipeline"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Event-driven Lambda is well suited for bursty traffic because it scales on demand without idle server cost.",
+      "fullExplanation": "Event-driven Lambda is well suited for bursty traffic because it scales on demand without idle server cost.",
+      "explanation": "Event-driven Lambda is well suited for bursty traffic because it scales on demand without idle server cost."
+    },
+    {
+      "id": "saa_c03_ex_03_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "3.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A service sends large files to users repeatedly and the same objects are requested many times per minute. Which design best reduces origin load?",
+      "answers": [
+        "CloudFront edge caching",
+        "Bigger IAM policies",
+        "Route 53 private hosted zones",
+        "More public subnets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Edge caching reduces repeated origin reads and lowers latency for popular content.",
+      "fullExplanation": "Edge caching reduces repeated origin reads and lowers latency for popular content.",
+      "explanation": "Edge caching reduces repeated origin reads and lowers latency for popular content."
+    },
+    {
+      "id": "saa_c03_ex_03_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "3.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A DynamoDB workload has acceptable average latency but periodic throttling under uneven access patterns. Which exam trap best explains this?",
+      "answers": [
+        "The table has too many GSIs",
+        "The workload likely has a hot partition",
+        "The VPC needs another NAT gateway",
+        "The IAM role is too permissive"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Even with enough total capacity, hot partitions can cause throttling and uneven latency.",
+      "fullExplanation": "Even with enough total capacity, hot partitions can cause throttling and uneven latency.",
+      "explanation": "Even with enough total capacity, hot partitions can cause throttling and uneven latency."
+    },
+    {
+      "id": "saa_c03_ex_03_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "3.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A web application compresses every payload aggressively and response times worsen under load. What tradeoff is most likely causing the issue?",
+      "answers": [
+        "Compression saves CPU but increases latency",
+        "Compression reduces transfer but increases CPU cost",
+        "Compression disables caching entirely",
+        "Compression forces traffic through one AZ"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Compression can lower transfer size but may become a CPU bottleneck under high concurrency.",
+      "fullExplanation": "Compression can lower transfer size but may become a CPU bottleneck under high concurrency.",
+      "explanation": "Compression can lower transfer size but may become a CPU bottleneck under high concurrency."
+    },
+    {
+      "id": "saa_c03_ex_03_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "3.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A relational database was moved to very fast compute instances but query latency remains poor. Which additional area should the architect inspect?",
+      "answers": [
+        "Storage performance and query design",
+        "The S3 bucket name",
+        "The account alias",
+        "The Route 53 health checks"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Performance bottlenecks often persist when compute is upgraded but storage configuration or query patterns remain weak.",
+      "fullExplanation": "Performance bottlenecks often persist when compute is upgraded but storage configuration or query patterns remain weak.",
+      "explanation": "Performance bottlenecks often persist when compute is upgraded but storage configuration or query patterns remain weak."
+    },
+    {
+      "id": "saa_c03_ex_03_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "3.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A latency-sensitive microservice performs many small synchronous calls to another service in the same workflow. Which redesign most likely improves performance?",
+      "answers": [
+        "Batch or asynchronous interaction where possible",
+        "Dedicated tenancy",
+        "More root access",
+        "Longer S3 lifecycle rules"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Reducing chattiness through batching or asynchronous interaction is a classic performance optimization for service-to-service latency.",
+      "fullExplanation": "Reducing chattiness through batching or asynchronous interaction is a classic performance optimization for service-to-service latency.",
+      "explanation": "Reducing chattiness through batching or asynchronous interaction is a classic performance optimization for service-to-service latency."
+    }
+  ]
+}

@@ -223,9 +223,9 @@ void main() {
     final resolved = resolveFeedDeckMeta(
       packs: const [
         DeckPackMeta(
-          id: 'starter',
-          title: 'Starter',
-          assetPath: 'assets/decks/starter.json',
+          id: 'placeholder',
+          title: 'Placeholder',
+          assetPath: 'assets/decks/placeholder.json',
           questionCount: 0,
           microCardCount: 0,
           examQuestionCount: 0,
@@ -233,22 +233,24 @@ void main() {
           availabilityNote: 'Soon',
         ),
         DeckPackMeta(
-          id: 'deck-a',
-          title: 'Deck A',
-          assetPath: 'assets/decks/deck_a.json',
-          questionCount: 20,
-          microCardCount: 20,
-          examQuestionCount: 0,
+          id: 'aws_certified_security_specialty_scs_c02',
+          title: 'AWS Certified Security - Specialty',
+          assetPath:
+              'assets/decks/aws_certified_security_specialty_scs_c02.json',
+          questionCount: 100,
+          microCardCount: 60,
+          examQuestionCount: 40,
+          examCode: 'SCS-C02',
         ),
       ],
       activeDeckId: 'missing-deck',
     );
 
-    expect(resolved?.id, 'deck-a');
+    expect(resolved?.id, 'aws_certified_security_specialty_scs_c02');
   });
 
   test(
-    'feed deck resolution prefers feed-friendly decks over exam-only decks',
+    'feed deck resolution prefers decks with feed and exam support over exam-only decks',
     () {
       final resolved = resolveFeedDeckMeta(
         packs: const [
@@ -259,22 +261,27 @@ void main() {
             questionCount: 90,
             microCardCount: 0,
             examQuestionCount: 90,
-            examCode: 'SY0-701',
+            examCode: 'SAA-C03',
           ),
           DeckPackMeta(
-            id: 'topic-feed',
-            title: 'Technology Basics',
-            assetPath: 'assets/decks/technology_basics.json',
-            questionCount: 30,
-            microCardCount: 30,
-            examQuestionCount: 0,
-            category: 'Technology',
+            id: 'aws_certified_solutions_architect_associate_saa_c03',
+            title: 'AWS Certified Solutions Architect - Associate',
+            assetPath:
+                'assets/decks/aws_certified_solutions_architect_associate_saa_c03.json',
+            questionCount: 100,
+            microCardCount: 60,
+            examQuestionCount: 40,
+            examCode: 'SAA-C03',
+            category: 'AWS Architecture',
           ),
         ],
         activeDeckId: 'exam-only',
       );
 
-      expect(resolved?.id, 'topic-feed');
+      expect(
+        resolved?.id,
+        'aws_certified_solutions_architect_associate_saa_c03',
+      );
     },
   );
 }

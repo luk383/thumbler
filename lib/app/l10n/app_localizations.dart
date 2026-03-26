@@ -32,44 +32,45 @@ class AppLocalizations {
   String get navProfile => isItalian ? 'Profilo' : 'Profile';
 
   String get onboardingHeroTitle => isItalian
-      ? 'Impara qualcosa di nuovo in pochi secondi'
-      : 'Learn something new in seconds';
+      ? 'Preparati alle certificazioni AWS con sessioni rapide'
+      : 'Prep for AWS certifications in focused bursts';
   String get onboardingHeroSubtitle => isItalian
-      ? 'Scorri tra le domande e allena la mente.'
-      : 'Swipe through questions and train your mind.';
-  String get onboardingInterestsTitle =>
-      isItalian ? 'Cosa vuoi imparare?' : 'What do you want to learn?';
+      ? 'Alterna flashcard, pratica guidata e simulazioni esame offline.'
+      : 'Mix offline flashcards, guided practice, and exam sessions.';
+  String get onboardingInterestsTitle => isItalian
+      ? 'Quale percorso AWS vuoi seguire?'
+      : 'Which AWS track do you want?';
   String get onboardingInterestsSubtitle => isItalian
-      ? 'Scegli uno o più interessi e inizia subito dal Feed.'
-      : 'Pick one or more interests and start the Feed instantly.';
+      ? 'Scegli uno o più focus e attiveremo il deck più adatto.'
+      : 'Pick one or more focus areas and we will activate the best deck.';
   String get onboardingSkip => isItalian ? 'Salta' : 'Skip';
   String get onboardingStartLearning =>
-      isItalian ? 'Inizia a imparare' : 'Start learning';
+      isItalian ? 'Configura il percorso' : 'Set up your track';
   String get onboardingStartFeed =>
-      isItalian ? 'Inizia dal Feed' : 'Start Feed';
-  String get onboardingBadge => isItalian ? 'Feed al centro' : 'Feed first';
+      isItalian ? 'Apri il percorso' : 'Open my track';
+  String get onboardingBadge => isItalian ? 'AWS cert prep' : 'AWS cert prep';
   String get onboardingHeroBody => isItalian
-      ? 'Apri l\'app, vedi una domanda, rispondi e vai avanti.'
-      : 'Open the app, see a question, answer, keep going.';
+      ? 'Apri l\'app, ripassa un concetto AWS, rispondi a una domanda scenario-based e continua a costruire memoria utile.'
+      : 'Open the app, review an AWS concept, answer a scenario-based question, and keep building useful recall.';
   String get onboardingHeroFoot => isItalian
-      ? 'Nessuna configurazione iniziale. Solo una domanda utile alla volta.'
-      : 'No setup friction. Just one useful question at a time.';
+      ? 'Tutto resta locale sul dispositivo: deck, progressi, cronologia e note.'
+      : 'Everything stays local on-device: decks, progress, history, and notes.';
 
   String get paywallTitle =>
       isItalian ? 'Sblocca Wolf Lab Pro' : 'Unlock Wolf Lab Pro';
   String paywallSubtitle(String feature) => isItalian
-      ? '$feature fa parte del piano Pro. La versione gratuita resta centrata sul Feed quotidiano e su argomenti ampi.'
-      : '$feature is part of the Pro plan. The free app stays focused on the daily Feed and broad learning topics.';
+      ? '$feature fa parte del piano Pro. Il piano completo sblocca import, deck personali e strumenti avanzati per lo studio AWS.'
+      : '$feature is part of the Pro plan. The full plan unlocks imports, personal decks, and advanced AWS study tools.';
   String get paywallProActive => isItalian ? 'Pro attivo' : 'Pro active';
   String get paywallProFeature => isItalian ? 'Funzione Pro' : 'Pro feature';
   String get paywallHeroBadge =>
-      isItalian ? 'Feed-first, Pro per andare oltre' : 'Feed-first, Pro deeper';
+      isItalian ? 'AWS offline-first' : 'AWS offline-first';
   String get paywallHeroTitle => isItalian
-      ? 'Mantieni gratuito il Feed quotidiano. Sblocca i flussi di apprendimento personalizzati con Pro.'
-      : 'Keep the daily Feed free. Unlock custom knowledge workflows with Pro.';
+      ? 'Mantieni gratuite le sessioni AWS locali. Sblocca import avanzato e deck personalizzati con Pro.'
+      : 'Keep local AWS study sessions free. Unlock advanced imports and custom decks with Pro.';
   String get paywallHeroBody => isItalian
-      ? 'Pro è il livello in cui vivono deck personali, pack esame importati e generazione da appunti.'
-      : 'Pro is where personal decks, imported exam packs, and note-based generation live.';
+      ? 'Pro ospita deck personali, import JSON e generazione da appunti per affiancare i percorsi AWS integrati.'
+      : 'Pro adds personal decks, JSON imports, and note-based generation alongside the built-in AWS tracks.';
   String get paywallWhatProUnlocks =>
       isItalian ? 'Cosa sblocca Pro' : 'What Pro unlocks';
   String get paywallImportDecksTitle =>
@@ -92,8 +93,7 @@ class AppLocalizations {
   String get paywallExamModeCopy => isItalian
       ? 'Le sessioni a tempo restano Pro insieme alle future librerie certificazione.'
       : 'Timed practice is reserved for Pro and future certification libraries.';
-  String get paywallSubscribe =>
-      isItalian ? 'Abbonati' : 'Subscribe';
+  String get paywallSubscribe => isItalian ? 'Abbonati' : 'Subscribe';
   String get paywallRestorePurchases =>
       isItalian ? 'Ripristina acquisti' : 'Restore Purchases';
   String get paywallRestored =>
@@ -106,9 +106,8 @@ class AppLocalizations {
   String get paywallProActiveBody => isItalian
       ? 'Hai accesso completo a tutte le funzionalità Pro.'
       : 'You have full access to all Pro features.';
-  String get paywallOffersUnavailableTitle => isItalian
-      ? 'Offerte non disponibili'
-      : 'Offers unavailable';
+  String get paywallOffersUnavailableTitle =>
+      isItalian ? 'Offerte non disponibili' : 'Offers unavailable';
   String get paywallOffersUnavailableBody => isItalian
       ? 'Impossibile caricare i piani di abbonamento. Controlla la connessione e riprova.'
       : 'Could not load subscription plans. Check your connection and try again.';
@@ -130,16 +129,16 @@ class AppLocalizations {
   String get libraryImportJson =>
       isItalian ? 'Importa deck JSON' : 'Import JSON Deck';
   String get libraryProImport => isItalian
-      ? 'Pro: importa appunti, deck, esami'
-      : 'Pro: import notes, decks, exams';
+      ? 'Pro: importa appunti, deck e quiz'
+      : 'Pro: import notes, decks, and quizzes';
   String get libraryPublicBuildNote => isItalian
-      ? 'Questa build pubblica include topic ampi per il Feed. Upload personali, pack esame e creazione deck custom sono Pro.'
-      : 'This public build ships broad free topics for the Feed. Personal uploads, exam packs, and custom deck creation are Pro-only.';
+      ? 'Questa build include i percorsi AWS Solutions Architect Associate e AWS Security Specialty. Import personali e deck custom restano Pro.'
+      : 'This build ships AWS Solutions Architect Associate and AWS Security Specialty tracks. Personal imports and custom decks stay Pro-only.';
   String get addStudyMaterialTitle =>
       isItalian ? 'Aggiungi materiale di studio' : 'Add Study Material';
   String get addStudyMaterialSubtitle => isItalian
-      ? 'Deck personali, upload di appunti e import JSON fanno parte di Pro.'
-      : 'Personal decks, note uploads, and JSON imports are part of Pro.';
+      ? 'Deck personali, upload di appunti e import JSON sono strumenti Pro accanto ai percorsi AWS inclusi.'
+      : 'Personal decks, note uploads, and JSON imports are Pro tools alongside the included AWS tracks.';
   String get bookmarksEmptyTitle =>
       isItalian ? 'Nessuna lezione salvata' : 'No saved lessons yet';
   String get bookmarksEmptyMessage => isItalian
@@ -157,8 +156,8 @@ class AppLocalizations {
       ? 'Nessuna card disponibile in $deckTitle'
       : 'No study cards available in $deckTitle';
   String get noStudyCardsMessage => isItalian
-      ? 'Scegli un altro topic dalla Libreria oppure sblocca Pro per importare un deck personale.'
-      : 'Select another topic from Library, or unlock Pro to import your own deck.';
+      ? 'Scegli un altro percorso AWS dalla Libreria oppure sblocca Pro per importare un deck personale.'
+      : 'Choose another AWS track from Library, or unlock Pro to import your own deck.';
   String get studyTitle => isItalian ? 'Studio' : 'Study';
   String cardsInDeck(int count) =>
       isItalian ? '$count carte nel deck' : '$count cards in deck';
@@ -167,10 +166,10 @@ class AppLocalizations {
   String get studyEmptyTitle =>
       isItalian ? 'Nessuna carta in Studio' : 'No cards in Study yet';
   String get studyEmptyMessage => isItalian
-      ? 'Vai nel Feed e tocca "Aggiungi a Studio", oppure importa un pack dal pulsante Libreria qui sotto.'
-      : "Go to Feed and tap 'Add to Study', or import a pack with the Library button below.";
+      ? 'Apri la Libreria e attiva un deck AWS, oppure aggiungi carte dal Feed al tuo percorso attivo.'
+      : "Open Library and activate an AWS deck, or add cards from Feed into your active track.";
   String get studySeedStarter =>
-      isItalian ? 'Aggiungi 5 carte iniziali' : 'Add 5 starter cards';
+      isItalian ? 'Aggiungi 5 carte AWS' : 'Add 5 AWS cards';
   String get studyStartSession =>
       isItalian ? 'Avvia sessione studio' : 'Start Study Session';
   String get studyStartSpeed =>
@@ -217,8 +216,8 @@ class AppLocalizations {
   String get examModeProTitle =>
       isItalian ? 'La modalità esame è Pro' : 'Exam mode is Pro';
   String get examModeProSubtitle => isItalian
-      ? 'Il lancio pubblico di Wolf Lab resta gratuito attorno al Feed e ai topic generali. Le sessioni esame a tempo si sbloccano con Pro.'
-      : 'The public launch keeps Wolf Lab free around the Feed and broad topic decks. Timed exam runs unlock with Pro.';
+      ? 'Le simulazioni a tempo fanno parte del piano Pro insieme agli strumenti avanzati per i percorsi AWS.'
+      : 'Timed exam simulations are part of Pro alongside advanced tooling for the AWS tracks.';
   String get examTitle => isItalian ? 'Esame' : 'Exam';
   String examQuestionsAvailable(int count) => isItalian
       ? '$count domande esame disponibili'
@@ -255,8 +254,8 @@ class AppLocalizations {
       ? 'Nessuna domanda esame importata'
       : 'No exam questions imported yet';
   String get noExamQuestionsImportedHelp => isItalian
-      ? 'Vai su Studio → Libreria e importa un pack come "CompTIA Security+ SY0-701".'
-      : 'Go to the Study tab → Library and import\na pack like "CompTIA Security+ SY0-701".';
+      ? 'Vai su Studio → Libreria e attiva un deck come "AWS Certified Solutions Architect - Associate" o "AWS Certified Security - Specialty".'
+      : 'Go to Study -> Library and activate\na deck like "AWS Certified Solutions Architect - Associate" or "AWS Certified Security - Specialty".';
   String onlyAvailableCount(int available) =>
       isItalian ? 'solo $available' : 'only $available';
   String historyCardTop(int correct, int total, String date) => isItalian
@@ -453,41 +452,56 @@ class AppLocalizations {
       ? '🎉 Obiettivo raggiunto! Continua così!'
       : '🎉 Goal reached! Keep going!';
   String get questsDone => isItalian ? 'Missioni fatte' : 'Quests Done';
-  String get lastCompleted => isItalian ? 'Ultima completata' : 'Last Completed';
-  String get resetStudyDeck => isItalian ? 'Reset Deck Studio' : 'Reset Study Deck';
+  String get lastCompleted =>
+      isItalian ? 'Ultima completata' : 'Last Completed';
+  String get resetStudyDeck =>
+      isItalian ? 'Reset Deck Studio' : 'Reset Study Deck';
   String get resetProgress => isItalian ? 'Reset Progressi' : 'Reset Progress';
-  String get resetExamHistory => isItalian ? 'Reset Storico Esami' : 'Reset Exam History';
-  String get resetAllAppData => isItalian ? 'Reset Tutti i Dati' : 'Reset All App Data';
-  String get progressAnalyticsTitle => isItalian ? 'Analisi Progressi' : 'Progress Analytics';
+  String get resetExamHistory =>
+      isItalian ? 'Reset Storico Esami' : 'Reset Exam History';
+  String get resetAllAppData =>
+      isItalian ? 'Reset Tutti i Dati' : 'Reset All App Data';
+  String get progressAnalyticsTitle =>
+      isItalian ? 'Analisi Progressi' : 'Progress Analytics';
   String get progressAnalyticsSubtitle => isItalian
       ? 'Vedi domande risposte, accuratezza del deck, performance per area e attività recente.'
       : 'See answered questions, deck-scoped accuracy, domain performance, and recent activity.';
-  String get currentScopePrefix => isItalian ? 'Ambito attuale: ' : 'Current scope: ';
+  String get currentScopePrefix =>
+      isItalian ? 'Ambito attuale: ' : 'Current scope: ';
   String get xpLegendTitle => isItalian ? 'Legenda XP' : 'XP Legend';
   String get xpLegendViewCard => isItalian ? 'Vedi una card' : 'View a card';
-  String get xpLegendRevealExplanation => isItalian ? 'Scopri spiegazione' : 'Reveal explanation';
-  String get xpLegendCorrectAnswer => isItalian ? 'Risposta corretta' : 'Correct answer';
+  String get xpLegendRevealExplanation =>
+      isItalian ? 'Scopri spiegazione' : 'Reveal explanation';
+  String get xpLegendCorrectAnswer =>
+      isItalian ? 'Risposta corretta' : 'Correct answer';
   String get cancelLabel => isItalian ? 'Annulla' : 'Cancel';
-  String get resetQuestDev => isItalian ? 'Reset Missione (dev)' : 'Reset Quest (dev)';
-  String get questResetSuccess => isItalian ? 'Missione resettata per test' : 'Quest reset for testing';
+  String get resetQuestDev =>
+      isItalian ? 'Reset Missione (dev)' : 'Reset Quest (dev)';
+  String get questResetSuccess =>
+      isItalian ? 'Missione resettata per test' : 'Quest reset for testing';
 
   // New strings for Study & Exam
-  String retryWrong(int count) => isItalian ? 'Riprova errori ($count)' : 'Retry wrong ($count)';
+  String retryWrong(int count) =>
+      isItalian ? 'Riprova errori ($count)' : 'Retry wrong ($count)';
   String get backToSetup => isItalian ? 'Torna al setup' : 'Back to setup';
   String get reveal => isItalian ? 'Scopri' : 'Reveal';
   String get again => isItalian ? 'Ancora' : 'Again';
   String get good => isItalian ? 'Bene' : 'Good';
   String get easy => isItalian ? 'Facile' : 'Easy';
-  String get sessionComplete => isItalian ? 'Sessione completata!' : 'Session Complete!';
-  String cardsStudied(int count) => isItalian ? '$count carte studiate' : '$count cards studied';
+  String get sessionComplete =>
+      isItalian ? 'Sessione completata!' : 'Session Complete!';
+  String cardsStudied(int count) =>
+      isItalian ? '$count carte studiate' : '$count cards studied';
   String get studyAgain => isItalian ? 'Studia di nuovo' : 'Study Again';
   String get correct => isItalian ? 'Corretto!' : 'Correct!';
-  String correctWithValue(String value) => isItalian ? 'Corretto: $value' : 'Correct: $value';
+  String correctWithValue(String value) =>
+      isItalian ? 'Corretto: $value' : 'Correct: $value';
   String get prev => isItalian ? 'Prec.' : 'Prev';
   String get next => isItalian ? 'Succ.' : 'Next';
   String get submit => isItalian ? 'Invia' : 'Submit';
   String get finish => isItalian ? 'Fine' : 'Finish';
-  String get questionOverview => isItalian ? 'Panoramica domande' : 'Question Overview';
+  String get questionOverview =>
+      isItalian ? 'Panoramica domande' : 'Question Overview';
   String get answered => isItalian ? 'Risposta' : 'Answered';
   String get flagged => isItalian ? 'Segnalata' : 'Flagged';
   String get unanswered => isItalian ? 'Non risposta' : 'Unanswered';
@@ -506,16 +520,24 @@ class AppLocalizations {
       : 'All questions answered. Ready to see your results?';
 
   // Exam Results
-  String get domainPerformance => isItalian ? 'Performance per area' : 'Domain Performance';
-  String get trainWeakestDomain => isItalian ? 'Allena area debole' : 'Train Weakest Domain';
-  String trainWeakestDomainLabel(String domain) => isItalian ? 'Allena area debole ($domain)' : 'Train Weakest Domain ($domain)';
-  String get reviewWrongAnswers => isItalian ? 'Rivedi errori' : 'Review Wrong Answers';
-  String get backToResults => isItalian ? 'Torna ai risultati' : 'Back to Results';
+  String get domainPerformance =>
+      isItalian ? 'Performance per area' : 'Domain Performance';
+  String get trainWeakestDomain =>
+      isItalian ? 'Allena area debole' : 'Train Weakest Domain';
+  String trainWeakestDomainLabel(String domain) => isItalian
+      ? 'Allena area debole ($domain)'
+      : 'Train Weakest Domain ($domain)';
+  String get reviewWrongAnswers =>
+      isItalian ? 'Rivedi errori' : 'Review Wrong Answers';
+  String get backToResults =>
+      isItalian ? 'Torna ai risultati' : 'Back to Results';
   String get newExam => isItalian ? 'Nuovo Esame' : 'New Exam';
   String get correctLabel => isItalian ? 'Corrette' : 'Correct';
   String get wrongLabel => isItalian ? 'Errate' : 'Wrong';
   String get timeUsedLabel => isItalian ? 'Tempo usato' : 'Time used';
-  String get notEnoughDomainData => isItalian ? 'Dati insufficienti per la performance per area.' : 'Not enough grouped data to detect domain performance yet.';
+  String get notEnoughDomainData => isItalian
+      ? 'Dati insufficienti per la performance per area.'
+      : 'Not enough grouped data to detect domain performance yet.';
 }
 
 class _AppLocalizationsDelegate

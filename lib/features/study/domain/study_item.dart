@@ -4,11 +4,15 @@ class StudyItem {
   const StudyItem({
     required this.id,
     this.deckId,
+    this.provider,
+    this.certificationId,
     required this.contentType,
     required this.category,
+    this.domainId,
     this.topic,
     this.subtopic,
     this.objectiveId,
+    this.tags = const [],
     required this.promptText,
     required this.options,
     required this.correctAnswerIndex,
@@ -37,11 +41,15 @@ class StudyItem {
 
   final String id;
   final String? deckId;
+  final String? provider;
+  final String? certificationId;
   final ContentType contentType;
   final String category;
+  final String? domainId;
   final String? topic;
   final String? subtopic;
   final String? objectiveId;
+  final List<String> tags;
 
   final String promptText;
   final String? explanationText;
@@ -62,9 +70,9 @@ class StudyItem {
   final DateTime? lastReviewedAt;
 
   // SM-2 state
-  final double easeFactor;   // starts at 2.5, min 1.3
-  final int srsInterval;     // interval in days
-  final int srsRepetitions;  // consecutive correct reviews
+  final double easeFactor; // starts at 2.5, min 1.3
+  final int srsInterval; // interval in days
+  final int srsRepetitions; // consecutive correct reviews
 
   // Personal annotation
   final String? userNote;
@@ -80,6 +88,9 @@ class StudyItem {
 
   StudyItem copyWith({
     String? deckId,
+    Object? provider = _sentinel,
+    Object? certificationId = _sentinel,
+    Object? domainId = _sentinel,
     int? againCount,
     int? goodCount,
     int? timesSeen,
@@ -91,6 +102,7 @@ class StudyItem {
     double? easeFactor,
     int? srsInterval,
     int? srsRepetitions,
+    List<String>? tags,
     Object? userNote = _sentinel,
     bool? isStarred,
     double? fsrsStability,
@@ -98,11 +110,17 @@ class StudyItem {
   }) => StudyItem(
     id: id,
     deckId: deckId ?? this.deckId,
+    provider: provider == _sentinel ? this.provider : provider as String?,
+    certificationId: certificationId == _sentinel
+        ? this.certificationId
+        : certificationId as String?,
     contentType: contentType,
     category: category,
+    domainId: domainId == _sentinel ? this.domainId : domainId as String?,
     topic: topic,
     subtopic: subtopic,
     objectiveId: objectiveId,
+    tags: tags ?? this.tags,
     promptText: promptText,
     explanationText: explanationText,
     options: options,
@@ -130,11 +148,15 @@ class StudyItem {
   Map<String, dynamic> toMap() => {
     'id': id,
     'deckId': deckId,
+    'provider': provider,
+    'certificationId': certificationId,
     'contentType': contentType.index,
     'category': category,
+    'domainId': domainId,
     'topic': topic,
     'subtopic': subtopic,
     'objectiveId': objectiveId,
+    'tags': tags,
     'promptText': promptText,
     'explanationText': explanationText,
     'options': options,
@@ -160,11 +182,15 @@ class StudyItem {
   factory StudyItem.fromMap(Map map) => StudyItem(
     id: map['id'] as String? ?? map['lessonId'] as String,
     deckId: map['deckId'] as String?,
+    provider: map['provider'] as String?,
+    certificationId: map['certificationId'] as String?,
     contentType: ContentType.values[(map['contentType'] as num?)?.toInt() ?? 0],
     category: map['category'] as String,
+    domainId: map['domainId'] as String?,
     topic: map['topic'] as String?,
     subtopic: map['subtopic'] as String?,
     objectiveId: map['objectiveId'] as String?,
+    tags: (map['tags'] as List?)?.map((e) => e as String).toList() ?? const [],
     promptText: map['promptText'] as String? ?? map['hook'] as String? ?? '',
     explanationText: map['explanationText'] as String?,
     options:
@@ -195,7 +221,11 @@ class StudyItem {
   static StudyItem fromLesson({
     required String id,
     String? deckId,
+    String? provider,
+    String? certificationId,
     required String category,
+    String? domainId,
+    List<String> tags = const [],
     required String hook,
     required String explanation,
     required List<String> options,
@@ -203,8 +233,12 @@ class StudyItem {
   }) => StudyItem(
     id: id,
     deckId: deckId,
+    provider: provider,
+    certificationId: certificationId,
     contentType: ContentType.microCard,
     category: category,
+    domainId: domainId,
+    tags: tags,
     promptText: hook,
     explanationText: explanation,
     options: options,

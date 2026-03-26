@@ -34,8 +34,8 @@ void main() {
       id: 'a1',
       startedAt: DateTime(2026, 3, 6, 10),
       finishedAt: DateTime(2026, 3, 6, 10, 30),
-      deckId: 'security-plus',
-      deckTitle: 'Security+',
+      deckId: 'aws_certified_security_specialty_scs_c02',
+      deckTitle: 'AWS Certified Security - Specialty',
       totalQuestions: 30,
       durationSeconds: 1800,
       remainingSeconds: 0,
@@ -47,8 +47,8 @@ void main() {
       id: 'b1',
       startedAt: DateTime(2026, 3, 6, 11),
       finishedAt: DateTime(2026, 3, 6, 11, 30),
-      deckId: 'aws-clf',
-      deckTitle: 'AWS CLF-C02',
+      deckId: 'aws_certified_solutions_architect_associate_saa_c03',
+      deckTitle: 'AWS Certified Solutions Architect - Associate',
       totalQuestions: 30,
       durationSeconds: 1800,
       remainingSeconds: 0,
@@ -63,28 +63,28 @@ void main() {
       ExamResult(
         id: 'a1',
         completedAt: DateTime(2026, 3, 6, 10, 30),
-        deckId: 'security-plus',
-        deckTitle: 'Security+',
+        deckId: 'aws_certified_security_specialty_scs_c02',
+        deckTitle: 'AWS Certified Security - Specialty',
         durationSeconds: 1800,
         totalQuestions: 30,
         correctAnswers: 20,
         wrongAnswers: 10,
         percentageScore: 67,
-        domainScores: {'Security': 67},
+        domainScores: {'Threat Detection and Monitoring': 67},
       ),
     );
     resultStorage.addResult(
       ExamResult(
         id: 'b1',
         completedAt: DateTime(2026, 3, 6, 11, 30),
-        deckId: 'aws-clf',
-        deckTitle: 'AWS CLF-C02',
+        deckId: 'aws_certified_solutions_architect_associate_saa_c03',
+        deckTitle: 'AWS Certified Solutions Architect - Associate',
         durationSeconds: 1800,
         totalQuestions: 30,
         correctAnswers: 18,
         wrongAnswers: 12,
         percentageScore: 60,
-        domainScores: {'AWS': 60},
+        domainScores: {'Design Secure Architectures': 60},
       ),
     );
 
@@ -101,8 +101,8 @@ void main() {
         id: 'a1',
         startedAt: DateTime(2026, 3, 6, 10),
         finishedAt: DateTime(2026, 3, 6, 10, 30),
-        deckId: 'security-plus',
-        deckTitle: 'Security+',
+        deckId: 'aws_certified_security_specialty_scs_c02',
+        deckTitle: 'AWS Certified Security - Specialty',
         totalQuestions: 30,
         durationSeconds: 1800,
         remainingSeconds: 0,
@@ -114,8 +114,8 @@ void main() {
         id: 'b1',
         startedAt: DateTime(2026, 3, 6, 11),
         finishedAt: DateTime(2026, 3, 6, 11, 30),
-        deckId: 'aws-clf',
-        deckTitle: 'AWS CLF-C02',
+        deckId: 'aws_certified_solutions_architect_associate_saa_c03',
+        deckTitle: 'AWS Certified Solutions Architect - Associate',
         totalQuestions: 30,
         durationSeconds: 1800,
         remainingSeconds: 0,
@@ -128,31 +128,35 @@ void main() {
       ExamResult(
         id: 'a1',
         completedAt: DateTime(2026, 3, 6, 10, 30),
-        deckId: 'security-plus',
-        deckTitle: 'Security+',
+        deckId: 'aws_certified_security_specialty_scs_c02',
+        deckTitle: 'AWS Certified Security - Specialty',
         durationSeconds: 1800,
         totalQuestions: 30,
         correctAnswers: 20,
         wrongAnswers: 10,
         percentageScore: 67,
-        domainScores: {'Security': 67},
+        domainScores: {'Threat Detection and Monitoring': 67},
       ),
       ExamResult(
         id: 'b1',
         completedAt: DateTime(2026, 3, 6, 11, 30),
-        deckId: 'aws-clf',
-        deckTitle: 'AWS CLF-C02',
+        deckId: 'aws_certified_solutions_architect_associate_saa_c03',
+        deckTitle: 'AWS Certified Solutions Architect - Associate',
         durationSeconds: 1800,
         totalQuestions: 30,
         correctAnswers: 18,
         wrongAnswers: 12,
         percentageScore: 60,
-        domainScores: {'AWS': 60},
+        domainScores: {'Design Secure Architectures': 60},
       ),
     ]);
 
-    attemptStorage.clearHistoryForDeck('security-plus');
-    resultStorage.clearResultsForDeck('security-plus');
+    attemptStorage.clearHistoryForDeck(
+      'aws_certified_security_specialty_scs_c02',
+    );
+    resultStorage.clearResultsForDeck(
+      'aws_certified_security_specialty_scs_c02',
+    );
 
     expect(attemptStorage.loadHistory().map((a) => a.id), ['b1']);
     expect(resultStorage.loadResults().map((r) => r.id), ['b1']);

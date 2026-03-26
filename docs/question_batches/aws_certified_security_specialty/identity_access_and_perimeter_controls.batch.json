@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_security_specialty_scs_c02_scs-identity_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_scs",
+  "certificationTitle": "AWS Certified Security - Specialty",
+  "track": "Specialty",
+  "title": "AWS Certified Security - Specialty",
+  "examCode": "SCS-C02",
+  "category": "AWS Security",
+  "description": "Scenario practice batch for Identity, Access, and Perimeter Controls.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Identity, Access, and Perimeter Controls"
+  ],
+  "tags": [
+    "aws",
+    "aws_scs",
+    "scs-c02",
+    "specialty"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "scs_c02_ex_02_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 1",
+      "objectiveId": "2.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A company wants developers to use their corporate identity provider to access AWS without creating IAM users in every account. Which approach is best?",
+      "answers": [
+        "IAM users with shared passwords",
+        "Federation through IAM Identity Center or a SAML/OIDC provider",
+        "Root user credentials for each team",
+        "Security groups with port 22 open"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Federation centralizes identity and avoids long-term IAM user sprawl in each AWS account.",
+      "fullExplanation": "Federation centralizes identity and avoids long-term IAM user sprawl in each AWS account.",
+      "explanation": "Federation centralizes identity and avoids long-term IAM user sprawl in each AWS account."
+    },
+    {
+      "id": "scs_c02_ex_02_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 2",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "An organization wants to prevent member accounts from disabling CloudTrail, even if an administrator in that account has broad permissions. Which control should be used?",
+      "answers": [
+        "A service control policy",
+        "A bucket ACL",
+        "A Lambda function timeout",
+        "An S3 lifecycle rule"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "SCPs define the maximum permissions allowed in the account and can block CloudTrail disable actions.",
+      "fullExplanation": "SCPs define the maximum permissions allowed in the account and can block CloudTrail disable actions.",
+      "explanation": "SCPs define the maximum permissions allowed in the account and can block CloudTrail disable actions."
+    },
+    {
+      "id": "scs_c02_ex_02_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 3",
+      "objectiveId": "2.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A platform team can create roles for application teams, but security wants to ensure those roles never exceed a defined maximum privilege level. What should be applied?",
+      "answers": [
+        "Permission boundaries",
+        "CloudFront origin groups",
+        "Amazon Inspector agents",
+        "NAT instances"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Permission boundaries cap the permissions delegated administrators can grant, which is exactly this use case.",
+      "fullExplanation": "Permission boundaries cap the permissions delegated administrators can grant, which is exactly this use case.",
+      "explanation": "Permission boundaries cap the permissions delegated administrators can grant, which is exactly this use case."
+    },
+    {
+      "id": "scs_c02_ex_02_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 4",
+      "objectiveId": "2.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A privileged role should require an additional verification step before use. Which feature should be enforced?",
+      "answers": [
+        "MFA",
+        "Faster snapshot restore",
+        "Reserved Instances",
+        "Enhanced networking"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "MFA is the standard control for increasing assurance on privileged role use.",
+      "fullExplanation": "MFA is the standard control for increasing assurance on privileged role use.",
+      "explanation": "MFA is the standard control for increasing assurance on privileged role use."
+    },
+    {
+      "id": "scs_c02_ex_02_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 5",
+      "objectiveId": "2.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A workload needs access to AWS APIs without exposing management traffic to the public internet. What should the architect add?",
+      "answers": [
+        "Interface VPC endpoints",
+        "Internet gateways in every subnet",
+        "Public IAM users",
+        "S3 static websites"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Interface endpoints let private subnets reach supported AWS APIs without public internet access.",
+      "fullExplanation": "Interface endpoints let private subnets reach supported AWS APIs without public internet access.",
+      "explanation": "Interface endpoints let private subnets reach supported AWS APIs without public internet access."
+    },
+    {
+      "id": "scs_c02_ex_02_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 6",
+      "objectiveId": "2.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "Security wants to authorize access based on tags such as project and environment rather than writing separate policies for every resource. Which model is best?",
+      "answers": [
+        "ABAC with session and resource tags",
+        "Static public IP allow lists only",
+        "Dedicated Hosts",
+        "Spot placement groups"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "ABAC scales authorization by matching tagged identities to tagged resources.",
+      "fullExplanation": "ABAC scales authorization by matching tagged identities to tagged resources.",
+      "explanation": "ABAC scales authorization by matching tagged identities to tagged resources."
+    },
+    {
+      "id": "scs_c02_ex_02_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 7",
+      "objectiveId": "2.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "Which statement about IAM policy evaluation is correct?",
+      "answers": [
+        "An explicit allow always wins",
+        "An explicit deny overrides allows",
+        "Resource policies are ignored",
+        "Permission boundaries grant access automatically"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Explicit deny has precedence over allow in AWS authorization evaluation.",
+      "fullExplanation": "Explicit deny has precedence over allow in AWS authorization evaluation.",
+      "explanation": "Explicit deny has precedence over allow in AWS authorization evaluation."
+    },
+    {
+      "id": "scs_c02_ex_02_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 8",
+      "objectiveId": "2.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A security team wants to reduce the risk of long-lived access keys for workloads. Which design is preferred?",
+      "answers": [
+        "Store keys in plaintext on disk",
+        "Use IAM roles and temporary credentials",
+        "Use the root user for automation",
+        "Disable CloudTrail"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "IAM roles provide temporary credentials and are the preferred way to authenticate workloads.",
+      "fullExplanation": "IAM roles provide temporary credentials and are the preferred way to authenticate workloads.",
+      "explanation": "IAM roles provide temporary credentials and are the preferred way to authenticate workloads."
+    },
+    {
+      "id": "scs_c02_ex_02_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 9",
+      "objectiveId": "2.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "An organization wants to isolate workloads with different trust levels and billing models. Which AWS concept provides a strong first-class boundary?",
+      "answers": [
+        "Separate AWS accounts",
+        "Separate IAM groups only",
+        "Separate VPC subnets only",
+        "Separate security groups only"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS accounts are a strong security, governance, and billing boundary.",
+      "fullExplanation": "AWS accounts are a strong security, governance, and billing boundary.",
+      "explanation": "AWS accounts are a strong security, governance, and billing boundary."
+    },
+    {
+      "id": "scs_c02_ex_02_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 10",
+      "objectiveId": "2.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "Emergency break-glass credentials are created for incident response. What additional control is most important?",
+      "answers": [
+        "Documented monitoring and credential rotation after use",
+        "Making them permanent for convenience",
+        "Disabling MFA on the account",
+        "Sharing them broadly across teams"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Break-glass access should be tightly monitored and rotated after use to preserve trust and accountability.",
+      "fullExplanation": "Break-glass access should be tightly monitored and rotated after use to preserve trust and accountability.",
+      "explanation": "Break-glass access should be tightly monitored and rotated after use to preserve trust and accountability."
+    },
+    {
+      "id": "scs_c02_ex_02_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 11",
+      "objectiveId": "2.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A team creates a role with broad permissions but forgets to update the trust policy for the identity provider. What is the practical result?",
+      "answers": [
+        "The role cannot be assumed as intended",
+        "The role becomes public automatically",
+        "The account loses CloudTrail",
+        "The VPC endpoint is deleted"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Without a correct trust policy, the principal cannot assume the role regardless of its permissions.",
+      "fullExplanation": "Without a correct trust policy, the principal cannot assume the role regardless of its permissions.",
+      "explanation": "Without a correct trust policy, the principal cannot assume the role regardless of its permissions."
+    },
+    {
+      "id": "scs_c02_ex_02_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 12",
+      "objectiveId": "2.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A company is building multi-account AWS access for employees. Which service is usually best for centralized workforce access at scale?",
+      "answers": [
+        "IAM Identity Center",
+        "Amazon Inspector",
+        "AWS Batch",
+        "Amazon MQ"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "IAM Identity Center is purpose-built for centralized human access across multiple AWS accounts.",
+      "fullExplanation": "IAM Identity Center is purpose-built for centralized human access across multiple AWS accounts.",
+      "explanation": "IAM Identity Center is purpose-built for centralized human access across multiple AWS accounts."
+    },
+    {
+      "id": "scs_c02_ex_02_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 13",
+      "objectiveId": "2.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A security architect says private subnets alone are enough to secure sensitive resources. What is the best response?",
+      "answers": [
+        "Private networking is helpful but IAM and resource policies are still required",
+        "Yes, IAM is unnecessary inside private subnets",
+        "Only root user access is needed",
+        "NACLs replace authorization entirely"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Network isolation does not replace identity and authorization controls in AWS.",
+      "fullExplanation": "Network isolation does not replace identity and authorization controls in AWS.",
+      "explanation": "Network isolation does not replace identity and authorization controls in AWS."
+    },
+    {
+      "id": "scs_c02_ex_02_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 14",
+      "objectiveId": "2.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A team wants admin rights for one hour during a deployment, then automatic expiration. Which design fits best?",
+      "answers": [
+        "Short-lived federated or assumed-role credentials",
+        "Permanent IAM users with admin access",
+        "Shared root credentials",
+        "A public bastion with static keys"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Temporary credentials align to least privilege and reduce long-lived admin exposure.",
+      "fullExplanation": "Temporary credentials align to least privilege and reduce long-lived admin exposure.",
+      "explanation": "Temporary credentials align to least privilege and reduce long-lived admin exposure."
+    },
+    {
+      "id": "scs_c02_ex_02_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-identity",
+      "domain": "Identity, Access, and Perimeter Controls",
+      "topic": "Identity, Access, and Perimeter Controls",
+      "subtopic": "Scenario 15",
+      "objectiveId": "2.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-identity",
+        "scenario-based"
+      ],
+      "question": "A company has dozens of nearly identical roles for each project and environment. Which authorization strategy may simplify the design?",
+      "answers": [
+        "ABAC based on tags",
+        "Dedicated hosts for each team",
+        "S3 Transfer Acceleration",
+        "Static passwords in Secrets Manager"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "ABAC can reduce role explosion by evaluating shared policy logic against tags.",
+      "fullExplanation": "ABAC can reduce role explosion by evaluating shared policy logic against tags.",
+      "explanation": "ABAC can reduce role explosion by evaluating shared policy logic against tags."
+    }
+  ]
+}

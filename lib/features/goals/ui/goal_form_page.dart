@@ -39,7 +39,9 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
   void dispose() {
     _titleCtrl.dispose();
     _descCtrl.dispose();
-    for (final c in _milestonesCtrls) { c.dispose(); }
+    for (final c in _milestonesCtrls) {
+      c.dispose();
+    }
     super.dispose();
   }
 
@@ -48,25 +50,29 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
 
     final milestones = _milestonesCtrls
         .where((c) => c.text.trim().isNotEmpty)
-        .mapIndexed((i, c) => GoalMilestone(
-              id: widget.existingGoal?.milestones.length != null &&
-                      i < widget.existingGoal!.milestones.length
-                  ? widget.existingGoal!.milestones[i].id
-                  : 'ms_${DateTime.now().millisecondsSinceEpoch}_$i',
-              text: c.text.trim(),
-              done: widget.existingGoal?.milestones.length != null &&
-                      i < widget.existingGoal!.milestones.length
-                  ? widget.existingGoal!.milestones[i].done
-                  : false,
-            ))
+        .mapIndexed(
+          (i, c) => GoalMilestone(
+            id:
+                widget.existingGoal?.milestones.length != null &&
+                    i < widget.existingGoal!.milestones.length
+                ? widget.existingGoal!.milestones[i].id
+                : 'ms_${DateTime.now().millisecondsSinceEpoch}_$i',
+            text: c.text.trim(),
+            done:
+                widget.existingGoal?.milestones.length != null &&
+                    i < widget.existingGoal!.milestones.length
+                ? widget.existingGoal!.milestones[i].done
+                : false,
+          ),
+        )
         .toList();
 
     final goal = Goal(
-      id: widget.existingGoal?.id ??
+      id:
+          widget.existingGoal?.id ??
           'goal_${DateTime.now().millisecondsSinceEpoch}',
       title: _titleCtrl.text.trim(),
-      description:
-          _descCtrl.text.trim().isEmpty ? null : _descCtrl.text.trim(),
+      description: _descCtrl.text.trim().isEmpty ? null : _descCtrl.text.trim(),
       area: _area,
       targetDate: _targetDate,
       milestones: milestones,
@@ -89,9 +95,7 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(isEdit ? 'Modifica obiettivo' : 'Nuovo obiettivo'),
-        actions: [
-          TextButton(onPressed: _save, child: const Text('Salva')),
-        ],
+        actions: [TextButton(onPressed: _save, child: const Text('Salva'))],
       ),
       body: Form(
         key: _formKey,
@@ -104,11 +108,13 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
             Wrap(
               spacing: 8,
               children: GoalArea.values
-                  .map((a) => ChoiceChip(
-                        label: Text('${a.emoji} ${a.label}'),
-                        selected: _area == a,
-                        onSelected: (_) => setState(() => _area = a),
-                      ))
+                  .map(
+                    (a) => ChoiceChip(
+                      label: Text('${a.emoji} ${a.label}'),
+                      selected: _area == a,
+                      onSelected: (_) => setState(() => _area = a),
+                    ),
+                  )
                   .toList(),
             ),
             const SizedBox(height: 20),
@@ -118,7 +124,7 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
               controller: _titleCtrl,
               decoration: const InputDecoration(
                 labelText: 'Titolo obiettivo *',
-                hintText: 'es. Ottenere la certificazione Security+',
+                hintText: 'es. Superare AWS Solutions Architect Associate',
                 border: OutlineInputBorder(),
               ),
               validator: (v) => v == null || v.trim().isEmpty
@@ -143,9 +149,11 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               leading: const Icon(Icons.event_outlined),
-              title: Text(_targetDate == null
-                  ? 'Nessuna data di scadenza'
-                  : _formatDate(_targetDate!)),
+              title: Text(
+                _targetDate == null
+                    ? 'Nessuna data di scadenza'
+                    : _formatDate(_targetDate!),
+              ),
               trailing: _targetDate != null
                   ? IconButton(
                       icon: const Icon(Icons.clear),
@@ -156,7 +164,8 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
                 final picked = await showDatePicker(
                   context: context,
                   initialDate:
-                      _targetDate ?? DateTime.now().add(const Duration(days: 30)),
+                      _targetDate ??
+                      DateTime.now().add(const Duration(days: 30)),
                   firstDate: DateTime.now(),
                   lastDate: DateTime.now().add(const Duration(days: 3650)),
                 );
@@ -170,37 +179,42 @@ class _GoalFormPageState extends ConsumerState<GoalFormPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Milestone',
-                    style: Theme.of(context).textTheme.labelLarge),
+                Text(
+                  'Milestone',
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
                 TextButton.icon(
                   onPressed: () => setState(
-                      () => _milestonesCtrls.add(TextEditingController())),
+                    () => _milestonesCtrls.add(TextEditingController()),
+                  ),
                   icon: const Icon(Icons.add, size: 16),
                   label: const Text('Aggiungi'),
                 ),
               ],
             ),
-            ..._milestonesCtrls.mapIndexed((i, ctrl) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: ctrl,
-                          decoration: InputDecoration(
-                            hintText: 'Milestone ${i + 1}',
-                            border: const OutlineInputBorder(),
-                          ),
+            ..._milestonesCtrls.mapIndexed(
+              (i, ctrl) => Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextFormField(
+                        controller: ctrl,
+                        decoration: InputDecoration(
+                          hintText: 'Milestone ${i + 1}',
+                          border: const OutlineInputBorder(),
                         ),
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.remove_circle_outline),
-                        onPressed: () => setState(
-                            () => _milestonesCtrls.removeAt(i)),
-                      ),
-                    ],
-                  ),
-                )),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.remove_circle_outline),
+                      onPressed: () =>
+                          setState(() => _milestonesCtrls.removeAt(i)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
 
             const SizedBox(height: 32),
             FilledButton.icon(

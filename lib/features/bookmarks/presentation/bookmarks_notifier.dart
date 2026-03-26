@@ -52,20 +52,29 @@ class BookmarksNotifier extends Notifier<List<String>> {
   bool isBookmarked(String lessonId) => state.contains(lessonId);
 }
 
-final bookmarksProvider =
-    NotifierProvider<BookmarksNotifier, List<String>>(BookmarksNotifier.new);
+final bookmarksProvider = NotifierProvider<BookmarksNotifier, List<String>>(
+  BookmarksNotifier.new,
+);
 
 /// Derived: full Lesson objects for bookmarked ids.
 final bookmarkedLessonsProvider = Provider<AsyncValue<List<Lesson>>>((ref) {
   final bookmarkedIds = ref.watch(bookmarksProvider);
-  return ref.watch(lessonsProvider).whenData(
-    (lessons) => lessons.where((l) => bookmarkedIds.contains(l.id)).toList(),
-  );
+  return ref
+      .watch(lessonsProvider)
+      .whenData(
+        (lessons) =>
+            lessons.where((l) => bookmarkedIds.contains(l.id)).toList(),
+      );
 });
 
 bool _shouldIncludeLegacyBookmarks(DeckPackMeta? activeDeck) {
   if (activeDeck == null) return true;
-  return activeDeck.examCode == 'SY0-701' ||
-      activeDeck.id.toLowerCase().contains('sec701') ||
-      activeDeck.title.toLowerCase().contains('security+');
+  final knownAliases = {
+    activeDeck.id.toLowerCase(),
+    ...activeDeck.aliases.map((alias) => alias.toLowerCase()),
+  };
+  return knownAliases.any(
+    (alias) =>
+        alias.contains('aws') || alias.contains('saa') || alias.contains('scs'),
+  );
 }

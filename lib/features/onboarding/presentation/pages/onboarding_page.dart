@@ -16,16 +16,15 @@ class OnboardingPage extends ConsumerStatefulWidget {
 
 class _OnboardingPageState extends ConsumerState<OnboardingPage> {
   final _pageController = PageController();
-  final _selectedInterests = <String>{'Cybersecurity'};
+  final _selectedInterests = <String>{'AWS Architecture'};
   var _pageIndex = 0;
   var _isFinishing = false;
 
   static const _interests = [
-    'Cybersecurity',
-    'Cloud',
-    'Technology',
-    'Science',
-    'History',
+    'AWS Architecture',
+    'AWS Security',
+    'Cloud Security',
+    'Solutions Design',
   ];
 
   @override

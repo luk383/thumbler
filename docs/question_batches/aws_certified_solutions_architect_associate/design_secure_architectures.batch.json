@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_solutions_architect_associate_saa_c03_saa-secure_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_saa",
+  "certificationTitle": "AWS Certified Solutions Architect - Associate",
+  "track": "Associate",
+  "title": "AWS Certified Solutions Architect - Associate",
+  "examCode": "SAA-C03",
+  "category": "AWS Architecture",
+  "description": "Scenario practice batch for Design Secure Architectures.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Design Secure Architectures"
+  ],
+  "tags": [
+    "aws",
+    "aws_saa",
+    "saa-c03",
+    "associate"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "saa_c03_ex_01_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company stores regulated documents in Amazon S3 and needs centralized key management, audit trails, and the ability to disable a key immediately. Which option best meets the requirement?",
+      "answers": [
+        "SSE-S3 with bucket keys",
+        "SSE-KMS with a customer managed KMS key",
+        "Client-side compression before upload",
+        "S3 Transfer Acceleration"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter.",
+      "fullExplanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter.",
+      "explanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter."
+    },
+    {
+      "id": "saa_c03_ex_01_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "1.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "Instances in private subnets must access Amazon S3 without traversing the public internet. What should the architect add?",
+      "answers": [
+        "A NAT gateway",
+        "A gateway VPC endpoint for S3",
+        "An internet gateway",
+        "A VPN connection"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "A gateway VPC endpoint keeps S3 access private inside the AWS network and avoids NAT or internet dependence.",
+      "fullExplanation": "A gateway VPC endpoint keeps S3 access private inside the AWS network and avoids NAT or internet dependence.",
+      "explanation": "A gateway VPC endpoint keeps S3 access private inside the AWS network and avoids NAT or internet dependence."
+    },
+    {
+      "id": "saa_c03_ex_01_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "An application on Amazon EC2 needs temporary access to DynamoDB without storing long-term credentials. Which design is best?",
+      "answers": [
+        "Create one IAM user for all instances",
+        "Store access keys in AWS Systems Manager Parameter Store as plain text",
+        "Attach an IAM role to the EC2 instances",
+        "Use the root user access keys"
+      ],
+      "correctIndex": 2,
+      "shortExplanation": "IAM roles give EC2 temporary credentials automatically and remove the operational risk of static keys.",
+      "fullExplanation": "IAM roles give EC2 temporary credentials automatically and remove the operational risk of static keys.",
+      "explanation": "IAM roles give EC2 temporary credentials automatically and remove the operational risk of static keys."
+    },
+    {
+      "id": "saa_c03_ex_01_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "1.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A security team wants a record of every API call made in an AWS account, including the identity used and source IP. Which service should be enabled?",
+      "answers": [
+        "Amazon GuardDuty",
+        "AWS CloudTrail",
+        "Amazon Inspector",
+        "AWS Shield"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "CloudTrail is the core audit trail for AWS API activity and is required for governance and investigations.",
+      "fullExplanation": "CloudTrail is the core audit trail for AWS API activity and is required for governance and investigations.",
+      "explanation": "CloudTrail is the core audit trail for AWS API activity and is required for governance and investigations."
+    },
+    {
+      "id": "saa_c03_ex_01_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A web application needs protection from SQL injection and cross-site scripting at the edge. Which service should be added?",
+      "answers": [
+        "AWS WAF",
+        "Amazon Macie",
+        "AWS Backup",
+        "Amazon EventBridge"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS WAF is the managed service designed to inspect and filter HTTP requests for common web exploits.",
+      "fullExplanation": "AWS WAF is the managed service designed to inspect and filter HTTP requests for common web exploits.",
+      "explanation": "AWS WAF is the managed service designed to inspect and filter HTTP requests for common web exploits."
+    },
+    {
+      "id": "saa_c03_ex_01_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "1.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company needs to share access to an AWS account with a central operations team without creating permanent users in the member account. Which approach is best?",
+      "answers": [
+        "Share the root credentials in a password vault",
+        "Use cross-account IAM roles and STS",
+        "Create the same IAM users in every account",
+        "Expose the account through a bastion host"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Cross-account roles keep identity centralized and rely on temporary credentials rather than duplicated IAM users.",
+      "fullExplanation": "Cross-account roles keep identity centralized and rely on temporary credentials rather than duplicated IAM users.",
+      "explanation": "Cross-account roles keep identity centralized and rely on temporary credentials rather than duplicated IAM users."
+    },
+    {
+      "id": "saa_c03_ex_01_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "1.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "An architect needs private connectivity from a VPC to AWS Secrets Manager. Which component is required?",
+      "answers": [
+        "Gateway Load Balancer",
+        "Interface VPC endpoint",
+        "Transit gateway route table",
+        "Egress-only internet gateway"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Secrets Manager is a PrivateLink-style service, so private API access uses an interface VPC endpoint.",
+      "fullExplanation": "Secrets Manager is a PrivateLink-style service, so private API access uses an interface VPC endpoint.",
+      "explanation": "Secrets Manager is a PrivateLink-style service, so private API access uses an interface VPC endpoint."
+    },
+    {
+      "id": "saa_c03_ex_01_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "1.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A startup needs a simple way to rotate database credentials used by a Lambda function. Which service is the best fit?",
+      "answers": [
+        "AWS Secrets Manager",
+        "Amazon SQS",
+        "AWS Artifact",
+        "Amazon Athena"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Secrets Manager supports managed secret storage and automated rotation workflows for credentials.",
+      "fullExplanation": "Secrets Manager supports managed secret storage and automated rotation workflows for credentials.",
+      "explanation": "Secrets Manager supports managed secret storage and automated rotation workflows for credentials."
+    },
+    {
+      "id": "saa_c03_ex_01_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "1.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "Which configuration provides the strongest protection for the AWS account root user?",
+      "answers": [
+        "Disable CloudTrail and rely on billing alerts",
+        "Use the root user for daily administration",
+        "Enable MFA and avoid routine root access",
+        "Create additional root users for redundancy"
+      ],
+      "correctIndex": 2,
+      "shortExplanation": "The root user should be tightly restricted, protected with MFA, and reserved for rare account-level actions.",
+      "fullExplanation": "The root user should be tightly restricted, protected with MFA, and reserved for rare account-level actions.",
+      "explanation": "The root user should be tightly restricted, protected with MFA, and reserved for rare account-level actions."
+    },
+    {
+      "id": "saa_c03_ex_01_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "1.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company wants to encrypt EBS volumes and snapshots by default across an account. What is the simplest approach?",
+      "answers": [
+        "Tag all volumes manually after launch",
+        "Enable EBS encryption by default",
+        "Use only instance store volumes",
+        "Copy every snapshot into S3"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "EBS encryption by default automatically protects new volumes and snapshots with minimal operational overhead.",
+      "fullExplanation": "EBS encryption by default automatically protects new volumes and snapshots with minimal operational overhead.",
+      "explanation": "EBS encryption by default automatically protects new volumes and snapshots with minimal operational overhead."
+    },
+    {
+      "id": "saa_c03_ex_01_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "1.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A team accidentally exposed an S3 bucket publicly in the past and wants a preventive guardrail across the account. Which control is best?",
+      "answers": [
+        "S3 Block Public Access at the account level",
+        "A NAT gateway per subnet",
+        "CloudFront cache policies",
+        "An EC2 launch template"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Account-level S3 Block Public Access is a broad preventive control against accidental public bucket exposure.",
+      "fullExplanation": "Account-level S3 Block Public Access is a broad preventive control against accidental public bucket exposure.",
+      "explanation": "Account-level S3 Block Public Access is a broad preventive control against accidental public bucket exposure."
+    },
+    {
+      "id": "saa_c03_ex_01_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "1.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A security review shows that an S3 bucket policy allows broad cross-account access. Which service helps identify this type of unintended exposure?",
+      "answers": [
+        "IAM Access Analyzer",
+        "Amazon Inspector",
+        "AWS Shield Advanced",
+        "Amazon CloudSearch"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "IAM Access Analyzer is built to detect public and cross-account access paths on supported resources.",
+      "fullExplanation": "IAM Access Analyzer is built to detect public and cross-account access paths on supported resources.",
+      "explanation": "IAM Access Analyzer is built to detect public and cross-account access paths on supported resources."
+    },
+    {
+      "id": "saa_c03_ex_01_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "1.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "An organization wants separate teams to manage keys and consume encrypted data. Which option best supports this requirement?",
+      "answers": [
+        "SSE-S3 only",
+        "Customer managed KMS keys with separate admins and users",
+        "Root user access keys",
+        "Shared IAM users"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Customer managed KMS keys make separation of duties easier through key policy and grant design.",
+      "fullExplanation": "Customer managed KMS keys make separation of duties easier through key policy and grant design.",
+      "explanation": "Customer managed KMS keys make separation of duties easier through key policy and grant design."
+    },
+    {
+      "id": "saa_c03_ex_01_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "1.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A workload accesses multiple AWS services from private subnets and the company wants to minimize internet exposure while avoiding NAT cost where possible. What should be prioritized?",
+      "answers": [
+        "Public subnets for application instances",
+        "VPC endpoints for supported services",
+        "Dedicated hosts",
+        "Classic Load Balancers only"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "VPC endpoints reduce internet exposure and can also reduce or eliminate NAT dependence for supported services.",
+      "fullExplanation": "VPC endpoints reduce internet exposure and can also reduce or eliminate NAT dependence for supported services.",
+      "explanation": "VPC endpoints reduce internet exposure and can also reduce or eliminate NAT dependence for supported services."
+    },
+    {
+      "id": "saa_c03_ex_01_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "1.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company requires server-side encryption for all newly uploaded S3 objects and wants enforcement even if clients forget to specify encryption headers. What should the architect do?",
+      "answers": [
+        "Rely on user training only",
+        "Configure bucket default encryption and enforce it with policy",
+        "Move uploads to EFS",
+        "Use Route 53 latency routing"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Default encryption plus policy enforcement ensures uploads remain encrypted even when clients are inconsistent.",
+      "fullExplanation": "Default encryption plus policy enforcement ensures uploads remain encrypted even when clients are inconsistent.",
+      "explanation": "Default encryption plus policy enforcement ensures uploads remain encrypted even when clients are inconsistent."
+    }
+  ]
+}

@@ -1,0 +1,3951 @@
+{
+  "id": "aws_certified_solutions_architect_associate_saa_c03",
+  "provider": "aws",
+  "certificationId": "aws_saa",
+  "certificationTitle": "AWS Certified Solutions Architect - Associate",
+  "track": "Associate",
+  "aliases": [
+    "aws_solutions_architect_associate_saa_c03"
+  ],
+  "title": "AWS Certified Solutions Architect - Associate",
+  "examCode": "SAA-C03",
+  "category": "AWS Architecture",
+  "description": "AWS Certified Solutions Architect - Associate offline study deck with exam-focused flashcards and scenario-based practice questions.",
+  "version": "3",
+  "questionCount": 140,
+  "domains": [
+    "Design Secure Architectures",
+    "Design Resilient Architectures",
+    "Design High-Performing Architectures",
+    "Design Cost-Optimized Architectures"
+  ],
+  "tags": [
+    "aws",
+    "aws_saa",
+    "saa-c03",
+    "associate"
+  ],
+  "defaultContentType": "micro_card",
+  "questions": [
+    {
+      "id": "saa_c03_fc_01_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "IAM",
+      "subtopic": "Least Privilege",
+      "objectiveId": "1.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "iam",
+        "least-privilege"
+      ],
+      "question": "What is the best exam takeaway about least privilege roles?",
+      "answers": [
+        "Use IAM roles and scoped policies so workloads receive only the permissions they actually need.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Use IAM roles and scoped policies so workloads receive only the permissions they actually need.",
+      "fullExplanation": "Use IAM roles and scoped policies so workloads receive only the permissions they actually need.",
+      "explanation": "Use IAM roles and scoped policies so workloads receive only the permissions they actually need."
+    },
+    {
+      "id": "saa_c03_fc_01_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Data Protection",
+      "subtopic": "S3 Encryption",
+      "objectiveId": "1.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "data-protection",
+        "s3-encryption"
+      ],
+      "question": "What is the best exam takeaway about sse-kms defaults?",
+      "answers": [
+        "SSE-KMS adds centralized key control, auditability, and separation of duties for S3 data.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "SSE-KMS adds centralized key control, auditability, and separation of duties for S3 data.",
+      "fullExplanation": "SSE-KMS adds centralized key control, auditability, and separation of duties for S3 data.",
+      "explanation": "SSE-KMS adds centralized key control, auditability, and separation of duties for S3 data."
+    },
+    {
+      "id": "saa_c03_fc_01_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Networking",
+      "subtopic": "Private Connectivity",
+      "objectiveId": "1.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "networking",
+        "private-connectivity"
+      ],
+      "question": "What is the best exam takeaway about private s3 access?",
+      "answers": [
+        "Gateway VPC endpoints keep S3 traffic on the AWS backbone instead of traversing the internet.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Gateway VPC endpoints keep S3 traffic on the AWS backbone instead of traversing the internet.",
+      "fullExplanation": "Gateway VPC endpoints keep S3 traffic on the AWS backbone instead of traversing the internet.",
+      "explanation": "Gateway VPC endpoints keep S3 traffic on the AWS backbone instead of traversing the internet."
+    },
+    {
+      "id": "saa_c03_fc_01_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Secrets Management",
+      "subtopic": "Rotation",
+      "objectiveId": "1.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "secrets-management",
+        "rotation"
+      ],
+      "question": "What is the best exam takeaway about secrets rotation?",
+      "answers": [
+        "AWS Secrets Manager is designed for storing and rotating credentials without embedding them in code.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS Secrets Manager is designed for storing and rotating credentials without embedding them in code.",
+      "fullExplanation": "AWS Secrets Manager is designed for storing and rotating credentials without embedding them in code.",
+      "explanation": "AWS Secrets Manager is designed for storing and rotating credentials without embedding them in code."
+    },
+    {
+      "id": "saa_c03_fc_01_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "IAM",
+      "subtopic": "Cross-Account Access",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "iam",
+        "cross-account-access"
+      ],
+      "question": "What is the best exam takeaway about cross-account access?",
+      "answers": [
+        "STS AssumeRole is the standard pattern for secure temporary access across AWS accounts.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "STS AssumeRole is the standard pattern for secure temporary access across AWS accounts.",
+      "fullExplanation": "STS AssumeRole is the standard pattern for secure temporary access across AWS accounts.",
+      "explanation": "STS AssumeRole is the standard pattern for secure temporary access across AWS accounts."
+    },
+    {
+      "id": "saa_c03_fc_01_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Edge Security",
+      "subtopic": "Web Protection",
+      "objectiveId": "1.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "edge-security",
+        "web-protection"
+      ],
+      "question": "What is the best exam takeaway about shielding public apps?",
+      "answers": [
+        "AWS WAF blocks common web attacks before they reach the application tier.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS WAF blocks common web attacks before they reach the application tier.",
+      "fullExplanation": "AWS WAF blocks common web attacks before they reach the application tier.",
+      "explanation": "AWS WAF blocks common web attacks before they reach the application tier."
+    },
+    {
+      "id": "saa_c03_fc_01_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Monitoring",
+      "subtopic": "Audit Logging",
+      "objectiveId": "1.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "monitoring",
+        "audit-logging"
+      ],
+      "question": "What is the best exam takeaway about audit trails?",
+      "answers": [
+        "CloudTrail is the default source of truth for API activity and change investigation.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudTrail is the default source of truth for API activity and change investigation.",
+      "fullExplanation": "CloudTrail is the default source of truth for API activity and change investigation.",
+      "explanation": "CloudTrail is the default source of truth for API activity and change investigation."
+    },
+    {
+      "id": "saa_c03_fc_01_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Encryption",
+      "subtopic": "KMS Policies",
+      "objectiveId": "1.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "encryption",
+        "kms-policies"
+      ],
+      "question": "What is the best exam takeaway about key policies matter?",
+      "answers": [
+        "A KMS key policy is the primary authorization boundary for customer managed keys.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "A KMS key policy is the primary authorization boundary for customer managed keys.",
+      "fullExplanation": "A KMS key policy is the primary authorization boundary for customer managed keys.",
+      "explanation": "A KMS key policy is the primary authorization boundary for customer managed keys."
+    },
+    {
+      "id": "saa_c03_fc_01_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Databases",
+      "subtopic": "Credential Strategy",
+      "objectiveId": "1.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "databases",
+        "credential-strategy"
+      ],
+      "question": "What is the best exam takeaway about database credential isolation?",
+      "answers": [
+        "IAM database authentication can reduce credential sprawl for supported database engines.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "IAM database authentication can reduce credential sprawl for supported database engines.",
+      "fullExplanation": "IAM database authentication can reduce credential sprawl for supported database engines.",
+      "explanation": "IAM database authentication can reduce credential sprawl for supported database engines."
+    },
+    {
+      "id": "saa_c03_fc_01_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Networking",
+      "subtopic": "Stateful Filtering",
+      "objectiveId": "1.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "networking",
+        "stateful-filtering"
+      ],
+      "question": "What is the best exam takeaway about security groups are stateful?",
+      "answers": [
+        "Security groups automatically allow response traffic for established flows.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Security groups automatically allow response traffic for established flows.",
+      "fullExplanation": "Security groups automatically allow response traffic for established flows.",
+      "explanation": "Security groups automatically allow response traffic for established flows."
+    },
+    {
+      "id": "saa_c03_fc_01_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Networking",
+      "subtopic": "Subnet Controls",
+      "objectiveId": "1.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "networking",
+        "subnet-controls"
+      ],
+      "question": "What is the best exam takeaway about nacls are subnet guardrails?",
+      "answers": [
+        "Network ACLs provide stateless subnet-level filtering and explicit deny controls.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Network ACLs provide stateless subnet-level filtering and explicit deny controls.",
+      "fullExplanation": "Network ACLs provide stateless subnet-level filtering and explicit deny controls.",
+      "explanation": "Network ACLs provide stateless subnet-level filtering and explicit deny controls."
+    },
+    {
+      "id": "saa_c03_fc_01_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Networking",
+      "subtopic": "Private APIs",
+      "objectiveId": "1.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "networking",
+        "private-apis"
+      ],
+      "question": "What is the best exam takeaway about private service access?",
+      "answers": [
+        "Interface endpoints provide private access to AWS APIs through PrivateLink.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Interface endpoints provide private access to AWS APIs through PrivateLink.",
+      "fullExplanation": "Interface endpoints provide private access to AWS APIs through PrivateLink.",
+      "explanation": "Interface endpoints provide private access to AWS APIs through PrivateLink."
+    },
+    {
+      "id": "saa_c03_fc_01_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Account Security",
+      "subtopic": "Root Protection",
+      "objectiveId": "1.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "account-security",
+        "root-protection"
+      ],
+      "question": "What is the best exam takeaway about root user protection?",
+      "answers": [
+        "MFA on the root user is a foundational AWS account hardening step.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "MFA on the root user is a foundational AWS account hardening step.",
+      "fullExplanation": "MFA on the root user is a foundational AWS account hardening step.",
+      "explanation": "MFA on the root user is a foundational AWS account hardening step."
+    },
+    {
+      "id": "saa_c03_fc_01_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Operations",
+      "subtopic": "Centralized Logging",
+      "objectiveId": "1.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "centralized-logging"
+      ],
+      "question": "What is the best exam takeaway about centralized logging?",
+      "answers": [
+        "Centralizing logs in CloudWatch Logs or S3 improves investigations and governance.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Centralizing logs in CloudWatch Logs or S3 improves investigations and governance.",
+      "fullExplanation": "Centralizing logs in CloudWatch Logs or S3 improves investigations and governance.",
+      "explanation": "Centralizing logs in CloudWatch Logs or S3 improves investigations and governance."
+    },
+    {
+      "id": "saa_c03_fc_01_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Architecture",
+      "subtopic": "Defense in Depth",
+      "objectiveId": "1.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "defense-in-depth"
+      ],
+      "question": "What is the best exam takeaway about defense in depth?",
+      "answers": [
+        "Combine identity, network, encryption, and logging controls instead of relying on a single layer.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Combine identity, network, encryption, and logging controls instead of relying on a single layer.",
+      "fullExplanation": "Combine identity, network, encryption, and logging controls instead of relying on a single layer.",
+      "explanation": "Combine identity, network, encryption, and logging controls instead of relying on a single layer."
+    },
+    {
+      "id": "saa_c03_fc_01_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Storage Security",
+      "subtopic": "Public Access Controls",
+      "objectiveId": "1.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage-security",
+        "public-access-controls"
+      ],
+      "question": "What is the best exam takeaway about s3 block public access?",
+      "answers": [
+        "S3 Block Public Access protects against accidental public exposure at bucket and account scope.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "S3 Block Public Access protects against accidental public exposure at bucket and account scope.",
+      "fullExplanation": "S3 Block Public Access protects against accidental public exposure at bucket and account scope.",
+      "explanation": "S3 Block Public Access protects against accidental public exposure at bucket and account scope."
+    },
+    {
+      "id": "saa_c03_fc_01_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "IAM",
+      "subtopic": "Policy Evaluation",
+      "objectiveId": "1.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "iam",
+        "policy-evaluation"
+      ],
+      "question": "What is the best exam takeaway about bucket policies versus iam?",
+      "answers": [
+        "Evaluate both identity-based and resource-based policies when diagnosing S3 access issues.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Evaluate both identity-based and resource-based policies when diagnosing S3 access issues.",
+      "fullExplanation": "Evaluate both identity-based and resource-based policies when diagnosing S3 access issues.",
+      "explanation": "Evaluate both identity-based and resource-based policies when diagnosing S3 access issues."
+    },
+    {
+      "id": "saa_c03_fc_01_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "IAM",
+      "subtopic": "Access Analysis",
+      "objectiveId": "1.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "iam",
+        "access-analysis"
+      ],
+      "question": "What is the best exam takeaway about iam access analyzer?",
+      "answers": [
+        "Access Analyzer helps find unintended public and cross-account resource exposure.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Access Analyzer helps find unintended public and cross-account resource exposure.",
+      "fullExplanation": "Access Analyzer helps find unintended public and cross-account resource exposure.",
+      "explanation": "Access Analyzer helps find unintended public and cross-account resource exposure."
+    },
+    {
+      "id": "saa_c03_fc_01_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Encryption",
+      "subtopic": "Delegated Access",
+      "objectiveId": "1.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "encryption",
+        "delegated-access"
+      ],
+      "question": "What is the best exam takeaway about kms grants?",
+      "answers": [
+        "KMS grants can delegate temporary key use without editing the full key policy.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "KMS grants can delegate temporary key use without editing the full key policy.",
+      "fullExplanation": "KMS grants can delegate temporary key use without editing the full key policy.",
+      "explanation": "KMS grants can delegate temporary key use without editing the full key policy."
+    },
+    {
+      "id": "saa_c03_fc_01_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Data Protection",
+      "subtopic": "In Transit Encryption",
+      "objectiveId": "1.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "data-protection",
+        "in-transit-encryption"
+      ],
+      "question": "What is the best exam takeaway about transit encryption matters?",
+      "answers": [
+        "TLS in transit complements encryption at rest and is often an explicit exam requirement.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "TLS in transit complements encryption at rest and is often an explicit exam requirement.",
+      "fullExplanation": "TLS in transit complements encryption at rest and is often an explicit exam requirement.",
+      "explanation": "TLS in transit complements encryption at rest and is often an explicit exam requirement."
+    },
+    {
+      "id": "saa_c03_fc_02_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Databases",
+      "subtopic": "High Availability",
+      "objectiveId": "2.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "databases",
+        "high-availability"
+      ],
+      "question": "What is the best exam takeaway about multi-az databases?",
+      "answers": [
+        "Multi-AZ database deployments protect availability when a host or Availability Zone fails.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Multi-AZ database deployments protect availability when a host or Availability Zone fails.",
+      "fullExplanation": "Multi-AZ database deployments protect availability when a host or Availability Zone fails.",
+      "explanation": "Multi-AZ database deployments protect availability when a host or Availability Zone fails."
+    },
+    {
+      "id": "saa_c03_fc_02_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Compute",
+      "subtopic": "Stateless Design",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "stateless-design"
+      ],
+      "question": "What is the best exam takeaway about stateless tiers scale better?",
+      "answers": [
+        "Stateless application tiers are easier to replace and scale behind a load balancer.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Stateless application tiers are easier to replace and scale behind a load balancer.",
+      "fullExplanation": "Stateless application tiers are easier to replace and scale behind a load balancer.",
+      "explanation": "Stateless application tiers are easier to replace and scale behind a load balancer."
+    },
+    {
+      "id": "saa_c03_fc_02_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Integration",
+      "subtopic": "Queue-Based Decoupling",
+      "objectiveId": "2.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "integration",
+        "queue-based-decoupling"
+      ],
+      "question": "What is the best exam takeaway about decoupling with queues?",
+      "answers": [
+        "Amazon SQS absorbs spikes and prevents tightly coupled services from failing together.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon SQS absorbs spikes and prevents tightly coupled services from failing together.",
+      "fullExplanation": "Amazon SQS absorbs spikes and prevents tightly coupled services from failing together.",
+      "explanation": "Amazon SQS absorbs spikes and prevents tightly coupled services from failing together."
+    },
+    {
+      "id": "saa_c03_fc_02_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Integration",
+      "subtopic": "Event Recovery",
+      "objectiveId": "2.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "integration",
+        "event-recovery"
+      ],
+      "question": "What is the best exam takeaway about event-driven retries?",
+      "answers": [
+        "Asynchronous retry patterns make failure recovery more controlled and less disruptive.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Asynchronous retry patterns make failure recovery more controlled and less disruptive.",
+      "fullExplanation": "Asynchronous retry patterns make failure recovery more controlled and less disruptive.",
+      "explanation": "Asynchronous retry patterns make failure recovery more controlled and less disruptive."
+    },
+    {
+      "id": "saa_c03_fc_02_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Disaster Recovery",
+      "subtopic": "Multi-Region",
+      "objectiveId": "2.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "disaster-recovery",
+        "multi-region"
+      ],
+      "question": "What is the best exam takeaway about cross-region recovery?",
+      "answers": [
+        "Multi-Region designs reduce the blast radius of a Regional outage.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Multi-Region designs reduce the blast radius of a Regional outage.",
+      "fullExplanation": "Multi-Region designs reduce the blast radius of a Regional outage.",
+      "explanation": "Multi-Region designs reduce the blast radius of a Regional outage."
+    },
+    {
+      "id": "saa_c03_fc_02_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Networking",
+      "subtopic": "DNS Failover",
+      "objectiveId": "2.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "networking",
+        "dns-failover"
+      ],
+      "question": "What is the best exam takeaway about route 53 failover?",
+      "answers": [
+        "Route 53 health checks can move traffic to standby endpoints when the primary is unhealthy.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Route 53 health checks can move traffic to standby endpoints when the primary is unhealthy.",
+      "fullExplanation": "Route 53 health checks can move traffic to standby endpoints when the primary is unhealthy.",
+      "explanation": "Route 53 health checks can move traffic to standby endpoints when the primary is unhealthy."
+    },
+    {
+      "id": "saa_c03_fc_02_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Operations",
+      "subtopic": "Immutable Deployments",
+      "objectiveId": "2.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "immutable-deployments"
+      ],
+      "question": "What is the best exam takeaway about immutable infrastructure?",
+      "answers": [
+        "Replacing failed instances is often safer than repairing them in place.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Replacing failed instances is often safer than repairing them in place.",
+      "fullExplanation": "Replacing failed instances is often safer than repairing them in place.",
+      "explanation": "Replacing failed instances is often safer than repairing them in place."
+    },
+    {
+      "id": "saa_c03_fc_02_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Operations",
+      "subtopic": "Recovery Validation",
+      "objectiveId": "2.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "recovery-validation"
+      ],
+      "question": "What is the best exam takeaway about backups need restore tests?",
+      "answers": [
+        "A backup strategy is incomplete until restore procedures are actually validated.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "A backup strategy is incomplete until restore procedures are actually validated.",
+      "fullExplanation": "A backup strategy is incomplete until restore procedures are actually validated.",
+      "explanation": "A backup strategy is incomplete until restore procedures are actually validated."
+    },
+    {
+      "id": "saa_c03_fc_02_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Databases",
+      "subtopic": "Read Scaling",
+      "objectiveId": "2.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "databases",
+        "read-scaling"
+      ],
+      "question": "What is the best exam takeaway about read replicas offload reads?",
+      "answers": [
+        "Read replicas increase resilience and scale for read-heavy database workloads.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Read replicas increase resilience and scale for read-heavy database workloads.",
+      "fullExplanation": "Read replicas increase resilience and scale for read-heavy database workloads.",
+      "explanation": "Read replicas increase resilience and scale for read-heavy database workloads."
+    },
+    {
+      "id": "saa_c03_fc_02_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Compute",
+      "subtopic": "Self Healing",
+      "objectiveId": "2.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "self-healing"
+      ],
+      "question": "What is the best exam takeaway about auto scaling replaces failure?",
+      "answers": [
+        "Auto Scaling groups can replace unhealthy instances without manual intervention.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Auto Scaling groups can replace unhealthy instances without manual intervention.",
+      "fullExplanation": "Auto Scaling groups can replace unhealthy instances without manual intervention.",
+      "explanation": "Auto Scaling groups can replace unhealthy instances without manual intervention."
+    },
+    {
+      "id": "saa_c03_fc_02_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Integration",
+      "subtopic": "Safe Retries",
+      "objectiveId": "2.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "integration",
+        "safe-retries"
+      ],
+      "question": "What is the best exam takeaway about idempotency matters?",
+      "answers": [
+        "Idempotent consumers prevent duplicate side effects during retries and replays.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Idempotent consumers prevent duplicate side effects during retries and replays.",
+      "fullExplanation": "Idempotent consumers prevent duplicate side effects during retries and replays.",
+      "explanation": "Idempotent consumers prevent duplicate side effects during retries and replays."
+    },
+    {
+      "id": "saa_c03_fc_02_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Architecture",
+      "subtopic": "Loose Coupling",
+      "objectiveId": "2.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "loose-coupling"
+      ],
+      "question": "What is the best exam takeaway about loose coupling wins?",
+      "answers": [
+        "Loosely coupled architectures reduce cascading failure across services.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Loosely coupled architectures reduce cascading failure across services.",
+      "fullExplanation": "Loosely coupled architectures reduce cascading failure across services.",
+      "explanation": "Loosely coupled architectures reduce cascading failure across services."
+    },
+    {
+      "id": "saa_c03_fc_02_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Storage",
+      "subtopic": "Durability",
+      "objectiveId": "2.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage",
+        "durability"
+      ],
+      "question": "What is the best exam takeaway about durable object storage?",
+      "answers": [
+        "Amazon S3 is designed for very high durability and is a core building block for resilient storage.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon S3 is designed for very high durability and is a core building block for resilient storage.",
+      "fullExplanation": "Amazon S3 is designed for very high durability and is a core building block for resilient storage.",
+      "explanation": "Amazon S3 is designed for very high durability and is a core building block for resilient storage."
+    },
+    {
+      "id": "saa_c03_fc_02_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Disaster Recovery",
+      "subtopic": "Pilot Light",
+      "objectiveId": "2.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "disaster-recovery",
+        "pilot-light"
+      ],
+      "question": "What is the best exam takeaway about pilot light basics?",
+      "answers": [
+        "Pilot light disaster recovery keeps core systems warm in a secondary Region for faster recovery.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Pilot light disaster recovery keeps core systems warm in a secondary Region for faster recovery.",
+      "fullExplanation": "Pilot light disaster recovery keeps core systems warm in a secondary Region for faster recovery.",
+      "explanation": "Pilot light disaster recovery keeps core systems warm in a secondary Region for faster recovery."
+    },
+    {
+      "id": "saa_c03_fc_02_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Disaster Recovery",
+      "subtopic": "Recovery Objectives",
+      "objectiveId": "2.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "disaster-recovery",
+        "recovery-objectives"
+      ],
+      "question": "What is the best exam takeaway about rto and rpo drive design?",
+      "answers": [
+        "Recovery objectives determine whether backup-and-restore, pilot light, warm standby, or active-active is appropriate.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Recovery objectives determine whether backup-and-restore, pilot light, warm standby, or active-active is appropriate.",
+      "fullExplanation": "Recovery objectives determine whether backup-and-restore, pilot light, warm standby, or active-active is appropriate.",
+      "explanation": "Recovery objectives determine whether backup-and-restore, pilot light, warm standby, or active-active is appropriate."
+    },
+    {
+      "id": "saa_c03_fc_02_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Architecture",
+      "subtopic": "Failure Isolation",
+      "objectiveId": "2.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "failure-isolation"
+      ],
+      "question": "What is the best exam takeaway about failure isolation boundaries?",
+      "answers": [
+        "Isolate failure domains so one component problem does not take down the full workload.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Isolate failure domains so one component problem does not take down the full workload.",
+      "fullExplanation": "Isolate failure domains so one component problem does not take down the full workload.",
+      "explanation": "Isolate failure domains so one component problem does not take down the full workload."
+    },
+    {
+      "id": "saa_c03_fc_02_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Architecture",
+      "subtopic": "Graceful Degradation",
+      "objectiveId": "2.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "graceful-degradation"
+      ],
+      "question": "What is the best exam takeaway about graceful degradation?",
+      "answers": [
+        "Designing degraded modes can preserve critical user journeys when a dependency fails.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Designing degraded modes can preserve critical user journeys when a dependency fails.",
+      "fullExplanation": "Designing degraded modes can preserve critical user journeys when a dependency fails.",
+      "explanation": "Designing degraded modes can preserve critical user journeys when a dependency fails."
+    },
+    {
+      "id": "saa_c03_fc_02_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Integration",
+      "subtopic": "Dead-Letter Queues",
+      "objectiveId": "2.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "integration",
+        "dead-letter-queues"
+      ],
+      "question": "What is the best exam takeaway about dlqs preserve failed work?",
+      "answers": [
+        "Dead-letter queues keep poison messages from blocking healthy processing.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Dead-letter queues keep poison messages from blocking healthy processing.",
+      "fullExplanation": "Dead-letter queues keep poison messages from blocking healthy processing.",
+      "explanation": "Dead-letter queues keep poison messages from blocking healthy processing."
+    },
+    {
+      "id": "saa_c03_fc_02_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Operations",
+      "subtopic": "Health Check Design",
+      "objectiveId": "2.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "health-check-design"
+      ],
+      "question": "What is the best exam takeaway about health checks are control loops?",
+      "answers": [
+        "Health checks only help when something is ready to act on the result automatically.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Health checks only help when something is ready to act on the result automatically.",
+      "fullExplanation": "Health checks only help when something is ready to act on the result automatically.",
+      "explanation": "Health checks only help when something is ready to act on the result automatically."
+    },
+    {
+      "id": "saa_c03_fc_02_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Disaster Recovery",
+      "subtopic": "Replication Tradeoffs",
+      "objectiveId": "2.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "disaster-recovery",
+        "replication-tradeoffs"
+      ],
+      "question": "What is the best exam takeaway about replication choices change cost and rpo?",
+      "answers": [
+        "Replication strategy is always a tradeoff between cost, complexity, and recovery objectives.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Replication strategy is always a tradeoff between cost, complexity, and recovery objectives.",
+      "fullExplanation": "Replication strategy is always a tradeoff between cost, complexity, and recovery objectives.",
+      "explanation": "Replication strategy is always a tradeoff between cost, complexity, and recovery objectives."
+    },
+    {
+      "id": "saa_c03_fc_03_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Compute",
+      "subtopic": "Right Sizing",
+      "objectiveId": "3.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "right-sizing"
+      ],
+      "question": "What is the best exam takeaway about right-size compute?",
+      "answers": [
+        "Instance family and size selection is the first performance decision, not a late optimization.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Instance family and size selection is the first performance decision, not a late optimization.",
+      "fullExplanation": "Instance family and size selection is the first performance decision, not a late optimization.",
+      "explanation": "Instance family and size selection is the first performance decision, not a late optimization."
+    },
+    {
+      "id": "saa_c03_fc_03_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Caching",
+      "subtopic": "Low Latency",
+      "objectiveId": "3.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "caching",
+        "low-latency"
+      ],
+      "question": "What is the best exam takeaway about use caching strategically?",
+      "answers": [
+        "Caching hot data reduces latency and removes pressure from primary data stores.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Caching hot data reduces latency and removes pressure from primary data stores.",
+      "fullExplanation": "Caching hot data reduces latency and removes pressure from primary data stores.",
+      "explanation": "Caching hot data reduces latency and removes pressure from primary data stores."
+    },
+    {
+      "id": "saa_c03_fc_03_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Edge",
+      "subtopic": "Content Delivery",
+      "objectiveId": "3.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "edge",
+        "content-delivery"
+      ],
+      "question": "What is the best exam takeaway about cdn reduces latency?",
+      "answers": [
+        "CloudFront serves content from edge locations closer to users.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudFront serves content from edge locations closer to users.",
+      "fullExplanation": "CloudFront serves content from edge locations closer to users.",
+      "explanation": "CloudFront serves content from edge locations closer to users."
+    },
+    {
+      "id": "saa_c03_fc_03_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Databases",
+      "subtopic": "Partition Design",
+      "objectiveId": "3.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "databases",
+        "partition-design"
+      ],
+      "question": "What is the best exam takeaway about partition data access?",
+      "answers": [
+        "Thoughtful partition key design prevents hot partitions in DynamoDB.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Thoughtful partition key design prevents hot partitions in DynamoDB.",
+      "fullExplanation": "Thoughtful partition key design prevents hot partitions in DynamoDB.",
+      "explanation": "Thoughtful partition key design prevents hot partitions in DynamoDB."
+    },
+    {
+      "id": "saa_c03_fc_03_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Optimization",
+      "subtopic": "Parallelism",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "optimization",
+        "parallelism"
+      ],
+      "question": "What is the best exam takeaway about parallelism helps throughput?",
+      "answers": [
+        "Parallel uploads and distributed processing can drastically improve throughput.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Parallel uploads and distributed processing can drastically improve throughput.",
+      "fullExplanation": "Parallel uploads and distributed processing can drastically improve throughput.",
+      "explanation": "Parallel uploads and distributed processing can drastically improve throughput."
+    },
+    {
+      "id": "saa_c03_fc_03_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Integration",
+      "subtopic": "Throughput Management",
+      "objectiveId": "3.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "integration",
+        "throughput-management"
+      ],
+      "question": "What is the best exam takeaway about use managed queues for smoothing?",
+      "answers": [
+        "Queues stabilize throughput when producers and consumers run at different rates.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Queues stabilize throughput when producers and consumers run at different rates.",
+      "fullExplanation": "Queues stabilize throughput when producers and consumers run at different rates.",
+      "explanation": "Queues stabilize throughput when producers and consumers run at different rates."
+    },
+    {
+      "id": "saa_c03_fc_03_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Compute",
+      "subtopic": "Placement",
+      "objectiveId": "3.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "placement"
+      ],
+      "question": "What is the best exam takeaway about placement matters?",
+      "answers": [
+        "Resource placement and locality affect latency for chatty systems.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Resource placement and locality affect latency for chatty systems.",
+      "fullExplanation": "Resource placement and locality affect latency for chatty systems.",
+      "explanation": "Resource placement and locality affect latency for chatty systems."
+    },
+    {
+      "id": "saa_c03_fc_03_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Operations",
+      "subtopic": "Performance Testing",
+      "objectiveId": "3.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "performance-testing"
+      ],
+      "question": "What is the best exam takeaway about performance testing is required?",
+      "answers": [
+        "Load testing is the only reliable way to validate scaling assumptions.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Load testing is the only reliable way to validate scaling assumptions.",
+      "fullExplanation": "Load testing is the only reliable way to validate scaling assumptions.",
+      "explanation": "Load testing is the only reliable way to validate scaling assumptions."
+    },
+    {
+      "id": "saa_c03_fc_03_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Compute",
+      "subtopic": "Instance Families",
+      "objectiveId": "3.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "instance-families"
+      ],
+      "question": "What is the best exam takeaway about use instance families intentionally?",
+      "answers": [
+        "Different EC2 families target CPU, memory, storage, and throughput tradeoffs.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Different EC2 families target CPU, memory, storage, and throughput tradeoffs.",
+      "fullExplanation": "Different EC2 families target CPU, memory, storage, and throughput tradeoffs.",
+      "explanation": "Different EC2 families target CPU, memory, storage, and throughput tradeoffs."
+    },
+    {
+      "id": "saa_c03_fc_03_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Storage",
+      "subtopic": "Storage Performance",
+      "objectiveId": "3.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage",
+        "storage-performance"
+      ],
+      "question": "What is the best exam takeaway about tune storage tiers?",
+      "answers": [
+        "Volume type and storage class choices should match IOPS and throughput requirements.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Volume type and storage class choices should match IOPS and throughput requirements.",
+      "fullExplanation": "Volume type and storage class choices should match IOPS and throughput requirements.",
+      "explanation": "Volume type and storage class choices should match IOPS and throughput requirements."
+    },
+    {
+      "id": "saa_c03_fc_03_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Compute",
+      "subtopic": "Serverless Scaling",
+      "objectiveId": "3.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "serverless-scaling"
+      ],
+      "question": "What is the best exam takeaway about serverless can burst fast?",
+      "answers": [
+        "Managed event-driven services scale quickly without idle capacity planning.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Managed event-driven services scale quickly without idle capacity planning.",
+      "fullExplanation": "Managed event-driven services scale quickly without idle capacity planning.",
+      "explanation": "Managed event-driven services scale quickly without idle capacity planning."
+    },
+    {
+      "id": "saa_c03_fc_03_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Optimization",
+      "subtopic": "Connection Reuse",
+      "objectiveId": "3.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "optimization",
+        "connection-reuse"
+      ],
+      "question": "What is the best exam takeaway about connection reuse matters?",
+      "answers": [
+        "Reusing clients and connections often reduces latency more than increasing raw compute.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Reusing clients and connections often reduces latency more than increasing raw compute.",
+      "fullExplanation": "Reusing clients and connections often reduces latency more than increasing raw compute.",
+      "explanation": "Reusing clients and connections often reduces latency more than increasing raw compute."
+    },
+    {
+      "id": "saa_c03_fc_03_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Architecture",
+      "subtopic": "Async Design",
+      "objectiveId": "3.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "async-design"
+      ],
+      "question": "What is the best exam takeaway about async workflows help ux?",
+      "answers": [
+        "Move slow work off the request path to improve perceived responsiveness.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Move slow work off the request path to improve perceived responsiveness.",
+      "fullExplanation": "Move slow work off the request path to improve perceived responsiveness.",
+      "explanation": "Move slow work off the request path to improve perceived responsiveness."
+    },
+    {
+      "id": "saa_c03_fc_03_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Operations",
+      "subtopic": "Observability",
+      "objectiveId": "3.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "observability"
+      ],
+      "question": "What is the best exam takeaway about observability drives tuning?",
+      "answers": [
+        "Metrics, logs, and traces reveal the real bottlenecks worth fixing.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Metrics, logs, and traces reveal the real bottlenecks worth fixing.",
+      "fullExplanation": "Metrics, logs, and traces reveal the real bottlenecks worth fixing.",
+      "explanation": "Metrics, logs, and traces reveal the real bottlenecks worth fixing."
+    },
+    {
+      "id": "saa_c03_fc_03_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Architecture",
+      "subtopic": "Service Selection",
+      "objectiveId": "3.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "service-selection"
+      ],
+      "question": "What is the best exam takeaway about regional services differ?",
+      "answers": [
+        "Service capabilities and scaling characteristics vary and should influence architecture choices.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Service capabilities and scaling characteristics vary and should influence architecture choices.",
+      "fullExplanation": "Service capabilities and scaling characteristics vary and should influence architecture choices.",
+      "explanation": "Service capabilities and scaling characteristics vary and should influence architecture choices."
+    },
+    {
+      "id": "saa_c03_fc_03_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Architecture",
+      "subtopic": "Access Patterns",
+      "objectiveId": "3.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "access-patterns"
+      ],
+      "question": "What is the best exam takeaway about read patterns matter?",
+      "answers": [
+        "You cannot optimize performance without understanding whether the workload is read-heavy, write-heavy, bursty, or steady.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "You cannot optimize performance without understanding whether the workload is read-heavy, write-heavy, bursty, or steady.",
+      "fullExplanation": "You cannot optimize performance without understanding whether the workload is read-heavy, write-heavy, bursty, or steady.",
+      "explanation": "You cannot optimize performance without understanding whether the workload is read-heavy, write-heavy, bursty, or steady."
+    },
+    {
+      "id": "saa_c03_fc_03_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Databases",
+      "subtopic": "Hot Partitions",
+      "objectiveId": "3.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "databases",
+        "hot-partitions"
+      ],
+      "question": "What is the best exam takeaway about hot partitions are hidden traps?",
+      "answers": [
+        "A service can look underutilized overall while one partition is saturated.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "A service can look underutilized overall while one partition is saturated.",
+      "fullExplanation": "A service can look underutilized overall while one partition is saturated.",
+      "explanation": "A service can look underutilized overall while one partition is saturated."
+    },
+    {
+      "id": "saa_c03_fc_03_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Optimization",
+      "subtopic": "Compression Tradeoffs",
+      "objectiveId": "3.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "optimization",
+        "compression-tradeoffs"
+      ],
+      "question": "What is the best exam takeaway about compression versus cpu?",
+      "answers": [
+        "Compression can reduce transfer time but may increase CPU cost and latency.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Compression can reduce transfer time but may increase CPU cost and latency.",
+      "fullExplanation": "Compression can reduce transfer time but may increase CPU cost and latency.",
+      "explanation": "Compression can reduce transfer time but may increase CPU cost and latency."
+    },
+    {
+      "id": "saa_c03_fc_03_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Storage",
+      "subtopic": "End-to-End Throughput",
+      "objectiveId": "3.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage",
+        "end-to-end-throughput"
+      ],
+      "question": "What is the best exam takeaway about compute and storage should co-fit?",
+      "answers": [
+        "A high-performance database can still bottleneck if the storage layer is mismatched.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "A high-performance database can still bottleneck if the storage layer is mismatched.",
+      "fullExplanation": "A high-performance database can still bottleneck if the storage layer is mismatched.",
+      "explanation": "A high-performance database can still bottleneck if the storage layer is mismatched."
+    },
+    {
+      "id": "saa_c03_fc_03_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Edge",
+      "subtopic": "Cacheability",
+      "objectiveId": "3.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "edge",
+        "cacheability"
+      ],
+      "question": "What is the best exam takeaway about use edge caching for repeatable reads?",
+      "answers": [
+        "Edge caching is strongest when content is read often and changes predictably.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Edge caching is strongest when content is read often and changes predictably.",
+      "fullExplanation": "Edge caching is strongest when content is read often and changes predictably.",
+      "explanation": "Edge caching is strongest when content is read often and changes predictably."
+    },
+    {
+      "id": "saa_c03_fc_04_01",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Access Patterns",
+      "objectiveId": "4.1",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "access-patterns"
+      ],
+      "question": "What is the best exam takeaway about match cost to access patterns?",
+      "answers": [
+        "Storage and compute choices should match how often and how predictably the workload is used.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Storage and compute choices should match how often and how predictably the workload is used.",
+      "fullExplanation": "Storage and compute choices should match how often and how predictably the workload is used.",
+      "explanation": "Storage and compute choices should match how often and how predictably the workload is used."
+    },
+    {
+      "id": "saa_c03_fc_04_02",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Scheduling",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "scheduling"
+      ],
+      "question": "What is the best exam takeaway about turn off idle resources?",
+      "answers": [
+        "Stopping nonproduction systems outside working hours removes waste without harming production SLAs.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Stopping nonproduction systems outside working hours removes waste without harming production SLAs.",
+      "fullExplanation": "Stopping nonproduction systems outside working hours removes waste without harming production SLAs.",
+      "explanation": "Stopping nonproduction systems outside working hours removes waste without harming production SLAs."
+    },
+    {
+      "id": "saa_c03_fc_04_03",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Commitments",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "commitments"
+      ],
+      "question": "What is the best exam takeaway about use managed pricing models?",
+      "answers": [
+        "Savings Plans and Reserved capacity lower cost for predictable usage.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Savings Plans and Reserved capacity lower cost for predictable usage.",
+      "fullExplanation": "Savings Plans and Reserved capacity lower cost for predictable usage.",
+      "explanation": "Savings Plans and Reserved capacity lower cost for predictable usage."
+    },
+    {
+      "id": "saa_c03_fc_04_04",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Storage",
+      "subtopic": "Lifecycle",
+      "objectiveId": "4.4",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage",
+        "lifecycle"
+      ],
+      "question": "What is the best exam takeaway about lifecycle policies matter?",
+      "answers": [
+        "S3 lifecycle rules automate movement to cheaper storage tiers as data ages.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "S3 lifecycle rules automate movement to cheaper storage tiers as data ages.",
+      "fullExplanation": "S3 lifecycle rules automate movement to cheaper storage tiers as data ages.",
+      "explanation": "S3 lifecycle rules automate movement to cheaper storage tiers as data ages."
+    },
+    {
+      "id": "saa_c03_fc_04_05",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Serverless Economics",
+      "objectiveId": "4.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "serverless-economics"
+      ],
+      "question": "What is the best exam takeaway about serverless reduces idle cost?",
+      "answers": [
+        "Pay-per-use compute removes the cost of unused always-on capacity.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Pay-per-use compute removes the cost of unused always-on capacity.",
+      "fullExplanation": "Pay-per-use compute removes the cost of unused always-on capacity.",
+      "explanation": "Pay-per-use compute removes the cost of unused always-on capacity."
+    },
+    {
+      "id": "saa_c03_fc_04_06",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Continuous Optimization",
+      "objectiveId": "4.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "continuous-optimization"
+      ],
+      "question": "What is the best exam takeaway about right-size continuously?",
+      "answers": [
+        "Cost optimization is ongoing because workloads evolve over time.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Cost optimization is ongoing because workloads evolve over time.",
+      "fullExplanation": "Cost optimization is ongoing because workloads evolve over time.",
+      "explanation": "Cost optimization is ongoing because workloads evolve over time."
+    },
+    {
+      "id": "saa_c03_fc_04_07",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Compute",
+      "subtopic": "Spot Strategy",
+      "objectiveId": "4.7",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "spot-strategy"
+      ],
+      "question": "What is the best exam takeaway about use spot where appropriate?",
+      "answers": [
+        "Spot capacity is a major savings lever for interruptible and fault-tolerant workloads.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Spot capacity is a major savings lever for interruptible and fault-tolerant workloads.",
+      "fullExplanation": "Spot capacity is a major savings lever for interruptible and fault-tolerant workloads.",
+      "explanation": "Spot capacity is a major savings lever for interruptible and fault-tolerant workloads."
+    },
+    {
+      "id": "saa_c03_fc_04_08",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Operations",
+      "subtopic": "Cost Visibility",
+      "objectiveId": "4.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "cost-visibility"
+      ],
+      "question": "What is the best exam takeaway about observe before optimizing?",
+      "answers": [
+        "Cost Explorer and usage metrics should guide optimization instead of intuition.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Cost Explorer and usage metrics should guide optimization instead of intuition.",
+      "fullExplanation": "Cost Explorer and usage metrics should guide optimization instead of intuition.",
+      "explanation": "Cost Explorer and usage metrics should guide optimization instead of intuition."
+    },
+    {
+      "id": "saa_c03_fc_04_09",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Networking",
+      "subtopic": "Transfer Costs",
+      "objectiveId": "4.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "networking",
+        "transfer-costs"
+      ],
+      "question": "What is the best exam takeaway about data transfer matters?",
+      "answers": [
+        "Cross-AZ, cross-Region, and internet transfer can materially affect total cost.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Cross-AZ, cross-Region, and internet transfer can materially affect total cost.",
+      "fullExplanation": "Cross-AZ, cross-Region, and internet transfer can materially affect total cost.",
+      "explanation": "Cross-AZ, cross-Region, and internet transfer can materially affect total cost."
+    },
+    {
+      "id": "saa_c03_fc_04_10",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Storage",
+      "subtopic": "Storage Classes",
+      "objectiveId": "4.10",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage",
+        "storage-classes"
+      ],
+      "question": "What is the best exam takeaway about storage tier selection matters?",
+      "answers": [
+        "S3 Standard, Intelligent-Tiering, and archive classes fit different retrieval patterns.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "S3 Standard, Intelligent-Tiering, and archive classes fit different retrieval patterns.",
+      "fullExplanation": "S3 Standard, Intelligent-Tiering, and archive classes fit different retrieval patterns.",
+      "explanation": "S3 Standard, Intelligent-Tiering, and archive classes fit different retrieval patterns."
+    },
+    {
+      "id": "saa_c03_fc_04_11",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Compute",
+      "subtopic": "Elasticity",
+      "objectiveId": "4.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "elasticity"
+      ],
+      "question": "What is the best exam takeaway about scale down after peaks?",
+      "answers": [
+        "Elasticity only saves money when systems contract after demand falls.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Elasticity only saves money when systems contract after demand falls.",
+      "fullExplanation": "Elasticity only saves money when systems contract after demand falls.",
+      "explanation": "Elasticity only saves money when systems contract after demand falls."
+    },
+    {
+      "id": "saa_c03_fc_04_12",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Databases",
+      "subtopic": "Managed Services",
+      "objectiveId": "4.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "databases",
+        "managed-services"
+      ],
+      "question": "What is the best exam takeaway about managed databases can reduce ops cost?",
+      "answers": [
+        "The cheapest architecture is not always the one with the lowest hourly resource price.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "The cheapest architecture is not always the one with the lowest hourly resource price.",
+      "fullExplanation": "The cheapest architecture is not always the one with the lowest hourly resource price.",
+      "explanation": "The cheapest architecture is not always the one with the lowest hourly resource price."
+    },
+    {
+      "id": "saa_c03_fc_04_13",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Compute",
+      "subtopic": "Price Performance",
+      "objectiveId": "4.13",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "compute",
+        "price-performance"
+      ],
+      "question": "What is the best exam takeaway about graviton can improve price-performance?",
+      "answers": [
+        "Graviton often lowers cost for supported workloads without sacrificing performance.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Graviton often lowers cost for supported workloads without sacrificing performance.",
+      "fullExplanation": "Graviton often lowers cost for supported workloads without sacrificing performance.",
+      "explanation": "Graviton often lowers cost for supported workloads without sacrificing performance."
+    },
+    {
+      "id": "saa_c03_fc_04_14",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Governance",
+      "subtopic": "Cost Allocation",
+      "objectiveId": "4.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "governance",
+        "cost-allocation"
+      ],
+      "question": "What is the best exam takeaway about cost tags improve accountability?",
+      "answers": [
+        "Allocation tags help teams understand and control what they own.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Allocation tags help teams understand and control what they own.",
+      "fullExplanation": "Allocation tags help teams understand and control what they own.",
+      "explanation": "Allocation tags help teams understand and control what they own."
+    },
+    {
+      "id": "saa_c03_fc_04_15",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Governance",
+      "subtopic": "Retention",
+      "objectiveId": "4.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "governance",
+        "retention"
+      ],
+      "question": "What is the best exam takeaway about design for deletion?",
+      "answers": [
+        "Retention rules prevent stale snapshots, logs, and artifacts from silently increasing cost.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Retention rules prevent stale snapshots, logs, and artifacts from silently increasing cost.",
+      "fullExplanation": "Retention rules prevent stale snapshots, logs, and artifacts from silently increasing cost.",
+      "explanation": "Retention rules prevent stale snapshots, logs, and artifacts from silently increasing cost."
+    },
+    {
+      "id": "saa_c03_fc_04_16",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Utilization Analysis",
+      "objectiveId": "4.16",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "utilization-analysis"
+      ],
+      "question": "What is the best exam takeaway about bursting can hide waste?",
+      "answers": [
+        "Low average utilization can still mask expensive always-on overprovisioning.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Low average utilization can still mask expensive always-on overprovisioning.",
+      "fullExplanation": "Low average utilization can still mask expensive always-on overprovisioning.",
+      "explanation": "Low average utilization can still mask expensive always-on overprovisioning."
+    },
+    {
+      "id": "saa_c03_fc_04_17",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Architecture",
+      "subtopic": "Resilience Tradeoffs",
+      "objectiveId": "4.17",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "architecture",
+        "resilience-tradeoffs"
+      ],
+      "question": "What is the best exam takeaway about match resiliency to business need?",
+      "answers": [
+        "Overbuilding recovery patterns can create cost without justified business value.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Overbuilding recovery patterns can create cost without justified business value.",
+      "fullExplanation": "Overbuilding recovery patterns can create cost without justified business value.",
+      "explanation": "Overbuilding recovery patterns can create cost without justified business value."
+    },
+    {
+      "id": "saa_c03_fc_04_18",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Cost",
+      "subtopic": "Commitment Strategy",
+      "objectiveId": "4.18",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "cost",
+        "commitment-strategy"
+      ],
+      "question": "What is the best exam takeaway about commit only on baselines?",
+      "answers": [
+        "Savings commitments should target predictable baseline usage, not highly variable spikes.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Savings commitments should target predictable baseline usage, not highly variable spikes.",
+      "fullExplanation": "Savings commitments should target predictable baseline usage, not highly variable spikes.",
+      "explanation": "Savings commitments should target predictable baseline usage, not highly variable spikes."
+    },
+    {
+      "id": "saa_c03_fc_04_19",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Storage",
+      "subtopic": "Retrieval Tradeoffs",
+      "objectiveId": "4.19",
+      "difficulty": 1,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "storage",
+        "retrieval-tradeoffs"
+      ],
+      "question": "What is the best exam takeaway about storage retrieval cost is part of the decision?",
+      "answers": [
+        "Archive classes are cheaper to store in but can be slower and more expensive to retrieve.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Archive classes are cheaper to store in but can be slower and more expensive to retrieve.",
+      "fullExplanation": "Archive classes are cheaper to store in but can be slower and more expensive to retrieve.",
+      "explanation": "Archive classes are cheaper to store in but can be slower and more expensive to retrieve."
+    },
+    {
+      "id": "saa_c03_fc_04_20",
+      "type": "micro_card",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Operations",
+      "subtopic": "Operational Efficiency",
+      "objectiveId": "4.20",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "operations",
+        "operational-efficiency"
+      ],
+      "question": "What is the best exam takeaway about efficiency includes operations?",
+      "answers": [
+        "Automation and managed services can reduce operational overhead that pure infrastructure comparisons miss.",
+        "It is mainly a cost-reporting mechanism in AWS Certified Solutions Architect - Associate.",
+        "It removes the need for IAM and network controls in AWS Certified Solutions Architect - Associate.",
+        "It is only relevant outside AWS certification scenarios."
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Automation and managed services can reduce operational overhead that pure infrastructure comparisons miss.",
+      "fullExplanation": "Automation and managed services can reduce operational overhead that pure infrastructure comparisons miss.",
+      "explanation": "Automation and managed services can reduce operational overhead that pure infrastructure comparisons miss."
+    },
+    {
+      "id": "saa_c03_ex_01_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "1.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company stores regulated documents in Amazon S3 and needs centralized key management, audit trails, and the ability to disable a key immediately. Which option best meets the requirement?",
+      "answers": [
+        "SSE-S3 with bucket keys",
+        "SSE-KMS with a customer managed KMS key",
+        "Client-side compression before upload",
+        "S3 Transfer Acceleration"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter.",
+      "fullExplanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter.",
+      "explanation": "Use a customer managed KMS key when auditability, explicit policy control, and lifecycle ownership matter."
+    },
+    {
+      "id": "saa_c03_ex_01_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "1.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "Instances in private subnets must access Amazon S3 without traversing the public internet. What should the architect add?",
+      "answers": [
+        "A NAT gateway",
+        "A gateway VPC endpoint for S3",
+        "An internet gateway",
+        "A VPN connection"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "A gateway VPC endpoint keeps S3 access private inside the AWS network and avoids NAT or internet dependence.",
+      "fullExplanation": "A gateway VPC endpoint keeps S3 access private inside the AWS network and avoids NAT or internet dependence.",
+      "explanation": "A gateway VPC endpoint keeps S3 access private inside the AWS network and avoids NAT or internet dependence."
+    },
+    {
+      "id": "saa_c03_ex_01_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "1.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "An application on Amazon EC2 needs temporary access to DynamoDB without storing long-term credentials. Which design is best?",
+      "answers": [
+        "Create one IAM user for all instances",
+        "Store access keys in AWS Systems Manager Parameter Store as plain text",
+        "Attach an IAM role to the EC2 instances",
+        "Use the root user access keys"
+      ],
+      "correctIndex": 2,
+      "shortExplanation": "IAM roles give EC2 temporary credentials automatically and remove the operational risk of static keys.",
+      "fullExplanation": "IAM roles give EC2 temporary credentials automatically and remove the operational risk of static keys.",
+      "explanation": "IAM roles give EC2 temporary credentials automatically and remove the operational risk of static keys."
+    },
+    {
+      "id": "saa_c03_ex_01_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "1.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A security team wants a record of every API call made in an AWS account, including the identity used and source IP. Which service should be enabled?",
+      "answers": [
+        "Amazon GuardDuty",
+        "AWS CloudTrail",
+        "Amazon Inspector",
+        "AWS Shield"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "CloudTrail is the core audit trail for AWS API activity and is required for governance and investigations.",
+      "fullExplanation": "CloudTrail is the core audit trail for AWS API activity and is required for governance and investigations.",
+      "explanation": "CloudTrail is the core audit trail for AWS API activity and is required for governance and investigations."
+    },
+    {
+      "id": "saa_c03_ex_01_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "1.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A web application needs protection from SQL injection and cross-site scripting at the edge. Which service should be added?",
+      "answers": [
+        "AWS WAF",
+        "Amazon Macie",
+        "AWS Backup",
+        "Amazon EventBridge"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "AWS WAF is the managed service designed to inspect and filter HTTP requests for common web exploits.",
+      "fullExplanation": "AWS WAF is the managed service designed to inspect and filter HTTP requests for common web exploits.",
+      "explanation": "AWS WAF is the managed service designed to inspect and filter HTTP requests for common web exploits."
+    },
+    {
+      "id": "saa_c03_ex_01_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "1.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company needs to share access to an AWS account with a central operations team without creating permanent users in the member account. Which approach is best?",
+      "answers": [
+        "Share the root credentials in a password vault",
+        "Use cross-account IAM roles and STS",
+        "Create the same IAM users in every account",
+        "Expose the account through a bastion host"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Cross-account roles keep identity centralized and rely on temporary credentials rather than duplicated IAM users.",
+      "fullExplanation": "Cross-account roles keep identity centralized and rely on temporary credentials rather than duplicated IAM users.",
+      "explanation": "Cross-account roles keep identity centralized and rely on temporary credentials rather than duplicated IAM users."
+    },
+    {
+      "id": "saa_c03_ex_01_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "1.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "An architect needs private connectivity from a VPC to AWS Secrets Manager. Which component is required?",
+      "answers": [
+        "Gateway Load Balancer",
+        "Interface VPC endpoint",
+        "Transit gateway route table",
+        "Egress-only internet gateway"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Secrets Manager is a PrivateLink-style service, so private API access uses an interface VPC endpoint.",
+      "fullExplanation": "Secrets Manager is a PrivateLink-style service, so private API access uses an interface VPC endpoint.",
+      "explanation": "Secrets Manager is a PrivateLink-style service, so private API access uses an interface VPC endpoint."
+    },
+    {
+      "id": "saa_c03_ex_01_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "1.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A startup needs a simple way to rotate database credentials used by a Lambda function. Which service is the best fit?",
+      "answers": [
+        "AWS Secrets Manager",
+        "Amazon SQS",
+        "AWS Artifact",
+        "Amazon Athena"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Secrets Manager supports managed secret storage and automated rotation workflows for credentials.",
+      "fullExplanation": "Secrets Manager supports managed secret storage and automated rotation workflows for credentials.",
+      "explanation": "Secrets Manager supports managed secret storage and automated rotation workflows for credentials."
+    },
+    {
+      "id": "saa_c03_ex_01_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "1.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "Which configuration provides the strongest protection for the AWS account root user?",
+      "answers": [
+        "Disable CloudTrail and rely on billing alerts",
+        "Use the root user for daily administration",
+        "Enable MFA and avoid routine root access",
+        "Create additional root users for redundancy"
+      ],
+      "correctIndex": 2,
+      "shortExplanation": "The root user should be tightly restricted, protected with MFA, and reserved for rare account-level actions.",
+      "fullExplanation": "The root user should be tightly restricted, protected with MFA, and reserved for rare account-level actions.",
+      "explanation": "The root user should be tightly restricted, protected with MFA, and reserved for rare account-level actions."
+    },
+    {
+      "id": "saa_c03_ex_01_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "1.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company wants to encrypt EBS volumes and snapshots by default across an account. What is the simplest approach?",
+      "answers": [
+        "Tag all volumes manually after launch",
+        "Enable EBS encryption by default",
+        "Use only instance store volumes",
+        "Copy every snapshot into S3"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "EBS encryption by default automatically protects new volumes and snapshots with minimal operational overhead.",
+      "fullExplanation": "EBS encryption by default automatically protects new volumes and snapshots with minimal operational overhead.",
+      "explanation": "EBS encryption by default automatically protects new volumes and snapshots with minimal operational overhead."
+    },
+    {
+      "id": "saa_c03_ex_01_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "1.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A team accidentally exposed an S3 bucket publicly in the past and wants a preventive guardrail across the account. Which control is best?",
+      "answers": [
+        "S3 Block Public Access at the account level",
+        "A NAT gateway per subnet",
+        "CloudFront cache policies",
+        "An EC2 launch template"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Account-level S3 Block Public Access is a broad preventive control against accidental public bucket exposure.",
+      "fullExplanation": "Account-level S3 Block Public Access is a broad preventive control against accidental public bucket exposure.",
+      "explanation": "Account-level S3 Block Public Access is a broad preventive control against accidental public bucket exposure."
+    },
+    {
+      "id": "saa_c03_ex_01_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "1.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A security review shows that an S3 bucket policy allows broad cross-account access. Which service helps identify this type of unintended exposure?",
+      "answers": [
+        "IAM Access Analyzer",
+        "Amazon Inspector",
+        "AWS Shield Advanced",
+        "Amazon CloudSearch"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "IAM Access Analyzer is built to detect public and cross-account access paths on supported resources.",
+      "fullExplanation": "IAM Access Analyzer is built to detect public and cross-account access paths on supported resources.",
+      "explanation": "IAM Access Analyzer is built to detect public and cross-account access paths on supported resources."
+    },
+    {
+      "id": "saa_c03_ex_01_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "1.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "An organization wants separate teams to manage keys and consume encrypted data. Which option best supports this requirement?",
+      "answers": [
+        "SSE-S3 only",
+        "Customer managed KMS keys with separate admins and users",
+        "Root user access keys",
+        "Shared IAM users"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Customer managed KMS keys make separation of duties easier through key policy and grant design.",
+      "fullExplanation": "Customer managed KMS keys make separation of duties easier through key policy and grant design.",
+      "explanation": "Customer managed KMS keys make separation of duties easier through key policy and grant design."
+    },
+    {
+      "id": "saa_c03_ex_01_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "1.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A workload accesses multiple AWS services from private subnets and the company wants to minimize internet exposure while avoiding NAT cost where possible. What should be prioritized?",
+      "answers": [
+        "Public subnets for application instances",
+        "VPC endpoints for supported services",
+        "Dedicated hosts",
+        "Classic Load Balancers only"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "VPC endpoints reduce internet exposure and can also reduce or eliminate NAT dependence for supported services.",
+      "fullExplanation": "VPC endpoints reduce internet exposure and can also reduce or eliminate NAT dependence for supported services.",
+      "explanation": "VPC endpoints reduce internet exposure and can also reduce or eliminate NAT dependence for supported services."
+    },
+    {
+      "id": "saa_c03_ex_01_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-secure",
+      "domain": "Design Secure Architectures",
+      "topic": "Design Secure Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "1.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-secure",
+        "scenario-based"
+      ],
+      "question": "A company requires server-side encryption for all newly uploaded S3 objects and wants enforcement even if clients forget to specify encryption headers. What should the architect do?",
+      "answers": [
+        "Rely on user training only",
+        "Configure bucket default encryption and enforce it with policy",
+        "Move uploads to EFS",
+        "Use Route 53 latency routing"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Default encryption plus policy enforcement ensures uploads remain encrypted even when clients are inconsistent.",
+      "fullExplanation": "Default encryption plus policy enforcement ensures uploads remain encrypted even when clients are inconsistent.",
+      "explanation": "Default encryption plus policy enforcement ensures uploads remain encrypted even when clients are inconsistent."
+    },
+    {
+      "id": "saa_c03_ex_02_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "2.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company runs an application on EC2 instances and wants unhealthy instances replaced automatically with minimal operational effort. Which design should be used?",
+      "answers": [
+        "A single EC2 instance with detailed monitoring",
+        "An Auto Scaling group across multiple Availability Zones",
+        "An EC2 instance with manual snapshots",
+        "A dedicated host in one AZ"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "An Auto Scaling group across multiple AZs provides both self-healing and resilience to a single-AZ failure.",
+      "fullExplanation": "An Auto Scaling group across multiple AZs provides both self-healing and resilience to a single-AZ failure.",
+      "explanation": "An Auto Scaling group across multiple AZs provides both self-healing and resilience to a single-AZ failure."
+    },
+    {
+      "id": "saa_c03_ex_02_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "2.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A workload must continue if one Availability Zone fails. Which database deployment option best meets that requirement with minimal application changes?",
+      "answers": [
+        "Amazon RDS Multi-AZ",
+        "A single Amazon Aurora reader",
+        "Amazon Redshift Serverless",
+        "Amazon Athena"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "RDS Multi-AZ offers managed synchronous standby and automated failover with minimal app changes.",
+      "fullExplanation": "RDS Multi-AZ offers managed synchronous standby and automated failover with minimal app changes.",
+      "explanation": "RDS Multi-AZ offers managed synchronous standby and automated failover with minimal app changes."
+    },
+    {
+      "id": "saa_c03_ex_02_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "2.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A spike in orders can overwhelm a downstream order processor. Which service best decouples the application tiers and smooths bursts?",
+      "answers": [
+        "Amazon SQS",
+        "AWS Artifact",
+        "Amazon Route 53",
+        "AWS Glue DataBrew"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon SQS buffers burst traffic so the downstream processor can catch up at a stable rate.",
+      "fullExplanation": "Amazon SQS buffers burst traffic so the downstream processor can catch up at a stable rate.",
+      "explanation": "Amazon SQS buffers burst traffic so the downstream processor can catch up at a stable rate."
+    },
+    {
+      "id": "saa_c03_ex_02_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "2.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company needs DNS-based failover from a primary Region to a disaster recovery Region. Which service should control the failover?",
+      "answers": [
+        "AWS Config",
+        "Amazon Route 53 health checks and failover routing",
+        "Amazon Inspector",
+        "AWS License Manager"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Route 53 failover routing is built for health-check-driven DNS redirection between endpoints or Regions.",
+      "fullExplanation": "Route 53 failover routing is built for health-check-driven DNS redirection between endpoints or Regions.",
+      "explanation": "Route 53 failover routing is built for health-check-driven DNS redirection between endpoints or Regions."
+    },
+    {
+      "id": "saa_c03_ex_02_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "2.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "An architect wants to reduce duplicate order processing caused by retries from an event source. What application pattern should be added?",
+      "answers": [
+        "Synchronous batch writes only",
+        "Idempotency for consumers",
+        "Longer DNS TTL values",
+        "Dedicated tenancy"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Idempotent processing avoids duplicate business actions when the same message is retried or replayed.",
+      "fullExplanation": "Idempotent processing avoids duplicate business actions when the same message is retried or replayed.",
+      "explanation": "Idempotent processing avoids duplicate business actions when the same message is retried or replayed."
+    },
+    {
+      "id": "saa_c03_ex_02_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "2.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A team needs object storage for backups with very high durability and native cross-Region replication options. Which service is the best fit?",
+      "answers": [
+        "Amazon EBS",
+        "Amazon S3",
+        "Amazon ElastiCache",
+        "Amazon FSx for Windows"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Amazon S3 provides high durability, lifecycle controls, and built-in replication features suitable for resilient backups.",
+      "fullExplanation": "Amazon S3 provides high durability, lifecycle controls, and built-in replication features suitable for resilient backups.",
+      "explanation": "Amazon S3 provides high durability, lifecycle controls, and built-in replication features suitable for resilient backups."
+    },
+    {
+      "id": "saa_c03_ex_02_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "2.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A system must recover in another Region within hours while keeping cost lower than active-active. Which disaster recovery strategy is usually the best fit?",
+      "answers": [
+        "Backup and restore only",
+        "Pilot light",
+        "Active-active across every Region",
+        "Single-AZ"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Pilot light balances cost and recovery speed by keeping the most critical components pre-positioned.",
+      "fullExplanation": "Pilot light balances cost and recovery speed by keeping the most critical components pre-positioned.",
+      "explanation": "Pilot light balances cost and recovery speed by keeping the most critical components pre-positioned."
+    },
+    {
+      "id": "saa_c03_ex_02_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "2.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "Which design choice most reduces cascading failure between microservices?",
+      "answers": [
+        "Hard-coded synchronous dependencies for every call",
+        "Loose coupling with asynchronous messaging",
+        "One large database transaction across all services",
+        "Keeping all services on one instance"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Loose coupling and asynchronous messaging reduce shared failure paths and simplify independent recovery.",
+      "fullExplanation": "Loose coupling and asynchronous messaging reduce shared failure paths and simplify independent recovery.",
+      "explanation": "Loose coupling and asynchronous messaging reduce shared failure paths and simplify independent recovery."
+    },
+    {
+      "id": "saa_c03_ex_02_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "2.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A database serves many read-heavy queries and the primary is becoming saturated. Which option improves resilience and read scalability?",
+      "answers": [
+        "Add read replicas",
+        "Disable backups",
+        "Move the database into a public subnet",
+        "Use smaller instance types"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Read replicas offload read traffic from the writer and can improve both scale and failure isolation.",
+      "fullExplanation": "Read replicas offload read traffic from the writer and can improve both scale and failure isolation.",
+      "explanation": "Read replicas offload read traffic from the writer and can improve both scale and failure isolation."
+    },
+    {
+      "id": "saa_c03_ex_02_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "2.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A team has backups but has never attempted a restore. What is the biggest risk?",
+      "answers": [
+        "The backups will cost more",
+        "The backups may fail when needed",
+        "The instances will scale too fast",
+        "CloudTrail will stop recording"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Backup validity is unproven until restores are tested, and many real failures surface only during recovery.",
+      "fullExplanation": "Backup validity is unproven until restores are tested, and many real failures surface only during recovery.",
+      "explanation": "Backup validity is unproven until restores are tested, and many real failures surface only during recovery."
+    },
+    {
+      "id": "saa_c03_ex_02_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "2.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A queue consumer repeatedly fails on the same malformed message and healthy messages are piling up behind it. What should be added?",
+      "answers": [
+        "More IAM users",
+        "A dead-letter queue",
+        "A larger VPC CIDR",
+        "An internet gateway"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "A dead-letter queue removes poison messages from the main flow so healthy processing can continue.",
+      "fullExplanation": "A dead-letter queue removes poison messages from the main flow so healthy processing can continue.",
+      "explanation": "A dead-letter queue removes poison messages from the main flow so healthy processing can continue."
+    },
+    {
+      "id": "saa_c03_ex_02_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "2.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company wants its application to keep serving read-only requests if a noncritical write dependency fails. Which design principle is most relevant?",
+      "answers": [
+        "Graceful degradation",
+        "Dedicated tenancy",
+        "Longer session tokens",
+        "Bastion-only access"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Graceful degradation preserves core user value by temporarily disabling noncritical functionality during partial failure.",
+      "fullExplanation": "Graceful degradation preserves core user value by temporarily disabling noncritical functionality during partial failure.",
+      "explanation": "Graceful degradation preserves core user value by temporarily disabling noncritical functionality during partial failure."
+    },
+    {
+      "id": "saa_c03_ex_02_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "2.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "An architecture spans multiple tiers and the team wants to minimize the impact of one service failure. Which principle best applies?",
+      "answers": [
+        "Failure isolation boundaries",
+        "Use the root account for automation",
+        "Single-AZ deployment",
+        "Synchronous writes everywhere"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Deliberate failure isolation keeps one tier or dependency problem from propagating across the whole system.",
+      "fullExplanation": "Deliberate failure isolation keeps one tier or dependency problem from propagating across the whole system.",
+      "explanation": "Deliberate failure isolation keeps one tier or dependency problem from propagating across the whole system."
+    },
+    {
+      "id": "saa_c03_ex_02_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "2.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A company needs near-zero data loss but can accept a longer recovery time in another Region. Which design concern is the highest priority?",
+      "answers": [
+        "Minimizing RPO through replication",
+        "Reducing IAM policy count",
+        "Adding public subnets",
+        "Choosing Spot for every workload"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "When near-zero data loss is required, the design must prioritize replication patterns that minimize RPO.",
+      "fullExplanation": "When near-zero data loss is required, the design must prioritize replication patterns that minimize RPO.",
+      "explanation": "When near-zero data loss is required, the design must prioritize replication patterns that minimize RPO."
+    },
+    {
+      "id": "saa_c03_ex_02_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-resilient",
+      "domain": "Design Resilient Architectures",
+      "topic": "Design Resilient Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "2.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-resilient",
+        "scenario-based"
+      ],
+      "question": "A health check continually reports failed targets but traffic is still being sent to them. What is most likely missing?",
+      "answers": [
+        "A control action tied to the health check result",
+        "Another Availability Zone",
+        "An S3 bucket policy",
+        "An EC2 key pair"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Health checks only improve resilience when they trigger routing, scaling, or recovery actions automatically.",
+      "fullExplanation": "Health checks only improve resilience when they trigger routing, scaling, or recovery actions automatically.",
+      "explanation": "Health checks only improve resilience when they trigger routing, scaling, or recovery actions automatically."
+    },
+    {
+      "id": "saa_c03_ex_03_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "3.1",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "Users around the world download static assets from an S3 bucket, but latency is high in distant Regions. Which change will improve performance the most?",
+      "answers": [
+        "Move the bucket to a public subnet",
+        "Use Amazon CloudFront in front of S3",
+        "Store the files on Amazon EBS",
+        "Replace HTTPS with HTTP"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "CloudFront caches content at edge locations and is the standard way to reduce latency for globally distributed users.",
+      "fullExplanation": "CloudFront caches content at edge locations and is the standard way to reduce latency for globally distributed users.",
+      "explanation": "CloudFront caches content at edge locations and is the standard way to reduce latency for globally distributed users."
+    },
+    {
+      "id": "saa_c03_ex_03_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "3.2",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A DynamoDB table experiences uneven traffic and throttling on a small set of partition keys. What should the architect review first?",
+      "answers": [
+        "The VPC route table",
+        "The partition key design",
+        "The AWS account alias",
+        "The NAT gateway count"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Hot partitions are usually a partition key design problem rather than a network problem.",
+      "fullExplanation": "Hot partitions are usually a partition key design problem rather than a network problem.",
+      "explanation": "Hot partitions are usually a partition key design problem rather than a network problem."
+    },
+    {
+      "id": "saa_c03_ex_03_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "3.3",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "An API reads the same product catalog data repeatedly and the database is becoming a bottleneck. Which option should be added?",
+      "answers": [
+        "Amazon ElastiCache",
+        "AWS Artifact",
+        "Amazon Inspector",
+        "AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "ElastiCache is the managed caching layer intended to offload repeated reads from the primary database.",
+      "fullExplanation": "ElastiCache is the managed caching layer intended to offload repeated reads from the primary database.",
+      "explanation": "ElastiCache is the managed caching layer intended to offload repeated reads from the primary database."
+    },
+    {
+      "id": "saa_c03_ex_03_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "3.4",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A team is lifting a CPU-intensive application to AWS. Which EC2 family should be evaluated first?",
+      "answers": [
+        "Compute optimized instances",
+        "Storage gateway appliances",
+        "T-series burstable instances only",
+        "Memory optimized instances only"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CPU-bound workloads usually start with compute optimized families because they match the bottleneck profile.",
+      "fullExplanation": "CPU-bound workloads usually start with compute optimized families because they match the bottleneck profile.",
+      "explanation": "CPU-bound workloads usually start with compute optimized families because they match the bottleneck profile."
+    },
+    {
+      "id": "saa_c03_ex_03_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "3.5",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A media processing pipeline can run many tasks independently. Which design improves throughput?",
+      "answers": [
+        "Serialize every task on one instance",
+        "Parallelize the jobs across multiple workers",
+        "Move the files to a public S3 bucket",
+        "Reduce the number of metrics collected"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Independent work should be parallelized to increase throughput and shorten total processing time.",
+      "fullExplanation": "Independent work should be parallelized to increase throughput and shorten total processing time.",
+      "explanation": "Independent work should be parallelized to increase throughput and shorten total processing time."
+    },
+    {
+      "id": "saa_c03_ex_03_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "3.6",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "An application experiences slow startup on every Lambda invocation because it recreates clients for downstream services. What should be changed?",
+      "answers": [
+        "Create clients outside the handler for reuse",
+        "Increase DNS TTLs",
+        "Move the function into a public subnet",
+        "Disable retries"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Reusing clients outside the handler is a common Lambda optimization that cuts repeated setup latency.",
+      "fullExplanation": "Reusing clients outside the handler is a common Lambda optimization that cuts repeated setup latency.",
+      "explanation": "Reusing clients outside the handler is a common Lambda optimization that cuts repeated setup latency."
+    },
+    {
+      "id": "saa_c03_ex_03_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "3.7",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A workload needs high throughput block storage for a database on EC2. Which option should be considered?",
+      "answers": [
+        "General Purpose SSD or Provisioned IOPS EBS volumes",
+        "S3 Glacier Deep Archive",
+        "Amazon Route 53 Resolver",
+        "AWS Trusted Advisor"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Database performance on EC2 depends heavily on choosing an EBS volume type that fits the required IOPS and throughput.",
+      "fullExplanation": "Database performance on EC2 depends heavily on choosing an EBS volume type that fits the required IOPS and throughput.",
+      "explanation": "Database performance on EC2 depends heavily on choosing an EBS volume type that fits the required IOPS and throughput."
+    },
+    {
+      "id": "saa_c03_ex_03_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "3.8",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A user-facing request triggers a long image rendering task. What architectural change most improves response time?",
+      "answers": [
+        "Do all rendering synchronously before replying",
+        "Move the render into an asynchronous workflow",
+        "Lower the EC2 security group limits",
+        "Add more IAM users"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Asynchronous processing removes slow operations from the request path and improves user-perceived performance.",
+      "fullExplanation": "Asynchronous processing removes slow operations from the request path and improves user-perceived performance.",
+      "explanation": "Asynchronous processing removes slow operations from the request path and improves user-perceived performance."
+    },
+    {
+      "id": "saa_c03_ex_03_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "3.9",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A team wants to understand which service call contributes most to end-user latency before optimizing. What should be added?",
+      "answers": [
+        "Distributed tracing and metrics",
+        "More public IPs",
+        "Dedicated hosts for every service",
+        "Additional root users"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Tracing and metrics expose where the time is actually being spent so tuning effort stays evidence-based.",
+      "fullExplanation": "Tracing and metrics expose where the time is actually being spent so tuning effort stays evidence-based.",
+      "explanation": "Tracing and metrics expose where the time is actually being spent so tuning effort stays evidence-based."
+    },
+    {
+      "id": "saa_c03_ex_03_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "3.10",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A workload receives unpredictable bursts of event traffic and needs to scale quickly without provisioning idle servers. Which option fits best?",
+      "answers": [
+        "AWS Lambda with event-driven triggers",
+        "One large EC2 instance with cron jobs",
+        "A fixed-size Auto Scaling group of one",
+        "A manual deployment pipeline"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Event-driven Lambda is well suited for bursty traffic because it scales on demand without idle server cost.",
+      "fullExplanation": "Event-driven Lambda is well suited for bursty traffic because it scales on demand without idle server cost.",
+      "explanation": "Event-driven Lambda is well suited for bursty traffic because it scales on demand without idle server cost."
+    },
+    {
+      "id": "saa_c03_ex_03_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "3.11",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A service sends large files to users repeatedly and the same objects are requested many times per minute. Which design best reduces origin load?",
+      "answers": [
+        "CloudFront edge caching",
+        "Bigger IAM policies",
+        "Route 53 private hosted zones",
+        "More public subnets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Edge caching reduces repeated origin reads and lowers latency for popular content.",
+      "fullExplanation": "Edge caching reduces repeated origin reads and lowers latency for popular content.",
+      "explanation": "Edge caching reduces repeated origin reads and lowers latency for popular content."
+    },
+    {
+      "id": "saa_c03_ex_03_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "3.12",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A DynamoDB workload has acceptable average latency but periodic throttling under uneven access patterns. Which exam trap best explains this?",
+      "answers": [
+        "The table has too many GSIs",
+        "The workload likely has a hot partition",
+        "The VPC needs another NAT gateway",
+        "The IAM role is too permissive"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Even with enough total capacity, hot partitions can cause throttling and uneven latency.",
+      "fullExplanation": "Even with enough total capacity, hot partitions can cause throttling and uneven latency.",
+      "explanation": "Even with enough total capacity, hot partitions can cause throttling and uneven latency."
+    },
+    {
+      "id": "saa_c03_ex_03_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "3.13",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A web application compresses every payload aggressively and response times worsen under load. What tradeoff is most likely causing the issue?",
+      "answers": [
+        "Compression saves CPU but increases latency",
+        "Compression reduces transfer but increases CPU cost",
+        "Compression disables caching entirely",
+        "Compression forces traffic through one AZ"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Compression can lower transfer size but may become a CPU bottleneck under high concurrency.",
+      "fullExplanation": "Compression can lower transfer size but may become a CPU bottleneck under high concurrency.",
+      "explanation": "Compression can lower transfer size but may become a CPU bottleneck under high concurrency."
+    },
+    {
+      "id": "saa_c03_ex_03_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "3.14",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A relational database was moved to very fast compute instances but query latency remains poor. Which additional area should the architect inspect?",
+      "answers": [
+        "Storage performance and query design",
+        "The S3 bucket name",
+        "The account alias",
+        "The Route 53 health checks"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Performance bottlenecks often persist when compute is upgraded but storage configuration or query patterns remain weak.",
+      "fullExplanation": "Performance bottlenecks often persist when compute is upgraded but storage configuration or query patterns remain weak.",
+      "explanation": "Performance bottlenecks often persist when compute is upgraded but storage configuration or query patterns remain weak."
+    },
+    {
+      "id": "saa_c03_ex_03_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-performance",
+      "domain": "Design High-Performing Architectures",
+      "topic": "Design High-Performing Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "3.15",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-performance",
+        "scenario-based"
+      ],
+      "question": "A latency-sensitive microservice performs many small synchronous calls to another service in the same workflow. Which redesign most likely improves performance?",
+      "answers": [
+        "Batch or asynchronous interaction where possible",
+        "Dedicated tenancy",
+        "More root access",
+        "Longer S3 lifecycle rules"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Reducing chattiness through batching or asynchronous interaction is a classic performance optimization for service-to-service latency.",
+      "fullExplanation": "Reducing chattiness through batching or asynchronous interaction is a classic performance optimization for service-to-service latency.",
+      "explanation": "Reducing chattiness through batching or asynchronous interaction is a classic performance optimization for service-to-service latency."
+    },
+    {
+      "id": "saa_c03_ex_04_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 1",
+      "objectiveId": "4.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A development environment is used only during business hours on weekdays. Which change usually reduces cost the most with little risk?",
+      "answers": [
+        "Move it to a larger instance family",
+        "Schedule the environment to stop when not in use",
+        "Replicate it to more Regions",
+        "Disable monitoring"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Stopping dev and test systems outside their active window is often the fastest and safest way to reduce waste.",
+      "fullExplanation": "Stopping dev and test systems outside their active window is often the fastest and safest way to reduce waste.",
+      "explanation": "Stopping dev and test systems outside their active window is often the fastest and safest way to reduce waste."
+    },
+    {
+      "id": "saa_c03_ex_04_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 2",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload stores logs that are rarely read after 90 days but must remain accessible for audits. Which S3 feature should be configured?",
+      "answers": [
+        "S3 lifecycle transitions",
+        "Route 53 failover",
+        "EBS fast snapshot restore",
+        "CloudFront origin groups"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Lifecycle transitions automatically move aging data to cheaper storage classes aligned to access frequency.",
+      "fullExplanation": "Lifecycle transitions automatically move aging data to cheaper storage classes aligned to access frequency.",
+      "explanation": "Lifecycle transitions automatically move aging data to cheaper storage classes aligned to access frequency."
+    },
+    {
+      "id": "saa_c03_ex_04_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 3",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A batch analytics job is fault tolerant and can tolerate interruptions. Which EC2 pricing model is most cost effective?",
+      "answers": [
+        "On-Demand only",
+        "Dedicated Hosts",
+        "Spot Instances",
+        "Capacity Blocks only"
+      ],
+      "correctIndex": 2,
+      "shortExplanation": "Spot Instances are built for interruptible workloads and often provide the largest cost savings.",
+      "fullExplanation": "Spot Instances are built for interruptible workloads and often provide the largest cost savings.",
+      "explanation": "Spot Instances are built for interruptible workloads and often provide the largest cost savings."
+    },
+    {
+      "id": "saa_c03_ex_04_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 4",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A company has steady baseline EC2 usage year-round. Which purchasing option should be evaluated to lower cost?",
+      "answers": [
+        "Savings Plans or Reserved capacity",
+        "Public IPv4 addresses for all instances",
+        "More NAT gateways",
+        "Larger root volumes"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Commitment-based pricing works best against steady baseline usage where utilization is predictable.",
+      "fullExplanation": "Commitment-based pricing works best against steady baseline usage where utilization is predictable.",
+      "explanation": "Commitment-based pricing works best against steady baseline usage where utilization is predictable."
+    },
+    {
+      "id": "saa_c03_ex_04_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 5",
+      "objectiveId": "4.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A team wants to optimize cost but does not yet know which services are driving spend. What should they review first?",
+      "answers": [
+        "AWS Cost Explorer and tags",
+        "IAM role trust policies",
+        "Security group names",
+        "CloudFormation stack outputs"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Cost Explorer and tagging provide the evidence needed to prioritize optimization work effectively.",
+      "fullExplanation": "Cost Explorer and tagging provide the evidence needed to prioritize optimization work effectively.",
+      "explanation": "Cost Explorer and tagging provide the evidence needed to prioritize optimization work effectively."
+    },
+    {
+      "id": "saa_c03_ex_04_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 6",
+      "objectiveId": "4.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A spiky API runs continuously on underutilized EC2 instances. Which redesign often improves cost efficiency?",
+      "answers": [
+        "Migrate to Lambda or a more elastic managed service",
+        "Use larger instances permanently",
+        "Add more Availability Zones only",
+        "Turn off logging"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Bursty workloads often benefit from pay-per-use compute so the business is not paying for idle baseline servers.",
+      "fullExplanation": "Bursty workloads often benefit from pay-per-use compute so the business is not paying for idle baseline servers.",
+      "explanation": "Bursty workloads often benefit from pay-per-use compute so the business is not paying for idle baseline servers."
+    },
+    {
+      "id": "saa_c03_ex_04_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 7",
+      "objectiveId": "4.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A storage team keeps every snapshot forever and costs keep rising. What control should be introduced?",
+      "answers": [
+        "Snapshot retention policy and cleanup automation",
+        "Longer password rotation",
+        "Route table summarization",
+        "Bigger instance metadata limits"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Retention controls stop forgotten snapshots from accumulating silently over time.",
+      "fullExplanation": "Retention controls stop forgotten snapshots from accumulating silently over time.",
+      "explanation": "Retention controls stop forgotten snapshots from accumulating silently over time."
+    },
+    {
+      "id": "saa_c03_ex_04_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 8",
+      "objectiveId": "4.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload can run on Graviton without code changes. Why should the architect evaluate it?",
+      "answers": [
+        "It removes the need for IAM",
+        "It can improve price-performance",
+        "It disables multi-AZ billing",
+        "It guarantees zero downtime"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Graviton often delivers favorable price-performance and is a common cost optimization path.",
+      "fullExplanation": "Graviton often delivers favorable price-performance and is a common cost optimization path.",
+      "explanation": "Graviton often delivers favorable price-performance and is a common cost optimization path."
+    },
+    {
+      "id": "saa_c03_ex_04_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 9",
+      "objectiveId": "4.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "An application sends large amounts of data across Regions unnecessarily. What is the likely result?",
+      "answers": [
+        "Lower CloudTrail costs",
+        "Higher data transfer charges",
+        "Automatic latency reduction",
+        "Free S3 replication"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Cross-Region data transfer can materially increase total spend and should be minimized where possible.",
+      "fullExplanation": "Cross-Region data transfer can materially increase total spend and should be minimized where possible.",
+      "explanation": "Cross-Region data transfer can materially increase total spend and should be minimized where possible."
+    },
+    {
+      "id": "saa_c03_ex_04_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 10",
+      "objectiveId": "4.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload scales out correctly during peaks but never scales back in. What is the cost consequence?",
+      "answers": [
+        "Improved Reserved Instance coverage",
+        "Unnecessary spend on idle capacity",
+        "Lower storage costs",
+        "Fewer CloudWatch metrics"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Scale-out without scale-in defeats elasticity and leaves idle compute running after demand subsides.",
+      "fullExplanation": "Scale-out without scale-in defeats elasticity and leaves idle compute running after demand subsides.",
+      "explanation": "Scale-out without scale-in defeats elasticity and leaves idle compute running after demand subsides."
+    },
+    {
+      "id": "saa_c03_ex_04_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 11",
+      "objectiveId": "4.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A company uses warm standby in multiple Regions but business stakeholders only require recovery in 24 hours. What architecture concern should be revisited?",
+      "answers": [
+        "Whether the resilience pattern is overbuilt for the RTO",
+        "Whether CloudTrail is enabled",
+        "Whether Route 53 has enough records",
+        "Whether IAM groups are nested"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "If business recovery requirements are loose, an expensive warm-standby design may be more than the business actually needs.",
+      "fullExplanation": "If business recovery requirements are loose, an expensive warm-standby design may be more than the business actually needs.",
+      "explanation": "If business recovery requirements are loose, an expensive warm-standby design may be more than the business actually needs."
+    },
+    {
+      "id": "saa_c03_ex_04_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 12",
+      "objectiveId": "4.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A team plans to buy Savings Plans for an unpredictable workload that spikes heavily during one month each quarter. What is the key risk?",
+      "answers": [
+        "They may commit above the steady baseline and underuse the commitment",
+        "The workload will lose encryption",
+        "The account will stop scaling",
+        "The VPC endpoints will be deleted"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Savings commitments should map to the predictable baseline, not temporary peaks, or the value erodes.",
+      "fullExplanation": "Savings commitments should map to the predictable baseline, not temporary peaks, or the value erodes.",
+      "explanation": "Savings commitments should map to the predictable baseline, not temporary peaks, or the value erodes."
+    },
+    {
+      "id": "saa_c03_ex_04_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 13",
+      "objectiveId": "4.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A company archives data in a very cheap tier but suddenly needs frequent retrieval. What tradeoff did the original design underestimate?",
+      "answers": [
+        "Archive retrieval cost and delay",
+        "Security group rule count",
+        "Transit gateway route scale",
+        "AMI launch time"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Low storage price is only one side of the equation; retrieval fees and restore times also matter.",
+      "fullExplanation": "Low storage price is only one side of the equation; retrieval fees and restore times also matter.",
+      "explanation": "Low storage price is only one side of the equation; retrieval fees and restore times also matter."
+    },
+    {
+      "id": "saa_c03_ex_04_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 14",
+      "objectiveId": "4.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A workload runs on self-managed databases even though the team spends many hours each week patching and maintaining them. Which cost concept is most relevant?",
+      "answers": [
+        "Operational overhead should be included in cost decisions",
+        "Public IPs are always cheaper",
+        "Cross-AZ traffic is free",
+        "Spot always fits databases"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "True cost includes team time and operational risk, not just resource hourly rates.",
+      "fullExplanation": "True cost includes team time and operational risk, not just resource hourly rates.",
+      "explanation": "True cost includes team time and operational risk, not just resource hourly rates."
+    },
+    {
+      "id": "saa_c03_ex_04_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_saa",
+      "domainId": "saa-cost",
+      "domain": "Design Cost-Optimized Architectures",
+      "topic": "Design Cost-Optimized Architectures",
+      "subtopic": "Scenario 15",
+      "objectiveId": "4.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_saa",
+        "saa-c03",
+        "saa-cost",
+        "scenario-based"
+      ],
+      "question": "A report shows many lightly used instances running around the clock. What should the architect examine first?",
+      "answers": [
+        "Rightsizing and scheduling opportunities",
+        "Root account aliases",
+        "S3 bucket ownership",
+        "WAF WebACL capacity"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Low utilization is usually a sign that rightsizing or scheduled shutdown could immediately reduce cost.",
+      "fullExplanation": "Low utilization is usually a sign that rightsizing or scheduled shutdown could immediately reduce cost.",
+      "explanation": "Low utilization is usually a sign that rightsizing or scheduled shutdown could immediately reduce cost."
+    }
+  ]
+}

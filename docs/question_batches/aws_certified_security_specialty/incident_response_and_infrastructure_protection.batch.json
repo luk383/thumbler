@@ -1,0 +1,445 @@
+{
+  "id": "aws_certified_security_specialty_scs_c02_scs-incident-response_batch_01",
+  "provider": "aws",
+  "certificationId": "aws_scs",
+  "certificationTitle": "AWS Certified Security - Specialty",
+  "track": "Specialty",
+  "title": "AWS Certified Security - Specialty",
+  "examCode": "SCS-C02",
+  "category": "AWS Security",
+  "description": "Scenario practice batch for Incident Response and Infrastructure Protection.",
+  "version": "3",
+  "questionCount": 15,
+  "domains": [
+    "Incident Response and Infrastructure Protection"
+  ],
+  "tags": [
+    "aws",
+    "aws_scs",
+    "scs-c02",
+    "specialty"
+  ],
+  "defaultContentType": "exam_question",
+  "questions": [
+    {
+      "id": "scs_c02_ex_04_01",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 1",
+      "objectiveId": "4.1",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "An EC2 instance is suspected of compromise and must be isolated quickly while preserving evidence. What is a strong first step?",
+      "answers": [
+        "Terminate the instance immediately",
+        "Quarantine the instance by updating security controls and preserve evidence",
+        "Disable CloudTrail",
+        "Delete all snapshots"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Containment should reduce blast radius without destroying the evidence needed for analysis.",
+      "fullExplanation": "Containment should reduce blast radius without destroying the evidence needed for analysis.",
+      "explanation": "Containment should reduce blast radius without destroying the evidence needed for analysis."
+    },
+    {
+      "id": "scs_c02_ex_04_02",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 2",
+      "objectiveId": "4.2",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A team wants to automate quarantine of an EC2 instance when a critical finding is raised. Which pattern is common?",
+      "answers": [
+        "EventBridge triggers a Lambda function that updates controls",
+        "Route 53 changes the domain name",
+        "AWS Budgets stops all spending",
+        "CloudFront clears the cache"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "EventBridge plus Lambda is a common response automation pattern for security findings.",
+      "fullExplanation": "EventBridge plus Lambda is a common response automation pattern for security findings.",
+      "explanation": "EventBridge plus Lambda is a common response automation pattern for security findings."
+    },
+    {
+      "id": "scs_c02_ex_04_03",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 3",
+      "objectiveId": "4.3",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "Which service helps identify software vulnerabilities on supported compute workloads in AWS?",
+      "answers": [
+        "Amazon Inspector",
+        "AWS Budgets",
+        "Amazon AppStream 2.0",
+        "Amazon Polly"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Amazon Inspector is the managed vulnerability and exposure assessment service for supported workloads.",
+      "fullExplanation": "Amazon Inspector is the managed vulnerability and exposure assessment service for supported workloads.",
+      "explanation": "Amazon Inspector is the managed vulnerability and exposure assessment service for supported workloads."
+    },
+    {
+      "id": "scs_c02_ex_04_04",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 4",
+      "objectiveId": "4.4",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "An internet-facing application needs managed DDoS protection beyond the baseline level. Which service should be evaluated?",
+      "answers": [
+        "AWS Shield Advanced",
+        "Amazon Macie",
+        "AWS Organizations",
+        "AWS Glue"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Shield Advanced adds enhanced DDoS protections and response capabilities for public applications.",
+      "fullExplanation": "Shield Advanced adds enhanced DDoS protections and response capabilities for public applications.",
+      "explanation": "Shield Advanced adds enhanced DDoS protections and response capabilities for public applications."
+    },
+    {
+      "id": "scs_c02_ex_04_05",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 5",
+      "objectiveId": "4.5",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "During an investigation, why is preserving CloudTrail logs and related snapshots important?",
+      "answers": [
+        "To reduce IAM complexity",
+        "To retain evidence for forensic analysis",
+        "To increase Spot capacity",
+        "To lower S3 retrieval costs"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Incident response depends on trustworthy logs and preserved system state for timeline reconstruction.",
+      "fullExplanation": "Incident response depends on trustworthy logs and preserved system state for timeline reconstruction.",
+      "explanation": "Incident response depends on trustworthy logs and preserved system state for timeline reconstruction."
+    },
+    {
+      "id": "scs_c02_ex_04_06",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 6",
+      "objectiveId": "4.6",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A security team wants to reduce blast radius in future incidents. Which architectural principle most helps?",
+      "answers": [
+        "Flat networks and shared credentials",
+        "Segmentation and least privilege",
+        "Bigger instance types",
+        "Longer DNS TTLs"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Segmentation plus least privilege limits lateral movement and narrows the affected area during compromise.",
+      "fullExplanation": "Segmentation plus least privilege limits lateral movement and narrows the affected area during compromise.",
+      "explanation": "Segmentation plus least privilege limits lateral movement and narrows the affected area during compromise."
+    },
+    {
+      "id": "scs_c02_ex_04_07",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 7",
+      "objectiveId": "4.7",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "Why should incident response runbooks be rehearsed regularly?",
+      "answers": [
+        "To make the document longer",
+        "To reveal missing access, unclear steps, and weak assumptions",
+        "To disable CloudTrail automatically",
+        "To increase route table limits"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Exercises expose practical gaps that are usually invisible until a real incident occurs.",
+      "fullExplanation": "Exercises expose practical gaps that are usually invisible until a real incident occurs.",
+      "explanation": "Exercises expose practical gaps that are usually invisible until a real incident occurs."
+    },
+    {
+      "id": "scs_c02_ex_04_08",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 8",
+      "objectiveId": "4.8",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "After a security incident is contained, what should happen before the event is considered fully resolved?",
+      "answers": [
+        "Delete all logs",
+        "Validate recovery and monitor for recurrence",
+        "Disable MFA for responders",
+        "Remove all metrics"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "Recovery should be tested and monitored to ensure compromise has not persisted or recurred.",
+      "fullExplanation": "Recovery should be tested and monitored to ensure compromise has not persisted or recurred.",
+      "explanation": "Recovery should be tested and monitored to ensure compromise has not persisted or recurred."
+    },
+    {
+      "id": "scs_c02_ex_04_09",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 9",
+      "objectiveId": "4.9",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A public application needs protection from common web exploits while retaining edge performance. Which combination is most appropriate?",
+      "answers": [
+        "CloudFront with AWS WAF",
+        "IAM users with passwords",
+        "S3 Glacier with Route 53",
+        "Amazon SNS with AWS Budgets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "CloudFront with WAF is the standard edge security combination for performance and filtering.",
+      "fullExplanation": "CloudFront with WAF is the standard edge security combination for performance and filtering.",
+      "explanation": "CloudFront with WAF is the standard edge security combination for performance and filtering."
+    },
+    {
+      "id": "scs_c02_ex_04_10",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 10",
+      "objectiveId": "4.10",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "What is the primary purpose of a post-incident review?",
+      "answers": [
+        "To increase log ingestion cost",
+        "To identify systemic improvements and prevent recurrence",
+        "To make backups smaller",
+        "To change VPC CIDR blocks"
+      ],
+      "correctIndex": 1,
+      "shortExplanation": "The goal is to strengthen systems and processes so similar incidents are less likely or less damaging.",
+      "fullExplanation": "The goal is to strengthen systems and processes so similar incidents are less likely or less damaging.",
+      "explanation": "The goal is to strengthen systems and processes so similar incidents are less likely or less damaging."
+    },
+    {
+      "id": "scs_c02_ex_04_11",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 11",
+      "objectiveId": "4.11",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A company discovers that evidence from short-lived compute instances often disappears before analysts can collect it. What control should be improved first?",
+      "answers": [
+        "Centralized logging and rapid evidence capture automation",
+        "Route 53 failover records",
+        "Savings Plans coverage",
+        "Bucket naming conventions"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Ephemeral infrastructure requires centralized logs and automated capture because instance-local evidence disappears quickly.",
+      "fullExplanation": "Ephemeral infrastructure requires centralized logs and automated capture because instance-local evidence disappears quickly.",
+      "explanation": "Ephemeral infrastructure requires centralized logs and automated capture because instance-local evidence disappears quickly."
+    },
+    {
+      "id": "scs_c02_ex_04_12",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 12",
+      "objectiveId": "4.12",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A quarantine playbook requires manual security group edits and takes twenty minutes to execute. What is the strongest improvement?",
+      "answers": [
+        "Prebuilt automated quarantine workflows",
+        "More IAM users",
+        "Longer DNS TTLs",
+        "Disable Config rules"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Predesigned and automated quarantine reduces response time and inconsistency during active incidents.",
+      "fullExplanation": "Predesigned and automated quarantine reduces response time and inconsistency during active incidents.",
+      "explanation": "Predesigned and automated quarantine reduces response time and inconsistency during active incidents."
+    },
+    {
+      "id": "scs_c02_ex_04_13",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 13",
+      "objectiveId": "4.13",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A team restores a system after compromise but does not verify integrity or monitor it closely afterward. What is the main risk?",
+      "answers": [
+        "The compromise could persist or recur unnoticed",
+        "KMS charges will double immediately",
+        "CloudTrail will stop logging",
+        "The VPC will lose subnets"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Recovery without validation can return an attacker or persistence mechanism to service.",
+      "fullExplanation": "Recovery without validation can return an attacker or persistence mechanism to service.",
+      "explanation": "Recovery without validation can return an attacker or persistence mechanism to service."
+    },
+    {
+      "id": "scs_c02_ex_04_14",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 14",
+      "objectiveId": "4.14",
+      "difficulty": 2,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "A company wants stronger DDoS resilience for a public application. Which answer reflects the best exam mindset?",
+      "answers": [
+        "Treat DDoS protection as an architectural pattern, not only one service",
+        "Use only one EC2 instance with detailed monitoring",
+        "Disable Auto Scaling to reduce attack surface",
+        "Move all traffic through a bastion host"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "DDoS resilience depends on edge protection, scaling, routing, and operational response, not one checkbox service.",
+      "fullExplanation": "DDoS resilience depends on edge protection, scaling, routing, and operational response, not one checkbox service.",
+      "explanation": "DDoS resilience depends on edge protection, scaling, routing, and operational response, not one checkbox service."
+    },
+    {
+      "id": "scs_c02_ex_04_15",
+      "type": "exam_question",
+      "certificationTrack": "aws_scs",
+      "domainId": "scs-incident-response",
+      "domain": "Incident Response and Infrastructure Protection",
+      "topic": "Incident Response and Infrastructure Protection",
+      "subtopic": "Scenario 15",
+      "objectiveId": "4.15",
+      "difficulty": 3,
+      "tags": [
+        "aws_scs",
+        "scs-c02",
+        "scs-incident-response",
+        "scenario-based"
+      ],
+      "question": "An incident response leader says tooling alone will solve future incidents. Which response is most accurate?",
+      "answers": [
+        "Incident response also depends on process, ownership, and architecture",
+        "Yes, tools replace runbooks completely",
+        "Only more EC2 capacity is needed",
+        "CloudTrail makes all runbooks unnecessary"
+      ],
+      "correctIndex": 0,
+      "shortExplanation": "Effective response is a systems discipline involving people, process, architecture, and tooling together.",
+      "fullExplanation": "Effective response is a systems discipline involving people, process, architecture, and tooling together.",
+      "explanation": "Effective response is a systems discipline involving people, process, architecture, and tooling together."
+    }
+  ]
+}
